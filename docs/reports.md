@@ -30,8 +30,9 @@
 В `engine` входят `scanner_semantics`, `profile_sha256`, `upstream_commit`,
 `analyzer_image_digest`, `analyzer_signature`, `model_id`, `model_revision`,
 `model_weights_sha256`, `patchset_sha256`, `dictionary_sha256`.
-Digest образа записывается как `sha256:...`: это Docker Image ID конфигурации
-реального платформенного образа, не digest общего multi-platform index.
+Digest образа записывается как `sha256:...`: это ID из платформенного inspect,
+то есть digest конфигурации либо платформенного manifest в зависимости от
+Docker image store. Общий multi-platform index для профиля не используется.
 Остальные SHA-256 — 64 hex-символа.
 Git OID — 40 либо 64 hex-символа согласно object format репозитория/артефакта.
 Модель/upstream могут использовать SHA-1 независимо от формата сканируемого Git.
