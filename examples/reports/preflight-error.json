@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_kind": "contract_example",
+  "report_id": "1c7bdd34-6a0a-54ab-a687-84609defdeac",
+  "created_at": "2026-10-18T00:00:00Z",
+  "scanner": {
+    "version": "0.0.0-spec"
+  },
+  "scan": {
+    "mode": "snapshot",
+    "target_ref": "missing-ref",
+    "base_ref": null,
+    "object_format": "sha1",
+    "target_commit": null,
+    "base_commit": null,
+    "target_tree": null
+  },
+  "configuration": {
+    "config_version": "1.0.0",
+    "analysis": {
+      "language": "ru",
+      "score_threshold": 0.35,
+      "entities": null,
+      "dictionary_enabled": true
+    },
+    "scope": {
+      "policy_version": "text-v1",
+      "include": [
+        "**"
+      ],
+      "exclude": [],
+      "encoding_overrides": [],
+      "max_file_bytes": 10485760
+    },
+    "execution": {
+      "analyzer_url": "http://analyzer:5001",
+      "connect_timeout_seconds": 5,
+      "analyze_timeout_seconds": 600,
+      "ready_timeout_seconds": 120,
+      "concurrency": 1
+    },
+    "presentation": {
+      "context_lines": 2
+    }
+  },
+  "engine": null,
+  "baseline": {
+    "status": "not_applicable",
+    "required": false,
+    "report_id": null,
+    "artifact_sha256": null,
+    "mismatch_reasons": []
+  },
+  "coverage": {
+    "complete": false,
+    "enumeration_complete": false,
+    "manifest_sha256": null,
+    "counts": {
+      "target": 0,
+      "analyzed": 0,
+      "inherited": 0,
+      "unverified": 0,
+      "excluded": 0,
+      "unsupported": 0,
+      "error": 0,
+      "deleted": 0
+    }
+  },
+  "files": [],
+  "deleted_files": [],
+  "findings": [],
+  "errors": [
+    {
+      "code": "revision_unavailable",
+      "stage": "git",
+      "file_id": null,
+      "message": "The requested commit is not available locally."
+    }
+  ],
+  "result": {
+    "status": "error",
+    "exit_code": 2,
+    "assurance": "none",
+    "findings_count": 0
+  }
+}
