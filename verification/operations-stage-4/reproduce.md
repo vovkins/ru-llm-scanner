@@ -101,6 +101,19 @@ python verification/operations-stage-4/probe.py --public-only \
   --public-commit b25c87d7cb8d6a18a37fa12442b5f883f9e41741
 ```
 
+Повтор Requests использовал `--run-timeout-seconds 900` в новом output. Оба
+прогона incomplete, не применять их как baseline. Минимальное воспроизведение
+RV-06: извлечь blob `AUTHORS.rst` через `git show COMMIT:AUTHORS.rst` как данные,
+поместить в собственный synthetic Git commit и выполнить snapshot. Hash входа,
+bounded error и resource/input preservation — [authors-repro.json](authors-repro.json).
+
+Дополнительный no-checkout clone `https://github.com/pallets/itsdangerous.git`,
+tag `2.2.0`, проверялся обычным launcher snapshot с `--analyzer-memory 2g` и
+`--run-timeout-seconds 300`, без исключений. SHA/tree и полная безопасная сводка —
+[public-itsdangerous-verification.json](public-itsdangerous-verification.json).
+Этот малый run и два последовательных AUTHORS probes выполнялись на фоне
+Requests900; ресурсные данные последнего не являются изолированным benchmark.
+
 Проверяйте commit/tree из [public-source.json](public-source.json). No-checkout
 допустим: scanner читает object store. Хэш/permissions/состав всего input дерева,
 включая `.git`, сравниваются до/после. Не добавляются исключения ради результата.

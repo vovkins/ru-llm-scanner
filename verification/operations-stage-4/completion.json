@@ -1,0 +1,198 @@
+{
+  "acceptance_cases": 16,
+  "advisory_status": "available_with_matches; no security clearance",
+  "browser": "passed, synthetic only, 1280/390px",
+  "clean_walkthroughs": 2,
+  "cli_cases": 9,
+  "code_direct_parity": 46,
+  "compose_cases": 25,
+  "contracts": {
+    "invalid_cases_rejected": 22,
+    "local_links": 565,
+    "log": "Valid schema; 11 synthetic reports; 22 rejected invalid cases; 565 local links.\nNo Git scanning, detector-quality or runtime validation is implied.",
+    "scope": "structural/semantic examples and links, not runtime",
+    "status": "passed",
+    "synthetic_valid_reports": 11
+  },
+  "date_utc": "2026-10-19T20:02:17.292004+00:00",
+  "dictionary_cases": 4,
+  "diff_check": "passed",
+  "documentation_checker": {
+    "browser_acceptance_performed": false,
+    "clean_install_walkthrough_performed": false,
+    "defaults_checked": 19,
+    "demo_artifact_kind": "contract_example",
+    "demo_external_assets": 0,
+    "demo_findings": 2,
+    "documented_commands_checked": 48,
+    "fresh_build_runtime_lock_uses": 3,
+    "role_navigation_anchors_checked": 8,
+    "runtime_rejects_example": true,
+    "shell_blocks_syntax_checked": 36,
+    "sources_sha256": {
+      "examples/config/scanner.json": "608915e492723d1ce8b037053a867f28dec4b5682dce705139974ebe9a6fa1c2",
+      "examples/demo/report.html": "d0d85a47d1534d418bbfcd6e4d768c4e4395027b7f8395dfddd0519ce4f77879",
+      "examples/demo/report.json": "6aeb966f118ddf55dd7702c03ac00bf79dd0f72c1099804ac90d3a2624ddaf79",
+      "examples/reports/snapshot-findings.json": "6aeb966f118ddf55dd7702c03ac00bf79dd0f72c1099804ac90d3a2624ddaf79",
+      "scripts/check_documentation.py": "c38775ad359a5fb3a5c22b801defbe8fdc606d8da2c0e6e2c2e1e6d6943666da",
+      "src/ru_llm_scanner/html_report.py": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
+      "src/ru_llm_scanner/report_validation.py": "c2046099dd2a52b748a6a91f023ea0e653997777e33fc68a58a7585c17d6ec21"
+    },
+    "status": "passed",
+    "verification_version": 1
+  },
+  "draft_pr": "https://github.com/vovkins/ru-llm-scanner/pull/27",
+  "evidence_sha256": {
+    "verification/operations-stage-4/README.md": "23c75049bd39b8af64cc488abb9fda8b5f6dbe957ff57ddd54cf6d1abd073664",
+    "verification/operations-stage-4/acceptance-verification.json": "e8f87ad8c5e63062aaf61317db4586f4bf8ac84bb5e2ce3bbbb7f9dc39029fb6",
+    "verification/operations-stage-4/authors-http.json": "94498adcf8d52724fb7c62ab25f0ed092af92016d5c5f455caa61c68cda5b917",
+    "verification/operations-stage-4/authors-repro.json": "18dba56fed54b0d6e91cc835a31e70a749d3952392936b0f37c230305c780894",
+    "verification/operations-stage-4/browser/browser-observations.json": "cc21d9245f15b4a6ad622d662505f9bf1d3070f09ea1c62d24af96ad6ee864e3",
+    "verification/operations-stage-4/browser/clean.png": "74a8b4224cdc873adddf71bf0929ac1019374867508510fbfec533dc55325171",
+    "verification/operations-stage-4/browser/incomplete.png": "7ca8c0f8c7982841031f4e0346808031c3544826315d323a66730e295d3c5910",
+    "verification/operations-stage-4/browser/multiline.png": "0a4b3aaa06054e32aa6fec20f908966bd3f5850c8b628c77792332a3495e9e01",
+    "verification/operations-stage-4/browser/stress-desktop.png": "ba3df97397504064693c359029299fc6f44a74fa71895ec2e847328258a8a805",
+    "verification/operations-stage-4/browser/stress-narrow.png": "6779521ce1111a6b0f2af9ed88e43f7c1e6f82d53fdef1f2776c031b8fc0d74e",
+    "verification/operations-stage-4/capacity-verification.json": "01d9edb0f455c19d516258b340f7ab4961756d9abb89de1a95436b293f2e9add",
+    "verification/operations-stage-4/cli-verification.json": "7bc16d47e6e657ffe48564ed96ea2f5bbe52abe36db1875dfe6fba769edc8ac6",
+    "verification/operations-stage-4/contracts-verification.json": "fee705cba2490086935f8cfa94d16bea3e08983f3585e6a964faece42b54e387",
+    "verification/operations-stage-4/dependencies.md": "c2a42c290b954ef0aad14495ba5b842089b8e9f92ef42b866cc03dd89f495c8a",
+    "verification/operations-stage-4/dependency-advisories.json": "505f054dd99ce60716b40c39a485cd06b74fbc9f2a7ee9b48edb4105efb145b0",
+    "verification/operations-stage-4/docker-verification.json": "2b3847a70e8dc07ecf5e0e6baebc1d312055381a5b59c31a34654d4d27a4b205",
+    "verification/operations-stage-4/documentation-verification.json": "9f7fad87b06dcc0875fcef15aec0ae54c36a13c4b6a05455cbe0e17b4ec4a9e3",
+    "verification/operations-stage-4/extras-verification.json": "cbfec82c44afe69ce4862daf25b9a4f766b75e8bc64d44cd7971f55a4d4800be",
+    "verification/operations-stage-4/fault-verification.json": "dd8de85e8a893daa8a9a64fcbe07a20ef4b4165b2f88fa1fc8b1ec3a3587d94f",
+    "verification/operations-stage-4/fresh-steps.json": "ff93f5d0cd3fd196dc4c181d9cc6278615da79010770c6e666ee6d9d0544bcbd",
+    "verification/operations-stage-4/git-host.json": "082b27bd1508c1588bfa611c6fbbc6e308f938fd80f2933be83d0a0718f3b424",
+    "verification/operations-stage-4/git-linux.json": "ca3d75a89d0b308d2203f69fa1611ac91fa3ab0cc54d515b9d102c4ecde8729b",
+    "verification/operations-stage-4/hard-kill-verification.json": "2ed8d6d99c2041847e19dd2d7a36803530253ebdc7d538c2ae7edf43c8212311",
+    "verification/operations-stage-4/installed-code.json": "405c4d9c5e1b8a67c15f1221631098c490995232bb2d1565593ecbe4fd908da8",
+    "verification/operations-stage-4/offline-verification.json": "5c480b6bbbd351255e061640dc5d453beafd08ce9d4800d7ede19e3139635022",
+    "verification/operations-stage-4/preservation.json": "a561c6fdb67f4991341287c59b45dc86714d046e1691e35ca3cc01a999b907db",
+    "verification/operations-stage-4/probe.py": "317a269415b0b0ad790c678528d4db9a139a5eb61f223fe38f0f5b097eac6298",
+    "verification/operations-stage-4/public-itsdangerous-verification.json": "b151ab0da6cb5515b28694543e7b8391525fc49eadb9f807d8abcbc07a87fb25",
+    "verification/operations-stage-4/public-requests-900.json": "558bd2ecf4cb04166b526e7162d32962ef4362f3c52c2accd7209b813386ca7d",
+    "verification/operations-stage-4/public-source.json": "7cec04c6e6397aa156b911bae0a26ac4982814a8779846d0cf36d84a3239e5e3",
+    "verification/operations-stage-4/ready-walkthrough.json": "fcbe9db7e0ee0663aca708272ce4af60c2469d81aa414a26cbed0e305b4d8a08",
+    "verification/operations-stage-4/reproduce.md": "1743f8377569f95ae09bf023734977de7ba03ceb42292065bf7f49ce23920666",
+    "verification/operations-stage-4/runtime-verification.json": "66dc56d07f1dc59f5110a288468d07a6b01186c70807c1a66512b1e56c48a022",
+    "verification/operations-stage-4/scan-verification.json": "c5469f85845df304eac652b6e524fe5cca4e1ae38a956ee8bcf336d5ba808793",
+    "verification/operations-stage-4/unit-tests.json": "3b81416ba76f7b3ba51593b1525498ea726f4eda2eeaec3b18c01d3b67a2c698",
+    "verification/operations-stage-4/upstream-tests.json": "d884e83652a3699f2f19ba05ceaaf338a10922bbaa5479c0d1e09dbf3f546dc5"
+  },
+  "expected_size_rejection": true,
+  "extras_cases": 14,
+  "fault_cases": 2,
+  "formatting": {
+    "files_checked": 72,
+    "status": "passed",
+    "tool": "Black25.1.0"
+  },
+  "git_host": 41,
+  "git_linux": 41,
+  "hardkill_operator_recovery_cases": 1,
+  "independent_quality": {
+    "exact_precision": 0.717391304347826,
+    "exact_recall": 0.8918918918918919,
+    "fn": 4,
+    "fp": 13,
+    "tp": 33
+  },
+  "itsdangerous": {
+    "analyzed": 58,
+    "error": 0,
+    "exit_code": 1,
+    "findings": 102,
+    "status": "complete_with_findings",
+    "unsupported": 2
+  },
+  "ner_parity": 77,
+  "not_tested": [
+    "another physical offline host",
+    "Linux AMD64/GPU",
+    "native Linux host UID/ACL",
+    "real Jenkins controller/Groovy/plugins",
+    "corporate PKI",
+    "Docker daemon restart/loss; launcher SIGKILL only",
+    "cross-browser/accessibility certification",
+    "full CPython vendor advisory/SBOM completeness audit"
+  ],
+  "open_issues": {
+    "DEP-01": {
+      "plan": 24,
+      "priority": "P1",
+      "status": "needs remediation/disposition"
+    },
+    "DEP-02": {
+      "plan": 24,
+      "priority": "P2",
+      "status": "ambiguous dist-info inventory"
+    },
+    "RV-06": {
+      "plan": 26,
+      "priority": "P1",
+      "status": "reproduced, not fixed"
+    }
+  },
+  "private_artifacts_root": ".build/operations-validation",
+  "product_commit": "755152b8d658506ddb3da819569270ca46f2ae57",
+  "profile_sha256": "172554ef20c07cf32e15cd97cd368a2510de49ab824ae2b339258078730a1864",
+  "requests300": {
+    "analyzed": 54,
+    "error": 69,
+    "exit_code": 2,
+    "findings": 216,
+    "status": "incomplete",
+    "unsupported": 9,
+    "wall_seconds": 301.51
+  },
+  "requests900": {
+    "coverage": {
+      "complete": false,
+      "counts": {
+        "analyzed": 68,
+        "deleted": 0,
+        "error": 53,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 132,
+        "unsupported": 11,
+        "unverified": 0
+      },
+      "enumeration_complete": true,
+      "manifest_sha256": "d53188d73129cba73f9274e5dfa7e1e0a61ccb1d3c6e252baecd7c8df81cc4d8"
+    },
+    "errors": {
+      "analyzer_timeout": 1,
+      "analyzer_unavailable": 3,
+      "scan_cancelled": 1,
+      "scan_interrupted": 49
+    },
+    "exit_code": 2,
+    "findings": 276,
+    "wall_seconds": 901.682
+  },
+  "runtime": {
+    "analyzer": {
+      "image_id": "sha256:dac76ca6f7f37d61f7a3ad4db1d56d68dcad14d9e44354252dcfbf3c208c5104",
+      "image_reference_id": "sha256:938b1eb4169fcaaf89882d07570fc57f2ebac23d80804e31221b18d8e4e04c00"
+    },
+    "scanner": {
+      "image_id": "sha256:dba647e777415aa7c51f9e57ade3be3120fab6a8fc99dadbac11c3e0f5d1c538",
+      "image_reference_id": "sha256:dba647e777415aa7c51f9e57ade3be3120fab6a8fc99dadbac11c3e0f5d1c538"
+    }
+  },
+  "source_runtime_model_corpus_default_locks_changed": false,
+  "stage5_plan": 25,
+  "stage5_started": false,
+  "status": "verification_completed_with_open_product_and_dependency_risks",
+  "synthetic_capacity_cases": 7,
+  "unit": {
+    "passed": 144,
+    "skipped": 0
+  },
+  "upstream": 478,
+  "verification_branch": "codex/operations-stage-4-validation",
+  "verification_harness_commit": "7421dbf3efee38256432007881ae2f3247bbaadb",
+  "verification_version": 1
+}

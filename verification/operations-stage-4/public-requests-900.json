@@ -1,0 +1,105 @@
+{
+  "additional_background_runs": [
+    "Pallets ItsDangerous full snapshot100.106s Analyzer2g",
+    "isolated AUTHORS14.830s Analyzer2g",
+    "AUTHORS HTTP probe~12s Analyzer2g"
+  ],
+  "additional_background_runs_are_sequential_not_three_parallel": true,
+  "background_original_containers": 7,
+  "cases": [
+    {
+      "artifacts_sha256": {
+        "report.html": "7b49e53bc312aaacaff8c2135d7ecd5c70ddb2c5f79a26d8392f74de12317c8d",
+        "report.json": "3fba1331a82bb24fa89c43cc7d50338edf4f8a34c75215ae983e046404dcc17a"
+      },
+      "case": "public-requests",
+      "categories": {
+        "DB_URL": 4,
+        "EMAIL_ADDRESS": 5,
+        "HOSTNAME": 1,
+        "INTERNAL_DOMAIN": 1,
+        "INTERNAL_IP": 241,
+        "LOGIN": 10,
+        "PASSWORD": 7,
+        "PERSON": 7
+      },
+      "cgroup_sample_maxima": {
+        "analyzer": {
+          "cpu_usage_usec": 1777647519,
+          "memory_peak_bytes": 997658624,
+          "tmp_visible_bytes": 187
+        },
+        "scanner": {
+          "cpu_usage_usec": 12839663,
+          "memory_peak_bytes": 42356736,
+          "tmp_visible_bytes": 299
+        }
+      },
+      "cleanup": true,
+      "coverage": {
+        "complete": false,
+        "counts": {
+          "analyzed": 68,
+          "deleted": 0,
+          "error": 53,
+          "excluded": 0,
+          "inherited": 0,
+          "target": 132,
+          "unsupported": 11,
+          "unverified": 0
+        },
+        "enumeration_complete": true,
+        "manifest_sha256": "d53188d73129cba73f9274e5dfa7e1e0a61ccb1d3c6e252baecd7c8df81cc4d8"
+      },
+      "errors": {
+        "analyzer_timeout": 1,
+        "analyzer_unavailable": 3,
+        "scan_cancelled": 1,
+        "scan_interrupted": 49
+      },
+      "exit_code": 2,
+      "expected_exit": null,
+      "findings": 276,
+      "fixture": null,
+      "harness_kill": false,
+      "input_unchanged": true,
+      "output_bytes": 644282,
+      "profile_sha256": "172554ef20c07cf32e15cd97cd368a2510de49ab824ae2b339258078730a1864",
+      "result": {
+        "assurance": "none",
+        "exit_code": 2,
+        "findings_count": 276,
+        "status": "incomplete"
+      },
+      "rules": {
+        "credential.kv.login": 7,
+        "credential.kv.password": 7,
+        "hostname_key_value": 1,
+        "none": 261
+      },
+      "run_timeout_seconds": 900,
+      "sample_failures_during_start_or_cleanup": 0,
+      "sources": {
+        "native_credential": 14,
+        "ner": 10,
+        "structural": 252
+      },
+      "wall_seconds": 901.682
+    }
+  ],
+  "fixture_seed": "deterministic-index-v1; no RNG",
+  "generator_sha256": "317a269415b0b0ad790c678528d4db9a139a5eb61f223fe38f0f5b097eac6298",
+  "images": {
+    "analyzer": {
+      "image_id": "sha256:dac76ca6f7f37d61f7a3ad4db1d56d68dcad14d9e44354252dcfbf3c208c5104",
+      "image_reference_id": "sha256:938b1eb4169fcaaf89882d07570fc57f2ebac23d80804e31221b18d8e4e04c00"
+    },
+    "scanner": {
+      "image_id": "sha256:dba647e777415aa7c51f9e57ade3be3120fab6a8fc99dadbac11c3e0f5d1c538",
+      "image_reference_id": "sha256:dba647e777415aa7c51f9e57ade3be3120fab6a8fc99dadbac11c3e0f5d1c538"
+    }
+  },
+  "measurement": "1s polling; cgroup lifetime CPU/memory.peak maxima observed before cleanup; final interval may be missed; tmp regular-file sizes omit deleted/open files and are not disk peak",
+  "performance_is_not_isolated_benchmark": true,
+  "platform": "linux/arm64"
+}

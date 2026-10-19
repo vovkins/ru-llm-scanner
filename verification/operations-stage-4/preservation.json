@@ -1,0 +1,112 @@
+{
+  "baseline_profile_sha256": "172554ef20c07cf32e15cd97cd368a2510de49ab824ae2b339258078730a1864",
+  "foreign_containers": [
+    {
+      "id_sha256": "f373719a6d0ef295b17b3f8e1294f6b65823c1e48e6603b59b2b27f8d325dae5",
+      "running_and_started_at_preserved": true
+    },
+    {
+      "id_sha256": "ba9314c50d2dd5bbfe767ac2007aace918b28ae7c33b4a8dda4e305edb086c46",
+      "running_and_started_at_preserved": true
+    },
+    {
+      "id_sha256": "bffb6708d45666741ef3454fc91425c5d48426bb8f96d6ba91d2bd16d721bf21",
+      "running_and_started_at_preserved": true
+    },
+    {
+      "id_sha256": "f5aba407e30f1dd69f572b9f7a91fde730155de9ec36354973783b61fc68750a",
+      "running_and_started_at_preserved": true
+    },
+    {
+      "id_sha256": "f3c7316cbf582dfd62ad30b994a9ea9c6b5df433437af1bf573fc134bfb05ddd",
+      "running_and_started_at_preserved": true
+    },
+    {
+      "id_sha256": "7a2de6fca0c6e2df5fb4ffd716cdc3d75575232eb644b50f90be018ba2ba8651",
+      "running_and_started_at_preserved": true
+    },
+    {
+      "id_sha256": "8d03315bc68dffee6db1e88a3e54f71b08480ac62499945441d4f039c9c0626d",
+      "running_and_started_at_preserved": true
+    }
+  ],
+  "foreign_containers_count": 7,
+  "main_preserved": "336feb64b201b0e9b807059f3d60b50fdee41ebb",
+  "original_default_and_previous_test_images_preserved": true,
+  "owned_compose_resources_remaining": 0,
+  "protected_files": {
+    "docker/cli-test.Dockerfile": "08552ed6115ab9e625bbc34cb03dae532b5ffcaa5375af52c94026d7113ac62b",
+    "docker/git-test.Dockerfile": "06292564a0bb33c9760a602ca85495e0a15efe74f42145a8569c83346f8023bf",
+    "docker/license_inventory.py": "495acee33c31defc3152e7fd681304d90b12d88276c512877be7f5fec8de259d",
+    "docker/probe_runtime.py": "02669375d8520ede5993b29430d642362101e4830d8b1207b1299d25952da270",
+    "docker/scan-test.Dockerfile": "53b206428dacb2ff3a33041679533995a9a2357a97584533bc66c3a2977e7d77",
+    "docker/scanner.Dockerfile": "2799fd2e7b12db6fd3ed4bbdccf78a73be8465d2cd9f5e3a13802a81e644e25d",
+    "locks/analyzer-cpu-linux-arm64.runtime.lock.json": "a8a08bd416193af9632997afc0ba5256f2528534607eddc74015915ec9cb1a7d",
+    "locks/requirements-cpu-linux-arm64.txt": "8ba7d4b93b1a38d869c9aa9fffffe0aaf040fefe914008ae312a3a23634e6730",
+    "locks/requirements-scanner-linux-arm64.txt": "06e179651d60f62f704e58ec8904074d54cbc6fe457afd23937d3f1d72379981",
+    "locks/scanner-cpu-linux-arm64.deployment.json": "877449870cb12066e3203f8de779cb868a5ded6f20a18d3dd4432e8e2ea60bde",
+    "patches/analyzer-api-v1.patch": "1b81547a59a43fa57bc88cfaeaec7d894465fc2e54491b306736976f6d6a0092",
+    "pyproject.toml": "a173727b39bc0bb3de2303ce2dba1e32f7846d7fd55b12fa636d0186ff49a8a8",
+    "requirements-dev.txt": "dc7419294f1bb820a48aec7309c21cd28ebc043f321e5ea1136b4309695add0f",
+    "schemas/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
+    "scripts/analyzer.py": "3f5c3a572a9be987dfe104a34184d4ab5cfdb5ce35c84b93771a0d7759d36355",
+    "scripts/build_scanner.py": "2fb516dfaaca0e17979571b44ce24f7e6d326120f926fec15dc9c930e0809789",
+    "scripts/docker_scanner.py": "583c0d3bfbd038fb132b661b48d4b025aee06cd856c0f209d8da6bf09e38ba05",
+    "scripts/prepare_scan_engine.py": "14d50f2e9afa7740e7342da03d3cf2b9adbfbe6c744c50e215e17ab1fe60a43c",
+    "src/ru_llm_scanner/__init__.py": "b1a0c9ede61fc13ba6c43be7880227c4ee230506537aa3cad83425e758b205a3",
+    "src/ru_llm_scanner/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/ru_llm_scanner/analyzer.py": "4f1cf5dce228592b4c43ce6c735ae798b139b6d32c92b9fdfa5e792195f2e746",
+    "src/ru_llm_scanner/artifacts.py": "77271cce804e4fd8c92baa46c4b7ab8f137c50134e516a2e7fbbba56bc836db3",
+    "src/ru_llm_scanner/baseline.py": "23ea9247b900c975be4b9c691f60f61d8762984ffdcc4e30ee83d423086f0020",
+    "src/ru_llm_scanner/cli.py": "3d399aaf656336b37de7d760fcaa87ca05393c76cc80b972db17ca022c79645a",
+    "src/ru_llm_scanner/configuration.py": "0a6e3f90de1bb9a089855734a5a0e06b92728b1cd9d8f13e5bc4b10b1ab7c959",
+    "src/ru_llm_scanner/dictionary.py": "6eecfcfe094ca3d2f4aaa43b3093bd94c69e55734292bba824553dd4807c6238",
+    "src/ru_llm_scanner/engine.py": "8a583e0ef31b4705c75af209a36f063695c7d76704e7f8348efcda8c10b65866",
+    "src/ru_llm_scanner/findings.py": "1f9ffd4f3dce7d48f1e066447552eda238cabf36d82cfe4cd5923c7b0c44a7cf",
+    "src/ru_llm_scanner/git_plan.py": "5b1dbd8b80424b9edb97157bcce3acd470af6c23cbea4befe126a46401c9f855",
+    "src/ru_llm_scanner/git_repository.py": "020bb53c3989a7e752fd25894c29d1f256d38137d942f40c3e9d373cb343bf27",
+    "src/ru_llm_scanner/html_report.py": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
+    "src/ru_llm_scanner/output.py": "8c5abca175d5947962330f5374e2e7cddcf391caf2edcc9213e1af509b3dc39d",
+    "src/ru_llm_scanner/pipeline.py": "334658282ca1a85ef230c965f1b4e6272987ff2affae812b435ded7629270eb5",
+    "src/ru_llm_scanner/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
+    "src/ru_llm_scanner/report_validation.py": "c2046099dd2a52b748a6a91f023ea0e653997777e33fc68a58a7585c17d6ec21",
+    "src/ru_llm_scanner/reports.py": "53b31d86e46ddf23e4c21fc479d87f41de943e06e53ea5bdcec5a788893144c3",
+    "src/ru_llm_scanner/text_policy.py": "53ab4ea4a072b76af5ca7df9faaae4ad0820bd25934805133244bc50a46e32d1",
+    "src/ru_llm_scanner/upstream.py": "d28a0623470615dd369afecd3facb5640e525ff4d49b7748436c18af681e95cb",
+    "tests/cli_fixtures.py": "f2df8a8050fbf1e26f4f3a24222209646056e4d8bce5aea6c83d4e8fbce18395",
+    "tests/corpus/README.md": "022f4edbb787fb5ed149e0049463609bd8a88d10a1545973025608ba7edec665",
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+    "tests/corpus/load_code_corpus.py": "34570026325dc91ae26ec4102680e46f1670564ed16713f4c5da86d73b145a59",
+    "tests/git_fixtures.py": "5c7d05e8b5c896af805aee66e2837eb1c9b173469c9f763551b5e6415a671c89",
+    "tests/integration/cli_offline.py": "be53b52c7405885fa04dae67fbc8c1016b81cc14b4c9c7f465100a51e87ed59a",
+    "tests/integration/html_fixtures.py": "1556aa8b34126f68e098ef22a8708ae8b222afc87909df514a27d85b18ecc2e5",
+    "tests/integration/offline.py": "185106d35cb106412d4025d065b1a2a9502e5418f58d0ebba02f06e984b88671",
+    "tests/integration/scan_offline.py": "fc05758347149adbefa16677b9636367f80baf1fa67c6a0d56ec5daedf3ce8b4",
+    "tests/scan_fixtures.py": "5ae7ef4dacf5914e06250f422daee51b9867454bd6d51df426ab6e7ba5def28e",
+    "tests/test_analyzer.py": "a5102f077fcfa2f2887a44b98ec9993feb4b5240d08a23dc22753a2d751e4d9a",
+    "tests/test_baseline.py": "4ab234676ed5783478860074fd3f57e4034805e0bce952de6fd11903ea2603e4",
+    "tests/test_cli.py": "23434302b5f73890a000cad09de43103f48962ff03eb649a20eedd9e55772b4a",
+    "tests/test_configuration.py": "d8c425396c47887c2e5f8618c416da547d7d4e8ec4e6dfbed97b9118b3473995",
+    "tests/test_dictionary.py": "ebee366297bb921a1177a0672a616aa448f9ed2bd77e0470652dd405a0923359",
+    "tests/test_docker_launcher.py": "ee4d50bfc85ed174f2904ebc5a4b9ed84e13700225b470fef10497c22a7dc118",
+    "tests/test_findings.py": "6735588700d28b66fb8ef542791596f12f28fb9632cd88bb10c96c7e26343925",
+    "tests/test_git_plan.py": "d2188ffd2e7086d2485464832a6cb45113caece0e81192d118c98a7b786047bb",
+    "tests/test_git_repository.py": "29c9ca9da8a595a0ec28fb5d333a521d9f5fe9d47bdca69a95d9829ef461b470",
+    "tests/test_git_security.py": "699662f501da067f7238ea27852e0e5be700400f8de3ce7abc8635de584494a1",
+    "tests/test_jenkins_example.py": "713272078957e4ce6a2e718986eb0b268a4e08f81b3618e49d2cb970efb1a32f",
+    "tests/test_output.py": "0dc08ce4efc36ab739e702dbee09f86e261994a83e4fd27ce4fb0726c3f012b8",
+    "tests/test_parity_verification.py": "a9c5c47ad44b37f30dff0356c2e19a6caf18a044095d6a2e7a4629b3672da15c",
+    "tests/test_pipeline.py": "544a5d62431b953399ef3967362bce52541628ac8151e6cc9677c86e5744efcb",
+    "tests/test_reports.py": "72dd0e86577e20f65b221e40a0ee0ee6f6af389f57452819fb33e637b5e00f1d",
+    "tests/test_runtime_lock.py": "e7d4ba81d8dd41f4b522dd3029967542a5f57202902919efcfbeff1ed21e809e",
+    "tests/test_text_policy.py": "e804870951116b1fab6704eca324564357d4ee94d80ecf961e0598a0c054d477",
+    "tests/test_upstream.py": "d0976e1011764a24cb01ed76111a5ab74cbd07a6db5f244d979d53cfd617e29f",
+    "upstream.lock.json": "64a2f586ef1629c8ba5ebf0665d9b6dfd923f6332e77b6095ab45c70e57a6bed"
+  },
+  "protected_files_count": 67,
+  "proxy_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
+  "proxy_tracked_tree_clean": true,
+  "proxy_untracked_private_files_not_inventoried_or_copied": true,
+  "release_tags_registry_or_external_settings_changed": false,
+  "status": "passed"
+}

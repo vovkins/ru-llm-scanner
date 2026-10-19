@@ -1,6 +1,7 @@
 {
   "cleanup": true,
   "daemon_loss_simulated_by_launcher_loss_only": true,
+  "daemon_loss_tested": false,
   "daemon_restart_performed": false,
   "input_unchanged": true,
   "launcher_return_code": -9,

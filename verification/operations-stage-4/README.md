@@ -5,9 +5,12 @@
 (PR #23 поверх #21/#19). Эта ветка добавляет проверочные инструменты и evidence;
 runtime, detectors, corpus, default locks и зависимости не меняет.
 
+Проверочный этап завершён, [draft PR #27](https://github.com/vovkins/ru-llm-scanner/pull/27).
+Это завершение испытаний с открытыми проблемами, не допуск к эксплуатации.
+
 **Итоговая приёмка требует решения новых RV-06/DEP-01/DEP-02.** Успех regression
 наборов ниже не отменяет воспроизведённый отказ на реальном тексте и dependency
-совпадения. Полный Requests с 300 s не завершён; результаты разных видов
+совпадения. Полный Requests с 300/900 s не завершён; результаты разных видов
 проверки не объединяются в общий безусловный passed.
 
 ## Матрица и бюджеты
@@ -63,7 +66,8 @@ VM 10 CPU и 8 321 515 520 bytes RAM; семь фоновых контейнер
 Documentation checker сам не открывает браузер и не устанавливает комплект;
 его поля `*_performed=false` относятся к области этого инструмента. Реальные
 walkthrough/browser evidence приведены отдельными строками. Counts contracts
-и проверка сохранности фиксируются после окончательной редакции документации.
+и проверка сохранности приведены в [completion](completion.json),
+[contracts](contracts-verification.json) и [preservation](preservation.json).
 
 ## Измеренная ёмкость
 
@@ -108,7 +112,16 @@ tree `2663dda7dbb8ce123af703b4573d85d09383ba0f`, 132 файла / 5 190 867 blob
 54 analyzed / 9 unsupported / 69 error, 216 сохранённых находок.
 Это неполный аудит. Manifest/errors/полные значения приватны; в сводке только
 counts/hashes/categories. Unsupported: 8 image и 1 PDF; расширения не исключались.
-Повтор Requests с budget 900 s фиксируется после завершения.
+Повтор всего Requests с budget 900 s завершился за **901.682 s, exit 2**:
+68 analyzed / 11 unsupported / 53 error, 276 сохранённых находок.
+[Evidence](public-requests-900.json). `AUTHORS.rst` снова дал analyzer_unavailable;
+SVG 883 794 bytes достиг file analyze timeout 600 s. Ещё два analyzer_unavailable
+наблюдались на `pyproject.toml` и `requirements-dev.txt` после SVG; их первопричина
+отдельно не изолирована и не приписывается автоматически RV-06. Остальные 49
+file errors — scan_interrupted при общем timeout, плюс глобальный scan_cancelled.
+Unsupported: 10 raster image / 1 PDF. Никаких скрытых исключений/урезания файла.
+Таким образом **полная проверка Requests не подтверждена** даже при большем budget.
+Повторные попытки/увеличение лимитов без исправления RV-06 не создают clean baseline.
 
 Дополнительно полностью проверен [Pallets ItsDangerous 2.2.0](https://github.com/pallets/itsdangerous/tree/2.2.0):
 commit `096c8d42545d3b68ea21a4f890fb2b2d8979c0bd`,
@@ -143,3 +156,17 @@ DEP-01 (P1) / DEP-02 (P2): [разбор](dependencies.md) и отдельно �
 План [этапа 5 #25](https://github.com/vovkins/ru-llm-scanner/issues/25) подготовлен;
 итоговая приёмка не начата, нужны отдельное согласование и disposition RV-06/рисков.
 Успех функциональных тестов не принимает dependency риски от имени владельца.
+
+## Сохранность и итог
+
+[67 protected files/hashes](preservation.json), исходный proxy `da4f50a` и его
+tracked tree, main `336feb6`, прежние default/test images, модель/словарь/corpus/
+default locks/профиль сохранены. Семь исходных контейнеров продолжают работать с
+теми же Running/StartedAt; собственных Compose контейнеров/сетей не осталось.
+Browser tab/localhost server закрыты. Private отчёты/логи/пакет оставлены локально
+для разбора; GH содержит только безопасные metadata/counts/hashes и synthetic QA.
+Merge/release/tags/registry/внешние настройки/лицензия не выполнялись.
+
+Полные команды и ограничения измерений — [reproduce.md](reproduce.md).
+Открытые результаты следует устранить или явно решить до [этапа 5 #25](https://github.com/vovkins/ru-llm-scanner/issues/25);
+этапы исправлений #24/#26 и итоговая приёмка требуют отдельного согласования.
