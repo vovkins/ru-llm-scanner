@@ -1,0 +1,78 @@
+{
+  "cases": [
+    {
+      "case": "unwritable-output",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "unreadable-input",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "public-output",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "jenkins-clean",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "case": "jenkins-diff",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "case": "jenkins-findings",
+      "exit_code": 1,
+      "passed": true
+    },
+    {
+      "case": "jenkins-error",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "jenkins-untrusted-baseline",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "transfer-checksum-rejected",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "platform-id-rejected",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "context-integrity-rejected",
+      "exit_code": 2,
+      "passed": true
+    }
+  ],
+  "gpu_tested": false,
+  "jenkins_controller_tested": false,
+  "package_checksums": {
+    "deployment.json": "877449870cb12066e3203f8de779cb868a5ded6f20a18d3dd4432e8e2ea60bde",
+    "engine/dictionary.json": "126805a93906873c7cd1fd7a3586c106a4c68d9329cfbe5169132d9bfc9a244e",
+    "engine/dictionary_policy.py": "9709364660baa4f5ac551b42fbbd411c6d2eaf8093ac1579ca8ea4a30696d099",
+    "engine/runtime-lock.json": "a8a08bd416193af9632997afc0ba5256f2528534607eddc74015915ec9cb1a7d",
+    "engine/source-lock.json": "64a2f586ef1629c8ba5ebf0665d9b6dfd923f6332e77b6095ab45c70e57a6bed",
+    "images.tar": "c0c6a49fc413e29d164dca765da8b41afd8927c764dcb16cbef6829e80e4cd84"
+  },
+  "sources_sha256": {
+    "examples/jenkins/Jenkinsfile": "17e83abc26be6624f7917dfc4f1f94eb8b616531857faea6c93394209c09248f",
+    "examples/jenkins/run_scan.py": "28af0dcd604353db59573f5e133affc71100079e29b7253dadb2e444eef04721",
+    "scripts/build_scanner.py": "73cd2b86fb6cc8e2c5f7bd8965c7a703143b07ea9d99bccc0fbec0e03a82d4af",
+    "scripts/check_deployment_extras.py": "1cac535849de573c0108a5597b9868b38f495b31388a61b1539de83fb512d7f5",
+    "scripts/docker_scanner.py": "81dd6f5cd0f99191d73ded13074380ba15d2ef4519c1ecd7bc75c0a3962dc98d"
+  },
+  "status": "passed",
+  "verification_version": 1
+}

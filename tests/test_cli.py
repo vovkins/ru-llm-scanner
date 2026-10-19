@@ -240,6 +240,15 @@ class CLITests(unittest.TestCase):
 
     @unittest.skipUnless(os.name == "posix", "POSIX SIGINT cleanup")
     def test_sigint_preserves_finished_findings_and_returns_two_without_traceback(self):
+        self._cancel(signal.SIGINT)
+
+    @unittest.skipUnless(os.name == "posix", "POSIX SIGTERM cleanup")
+    def test_sigterm_preserves_finished_findings_and_returns_two_without_traceback(
+        self,
+    ):
+        self._cancel(signal.SIGTERM)
+
+    def _cancel(self, sig):
         self.repo.commit({b"a": b"VALUE_GOOD", b"b": b"VALUE_BLOCKED"})
         output = self.root / "cancelled"
         process = subprocess.Popen(
@@ -263,7 +272,7 @@ class CLITests(unittest.TestCase):
         )
         try:
             self.assertTrue(self.server.blocked.wait(5))
-            process.send_signal(signal.SIGINT)
+            process.send_signal(sig)
             stdout, stderr = process.communicate(timeout=5)
         finally:
             self.server.release.set()

@@ -6,7 +6,8 @@
 механизм Analyzer и Git/text-слой, в том числе в контейнерах без сети.
 На этапе 4 проверен внутренний scan pipeline с реальной моделью без внешней
 сети. CLI/отчёты/baseline реализованы и проверены на этапе 5. Штатное
-контейнерное развёртывание и Jenkins ещё не готовы.
+контейнерное развёртывание реализовано и проверено на CPU ARM64 в Docker Desktop;
+пример Jenkins проверен локальной последовательностью, без Jenkins controller.
 
 ## Как сообщить
 
@@ -47,6 +48,13 @@
 Репозиторий монтируется read-only, отчёты отдельно. При сканировании сеть
 ограничена внутренней связью scanner/analyzer без интернета и опубликованных
 портов. Подготовка зависимостей и образов выполняется отдельно и явно.
+Non-root UID/GID оператора, read-only root FS, tmpfs, drop ALL capabilities и
+no-new-privileges включены штатным launcher. Container logs отключены. Перед
+стартом проверяются immutable image reference/platform IDs. SHA-256 пакета/lock
+не подтверждает издателя: доставка и происхождение доверенные. Docker daemon и
+host operator входят в trust boundary; SIGKILL/daemon loss требует ручного
+[cleanup точного проекта](docs/operations.md). Копии private reports в Jenkins/
+backup требуют отдельно настроенных владельцем RBAC/retention.
 
 ## Чувствительные артефакты
 

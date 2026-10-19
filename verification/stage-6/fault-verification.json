@@ -1,0 +1,26 @@
+{
+  "cases": [
+    {
+      "analyzer_memory_sample": "1.168GiB / 3GiB",
+      "case": "actual-oom",
+      "exit_code": 2,
+      "memory_sample_is_peak": false,
+      "oom_killed": true
+    },
+    {
+      "analyzer_memory_sample": "1.623GiB / 3GiB",
+      "case": "cancel-after-findings",
+      "completed_findings_preserved": 1,
+      "exit_code": 2,
+      "memory_sample_is_peak": false,
+      "oom_killed": false
+    }
+  ],
+  "input_unchanged": true,
+  "sources_sha256": {
+    "scripts/check_runtime_faults.py": "c1d37ca2081940022786f017678fb9161538ed9e59a41d509201f72f80479f2a",
+    "scripts/docker_scanner.py": "81dd6f5cd0f99191d73ded13074380ba15d2ef4519c1ecd7bc75c0a3962dc98d"
+  },
+  "status": "passed",
+  "verification_version": 1
+}

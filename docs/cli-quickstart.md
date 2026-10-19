@@ -1,7 +1,8 @@
 # Запуск CLI и работа с отчётами
 
-Доступны `snapshot`, `diff`, JSON/HTML v1 и baseline chain. Штатные Docker/Compose,
-перенос образов и пример Jenkins относятся к этапу 6. Ниже — проверенный dev
+Доступны `snapshot`, `diff`, JSON/HTML v1 и baseline chain. Штатные
+[Docker/Compose](docker-quickstart.md), [перенос](offline-build.md) и
+[Jenkins example](jenkins.md) описаны отдельно. Ниже — проверенный dev
 интерфейс; при анализе зависимости/веса не скачиваются.
 
 ## Установка и доверенные assets

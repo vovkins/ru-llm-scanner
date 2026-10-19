@@ -5,7 +5,8 @@
 снимки/сравнение, классификация и строгая подготовка текста.
 Внутренний scan pipeline, профиль и находки/координаты реализованы на этапе 4.
 CLI snapshot/diff, renderer и baseline реализованы на этапе 5. Штатный
-Docker/Compose и Jenkins ещё не реализованы.
+Docker/Compose и Jenkins example реализованы на этапе 6; инструкции находятся
+в [Docker quickstart](docker-quickstart.md) и [Jenkins guide](jenkins.md).
 
 ## Структура
 
@@ -116,6 +117,39 @@ stub в CLI-тестах; нужен разрешённый dev runtime, без 
 engine, отдельный корпус и A→B→C. [Результаты этапа 5](../verification/stage-5/README.md)
 отделяют его от HTTP stub/unit и браузерной визуальной QA.
 
+Этап 6 добавляет host launcher/production builder и Jenkins guard rails,
+а также SIGTERM CLI. Актуальный полный набор — 131 test method, без skipped.
+Отдельные проверки используют только собственные синтетические репозитории,
+готовые локальные образы и точные ownership labels:
+
+```bash
+.venv/bin/python scripts/check_cli_tests.py --output-dir .build/stage-6/unit-tests
+.venv/bin/python scripts/check_docker_integration.py \
+  --output-dir .build/stage-6/production-tests
+.venv/bin/python scripts/check_deployment_extras.py \
+  --output-dir .build/stage-6/extra-tests \
+  --package /transfer/scanner-cpu-arm64 --context .build/production-context
+.venv/bin/python scripts/check_runtime_faults.py \
+  --output-dir .build/stage-6/fault-tests
+.venv/bin/python -m black --check src tests docker scripts examples/jenkins \
+  --extend-exclude 'check_contracts\.py'
+```
+
+Production harness требует стандартный доверенный deployment lock в `locks/`
+и host loopback разрешение для полного unit-набора. Output-каталоги harness
+должны быть новыми. `extras` требует предварительно экспортированный полный
+offline-пакет и hash-проверенный scanner context; защищённый payload содержит
+только синтетические значения. `faults` сознательно уменьшает RAM только своего
+Analyzer и отменяет свой большой synthetic scan, чтобы проверить OOMKilled/
+сохранение завершённых находок. Другие проекты не изменяются.
+
+Независимый code-v1 повторяется существующим `check_cli_integration.py` с
+`--scanner-image` готового production scanner: реальный механизм работает
+в network-none namespace, дополнительно к штатному internal-network прогону.
+[Результаты этапа 6](../verification/stage-6/README.md) фиксируют hashes/IDs,
+CPU/RAM бюджеты, save/load и локальную Jenkins-последовательность. Они не
+подтверждают реальный Jenkins, GPU, корпоративный PKI/proxy или отдельный Linux host.
+
 ## Стратегия следующих этапов
 
 | Этап | Проверки, которые появятся с реализацией |
@@ -124,7 +158,7 @@ engine, отдельный корпус и A→B→C. [Результаты эт
 | 3 (реализовано) | Git-деревья, refs, добавления/удаления/переименования, пути, хуки/фильтры, missing objects |
 | 4 (реализовано) | Полные файлы, координаты, длинные/многострочные значения, bounded queue/отмена, положительный и отрицательный корпус кода |
 | 5 (реализовано) | Реальные отчёты, semantic validation, цепочка baseline, экранирование и визуальная QA HTML |
-| 6 | Изолированный Docker, mounts, CPU/GPU, отсутствие внешних соединений, Jenkins артефакты |
+| 6 (реализовано CPU ARM64) | Изолированный Docker, RO mounts/private output, ID/transfer, аварии/сигналы/parallel и локальный Jenkins adapter; GPU/настоящий Jenkins не проверены |
 | 7 | Сквозная приёмка, актуальность инструкций, обновление Analyzer и откат |
 
 Не добавляем тесты обратимых мелких правок и проверки, которые лишь повторяют

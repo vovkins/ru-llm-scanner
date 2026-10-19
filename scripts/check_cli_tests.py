@@ -31,6 +31,9 @@ def main():
         Path(__file__),
         ROOT / "pyproject.toml",
         ROOT / "schemas/report-v1.schema.json",
+        ROOT / "scripts/docker_scanner.py",
+        ROOT / "scripts/build_scanner.py",
+        ROOT / "examples/jenkins/run_scan.py",
     ]
     before = {p.relative_to(ROOT).as_posix(): file_hash(p) for p in sorted(paths)}
     suite = unittest.defaultTestLoader.discover(str(ROOT / "tests"))

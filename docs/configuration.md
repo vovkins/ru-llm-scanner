@@ -1,7 +1,9 @@
 # CLI и конфигурация
 
 CLI реализован; [dev quickstart](cli-quickstart.md) описывает установку и
-доверенные assets. Штатный Docker-запуск — этап 6. Git-входы читаются из
+доверенные assets. [Штатный Docker launcher](docker-quickstart.md) использует
+те же параметры анализа/области, запечатанный engine и фиксированный внутренний
+Analyzer URL; добавляет resource/lifecycle budgets. Git-входы читаются из
 локальных объектов, сеть для получения Git-данных не используется.
 Scope/encoding правила реализованы как `TextPolicy` в
 [Git API](git-reader.md); загрузчик полного JSON-профиля, эффективная конфигурация

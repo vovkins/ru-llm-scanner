@@ -14,8 +14,9 @@ CPU-образа. Подготовлены спецификации, JSON Schema
 Работает внутренний scan API: конфигурация/профиль, анализ полных файлов,
 находки/координаты/контекст, ограниченная очередь и явные ошибки/охват.
 Доступны CLI `snapshot/diff`, реальные JSON/HTML и проверяемая цепочка baseline.
-Штатный Docker/Compose и Jenkins ещё относятся к следующему этапу.
-[Dev quickstart CLI](docs/cli-quickstart.md).
+Доступен штатный offline Docker/Compose launcher, перенос готовых образов и
+пример Jenkins. [Docker quickstart](docs/docker-quickstart.md),
+[сборка и перенос](docs/offline-build.md), [Jenkins](docs/jenkins.md).
 
 Для проверки уже доступного механизма см. [руководство Analyzer](docs/analyzer.md).
 Проверенная платформа — CPU `linux/arm64`. GPU-цели upstream сохранены, но
@@ -26,6 +27,7 @@ CPU-образа. Подготовлены спецификации, JSON Schema
 [Scan API и воспроизводимый offline-прогон](docs/scan-api.md),
 [результаты этапа 4](verification/stage-4/README.md).
 [Проверки CLI/отчётов/baseline](verification/stage-5/README.md).
+[Проверки production Docker и offline transfer](verification/stage-6/README.md).
 
 На отдельном синтетическом корпусе кода получены exact precision 71.74% и
 recall 89.19% (37 размеченных мест). Ограничения текущей модели, включая
@@ -39,7 +41,8 @@ recall 89.19% (37 размеченных мест). Ограничения те�
 [Этап 3](https://github.com/vovkins/ru-llm-scanner/issues/5) ·
 [Этап 4](https://github.com/vovkins/ru-llm-scanner/issues/7) ·
 [Этап 5](https://github.com/vovkins/ru-llm-scanner/issues/9) ·
-[План этапа 6](https://github.com/vovkins/ru-llm-scanner/issues/11) ·
+[Этап 6](https://github.com/vovkins/ru-llm-scanner/issues/11) ·
+[План этапа 7](https://github.com/vovkins/ru-llm-scanner/issues/13) ·
 [Документация](docs/README.md)
 
 ## Сценарии первой версии
@@ -51,19 +54,21 @@ recall 89.19% (37 размеченных мест). Ограничения те�
 | Последовательная проверка в CI | `diff --baseline ... --require-baseline` | Изменённые файлы B и подтверждённый охват неизменённых файлов из A |
 
 ```bash
-# CLI: доверенные assets и доступный Analyzer задаются по dev quickstart.
-ru-llm-scanner snapshot --repo /repo --commit HEAD --output /reports/initial
+# Из каталога scanner, с готовыми локальными образами и доверенным lock.
+python3 scripts/docker_scanner.py snapshot \
+  --repo /data/project --commit HEAD --output /data/results/initial
 
-ru-llm-scanner diff --repo /repo --from COMMIT_A --to COMMIT_B \
-  --baseline /reports/initial/report.json --require-baseline \
-  --output /reports/check-B
+python3 scripts/docker_scanner.py diff \
+  --repo /data/project --from COMMIT_A --to COMMIT_B \
+  --baseline /data/results/initial/report.json --require-baseline \
+  --output /data/results/check-B
 ```
 
 Набор данных соответствует закреплённому механизму прокси: персональные данные,
 документы и реквизиты РФ, инфраструктурные адреса, пароли, ключи, токены и
 словарные бизнес-термины. [Каталог и ограничения](docs/upstream.md).
 
-Планируется запуск двух контейнеров `scanner` и `analyzer` во внутренней сети
+Launcher запускает два контейнера `scanner` и `analyzer` во внутренней сети
 Docker. Репозиторий монтируется только для чтения, отчёты — отдельно для записи.
 После подготовки образов анализ не требует интернета или внешних API.
 
@@ -98,7 +103,7 @@ Docker. Репозиторий монтируется только для чте
 - [Проверка спецификаций](docs/development.md), [участие](CONTRIBUTING.md), [безопасность](SECURITY.md).
 - [Происхождение компонентов и статус лицензии](docs/licensing.md).
 
-Штатные инструкции Docker/Compose и Jenkins pipeline появятся на этапе 6.
-[Запуск доступного CLI и отчёты](docs/cli-quickstart.md).
+[Docker/Compose](docs/docker-quickstart.md), [диагностика](docs/operations.md),
+[Jenkins example](docs/jenkins.md), [dev CLI и отчёты](docs/cli-quickstart.md).
 [Сборка и offline-проверка Analyzer](docs/analyzer.md) уже доступны.
 Лицензия самого проекта пока не выбрана.
