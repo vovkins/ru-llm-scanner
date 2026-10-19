@@ -2,8 +2,7 @@
 
 План [#24](https://github.com/vovkins/ru-llm-scanner/issues/24) согласован
 2026-10-19. Ветка построена поверх [RV-06](../operations-ner-windowing/README.md).
-Это результаты отдельного кандидата; полный Requests, повторные acceptance и
-walkthrough ещё выполняются. Прежние images/default deployment/main сохранены.
+Это результаты отдельного кандидата; итоговый Requests, runtime gates и оба walkthrough завершены и зафиксированы ниже. Прежние images/default deployment/main сохранены.
 Принятия остаточных рисков, merge/release/tags/публикации нет.
 
 ## Выбор и воспроизводимость
@@ -67,7 +66,7 @@ name/version, **0 OSV matches**. Для `last_affected` не придуман fi
 [Native dispositions](native-dispositions.json) сохраняют все 185 прежних records.
 Все 42 с известной более новой fixed version исправлены по фактическим версиям
 и `dpkg` comparison. В кандидате остаются 139 records без указанной fixed version:
-55 `unimportant`, 84 `not yet assigned`. Они не объявлены исправленными.
+55 `unimportant`, 84 `not yet assigned`. Они не объявлены исправленными. Четыре прежние строки относились к разным версиям одного source/advisory и в новом одинаковом closure объединены; 185−42 и 139 поэтому не равны.
 Для каждого описаны API/предпосылка, supported workflow и источник; source match
 не доказывает запуск уязвимого инструмента или исчерпывающую достижимость.
 
@@ -76,6 +75,18 @@ glibc `CVE-2026-19542`, zlib `CVE-2026-27171`, `CVE-2026-85091`. Размеры 
 ограничены, Git читает локальные objects, но полное исключение этих native paths
 не доказано. Решение о риске не принято. Нерешённые P1 не закрываются автоматически;
 итоговая приёмка #25 не начинается.
+
+### Пять записей для решения владельца
+
+| Advisory | Установленный source/version | Условие и оценка |
+| --- | --- | --- |
+| [CVE-2026-102010](https://security-tracker.debian.org/tracker/CVE-2026-102010) | gcc-14 14.2.0-19 | Ошибка `erase_if` binary heap в libstdc++; штатный вызов не установлен, полного native call graph нет |
+| [CVE-2026-95619](https://security-tracker.debian.org/tracker/CVE-2026-95619) | gcc-14 14.2.0-19 | Переполнение при большом aligned allocation; фиксированные формы BERT и лимиты уменьшают ввод, но не доказывают недостижимость всех native paths |
+| [CVE-2026-19542](https://security-tracker.debian.org/tracker/CVE-2026-19542) | glibc 2.41-12+deb13u4 | `tdelete` глубокого дерева, предпосылка порядка миллиона узлов; такой маршрут scanner не установлен, исключение всех библиотечных вызовов не доказано |
+| [CVE-2026-27171](https://security-tracker.debian.org/tracker/CVE-2026-27171) | zlib 1:1.3.dfsg+really1.3.1-1 | CPU DoS в CRC combine APIs; локальный Git использует zlib, исчерпывающего доказательства достижимости/недостижимости нет |
+| [CVE-2026-85091](https://security-tracker.debian.org/tracker/CVE-2026-85091) | zlib 1:1.3.dfsg+really1.3.1-1 | Nonblocking gzwrite/gzprintf после stall; scanner не вызывает gz API напрямую; Debian всё ещё помечает версию vulnerable, range обсуждается |
+
+Это остаточный вопрос DEP-01, а не пять автоматически доказанных эксплуатируемых P1 в scanner. Non-root/read-only/network isolation и RAM/time budgets ограничивают последствия, но не исправляют библиотеки. Варианты решения: явно принять документированные ограничения для выбранного пилота либо продолжить отдельную проверку достижимости/backport/base. Без решения DEP-01 не объявляется устранённым и #25 не начинается.
 
 ## CPython и встроенные библиотеки
 
@@ -108,4 +119,122 @@ OS хоста/daemon и Jenkins controller не покрыты. [License invento
 
 [Fresh walkthrough](fresh-walkthrough.json) пройден из `git archive` в отдельном каталоге без `.git`, с новым venv: source prepare, cache-only полный context, offline RUN build, seal, реальная parity, engine/wheel, scanner build, verify, [9 CLI scenarios](cli-verification.json), export. Online шаги установки dev dependencies/build backend выделены. Использовались доступный официальный base, доверенный hash-cache и Docker store того же стенда; сборка не заявлена cache-free/на другом физическом host.
 
-[155 host tests](unit-tests.json) прошли без skips. Первый запуск внутри sandbox не мог bind loopback HTTP fixtures; после выполнения с разрешённым локальным loopback прошёл весь набор. Пропусками эту проверку не заменяли. [Проверка документации](documentation.json) не подменяет runtime acceptance. Остальные эксплуатационные gates и полный Requests выполняются последовательно; их результаты добавляются после завершения.
+[155 host tests](unit-tests.json) прошли без skips. Первый запуск внутри sandbox не мог bind loopback HTTP fixtures; после выполнения с разрешённым локальным loopback прошёл весь набор. Пропусками эту проверку не заменяли. [Проверка документации](documentation.json) не подменяет runtime acceptance. Эксплуатационные gates и полный Requests завершены последовательно; результаты приведены ниже.
+
+## Воспроизведение runtime gates
+
+Сначала пройти [fresh build](../../docs/admin/build.md) до export; выбрать новые
+пути результатов и использовать один и тот же комплект. Здесь `SCANNER_CONTEXT`,
+`DEPLOYMENT`, `PACKAGE` относятся к новой сборке, `OLD_DEPLOYMENT` —
+к сохранённому проверенному rollback. Все outputs вне сканируемого клона и новые.
+
+```sh
+python scripts/check_acceptance.py --deployment-lock "$DEPLOYMENT" \
+  --output-dir .build/check-next/acceptance
+python scripts/check_docker_integration.py --deployment-lock "$DEPLOYMENT" \
+  --output-dir .build/check-next/docker
+python scripts/check_runtime_faults.py --deployment-lock "$DEPLOYMENT" \
+  --output-dir .build/check-next/faults
+python scripts/check_deployment_extras.py --deployment-lock "$DEPLOYMENT" \
+  --context "$SCANNER_CONTEXT" --package "$PACKAGE" --output-dir .build/check-next/extras
+python scripts/check_upgrade_rollback.py --old-deployment "$OLD_DEPLOYMENT" \
+  --current-deployment "$DEPLOYMENT" --output-dir .build/check-next/rollback
+python verification/operations-ner-windowing/probe.py \
+  --deployment-lock "$DEPLOYMENT" --output-dir .build/check-next/capacity
+```
+
+Выполнять последовательно: acceptance/Docker harness сохраняет все запущенные
+контейнеры стенда, поэтому завершение параллельного теста меняет его исходный
+snapshot. Прежние незавершённые параллельные измерения не засчитаны. Sampler
+теперь находит scanner по обоим bind mounts — input **и уникальному output**;
+два runs одного клона не могут принять контейнер друг друга. Отдельная unit
+регрессия проверяет это и исчезновение контейнера между ps/inspect.
+
+Для Requests использовать доверенный локальный no-checkout клон `psf/requests`
+без выполнения его кода. Получение публичного клона — отдельная online-подготовка.
+Scanner snapshot читает tracked blobs закреплённого commit:
+
+```sh
+python verification/operations-ner-windowing/probe.py \
+  --deployment-lock "$DEPLOYMENT" --output-dir .build/check-next/requests \
+  --public-only --public-repo "$REQUESTS" \
+  --public-commit b25c87d7cb8d6a18a37fa12442b5f883f9e41741 \
+  --run-timeout-seconds 2400 --analyze-timeout-seconds 1800 --analyzer-cpus 8
+```
+
+`probe-summary-*.json` содержит только counts/hash/метрики; `report.json`,
+`report.html` и console assertion logs остаются приватными даже для публичного
+репозитория. Наличие находки не доказывает действительность credentials.
+Capacity использует synthetic known fixtures, Requests не имеет ground truth.
+Polling cgroup включает overhead измерения и может пропустить последний интервал;
+максимум tmp regular-file sizes не является пиком диска. Стенд общий с семью
+работающими контейнерами; эти времена не являются изолированным benchmark.
+
+Повтор advisory — отдельная явно online операция, только names/versions:
+
+```sh
+python scripts/check_dependency_advisories.py --deployment-lock "$DEPLOYMENT" \
+  --output-dir .build/check-next/advisories
+```
+
+## Полный Requests
+
+[Окончательный snapshot](public-requests.json) закреплённого commit перечислил все
+132 объекта: **119 analyzed / 13 unsupported / 0 errors**, без exclude/inherited/
+unverified. Код **1**, **612 кандидатов**, assurance `snapshot_verified` в scope
+`text-v1`. Полные AUTHORS, tests/test_requests.py и requests-logo.svg обработаны.
+13 объектов классифицированы как image/PDF/symlink; их содержимое не заявлено
+проанализированным. Нет ground truth и внешней проверки действительности credentials.
+Этот отчёт с находками не является clean baseline.
+
+Время **733.927 s**, 8 CPU / Analyzer 3 GiB / scanner 1 GiB; budgets 1800 s analyze,
+2400 s total. Наблюдаемый cgroup memory.peak: Analyzer 1116069888 bytes, scanner
+100380672 bytes. Общий объём JSON/HTML **72433959 bytes**: длинные строки SVG
+увеличивают контекст и размер отчёта, поэтому исходный размер клона не определяет
+retention/память renderer. Это измерение на общем стенде, не SLA и не проверка
+интерактивности огромного HTML в браузере.
+
+[Сравнение с предыдущим quarter-only кандидатом](public-detection-comparison.json):
+на всех **118 общих успешно обработанных файлах 581 finding совпал точно**, включая
+value/context/coordinates/score/source/rule_id; исключены только report-specific IDs.
+Добавленные **31** относятся к ранее отказавшему tests/test_requests.py. Это отдельная
+проверка стабильности на публичном вводе, не оценка precision/recall. Полные значения
+и оба отчёта остаются приватными. Вход не изменён, собственный public-run очищен.
+
+При первом запуске дополнительных gates по ошибке был передан Analyzer context в `check_deployment_extras.py`, ожидающий **scanner build context**. Проверки permissions/Jenkins/transfer прошли, затем проверка scanner inventory отказала до изменения context. Эта попытка не засчитана; повтор [прошёл с правильным `SCANNER_CONTEXT`](extras-verification.json). Product sources/images не менялись.
+
+## Runtime, перенос и сохранность
+
+| Проверка | Итоговый evidence |
+| --- | --- |
+| Snapshot/diff/history boundary/strict baseline | [16 scenarios](acceptance-verification.json) |
+| Compose isolation/параллельные runs/ошибки | [25 cases](docker-verification.json) |
+| Реальные OOM и отмена во время analysis | [2 cases](fault-verification.json) |
+| Permissions/Jenkins adapter/transfer negatives/context tamper | [14 cases](extras-verification.json) |
+| Отдельное обновление и откат, несовместимый baseline | [8 runs](upgrade-verification.json) |
+| Synthetic 10/100/1000 files, concurrency 2, long text, limit, 128 findings | [7 cases](capacity-verification.json) |
+| Git/text в Linux test image | [41 tests](git-linux.json), отдельный прежний dev image для неизменного Git/text слоя |
+| Установка из готового offline-пакета | [Ready walkthrough](ready-walkthrough.json), stdlib Python `-I -S` |
+| Отмена большого SVG и последующий запрос на окончательном image | [Cancellation/recovery](cancellation.json), 2 CPU, network none |
+| Сохранность и cleanup | [Preservation](preservation.json) |
+
+Ready installation содержит launcher/docs/package, без src/venv/.git/proxy/build
+contexts. Каждый scan запущен из этого каталога с явным deployment; input неизменен,
+private directories 0700 и reports 0600. Проверены clean/findings/error, snapshot A/B,
+diff/strict/equal, config/encoding/size flags, неправильный ref и public-output отказ.
+Пакет импортирован и IDs проверены. Hard links использованы только для доверенной
+копии завершённого export на том же host; другой физический host не проверялся.
+
+[Runtime gates](runtime-gates.json) фиксируют успешные команды после исправления
+параметра context. Отменённый HTTP SVG не засчитан analyzed; следующий запрос
+успешен после bounded capacity rejection. Core error priority и required NER
+не ослаблялись. [Retained notices](retained-notices.json) содержат 72 Analyzer/28
+scanner distributions и hashes найденных Python/native notices; отсутствие metadata
+не означает отсутствия условий лицензии и не является полной SBOM.
+
+Main `336feb6`, default runtime/deployment, прежние images, proxy tracked tree,
+model/dictionary/spaCy tree и frozen corpus сохранены. Все семь чужих контейнеров
+с прежними Running/StartedAt. Собственные Compose containers/networks очищены,
+prune/остановки чужих проектов не выполнялись. Реальные полные отчёты приватны.
+Оставшийся вопрос — явное решение владельца по пяти native advisory из таблицы;
+DEP-02 и RV-06 исправлены, DEP-01 не объявлен полностью закрытым. #25 не начата.

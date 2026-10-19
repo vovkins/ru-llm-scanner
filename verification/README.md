@@ -13,16 +13,18 @@
 | Исправления RV-01–RV-05 | [operations-stage-2](operations-stage-2/README.md) | 144 unit без skipped, реальные parity/CLI/Compose/Jenkins adapter и private output |
 | Документация по ролям | [operations-stage-3](operations-stage-3/README.md) | Сверка команд/путей/locks, валидные синтетические примеры, ссылки и неизменность runtime |
 | Комплексные проверки #22 | [operations-stage-4](operations-stage-4/README.md) | Новый комплект, оба walkthrough, реальные модель/CLI/Compose/faults, browser, ёмкость, публичный snapshot и свежие advisories |
+| RV-06 #26 | [operations-ner-windowing](operations-ner-windowing/README.md) | Ограниченное восстановление границ, полные входы, fail-closed, отмена и восстановление |
+| DEP-01/DEP-02 #24 | [operations-dependencies](operations-dependencies/README.md) | Чистый offline closure, уникальный inventory, реальная parity/quality, полный Requests; native residuals требуют решения владельца |
 
 Оба руководства пройдены в новых каталогах на том же Docker Desktop store.
 Это не испытание другого физического offline host. Обнаруженные dependency
-риски и смешанный packaging inventory имеют отдельный
-[план #24](https://github.com/vovkins/ru-llm-scanner/issues/24), ожидающий согласования.
-Итоговая приёмка [#25](https://github.com/vovkins/ru-llm-scanner/issues/25) ещё не начата.
-На реальном Requests дополнительно воспроизведён RV-06: NER window boundary
-не разрешается на `AUTHORS.rst`, результат 2. Исправление вынесено в
-[план #26](https://github.com/vovkins/ru-llm-scanner/issues/26); полный snapshot
-Pallets ItsDangerous завершён с находками и без ошибок.
+риски и смешанный packaging inventory исправлялись по согласованным #24/#26.
+У нового кандидата inventory однозначен, 478 upstream/96 NER/155 host tests,
+77 NER/4 dictionary и code-v1 33/13/4 сохранены. Полный Requests завершён:
+119 analyzed/13 unsupported/0 errors, 612 кандидатов, exit 1, без дополнительных
+excludes. Пять native advisory имеют явный статус `owner_review_required`;
+DEP-01 не объявлен полностью устранённым. Итоговая приёмка
+[#25](https://github.com/vovkins/ru-llm-scanner/issues/25) не начата.
 
 ## История первой реализации
 
@@ -59,7 +61,8 @@ TEST-01: часть CLI/dictionary unit требует prepared `.build/analyzer
 ## Среда и известные ограничения
 
 Подтверждено: CPU Linux ARM64 в Docker Desktop на Apple Silicon, Docker 29.6.1,
-Compose 5.2.0; host Python 3.12.14, image Python 3.11.16. Другие версии требуют
+Compose 5.2.0; host Python 3.12.14, исторические images Python 3.11.16,
+новый кандидат #24 — Python 3.11.17. Другие версии требуют
 проверки совместимости в целевой среде. AMD64/GPU, реальный Linux-host UID/ACL,
 настоящий Jenkins controller, корпоративный PKI и другой физический offline host
 не проверены. Локальная adapter-последовательность не равна испытанию Jenkins.

@@ -4,9 +4,12 @@
 [установку из пакета](installation.md). Сборка/установка dependencies может
 обращаться к одобренным источникам; сканирование готовыми images работает offline.
 Проверены CPU Linux ARM64 и [указанная среда](README.md#среда-и-ответственность).
-На `755152b` полный маршрут выполнен в новом каталоге с отдельным venv и единым
-новым runtime/deployment: [evidence](../../verification/operations-stage-4/README.md).
-Локальные base и BuildKit cache использовались; это не cache-free сборка.
+На source checkpoint `2588571` полный новый offline-маршрут выполнен в отдельном
+каталоге из `git archive`, с новым venv и единым runtime/deployment:
+[evidence #24](../../verification/operations-dependencies/README.md).
+Использовались локальный base, проверенный hash-cache и BuildKit cache;
+это не cache-free сборка. [Исторический маршрут](../../verification/operations-stage-4/README.md)
+относится к прежней recipe; его locks с новой сборкой не смешиваются.
 
 ## 1. Подготовить инструменты и отдельные пути
 

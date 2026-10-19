@@ -1,7 +1,7 @@
 {
   "inventory_version": 1,
-  "runtime_image_id": "sha256:8ae073e506b5311edb21e4d2180b48b66deea7ede8766d5dfbe1ee114173bcf9",
-  "source_lock_sha256": "5e1a1c7a5255e453e9d7efb544232fffd16ad1fa2c93348516dab0ca3a3587f7",
+  "runtime_image_id": "sha256:40cb971b58e2144749080fd50e6cb5c7bad8b74ce2c4d237e8a9800165d7e8fc",
+  "source_lock_sha256": "b088772c5ec2cb61356e3b6c6181ff0085652ebe51941fe99d9eedffae28bd3d",
   "helper_sha256": "495acee33c31defc3152e7fd681304d90b12d88276c512877be7f5fec8de259d",
   "packages": {
     "DAWG2-Python": {

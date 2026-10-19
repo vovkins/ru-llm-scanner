@@ -23,6 +23,7 @@ flowchart LR
   F --> E[Engine bundle]
   R --> E
   E --> C[Scanner context и wheel]
+  H --> C
   C --> I[Scanner image]
   I --> D[Новый deployment lock]
   R --> D

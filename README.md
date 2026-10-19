@@ -85,12 +85,13 @@ Docker Desktop на Apple Silicon. AMD64/GPU, реальный Linux host/Jenkin
 [Матрица выполненных проверок](verification/README.md).
 Новый [комплексный прогон](verification/operations-stage-4/README.md) включает
 прохождение руководств, браузер, нагрузку и публичный репозиторий.
-Перед итоговой приёмкой выполняются согласованные
-[исправления зависимостей](https://github.com/vovkins/ru-llm-scanner/issues/24).
-На реальном Requests также воспроизведён отказ NER на обычном `AUTHORS.rst`:
-выдаётся неполнота/код 2. [Дефект и отдельный план исправления](https://github.com/vovkins/ru-llm-scanner/issues/26).
-Отдельный [NER-кандидат](verification/operations-ner-windowing/README.md)
-уже проходит этот файл; полный Requests и эксплуатационные проверки продолжаются.
+Согласованные исправления [NER/RV-06](verification/operations-ner-windowing/README.md)
+и [зависимостей DEP-01/DEP-02](verification/operations-dependencies/README.md)
+подготовлены отдельными кандидатами. Полный Requests: **119 analyzed / 13 unsupported /
+0 errors**, 612 кандидатов, код 1; значения не проверялись во внешних сервисах.
+Модель/словарь сохранены, неоднозначность packaging inventory устранена.
+Перед итоговым допуском остаётся решение владельца по пяти native advisory;
+штатный deployment не заменён, этап #25 отдельно не согласован.
 
 Diff сравнивает конечные A/B и **не сканирует промежуточную историю**. Секрет,
 добавленный и удалённый между ними, может остаться в Git. PDF/Office/OCR,
