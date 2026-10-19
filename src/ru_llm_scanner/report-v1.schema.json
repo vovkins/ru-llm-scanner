@@ -1,0 +1,1705 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ru-llm-scanner:report:1.0.0",
+  "title": "ru-llm-scanner report v1",
+  "description": "Structural contract. Cross-field, Git, trust and baseline checks are documented separately in docs/reports.md. Contract examples are never runtime evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "artifact_kind": {
+      "enum": [
+        "scan_report",
+        "contract_example"
+      ]
+    },
+    "report_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "scanner": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
+    "scan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "snapshot",
+            "diff"
+          ]
+        },
+        "target_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "base_ref": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "object_format": {
+          "enum": [
+            "sha1",
+            "sha256",
+            null
+          ]
+        },
+        "target_commit": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "base_commit": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target_tree": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "mode",
+        "target_ref",
+        "base_ref",
+        "object_format",
+        "target_commit",
+        "base_commit",
+        "target_tree"
+      ]
+    },
+    "configuration": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/configuration"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "engine": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/engine"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "baseline": {
+      "$ref": "#/$defs/baseline"
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "complete": {
+          "type": "boolean"
+        },
+        "enumeration_complete": {
+          "type": "boolean"
+        },
+        "manifest_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "target": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "analyzed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "inherited": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unverified": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "excluded": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unsupported": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "error": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "deleted": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "target",
+            "analyzed",
+            "inherited",
+            "unverified",
+            "excluded",
+            "unsupported",
+            "error",
+            "deleted"
+          ]
+        }
+      },
+      "required": [
+        "complete",
+        "enumeration_complete",
+        "manifest_sha256",
+        "counts"
+      ]
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/file"
+      }
+    },
+    "deleted_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path_bytes_b64": {
+            "type": "string",
+            "minLength": 4,
+            "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+          },
+          "object_oid": {
+            "type": "string",
+            "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+          },
+          "mode": {
+            "enum": [
+              "100644",
+              "100755",
+              "120000",
+              "160000"
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "path_bytes_b64",
+          "object_oid",
+          "mode"
+        ]
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/finding"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/error"
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "clean",
+            "findings",
+            "incomplete",
+            "error"
+          ]
+        },
+        "exit_code": {
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "assurance": {
+          "enum": [
+            "snapshot_verified",
+            "baseline_verified",
+            "changed_files_only",
+            "none"
+          ]
+        },
+        "findings_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "status",
+        "exit_code",
+        "assurance",
+        "findings_count"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "report_id",
+    "created_at",
+    "scanner",
+    "scan",
+    "configuration",
+    "engine",
+    "baseline",
+    "coverage",
+    "files",
+    "deleted_files",
+    "findings",
+    "errors",
+    "result"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "scan": {
+            "properties": {
+              "mode": {
+                "const": "snapshot"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "allOf": [
+          {
+            "properties": {
+              "scan": {
+                "properties": {
+                  "base_ref": {
+                    "type": "null"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "scan": {
+                "properties": {
+                  "base_commit": {
+                    "type": "null"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "baseline": {
+                "properties": {
+                  "status": {
+                    "const": "not_applicable"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "files": {
+                "items": {
+                  "properties": {
+                    "change": {
+                      "const": "snapshot"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "files": {
+                "items": {
+                  "properties": {
+                    "status": {
+                      "not": {
+                        "enum": [
+                          "inherited",
+                          "unverified"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "deleted_files": {
+                "maxItems": 0
+              }
+            }
+          }
+        ]
+      },
+      "else": {
+        "allOf": [
+          {
+            "properties": {
+              "scan": {
+                "properties": {
+                  "base_ref": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "baseline": {
+                "properties": {
+                  "status": {
+                    "not": {
+                      "const": "not_applicable"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "files": {
+                "items": {
+                  "properties": {
+                    "change": {
+                      "not": {
+                        "const": "snapshot"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "clean",
+                  "findings"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "allOf": [
+          {
+            "properties": {
+              "configuration": {
+                "$ref": "#/$defs/configuration"
+              }
+            }
+          },
+          {
+            "properties": {
+              "engine": {
+                "$ref": "#/$defs/engine"
+              }
+            }
+          },
+          {
+            "properties": {
+              "scan": {
+                "properties": {
+                  "target_commit": {
+                    "type": "string",
+                    "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "scan": {
+                "properties": {
+                  "target_tree": {
+                    "type": "string",
+                    "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "scan": {
+                "properties": {
+                  "object_format": {
+                    "enum": [
+                      "sha1",
+                      "sha256"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "errors": {
+                "maxItems": 0
+              }
+            }
+          },
+          {
+            "properties": {
+              "coverage": {
+                "properties": {
+                  "complete": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "coverage": {
+                "properties": {
+                  "enumeration_complete": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "coverage": {
+                "properties": {
+                  "manifest_sha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "files": {
+                "items": {
+                  "properties": {
+                    "status": {
+                      "not": {
+                        "const": "error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "scan": {
+                  "properties": {
+                    "mode": {
+                      "const": "snapshot"
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "result": {
+                  "properties": {
+                    "assurance": {
+                      "const": "snapshot_verified"
+                    }
+                  }
+                }
+              }
+            },
+            "else": {
+              "allOf": [
+                {
+                  "properties": {
+                    "scan": {
+                      "properties": {
+                        "base_commit": {
+                          "type": "string",
+                          "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "baseline": {
+                        "properties": {
+                          "status": {
+                            "const": "verified"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "then": {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "result": {
+                            "properties": {
+                              "assurance": {
+                                "const": "baseline_verified"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "properties": {
+                          "files": {
+                            "items": {
+                              "properties": {
+                                "status": {
+                                  "not": {
+                                    "const": "unverified"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "else": {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "baseline": {
+                            "properties": {
+                              "status": {
+                                "const": "not_requested"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "properties": {
+                          "result": {
+                            "properties": {
+                              "assurance": {
+                                "const": "changed_files_only"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "else": {
+        "allOf": [
+          {
+            "properties": {
+              "result": {
+                "properties": {
+                  "exit_code": {
+                    "const": 2
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "result": {
+                "properties": {
+                  "assurance": {
+                    "const": "none"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "coverage": {
+                "properties": {
+                  "complete": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "errors": {
+                "minItems": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "properties": {
+              "status": {
+                "const": "clean"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "allOf": [
+          {
+            "properties": {
+              "result": {
+                "properties": {
+                  "exit_code": {
+                    "const": 0
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "result": {
+                "properties": {
+                  "findings_count": {
+                    "const": 0
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "findings": {
+                "maxItems": 0
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "properties": {
+              "status": {
+                "const": "findings"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "allOf": [
+          {
+            "properties": {
+              "result": {
+                "properties": {
+                  "exit_code": {
+                    "const": 1
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "result": {
+                "properties": {
+                  "findings_count": {
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "findings": {
+                "minItems": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "baseline": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "missing",
+                  "incompatible",
+                  "invalid"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "allOf": [
+          {
+            "properties": {
+              "result": {
+                "properties": {
+                  "exit_code": {
+                    "const": 2
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "result": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "incomplete",
+                      "error"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "files": {
+            "contains": {
+              "properties": {
+                "status": {
+                  "const": "inherited"
+                }
+              },
+              "required": [
+                "status"
+              ]
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "baseline": {
+            "properties": {
+              "status": {
+                "const": "verified"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "oid": {
+      "type": "string",
+      "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+    },
+    "path": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path_bytes_b64": {
+          "type": "string",
+          "minLength": 4,
+          "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+        }
+      },
+      "required": [
+        "path",
+        "path_bytes_b64"
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "config_version": {
+          "const": "1.0.0"
+        },
+        "analysis": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "language": {
+              "const": "ru"
+            },
+            "score_threshold": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "entities": {
+              "type": "null"
+            },
+            "dictionary_enabled": {
+              "const": true
+            }
+          },
+          "required": [
+            "language",
+            "score_threshold",
+            "entities",
+            "dictionary_enabled"
+          ]
+        },
+        "scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "policy_version": {
+              "const": "text-v1"
+            },
+            "include": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "exclude": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "encoding_overrides": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "pattern": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "encoding": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "pattern",
+                  "encoding"
+                ]
+              },
+              "uniqueItems": true
+            },
+            "max_file_bytes": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "policy_version",
+            "include",
+            "exclude",
+            "encoding_overrides",
+            "max_file_bytes"
+          ]
+        },
+        "execution": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "analyzer_url": {
+              "type": "string",
+              "minLength": 1
+            },
+            "connect_timeout_seconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "analyze_timeout_seconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "ready_timeout_seconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "concurrency": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 16
+            }
+          },
+          "required": [
+            "analyzer_url",
+            "connect_timeout_seconds",
+            "analyze_timeout_seconds",
+            "ready_timeout_seconds",
+            "concurrency"
+          ]
+        },
+        "presentation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "context_lines": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "context_lines"
+          ]
+        }
+      },
+      "required": [
+        "config_version",
+        "analysis",
+        "scope",
+        "execution",
+        "presentation"
+      ]
+    },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scanner_semantics": {
+          "const": "scanner-v1"
+        },
+        "profile_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "upstream_commit": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+        },
+        "analyzer_image_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "analyzer_signature": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_revision": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+        },
+        "model_weights_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "patchset_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "dictionary_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "scanner_semantics",
+        "profile_sha256",
+        "upstream_commit",
+        "analyzer_image_digest",
+        "analyzer_signature",
+        "model_id",
+        "model_revision",
+        "model_weights_sha256",
+        "patchset_sha256",
+        "dictionary_sha256"
+      ]
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path_bytes_b64": {
+          "type": "string",
+          "minLength": 4,
+          "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+        },
+        "object_oid": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+        },
+        "mode": {
+          "enum": [
+            "100644",
+            "100755",
+            "120000",
+            "160000"
+          ]
+        },
+        "size_bytes": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "change": {
+          "enum": [
+            "snapshot",
+            "added",
+            "modified",
+            "renamed",
+            "type_changed",
+            "unchanged"
+          ]
+        },
+        "previous_path": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/path"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "enum": [
+            "analyzed",
+            "inherited",
+            "unverified",
+            "excluded",
+            "unsupported",
+            "error"
+          ]
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "encoding": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence_report_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "path",
+        "path_bytes_b64",
+        "object_oid",
+        "mode",
+        "size_bytes",
+        "change",
+        "previous_path",
+        "status",
+        "reason",
+        "encoding",
+        "evidence_report_id"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "analyzed",
+                  "inherited"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "reason": {
+                "type": "null"
+              },
+              "encoding": {
+                "type": "string",
+                "minLength": 1
+              },
+              "size_bytes": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "mode": {
+                "enum": [
+                  "100644",
+                  "100755"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "excluded",
+                  "unsupported",
+                  "error"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "inherited"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "change": {
+                "const": "unchanged"
+              },
+              "evidence_report_id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "evidence_report_id": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "unverified"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "change": {
+                "const": "unchanged"
+              },
+              "reason": {
+                "const": "no_baseline"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "change": {
+                "const": "renamed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "previous_path": {
+                "$ref": "#/$defs/path"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "previous_path": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "file_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "category": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+        },
+        "start_offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end_offset": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "start_line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "start_column": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end_line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end_column": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "start_line": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "end_line": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "start_line",
+            "end_line",
+            "text"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rule_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "file_id",
+        "category",
+        "path",
+        "commit",
+        "start_offset",
+        "end_offset",
+        "start_line",
+        "start_column",
+        "end_line",
+        "end_column",
+        "value",
+        "context",
+        "source",
+        "score",
+        "rule_id"
+      ]
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stage": {
+          "enum": [
+            "arguments",
+            "configuration",
+            "git",
+            "baseline",
+            "decoding",
+            "analysis",
+            "reporting"
+          ]
+        },
+        "file_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "code",
+        "stage",
+        "file_id",
+        "message"
+      ]
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "not_applicable",
+            "not_requested",
+            "verified",
+            "missing",
+            "incompatible",
+            "invalid"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "report_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "artifact_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mismatch_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "status",
+        "required",
+        "report_id",
+        "artifact_sha256",
+        "mismatch_reasons"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "verified"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "report_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "artifact_sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "mismatch_reasons": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "not_applicable",
+                  "not_requested",
+                  "missing"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "report_id": {
+                "type": "null"
+              },
+              "artifact_sha256": {
+                "type": "null"
+              },
+              "mismatch_reasons": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "not_applicable",
+                  "not_requested"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "required": {
+                "const": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "missing"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "required": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "incompatible",
+                  "invalid"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "mismatch_reasons": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

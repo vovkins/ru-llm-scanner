@@ -1,0 +1,48 @@
+{
+  "verification_version": 1,
+  "status": "passed_with_explicit_browser_limit",
+  "browser": "Codex in-app browser",
+  "transport": "loopback HTTP",
+  "viewport": {
+    "width": 696,
+    "height": 818
+  },
+  "file_url": "blocked_by_browser_url_policy_not_tested",
+  "rendered_states": [
+    "clean",
+    "findings",
+    "incomplete"
+  ],
+  "checks": {
+    "category_password_visible": 5,
+    "category_private_key_visible": 1,
+    "file_private_key_visible": 1,
+    "search_no_match_visible": 0,
+    "source_ner_with_private_key_visible": 0,
+    "grouping_option": "category",
+    "reset_restores_category_and_group": true,
+    "multiline_full_value_context_lines": true,
+    "long_path_value_wrapping": true,
+    "raw_display_collision_distinct_ids": true,
+    "html_like_strings_displayed_literally": true,
+    "external_resources": "none; CSP connect-src none"
+  },
+  "reviewed_synthetic_artifact_sha256": {
+    "incomplete/report.json": "3050c54e192e787a1889e30ccb63b107970fef3e56071e079f1f9656c9612407",
+    "incomplete/report.html": "0857acd86f839dbf4e14c45a41b51f8748be1026ac281ee346fb0a74941f13b0",
+    "clean/report.json": "7fc1e7770ac33b3fb27ef3f84277f85d6dc6b4821190facc1ace03a84056bb71",
+    "clean/report.html": "717e77efd59c2e0c19d256798e95fde208553572d3c5fb040d1d286df4045869",
+    "findings/report.json": "cff38a15e5ca78a3fdc3be1f7bf17dd8d79a6fe9a2a4007780c674e428cd50b1",
+    "findings/report.html": "1a15a029d9ad6a8f243d68c8b3f1b38bc7ce503db97274f42ad299e18aafc6f4",
+    "stress/report.json": "cf429dc2eeb24154af8414215dd4ad574f1bf3b267d4f97ac6499cf8aa7b34be",
+    "stress/report.html": "b073fc73ac23412c6dadd574d4c1c87b64712696fe42ccb35ca618edc586d4d9"
+  },
+  "screenshot_sha256": {
+    "incomplete.png": "4995edf12a352921894c2783f04c514292c4be27afe8ea237301b22d99c6cc00",
+    "clean.png": "d91921aebbedd4107ed42a231a7065b31b10a2fa2c67b147cd59e5e9c8385632",
+    "stress.png": "5d0a747f93910225a357c041c5dc1fbed63b0a3e9c7989490b8a26fa61e44ba9",
+    "multiline-key.png": "0c52702821eea256ae5630f8e122a89756d9021fd364d73d238845379606b80a"
+  },
+  "html_renderer_sha256": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
+  "stress_fixture_sha256": "1556aa8b34126f68e098ef22a8708ae8b222afc87909df514a27d85b18ecc2e5"
+}

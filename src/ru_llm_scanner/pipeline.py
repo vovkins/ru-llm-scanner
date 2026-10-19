@@ -1,4 +1,4 @@
-"""Bounded snapshot/diff scan API. No report writer, baseline inheritance or CLI."""
+"""Bounded snapshot/diff scan API with explicit verified baseline inheritance."""
 
 from __future__ import annotations
 
@@ -13,10 +13,12 @@ import httpx
 from .analyzer import AnalysisError, AnalyzerClient
 from .artifacts import canonical, sha256
 from .configuration import ConfigError, EffectiveConfig
+from .baseline import BaselineError, BaselineState, default_baseline, verify_baseline
 from .engine import ScanEngine
 from .findings import Finding, make_findings
-from .git_plan import FileSelection, GitPlan, plan_diff, plan_snapshot
+from .git_plan import FileSelection, GitPlan, PreparedFile, plan_diff, plan_snapshot
 from .git_repository import GitError, GitLimits, GitRepository
+from .text_policy import prepare_content
 
 
 @dataclass(frozen=True)
@@ -34,6 +36,7 @@ class ScanFile:
     size_bytes: int | None = None
     encoding: str | None = None
     findings: tuple[Finding, ...] = field(default=(), repr=False)
+    evidence_report_id: str | None = None
 
     @property
     def id(self):
@@ -59,6 +62,7 @@ class ScanResult:
     engine: ScanEngine = field(repr=False)
     files: tuple[ScanFile, ...]
     errors: tuple[ScanError, ...]
+    baseline: BaselineState
 
     @property
     def findings(self):
@@ -89,7 +93,15 @@ class ScanResult:
     def assurance(self):
         if not self.complete:
             return "none"
-        return "snapshot_verified" if self.mode == "snapshot" else "changed_files_only"
+        return (
+            "snapshot_verified"
+            if self.mode == "snapshot"
+            else (
+                "baseline_verified"
+                if self.baseline.status == "verified"
+                else "changed_files_only"
+            )
+        )
 
     @property
     def manifest_sha256(self):
@@ -173,15 +185,52 @@ class _GitWork(_SerialWork):
         self.repository = None
         self.iterator = None
 
-    def open(self, path, mode, commit, from_commit, to_commit, config, limits):
+    def open(
+        self,
+        path,
+        mode,
+        commit,
+        from_commit,
+        to_commit,
+        config,
+        limits,
+        engine,
+        baseline_path,
+        required,
+    ):
         self.repository = GitRepository(path, limits=limits)
         plan = (
             plan_snapshot(self.repository, commit)
             if mode == "snapshot"
             else plan_diff(self.repository, from_commit, to_commit)
         )
-        self.iterator = iter(plan.prepare(self.repository, config.scope))
-        return plan
+        baseline = (
+            verify_baseline(baseline_path, plan.base, engine, config, required=required)
+            if baseline_path is not None
+            else default_baseline(mode, required)
+        )
+
+        def prepare():
+            for prepared in plan.prepare(self.repository, config.scope):
+                # Reclassify unchanged unsupported blobs with the same policy. They
+                # acquire no analyzed assurance through the previous classification.
+                previous = baseline.records.get(prepared.selection.entry.path_bytes)
+                if (
+                    prepared.content.state == "not_selected"
+                    and previous is not None
+                    and previous["status"] == "unsupported"
+                ):
+                    yield PreparedFile(
+                        prepared.selection,
+                        prepare_content(
+                            self.repository, prepared.selection.entry, config.scope
+                        ),
+                    )
+                else:
+                    yield prepared
+
+        self.iterator = iter(prepare())
+        return plan, baseline
 
     def next(self):
         return next(self.iterator, None)
@@ -206,9 +255,18 @@ async def scan_repository(
     config: EffectiveConfig | None = None,
     git_limits: GitLimits | None = None,
     transport: httpx.AsyncBaseTransport | None = None,
+    baseline: Path | None = None,
+    require_baseline: bool = False,
+    capture_cancelled: bool = False,
 ) -> ScanResult:
     """Own all clients/workers. Cancellation propagates after local work is joined."""
     if mode not in {"snapshot", "diff"} or not isinstance(engine, ScanEngine):
+        raise AnalysisError("invalid_arguments")
+    if (
+        type(require_baseline) is not bool
+        or type(capture_cancelled) is not bool
+        or (mode == "snapshot" and (baseline is not None or require_baseline))
+    ):
         raise AnalysisError("invalid_arguments")
     if (
         mode == "snapshot"
@@ -231,6 +289,15 @@ async def scan_repository(
     git, cpu = _GitWork(), _SerialWork("scanner-findings", settings.concurrency)
     plan, files, errors = None, [], []
     cancelled, halt_code = False, None
+    baseline_state = (
+        BaselineState(
+            "invalid",
+            require_baseline,
+            mismatch_reasons=("verification_not_completed",),
+        )
+        if baseline is not None
+        else default_baseline(mode, require_baseline)
+    )
 
     def fail(selection, code, stage="analysis", size=None, encoding=None):
         file = ScanFile(selection, "error", code, size, encoding)
@@ -272,7 +339,22 @@ async def scan_repository(
                         content.encoding,
                     )
                 elif content.state == "not_selected":
-                    files[number] = ScanFile(selection, "unverified", "no_baseline")
+                    previous = baseline_state.records.get(selection.entry.path_bytes)
+                    if previous is not None and previous["status"] in {
+                        "analyzed",
+                        "inherited",
+                    }:
+                        files[number] = ScanFile(
+                            selection,
+                            "inherited",
+                            size_bytes=previous["size_bytes"],
+                            encoding=previous["encoding"],
+                            evidence_report_id=baseline_state.report_id,
+                        )
+                    elif baseline_state.status == "verified":
+                        files[number] = fail(selection, "baseline_invalid", "baseline")
+                    else:
+                        files[number] = ScanFile(selection, "unverified", "no_baseline")
                 else:
                     files[number] = ScanFile(
                         selection,
@@ -290,6 +372,9 @@ async def scan_repository(
                 )
             else:
                 try:
+                    if not selection.selected:
+                        # A baseline claiming unsupported for a ready text is invalid.
+                        raise AnalysisError("baseline_invalid")
                     deadline = (
                         asyncio.get_running_loop().time()
                         + settings.analyze_timeout_seconds
@@ -348,9 +433,21 @@ async def scan_repository(
                     await queue.put(None)
 
     try:
+        if require_baseline and baseline is None:
+            raise BaselineError(baseline_state)
         await client.wait_ready()
-        plan = await git.run(
-            git.open, path, mode, commit, from_commit, to_commit, config, git_limits
+        plan, baseline_state = await git.run(
+            git.open,
+            path,
+            mode,
+            commit,
+            from_commit,
+            to_commit,
+            config,
+            git_limits,
+            engine,
+            baseline,
+            require_baseline,
         )
         files = [None] * len(plan.files)
         queue = asyncio.Queue(maxsize=settings.concurrency)
@@ -365,6 +462,9 @@ async def scan_repository(
         cancelled = True
     except TimeoutError:
         errors.append(ScanError("analyzer_timeout", "analysis"))
+    except BaselineError as error:
+        baseline_state = error.state
+        errors.append(ScanError(error.code, "baseline"))
     except Exception as error:
         stage = "git" if isinstance(error, (GitError, OSError)) else "analysis"
         errors.append(ScanError(_code(error, "scan_failed"), stage))
@@ -390,11 +490,19 @@ async def scan_repository(
             except asyncio.CancelledError:
                 cancelled = True
         cleanup_task.result()
-    if cancelled:
+    if cancelled and not capture_cancelled:
         raise asyncio.CancelledError
+    if cancelled:
+        errors.append(ScanError("scan_cancelled", "analysis"))
     if plan:
         for number, selection in enumerate(plan.files):
             if files[number] is None:
                 files[number] = fail(selection, "scan_interrupted")
+    if baseline_state.status in {"invalid", "missing", "incompatible"} and not any(
+        e.stage == "baseline" for e in errors
+    ):
+        errors.append(ScanError("baseline_invalid", "baseline"))
     errors.sort(key=lambda e: (e.stage, e.file_id or "", e.code))
-    return ScanResult(mode, plan, config, engine, tuple(files), tuple(errors))
+    return ScanResult(
+        mode, plan, config, engine, tuple(files), tuple(errors), baseline_state
+    )
