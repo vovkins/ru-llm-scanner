@@ -1,0 +1,38 @@
+{
+  "description": "Synthetic contract data; never evidence of actual scanning or detector accuracy. Source OIDs are Git blob hashes, commit/tree/image metadata is illustrative.",
+  "reports": [
+    "snapshot-clean",
+    "diff-baseline-clean",
+    "diff-chain-clean",
+    "diff-no-baseline-clean",
+    "diff-identical-no-baseline",
+    "snapshot-findings",
+    "incomplete",
+    "baseline-incompatible",
+    "snapshot-unsupported",
+    "snapshot-empty",
+    "preflight-error"
+  ],
+  "sources": {
+    "7f0c832f524034c92ee508d14124223614d034ed": {
+      "encoding": "utf-8",
+      "text": "Локальный синтетический пример.\r\n"
+    },
+    "f924ea7b73a73dab0aad0e520f05a657705f1a2c": {
+      "encoding": "utf-8",
+      "text": "Новая заметка без учётных данных.\n"
+    },
+    "068d799f3e31168ddaeec42cc1770f4ef7d942df": {
+      "encoding": "utf-8",
+      "text": "😀 Контакт: audit@example.invalid\r\nРезерв: audit@example.invalid\r\n"
+    },
+    "699864d8591bc0a6e08098c24b36db96c558a01e": {
+      "encoding": "utf-8",
+      "text": "Следующий синтетический шаг.\n"
+    },
+    "15cb0ecb3e219d1701294bfdf0fe3f5cb5d208e7": {
+      "encoding": "utf-8",
+      "text": "PK\u0005\u0006\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+    }
+  }
+}

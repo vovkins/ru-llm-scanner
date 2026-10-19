@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_kind": "contract_example",
+  "report_id": "3795328a-2b89-5811-9135-de1f4ed36866",
+  "created_at": "2026-10-18T00:00:00Z",
+  "scanner": {
+    "version": "0.0.0-spec"
+  },
+  "scan": {
+    "mode": "diff",
+    "target_ref": "0a14de35ff9141e4de632f39bf4842a189f16d01",
+    "base_ref": "23bb78170f853daa8c4c16c6bec5c203cb06d477",
+    "object_format": "sha1",
+    "target_commit": "0a14de35ff9141e4de632f39bf4842a189f16d01",
+    "base_commit": "23bb78170f853daa8c4c16c6bec5c203cb06d477",
+    "target_tree": "1e74243ae7acc2294c79aea864776a9eed8162f5"
+  },
+  "configuration": {
+    "config_version": "1.0.0",
+    "analysis": {
+      "language": "ru",
+      "score_threshold": 0.35,
+      "entities": null,
+      "dictionary_enabled": true
+    },
+    "scope": {
+      "policy_version": "text-v1",
+      "include": [
+        "**"
+      ],
+      "exclude": [],
+      "encoding_overrides": [],
+      "max_file_bytes": 10485760
+    },
+    "execution": {
+      "analyzer_url": "http://analyzer:5001",
+      "connect_timeout_seconds": 5,
+      "analyze_timeout_seconds": 600,
+      "ready_timeout_seconds": 120,
+      "concurrency": 1
+    },
+    "presentation": {
+      "context_lines": 2
+    }
+  },
+  "engine": {
+    "scanner_semantics": "scanner-v1",
+    "upstream_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
+    "analyzer_image_digest": "sha256:bbb9a30ac377725931b09171c74994e4428edd32294adb6bf49285e786715299",
+    "analyzer_signature": "fdcd9ad20ff35ae5708238c1bbb2f47a7a3ae10840c8e5bc2c1b2e7cee3d6e12",
+    "model_id": "fef2/ner_rus_bert-secret_detection",
+    "model_revision": "52b5b0745aac14f73fcf2ac0f91d9b5001a85ae4",
+    "model_weights_sha256": "6a2c875d02398554ec69384f489a0bf4fe3505fc347c6cdd3385d4fd31ef21a4",
+    "patchset_sha256": "43ed118cf988372c7a77fdae71638818ba76dbac63ff73b37e873e696b1c00f5",
+    "dictionary_sha256": "d88af27fed56e376a51e032c2ca8dd90c5be1f6f616fed3828fe3ee7a1d45053",
+    "profile_sha256": "66b2e6730f5d59c7a76c5eca72372372b86270845f0776434a1f6b8c1fabe9c9"
+  },
+  "baseline": {
+    "status": "not_requested",
+    "required": false,
+    "report_id": null,
+    "artifact_sha256": null,
+    "mismatch_reasons": []
+  },
+  "coverage": {
+    "complete": true,
+    "enumeration_complete": true,
+    "manifest_sha256": "c7415170529f6f7a8b97138aa688002a4567a6c7add18f5f92a31d2201ea2822",
+    "counts": {
+      "target": 2,
+      "analyzed": 1,
+      "inherited": 0,
+      "unverified": 1,
+      "excluded": 0,
+      "unsupported": 0,
+      "error": 0,
+      "deleted": 0
+    }
+  },
+  "files": [
+    {
+      "id": "b01eeed0ec6fc4f4799e44c7b4084e649d6eee4f1aca52ac935553ff82108398",
+      "path": "README.txt",
+      "path_bytes_b64": "UkVBRE1FLnR4dA==",
+      "object_oid": "7f0c832f524034c92ee508d14124223614d034ed",
+      "mode": "100644",
+      "size_bytes": 61,
+      "change": "unchanged",
+      "previous_path": null,
+      "status": "unverified",
+      "reason": "no_baseline",
+      "encoding": null,
+      "evidence_report_id": null
+    },
+    {
+      "id": "e39538e7f27a7bf579cd9b85a103c0f0b86b60b788534295538d0301a9c5dce6",
+      "path": "notes.txt",
+      "path_bytes_b64": "bm90ZXMudHh0",
+      "object_oid": "f924ea7b73a73dab0aad0e520f05a657705f1a2c",
+      "mode": "100644",
+      "size_bytes": 62,
+      "change": "added",
+      "previous_path": null,
+      "status": "analyzed",
+      "reason": null,
+      "encoding": "utf-8",
+      "evidence_report_id": null
+    }
+  ],
+  "deleted_files": [],
+  "findings": [],
+  "errors": [],
+  "result": {
+    "status": "clean",
+    "exit_code": 0,
+    "assurance": "changed_files_only",
+    "findings_count": 0
+  }
+}
