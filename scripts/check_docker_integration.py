@@ -32,13 +32,20 @@ def require(value, code):
         raise RuntimeError(code)
 
 
-def running_scanner(repo):
+def running_scanner(repo, output):
+    """Locate this run by both mounts; one repository can have concurrent scans."""
     ids = docker(
         "ps", "-q", "--filter", "label=com.docker.compose.service=scanner"
     ).stdout.split()
     for value in ids:
-        info = json.loads(docker("inspect", value.decode()).stdout)[0]
-        if any(m.get("Source") == str(repo) for m in info["Mounts"]):
+        result = docker("inspect", value.decode(), check=False)
+        if result.returncode:
+            continue  # A concurrently finishing container may disappear.
+        info = json.loads(result.stdout)[0]
+        mounts = {m.get("Destination"): m.get("Source") for m in info["Mounts"]}
+        if mounts.get("/input/repository") == str(repo.resolve()) and mounts.get(
+            "/output"
+        ) == str(output.resolve()):
             return info
     return None
 
@@ -191,7 +198,7 @@ def main():
             if action:
                 end = time.monotonic() + 40
                 while process.poll() is None and time.monotonic() < end:
-                    info = running_scanner(input_repo)
+                    info = running_scanner(input_repo, output)
                     if info:
                         break
                     time.sleep(0.05)

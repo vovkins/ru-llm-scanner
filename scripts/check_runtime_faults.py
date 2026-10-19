@@ -68,7 +68,7 @@ def main():
         try:
             end = time.monotonic() + 40
             while process.poll() is None and time.monotonic() < end:
-                info = running_scanner(repo.root)
+                info = running_scanner(repo.root, output)
                 if info:
                     break
                 time.sleep(0.05)

@@ -80,7 +80,7 @@ def main():
                     process.kill()
                     killed = True
                     break
-                info = running_scanner(repo)
+                info = running_scanner(repo, output)
                 if info:
                     project = info["Config"]["Labels"]["com.docker.compose.project"]
                     containers, _ = owned_resources(project)
