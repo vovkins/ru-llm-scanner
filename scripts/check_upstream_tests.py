@@ -8,7 +8,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 from ru_llm_scanner.artifacts import file_hash, require, strict_json, write_json
 from ru_llm_scanner.upstream import verify_context
 
@@ -28,6 +29,7 @@ def main():
     p.add_argument("--context", type=Path, required=True)
     p.add_argument("--image", required=True)
     p.add_argument("--output", type=Path, required=True)
+    p.add_argument("--suite", choices=("core", "ner"), default="core")
     args = p.parse_args()
     context = args.context.resolve()
     manifest, lock = verify_context(context)
@@ -70,6 +72,13 @@ def main():
         "/workspace",
         reference,
     ]
+    tests = TESTS if args.suite == "core" else ("test_ner.py",)
+    regression = ROOT / "tests/integration/ner_window_cases.py"
+    if args.suite == "ner":
+        base[-1:-1] = [
+            "--mount",
+            f"type=bind,src={regression},dst=/ner_window_cases.py,readonly",
+        ]
     packages = strict_json(
         subprocess.check_output(
             [
@@ -89,7 +98,8 @@ def main():
             "-q",
             "-p",
             "no:cacheprovider",
-            *("presidio/tests/" + name for name in TESTS),
+            *("presidio/tests/" + name for name in tests),
+            *(["/ner_window_cases.py"] if args.suite == "ner" else []),
         ],
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
@@ -106,18 +116,20 @@ def main():
         "source_lock_sha256": manifest["source_lock_sha256"],
         "test_image_id": info["Id"],
         "platform": platform,
-        "test_files": list(TESTS),
+        "test_files": list(tests),
         "packages": packages,
         "passed": int(passed[-1]) if passed else 0,
         "return_code": result.returncode,
     }
+    if args.suite == "ner":
+        report["scanner_regression_sha256"] = file_hash(regression)
     write_json(args.output, report)
     print(
         json.dumps(
             {
                 "status": report["status"],
                 "passed": report["passed"],
-                "test_files": len(TESTS),
+                "test_files": len(tests) + (args.suite == "ner"),
             }
         )
     )

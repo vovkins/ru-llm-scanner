@@ -1,0 +1,1171 @@
+{
+  "cases": 46,
+  "checks": {
+    "all_selected_files_analyzed": true,
+    "diff_full_file_context": true,
+    "diff_no_baseline_inheritance": true,
+    "direct_detector_parity": true,
+    "long_tail": true,
+    "multiline_value": true,
+    "network_only_loopback": true,
+    "original_values_and_coordinates": true,
+    "partial_findings_retained": true,
+    "wrong_profile_rejected": true
+  },
+  "corpus_sha256": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+  "corpus_version": "code-v1",
+  "direct_parity_cases": 46,
+  "environment": {
+    "effective_uid": 65534,
+    "git": "git version 2.47.3",
+    "httpx": "0.28.1",
+    "machine": "aarch64",
+    "python": "3.11.16",
+    "system": "Linux"
+  },
+  "expected_catalog": [
+    "API_KEY",
+    "AUTH_TOKEN",
+    "BASE64_DATA",
+    "BEARER_TOKEN",
+    "CONTRACT_NUMBER",
+    "CREDIT_CARD",
+    "DB_URL",
+    "DICTIONARY_TERM",
+    "EMAIL_ADDRESS",
+    "HOSTNAME",
+    "INTERNAL_DOMAIN",
+    "INTERNAL_IP",
+    "JWT",
+    "LOCATION",
+    "LOGIN",
+    "ORGANIZATION",
+    "PASSWORD",
+    "PERSON",
+    "PHONE_NUMBER",
+    "PRIVATE_KEY",
+    "RU_ADDRESS",
+    "RU_BIK",
+    "RU_CORRESPONDENT_ACCOUNT",
+    "RU_INN",
+    "RU_KPP",
+    "RU_OGRN",
+    "RU_OGRNIP",
+    "RU_PASSPORT",
+    "RU_SETTLEMENT_ACCOUNT",
+    "RU_SNILS",
+    "SECRET_KEY"
+  ],
+  "gpu_inference": "not_tested_no_cuda",
+  "images": {
+    "analyzer_platform_id": "sha256:80dcf6050b927fdbcea85be8a872327c3f0cd12a8f9afdc82a0c2e6d0b9da432",
+    "analyzer_reference_id": "sha256:b893c6e892d8f6d28172b4c6c88cd08234a50c5af8d5221c68752c44fe55aacc",
+    "platform": "linux/arm64",
+    "scanner_platform_id": "sha256:c1db24bd78ff63e3d63d44203aee43f0fc0476a6610fde8fb0706d850615b5af",
+    "scanner_reference_id": "sha256:c1db24bd78ff63e3d63d44203aee43f0fc0476a6610fde8fb0706d850615b5af"
+  },
+  "launcher_sha256": "b9265d0f5efe810ceae50a696fa579cdd9c11e80189f2cc156863c32abdb13f0",
+  "profile": {
+    "analyzer_image_digest": "sha256:80dcf6050b927fdbcea85be8a872327c3f0cd12a8f9afdc82a0c2e6d0b9da432",
+    "analyzer_signature": "d629cb253ec63d48a503730491002113e74740963d6167b70ae08e35ceb5e5b7",
+    "dictionary_sha256": "dc2ae9065b21ba772be25067444fb1049a73342038b594400fc2a4acf2680392",
+    "model_id": "fef2/ner_rus_bert-secret_detection",
+    "model_revision": "52b5b0745aac14f73fcf2ac0f91d9b5001a85ae4",
+    "model_weights_sha256": "6a2c875d02398554ec69384f489a0bf4fe3505fc347c6cdd3385d4fd31ef21a4",
+    "patchset_sha256": "b5671ccc73445ae2e9e9d63da0a170fd87da06f161730b51c94c1d743d6a0ed8",
+    "profile_sha256": "12067899089288d3a542c82d9e935c11c48e1cc08c8a81bcb432d4eb268b8ef5",
+    "scanner_semantics": "scanner-v1",
+    "upstream_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c"
+  },
+  "quality_evaluation": {
+    "case_metrics": [
+      {
+        "case_id": "python-password",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "credentials",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "dotenv-login",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "credentials",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "yaml-auth",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "credentials",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "json-secret",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "credentials",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "provider-api",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "credentials",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "http-jwt",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "credentials",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "http-bearer",
+        "exact_fn": 1,
+        "exact_fp": 1,
+        "exact_precision": 0.0,
+        "exact_recall": 0.0,
+        "exact_tp": 0,
+        "expected": 1,
+        "extra": [
+          {
+            "category": "AUTH_TOKEN",
+            "end": 58,
+            "start": 22
+          }
+        ],
+        "group": "credentials",
+        "missing": [
+          {
+            "category": "BEARER_TOKEN",
+            "end": 58,
+            "start": 0
+          }
+        ],
+        "predicted": 1,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "multiline-key",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "credentials",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "encoded-data",
+        "exact_fn": 1,
+        "exact_fp": 2,
+        "exact_precision": 0.0,
+        "exact_recall": 0.0,
+        "exact_tp": 0,
+        "expected": 1,
+        "extra": [
+          {
+            "category": "PASSWORD",
+            "end": 60,
+            "start": 58
+          },
+          {
+            "category": "SECRET_KEY",
+            "end": 58,
+            "start": 8
+          }
+        ],
+        "group": "credentials",
+        "missing": [
+          {
+            "category": "BASE64_DATA",
+            "end": 60,
+            "start": 8
+          }
+        ],
+        "predicted": 2,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "infra-ip",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "infrastructure",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "infra-public-ip",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "infrastructure",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "infra-domain",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "infrastructure",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "infra-hostname",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "infrastructure",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "database-url",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "infrastructure",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "contact-email",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "contact",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "contact-phone",
+        "exact_fn": 1,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": 0.0,
+        "exact_tp": 0,
+        "expected": 1,
+        "extra": [],
+        "group": "contact",
+        "missing": [
+          {
+            "category": "PHONE_NUMBER",
+            "end": 29,
+            "start": 12
+          }
+        ],
+        "predicted": 0,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "ru-address",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "contact",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "person-comment",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "identity",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "location-doc",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "identity",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "organization-doc",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "identity",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "contract-doc",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "identity",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "inn-yaml",
+        "exact_fn": 1,
+        "exact_fp": 1,
+        "exact_precision": 0.0,
+        "exact_recall": 0.0,
+        "exact_tp": 0,
+        "expected": 1,
+        "extra": [
+          {
+            "category": "PHONE_NUMBER",
+            "end": 33,
+            "start": 23
+          }
+        ],
+        "group": "documents",
+        "missing": [
+          {
+            "category": "RU_INN",
+            "end": 33,
+            "start": 23
+          }
+        ],
+        "predicted": 1,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "kpp-doc",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "documents",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "ogrn-doc",
+        "exact_fn": 0,
+        "exact_fp": 1,
+        "exact_precision": 0.5,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [
+          {
+            "category": "ORGANIZATION",
+            "end": 4,
+            "start": 0
+          }
+        ],
+        "group": "documents",
+        "missing": [],
+        "predicted": 2,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "ogrnip-doc",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "documents",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "snils-doc",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "documents",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "passport-doc",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "documents",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "bik-doc",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "financial",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "settlement-doc",
+        "exact_fn": 0,
+        "exact_fp": 1,
+        "exact_precision": 0.6666666666666666,
+        "exact_recall": 1.0,
+        "exact_tp": 2,
+        "expected": 2,
+        "extra": [
+          {
+            "category": "ORGANIZATION",
+            "end": 40,
+            "start": 38
+          }
+        ],
+        "group": "financial",
+        "missing": [],
+        "predicted": 3,
+        "typed_covered": 2
+      },
+      {
+        "case_id": "correspondent-doc",
+        "exact_fn": 0,
+        "exact_fp": 1,
+        "exact_precision": 0.6666666666666666,
+        "exact_recall": 1.0,
+        "exact_tp": 2,
+        "expected": 2,
+        "extra": [
+          {
+            "category": "ORGANIZATION",
+            "end": 3,
+            "start": 0
+          }
+        ],
+        "group": "financial",
+        "missing": [],
+        "predicted": 3,
+        "typed_covered": 2
+      },
+      {
+        "case_id": "card-json",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "financial",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "dictionary-repeat",
+        "exact_fn": 0,
+        "exact_fp": 2,
+        "exact_precision": 0.5,
+        "exact_recall": 1.0,
+        "exact_tp": 2,
+        "expected": 2,
+        "extra": [
+          {
+            "category": "ORGANIZATION",
+            "end": 16,
+            "start": 8
+          },
+          {
+            "category": "ORGANIZATION",
+            "end": 35,
+            "start": 27
+          }
+        ],
+        "group": "dictionary",
+        "missing": [],
+        "predicted": 4,
+        "typed_covered": 2
+      },
+      {
+        "case_id": "unicode-password",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "credentials",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "long-tail",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "extra": [],
+        "group": "credentials",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      {
+        "case_id": "negative-constants",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": null,
+        "exact_tp": 0,
+        "expected": 0,
+        "extra": [],
+        "group": "negative",
+        "missing": [],
+        "predicted": 0,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "negative-password-placeholder",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": null,
+        "exact_tp": 0,
+        "expected": 0,
+        "extra": [],
+        "group": "negative",
+        "missing": [],
+        "predicted": 0,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "negative-api-placeholder",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": null,
+        "exact_tp": 0,
+        "expected": 0,
+        "extra": [],
+        "group": "negative",
+        "missing": [],
+        "predicted": 0,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "negative-login-placeholder",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": null,
+        "exact_tp": 0,
+        "expected": 0,
+        "extra": [],
+        "group": "negative",
+        "missing": [],
+        "predicted": 0,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "negative-description",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": null,
+        "exact_tp": 0,
+        "expected": 0,
+        "extra": [],
+        "group": "negative",
+        "missing": [],
+        "predicted": 0,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "negative-host-context",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": null,
+        "exact_tp": 0,
+        "expected": 0,
+        "extra": [],
+        "group": "negative",
+        "missing": [],
+        "predicted": 0,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "negative-ip",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": null,
+        "exact_tp": 0,
+        "expected": 0,
+        "extra": [],
+        "group": "negative",
+        "missing": [],
+        "predicted": 0,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "negative-inn-checksum",
+        "exact_fn": 0,
+        "exact_fp": 1,
+        "exact_precision": 0.0,
+        "exact_recall": null,
+        "exact_tp": 0,
+        "expected": 0,
+        "extra": [
+          {
+            "category": "PHONE_NUMBER",
+            "end": 15,
+            "start": 5
+          }
+        ],
+        "group": "negative",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "negative-url",
+        "exact_fn": 0,
+        "exact_fp": 2,
+        "exact_precision": 0.0,
+        "exact_recall": null,
+        "exact_tp": 0,
+        "expected": 0,
+        "extra": [
+          {
+            "category": "LOGIN",
+            "end": 35,
+            "start": 24
+          },
+          {
+            "category": "PERSON",
+            "end": 24,
+            "start": 22
+          }
+        ],
+        "group": "negative",
+        "missing": [],
+        "predicted": 2,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "negative-base64",
+        "exact_fn": 0,
+        "exact_fp": 1,
+        "exact_precision": 0.0,
+        "exact_recall": null,
+        "exact_tp": 0,
+        "expected": 0,
+        "extra": [
+          {
+            "category": "PASSWORD",
+            "end": 19,
+            "start": 14
+          }
+        ],
+        "group": "negative",
+        "missing": [],
+        "predicted": 1,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "negative-contract",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": null,
+        "exact_tp": 0,
+        "expected": 0,
+        "extra": [],
+        "group": "negative",
+        "missing": [],
+        "predicted": 0,
+        "typed_covered": 0
+      },
+      {
+        "case_id": "negative-empty",
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": null,
+        "exact_tp": 0,
+        "expected": 0,
+        "extra": [],
+        "group": "negative",
+        "missing": [],
+        "predicted": 0,
+        "typed_covered": 0
+      }
+    ],
+    "per_category": {
+      "API_KEY": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "AUTH_TOKEN": {
+        "exact_fn": 0,
+        "exact_fp": 1,
+        "exact_precision": 0.5,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 2,
+        "typed_covered": 1
+      },
+      "BASE64_DATA": {
+        "exact_fn": 1,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": 0.0,
+        "exact_tp": 0,
+        "expected": 1,
+        "predicted": 0,
+        "typed_covered": 0
+      },
+      "BEARER_TOKEN": {
+        "exact_fn": 1,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": 0.0,
+        "exact_tp": 0,
+        "expected": 1,
+        "predicted": 0,
+        "typed_covered": 0
+      },
+      "CONTRACT_NUMBER": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "CREDIT_CARD": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "DB_URL": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "DICTIONARY_TERM": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 2,
+        "expected": 2,
+        "predicted": 2,
+        "typed_covered": 2
+      },
+      "EMAIL_ADDRESS": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "HOSTNAME": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "INTERNAL_DOMAIN": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "INTERNAL_IP": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 2,
+        "expected": 2,
+        "predicted": 2,
+        "typed_covered": 2
+      },
+      "JWT": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "LOCATION": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "LOGIN": {
+        "exact_fn": 0,
+        "exact_fp": 1,
+        "exact_precision": 0.5,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 2,
+        "typed_covered": 1
+      },
+      "ORGANIZATION": {
+        "exact_fn": 0,
+        "exact_fp": 5,
+        "exact_precision": 0.16666666666666666,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 6,
+        "typed_covered": 1
+      },
+      "PASSWORD": {
+        "exact_fn": 0,
+        "exact_fp": 2,
+        "exact_precision": 0.6,
+        "exact_recall": 1.0,
+        "exact_tp": 3,
+        "expected": 3,
+        "predicted": 5,
+        "typed_covered": 3
+      },
+      "PERSON": {
+        "exact_fn": 0,
+        "exact_fp": 1,
+        "exact_precision": 0.5,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 2,
+        "typed_covered": 1
+      },
+      "PHONE_NUMBER": {
+        "exact_fn": 1,
+        "exact_fp": 2,
+        "exact_precision": 0.0,
+        "exact_recall": 0.0,
+        "exact_tp": 0,
+        "expected": 1,
+        "predicted": 2,
+        "typed_covered": 0
+      },
+      "PRIVATE_KEY": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "RU_ADDRESS": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "RU_BIK": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 3,
+        "expected": 3,
+        "predicted": 3,
+        "typed_covered": 3
+      },
+      "RU_CORRESPONDENT_ACCOUNT": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "RU_INN": {
+        "exact_fn": 1,
+        "exact_fp": 0,
+        "exact_precision": null,
+        "exact_recall": 0.0,
+        "exact_tp": 0,
+        "expected": 1,
+        "predicted": 0,
+        "typed_covered": 0
+      },
+      "RU_KPP": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "RU_OGRN": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "RU_OGRNIP": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "RU_PASSPORT": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "RU_SETTLEMENT_ACCOUNT": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "RU_SNILS": {
+        "exact_fn": 0,
+        "exact_fp": 0,
+        "exact_precision": 1.0,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 1,
+        "typed_covered": 1
+      },
+      "SECRET_KEY": {
+        "exact_fn": 0,
+        "exact_fp": 1,
+        "exact_precision": 0.5,
+        "exact_recall": 1.0,
+        "exact_tp": 1,
+        "expected": 1,
+        "predicted": 2,
+        "typed_covered": 1
+      }
+    },
+    "status": "measured_without_detector_changes"
+  },
+  "scan_elapsed_seconds": 14.059,
+  "source_lock_sha256": "b4d710a18c0e840b0a84cd979974ad311cf3d3647e716e99256cda6fa889091a",
+  "sources_sha256": {
+    "src/ru_llm_scanner/__init__.py": "b1a0c9ede61fc13ba6c43be7880227c4ee230506537aa3cad83425e758b205a3",
+    "src/ru_llm_scanner/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/ru_llm_scanner/analyzer.py": "4f1cf5dce228592b4c43ce6c735ae798b139b6d32c92b9fdfa5e792195f2e746",
+    "src/ru_llm_scanner/artifacts.py": "77271cce804e4fd8c92baa46c4b7ab8f137c50134e516a2e7fbbba56bc836db3",
+    "src/ru_llm_scanner/baseline.py": "23ea9247b900c975be4b9c691f60f61d8762984ffdcc4e30ee83d423086f0020",
+    "src/ru_llm_scanner/cli.py": "3d399aaf656336b37de7d760fcaa87ca05393c76cc80b972db17ca022c79645a",
+    "src/ru_llm_scanner/configuration.py": "0a6e3f90de1bb9a089855734a5a0e06b92728b1cd9d8f13e5bc4b10b1ab7c959",
+    "src/ru_llm_scanner/dictionary.py": "6eecfcfe094ca3d2f4aaa43b3093bd94c69e55734292bba824553dd4807c6238",
+    "src/ru_llm_scanner/engine.py": "8a583e0ef31b4705c75af209a36f063695c7d76704e7f8348efcda8c10b65866",
+    "src/ru_llm_scanner/findings.py": "1f9ffd4f3dce7d48f1e066447552eda238cabf36d82cfe4cd5923c7b0c44a7cf",
+    "src/ru_llm_scanner/git_plan.py": "5b1dbd8b80424b9edb97157bcce3acd470af6c23cbea4befe126a46401c9f855",
+    "src/ru_llm_scanner/git_repository.py": "020bb53c3989a7e752fd25894c29d1f256d38137d942f40c3e9d373cb343bf27",
+    "src/ru_llm_scanner/html_report.py": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
+    "src/ru_llm_scanner/output.py": "8c5abca175d5947962330f5374e2e7cddcf391caf2edcc9213e1af509b3dc39d",
+    "src/ru_llm_scanner/pipeline.py": "334658282ca1a85ef230c965f1b4e6272987ff2affae812b435ded7629270eb5",
+    "src/ru_llm_scanner/report_validation.py": "c2046099dd2a52b748a6a91f023ea0e653997777e33fc68a58a7585c17d6ec21",
+    "src/ru_llm_scanner/reports.py": "53b31d86e46ddf23e4c21fc479d87f41de943e06e53ea5bdcec5a788893144c3",
+    "src/ru_llm_scanner/text_policy.py": "53ab4ea4a072b76af5ca7df9faaae4ad0820bd25934805133244bc50a46e32d1",
+    "src/ru_llm_scanner/upstream.py": "d28a0623470615dd369afecd3facb5640e525ff4d49b7748436c18af681e95cb",
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+    "tests/corpus/load_code_corpus.py": "34570026325dc91ae26ec4102680e46f1670564ed16713f4c5da86d73b145a59",
+    "tests/git_fixtures.py": "5c7d05e8b5c896af805aee66e2837eb1c9b173469c9f763551b5e6415a671c89",
+    "tests/integration/scan_offline.py": "fc05758347149adbefa16677b9636367f80baf1fa67c6a0d56ec5daedf3ce8b4"
+  },
+  "status": "passed",
+  "test_dockerfile_sha256": "53b206428dacb2ff3a33041679533995a9a2357a97584533bc66c3a2977e7d77",
+  "total_elapsed_seconds": 23.234,
+  "verification_version": 1
+}

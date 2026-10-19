@@ -1,0 +1,13 @@
+{
+  "elapsed_seconds": 11.043,
+  "http_status": 200,
+  "image": {
+    "image_id": "sha256:80dcf6050b927fdbcea85be8a872327c3f0cd12a8f9afdc82a0c2e6d0b9da432",
+    "image_reference_id": "sha256:b893c6e892d8f6d28172b4c6c88cd08234a50c5af8d5221c68752c44fe55aacc"
+  },
+  "network": "none; loopback only",
+  "readonly_nonroot_no_caps_no_logs": true,
+  "response_bytes": 20183,
+  "response_sha256": "4d0581b8f35b1a2069c587f8cafcdeacc4a4a7cce0125606e9082b36d9be2e00",
+  "source_sha256": "67b09ec1002aef944fec0a4c6ab76d5662e0f596f289e1c7b280c24cbb749678"
+}

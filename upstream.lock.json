@@ -158,6 +158,16 @@
           "after": "b6d1adefcd6a4fe13a8b43757b4680b80243433c311967caa6a6f40b80b264a9"
         }
       }
+    },
+    {
+      "path": "patches/ner-window-recovery.patch",
+      "sha256": "74fec5e4ac94091cb0989465ba9034e0fc1692465c018a3c9e4260b069e36cfe",
+      "targets": {
+        "presidio/ner/huggingface_recognizer.py": {
+          "before": "9f7794c43cb365b0e3aca626473889330f56225da279e29afd956e026cfc7a52",
+          "after": "7a158c20418e6fa13c2a855c0cf2f61a0cca1e96d39c919fdbde1bbbaa5c1ac5"
+        }
+      }
     }
   ],
   "build_profiles": {

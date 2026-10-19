@@ -1,0 +1,108 @@
+--- a/presidio/ner/huggingface_recognizer.py
++++ b/presidio/ner/huggingface_recognizer.py
+@@ -1136,13 +1136,56 @@
+                 entity_predictions = merge_window_predictions(
+                     filtered_predictions + selected_recovery_predictions
+                 )
+-            except NERWindowBoundaryError as exc:
+-                error = NERProcessingError(
+-                    phase="windowing",
+-                    failure_class="window_boundary_unresolved",
+-                    windows_processed=windows_processed,
+-                )
+-                raise error from exc
++            except NERWindowBoundaryError as centered_unresolved:
++                # A centered recovery window can suppress a boundary prediction
++                # because its context changed. Try two other full contexts; never
++                # discard the original candidate or treat absence as clean.
++                try:
++                    alternate_predictions, alternate_count = self._recover_window_boundaries(
++                        normalized.text,
++                        centered_unresolved.unresolved_clusters,
++                        cancellation_event=cancellation_event,
++                        alternate=True,
++                    )
++                except NERInferenceCancelled:
++                    raise
++                except NERBackendError as error:
++                    combined_error = NERProcessingError(
++                        phase=error.phase,
++                        failure_class=error.failure_class,
++                        windows_processed=windows_processed + error.windows_processed,
++                    )
++                    self._mark_failed_if_service_wide(combined_error)
++                    raise combined_error from error
++                except Exception as exc:
++                    error = NERProcessingError(
++                        phase="inference",
++                        failure_class="unexpected_failure",
++                        windows_processed=windows_processed,
++                    )
++                    self._mark_failed_if_service_wide(error)
++                    raise error from exc
++                windows_processed += alternate_count
++                selected_alternates = _select_boundary_recovery_predictions(
++                    _filter_window_predictions(
++                        alternate_predictions,
++                        score_threshold=score_threshold,
++                        requested_entities=requested_entities,
++                        supporting_name_spans=supporting_name_spans,
++                    ),
++                    centered_unresolved.unresolved_clusters,
++                )
++                try:
++                    entity_predictions = merge_window_predictions(
++                        filtered_predictions + selected_recovery_predictions + selected_alternates
++                    )
++                except NERWindowBoundaryError as exc:
++                    error = NERProcessingError(
++                        phase="windowing",
++                        failure_class="window_boundary_unresolved",
++                        windows_processed=windows_processed,
++                    )
++                    raise error from exc
+             except Exception as exc:
+                 error = NERProcessingError(
+                     phase="inference",
+@@ -1366,6 +1409,7 @@
+         unresolved_clusters: tuple[UnresolvedWindowEntityCluster, ...],
+         *,
+         cancellation_event: threading.Event | None = None,
++        alternate: bool = False,
+     ) -> tuple[list[WindowEntityPrediction], int]:
+         input_ids, offsets, original_windows = self._prepare_window_input(
+             normalized_text
+@@ -1395,13 +1439,26 @@
+         window_size = min(MAX_CONTENT_TOKENS, token_count)
+         latest_start = token_count - window_size
+         for boundary_token in sorted(boundary_tokens):
+-            start_token = min(
+-                max(0, boundary_token - (window_size // 2)),
+-                latest_start,
+-            )
+-            recovery_range = (start_token, start_token + window_size)
+-            if recovery_range not in original_ranges:
+-                recovery_ranges.add(recovery_range)
++            shifts = (window_size // 4, (window_size * 3) // 4) if alternate else (window_size // 2,)
++            centered_start = min(max(0, boundary_token - window_size // 2), latest_start)
++            for shift in shifts:
++                start_token = min(max(0, boundary_token - shift), latest_start)
++                recovery_range = (start_token, start_token + window_size)
++                if alternate:
++                    # Alternate context must contain the whole unresolved span.
++                    # An entity longer than a model window remains fail-closed.
++                    char_start = offsets[start_token][0]
++                    char_end = offsets[start_token + window_size - 1][1]
++                    if not any(
++                        (start_token == 0 or char_start < min(p.entity.start for p in cluster.predictions))
++                        and (start_token + window_size == token_count or char_end > max(p.entity.end for p in cluster.predictions))
++                        for cluster in unresolved_clusters
++                    ):
++                        continue
++                if recovery_range not in original_ranges and (
++                    not alternate or start_token != centered_start
++                ):
++                    recovery_ranges.add(recovery_range)
+ 
+         recovery_windows = tuple(
+             TokenWindow(

@@ -67,6 +67,12 @@ spaCy `ru_core_news_sm` и детерминированные правила т�
 
 Источник: [result_merging.py](https://github.com/vovkins/ru-llm-proxy/blob/da4f50a87ddf8a6c160c5f1893f5bf526f713d1c/presidio/result_merging.py).
 
+Кандидат исправления RV-06 дополнительно содержит закреплённый
+[NER patch](../../patches/ner-window-recovery.patch): при неудаче центрированного
+восстановления границы пробуются два других полных контекста. Неподтверждённая
+граница остаётся ошибкой. Модель и пороги не меняются; подпись профиля меняется.
+[Проверки и текущие ограничения кандидата](../../verification/operations-ner-windowing/README.md).
+
 ## Настройки, подпись и словарь
 
 В `analysis_signature` входят исходники Analyzer/NER/распознавателей,

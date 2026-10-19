@@ -1,0 +1,67 @@
+"""Explicit CPU-image regressions for the scanner's NER adaptation patch.
+
+Use pytest inside the Analyzer test image, with a prepared context on PYTHONPATH.
+These synthetic context-dependent logits reproduce the boundary failure without
+copying real authors or changing the frozen model/corpus.
+"""
+
+import pytest
+from presidio.ner.huggingface_recognizer import (
+    HuggingFaceNERRecognizer,
+    NERProcessingError,
+)
+from presidio.tests.test_ner import FakeTokenizer, GlobalLabelModel
+
+
+class ContextDependentModel(GlobalLabelModel):
+    def __init__(self, *, confirm_alternate=True, fail_alternate=False):
+        super().__init__()
+        self.confirm_alternate = confirm_alternate
+        self.fail_alternate = fail_alternate
+
+    def __call__(self, **kwargs):
+        result = super().__call__(**kwargs)
+        for row, token_ids in enumerate(kwargs["input_ids"].tolist()):
+            content = [i for i in token_ids if i >= 1000]
+            start = content[0] - 1000
+            if start == 32 and self.fail_alternate:
+                raise RuntimeError("synthetic alternate inference failure")
+            if start != 320 and not (start == 32 and self.confirm_alternate):
+                continue
+            for column, token in enumerate(token_ids):
+                position = token - 1000
+                if 320 <= position < 325:
+                    result.logits[row, column, :] = -10.0
+                    result.logits[row, column, 1 if position == 320 else 2] = 10.0
+        return result
+
+
+def recognizer(**kwargs):
+    tokenizer = FakeTokenizer([(i, i + 1) for i in range(500)])
+    return HuggingFaceNERRecognizer(
+        tokenizer=tokenizer, model=ContextDependentModel(**kwargs)
+    )
+
+
+def test_alternate_context_confirms_candidate_without_losing_tail():
+    detector = recognizer()
+    result = detector.analyze("x" * 500)
+    assert [(r.entity_type, r.start, r.end) for r in result] == [("PERSON", 320, 325)]
+    assert detector.is_ready()
+    # Initial windows, then centered recovery, then alternate context.
+    assert detector._model.call_count == 3
+
+
+def test_absence_in_all_recovery_contexts_is_not_clean():
+    detector = recognizer(confirm_alternate=False)
+    with pytest.raises(NERProcessingError) as error:
+        detector.analyze("x" * 500)
+    assert error.value.failure_class == "window_boundary_unresolved"
+    assert detector.is_ready()  # request scoped; a later request may still work
+
+
+def test_alternate_forward_failure_is_not_clean():
+    detector = recognizer(fail_alternate=True)
+    with pytest.raises(NERProcessingError) as error:
+        detector.analyze("x" * 500)
+    assert error.value.failure_class == "forward_pass_failed"
