@@ -181,11 +181,11 @@
     },
     {
       "path": "patches/transformers-v5-tokenizer.patch",
-      "sha256": "76803fe37a1c86e390b3d65faeebcbd17c3fe016643faf1a058bb9ccf2ad91be",
+      "sha256": "eca56d2934c78864929e12376d8413c396f049faab12ea8f26752955a44a440f",
       "targets": {
         "presidio/ner/huggingface_recognizer.py": {
-          "before": "7a158c20418e6fa13c2a855c0cf2f61a0cca1e96d39c919fdbde1bbbaa5c1ac5",
-          "after": "b7ff51d6e9759cdcafb0a7bb7daf8c52d85f0d9b582fc618b0715cb4a89b681f"
+          "before": "29266aa251a1ffa8889caf5d4a6a445d2464226ff0ea8645094ac271ea11221a",
+          "after": "ec850ccfe4409149953d0d66a6590e2ac11b57a2bae831b7cdee8d024f8b56d8"
         }
       }
     }
