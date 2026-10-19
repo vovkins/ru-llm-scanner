@@ -28,10 +28,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--runtime-lock", type=Path, required=True)
     parser.add_argument("--context", type=Path, required=True)
+    parser.add_argument("--source-lock", type=Path, default=ROOT / "upstream.lock.json")
     parser.add_argument("--scanner-image", required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
-    source = ROOT / "upstream.lock.json"
+    source = args.source_lock
     runtime = load_runtime_lock(args.runtime_lock, source)
     analyzer_info = inspected(runtime["image_reference_id"], runtime["platform"])
     require(
@@ -68,6 +69,7 @@ def main():
         }
     )
     files["locks/analyzer-cpu-linux-arm64.runtime.lock.json"] = args.runtime_lock
+    files["upstream.lock.json"] = source
     files.update(assets)
     before = {name: file_hash(path) for name, path in files.items()}
     args.output_dir.mkdir(parents=True, exist_ok=True)

@@ -150,16 +150,41 @@ Analyzer и отменяет свой большой synthetic scan, чтобы 
 CPU/RAM бюджеты, save/load и локальную Jenkins-последовательность. Они не
 подтверждают реальный Jenkins, GPU, корпоративный PKI/proxy или отдельный Linux host.
 
-## Стратегия следующих этапов
+## Проверки по этапам
 
-| Этап | Проверки, которые появятся с реализацией |
+| Этап | Проверки и фактический статус |
 | --- | --- |
 | 2 (реализовано) | Контракт API, readiness, источник, каталог, словарь, соответствие upstream |
 | 3 (реализовано) | Git-деревья, refs, добавления/удаления/переименования, пути, хуки/фильтры, missing objects |
 | 4 (реализовано) | Полные файлы, координаты, длинные/многострочные значения, bounded queue/отмена, положительный и отрицательный корпус кода |
 | 5 (реализовано) | Реальные отчёты, semantic validation, цепочка baseline, экранирование и визуальная QA HTML |
 | 6 (реализовано CPU ARM64) | Изолированный Docker, RO mounts/private output, ID/transfer, аварии/сигналы/parallel и локальный Jenkins adapter; GPU/настоящий Jenkins не проверены |
-| 7 | Сквозная приёмка, актуальность инструкций, обновление Analyzer и откат |
+| 7 (выполнен CPU ARM64) | Сквозная приёмка, актуальность инструкций, реальные исторические версии Analyzer и откат |
+
+Этап 7 выполнен на той же CPU ARM64 среде. Новые dev harness не меняют
+продуктовые детекторы/модель/пороги или frozen annotations:
+
+```bash
+.venv/bin/python scripts/check_acceptance.py \
+  --deployment-lock locks/scanner-cpu-linux-arm64.deployment.json \
+  --output-dir .build/acceptance
+.venv/bin/python scripts/check_cli_tests.py --output-dir .build/final-unit
+```
+
+`check_acceptance.py` выполняет 16 реальных production запусков на синтетических
+Git-объектах. Полные 0600 отчёты сохраняются только в указанной приватной папке;
+публичный `acceptance-verification.json` содержит hashes/counts без значений.
+Каждый шаг сопоставляет report с ожидаемым tree/profile и fingerprint до/после.
+При раннем отказе resolved SHA может отсутствовать, requested ref сохраняется;
+baseline другого A отклоняется как invalid tree evidence.
+
+Историческое [обновление/откат](updating-analyzer.md) используют отдельные
+`prepare_rehearsal.py`, `build_rehearsal_scanner.py`, `check_upgrade_rollback.py`
+и curated `check_rehearsal_parity.py`. Общие CLI/scan dev harness принимают
+`--source-lock` для проверки отдельного кандидата без замены штатного lock.
+Исходный proxy читается только как tracked Git bytes; рабочие config/secrets
+не копируются. Обновление R05 подтверждено реальными версиями и тем же scanner
+wheel, не подстановкой digest/label. [Результаты](../verification/stage-7/README.md).
 
 Не добавляем тесты обратимых мелких правок и проверки, которые лишь повторяют
 реализацию. Новые тесты должны подтверждать контракт, значимый сценарий или

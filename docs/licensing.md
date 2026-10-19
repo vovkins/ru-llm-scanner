@@ -13,7 +13,7 @@
 | Правила из Gitleaks в прокси | `THIRD_PARTY_NOTICES.md` содержит MIT notice с авторством | Сохранить уведомление при переносе соответствующего компонента |
 | NER-модель | `model_manifest.json` указывает `apache-2.0`; происхождение описано в прокси | Проверить и включить требуемые notices для фактических артефактов сборки |
 | Python/runtime-зависимости | 71 пакет CPU ARM64 и метаданные уведомлений зафиксированы [инвентаризацией](../verification/stage-2/licenses.json) | Проверить комплект перед распространением |
-| JSON Schema / проверка | Схема написана для scanner; `jsonschema` — dev-инструмент | Отдельно учитывать лицензии распространяемых зависимостей |
+| JSON Schema / проверка | Схема написана для scanner; `jsonschema[format]` — runtime/dev dependency | Отдельно учитывать лицензии распространяемых зависимостей |
 
 Закреплённые ссылки: [инвентаризация upstream](upstream.md),
 [уведомления прокси](https://github.com/vovkins/ru-llm-proxy/blob/da4f50a87ddf8a6c160c5f1893f5bf526f713d1c/THIRD_PARTY_NOTICES.md).

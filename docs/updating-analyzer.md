@@ -44,7 +44,7 @@ Source lock v1 хранит map `sources: path → SHA-256`. Каждый patch 
 ## Baseline после обновления
 
 После смены детекторов, артефактов, модели, влияющего профиля или scanner
-semantics будущий scanner требует новый полный snapshot проверяемого
+semantics scanner требует новый полный snapshot проверяемого
 состояния. Проверка только изменённых файлов новой моделью не подтверждает
 неизменённые файлы. Прежний успешный baseline не объявляется совместимым
 на основании одного имени модели. [Точные условия](baseline.md).
@@ -56,6 +56,75 @@ semantics будущий scanner требует новый полный snapshot
 можно использовать только для правильного коммита и точно прежнего профиля.
 Результат новой версии не становится совместимым автоматически.
 
-На этапе 2 подтверждены подготовка текущей версии, применение патча, сборка,
-seal и ошибки несовместимости. Полная репетиция обновления на другую ревизию
-и отката запланирована на этапе 7; эта инструкция не выдаёт её за выполненную.
+## Проверенная историческая репетиция
+
+На этапе 7 новая upstream-ревизия отсутствовала: main уже совпадал с закреплённым
+`da4f50a87ddf8a6c160c5f1893f5bf526f713d1c`, остальные доступные ветки были его
+предками. Пользователь явно согласовал настоящую историческую последовательность
+**v0.4.0 (`dd403a182494a1c439f552666f21e7c4c8e7e080`) → da4f50a → v0.4.0**.
+Это проверка реальных разных исходников, не имитация новой версии другим tag.
+
+Исторический API patch добавляет те же metadata поля по пяти точным anchors;
+отдельный patch и хеши до/после затем проверяются обычным `prepare` без fuzz.
+Менялись словарная политика, LOGIN/instruction rules и result merging; модель,
+runtime dependencies и third-party notices не менялись. Один и тот же scanner
+wheel работал с обоими engine bundles. Git/pipeline/renderer не изменялись.
+
+Пример повторения на том же CPU ARM64 окружении, с сохранённым source clone и
+проверенным scanner context. Все выходные папки должны быть новыми:
+
+```bash
+python3 scripts/prepare_rehearsal.py \
+  --source /path/to/ru-llm-proxy --output-dir .build/rehearsal
+
+python3 scripts/analyzer.py build \
+  --context .build/rehearsal/old-context --tag ru-llm-scanner-analyzer:rehearsal-old
+python3 scripts/analyzer.py seal \
+  --context .build/rehearsal/old-context --image ru-llm-scanner-analyzer:rehearsal-old \
+  --output .build/rehearsal/old.runtime.lock.json
+python3 scripts/prepare_scan_engine.py \
+  --context .build/rehearsal/old-context --runtime-lock .build/rehearsal/old.runtime.lock.json \
+  --output .build/rehearsal/old-engine
+
+python3 scripts/build_rehearsal_scanner.py \
+  --base-context .build/production-context --engine-dir .build/rehearsal/old-engine \
+  --context .build/rehearsal/scanner-context --tag ru-llm-scanner:rehearsal-old \
+  --deployment-lock .build/rehearsal/old.deployment.json
+
+python3 scripts/check_upgrade_rollback.py \
+  --old-deployment .build/rehearsal/old.deployment.json \
+  --current-deployment locks/scanner-cpu-linux-arm64.deployment.json \
+  --output-dir .build/rehearsal/transition
+```
+
+Это dev-инструменты с установленными зависимостями проекта; host launcher при
+обычном scan по-прежнему использует только стандартную библиотеку. Исторический
+helper намеренно закрепляет две согласованные SHA и отказывается от других
+anchors/исходного lock. Для будущего нового upstream нужен новый reviewed source
+lock/patch, а не изменение константы ради прохождения репетиции.
+
+Проверки отдельного source lock больше не требуют временной замены штатного:
+
+```bash
+python3 scripts/check_rehearsal_parity.py \
+  --context .build/rehearsal/old-context --runtime-lock .build/rehearsal/old.runtime.lock.json \
+  --output-dir .build/rehearsal/parity
+python3 scripts/check_cli_integration.py \
+  --context .build/rehearsal/old-context \
+  --source-lock .build/rehearsal/old-project/upstream.lock.json \
+  --runtime-lock .build/rehearsal/old.runtime.lock.json \
+  --scanner-image ru-llm-scanner:rehearsal-old --output-dir .build/rehearsal/code
+```
+
+`--source-lock` также поддержан dev scan harness. Raw/patched parity helper
+монтирует только явный curated context и исходники проверки, без всего checkout.
+Фиксируются 77/77 NER parity и четыре dictionary cases на каждой версии;
+независимый code-v1 отдельно сохраняет прежние TP 33 / FP 13 / FN 4.
+
+Восемь production шагов подтвердили: old baseline отвергается новой версией;
+новый snapshot позволяет новый diff; после возврата точного старого deployment
+новый baseline отвергается, старый baseline правильного B принимается, а baseline
+другого A — нет. Повторный seal текущего образа полностью совпал со штатным.
+Переключались явно выбранные отдельные deployment files; основные locks и клон
+proxy оставались неизменными. Кандидат автоматически не принимается в эксплуатацию.
+[Полные результаты и ограничения](../verification/stage-7/README.md).

@@ -17,6 +17,9 @@ CPU-образа. Подготовлены спецификации, JSON Schema
 Доступен штатный offline Docker/Compose launcher, перенос готовых образов и
 пример Jenkins. [Docker quickstart](docs/docker-quickstart.md),
 [сборка и перенос](docs/offline-build.md), [Jenkins](docs/jenkins.md).
+Сквозная приёмка первой версии и историческое обновление/откат Analyzer
+пройдены в заявленных границах CPU ARM64. Версия `0.1.0.dev0` остаётся
+предрелизной: draft PR не слиты автоматически, release не опубликован.
 
 Для проверки уже доступного механизма см. [руководство Analyzer](docs/analyzer.md).
 Проверенная платформа — CPU `linux/arm64`. GPU-цели upstream сохранены, но
@@ -28,6 +31,7 @@ CPU-образа. Подготовлены спецификации, JSON Schema
 [результаты этапа 4](verification/stage-4/README.md).
 [Проверки CLI/отчётов/baseline](verification/stage-5/README.md).
 [Проверки production Docker и offline transfer](verification/stage-6/README.md).
+[Итоговая приёмка и обновление/откат](verification/stage-7/README.md).
 
 На отдельном синтетическом корпусе кода получены exact precision 71.74% и
 recall 89.19% (37 размеченных мест). Ограничения текущей модели, включая
@@ -42,7 +46,7 @@ recall 89.19% (37 размеченных мест). Ограничения те�
 [Этап 4](https://github.com/vovkins/ru-llm-scanner/issues/7) ·
 [Этап 5](https://github.com/vovkins/ru-llm-scanner/issues/9) ·
 [Этап 6](https://github.com/vovkins/ru-llm-scanner/issues/11) ·
-[План этапа 7](https://github.com/vovkins/ru-llm-scanner/issues/13) ·
+[Этап 7](https://github.com/vovkins/ru-llm-scanner/issues/13) ·
 [Документация](docs/README.md)
 
 ## Сценарии первой версии

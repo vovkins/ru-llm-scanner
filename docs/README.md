@@ -6,6 +6,8 @@ snapshot/diff, JSON/HTML и baseline работают через CLI. Досту
 деревьев и готовит тексты. Scan API соединяет его с Analyzer/словарём,
 сохраняет находки/координаты/охват и возвращает безопасную сводку.
 Production Docker/Compose, offline transfer и пример Jenkins реализованы.
+Сквозная приёмка и согласованная историческая репетиция обновления/отката
+Analyzer выполнены; [итоговые результаты](../verification/stage-7/README.md).
 
 ## Пользователю и оператору CI
 
@@ -42,6 +44,7 @@ GPU и Linux-host/другие платформы требуют отдельн�
 - [Результаты scan pipeline и качества кода на этапе 4](../verification/stage-4/README.md).
 - [Результаты CLI/отчётов/baseline на этапе 5](../verification/stage-5/README.md).
 - [Результаты production Docker/transfer на этапе 6](../verification/stage-6/README.md).
+- [Итоговая приёмка/upgrade/rollback на этапе 7](../verification/stage-7/README.md).
 - [Лицензирование](licensing.md), [постоянные инструкции](../AGENTS.md).
 
 Источником договорённостей служит [общая задача #1](https://github.com/vovkins/ru-llm-scanner/issues/1).
@@ -57,5 +60,5 @@ Analyzer. [Этап 3](https://github.com/vovkins/ru-llm-scanner/issues/5)
 2026-10-19: CLI, отчёты и baseline реализованы.
 [Этап 6](https://github.com/vovkins/ru-llm-scanner/issues/11) согласован
 2026-10-19: production Docker/Compose, offline transfer и пример Jenkins реализованы.
-[План этапа 7](https://github.com/vovkins/ru-llm-scanner/issues/13) подготовлен
-для отдельного согласования; приёмка/репетиция обновления не начата.
+[Этап 7](https://github.com/vovkins/ru-llm-scanner/issues/13) согласован 2026-10-19;
+сквозная приёмка и историческая репетиция реальных версий выполнены.

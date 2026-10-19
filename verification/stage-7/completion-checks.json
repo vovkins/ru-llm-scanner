@@ -1,0 +1,54 @@
+{
+  "black_checked_files": 66,
+  "contract_examples": 11,
+  "environment": {
+    "compose": "5.2.0",
+    "cpus": 10,
+    "docker": "29.6.1",
+    "docker_vm_memory_bytes": 8321515520
+  },
+  "foreign_running_containers_preserved": 7,
+  "gpu_tested": false,
+  "historical_patch_record_matches_lock": true,
+  "historical_substitution_explicitly_approved": true,
+  "jenkins_controller_tested": false,
+  "local_markdown_links": 305,
+  "main_reseal_exact_match": true,
+  "newer_upstream_revision_available": false,
+  "original_artifact_hashes_unchanged": {
+    "locks/analyzer-cpu-linux-arm64.runtime.lock.json": "a8a08bd416193af9632997afc0ba5256f2528534607eddc74015915ec9cb1a7d",
+    "locks/scanner-cpu-linux-arm64.deployment.json": "877449870cb12066e3203f8de779cb868a5ded6f20a18d3dd4432e8e2ea60bde",
+    "schemas/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+    "upstream.lock.json": "64a2f586ef1629c8ba5ebf0665d9b6dfd923f6332e77b6095ab45c70e57a6bed"
+  },
+  "original_offline_package_checksums_preserved": {
+    "deployment.json": "877449870cb12066e3203f8de779cb868a5ded6f20a18d3dd4432e8e2ea60bde",
+    "engine/dictionary.json": "126805a93906873c7cd1fd7a3586c106a4c68d9329cfbe5169132d9bfc9a244e",
+    "engine/dictionary_policy.py": "9709364660baa4f5ac551b42fbbd411c6d2eaf8093ac1579ca8ea4a30696d099",
+    "engine/runtime-lock.json": "a8a08bd416193af9632997afc0ba5256f2528534607eddc74015915ec9cb1a7d",
+    "engine/source-lock.json": "64a2f586ef1629c8ba5ebf0665d9b6dfd923f6332e77b6095ab45c70e57a6bed",
+    "images.tar": "c0c6a49fc413e29d164dca765da8b41afd8927c764dcb16cbef6829e80e4cd84"
+  },
+  "original_proxy_head_unchanged": true,
+  "original_proxy_tracked_changes": false,
+  "own_containers_remaining": 0,
+  "own_networks_remaining": 0,
+  "rejected_invalid_contract_cases": 22,
+  "renderer_changed": false,
+  "runtime_code_unchanged": true,
+  "sources_sha256": {
+    "scripts/build_rehearsal_scanner.py": "0991611b418554ef1ea4cd44caae1ecde4c5253eced9f2815caa7ad6507259c2",
+    "scripts/check_acceptance.py": "49f3dd9aba6d14a66d10bc521765546dcd15d69c6a9e787e4dd84315b5e32dd7",
+    "scripts/check_cli_integration.py": "b158b555e48762a9bc9c9b25b392a5d6d093da31068c8a5d17840436d8caa1fc",
+    "scripts/check_rehearsal_parity.py": "0e138f9c60449bd2871be39703db1a6e8b1c5013d89921dfb81d0b4dcabd580c",
+    "scripts/check_scan_integration.py": "b590c84541c6382c4dd17efc13cd47696b063b46f23b326ec2a8054198782035",
+    "scripts/check_upgrade_rollback.py": "e8bea3c347184749b688f9c8244a54256719722751ebdc8dc4bce8b2f88229ff",
+    "scripts/prepare_rehearsal.py": "52111cf83fe3f702fa96cbfd2a5ecbc4c7c217b98c7147542a5a537adb04f29f"
+  },
+  "status": "passed",
+  "unit_skipped": 0,
+  "unit_tests": 131,
+  "verification_version": 1,
+  "visual_qa_reference": "verification/stage-5/"
+}

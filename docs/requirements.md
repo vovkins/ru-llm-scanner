@@ -10,6 +10,9 @@
 [этапа 5](../verification/stage-5/README.md) и
 [этапа 6](../verification/stage-6/README.md). Scan API, CLI/отчёты/baseline,
 штатная упаковка и Jenkins example реализованы; настоящий Jenkins/GPU не проверены.
+Итоговая сквозная приёмка и согласованное историческое обновление/откат —
+[этап 7](../verification/stage-7/README.md). Статусы ниже относятся к указанной
+проверенной среде, не к отсутствующему release или другой инфраструктуре.
 
 | ID | Договорённость | Спецификация | Приёмочный сценарий / этап |
 | --- | --- | --- | --- |
@@ -30,14 +33,29 @@
 | R15 | Отдельные согласования и чекбоксы этапов | [AGENTS](../AGENTS.md) | Задача/показ плана/явное согласование до каждого этапа; все |
 | R16 | Качественная документация публичного проекта | [Карта](README.md), [разработка](development.md) | Правдивый статус, ссылки, примеры и актуализация; все |
 
-## Следующие задачи
+## Фактический результат приёмки R01–R16
 
-Этапы 1–6 реализованы и проверены в заявленных границах; результаты подготовлены
-в отдельных draft PR, в main пока не слиты. [Docker/Jenkins (этап 6)](https://github.com/vovkins/ru-llm-scanner/issues/11)
-согласован 2026-10-19. [План этапа 7](https://github.com/vovkins/ru-llm-scanner/issues/13)
-требует отдельного явного согласования; реализация не начата.
-Остальные подробные планы создаются перед реализацией, после результатов
-предыдущего этапа, и отдельно согласуются.
+| Требования | Подтверждение | Практическая граница |
+| --- | --- | --- |
+| R01, R02 | Production snapshot/diff, full-file context, multiline, rename/delete/mode/type, merge и A=B в этапе 7 | Состояние Git-коммита; working/staged/untracked не сканируются |
+| R03 | Clean A/B и находка промежуточного snapshot в отдельном history-сценарии | Diff не аудирует историю и не подтверждает каждый промежуточный commit |
+| R04 | 77/77 raw/patched NER parity + 4 dictionary cases; 46/46 code-v1 direct parity на обеих реальных версиях | Независимое качество: TP 33 / FP 13 / FN 4, без гарантии полноты |
+| R05 | Реальные v0.4.0 → da4f50a → v0.4.0, один scanner wheel, отдельные seals/profiles и восемь production шагов | Репетиция историческая, новая upstream-ревизия отсутствовала; кандидат не принят автоматически |
+| R06, R07 | Штатный internal-network launcher, read-only host clone, private output/0/1/2; локальный Jenkins adapter | Настоящий Jenkins не проверен, job/RBAC/retention настраивает владелец |
+| R08 | Pinned CPU ARM64 build/prepare/seal, secret mounts для CA/pip/apt и save/load с проверкой IDs | GPU/AMD64/корпоративный PKI/другой физический offline host не проверены |
+| R09, R10 | Реальные JSON/HTML, Unicode/CRLF/raw collisions/кодировки/контекст и runtime schema/semantic validation | Визуальная QA этапа 5; file:// блокировался политикой встроенного браузера |
+| R11 | A→B→C, profile mismatch, неправильный A, old/new baseline rejection при upgrade/rollback | Baseline доверенный по происхождению; JSON/SHA-256 не цифровая подпись |
+| R12, R13 | Production errors/timeouts/crash/OOM/signals; unsupported/exclude/limits отражены явно | Ранний отказ может не оставить отчёта, CPU join не жёсткий deadline, JSON/HTML атомарны отдельно |
+| R14 | Hostile config/hooks/filters/textconv/includes/replace/grafts/promisor/links и неизменные input fingerprints | Host/daemon доверенные, object store не должен меняться параллельно снаружи |
+| R15 | Отдельные задачи #2/#3/#5/#7/#9/#11/#13 и явные согласования в чате | Merge/release/внешние настройки отдельно не разрешены |
+| R16 | Обновлённые guides/examples/status, contracts/ссылки/format и safe evidence | Лицензия scanner и приватный vulnerability contact остаются решениями владельца |
+
+## Состояние проекта
+
+Этапы 1–7 реализованы и проверены в заявленных границах; результаты подготовлены
+в отдельных draft PR, в main пока не слиты. [Этап 7](https://github.com/vovkins/ru-llm-scanner/issues/13)
+и историческая репетиция отдельно согласованы 2026-10-19. Автоматический merge,
+release/registry и изменение внешней инфраструктуры не выполнялись.
 Лицензия scanner пока не выбрана; статус явно отражён в [licensing](licensing.md).
 Закрытый канал сообщения об уязвимостях пока не объявлен; фактическая процедура
 описана в [SECURITY](../SECURITY.md). Эти решения не выдаются за выполненные.
