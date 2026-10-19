@@ -14,10 +14,13 @@ from presidio.tests.test_ner import FakeTokenizer, GlobalLabelModel
 
 
 class ContextDependentModel(GlobalLabelModel):
-    def __init__(self, *, confirm_alternate=True, fail_alternate=False):
+    def __init__(
+        self, *, confirm_alternate=True, fail_alternate=False, confirm_fine=False
+    ):
         super().__init__()
         self.confirm_alternate = confirm_alternate
         self.fail_alternate = fail_alternate
+        self.confirm_fine = confirm_fine
 
     def __call__(self, **kwargs):
         result = super().__call__(**kwargs)
@@ -26,7 +29,11 @@ class ContextDependentModel(GlobalLabelModel):
             start = content[0] - 1000
             if start == 32 and self.fail_alternate:
                 raise RuntimeError("synthetic alternate inference failure")
-            if start != 320 and not (start == 32 and self.confirm_alternate):
+            if (
+                start != 320
+                and not (start == 32 and self.confirm_alternate)
+                and not (start == 80 and self.confirm_fine)
+            ):
                 continue
             for column, token in enumerate(token_ids):
                 position = token - 1000
@@ -58,6 +65,13 @@ def test_absence_in_all_recovery_contexts_is_not_clean():
         detector.analyze("x" * 500)
     assert error.value.failure_class == "window_boundary_unresolved"
     assert detector.is_ready()  # request scoped; a later request may still work
+
+
+def test_fine_context_is_used_only_after_quarter_context_fails():
+    detector = recognizer(confirm_alternate=False, confirm_fine=True)
+    result = detector.analyze("x" * 500)
+    assert [(r.entity_type, r.start, r.end) for r in result] == [("PERSON", 320, 325)]
+    assert detector._model.call_count == 4
 
 
 def test_alternate_forward_failure_is_not_clean():
