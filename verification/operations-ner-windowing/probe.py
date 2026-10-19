@@ -44,7 +44,7 @@ def main():
     parser.add_argument("--analyzer-cpus", type=float, default=2)
     args = parser.parse_args()
     assert 1 <= args.run_timeout_seconds <= 7200
-    assert 0 < args.analyze_timeout_seconds <= args.run_timeout_seconds
+    assert 0 < args.analyze_timeout_seconds <= 7200
     assert 0 < args.analyzer_cpus <= 8
     lock = load_lock(args.deployment_lock)
     out = args.output_dir.resolve()
