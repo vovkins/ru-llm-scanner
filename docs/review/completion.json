@@ -1,0 +1,73 @@
+{
+  "review_version": 1,
+  "status": "review_completed_with_open_findings",
+  "completed_at": "2026-10-19T17:56:59.125431+00:00",
+  "reviewed_commit": "336feb64b201b0e9b807059f3d60b50fdee41ebb",
+  "reviewed_tree": "068be1d1fb7750b1be5040f650503c7bb3278a20",
+  "initial_tracked_files": 180,
+  "initial_python_files": 67,
+  "initial_unit_methods": 131,
+  "confirmed_defects": {
+    "p1": 1,
+    "p2": 2
+  },
+  "hardening_proposals": 2,
+  "focused_unit_tests": 13,
+  "focused_unit_skipped": 0,
+  "jenkins_probe_cases": 5,
+  "jenkins_invalid_cases_returning_zero": 4,
+  "coordinate_positions_checked": 4200,
+  "legacy_scan_image": {
+    "reference_id": "sha256:dccb653c708db17b94bbbcc875f6e71637887f87d5b3318f1587431c891b6b19",
+    "fresh_build_performed": false,
+    "jsonschema_installed": false,
+    "pipeline_import": "failed",
+    "missing_module": "jsonschema"
+  },
+  "production_sources_tests_schema_locks_corpus_unchanged": true,
+  "original_tracked_files_changed_only": [
+    "AGENTS.md",
+    "docs/README.md"
+  ],
+  "new_files_scope": "docs/review/",
+  "profile_sha256_unchanged": "172554ef20c07cf32e15cd97cd368a2510de49ab824ae2b339258078730a1864",
+  "foreign_running_containers_preserved": 7,
+  "own_containers_remaining": 0,
+  "own_networks_remaining": 0,
+  "proxy_head_unchanged": true,
+  "proxy_tracked_changes": false,
+  "images_built_or_published": false,
+  "release_merge_tags_performed": false,
+  "fresh_ner_or_full_production_suite_run": false,
+  "fresh_advisory_database_scan": false,
+  "environment": {
+    "python": "3.12.14",
+    "system": "Darwin",
+    "machine": "arm64",
+    "git": "git version 2.39.5 (Apple Git-154)",
+    "docker": "29.6.1",
+    "compose": "5.2.0"
+  },
+  "immutable_artifact_hashes": {
+    "locks/analyzer-cpu-linux-arm64.runtime.lock.json": "a8a08bd416193af9632997afc0ba5256f2528534607eddc74015915ec9cb1a7d",
+    "locks/requirements-cpu-linux-arm64.txt": "8ba7d4b93b1a38d869c9aa9fffffe0aaf040fefe914008ae312a3a23634e6730",
+    "locks/requirements-scanner-linux-arm64.txt": "06e179651d60f62f704e58ec8904074d54cbc6fe457afd23937d3f1d72379981",
+    "locks/scanner-cpu-linux-arm64.deployment.json": "877449870cb12066e3203f8de779cb868a5ded6f20a18d3dd4432e8e2ea60bde",
+    "schemas/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
+    "tests/corpus/README.md": "022f4edbb787fb5ed149e0049463609bd8a88d10a1545973025608ba7edec665",
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+    "tests/corpus/load_code_corpus.py": "34570026325dc91ae26ec4102680e46f1670564ed16713f4c5da86d73b145a59",
+    "upstream.lock.json": "64a2f586ef1629c8ba5ebf0665d9b6dfd923f6332e77b6095ab45c70e57a6bed"
+  },
+  "evidence_sha256": {
+    "scope.json": "4d613a488870ff189fb91d9d816a218fedebb588282bcd89c8eb7113b2ade68e",
+    "focused-unit.json": "94ba21bece37ae327907858e15dbf7bd39b86104108573f99fbe9a1e607495c8",
+    "observations.json": "0825db1d5b0a1ea940171a1306ac3654122eb1bfaae29df3090aaa6ee4238e67",
+    "reproduce.py": "8065c058d75c1706b56abd3eeca9f5890f9f14c0279519d5a9bd6db73668349e"
+  },
+  "contract_examples": 11,
+  "invalid_contract_cases": 22,
+  "local_markdown_links": 336,
+  "black_checked_files": 67,
+  "diff_check_passed": true
+}

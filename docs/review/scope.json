@@ -1,0 +1,541 @@
+{
+  "reviewed_commit": "336feb64b201b0e9b807059f3d60b50fdee41ebb",
+  "files": [
+    {
+      "path": "docker/license_inventory.py",
+      "sha256": "495acee33c31defc3152e7fd681304d90b12d88276c512877be7f5fec8de259d",
+      "lines": 39,
+      "functions": 1,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "docker/probe_runtime.py",
+      "sha256": "02669375d8520ede5993b29430d642362101e4830d8b1207b1299d25952da270",
+      "lines": 117,
+      "functions": 3,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "examples/jenkins/run_scan.py",
+      "sha256": "28af0dcd604353db59573f5e133affc71100079e29b7253dadb2e444eef04721",
+      "lines": 123,
+      "functions": 4,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/analyzer.py",
+      "sha256": "3f5c3a572a9be987dfe104a34184d4ab5cfdb5ce35c84b93771a0d7759d36355",
+      "lines": 11,
+      "functions": 0,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/build_rehearsal_scanner.py",
+      "sha256": "0991611b418554ef1ea4cd44caae1ecde4c5253eced9f2815caa7ad6507259c2",
+      "lines": 62,
+      "functions": 1,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/build_scanner.py",
+      "sha256": "2fb516dfaaca0e17979571b44ce24f7e6d326120f926fec15dc9c930e0809789",
+      "lines": 229,
+      "functions": 5,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/capture_licenses.py",
+      "sha256": "1ab4de7fa3dee42900188430911ed53b414b065e10d54ed2a75a7e7b1b66205c",
+      "lines": 79,
+      "functions": 1,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_acceptance.py",
+      "sha256": "49f3dd9aba6d14a66d10bc521765546dcd15d69c6a9e787e4dd84315b5e32dd7",
+      "lines": 444,
+      "functions": 5,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_analyzer_integration.py",
+      "sha256": "40c4ee54c8ab9e71c8093b13ca700357a9a85bdd38683a8b933fd0d00f8f924b",
+      "lines": 75,
+      "functions": 1,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_cli_integration.py",
+      "sha256": "b158b555e48762a9bc9c9b25b392a5d6d093da31068c8a5d17840436d8caa1fc",
+      "lines": 193,
+      "functions": 2,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_cli_tests.py",
+      "sha256": "12d89000a3608d15c6efaf766e1769d568347c62bcf60a5423e75b6ac2cf8a1f",
+      "lines": 82,
+      "functions": 1,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_contracts.py",
+      "sha256": "0264ce533afa7640d7ea81258a2c5e24a379635a50ef44c701c3839eb89b3fc0",
+      "lines": 250,
+      "functions": 14,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_deployment_extras.py",
+      "sha256": "1cac535849de573c0108a5597b9868b38f495b31388a61b1539de83fb512d7f5",
+      "lines": 243,
+      "functions": 4,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_docker_integration.py",
+      "sha256": "3cf73e29c6256e74bf4290914d5f098a0030b095cf5170cc103e608b2d48901c",
+      "lines": 431,
+      "functions": 5,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_git_layer.py",
+      "sha256": "0c0b25e69500f6e718ff225f4a42106646006a9ac959d10c1c45393d7c6ce62b",
+      "lines": 185,
+      "functions": 4,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_rehearsal_parity.py",
+      "sha256": "0e138f9c60449bd2871be39703db1a6e8b1c5013d89921dfb81d0b4dcabd580c",
+      "lines": 115,
+      "functions": 1,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_runtime_faults.py",
+      "sha256": "c1d37ca2081940022786f017678fb9161538ed9e59a41d509201f72f80479f2a",
+      "lines": 175,
+      "functions": 1,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_scan_integration.py",
+      "sha256": "b590c84541c6382c4dd17efc13cd47696b063b46f23b326ec2a8054198782035",
+      "lines": 183,
+      "functions": 2,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_upgrade_rollback.py",
+      "sha256": "e8bea3c347184749b688f9c8244a54256719722751ebdc8dc4bce8b2f88229ff",
+      "lines": 137,
+      "functions": 1,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/check_upstream_tests.py",
+      "sha256": "1a9f8b16a3704d76076602157ec762f89d2d48e04ba4111e8adf86c336fea0fb",
+      "lines": 128,
+      "functions": 1,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/docker_scanner.py",
+      "sha256": "171753dc0cbbc8bc3d21f756a7a112a850013e458e31756f5ec32a9903285f44",
+      "lines": 555,
+      "functions": 22,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/prepare_rehearsal.py",
+      "sha256": "52111cf83fe3f702fa96cbfd2a5ecbc4c7c217b98c7147542a5a537adb04f29f",
+      "lines": 175,
+      "functions": 2,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "scripts/prepare_scan_engine.py",
+      "sha256": "14d50f2e9afa7740e7342da03d3cf2b9adbfbe6c744c50e215e17ab1fe60a43c",
+      "lines": 37,
+      "functions": 1,
+      "unit_methods": 0,
+      "review_group": "harness_critical_paths"
+    },
+    {
+      "path": "src/ru_llm_scanner/__init__.py",
+      "sha256": "b1a0c9ede61fc13ba6c43be7880227c4ee230506537aa3cad83425e758b205a3",
+      "lines": 3,
+      "functions": 0,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/__main__.py",
+      "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "lines": 3,
+      "functions": 0,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/analyzer.py",
+      "sha256": "4f1cf5dce228592b4c43ce6c735ae798b139b6d32c92b9fdfa5e792195f2e746",
+      "lines": 330,
+      "functions": 12,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/artifacts.py",
+      "sha256": "77271cce804e4fd8c92baa46c4b7ab8f137c50134e516a2e7fbbba56bc836db3",
+      "lines": 74,
+      "functions": 9,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/baseline.py",
+      "sha256": "23ea9247b900c975be4b9c691f60f61d8762984ffdcc4e30ee83d423086f0020",
+      "lines": 111,
+      "functions": 4,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/cli.py",
+      "sha256": "3d399aaf656336b37de7d760fcaa87ca05393c76cc80b972db17ca022c79645a",
+      "lines": 231,
+      "functions": 7,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/configuration.py",
+      "sha256": "0a6e3f90de1bb9a089855734a5a0e06b92728b1cd9d8f13e5bc4b10b1ab7c959",
+      "lines": 191,
+      "functions": 10,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/dictionary.py",
+      "sha256": "6eecfcfe094ca3d2f4aaa43b3093bd94c69e55734292bba824553dd4807c6238",
+      "lines": 87,
+      "functions": 3,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/engine.py",
+      "sha256": "8a583e0ef31b4705c75af209a36f063695c7d76704e7f8348efcda8c10b65866",
+      "lines": 105,
+      "functions": 4,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/findings.py",
+      "sha256": "1f9ffd4f3dce7d48f1e066447552eda238cabf36d82cfe4cd5923c7b0c44a7cf",
+      "lines": 132,
+      "functions": 4,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/git_plan.py",
+      "sha256": "5b1dbd8b80424b9edb97157bcce3acd470af6c23cbea4befe126a46401c9f855",
+      "lines": 103,
+      "functions": 4,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/git_repository.py",
+      "sha256": "020bb53c3989a7e752fd25894c29d1f256d38137d942f40c3e9d373cb343bf27",
+      "lines": 672,
+      "functions": 39,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/html_report.py",
+      "sha256": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
+      "lines": 234,
+      "functions": 4,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/output.py",
+      "sha256": "c2046f35fbe63219857e4cac740bdaa1cab334dc05f8bf82e28f892aaa6e38e5",
+      "lines": 148,
+      "functions": 8,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/pipeline.py",
+      "sha256": "334658282ca1a85ef230c965f1b4e6272987ff2affae812b435ded7629270eb5",
+      "lines": 508,
+      "functions": 26,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/report_validation.py",
+      "sha256": "c2046099dd2a52b748a6a91f023ea0e653997777e33fc68a58a7585c17d6ec21",
+      "lines": 219,
+      "functions": 7,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/reports.py",
+      "sha256": "53b31d86e46ddf23e4c21fc479d87f41de943e06e53ea5bdcec5a788893144c3",
+      "lines": 189,
+      "functions": 5,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/text_policy.py",
+      "sha256": "53ab4ea4a072b76af5ca7df9faaae4ad0820bd25934805133244bc50a46e32d1",
+      "lines": 258,
+      "functions": 12,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "src/ru_llm_scanner/upstream.py",
+      "sha256": "d28a0623470615dd369afecd3facb5640e525ff4d49b7748436c18af681e95cb",
+      "lines": 825,
+      "functions": 14,
+      "unit_methods": 0,
+      "review_group": "runtime_detailed"
+    },
+    {
+      "path": "tests/cli_fixtures.py",
+      "sha256": "f2df8a8050fbf1e26f4f3a24222209646056e4d8bce5aea6c83d4e8fbce18395",
+      "lines": 86,
+      "functions": 7,
+      "unit_methods": 0,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/corpus/load_code_corpus.py",
+      "sha256": "34570026325dc91ae26ec4102680e46f1670564ed16713f4c5da86d73b145a59",
+      "lines": 42,
+      "functions": 1,
+      "unit_methods": 0,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/git_fixtures.py",
+      "sha256": "5c7d05e8b5c896af805aee66e2837eb1c9b173469c9f763551b5e6415a671c89",
+      "lines": 119,
+      "functions": 7,
+      "unit_methods": 0,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/integration/cli_offline.py",
+      "sha256": "be53b52c7405885fa04dae67fbc8c1016b81cc14b4c9c7f465100a51e87ed59a",
+      "lines": 284,
+      "functions": 3,
+      "unit_methods": 0,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/integration/html_fixtures.py",
+      "sha256": "1556aa8b34126f68e098ef22a8708ae8b222afc87909df514a27d85b18ecc2e5",
+      "lines": 75,
+      "functions": 2,
+      "unit_methods": 0,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/integration/offline.py",
+      "sha256": "185106d35cb106412d4025d065b1a2a9502e5418f58d0ebba02f06e984b88671",
+      "lines": 381,
+      "functions": 5,
+      "unit_methods": 0,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/integration/scan_offline.py",
+      "sha256": "fc05758347149adbefa16677b9636367f80baf1fa67c6a0d56ec5daedf3ce8b4",
+      "lines": 365,
+      "functions": 5,
+      "unit_methods": 0,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/scan_fixtures.py",
+      "sha256": "5ae7ef4dacf5914e06250f422daee51b9867454bd6d51df426ab6e7ba5def28e",
+      "lines": 107,
+      "functions": 7,
+      "unit_methods": 0,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_analyzer.py",
+      "sha256": "a5102f077fcfa2f2887a44b98ec9993feb4b5240d08a23dc22753a2d751e4d9a",
+      "lines": 334,
+      "functions": 27,
+      "unit_methods": 15,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_baseline.py",
+      "sha256": "4ab234676ed5783478860074fd3f57e4034805e0bce952de6fd11903ea2603e4",
+      "lines": 246,
+      "functions": 10,
+      "unit_methods": 6,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_cli.py",
+      "sha256": "23434302b5f73890a000cad09de43103f48962ff03eb649a20eedd9e55772b4a",
+      "lines": 290,
+      "functions": 16,
+      "unit_methods": 9,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_configuration.py",
+      "sha256": "d8c425396c47887c2e5f8618c416da547d7d4e8ec4e6dfbed97b9118b3473995",
+      "lines": 158,
+      "functions": 5,
+      "unit_methods": 5,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_dictionary.py",
+      "sha256": "ebee366297bb921a1177a0672a616aa448f9ed2bd77e0470652dd405a0923359",
+      "lines": 121,
+      "functions": 7,
+      "unit_methods": 5,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_docker_launcher.py",
+      "sha256": "17b9317d5d9b7eaf21b1a93fa37eb1d672638fa02b085ed22214f9b9a4fb0b3a",
+      "lines": 146,
+      "functions": 5,
+      "unit_methods": 5,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_findings.py",
+      "sha256": "6735588700d28b66fb8ef542791596f12f28fb9632cd88bb10c96c7e26343925",
+      "lines": 175,
+      "functions": 4,
+      "unit_methods": 4,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_git_plan.py",
+      "sha256": "d2188ffd2e7086d2485464832a6cb45113caece0e81192d118c98a7b786047bb",
+      "lines": 150,
+      "functions": 8,
+      "unit_methods": 6,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_git_repository.py",
+      "sha256": "29c9ca9da8a595a0ec28fb5d333a521d9f5fe9d47bdca69a95d9829ef461b470",
+      "lines": 263,
+      "functions": 15,
+      "unit_methods": 14,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_git_security.py",
+      "sha256": "699662f501da067f7238ea27852e0e5be700400f8de3ce7abc8635de584494a1",
+      "lines": 295,
+      "functions": 12,
+      "unit_methods": 9,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_jenkins_example.py",
+      "sha256": "91ef5cb11e735fb82ded2fcbfd0f51461b21bf34784917fbfb807aa2f17c9959",
+      "lines": 50,
+      "functions": 2,
+      "unit_methods": 2,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_output.py",
+      "sha256": "2958aceb6eee1447e3f0cdd7967414d5854fa6dad2f7ad996ae02c830519f5d2",
+      "lines": 122,
+      "functions": 8,
+      "unit_methods": 6,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_pipeline.py",
+      "sha256": "544a5d62431b953399ef3967362bce52541628ac8151e6cc9677c86e5744efcb",
+      "lines": 469,
+      "functions": 27,
+      "unit_methods": 15,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_reports.py",
+      "sha256": "72dd0e86577e20f65b221e40a0ee0ee6f6af389f57452819fb33e637b5e00f1d",
+      "lines": 265,
+      "functions": 13,
+      "unit_methods": 7,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_runtime_lock.py",
+      "sha256": "e7d4ba81d8dd41f4b522dd3029967542a5f57202902919efcfbeff1ed21e809e",
+      "lines": 74,
+      "functions": 5,
+      "unit_methods": 3,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_text_policy.py",
+      "sha256": "e804870951116b1fab6704eca324564357d4ee94d80ecf961e0598a0c054d477",
+      "lines": 312,
+      "functions": 16,
+      "unit_methods": 12,
+      "review_group": "test_inventory_and_contract_review"
+    },
+    {
+      "path": "tests/test_upstream.py",
+      "sha256": "d0976e1011764a24cb01ed76111a5ab74cbd07a6db5f244d979d53cfd617e29f",
+      "lines": 210,
+      "functions": 11,
+      "unit_methods": 8,
+      "review_group": "test_inventory_and_contract_review"
+    }
+  ]
+}

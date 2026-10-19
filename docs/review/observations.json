@@ -1,0 +1,81 @@
+{
+  "reference_commit": "336feb64b201b0e9b807059f3d60b50fdee41ebb",
+  "status": "observations_recorded",
+  "sources_sha256": {
+    "examples/jenkins/run_scan.py": "28af0dcd604353db59573f5e133affc71100079e29b7253dadb2e444eef04721",
+    "scripts/docker_scanner.py": "171753dc0cbbc8bc3d21f756a7a112a850013e458e31756f5ec32a9903285f44",
+    "src/ru_llm_scanner/output.py": "c2046f35fbe63219857e4cac740bdaa1cab334dc05f8bf82e28f892aaa6e38e5",
+    "src/ru_llm_scanner/findings.py": "1f9ffd4f3dce7d48f1e066447552eda238cabf36d82cfe4cd5923c7b0c44a7cf"
+  },
+  "jenkins_invalid_summary": [
+    {
+      "case": "empty",
+      "expected_exit": 2,
+      "actual_exit": 0,
+      "console_exit": 0,
+      "saved_exit": 2,
+      "saved_type": "dict",
+      "reports_available": false,
+      "stderr_empty": true
+    },
+    {
+      "case": "malformed",
+      "expected_exit": 2,
+      "actual_exit": 0,
+      "console_exit": 0,
+      "saved_exit": 2,
+      "saved_type": "dict",
+      "reports_available": false,
+      "stderr_empty": true
+    },
+    {
+      "case": "wrong_type",
+      "expected_exit": 2,
+      "actual_exit": 0,
+      "console_exit": 0,
+      "saved_exit": null,
+      "saved_type": "list",
+      "reports_available": false,
+      "stderr_empty": true
+    },
+    {
+      "case": "boolean_exit",
+      "expected_exit": 2,
+      "actual_exit": 0,
+      "console_exit": 0,
+      "saved_exit": false,
+      "saved_type": "dict",
+      "reports_available": false,
+      "stderr_empty": true
+    },
+    {
+      "case": "valid_failure",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "console_exit": 2,
+      "saved_exit": 2,
+      "saved_type": "dict",
+      "reports_available": false,
+      "stderr_empty": true
+    }
+  ],
+  "public_output": {
+    "existing_output_mode": "0o777",
+    "launcher_rejected": true,
+    "python_writer_accepted": true,
+    "file_modes": {
+      "report.html": "0o600",
+      "report.json": "0o600"
+    }
+  },
+  "fifo_deployment_lock": {
+    "blocked_until_external_timeout": true,
+    "timeout_seconds": 2
+  },
+  "coordinates": {
+    "seed": 1701,
+    "texts": 200,
+    "checked_positions": 4200,
+    "status": "passed"
+  }
+}
