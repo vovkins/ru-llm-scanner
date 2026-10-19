@@ -3,7 +3,8 @@
 Доступны спецификации, JSON Schema, синтетические отчёты и механизм анализа:
 подготовка/сборка Analyzer, API-адаптер и словарь. Доступен внутренний Git API:
 снимки/сравнение, классификация и строгая подготовка текста.
-Scan pipeline, CLI snapshot/diff, renderer и Jenkins ещё не реализованы.
+Внутренний scan pipeline, профиль и находки/координаты реализованы на этапе 4.
+CLI snapshot/diff, renderer/baseline и Jenkins ещё не реализованы.
 
 ## Структура
 
@@ -18,6 +19,8 @@ Scan pipeline, CLI snapshot/diff, renderer и Jenkins ещё не реализо
 | `src/ru_llm_scanner/` | Async API-адаптер, словарь, артефакты и инструменты подготовки |
 | `git_repository.py`, `git_plan.py`, `text_policy.py` в `src/ru_llm_scanner/` | Изолированное чтение Git, выбор A/B и подготовка text-v1 |
 | `scripts/check_git_layer.py`, `docker/git-test.Dockerfile` | Синтетический dev-прогон Git/text, включая Linux без сети |
+| `configuration.py`, `engine.py`, `findings.py`, `pipeline.py` в `src/ru_llm_scanner/` | Эффективный профиль, доверенные assets, координаты и bounded scan API |
+| `tests/corpus/`, `scripts/check_scan_integration.py` | Независимый code-v1 и реальная offline-проверка pipeline |
 | `upstream.lock.json`, `locks/` | Закреплённые источники, constraints и измеренный runtime |
 | `patches/`, `docker/` | Минимальная адаптация API и offline inventory helpers |
 | `tests/`, `scripts/check_*` | Модульные и изолированные интеграционные проверки |
@@ -56,7 +59,7 @@ Unicode/CRLF, ссылки внутри Markdown и закрытие code fences
 .venv/bin/python -m unittest discover -s tests -v
 .venv/bin/python -m black --check src tests docker scripts/analyzer.py \
   scripts/check_analyzer_integration.py scripts/check_upstream_tests.py \
-  scripts/capture_licenses.py scripts/check_git_layer.py
+  scripts/capture_licenses.py scripts/check_git_layer.py scripts/check_scan_integration.py
 ```
 
 Для словарных parity-тестов сначала выполните `prepare --output .build/analyzer`
@@ -84,13 +87,23 @@ filters/includes/helpers, лимиты, сигнатуры и строгие к�
 NER не повторяется для независимого Git-изменения: её исходники/артефакты
 на этом этапе не менялись.
 
+Этап 4 добавляет 24 unit test method для strict config/профиля, находок и
+pipeline; полный набор теперь содержит 96 тестов. Запуск тот же `unittest`
+выше, включая подготовленные словарные assets без skipped. Синтетический
+[code-v1](../tests/corpus/README.md) содержит 46 файлов/37 размеченных мест
+полного каталога, включая отрицательные примеры. [Реальный offline-прогон](scan-api.md)
+выполняется отдельно: техническая parity с Analyzer/словарём не заменяет
+оценку exact TP/FP/FN относительно независимой разметки.
+[Результаты этапа 4](../verification/stage-4/README.md) сохраняют оба результата
+и известные ошибки качества без исходных значений.
+
 ## Стратегия следующих этапов
 
 | Этап | Проверки, которые появятся с реализацией |
 | --- | --- |
 | 2 (реализовано) | Контракт API, readiness, источник, каталог, словарь, соответствие upstream |
 | 3 (реализовано) | Git-деревья, refs, добавления/удаления/переименования, пути, хуки/фильтры, missing objects |
-| 4 | Полные файлы, координаты, длинные/многострочные значения, положительный и отрицательный корпус кода |
+| 4 (реализовано) | Полные файлы, координаты, длинные/многострочные значения, bounded queue/отмена, положительный и отрицательный корпус кода |
 | 5 | Реальные отчёты, semantic validation, цепочка baseline, экранирование и визуальная QA HTML |
 | 6 | Изолированный Docker, mounts, CPU/GPU, отсутствие внешних соединений, Jenkins артефакты |
 | 7 | Сквозная приёмка, актуальность инструкций, обновление Analyzer и откат |

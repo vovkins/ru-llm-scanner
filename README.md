@@ -11,8 +11,10 @@
 CPU-образа. Подготовлены спецификации, JSON Schema и синтетические отчёты.
 Добавлен внутренний Git API: снимки/сравнение A/B, полный манифест, безопасное
 чтение объектов и подготовка текста `text-v1`.
-Scan pipeline, CLI `snapshot/diff`, формирование HTML/JSON и Jenkins
-**ещё не реализованы**. Ниже — проектируемый интерфейс сканера.
+Работает внутренний scan API: конфигурация/профиль, анализ полных файлов,
+находки/координаты/контекст, ограниченная очередь и явные ошибки/охват.
+CLI `snapshot/diff`, формирование HTML/JSON, baseline и Jenkins
+**ещё не реализованы**. Ниже — проектируемый пользовательский интерфейс.
 
 Для проверки уже доступного механизма см. [руководство Analyzer](docs/analyzer.md).
 Проверенная платформа — CPU `linux/arm64`. GPU-цели upstream сохранены, но
@@ -20,12 +22,21 @@ Scan pipeline, CLI `snapshot/diff`, формирование HTML/JSON и Jenkin
 [Результаты проверок и артефакты этапа 2](verification/stage-2/README.md).
 [Git API и ограничения входа](docs/git-reader.md),
 [результаты этапа 3](verification/stage-3/README.md).
+[Scan API и воспроизводимый offline-прогон](docs/scan-api.md),
+[результаты этапа 4](verification/stage-4/README.md).
+
+На отдельном синтетическом корпусе кода получены exact precision 71.74% и
+recall 89.19% (37 размеченных мест). Ограничения текущей модели, включая
+пропущенный телефон и ошибки категорий, сохранены в результатах этапа 4.
+Соответствие pipeline прямому Analyzer+словарю проверено на 46/46 файлах;
+это отдельная проверка, которая не означает безошибочное распознавание.
 
 [Общий план и прогресс](https://github.com/vovkins/ru-llm-scanner/issues/1) ·
 [Этап 1](https://github.com/vovkins/ru-llm-scanner/issues/2) ·
 [Этап 2](https://github.com/vovkins/ru-llm-scanner/issues/3) ·
 [Этап 3](https://github.com/vovkins/ru-llm-scanner/issues/5) ·
-[План этапа 4](https://github.com/vovkins/ru-llm-scanner/issues/7) ·
+[Этап 4](https://github.com/vovkins/ru-llm-scanner/issues/7) ·
+[План этапа 5](https://github.com/vovkins/ru-llm-scanner/issues/9) ·
 [Документация](docs/README.md)
 
 ## Сценарии первой версии
@@ -79,6 +90,7 @@ Docker. Репозиторий монтируется только для чте
 ## Работа с проектом
 
 - [Режимы и охват](docs/scan-modes.md), [CLI и настройки](docs/configuration.md).
+- [Доступный Python API](docs/scan-api.md), [независимый корпус](tests/corpus/README.md).
 - [Отчёты](docs/reports.md), [baseline](docs/baseline.md), [архитектура](docs/architecture.md).
 - [Проверка спецификаций](docs/development.md), [участие](CONTRIBUTING.md), [безопасность](SECURITY.md).
 - [Происхождение компонентов и статус лицензии](docs/licensing.md).
