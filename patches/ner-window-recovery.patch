@@ -1,6 +1,14 @@
 --- a/presidio/ner/huggingface_recognizer.py
 +++ b/presidio/ner/huggingface_recognizer.py
-@@ -1136,13 +1136,71 @@
+@@ -7,6 +7,7 @@
+ import re
+ import threading
+ import time
++from bisect import bisect_left
+ from contextlib import nullcontext
+ from dataclasses import dataclass
+ from pathlib import Path
+@@ -1136,13 +1137,77 @@
                  entity_predictions = merge_window_predictions(
                      filtered_predictions + selected_recovery_predictions
                  )
@@ -18,12 +26,14 @@
 +                selected_alternates = []
 +                for fine in (False, True):
 +                    try:
-+                        alternate_predictions, alternate_count = self._recover_window_boundaries(
-+                            normalized.text,
-+                            unresolved_error.unresolved_clusters,
-+                            cancellation_event=cancellation_event,
-+                            alternate=True,
-+                            fine=fine,
++                        alternate_predictions, alternate_count = (
++                            self._recover_window_boundaries(
++                                normalized.text,
++                                unresolved_error.unresolved_clusters,
++                                cancellation_event=cancellation_event,
++                                alternate=True,
++                                fine=fine,
++                            )
 +                        )
 +                    except NERInferenceCancelled:
 +                        raise
@@ -45,17 +55,21 @@
 +                        raise error from exc
 +                    windows_processed += alternate_count
 +                    try:
-+                        selected_alternates.extend(_select_boundary_recovery_predictions(
-+                            _filter_window_predictions(
-+                                alternate_predictions,
-+                                score_threshold=score_threshold,
-+                                requested_entities=requested_entities,
-+                                supporting_name_spans=supporting_name_spans,
-+                            ),
-+                            unresolved_error.unresolved_clusters,
-+                        ))
++                        selected_alternates.extend(
++                            _select_boundary_recovery_predictions(
++                                _filter_window_predictions(
++                                    alternate_predictions,
++                                    score_threshold=score_threshold,
++                                    requested_entities=requested_entities,
++                                    supporting_name_spans=supporting_name_spans,
++                                ),
++                                unresolved_error.unresolved_clusters,
++                            )
++                        )
 +                        entity_predictions = merge_window_predictions(
-+                            filtered_predictions + selected_recovery_predictions + selected_alternates
++                            filtered_predictions
++                            + selected_recovery_predictions
++                            + selected_alternates
 +                        )
 +                    except NERWindowBoundaryError as exc:
 +                        unresolved_error = exc
@@ -79,7 +93,7 @@
              except Exception as exc:
                  error = NERProcessingError(
                      phase="inference",
-@@ -1366,6 +1424,8 @@
+@@ -1366,6 +1431,8 @@
          unresolved_clusters: tuple[UnresolvedWindowEntityCluster, ...],
          *,
          cancellation_event: threading.Event | None = None,
@@ -88,7 +102,32 @@
      ) -> tuple[list[WindowEntityPrediction], int]:
          input_ids, offsets, original_windows = self._prepare_window_input(
              normalized_text
-@@ -1395,13 +1455,29 @@
+@@ -1382,11 +1449,20 @@
+                 window = original_windows[prediction.window_index]
+                 if prediction.touches_left_boundary and window.start_token > 0:
+                     boundary_tokens.add(window.start_token)
+-                if (
+-                    prediction.touches_right_boundary
+-                    and window.end_token < token_count
+-                ):
++                if prediction.touches_right_boundary and window.end_token < token_count:
+                     boundary_tokens.add(window.end_token)
++
++        if fine:
++            # The far end of a short clipped entity can be a better anchor than
++            # its clipped window edge. Keep every token; probe full contexts.
++            starts = [offset[0] for offset in offsets]
++            for cluster in unresolved_clusters:
++                first = min(item.entity.start for item in cluster.predictions)
++                last = max(item.entity.end for item in cluster.predictions)
++                first_token = bisect_left(starts, first)
++                last_token = bisect_left(starts, last) - 1
++                if 0 <= first_token <= last_token < token_count:
++                    boundary_tokens.update((first_token, last_token))
+ 
+         original_ranges = {
+             (window.start_token, window.end_token) for window in original_windows
+@@ -1395,13 +1471,42 @@
          window_size = min(MAX_CONTENT_TOKENS, token_count)
          latest_start = token_count - window_size
          for boundary_token in sorted(boundary_tokens):
@@ -102,8 +141,14 @@
 +            if fine:
 +                shifts = tuple(window_size * step // 8 for step in (1, 3, 5, 7))
 +            else:
-+                shifts = (window_size // 4, (window_size * 3) // 4) if alternate else (window_size // 2,)
-+            centered_start = min(max(0, boundary_token - window_size // 2), latest_start)
++                shifts = (
++                    (window_size // 4, (window_size * 3) // 4)
++                    if alternate
++                    else (window_size // 2,)
++                )
++            centered_start = min(
++                max(0, boundary_token - window_size // 2), latest_start
++            )
 +            for shift in shifts:
 +                start_token = min(max(0, boundary_token - shift), latest_start)
 +                recovery_range = (start_token, start_token + window_size)
@@ -113,8 +158,15 @@
 +                    char_start = offsets[start_token][0]
 +                    char_end = offsets[start_token + window_size - 1][1]
 +                    if not any(
-+                        (start_token == 0 or char_start < min(p.entity.start for p in cluster.predictions))
-+                        and (start_token + window_size == token_count or char_end > max(p.entity.end for p in cluster.predictions))
++                        (
++                            start_token == 0
++                            or char_start
++                            < min(p.entity.start for p in cluster.predictions)
++                        )
++                        and (
++                            start_token + window_size == token_count
++                            or char_end > max(p.entity.end for p in cluster.predictions)
++                        )
 +                        for cluster in unresolved_clusters
 +                    ):
 +                        continue
@@ -125,3 +177,59 @@
  
          recovery_windows = tuple(
              TokenWindow(
+@@ -1409,18 +1514,51 @@
+                 start_token=start_token,
+                 end_token=end_token,
+             )
+-            for index, (start_token, end_token) in enumerate(
+-                sorted(recovery_ranges)
+-            )
++            for index, (start_token, end_token) in enumerate(sorted(recovery_ranges))
+         )
+         if not recovery_windows:
+             return [], 0
+-        return self._predict_windows(
++        recovered, processed = self._predict_windows(
+             input_ids,
+             offsets,
+             recovery_windows,
+             cancellation_event=cancellation_event,
+         )
++        if alternate:
++            # Containment must belong to the corroborated cluster, not merely
++            # another short cluster in the same window. Long spans stay closed.
++            bounds = {
++                window.index: (
++                    offsets[window.start_token][0],
++                    offsets[window.end_token - 1][1],
++                    window.start_token == 0,
++                    window.end_token == token_count,
++                )
++                for window in recovery_windows
++            }
++            recovered = [
++                prediction
++                for prediction in recovered
++                if any(
++                    prediction.entity.entity_type == cluster.entity_type
++                    and any(
++                        _spans_overlap(prediction.entity, item.entity)
++                        for item in cluster.predictions
++                    )
++                    and (
++                        bounds[prediction.window_index][2]
++                        or bounds[prediction.window_index][0]
++                        < min(item.entity.start for item in cluster.predictions)
++                    )
++                    and (
++                        bounds[prediction.window_index][3]
++                        or bounds[prediction.window_index][1]
++                        > max(item.entity.end for item in cluster.predictions)
++                    )
++                    for cluster in unresolved_clusters
++                )
++            ]
++        return recovered, processed
+ 
+     def _infer_window(
+         self,

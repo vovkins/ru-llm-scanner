@@ -1,18 +1,1898 @@
 {
+  "verification_version": 1,
+  "status": "passed",
+  "source_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
+  "source_lock_sha256": "6ec18039c16af5dde639bb5956e5fb0769871bb42dc173b6f55117034c6754a9",
+  "prepared_manifest_sha256": "5ce409ce18aec5a4053f105103f11d959fd173152571bb799eb56dbd9de98999",
+  "scanner_sources_sha256": {
+    "src/ru_llm_scanner/__init__.py": "b1a0c9ede61fc13ba6c43be7880227c4ee230506537aa3cad83425e758b205a3",
+    "src/ru_llm_scanner/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/ru_llm_scanner/analyzer.py": "4f1cf5dce228592b4c43ce6c735ae798b139b6d32c92b9fdfa5e792195f2e746",
+    "src/ru_llm_scanner/artifacts.py": "77271cce804e4fd8c92baa46c4b7ab8f137c50134e516a2e7fbbba56bc836db3",
+    "src/ru_llm_scanner/baseline.py": "23ea9247b900c975be4b9c691f60f61d8762984ffdcc4e30ee83d423086f0020",
+    "src/ru_llm_scanner/cli.py": "3d399aaf656336b37de7d760fcaa87ca05393c76cc80b972db17ca022c79645a",
+    "src/ru_llm_scanner/configuration.py": "0a6e3f90de1bb9a089855734a5a0e06b92728b1cd9d8f13e5bc4b10b1ab7c959",
+    "src/ru_llm_scanner/dictionary.py": "6eecfcfe094ca3d2f4aaa43b3093bd94c69e55734292bba824553dd4807c6238",
+    "src/ru_llm_scanner/engine.py": "8a583e0ef31b4705c75af209a36f063695c7d76704e7f8348efcda8c10b65866",
+    "src/ru_llm_scanner/findings.py": "1f9ffd4f3dce7d48f1e066447552eda238cabf36d82cfe4cd5923c7b0c44a7cf",
+    "src/ru_llm_scanner/git_plan.py": "5b1dbd8b80424b9edb97157bcce3acd470af6c23cbea4befe126a46401c9f855",
+    "src/ru_llm_scanner/git_repository.py": "020bb53c3989a7e752fd25894c29d1f256d38137d942f40c3e9d373cb343bf27",
+    "src/ru_llm_scanner/html_report.py": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
+    "src/ru_llm_scanner/output.py": "8c5abca175d5947962330f5374e2e7cddcf391caf2edcc9213e1af509b3dc39d",
+    "src/ru_llm_scanner/pipeline.py": "334658282ca1a85ef230c965f1b4e6272987ff2affae812b435ded7629270eb5",
+    "src/ru_llm_scanner/report_validation.py": "c2046099dd2a52b748a6a91f023ea0e653997777e33fc68a58a7585c17d6ec21",
+    "src/ru_llm_scanner/reports.py": "53b31d86e46ddf23e4c21fc479d87f41de943e06e53ea5bdcec5a788893144c3",
+    "src/ru_llm_scanner/text_policy.py": "53ab4ea4a072b76af5ca7df9faaae4ad0820bd25934805133244bc50a46e32d1",
+    "src/ru_llm_scanner/upstream.py": "d28a0623470615dd369afecd3facb5640e525ff4d49b7748436c18af681e95cb",
+    "tests/integration/offline.py": "185106d35cb106412d4025d065b1a2a9502e5418f58d0ebba02f06e984b88671"
+  },
+  "runtime_image_id": "sha256:33feba355410974fe5593135beecc93e0e1e003557aab4d6d8ce4313e085ec76",
+  "corpus_sha256": "8bc2f6e3f10a9d123651839de21bae09b35c708622f9bfcada2f908ec0b5582f",
   "cases": 77,
+  "parity_cases": 77,
+  "score_absolute_tolerance": 1e-07,
+  "observed_sources": [
+    "contextual_contract",
+    "native_credential",
+    "ner",
+    "structural"
+  ],
+  "rule_ids_observed": 8,
+  "dictionary_cases": 4,
   "checks": {
-    "corrupted_hash_rejected": true,
-    "gpu_request_does_not_fallback_to_cpu": true,
-    "long_window_tail": true,
-    "missing_model_fail_closed": true,
     "network_only_loopback": true,
-    "stopped_service_rejected": true,
+    "long_window_tail": true,
     "unicode_offsets": true,
     "unpatched_api_rejected": true,
-    "wrong_profile_rejected": true
+    "wrong_profile_rejected": true,
+    "stopped_service_rejected": true,
+    "missing_model_fail_closed": true,
+    "corrupted_hash_rejected": true,
+    "gpu_request_does_not_fallback_to_cpu": true
   },
-  "corpus_sha256": "8bc2f6e3f10a9d123651839de21bae09b35c708622f9bfcada2f908ec0b5582f",
+  "metrics": {
+    "aggregate": {
+      "expected": 67,
+      "predicted": 67,
+      "true_positives": 67,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "typed_covered": 67,
+      "typed_coverage_recall": 1.0,
+      "masking_covered": 67,
+      "masking_coverage_recall": 1.0,
+      "critical_expected": 17,
+      "critical_covered": 17,
+      "critical_coverage_recall": 1.0
+    },
+    "per_entity": {
+      "AUTH_TOKEN": {
+        "expected": 8,
+        "predicted": 8,
+        "true_positives": 8,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 8,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 8,
+        "masking_coverage_recall": 1.0
+      },
+      "CONTRACT_NUMBER": {
+        "expected": 14,
+        "predicted": 14,
+        "true_positives": 14,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 14,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 14,
+        "masking_coverage_recall": 1.0
+      },
+      "LOCATION": {
+        "expected": 7,
+        "predicted": 7,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 7,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 7,
+        "masking_coverage_recall": 1.0
+      },
+      "LOGIN": {
+        "expected": 7,
+        "predicted": 7,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 7,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 7,
+        "masking_coverage_recall": 1.0
+      },
+      "ORGANIZATION": {
+        "expected": 7,
+        "predicted": 7,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 7,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 7,
+        "masking_coverage_recall": 1.0
+      },
+      "PASSWORD": {
+        "expected": 8,
+        "predicted": 8,
+        "true_positives": 8,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 8,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 8,
+        "masking_coverage_recall": 1.0
+      },
+      "PERSON": {
+        "expected": 9,
+        "predicted": 9,
+        "true_positives": 9,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 9,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 9,
+        "masking_coverage_recall": 1.0
+      },
+      "SECRET_KEY": {
+        "expected": 7,
+        "predicted": 7,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 7,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 7,
+        "masking_coverage_recall": 1.0
+      }
+    },
+    "prediction_type_counts": {
+      "AUTH_TOKEN": 8,
+      "CONTRACT_NUMBER": 14,
+      "LOCATION": 7,
+      "LOGIN": 7,
+      "ORGANIZATION": 7,
+      "PASSWORD": 8,
+      "PERSON": 9,
+      "SECRET_KEY": 7
+    },
+    "critical_misses": [],
+    "cases": [
+      {
+        "case_id": "person_full_name_ru",
+        "tags": [
+          "positive",
+          "person",
+          "ru",
+          "basic"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_full_name_en",
+        "tags": [
+          "positive",
+          "person",
+          "en",
+          "basic"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_initials_ru",
+        "tags": [
+          "positive",
+          "person",
+          "ru",
+          "punctuation"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_repeated_value",
+        "tags": [
+          "positive",
+          "person",
+          "ru",
+          "repeated"
+        ],
+        "critical": false,
+        "expected": 2,
+        "target_predictions": 2,
+        "all_predictions": 2,
+        "exact_matches": 2,
+        "typed_covered": 2,
+        "masking_covered": 2,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_decomposed_unicode",
+        "tags": [
+          "positive",
+          "person",
+          "ru",
+          "unicode",
+          "nfd"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_after_emoji",
+        "tags": [
+          "positive",
+          "person",
+          "ru",
+          "unicode",
+          "emoji"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_after_long_prefix",
+        "tags": [
+          "positive",
+          "person",
+          "ru",
+          "long_input",
+          "boundary"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_label_negative",
+        "tags": [
+          "negative",
+          "person",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "person_role_negative",
+        "tags": [
+          "negative",
+          "person",
+          "ru",
+          "missing_value"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "location_city_ru",
+        "tags": [
+          "positive",
+          "location",
+          "ru",
+          "basic"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOCATION"
+        ]
+      },
+      {
+        "case_id": "location_city_en",
+        "tags": [
+          "positive",
+          "location",
+          "en",
+          "basic"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOCATION"
+        ]
+      },
+      {
+        "case_id": "location_multiword_ru",
+        "tags": [
+          "positive",
+          "location",
+          "ru",
+          "multiword"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOCATION"
+        ]
+      },
+      {
+        "case_id": "location_region_ru",
+        "tags": [
+          "positive",
+          "location",
+          "ru",
+          "region"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOCATION"
+        ]
+      },
+      {
+        "case_id": "location_repeated",
+        "tags": [
+          "positive",
+          "location",
+          "ru",
+          "repeated"
+        ],
+        "critical": false,
+        "expected": 2,
+        "target_predictions": 2,
+        "all_predictions": 2,
+        "exact_matches": 2,
+        "typed_covered": 2,
+        "masking_covered": 2,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOCATION"
+        ]
+      },
+      {
+        "case_id": "location_label_negative",
+        "tags": [
+          "negative",
+          "location",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "location_direction_negative",
+        "tags": [
+          "negative",
+          "location",
+          "ru",
+          "no_named_place"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "organization_bank_ru",
+        "tags": [
+          "positive",
+          "organization",
+          "ru",
+          "basic"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "ORGANIZATION"
+        ]
+      },
+      {
+        "case_id": "organization_legal_form_ru",
+        "tags": [
+          "positive",
+          "organization",
+          "ru",
+          "legal_form"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "ORGANIZATION"
+        ]
+      },
+      {
+        "case_id": "organization_en",
+        "tags": [
+          "positive",
+          "organization",
+          "en",
+          "basic"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "ORGANIZATION"
+        ]
+      },
+      {
+        "case_id": "organization_quoted_ru",
+        "tags": [
+          "positive",
+          "organization",
+          "ru",
+          "punctuation"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "ORGANIZATION"
+        ]
+      },
+      {
+        "case_id": "organization_repeated",
+        "tags": [
+          "positive",
+          "organization",
+          "ru",
+          "repeated"
+        ],
+        "critical": false,
+        "expected": 2,
+        "target_predictions": 2,
+        "all_predictions": 2,
+        "exact_matches": 2,
+        "typed_covered": 2,
+        "masking_covered": 2,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "ORGANIZATION"
+        ]
+      },
+      {
+        "case_id": "organization_process_negative",
+        "tags": [
+          "negative",
+          "organization",
+          "ru",
+          "common_noun"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "organization_field_negative",
+        "tags": [
+          "negative",
+          "organization",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "login_assignment_en",
+        "tags": [
+          "positive",
+          "login",
+          "en",
+          "assignment"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOGIN"
+        ]
+      },
+      {
+        "case_id": "login_assignment_ru",
+        "tags": [
+          "positive",
+          "login",
+          "ru",
+          "assignment"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOGIN"
+        ]
+      },
+      {
+        "case_id": "login_username_en",
+        "tags": [
+          "positive",
+          "login",
+          "en",
+          "quoted"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOGIN"
+        ]
+      },
+      {
+        "case_id": "login_cyrillic",
+        "tags": [
+          "positive",
+          "login",
+          "ru",
+          "unicode"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOGIN"
+        ]
+      },
+      {
+        "case_id": "login_email_style",
+        "tags": [
+          "positive",
+          "login",
+          "ru",
+          "email_style"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOGIN"
+        ]
+      },
+      {
+        "case_id": "login_after_emoji",
+        "tags": [
+          "positive",
+          "login",
+          "en",
+          "emoji",
+          "offset"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOGIN"
+        ]
+      },
+      {
+        "case_id": "login_placeholder_negative",
+        "tags": [
+          "negative",
+          "login",
+          "en",
+          "placeholder"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "login_explanation_negative",
+        "tags": [
+          "negative",
+          "login",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "password_assignment_en",
+        "tags": [
+          "positive",
+          "password",
+          "en",
+          "assignment"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_assignment_ru",
+        "tags": [
+          "positive",
+          "password",
+          "ru",
+          "assignment"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_hash_symbol",
+        "tags": [
+          "positive",
+          "password",
+          "en",
+          "punctuation"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_cyrillic",
+        "tags": [
+          "positive",
+          "password",
+          "ru",
+          "unicode"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_short_boundary",
+        "tags": [
+          "positive",
+          "password",
+          "en",
+          "boundary"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_with_spaces",
+        "tags": [
+          "positive",
+          "password",
+          "ru",
+          "spaces"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_multiline",
+        "tags": [
+          "positive",
+          "password",
+          "ru",
+          "multiline"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_placeholder_negative",
+        "tags": [
+          "negative",
+          "password",
+          "en",
+          "placeholder"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "password_explanation_negative",
+        "tags": [
+          "negative",
+          "password",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "auth_token_assignment",
+        "tags": [
+          "positive",
+          "auth_token",
+          "en",
+          "assignment"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN"
+        ]
+      },
+      {
+        "case_id": "auth_token_ru_context",
+        "tags": [
+          "positive",
+          "auth_token",
+          "ru",
+          "context"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN"
+        ]
+      },
+      {
+        "case_id": "auth_token_bearer",
+        "tags": [
+          "positive",
+          "auth_token",
+          "en",
+          "bearer"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN"
+        ]
+      },
+      {
+        "case_id": "auth_token_quoted",
+        "tags": [
+          "positive",
+          "auth_token",
+          "en",
+          "quoted"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN"
+        ]
+      },
+      {
+        "case_id": "auth_token_multiline",
+        "tags": [
+          "positive",
+          "auth_token",
+          "en",
+          "multiline"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN"
+        ]
+      },
+      {
+        "case_id": "auth_token_repeated",
+        "tags": [
+          "positive",
+          "auth_token",
+          "ru",
+          "repeated"
+        ],
+        "critical": false,
+        "expected": 2,
+        "target_predictions": 2,
+        "all_predictions": 2,
+        "exact_matches": 2,
+        "typed_covered": 2,
+        "masking_covered": 2,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN"
+        ]
+      },
+      {
+        "case_id": "auth_token_placeholder_negative",
+        "tags": [
+          "negative",
+          "auth_token",
+          "en",
+          "placeholder"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "auth_token_explanation_negative",
+        "tags": [
+          "negative",
+          "auth_token",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "secret_key_assignment",
+        "tags": [
+          "positive",
+          "secret_key",
+          "en",
+          "assignment"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "SECRET_KEY"
+        ]
+      },
+      {
+        "case_id": "secret_key_ru_context",
+        "tags": [
+          "positive",
+          "secret_key",
+          "ru",
+          "context"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "SECRET_KEY"
+        ]
+      },
+      {
+        "case_id": "secret_key_client_secret",
+        "tags": [
+          "positive",
+          "secret_key",
+          "en",
+          "client_secret"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "SECRET_KEY"
+        ]
+      },
+      {
+        "case_id": "secret_key_punctuation",
+        "tags": [
+          "positive",
+          "secret_key",
+          "en",
+          "punctuation"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "SECRET_KEY"
+        ]
+      },
+      {
+        "case_id": "secret_key_multiline",
+        "tags": [
+          "positive",
+          "secret_key",
+          "ru",
+          "multiline"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "SECRET_KEY"
+        ]
+      },
+      {
+        "case_id": "secret_key_long_context",
+        "tags": [
+          "positive",
+          "secret_key",
+          "en",
+          "long_input",
+          "boundary"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "SECRET_KEY"
+        ]
+      },
+      {
+        "case_id": "secret_key_placeholder_negative",
+        "tags": [
+          "negative",
+          "secret_key",
+          "en",
+          "placeholder"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "secret_key_explanation_negative",
+        "tags": [
+          "negative",
+          "secret_key",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_number_symbol_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "symbol"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_number_digits_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "digits"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_number_cyrillic_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "cyrillic"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_number_en",
+        "tags": [
+          "positive",
+          "contract_number",
+          "en",
+          "basic"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_number_repeated",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "repeated"
+        ],
+        "critical": false,
+        "expected": 2,
+        "target_predictions": 2,
+        "all_predictions": 2,
+        "exact_matches": 2,
+        "typed_covered": 2,
+        "masking_covered": 2,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_number_pdf_copy",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "pdf_copy",
+          "unicode"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_version_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "wrong_context"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_request_number_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "wrong_context"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_without_number_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "missing_value"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_random_code_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "wrong_context"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_inflected_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "inflection"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_agreement_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "agreement"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_agreement_en",
+        "tags": [
+          "positive",
+          "contract_number",
+          "en",
+          "agreement"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_two_contexts_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "multiple_contexts"
+        ],
+        "critical": false,
+        "expected": 2,
+        "target_predictions": 2,
+        "all_predictions": 2,
+        "exact_matches": 2,
+        "typed_covered": 2,
+        "masking_covered": 2,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_multiline_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "multiline"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_document_version_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "document_version"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_template_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "template"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_date_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "date"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_dotted_version_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "version"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "mixed_identity_and_contract",
+        "tags": [
+          "positive",
+          "mixed",
+          "ru",
+          "multiple_entities"
+        ],
+        "critical": true,
+        "expected": 4,
+        "target_predictions": 4,
+        "all_predictions": 4,
+        "exact_matches": 4,
+        "typed_covered": 4,
+        "masking_covered": 4,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER",
+          "LOGIN",
+          "PASSWORD",
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "mixed_org_location_secrets",
+        "tags": [
+          "positive",
+          "mixed",
+          "ru",
+          "multiple_entities"
+        ],
+        "critical": true,
+        "expected": 4,
+        "target_predictions": 4,
+        "all_predictions": 4,
+        "exact_matches": 4,
+        "typed_covered": 4,
+        "masking_covered": 4,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN",
+          "LOCATION",
+          "ORGANIZATION",
+          "SECRET_KEY"
+        ]
+      }
+    ]
+  },
+  "quality_gate": [
+    {
+      "name": "critical_coverage_recall",
+      "actual": 1.0,
+      "minimum": 1.0,
+      "passed": true
+    },
+    {
+      "name": "LOGIN.precision",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "LOGIN.recall",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "PASSWORD.precision",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "PASSWORD.recall",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "AUTH_TOKEN.precision",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "AUTH_TOKEN.recall",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "SECRET_KEY.precision",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "SECRET_KEY.recall",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "CONTRACT_NUMBER.precision",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "CONTRACT_NUMBER.recall",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "PERSON.recall_vs_baseline",
+      "actual": 1.0,
+      "minimum": 0.757778,
+      "passed": true
+    },
+    {
+      "name": "LOCATION.recall_vs_baseline",
+      "actual": 1.0,
+      "minimum": 0.837143,
+      "passed": true
+    },
+    {
+      "name": "ORGANIZATION.recall_vs_baseline",
+      "actual": 1.0,
+      "minimum": 0.837143,
+      "passed": true
+    }
+  ],
+  "gpu_inference": "not_tested_no_cuda",
+  "launcher_sha256": "a6441500fc4c541afd5ff4f9698603bfa066c9bb8897cbcc7952c64135288c6f",
+  "shared_helper_sha256": "f46404515e8e7f294779e7860ee6e84a645def775c3ce80baa20a14f4bc541f0",
   "curated_input_sha256": {
+    "src/ru_llm_scanner/configuration.py": "0a6e3f90de1bb9a089855734a5a0e06b92728b1cd9d8f13e5bc4b10b1ab7c959",
+    "src/ru_llm_scanner/findings.py": "1f9ffd4f3dce7d48f1e066447552eda238cabf36d82cfe4cd5923c7b0c44a7cf",
+    "src/ru_llm_scanner/text_policy.py": "53ab4ea4a072b76af5ca7df9faaae4ad0820bd25934805133244bc50a46e32d1",
+    "src/ru_llm_scanner/baseline.py": "23ea9247b900c975be4b9c691f60f61d8762984ffdcc4e30ee83d423086f0020",
+    "src/ru_llm_scanner/html_report.py": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
+    "src/ru_llm_scanner/analyzer.py": "4f1cf5dce228592b4c43ce6c735ae798b139b6d32c92b9fdfa5e792195f2e746",
+    "src/ru_llm_scanner/__init__.py": "b1a0c9ede61fc13ba6c43be7880227c4ee230506537aa3cad83425e758b205a3",
+    "src/ru_llm_scanner/engine.py": "8a583e0ef31b4705c75af209a36f063695c7d76704e7f8348efcda8c10b65866",
+    "src/ru_llm_scanner/cli.py": "3d399aaf656336b37de7d760fcaa87ca05393c76cc80b972db17ca022c79645a",
+    "src/ru_llm_scanner/pipeline.py": "334658282ca1a85ef230c965f1b4e6272987ff2affae812b435ded7629270eb5",
+    "src/ru_llm_scanner/reports.py": "53b31d86e46ddf23e4c21fc479d87f41de943e06e53ea5bdcec5a788893144c3",
+    "src/ru_llm_scanner/upstream.py": "d28a0623470615dd369afecd3facb5640e525ff4d49b7748436c18af681e95cb",
+    "src/ru_llm_scanner/artifacts.py": "77271cce804e4fd8c92baa46c4b7ab8f137c50134e516a2e7fbbba56bc836db3",
+    "src/ru_llm_scanner/dictionary.py": "6eecfcfe094ca3d2f4aaa43b3093bd94c69e55734292bba824553dd4807c6238",
+    "src/ru_llm_scanner/report_validation.py": "c2046099dd2a52b748a6a91f023ea0e653997777e33fc68a58a7585c17d6ec21",
+    "src/ru_llm_scanner/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
+    "src/ru_llm_scanner/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/ru_llm_scanner/git_plan.py": "5b1dbd8b80424b9edb97157bcce3acd470af6c23cbea4befe126a46401c9f855",
+    "src/ru_llm_scanner/git_repository.py": "020bb53c3989a7e752fd25894c29d1f256d38137d942f40c3e9d373cb343bf27",
+    "src/ru_llm_scanner/output.py": "8c5abca175d5947962330f5374e2e7cddcf391caf2edcc9213e1af509b3dc39d",
+    "tests/integration/offline.py": "185106d35cb106412d4025d065b1a2a9502e5418f58d0ebba02f06e984b88671",
+    "runtime.json": "461a950088bc445cad741154cb18178cbfc28e87a462be392d9003d721e614df",
     "context/README.md": "61a56e9c3aaa911c2df1033b284766e4638ce66e9c4eab09316b84cfe749afb8",
     "context/THIRD_PARTY_NOTICES.md": "79b0dc96e17376d526039c2a740d40c2e9da48f0a29a87770062e17d77493264",
     "context/certs/README.md": "d20e192e80ae69c0f57d7df4172454bc50d3aeac52a7b6b4ada5bb0a3fdb55c5",
@@ -47,7 +1927,7 @@
     "context/presidio/model_artifact.py": "c49d442a42ed7e667708e6b13b500e0c589da03ae2c7c57d4db5433bbd32bd95",
     "context/presidio/model_manifest.json": "79aeb5fbd1ed93f37c811704e6b1237be191551821092d08b1fe9869ba2fb9a7",
     "context/presidio/ner/__init__.py": "a7b3f2a53984b3e778bcda03e1091ad96a71274ebb19e54a8daa40593e387d53",
-    "context/presidio/ner/huggingface_recognizer.py": "29266aa251a1ffa8889caf5d4a6a445d2464226ff0ea8645094ac271ea11221a",
+    "context/presidio/ner/huggingface_recognizer.py": "45989013ea10f19d2953a1fb906eec1df9d06a417013ad1c476bb8fc62c8a3d7",
     "context/presidio/ner/text_processing.py": "b0a826c41012ffb5dabfaf314216070ccddfecb691203e0a07de485aa6b096e4",
     "context/presidio/real_model_smoke.py": "8ed1563b7058876bc47ea8efe53938443526a8316b8c5c1a939173b496b3e959",
     "context/presidio/recognizers/__init__.py": "3043f2220709038c6a62ee9c4f4706b5ffe6a49ac46499ef3b343d5311e6ccb7",
@@ -92,10 +1972,9 @@
     "context/presidio/verify_gpu_runtime.py": "8be1db150f8832f2b16a4f58b06ed1dd18d89726aebc37462537365c400bddb0",
     "context/scanner_build/Dockerfile": "4d10df4544fdde873d2fda813fb31d780369dd8530fbfb303fe249dadd3e115c",
     "context/scanner_build/constraints.txt": "8ba7d4b93b1a38d869c9aa9fffffe0aaf040fefe914008ae312a3a23634e6730",
-    "context/scanner_build/manifest.json": "28b486725d953c7558861487b2e5212d5c94b4fa6ccb9998574db5ee2f8b4e61",
     "context/scanner_build/original_analyzer_server.py": "3517fdda1288483ec366fdd636e3e92bcd0412c3d511af805bf2130adb0b67c5",
     "context/scanner_build/probe_runtime.py": "02669375d8520ede5993b29430d642362101e4830d8b1207b1299d25952da270",
-    "context/scanner_build/source-lock.json": "0d491e84321ed06f26018ccb373a739a6fde87c437fcba0e070a2567040e86f9",
+    "context/scanner_build/source-lock.json": "6ec18039c16af5dde639bb5956e5fb0769871bb42dc173b6f55117034c6754a9",
     "context/tests/fixtures/dkb/1.txt": "ac4c829a0f9ab773405924b414140e0903fca8062c715f5b6bda893f288c9249",
     "context/tests/fixtures/dkb/10.txt": "c0f801a856eca4255a0c35ea15b7e265b8519062606848c783318e4a3cfec6c4",
     "context/tests/fixtures/dkb/11.txt": "478ec51eacf139349b75249116cf576e753eec64922e8b71dcbe720ad4701494",
@@ -116,1887 +1995,8 @@
     "context/tests/fixtures/dkb/9.txt": "2c08d99d157de8455179373fa7fe22f4768f921d1fdea59995962decddd43e2d",
     "context/tests/fixtures/dkb/README.md": "605148a3c21ad035fb1e66577cee339c6ebefb709a8151d02c45a7cf724d79e2",
     "context/tests/fixtures/dkb/manifest.json": "8693cd751b6980b3b23010727ecfd467aad6f473c2913120ae47b3824a7adf18",
-    "runtime.json": "b450a5b5a8a445e0d56ff4320ed57a3466b6c1df565284e823aff659c2dac42a",
-    "src/ru_llm_scanner/__init__.py": "b1a0c9ede61fc13ba6c43be7880227c4ee230506537aa3cad83425e758b205a3",
-    "src/ru_llm_scanner/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
-    "src/ru_llm_scanner/analyzer.py": "4f1cf5dce228592b4c43ce6c735ae798b139b6d32c92b9fdfa5e792195f2e746",
-    "src/ru_llm_scanner/artifacts.py": "77271cce804e4fd8c92baa46c4b7ab8f137c50134e516a2e7fbbba56bc836db3",
-    "src/ru_llm_scanner/baseline.py": "23ea9247b900c975be4b9c691f60f61d8762984ffdcc4e30ee83d423086f0020",
-    "src/ru_llm_scanner/cli.py": "3d399aaf656336b37de7d760fcaa87ca05393c76cc80b972db17ca022c79645a",
-    "src/ru_llm_scanner/configuration.py": "0a6e3f90de1bb9a089855734a5a0e06b92728b1cd9d8f13e5bc4b10b1ab7c959",
-    "src/ru_llm_scanner/dictionary.py": "6eecfcfe094ca3d2f4aaa43b3093bd94c69e55734292bba824553dd4807c6238",
-    "src/ru_llm_scanner/engine.py": "8a583e0ef31b4705c75af209a36f063695c7d76704e7f8348efcda8c10b65866",
-    "src/ru_llm_scanner/findings.py": "1f9ffd4f3dce7d48f1e066447552eda238cabf36d82cfe4cd5923c7b0c44a7cf",
-    "src/ru_llm_scanner/git_plan.py": "5b1dbd8b80424b9edb97157bcce3acd470af6c23cbea4befe126a46401c9f855",
-    "src/ru_llm_scanner/git_repository.py": "020bb53c3989a7e752fd25894c29d1f256d38137d942f40c3e9d373cb343bf27",
-    "src/ru_llm_scanner/html_report.py": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
-    "src/ru_llm_scanner/output.py": "8c5abca175d5947962330f5374e2e7cddcf391caf2edcc9213e1af509b3dc39d",
-    "src/ru_llm_scanner/pipeline.py": "334658282ca1a85ef230c965f1b4e6272987ff2affae812b435ded7629270eb5",
-    "src/ru_llm_scanner/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
-    "src/ru_llm_scanner/report_validation.py": "c2046099dd2a52b748a6a91f023ea0e653997777e33fc68a58a7585c17d6ec21",
-    "src/ru_llm_scanner/reports.py": "53b31d86e46ddf23e4c21fc479d87f41de943e06e53ea5bdcec5a788893144c3",
-    "src/ru_llm_scanner/text_policy.py": "53ab4ea4a072b76af5ca7df9faaae4ad0820bd25934805133244bc50a46e32d1",
-    "src/ru_llm_scanner/upstream.py": "d28a0623470615dd369afecd3facb5640e525ff4d49b7748436c18af681e95cb",
-    "tests/integration/offline.py": "185106d35cb106412d4025d065b1a2a9502e5418f58d0ebba02f06e984b88671"
+    "context/scanner_build/manifest.json": "5ce409ce18aec5a4053f105103f11d959fd173152571bb799eb56dbd9de98999"
   },
-  "dictionary_cases": 4,
-  "gpu_inference": "not_tested_no_cuda",
-  "image_platform_id": "sha256:756cbdbcea6034a7850b918dd86d960a0455ff8755fa426eda398a94917731c8",
-  "image_reference_id": "sha256:95d64abc7312c4804bf017d6ab98567617442582c4cab9b36d1aa164e4b47f24",
-  "launcher_sha256": "a6441500fc4c541afd5ff4f9698603bfa066c9bb8897cbcc7952c64135288c6f",
-  "metrics": {
-    "aggregate": {
-      "critical_coverage_recall": 1.0,
-      "critical_covered": 17,
-      "critical_expected": 17,
-      "expected": 67,
-      "f1": 1.0,
-      "false_negatives": 0,
-      "false_positives": 0,
-      "masking_coverage_recall": 1.0,
-      "masking_covered": 67,
-      "precision": 1.0,
-      "predicted": 67,
-      "recall": 1.0,
-      "true_positives": 67,
-      "typed_coverage_recall": 1.0,
-      "typed_covered": 67
-    },
-    "cases": [
-      {
-        "all_prediction_types": [
-          "PERSON"
-        ],
-        "all_predictions": 1,
-        "case_id": "person_full_name_ru",
-        "critical": true,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "person",
-          "ru",
-          "basic"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PERSON"
-        ],
-        "all_predictions": 1,
-        "case_id": "person_full_name_en",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "person",
-          "en",
-          "basic"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PERSON"
-        ],
-        "all_predictions": 1,
-        "case_id": "person_initials_ru",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "person",
-          "ru",
-          "punctuation"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PERSON"
-        ],
-        "all_predictions": 2,
-        "case_id": "person_repeated_value",
-        "critical": false,
-        "exact_matches": 2,
-        "expected": 2,
-        "masking_covered": 2,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "person",
-          "ru",
-          "repeated"
-        ],
-        "target_predictions": 2,
-        "typed_covered": 2,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PERSON"
-        ],
-        "all_predictions": 1,
-        "case_id": "person_decomposed_unicode",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "person",
-          "ru",
-          "unicode",
-          "nfd"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PERSON"
-        ],
-        "all_predictions": 1,
-        "case_id": "person_after_emoji",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "person",
-          "ru",
-          "unicode",
-          "emoji"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PERSON"
-        ],
-        "all_predictions": 1,
-        "case_id": "person_after_long_prefix",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "person",
-          "ru",
-          "long_input",
-          "boundary"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "person_label_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "person",
-          "ru",
-          "explanatory"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "person_role_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "person",
-          "ru",
-          "missing_value"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "LOCATION"
-        ],
-        "all_predictions": 1,
-        "case_id": "location_city_ru",
-        "critical": true,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "location",
-          "ru",
-          "basic"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "LOCATION"
-        ],
-        "all_predictions": 1,
-        "case_id": "location_city_en",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "location",
-          "en",
-          "basic"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "LOCATION"
-        ],
-        "all_predictions": 1,
-        "case_id": "location_multiword_ru",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "location",
-          "ru",
-          "multiword"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "LOCATION"
-        ],
-        "all_predictions": 1,
-        "case_id": "location_region_ru",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "location",
-          "ru",
-          "region"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "LOCATION"
-        ],
-        "all_predictions": 2,
-        "case_id": "location_repeated",
-        "critical": false,
-        "exact_matches": 2,
-        "expected": 2,
-        "masking_covered": 2,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "location",
-          "ru",
-          "repeated"
-        ],
-        "target_predictions": 2,
-        "typed_covered": 2,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "location_label_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "location",
-          "ru",
-          "explanatory"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "location_direction_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "location",
-          "ru",
-          "no_named_place"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "ORGANIZATION"
-        ],
-        "all_predictions": 1,
-        "case_id": "organization_bank_ru",
-        "critical": true,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "organization",
-          "ru",
-          "basic"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "ORGANIZATION"
-        ],
-        "all_predictions": 1,
-        "case_id": "organization_legal_form_ru",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "organization",
-          "ru",
-          "legal_form"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "ORGANIZATION"
-        ],
-        "all_predictions": 1,
-        "case_id": "organization_en",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "organization",
-          "en",
-          "basic"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "ORGANIZATION"
-        ],
-        "all_predictions": 1,
-        "case_id": "organization_quoted_ru",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "organization",
-          "ru",
-          "punctuation"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "ORGANIZATION"
-        ],
-        "all_predictions": 2,
-        "case_id": "organization_repeated",
-        "critical": false,
-        "exact_matches": 2,
-        "expected": 2,
-        "masking_covered": 2,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "organization",
-          "ru",
-          "repeated"
-        ],
-        "target_predictions": 2,
-        "typed_covered": 2,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "organization_process_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "organization",
-          "ru",
-          "common_noun"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "organization_field_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "organization",
-          "ru",
-          "explanatory"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "LOGIN"
-        ],
-        "all_predictions": 1,
-        "case_id": "login_assignment_en",
-        "critical": true,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "login",
-          "en",
-          "assignment"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "LOGIN"
-        ],
-        "all_predictions": 1,
-        "case_id": "login_assignment_ru",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "login",
-          "ru",
-          "assignment"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "LOGIN"
-        ],
-        "all_predictions": 1,
-        "case_id": "login_username_en",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "login",
-          "en",
-          "quoted"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "LOGIN"
-        ],
-        "all_predictions": 1,
-        "case_id": "login_cyrillic",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "login",
-          "ru",
-          "unicode"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "LOGIN"
-        ],
-        "all_predictions": 1,
-        "case_id": "login_email_style",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "login",
-          "ru",
-          "email_style"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "LOGIN"
-        ],
-        "all_predictions": 1,
-        "case_id": "login_after_emoji",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "login",
-          "en",
-          "emoji",
-          "offset"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "login_placeholder_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "login",
-          "en",
-          "placeholder"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "login_explanation_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "login",
-          "ru",
-          "explanatory"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PASSWORD"
-        ],
-        "all_predictions": 1,
-        "case_id": "password_assignment_en",
-        "critical": true,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "password",
-          "en",
-          "assignment"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PASSWORD"
-        ],
-        "all_predictions": 1,
-        "case_id": "password_assignment_ru",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "password",
-          "ru",
-          "assignment"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PASSWORD"
-        ],
-        "all_predictions": 1,
-        "case_id": "password_hash_symbol",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "password",
-          "en",
-          "punctuation"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PASSWORD"
-        ],
-        "all_predictions": 1,
-        "case_id": "password_cyrillic",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "password",
-          "ru",
-          "unicode"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PASSWORD"
-        ],
-        "all_predictions": 1,
-        "case_id": "password_short_boundary",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "password",
-          "en",
-          "boundary"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PASSWORD"
-        ],
-        "all_predictions": 1,
-        "case_id": "password_with_spaces",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "password",
-          "ru",
-          "spaces"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "PASSWORD"
-        ],
-        "all_predictions": 1,
-        "case_id": "password_multiline",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "password",
-          "ru",
-          "multiline"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "password_placeholder_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "password",
-          "en",
-          "placeholder"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "password_explanation_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "password",
-          "ru",
-          "explanatory"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "AUTH_TOKEN"
-        ],
-        "all_predictions": 1,
-        "case_id": "auth_token_assignment",
-        "critical": true,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "auth_token",
-          "en",
-          "assignment"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "AUTH_TOKEN"
-        ],
-        "all_predictions": 1,
-        "case_id": "auth_token_ru_context",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "auth_token",
-          "ru",
-          "context"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "AUTH_TOKEN"
-        ],
-        "all_predictions": 1,
-        "case_id": "auth_token_bearer",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "auth_token",
-          "en",
-          "bearer"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "AUTH_TOKEN"
-        ],
-        "all_predictions": 1,
-        "case_id": "auth_token_quoted",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "auth_token",
-          "en",
-          "quoted"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "AUTH_TOKEN"
-        ],
-        "all_predictions": 1,
-        "case_id": "auth_token_multiline",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "auth_token",
-          "en",
-          "multiline"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "AUTH_TOKEN"
-        ],
-        "all_predictions": 2,
-        "case_id": "auth_token_repeated",
-        "critical": false,
-        "exact_matches": 2,
-        "expected": 2,
-        "masking_covered": 2,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "auth_token",
-          "ru",
-          "repeated"
-        ],
-        "target_predictions": 2,
-        "typed_covered": 2,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "auth_token_placeholder_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "auth_token",
-          "en",
-          "placeholder"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "auth_token_explanation_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "auth_token",
-          "ru",
-          "explanatory"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "SECRET_KEY"
-        ],
-        "all_predictions": 1,
-        "case_id": "secret_key_assignment",
-        "critical": true,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "secret_key",
-          "en",
-          "assignment"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "SECRET_KEY"
-        ],
-        "all_predictions": 1,
-        "case_id": "secret_key_ru_context",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "secret_key",
-          "ru",
-          "context"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "SECRET_KEY"
-        ],
-        "all_predictions": 1,
-        "case_id": "secret_key_client_secret",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "secret_key",
-          "en",
-          "client_secret"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "SECRET_KEY"
-        ],
-        "all_predictions": 1,
-        "case_id": "secret_key_punctuation",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "secret_key",
-          "en",
-          "punctuation"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "SECRET_KEY"
-        ],
-        "all_predictions": 1,
-        "case_id": "secret_key_multiline",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "secret_key",
-          "ru",
-          "multiline"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "SECRET_KEY"
-        ],
-        "all_predictions": 1,
-        "case_id": "secret_key_long_context",
-        "critical": true,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "secret_key",
-          "en",
-          "long_input",
-          "boundary"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "secret_key_placeholder_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "secret_key",
-          "en",
-          "placeholder"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "secret_key_explanation_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "secret_key",
-          "ru",
-          "explanatory"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "CONTRACT_NUMBER"
-        ],
-        "all_predictions": 1,
-        "case_id": "contract_number_symbol_ru",
-        "critical": true,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "contract_number",
-          "ru",
-          "symbol"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "CONTRACT_NUMBER"
-        ],
-        "all_predictions": 1,
-        "case_id": "contract_number_digits_ru",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "contract_number",
-          "ru",
-          "digits"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "CONTRACT_NUMBER"
-        ],
-        "all_predictions": 1,
-        "case_id": "contract_number_cyrillic_ru",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "contract_number",
-          "ru",
-          "cyrillic"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "CONTRACT_NUMBER"
-        ],
-        "all_predictions": 1,
-        "case_id": "contract_number_en",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "contract_number",
-          "en",
-          "basic"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "CONTRACT_NUMBER"
-        ],
-        "all_predictions": 2,
-        "case_id": "contract_number_repeated",
-        "critical": false,
-        "exact_matches": 2,
-        "expected": 2,
-        "masking_covered": 2,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "contract_number",
-          "ru",
-          "repeated"
-        ],
-        "target_predictions": 2,
-        "typed_covered": 2,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "CONTRACT_NUMBER"
-        ],
-        "all_predictions": 1,
-        "case_id": "contract_number_pdf_copy",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "contract_number",
-          "ru",
-          "pdf_copy",
-          "unicode"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "contract_version_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "contract_number",
-          "ru",
-          "wrong_context"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "contract_request_number_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "contract_number",
-          "ru",
-          "wrong_context"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "contract_without_number_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "contract_number",
-          "ru",
-          "missing_value"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "contract_random_code_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "contract_number",
-          "ru",
-          "wrong_context"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "CONTRACT_NUMBER"
-        ],
-        "all_predictions": 1,
-        "case_id": "contract_inflected_ru",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "contract_number",
-          "ru",
-          "inflection"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "CONTRACT_NUMBER"
-        ],
-        "all_predictions": 1,
-        "case_id": "contract_agreement_ru",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "contract_number",
-          "ru",
-          "agreement"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "CONTRACT_NUMBER"
-        ],
-        "all_predictions": 1,
-        "case_id": "contract_agreement_en",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "contract_number",
-          "en",
-          "agreement"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "CONTRACT_NUMBER"
-        ],
-        "all_predictions": 2,
-        "case_id": "contract_two_contexts_ru",
-        "critical": false,
-        "exact_matches": 2,
-        "expected": 2,
-        "masking_covered": 2,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "contract_number",
-          "ru",
-          "multiple_contexts"
-        ],
-        "target_predictions": 2,
-        "typed_covered": 2,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "CONTRACT_NUMBER"
-        ],
-        "all_predictions": 1,
-        "case_id": "contract_multiline_ru",
-        "critical": false,
-        "exact_matches": 1,
-        "expected": 1,
-        "masking_covered": 1,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "contract_number",
-          "ru",
-          "multiline"
-        ],
-        "target_predictions": 1,
-        "typed_covered": 1,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "contract_document_version_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "contract_number",
-          "ru",
-          "document_version"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "contract_template_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "contract_number",
-          "ru",
-          "template"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "contract_date_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "contract_number",
-          "ru",
-          "date"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [],
-        "all_predictions": 0,
-        "case_id": "contract_dotted_version_negative",
-        "critical": false,
-        "exact_matches": 0,
-        "expected": 0,
-        "masking_covered": 0,
-        "missing_entity_types": [],
-        "tags": [
-          "negative",
-          "contract_number",
-          "ru",
-          "version"
-        ],
-        "target_predictions": 0,
-        "typed_covered": 0,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "CONTRACT_NUMBER",
-          "LOGIN",
-          "PASSWORD",
-          "PERSON"
-        ],
-        "all_predictions": 4,
-        "case_id": "mixed_identity_and_contract",
-        "critical": true,
-        "exact_matches": 4,
-        "expected": 4,
-        "masking_covered": 4,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "mixed",
-          "ru",
-          "multiple_entities"
-        ],
-        "target_predictions": 4,
-        "typed_covered": 4,
-        "unexpected_target_types": []
-      },
-      {
-        "all_prediction_types": [
-          "AUTH_TOKEN",
-          "LOCATION",
-          "ORGANIZATION",
-          "SECRET_KEY"
-        ],
-        "all_predictions": 4,
-        "case_id": "mixed_org_location_secrets",
-        "critical": true,
-        "exact_matches": 4,
-        "expected": 4,
-        "masking_covered": 4,
-        "missing_entity_types": [],
-        "tags": [
-          "positive",
-          "mixed",
-          "ru",
-          "multiple_entities"
-        ],
-        "target_predictions": 4,
-        "typed_covered": 4,
-        "unexpected_target_types": []
-      }
-    ],
-    "critical_misses": [],
-    "per_entity": {
-      "AUTH_TOKEN": {
-        "expected": 8,
-        "f1": 1.0,
-        "false_negatives": 0,
-        "false_positives": 0,
-        "masking_coverage_recall": 1.0,
-        "masking_covered": 8,
-        "precision": 1.0,
-        "predicted": 8,
-        "recall": 1.0,
-        "true_positives": 8,
-        "typed_coverage_recall": 1.0,
-        "typed_covered": 8
-      },
-      "CONTRACT_NUMBER": {
-        "expected": 14,
-        "f1": 1.0,
-        "false_negatives": 0,
-        "false_positives": 0,
-        "masking_coverage_recall": 1.0,
-        "masking_covered": 14,
-        "precision": 1.0,
-        "predicted": 14,
-        "recall": 1.0,
-        "true_positives": 14,
-        "typed_coverage_recall": 1.0,
-        "typed_covered": 14
-      },
-      "LOCATION": {
-        "expected": 7,
-        "f1": 1.0,
-        "false_negatives": 0,
-        "false_positives": 0,
-        "masking_coverage_recall": 1.0,
-        "masking_covered": 7,
-        "precision": 1.0,
-        "predicted": 7,
-        "recall": 1.0,
-        "true_positives": 7,
-        "typed_coverage_recall": 1.0,
-        "typed_covered": 7
-      },
-      "LOGIN": {
-        "expected": 7,
-        "f1": 1.0,
-        "false_negatives": 0,
-        "false_positives": 0,
-        "masking_coverage_recall": 1.0,
-        "masking_covered": 7,
-        "precision": 1.0,
-        "predicted": 7,
-        "recall": 1.0,
-        "true_positives": 7,
-        "typed_coverage_recall": 1.0,
-        "typed_covered": 7
-      },
-      "ORGANIZATION": {
-        "expected": 7,
-        "f1": 1.0,
-        "false_negatives": 0,
-        "false_positives": 0,
-        "masking_coverage_recall": 1.0,
-        "masking_covered": 7,
-        "precision": 1.0,
-        "predicted": 7,
-        "recall": 1.0,
-        "true_positives": 7,
-        "typed_coverage_recall": 1.0,
-        "typed_covered": 7
-      },
-      "PASSWORD": {
-        "expected": 8,
-        "f1": 1.0,
-        "false_negatives": 0,
-        "false_positives": 0,
-        "masking_coverage_recall": 1.0,
-        "masking_covered": 8,
-        "precision": 1.0,
-        "predicted": 8,
-        "recall": 1.0,
-        "true_positives": 8,
-        "typed_coverage_recall": 1.0,
-        "typed_covered": 8
-      },
-      "PERSON": {
-        "expected": 9,
-        "f1": 1.0,
-        "false_negatives": 0,
-        "false_positives": 0,
-        "masking_coverage_recall": 1.0,
-        "masking_covered": 9,
-        "precision": 1.0,
-        "predicted": 9,
-        "recall": 1.0,
-        "true_positives": 9,
-        "typed_coverage_recall": 1.0,
-        "typed_covered": 9
-      },
-      "SECRET_KEY": {
-        "expected": 7,
-        "f1": 1.0,
-        "false_negatives": 0,
-        "false_positives": 0,
-        "masking_coverage_recall": 1.0,
-        "masking_covered": 7,
-        "precision": 1.0,
-        "predicted": 7,
-        "recall": 1.0,
-        "true_positives": 7,
-        "typed_coverage_recall": 1.0,
-        "typed_covered": 7
-      }
-    },
-    "prediction_type_counts": {
-      "AUTH_TOKEN": 8,
-      "CONTRACT_NUMBER": 14,
-      "LOCATION": 7,
-      "LOGIN": 7,
-      "ORGANIZATION": 7,
-      "PASSWORD": 8,
-      "PERSON": 9,
-      "SECRET_KEY": 7
-    }
-  },
-  "observed_sources": [
-    "contextual_contract",
-    "native_credential",
-    "ner",
-    "structural"
-  ],
-  "parity_cases": 77,
-  "prepared_manifest_sha256": "28b486725d953c7558861487b2e5212d5c94b4fa6ccb9998574db5ee2f8b4e61",
-  "quality_gate": [
-    {
-      "actual": 1.0,
-      "minimum": 1.0,
-      "name": "critical_coverage_recall",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.95,
-      "name": "LOGIN.precision",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.95,
-      "name": "LOGIN.recall",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.95,
-      "name": "PASSWORD.precision",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.95,
-      "name": "PASSWORD.recall",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.95,
-      "name": "AUTH_TOKEN.precision",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.95,
-      "name": "AUTH_TOKEN.recall",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.95,
-      "name": "SECRET_KEY.precision",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.95,
-      "name": "SECRET_KEY.recall",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.95,
-      "name": "CONTRACT_NUMBER.precision",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.95,
-      "name": "CONTRACT_NUMBER.recall",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.757778,
-      "name": "PERSON.recall_vs_baseline",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.837143,
-      "name": "LOCATION.recall_vs_baseline",
-      "passed": true
-    },
-    {
-      "actual": 1.0,
-      "minimum": 0.837143,
-      "name": "ORGANIZATION.recall_vs_baseline",
-      "passed": true
-    }
-  ],
-  "rule_ids_observed": 8,
-  "runtime_image_id": "sha256:756cbdbcea6034a7850b918dd86d960a0455ff8755fa426eda398a94917731c8",
-  "scanner_sources_sha256": {
-    "src/ru_llm_scanner/__init__.py": "b1a0c9ede61fc13ba6c43be7880227c4ee230506537aa3cad83425e758b205a3",
-    "src/ru_llm_scanner/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
-    "src/ru_llm_scanner/analyzer.py": "4f1cf5dce228592b4c43ce6c735ae798b139b6d32c92b9fdfa5e792195f2e746",
-    "src/ru_llm_scanner/artifacts.py": "77271cce804e4fd8c92baa46c4b7ab8f137c50134e516a2e7fbbba56bc836db3",
-    "src/ru_llm_scanner/baseline.py": "23ea9247b900c975be4b9c691f60f61d8762984ffdcc4e30ee83d423086f0020",
-    "src/ru_llm_scanner/cli.py": "3d399aaf656336b37de7d760fcaa87ca05393c76cc80b972db17ca022c79645a",
-    "src/ru_llm_scanner/configuration.py": "0a6e3f90de1bb9a089855734a5a0e06b92728b1cd9d8f13e5bc4b10b1ab7c959",
-    "src/ru_llm_scanner/dictionary.py": "6eecfcfe094ca3d2f4aaa43b3093bd94c69e55734292bba824553dd4807c6238",
-    "src/ru_llm_scanner/engine.py": "8a583e0ef31b4705c75af209a36f063695c7d76704e7f8348efcda8c10b65866",
-    "src/ru_llm_scanner/findings.py": "1f9ffd4f3dce7d48f1e066447552eda238cabf36d82cfe4cd5923c7b0c44a7cf",
-    "src/ru_llm_scanner/git_plan.py": "5b1dbd8b80424b9edb97157bcce3acd470af6c23cbea4befe126a46401c9f855",
-    "src/ru_llm_scanner/git_repository.py": "020bb53c3989a7e752fd25894c29d1f256d38137d942f40c3e9d373cb343bf27",
-    "src/ru_llm_scanner/html_report.py": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
-    "src/ru_llm_scanner/output.py": "8c5abca175d5947962330f5374e2e7cddcf391caf2edcc9213e1af509b3dc39d",
-    "src/ru_llm_scanner/pipeline.py": "334658282ca1a85ef230c965f1b4e6272987ff2affae812b435ded7629270eb5",
-    "src/ru_llm_scanner/report_validation.py": "c2046099dd2a52b748a6a91f023ea0e653997777e33fc68a58a7585c17d6ec21",
-    "src/ru_llm_scanner/reports.py": "53b31d86e46ddf23e4c21fc479d87f41de943e06e53ea5bdcec5a788893144c3",
-    "src/ru_llm_scanner/text_policy.py": "53ab4ea4a072b76af5ca7df9faaae4ad0820bd25934805133244bc50a46e32d1",
-    "src/ru_llm_scanner/upstream.py": "d28a0623470615dd369afecd3facb5640e525ff4d49b7748436c18af681e95cb",
-    "tests/integration/offline.py": "185106d35cb106412d4025d065b1a2a9502e5418f58d0ebba02f06e984b88671"
-  },
-  "score_absolute_tolerance": 1e-07,
-  "shared_helper_sha256": "f46404515e8e7f294779e7860ee6e84a645def775c3ce80baa20a14f4bc541f0",
-  "source_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
-  "source_lock_sha256": "0d491e84321ed06f26018ccb373a739a6fde87c437fcba0e070a2567040e86f9",
-  "status": "passed",
-  "verification_version": 1
+  "image_reference_id": "sha256:0f05c30512df77a814daf42b0ec28f8b9b9debe95e50fc7d6145eb2043f11fcd",
+  "image_platform_id": "sha256:33feba355410974fe5593135beecc93e0e1e003557aab4d6d8ce4313e085ec76"
 }

@@ -1,16 +1,20 @@
 {
-  "elapsed_seconds": 22.362,
+  "verification_version": 1,
+  "status": "passed",
+  "tests_run": 145,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_seconds": 28.463,
+  "sources_unchanged": true,
   "environment": {
+    "python": "3.12.14",
+    "system": "Darwin",
+    "machine": "arm64",
     "git": "git version 2.39.5 (Apple Git-154)",
     "httpx": "0.28.1",
-    "jsonschema": "4.26.0",
-    "machine": "arm64",
-    "python": "3.12.14",
-    "system": "Darwin"
+    "jsonschema": "4.26.0"
   },
-  "errors": 0,
-  "failures": 0,
-  "skipped": 0,
   "sources_sha256": {
     "docker/scan-test.Dockerfile": "53b206428dacb2ff3a33041679533995a9a2357a97584533bc66c3a2977e7d77",
     "examples/jenkins/run_scan.py": "18b7313f60c7179e6c59a7da2602570b90b41dcb6dc4360d0a255386a99812a8",
@@ -50,7 +54,7 @@
     "tests/git_fixtures.py": "5c7d05e8b5c896af805aee66e2837eb1c9b173469c9f763551b5e6415a671c89",
     "tests/integration/cli_offline.py": "be53b52c7405885fa04dae67fbc8c1016b81cc14b4c9c7f465100a51e87ed59a",
     "tests/integration/html_fixtures.py": "1556aa8b34126f68e098ef22a8708ae8b222afc87909df514a27d85b18ecc2e5",
-    "tests/integration/ner_window_cases.py": "a54249a3e019a205d0c594961cc34952374e7413ba7c0a2999691c3c426db9ba",
+    "tests/integration/ner_window_cases.py": "d0691f03fd1fbcfb23012e4b9038b1d7efaca820c686531090a5a6d9e0b8d4e0",
     "tests/integration/offline.py": "185106d35cb106412d4025d065b1a2a9502e5418f58d0ebba02f06e984b88671",
     "tests/integration/scan_offline.py": "fc05758347149adbefa16677b9636367f80baf1fa67c6a0d56ec5daedf3ce8b4",
     "tests/scan_fixtures.py": "5ae7ef4dacf5914e06250f422daee51b9867454bd6d51df426ab6e7ba5def28e",
@@ -72,9 +76,5 @@
     "tests/test_runtime_lock.py": "8ff8adcba0ace3d2a9802a48fcc52d035d6de015ab36c6254dfa8f60faaa2039",
     "tests/test_text_policy.py": "e804870951116b1fab6704eca324564357d4ee94d80ecf961e0598a0c054d477",
     "tests/test_upstream.py": "d0976e1011764a24cb01ed76111a5ab74cbd07a6db5f244d979d53cfd617e29f"
-  },
-  "sources_unchanged": true,
-  "status": "passed",
-  "tests_run": 145,
-  "verification_version": 1
+  }
 }

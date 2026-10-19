@@ -35,7 +35,7 @@ with httpx.Client(trust_env=False,timeout=600) as client:
   time.sleep(.1)
  else:raise RuntimeError('not_ready')
  assert h.json()['analysis_signature']==p['signature']
- for name in ('authors.txt','test_requests.py.txt'):
+ for name in (() if p['cancel_only'] else ('authors.txt','test_requests.py.txt')):
   text=p['inputs'][name];started=time.monotonic()
   q=client.post('http://127.0.0.1:5001/api/v1/analyze',json={'text':text,'language':'ru','entities':None,'score_threshold':.35})
   if q.status_code!=200:
@@ -44,10 +44,10 @@ with httpx.Client(trust_env=False,timeout=600) as client:
   assert all(0<=e['start']<e['end']<=len(text) and text[e['start']:e['end']]==e['text'] for e in body['entities'])
   records.append({'input':name,'http_status':200,'seconds':round(time.monotonic()-started,3),'characters':len(text),'response_sha256':hashlib.sha256(q.content).hexdigest(),'findings':len(body['entities']),'categories':dict(collections.Counter(e['entity_type'] for e in body['entities'])),'full_echo_and_coordinates_verified':True})
  try:
-  client.post('http://127.0.0.1:5001/api/v1/analyze',json={'text':p['inputs']['requests-logo.svg'],'language':'ru','entities':None,'score_threshold':.35},timeout=5)
+  client.post('http://127.0.0.1:5001/api/v1/analyze',json={'text':p['inputs']['requests-logo.svg'],'language':'ru','entities':None,'score_threshold':.35},timeout=p['cancel_after'])
  except httpx.TimeoutException:pass
  else:raise RuntimeError('cancellation_not_exercised')
- started=time.monotonic();statuses=[];ready_states=[]
+ started=time.monotonic();statuses=[];ready_states=[];rejections=[]
  while time.monotonic()-started<60:
   h=client.get('http://127.0.0.1:5001/api/v1/health',timeout=3)
   ready_states.append(h.json().get('ner_state'))
@@ -57,10 +57,12 @@ with httpx.Client(trust_env=False,timeout=600) as client:
    statuses.append(q.status_code)
    if q.status_code==200:break
    assert q.status_code==503
+   detail=q.json().get('detail',{});assert isinstance(detail,dict)
+   rejections.append({k:detail.get(k) for k in ('code','reason')})
   except httpx.TimeoutException:statuses.append('client_timeout')
   time.sleep(.1)
  else:raise RuntimeError('capacity_did_not_recover')
- print(json.dumps({'inputs':records,'cancelled_svg_not_claimed_analyzed':True,'cancellation_timeout_seconds':5,'subsequent_small_request_statuses':statuses,'observed_ner_states':ready_states,'recovered_seconds':round(time.monotonic()-started,3),'final_health_ready':True}),flush=True)
+ print(json.dumps({'inputs':records,'cancelled_svg_not_claimed_analyzed':True,'cancellation_timeout_seconds':p['cancel_after'],'subsequent_small_request_statuses':statuses,'capacity_rejections':rejections,'observed_ner_states':ready_states,'recovered_seconds':round(time.monotonic()-started,3),'final_health_ready':True}),flush=True)
 """
 
 
@@ -71,6 +73,10 @@ def main():
     parser.add_argument("--inputs-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--cpus", choices=("2", "8"), default="2")
+    parser.add_argument("--cancel-only", action="store_true")
+    parser.add_argument(
+        "--cancel-after-seconds", type=float, choices=(0.1, 5.0), default=5.0
+    )
     args = parser.parse_args()
     runtime = load_runtime_lock(args.runtime_lock, args.source_lock)
     assert (
@@ -120,6 +126,8 @@ def main():
                 {
                     "inputs": inputs,
                     "signature": runtime["runtime"]["analysis_signature"],
+                    "cancel_only": args.cancel_only,
+                    "cancel_after": args.cancel_after_seconds,
                 }
             ).encode(),
             capture_output=True,

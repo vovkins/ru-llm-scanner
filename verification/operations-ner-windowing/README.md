@@ -18,10 +18,15 @@
 центрированного recovery пробует два сдвига — четверть и три четверти окна.
 Если граница всё ещё не подтверждена, последним шагом пробуются четыре нечётных
 восьмых окна. Каждый следующий шаг запускается только после отказа предыдущего.
+Последний шаг использует также первый и последний токены незакрытого span
+как anchors. Полнота контекста проверяется именно для подтверждаемого cluster;
+соседняя короткая сущность не позволяет обойти защиту слишком длинной.
 Дополнительное окно должно целиком вмещать незакрытый span; учитываются только
 подтверждения той же категории, перекрывающие исходный кандидат и находящиеся
 внутри окна. Остальные предсказания recovery не добавляются в результат.
-Первоначальные кандидаты сохраняются. Если подтверждения нет, span длиннее
+Первоначальные кандидаты участвуют в проверке до подтверждения границ;
+итоговый span выбирает штатный upstream merge из внутренних предсказаний.
+Вход/окна не обрезаются. Если подтверждения нет, span длиннее
 доступного контекста или inference отказал, остаётся ошибка, а не clean.
 Успешный прежний путь дополнительных окон не запускает.
 
@@ -37,10 +42,11 @@ Upstream/proxy не изменён. Модель, tokenizer artifacts, слов�
 | --- | --- |
 | Собственные unit/CLI | [145 passed, 0 skipped](unit-tests.json) |
 | Upstream subset | [478 passed](upstream-tests.json) |
-| NER unit и новые регрессии | [91 passed](ner-regressions.json), включая отсутствие подтверждения и отказ inference |
+| NER unit и новые регрессии | [93 passed](ner-regressions.json), включая отсутствие подтверждения и отказ inference |
 | Настоящая модель, API parity | [77 NER / 4 dictionary](offline-verification.json) |
 | Независимый code-v1 | [46 direct parity, TP 33 / FP 13 / FN 4](scan-verification.json) |
-| Полный AUTHORS, HTTP | [200 за 11.043 s](authors-http.json), прежний образ давал 503 |
+| Полные AUTHORS и test_requests.py, HTTP | [200, полный echo и координаты](complete-inputs.json), 8 CPU |
+| Отмена во время SVG, 2 CPU | [503 queue_timeout → 200](cancellation.json), сервис ready, восстановление 2.348 s |
 
 Raw/patched parity сравнивает исходный и расширенный HTTP API **с одинаковым
 исправленным NER**. Это не побитовое сравнение logits старой и новой реализации.
@@ -81,6 +87,8 @@ image использует прежние библиотеки и монтиру
 выполняются отдельно в [#24](https://github.com/vovkins/ru-llm-scanner/issues/24).
 
 На HTTP-проверке: network none, read-only, non-root, drop ALL,
-no-new-privileges, log driver none, 2 CPU / 2 GiB RAM. Времена зависят от стенда.
+no-new-privileges, log driver none, 2 GiB RAM; число CPU указано в evidence. Времена зависят от стенда.
 Один успешный AUTHORS не подтверждает обработку любого SVG/длинного текста.
 Прежние images и default deployment сохранены, публикации/merge нет.
+
+Для проверки полных blobs и отмены: `check_inputs.py --runtime-lock "$RUNTIME" --source-lock upstream.lock.json --inputs-dir "$PRIVATE_INPUTS" --output "$PRIVATE_OUTPUT" --cpus 8`. Имена локальных blobs и hashes закреплены в helper. Отдельный запуск с `--cancel-only --cpus 2 --cancel-after-seconds 5` воспроизводит занятость worker: два ограниченных 503 `analyzer_overloaded/queue_timeout`, затем успешный запрос. Отменённый SVG не засчитывается как проанализированный. Исторический `authors-http.json` относится к первому quarter-only кандидату; окончательные результаты — `complete-inputs.json`.
