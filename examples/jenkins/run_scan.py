@@ -6,10 +6,70 @@ import os
 from pathlib import Path
 import re
 import signal
+import stat
 import subprocess
 import sys
 
 NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,127}\Z")
+ERROR = re.compile(r"[a-z][a-z0-9_]{0,79}\Z")
+PROJECT = re.compile(r"rullmscan-[0-9a-f]{32}\Z")
+
+
+def private(path, *, directory=False):
+    info = path.lstat()
+    kind = stat.S_ISDIR if directory else stat.S_ISREG
+    return (
+        kind(info.st_mode)
+        and info.st_uid == os.getuid()
+        and not info.st_mode & 0o077
+        and (directory or info.st_size > 0)
+    )
+
+
+def reports_available(output):
+    try:
+        return private(output, directory=True) and all(
+            private(output / name) for name in ("report.json", "report.html")
+        )
+    except OSError:
+        return False
+
+
+def validated_status(stdout, returncode, stderr):
+    def pairs(items):
+        value = {}
+        for key, item in items:
+            if key in value:
+                raise ValueError()
+            value[key] = item
+        return value
+
+    value = json.loads(
+        stdout,
+        object_pairs_hook=pairs,
+        parse_constant=lambda _: (_ for _ in ()).throw(ValueError()),
+    )
+    if (
+        type(value) is not dict
+        or set(value) not in ({"exit_code", "error"}, {"exit_code", "error", "project"})
+        or type(value["exit_code"]) is not int
+        or value["exit_code"] not in (0, 1, 2)
+        or value["exit_code"] != returncode
+        or stderr
+    ):
+        raise ValueError()
+    error, project = value["error"], value.get("project")
+    if error is not None and (type(error) is not str or not ERROR.fullmatch(error)):
+        raise ValueError()
+    if "project" in value and (
+        type(project) is not str or not PROJECT.fullmatch(project)
+    ):
+        raise ValueError()
+    if (value["exit_code"] != 2 and error is not None) or (
+        error is None and project is None
+    ):
+        raise ValueError()
+    return value
 
 
 def selected(root, name, *, directory=False):
@@ -67,52 +127,88 @@ def command(environ, output):
 
 def main():
     os.umask(0o077)
-    workspace = Path(os.environ["WORKSPACE"]).resolve(strict=True)
+    workspace = None
+    output = None
+    process = None
+    previous_handlers = {}
+    interrupted = []
     status = {"exit_code": 2, "error": "jenkins_preflight_failed"}
     code = 2
+
+    def forward(sig, _):
+        interrupted.append(sig)
+        if process is not None and process.poll() is None:
+            try:
+                process.send_signal(signal.SIGTERM)
+            except ProcessLookupError:
+                pass
+
     try:
+        workspace = Path(os.environ["WORKSPACE"]).resolve(strict=True)
+        if not workspace.is_dir():
+            raise ValueError()
+        output = workspace / "scan-results"
+        if os.path.lexists(workspace / "scan-status.json"):
+            raise ValueError()
+        if os.path.lexists(output) and (
+            not private(output, directory=True) or any(output.iterdir())
+        ):
+            raise ValueError()
+        for sig in (signal.SIGINT, signal.SIGTERM):
+            previous_handlers[sig] = signal.signal(sig, forward)
         process = subprocess.Popen(
-            command(os.environ, workspace / "scan-results"),
+            command(os.environ, output),
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
-        interrupted = []
-
-        def forward(sig, _):
-            interrupted.append(sig)
-            if process.poll() is None:
-                process.send_signal(signal.SIGTERM)
-
-        old = {s: signal.signal(s, forward) for s in (signal.SIGINT, signal.SIGTERM)}
-        try:
-            stdout, stderr = process.communicate()
-        finally:
-            for sig, previous in old.items():
-                signal.signal(sig, previous)
-        code = process.returncode if process.returncode in (0, 1, 2) else 2
-        # Only the trusted launcher's structured summary is retained; never echo
-        # parameter values, raw stderr or file contents into Jenkins console.
-        status = json.loads(stdout)
-        if status.get("exit_code") != code or stderr or interrupted:
-            code = 2
-            status = {"exit_code": 2, "error": "jenkins_launcher_failed"}
+        while True:
+            try:
+                stdout, stderr = process.communicate(timeout=1)
+                break
+            except subprocess.TimeoutExpired:
+                if interrupted:
+                    # The trusted launcher gets cleanup grace, then is reaped.
+                    stdout, stderr = process.communicate(timeout=45)
+                    break
+        checked = validated_status(stdout, process.returncode, stderr)
+        if interrupted or (
+            checked["exit_code"] in (0, 1) and not reports_available(output)
+        ):
+            raise ValueError()
+        # Assign a successful code only after every check. Never retain raw output.
+        status, code = checked, checked["exit_code"]
     except (Exception, KeyboardInterrupt):
-        pass
+        code = 2
+        status = {"exit_code": 2, "error": "jenkins_launcher_failed"}
     finally:
+        if process is not None and process.poll() is None:
+            try:
+                process.terminate()
+                process.communicate(timeout=45)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.communicate()
+            except ProcessLookupError:
+                process.communicate()
+        if interrupted:
+            code = 2
+            status = {"exit_code": 2, "error": "jenkins_interrupted"}
         try:
+            if workspace is None:
+                raise OSError()
             with (workspace / "scan-status.json").open("x") as stream:
                 json.dump(status, stream, sort_keys=True)
                 stream.write("\n")
-        except OSError:
+        except (OSError, ValueError):
             code = 2
+        finally:
+            for sig, previous in previous_handlers.items():
+                signal.signal(sig, previous)
     print(
         json.dumps(
             {
                 "exit_code": code,
-                "reports_available": all(
-                    (workspace / "scan-results" / name).is_file()
-                    for name in ("report.json", "report.html")
-                ),
+                "reports_available": output is not None and reports_available(output),
             }
         )
     )
