@@ -10,7 +10,16 @@ import subprocess
 import sys
 import time
 
-from docker_scanner import ROOT, cleanup, digest, docker, owned_resources, write_private
+from docker_scanner import (
+    ROOT,
+    DEFAULT_LOCK,
+    cleanup,
+    digest,
+    docker,
+    load_lock,
+    owned_resources,
+    write_private,
+)
 from check_docker_integration import require, running_scanner
 
 sys.path[:0] = [str(ROOT / "tests"), str(ROOT / "src")]
@@ -21,7 +30,10 @@ from ru_llm_scanner.report_validation import validate_report
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--output-dir", type=Path, required=True)
-    root = p.parse_args().output_dir.resolve()
+    p.add_argument("--deployment-lock", type=Path, default=DEFAULT_LOCK)
+    args = p.parse_args()
+    lock = load_lock(args.deployment_lock)
+    root = args.output_dir.resolve()
     root.mkdir(mode=0o700, exist_ok=False)
     repo = RepoFixture(root / "repo")
     commit = repo.commit(
@@ -39,6 +51,8 @@ def main():
                 sys.executable,
                 str(ROOT / "scripts/docker_scanner.py"),
                 "snapshot",
+                "--deployment-lock",
+                str(args.deployment_lock.resolve()),
                 "--repo",
                 str(repo.root),
                 "--commit",
@@ -148,6 +162,8 @@ def main():
             "status": "passed",
             "cases": records,
             "input_unchanged": True,
+            "images": {name: lock[name] for name in ("scanner", "analyzer")},
+            "platform": lock["platform"],
             "sources_sha256": {
                 str(p.relative_to(ROOT)): digest(p)
                 for p in [Path(__file__), ROOT / "scripts/docker_scanner.py"]

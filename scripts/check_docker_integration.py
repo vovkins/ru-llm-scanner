@@ -13,6 +13,7 @@ import time
 
 from docker_scanner import (
     ROOT,
+    DEFAULT_LOCK,
     cleanup,
     digest,
     docker,
@@ -114,10 +115,11 @@ def inspect_isolation(info, repo):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--output-dir", type=Path, required=True)
+    p.add_argument("--deployment-lock", type=Path, default=DEFAULT_LOCK)
     args = p.parse_args()
     root = args.output_dir.resolve()
     root.mkdir(mode=0o700, parents=True, exist_ok=False)
-    lock = load_lock(ROOT / "locks/scanner-cpu-linux-arm64.deployment.json")
+    lock = load_lock(args.deployment_lock)
     foreign = docker("ps", "-q").stdout.split()
     foreign_started = {
         c.decode(): json.loads(docker("inspect", c.decode()).stdout)[0]["State"][
@@ -168,6 +170,8 @@ def main():
             sys.executable,
             str(ROOT / "scripts/docker_scanner.py"),
             mode,
+            "--deployment-lock",
+            str(args.deployment_lock.resolve()),
             "--repo",
             str(input_repo),
             "--output",
