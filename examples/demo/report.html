@@ -1,0 +1,131 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;sha256-G73kivDbByyDU2nzfsqdXqCxdlmuoY/yARTqGgH+Cwo=&#x27;; style-src &#x27;sha256-DBAoIn/w2RPwj6StYzWgktR8jdcnNQ7orCFMjOeBLlM=&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;; connect-src &#x27;none&#x27;; object-src &#x27;none&#x27;"><title>ru-llm-scanner · Обнаружены чувствительные данные</title><style>
+:root{color-scheme:light;--ink:#202b32;--muted:#5d6b73;--line:#dce3e3;--paper:#f5f7f6;--accent:#176c61}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+main{max-width:1280px;margin:auto;padding:30px 36px 70px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px;gap:20px}
+.brand{font-weight:750;letter-spacing:-.5px;font-size:19px}.brand b{background:var(--accent);color:white;border-radius:7px;padding:4px 8px;margin-right:8px}.eyebrow{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted);margin-top:38px}h1{font-size:34px;line-height:1.2;letter-spacing:-1px;margin:10px 0 20px}h2{font-size:22px;letter-spacing:-.4px}h3{font-size:16px;margin:0;overflow-wrap:anywhere}
+.badge{display:inline-block;border-radius:30px;padding:5px 12px;font-size:12px;font-weight:700;background:#e4eeeb;color:#21594f}.status-findings{background:#fff0d6;color:#875318}.status-error,.status-incomplete{background:#fce5e3;color:#a13d35}
+.intro{color:var(--muted);max-width:850px}.banner{border-left:4px solid var(--accent);padding:16px 20px;background:#eaf2ef;margin:24px 0}.banner.status-findings{border-color:#b9812a;background:#fff3df;color:var(--ink)}.banner.status-incomplete,.banner.status-error{border-color:#b14e43;background:#fbecea;color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:26px 0}.stat{background:white;border:1px solid var(--line);border-radius:10px;padding:20px}.stat span{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}.stat strong{font-size:32px;letter-spacing:-1px;display:block;margin-top:4px}.stat small{color:var(--muted)}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;margin:20px 0;color:var(--muted);font-size:13px}.meta code{color:var(--ink);overflow-wrap:anywhere}.section-head{display:flex;justify-content:space-between;align-items:center;margin-top:38px;gap:15px}.section-head p{color:var(--muted)}
+.filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:12px;background:white;border:1px solid var(--line);padding:18px;border-radius:10px;margin:12px 0 20px}label{display:block;font-size:12px;font-weight:650;color:var(--muted)}input,select,button{width:100%;padding:9px 10px;margin-top:6px;border:1px solid #cbd5d6;background:white;border-radius:6px;font:inherit;color:var(--ink)}input:focus,select:focus{outline:2px solid #79b9ae;outline-offset:1px}button{cursor:pointer}.group-mode{max-width:200px}.group{margin:26px 0}.group>h3{font-size:14px;color:var(--muted);margin:0 0 12px;font-weight:650}.finding{background:white;border:1px solid var(--line);border-radius:10px;margin:12px 0;overflow:hidden}.finding-top{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:16px 20px;border-bottom:1px solid #edf0f0}.category{font:700 12px ui-monospace,SFMono-Regular,Consolas,monospace;color:#225e55;background:#e8f2ee;padding:4px 8px;border-radius:5px}.source{font-size:12px;color:var(--muted)}.coords{margin-left:auto;font:12px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--muted)}.finding-body{padding:18px 20px}.file-path{font-size:13px;overflow-wrap:anywhere;margin:0 0 12px;color:var(--muted)}pre,code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}pre{font-size:13px;margin:0;white-space:pre-wrap;overflow-wrap:anywhere;tab-size:4}.value{background:#f3f6f5;border-radius:6px;padding:14px;border:1px solid #e5ebe8}details{margin-top:16px}summary{cursor:pointer;color:var(--muted);font-size:13px;font-weight:600}.context{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;background:#f7f9f9;padding:14px;border:1px solid var(--line);border-radius:6px;margin-top:10px}.numbers{color:#8b979d;text-align:right;user-select:none}.empty{padding:42px 20px;text-align:center;border:1px dashed #bacbc7;border-radius:10px;background:white;color:var(--muted)}[hidden]{display:none!important}
+.table-wrap{overflow:auto;background:white;border:1px solid var(--line);border-radius:9px;margin-top:14px}table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}th,td{padding:12px 15px;border-bottom:1px solid #e8eded;vertical-align:top}th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.7px;background:#f9fbfa}td:first-child{min-width:200px;max-width:480px;overflow-wrap:anywhere}td code{overflow-wrap:anywhere}.error{border:1px solid #e8c8c3;background:#fff5f3;padding:14px 18px;border-radius:7px;margin:10px 0}.technical{background:white;border:1px solid var(--line);border-radius:8px;padding:16px 20px}.technical pre{margin-top:14px;max-height:400px;overflow:auto}.note{font-size:12px;color:var(--muted)}footer{margin-top:42px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;overflow-wrap:anywhere}a{color:var(--accent)}
+@media(max-width:800px){main{padding:20px 16px 40px}.stats{grid-template-columns:repeat(2,1fr)}.filters,.meta{grid-template-columns:1fr 1fr}h1{font-size:28px}.coords{margin-left:0}.finding-body,.finding-top{padding:14px}header{align-items:flex-start}.section-head{align-items:flex-start;flex-direction:column}}
+@media(max-width:480px){.filters,.meta{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:14px}.stat strong{font-size:26px}}
+</style></head><body><main><aside class="banner" id="documentation-example"><strong>СИНТЕТИЧЕСКИЙ ПРИМЕР · contract_example</strong><p>Иллюстрация формата, не результат проверки репозитория. Все значения, коммиты, подписи и score иллюстративные. Не использовать как baseline. Соответствующий <a href="report.json">JSON</a> тоже помечен contract_example.</p></aside><header><div class="brand"><b>ru</b>llm-scanner</div><span class="badge status-findings">FINDINGS · EXIT 1</span></header><div class="eyebrow">Локальный аудит · snapshot</div><h1>Синтетический пример отчёта</h1><p class="intro">Содержимое Git-состояния · 2026-10-18T00:00:00Z</p><div class="banner status-findings"><strong>Обнаружены чувствительные данные</strong><br>Проверена поддерживаемая текстовая область снимка.</div><div class="stats"><div class="stat"><span>Находки</span><strong>2</strong><small>все места сохранены</small></div><div class="stat"><span>Проанализировано</span><strong>1</strong><small>из 1 записей B</small></div><div class="stat"><span>Наследовано</span><strong>0</strong><small>не подтверждено: 0</small></div><div class="stat"><span>Ошибки</span><strong>0</strong><small>исключено / не поддерживается: 0 / 0</small></div></div><div class="meta"><div>Коммит B<br><code>23bb78170f853daa8c4c16c6bec5c203cb06d477</code></div><div>Коммит A<br><code>—</code></div><div>Assurance<br><code>snapshot_verified</code></div><div>Baseline<br><code>not_applicable</code></div></div><p class="note">Отчёт содержит полные чувствительные значения. Не публикуйте его. Отсутствие находок не гарантирует полноту распознавания; история, исключения и неподдерживаемые объекты не подтверждаются.</p><section aria-label="Находки"><div class="section-head"><h2>Находки</h2><p id="visible-count" role="status" aria-live="polite"></p></div><div class="filters"><label>Поиск по находкам<input id="search" type="search" placeholder="Файл, категория, значение…"></label><label>Категория<select id="category"><option value="">Все</option><option value="EMAIL_ADDRESS">EMAIL_ADDRESS</option></select></label><label>Источник<select id="source"><option value="">Все</option><option value="structural">structural</option></select></label><label>Файл<select id="file"><option value="">Все</option><option value="b01a694798646d2a12086ed6715623e491c5ce2465c39e47ac47f73f37725a6d">contacts.txt · b01a6947</option></select></label><label>Группировка<select id="group"><option value="file">По файлам</option><option value="category">По категориям</option></select></label><div><button type="button" id="reset">Сбросить фильтры</button></div></div><div id="findings"><article class="finding" data-category="EMAIL_ADDRESS" data-source="structural" data-file="b01a694798646d2a12086ed6715623e491c5ce2465c39e47ac47f73f37725a6d" data-path="contacts.txt · b01a6947"><div class="finding-top"><span class="category">EMAIL_ADDRESS</span><span class="source">structural · score 0.850</span><span class="coords">1:12 → 1:33</span></div><div class="finding-body"><p class="file-path">contacts.txt · b01a6947</p><pre class="value">audit@example.invalid</pre><details open><summary>Контекст · строки 1–2</summary><div class="context"><pre class="numbers" aria-hidden="true">1
+2</pre><pre>😀 Контакт: audit@example.invalid&#13;
+Резерв: audit@example.invalid&#13;
+</pre></div></details><p class="note">Rule: — · <code>3bd1838e93f53a1938bc122c234ed58c753879a01af16cbdb6c8841de1a100f2</code></p></div></article><article class="finding" data-category="EMAIL_ADDRESS" data-source="structural" data-file="b01a694798646d2a12086ed6715623e491c5ce2465c39e47ac47f73f37725a6d" data-path="contacts.txt · b01a6947"><div class="finding-top"><span class="category">EMAIL_ADDRESS</span><span class="source">structural · score 0.850</span><span class="coords">2:9 → 2:30</span></div><div class="finding-body"><p class="file-path">contacts.txt · b01a6947</p><pre class="value">audit@example.invalid</pre><details open><summary>Контекст · строки 1–2</summary><div class="context"><pre class="numbers" aria-hidden="true">1
+2</pre><pre>😀 Контакт: audit@example.invalid&#13;
+Резерв: audit@example.invalid&#13;
+</pre></div></details><p class="note">Rule: — · <code>e0a908bc09231de6d5a81f012bcb488c01563f9809161c0e773a6331b2e2066f</code></p></div></article></div><div class="empty" id="no-matches" hidden>Нет находок по выбранным фильтрам.</div></section><section id="coverage"><div class="section-head"><h2>Охват файлов</h2></div><p class="note">Все записи B, включая неподтверждённые и исключения. Управляющие/невидимые символы показаны как \uXXXX; исходные значения сохранены в JSON.</p><div class="table-wrap"><table><thead><tr><th>Файл</th><th>Изменение</th><th>Статус</th><th>Причина</th><th>Размер / кодировка</th></tr></thead><tbody><tr><td>contacts.txt<details><summary>Raw path / ID</summary><code>Y29udGFjdHMudHh0<br>b01a694798646d2a12086ed6715623e491c5ce2465c39e47ac47f73f37725a6d</code></details></td><td>snapshot</td><td>analyzed</td><td>—</td><td>81 / utf-8</td></tr></tbody></table></div></section><details class="technical"><summary>Профиль, происхождение и параметры</summary><pre>{
+  &quot;scan&quot;: {
+    &quot;mode&quot;: &quot;snapshot&quot;,
+    &quot;target_ref&quot;: &quot;23bb78170f853daa8c4c16c6bec5c203cb06d477&quot;,
+    &quot;base_ref&quot;: null,
+    &quot;object_format&quot;: &quot;sha1&quot;,
+    &quot;target_commit&quot;: &quot;23bb78170f853daa8c4c16c6bec5c203cb06d477&quot;,
+    &quot;base_commit&quot;: null,
+    &quot;target_tree&quot;: &quot;f350562430a84883b2b6b89e4738465ce9a73abe&quot;
+  },
+  &quot;configuration&quot;: {
+    &quot;config_version&quot;: &quot;1.0.0&quot;,
+    &quot;analysis&quot;: {
+      &quot;language&quot;: &quot;ru&quot;,
+      &quot;score_threshold&quot;: 0.35,
+      &quot;entities&quot;: null,
+      &quot;dictionary_enabled&quot;: true
+    },
+    &quot;scope&quot;: {
+      &quot;policy_version&quot;: &quot;text-v1&quot;,
+      &quot;include&quot;: [
+        &quot;**&quot;
+      ],
+      &quot;exclude&quot;: [],
+      &quot;encoding_overrides&quot;: [],
+      &quot;max_file_bytes&quot;: 10485760
+    },
+    &quot;execution&quot;: {
+      &quot;analyzer_url&quot;: &quot;http://analyzer:5001&quot;,
+      &quot;connect_timeout_seconds&quot;: 5,
+      &quot;analyze_timeout_seconds&quot;: 600,
+      &quot;ready_timeout_seconds&quot;: 120,
+      &quot;concurrency&quot;: 1
+    },
+    &quot;presentation&quot;: {
+      &quot;context_lines&quot;: 2
+    }
+  },
+  &quot;engine&quot;: {
+    &quot;scanner_semantics&quot;: &quot;scanner-v1&quot;,
+    &quot;upstream_commit&quot;: &quot;da4f50a87ddf8a6c160c5f1893f5bf526f713d1c&quot;,
+    &quot;analyzer_image_digest&quot;: &quot;sha256:bbb9a30ac377725931b09171c74994e4428edd32294adb6bf49285e786715299&quot;,
+    &quot;analyzer_signature&quot;: &quot;fdcd9ad20ff35ae5708238c1bbb2f47a7a3ae10840c8e5bc2c1b2e7cee3d6e12&quot;,
+    &quot;model_id&quot;: &quot;fef2/ner_rus_bert-secret_detection&quot;,
+    &quot;model_revision&quot;: &quot;52b5b0745aac14f73fcf2ac0f91d9b5001a85ae4&quot;,
+    &quot;model_weights_sha256&quot;: &quot;6a2c875d02398554ec69384f489a0bf4fe3505fc347c6cdd3385d4fd31ef21a4&quot;,
+    &quot;patchset_sha256&quot;: &quot;43ed118cf988372c7a77fdae71638818ba76dbac63ff73b37e873e696b1c00f5&quot;,
+    &quot;dictionary_sha256&quot;: &quot;d88af27fed56e376a51e032c2ca8dd90c5be1f6f616fed3828fe3ee7a1d45053&quot;,
+    &quot;profile_sha256&quot;: &quot;66b2e6730f5d59c7a76c5eca72372372b86270845f0776434a1f6b8c1fabe9c9&quot;
+  },
+  &quot;baseline&quot;: {
+    &quot;status&quot;: &quot;not_applicable&quot;,
+    &quot;required&quot;: false,
+    &quot;report_id&quot;: null,
+    &quot;artifact_sha256&quot;: null,
+    &quot;mismatch_reasons&quot;: []
+  },
+  &quot;coverage&quot;: {
+    &quot;complete&quot;: true,
+    &quot;enumeration_complete&quot;: true,
+    &quot;manifest_sha256&quot;: &quot;93844e734b38285c8c2433ca737913b3f24b2fdfd130054f50f86a7c37fed6ee&quot;,
+    &quot;counts&quot;: {
+      &quot;target&quot;: 1,
+      &quot;analyzed&quot;: 1,
+      &quot;inherited&quot;: 0,
+      &quot;unverified&quot;: 0,
+      &quot;excluded&quot;: 0,
+      &quot;unsupported&quot;: 0,
+      &quot;error&quot;: 0,
+      &quot;deleted&quot;: 0
+    }
+  }
+}</pre></details><footer>ru-llm-scanner 0.0.0-spec · 1560a79b-c14e-51ee-80fc-cfb327770808<br>Полные значения и контрольные данные — в report.json. Состояние доставки артефактов подтверждается кодом завершения команды.</footer></main><script>
+(() => {
+  const articles = Array.from(document.querySelectorAll('article.finding'));
+  const root = document.getElementById('findings');
+  const fields = ['search','category','source','file','group'];
+  function update() {
+    const search = document.getElementById('search').value.toLocaleLowerCase();
+    const category = document.getElementById('category').value;
+    const source = document.getElementById('source').value;
+    const file = document.getElementById('file').value;
+    const byCategory = document.getElementById('group').value === 'category';
+    const groups = new Map();
+    root.replaceChildren();
+    let count = 0;
+    for (const article of articles) {
+      if ((category && article.dataset.category !== category) ||
+          (source && article.dataset.source !== source) ||
+          (file && article.dataset.file !== file) ||
+          (search && !article.textContent.toLocaleLowerCase().includes(search))) continue;
+      const key = byCategory ? article.dataset.category : article.dataset.file;
+      let group = groups.get(key);
+      if (!group) {
+        group = document.createElement('section'); group.className = 'group';
+        const heading = document.createElement('h3');
+        heading.textContent = byCategory ? article.dataset.category : article.dataset.path;
+        group.appendChild(heading); root.appendChild(group); groups.set(key, group);
+      }
+      group.appendChild(article); count++;
+    }
+    document.getElementById('visible-count').textContent = 'Показано ' + count + ' из ' + articles.length;
+    document.getElementById('no-matches').hidden = count !== 0 || articles.length === 0;
+  }
+  for (const id of fields) document.getElementById(id).addEventListener('input', update);
+  document.getElementById('reset').addEventListener('click', () => {
+    for (const id of fields) document.getElementById(id).value = id === 'group' ? 'file' : '';
+    update();
+  });
+  update();
+})();
+</script></body></html>

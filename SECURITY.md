@@ -1,17 +1,16 @@
 # Безопасность и сообщения о проблемах
 
-Статус: runtime не выпущен. Поддерживаемой production-версии и гарантированного
-срока реакции на сообщения пока нет. Структурные проверки спецификаций не
-являются аудитом полного scanner runtime. На этапах 2–3 проверены отдельные
-механизм Analyzer и Git/text-слой, в том числе в контейнерах без сети.
-На этапе 4 проверен внутренний scan pipeline с реальной моделью без внешней
-сети. CLI/отчёты/baseline реализованы и проверены на этапе 5. Штатное
-контейнерное развёртывание реализовано и проверено на CPU ARM64 в Docker Desktop;
-пример Jenkins проверен локальной последовательностью, без Jenkins controller.
-На этапе 7 production acceptance подтвердил hostile config/hooks/filters/
-textconv/replace/grafts, ссылки и promisor missing objects: выполнения кода,
-чтения untracked canary по ссылке и внешнего fetch не произошло. Историческое
-обновление/откат проверило несовместимость baseline между реальными профилями.
+Версия `0.1.0.dev0`, опубликованного release и гарантированного срока реакции
+на сообщения пока нет. Реальные CLI/Compose/Analyzer проверены на CPU Linux ARM64
+в Docker Desktop; Jenkins adapter проверен локально без controller.
+[Матрица свидетельств](verification/README.md) отделяет static/schema/unit stub,
+real model, independent quality и production behavior. Это внутренние проверки,
+не независимая сертификация или гарантия отсутствия дефектов.
+
+Исходные [замечания ревью](docs/review/README.md) и
+[исправления RV-01–RV-05](verification/operations-stage-2/README.md) сохранены
+отдельно. Hostile Git config/hooks/filters/textconv/replace/grafts, ссылки и
+missing objects проверены синтетическими сценариями без исполнения кода/fetch.
 
 ## Как сообщить
 
@@ -57,7 +56,7 @@ no-new-privileges включены штатным launcher. Container logs от�
 стартом проверяются immutable image reference/platform IDs. SHA-256 пакета/lock
 не подтверждает издателя: доставка и происхождение доверенные. Docker daemon и
 host operator входят в trust boundary; SIGKILL/daemon loss требует ручного
-[cleanup точного проекта](docs/operations.md). Копии private reports в Jenkins/
+[cleanup точного проекта](docs/admin/operations.md). Копии private reports в Jenkins/
 backup требуют отдельно настроенных владельцем RBAC/retention.
 
 ## Чувствительные артефакты
@@ -73,6 +72,8 @@ HTML экранирует значения и пути, использует т�
 URL/фрагмент из репозитория не исполняется и не загружается автоматически.
 
 Новые output-каталоги/файлы имеют 0700/0600, symlinks в output path запрещены.
+Существующий конечный output обязан принадлежать UID оператора и не иметь
+group/other permissions; публичный/чужой каталог отвергается без chmod/chown.
 Атомарность относится к одному файлу, не к JSON/HTML вместе. Если исправление
 артефакта после отказа записи невозможно, он может сохранить прежний статус;
 код команды остаётся 2. Доверенный процесс не использует такой запуск как

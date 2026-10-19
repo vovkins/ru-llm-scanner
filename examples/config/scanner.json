@@ -1,0 +1,28 @@
+{
+  "config_version": "1.0.0",
+  "analysis": {
+    "language": "ru",
+    "score_threshold": 0.35,
+    "entities": null,
+    "dictionary_enabled": true
+  },
+  "scope": {
+    "policy_version": "text-v1",
+    "include": [
+      "**"
+    ],
+    "exclude": [],
+    "encoding_overrides": [],
+    "max_file_bytes": 10485760
+  },
+  "execution": {
+    "analyzer_url": "http://analyzer:5001",
+    "connect_timeout_seconds": 5,
+    "analyze_timeout_seconds": 600,
+    "ready_timeout_seconds": 120,
+    "concurrency": 1
+  },
+  "presentation": {
+    "context_lines": 2
+  }
+}

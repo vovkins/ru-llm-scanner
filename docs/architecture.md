@@ -4,7 +4,7 @@
 Git reader, сравнение деревьев и подготовка текста реализованы на этапе 3.
 Внутренний [scan pipeline](scan-api.md) реализован на этапе 4.
 CLI, JSON/HTML writer, runtime validation и baseline подключены на этапе 5.
-[Штатный Docker/Compose](docker-quickstart.md) и [пример Jenkins](jenkins.md)
+[Штатный Docker/Compose](user/README.md) и [пример Jenkins](admin/jenkins.md)
 подключены на этапе 6; реальные Jenkins/GPU не проверялись.
 
 ## Компоненты и данные
@@ -118,7 +118,7 @@ GPU использует возможности прокси; fallback GPU→CPU
 На этапе 7 проверена согласованная историческая репетиция реальных версий
 v0.4.0 → da4f50a → v0.4.0 с отдельными context/locks/images. Один scanner wheel
 работал с обоими engine bundles, несовместимые baseline отклонялись, прежний
-profile восстанавливался. Штатные locks не менялись. [Процедура и evidence](updating-analyzer.md).
+profile восстанавливался. Штатные locks не менялись. [Процедура и evidence](admin/updating-analyzer.md).
 
 ## Доверие и решения
 
@@ -128,4 +128,4 @@ profile восстанавливался. Штатные locks не меняли
 
 [ADR-0001](decisions/0001-analyzer-boundary.md) фиксирует границу Analyzer,
 [ADR-0002](decisions/0002-state-and-baseline.md) — конечные состояния и baseline.
-[Инвентаризация upstream](upstream.md) отделяет проверенные факты от дизайна.
+[Инвентаризация upstream](reference/detection.md) отделяет проверенные факты от дизайна.

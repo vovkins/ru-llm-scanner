@@ -1,9 +1,10 @@
-# Запуск CLI и работа с отчётами
+# Python CLI для разработки
 
 Доступны `snapshot`, `diff`, JSON/HTML v1 и baseline chain. Штатные
-[Docker/Compose](docker-quickstart.md), [перенос](offline-build.md) и
-[Jenkins example](jenkins.md) описаны отдельно. Ниже — проверенный dev
-интерфейс; при анализе зависимости/веса не скачиваются.
+[Docker/Compose](user/README.md), [перенос](admin/build.md) и
+[Jenkins example](admin/jenkins.md) описаны отдельно. Ниже — проверенный dev
+интерфейс; при анализе зависимости/веса не скачиваются. Для пользователя готовых
+images основной маршрут — [руководство пользователя](user/README.md).
 
 ## Установка и доверенные assets
 
@@ -16,9 +17,11 @@ python3.11 -m venv .venv
 .venv/bin/python -m pip install -e . -r requirements-dev.txt
 .venv/bin/ru-llm-scanner --help
 .venv/bin/ru-llm-scanner --version
+ANALYZER_CONTEXT=/trusted/build/analyzer
+RUNTIME_LOCK=/trusted/build/analyzer.runtime.lock.json
 .venv/bin/python scripts/prepare_scan_engine.py \
-  --context .build/analyzer \
-  --runtime-lock locks/analyzer-cpu-linux-arm64.runtime.lock.json \
+  --context "$ANALYZER_CONTEXT" \
+  --runtime-lock "$RUNTIME_LOCK" \
   --output .build/scanner-engine
 ```
 
@@ -34,7 +37,7 @@ runtime lock. Получаются ровно `source-lock.json`, `runtime-lock.
 
 Analyzer должен уже работать по адресу, доступному из окружения CLI. Пример
 `http://analyzer:5001` — внутреннее имя сервиса, не публичный API. Эксплуатационная
-сеть и запуск контейнеров будут оформлены на этапе 6; полностью воспроизводимая
+сеть готового deployment задаётся [launcher](reference/runtime.md); изолированная
 проверка с собственными временными контейнерами приведена ниже.
 
 ```bash
@@ -89,7 +92,7 @@ analyzed/inherited получают `inherited` с encoding/size и ID непо�
 Для намеренной проверки только изменений запустите diff без baseline:
 результат будет `changed_files_only`, unchanged — `unverified/no_baseline`,
 включая A=B. Новая модель/правила/область требуют snapshot.
-[Подробная матрица](baseline.md), [профиль и параметры](configuration.md).
+[Подробная матрица](reference/baseline.md), [профиль и параметры](reference/configuration.md).
 
 ## Файлы и ошибки
 
@@ -129,16 +132,16 @@ preflight до проверки предъявленного baseline он им�
 запускает анализ без внешней сети.
 
 ```bash
-.venv/bin/python -m pip wheel --no-deps --wheel-dir .build/stage-5/wheels .
-mkdir -p .build/stage-5/image-context
-cp docker/cli-test.Dockerfile .build/stage-5/image-context/Dockerfile
-cp .build/stage-5/wheels/*.whl .build/stage-5/image-context/
-docker build --platform linux/arm64 -t ru-llm-scanner-cli-tests:stage5 \
-  .build/stage-5/image-context
+.venv/bin/python -m pip wheel --no-deps --wheel-dir .build/cli-dev-new/wheels .
+mkdir -p .build/cli-dev-new/image-context
+cp docker/cli-test.Dockerfile .build/cli-dev-new/image-context/Dockerfile
+cp .build/cli-dev-new/wheels/*.whl .build/cli-dev-new/image-context/
+docker build --platform linux/arm64 -t ru-llm-scanner-cli-tests:dev-new \
+  .build/cli-dev-new/image-context
 .venv/bin/python scripts/check_cli_integration.py \
-  --runtime-lock locks/analyzer-cpu-linux-arm64.runtime.lock.json \
-  --context .build/analyzer --scanner-image ru-llm-scanner-cli-tests:stage5 \
-  --output-dir .build/stage-5/real-model
+  --runtime-lock "$RUNTIME_LOCK" \
+  --context "$ANALYZER_CONTEXT" --scanner-image ru-llm-scanner-cli-tests:dev-new \
+  --output-dir .build/cli-dev-new/real-model
 ```
 
 Контекст содержит только Dockerfile и wheel, не корень проекта. Launcher

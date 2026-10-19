@@ -1,7 +1,8 @@
 # Лицензирование и происхождение
 
-По состоянию на 2026-10-18 GitHub API сообщает `license=null`, в исходном
-`ru-llm-scanner` нет файла LICENSE. Лицензия этого проекта пока не выбрана.
+В текущем checkout `ru-llm-scanner` нет файла LICENSE; лицензия scanner пока
+не выбрана владельцем. Историческая read-only проверка GitHub 2026-10-18
+также вернула `license=null`; это не новая проверка внешних настроек.
 Не добавляем MIT/Apache badge или утверждение о лицензии без решения владельца.
 Это статус проекта, а не рекомендация по юридическому толкованию лицензий.
 
@@ -15,7 +16,7 @@
 | Python/runtime-зависимости | 71 пакет CPU ARM64 и метаданные уведомлений зафиксированы [инвентаризацией](../verification/stage-2/licenses.json) | Проверить комплект перед распространением |
 | JSON Schema / проверка | Схема написана для scanner; `jsonschema[format]` — runtime/dev dependency | Отдельно учитывать лицензии распространяемых зависимостей |
 
-Закреплённые ссылки: [инвентаризация upstream](upstream.md),
+Закреплённые ссылки: [инвентаризация upstream](reference/detection.md),
 [уведомления прокси](https://github.com/vovkins/ru-llm-proxy/blob/da4f50a87ddf8a6c160c5f1893f5bf526f713d1c/THIRD_PARTY_NOTICES.md).
 
 На этапе 1 не копировался runtime-код детекторов или веса. На этапе 2 источники
@@ -26,8 +27,8 @@
 
 ```bash
 .venv/bin/python scripts/capture_licenses.py \
-  --runtime-lock .build/runtime-cpu.lock.json \
-  --output .build/verification/licenses.json
+  --runtime-lock /trusted/build/analyzer.runtime.lock.json \
+  --output .build/licenses-new.json
 ```
 
 Инвентаризация содержит объявленные SPDX expressions/classifiers и SHA-256
@@ -35,4 +36,7 @@ notice-файлов. Пустое поле означает отсутствие
 условий использования. Веса имеют заявленную лицензию из model manifest;
 отдельного license-файла в закреплённом комплекте модели нет. Выбор лицензии
 scanner и окончательная проверка комплекта уведомлений перед распространением
-остаются явными решениями владельца. Публикация release в этап 2 не входит.
+остаются явными решениями владельца. Release/images не опубликованы, внешние
+настройки/лицензия этим циклом документации не меняются. Побайтовый upstream
+THIRD_PARTY_NOTICES сохраняется; ссылки на него и версии артефактов не являются
+обещанием условий для ещё не выбранной лицензии scanner.
