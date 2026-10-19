@@ -50,6 +50,7 @@ GPU и Linux-host/другие платформы требуют отдельн�
 - [Итоговая приёмка/upgrade/rollback на этапе 7](../verification/stage-7/README.md).
 - [Последовательное слияние семи PR и проверка main](../verification/main-integration/README.md).
 - [Ревью перед подготовкой к эксплуатации: замечания и матрица проверок](review/README.md).
+- [Исправления RV-01–RV-05 и повторные проверки](../verification/operations-stage-2/README.md).
 - [Лицензирование](licensing.md), [постоянные инструкции](../AGENTS.md).
 
 Источником договорённостей служит [общая задача #1](https://github.com/vovkins/ru-llm-scanner/issues/1).

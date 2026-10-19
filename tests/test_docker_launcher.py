@@ -26,7 +26,7 @@ class DockerLauncherTests(unittest.TestCase):
             self.assertEqual(launcher.strict_json(path), {"valid": 1})
             link = root / "link.json"
             link.symlink_to(path)
-            for invalid in (link, root, root / "missing"):
+            for invalid in (link, root, root / "missing", Path("/dev/null")):
                 with self.assertRaises(launcher.Failure) as error:
                     launcher.strict_json(invalid)
                 self.assertEqual(error.exception.code, "invalid_lock")
@@ -166,6 +166,7 @@ class DockerLauncherTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "lock.json"
             path.write_text(json.dumps(lock))
+            self.assertEqual(launcher.load_lock(path, verify=False), lock)
             with patch.object(
                 launcher, "image_identity", return_value="sha256:" + "6" * 64
             ):
