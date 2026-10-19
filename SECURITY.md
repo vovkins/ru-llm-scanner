@@ -8,6 +8,10 @@
 сети. CLI/отчёты/baseline реализованы и проверены на этапе 5. Штатное
 контейнерное развёртывание реализовано и проверено на CPU ARM64 в Docker Desktop;
 пример Jenkins проверен локальной последовательностью, без Jenkins controller.
+На этапе 7 production acceptance подтвердил hostile config/hooks/filters/
+textconv/replace/grafts, ссылки и promisor missing objects: выполнения кода,
+чтения untracked canary по ссылке и внешнего fetch не произошло. Историческое
+обновление/откат проверило несовместимость baseline между реальными профилями.
 
 ## Как сообщить
 

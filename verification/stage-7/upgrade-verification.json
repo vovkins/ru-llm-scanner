@@ -1,0 +1,197 @@
+{
+  "baseline_incompatibility_confirmed": true,
+  "current_images": {
+    "analyzer": {
+      "image_id": "sha256:dac76ca6f7f37d61f7a3ad4db1d56d68dcad14d9e44354252dcfbf3c208c5104",
+      "image_reference_id": "sha256:73a1bd28e9e74d05eb9594027e9fcb97d92197c3f36ba5c8d1aeb65d9fe5ad46"
+    },
+    "scanner": {
+      "image_id": "sha256:257f7d6918bc360a28fb52e09022a40940691c691a9556f6aa5b9ea32485c73d",
+      "image_reference_id": "sha256:257f7d6918bc360a28fb52e09022a40940691c691a9556f6aa5b9ea32485c73d"
+    }
+  },
+  "current_profile": "172554ef20c07cf32e15cd97cd368a2510de49ab824ae2b339258078730a1864",
+  "current_upstream_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
+  "input_unchanged": true,
+  "main_hashes_unchanged": {
+    "locks/analyzer-cpu-linux-arm64.runtime.lock.json": "a8a08bd416193af9632997afc0ba5256f2528534607eddc74015915ec9cb1a7d",
+    "locks/scanner-cpu-linux-arm64.deployment.json": "877449870cb12066e3203f8de779cb868a5ded6f20a18d3dd4432e8e2ea60bde",
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+    "upstream.lock.json": "64a2f586ef1629c8ba5ebf0665d9b6dfd923f6332e77b6095ab45c70e57a6bed"
+  },
+  "old_images": {
+    "analyzer": {
+      "image_id": "sha256:f0e82e7e83bbcc49e74f364507593289f6da826c0ff1e29843b116b80d1401b8",
+      "image_reference_id": "sha256:59a0ebfdf95d3cba637aa9073261364e9d92b802bac8fb4b23a8a692052dfe2b"
+    },
+    "scanner": {
+      "image_id": "sha256:373d4bd485bde1b0ed3bc17eade0a4d4892033c2d40749ecb5fe910afdbc62b7",
+      "image_reference_id": "sha256:373d4bd485bde1b0ed3bc17eade0a4d4892033c2d40749ecb5fe910afdbc62b7"
+    }
+  },
+  "old_profile": "a421143128cc3978f80229815eaa0648ebe672d330a0558bcc4122afa44e2959",
+  "old_upstream_commit": "dd403a182494a1c439f552666f21e7c4c8e7e080",
+  "rollback_confirmed": true,
+  "runs": [
+    {
+      "assurance": "snapshot_verified",
+      "case": "old-snapshot-a",
+      "counts": {
+        "analyzed": 2,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 2,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 4.995,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "snapshot",
+      "report_sha256": "8b2a539fcf53ad577436276ea3951a925a70c343076690c3b7559383d3022030"
+    },
+    {
+      "assurance": "baseline_verified",
+      "case": "old-diff-a-b",
+      "counts": {
+        "analyzed": 1,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 1,
+        "target": 2,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 4.586,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "diff",
+      "report_sha256": "36c8e75d104ec7dc414b81b95fb6b9b64f39af122176f90e059d6312c2923689"
+    },
+    {
+      "assurance": "none",
+      "case": "rollback-reject-new-baseline",
+      "counts": {
+        "analyzed": 0,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 0,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 4.976,
+      "exit_code": 2,
+      "findings": 0,
+      "mode": "diff",
+      "report_sha256": "00edba5918e26650bbdef95b8f48a398013ccfd081592197b3759af2d0b6dc92"
+    },
+    {
+      "assurance": "none",
+      "case": "rollback-reject-wrong-a",
+      "counts": {
+        "analyzed": 0,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 0,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 5.517,
+      "exit_code": 2,
+      "findings": 0,
+      "mode": "diff",
+      "report_sha256": "0362a3ae10ad42f8930da0275242b0c90537aa84f955941956ca565b9488bac7"
+    },
+    {
+      "assurance": "baseline_verified",
+      "case": "rollback-accept-old-baseline-b",
+      "counts": {
+        "analyzed": 1,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 1,
+        "target": 2,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 4.585,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "diff",
+      "report_sha256": "b9f30aa646ca9a283849d37940fd0eff973aee918f980b1a5b155e34884de1dc"
+    },
+    {
+      "assurance": "none",
+      "case": "upgrade-reject-old-baseline",
+      "counts": {
+        "analyzed": 0,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 0,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 4.39,
+      "exit_code": 2,
+      "findings": 0,
+      "mode": "diff",
+      "report_sha256": "82fa34b94e49262da7c37802c01892ccf1f59c49f859dccdd75a93cfe65c0864"
+    },
+    {
+      "assurance": "snapshot_verified",
+      "case": "upgrade-new-snapshot-b",
+      "counts": {
+        "analyzed": 2,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 2,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 4.442,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "snapshot",
+      "report_sha256": "150ea542f21d217d8cd478ebc5e16bad8a20616e410f11df8798c9c6f5c54c80"
+    },
+    {
+      "assurance": "baseline_verified",
+      "case": "upgrade-diff-b-c",
+      "counts": {
+        "analyzed": 1,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 1,
+        "target": 2,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 4.792,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "diff",
+      "report_sha256": "e7090f99c41936d0a40e9337d0abec0306ddbe082e71b3bb18cb22b25be7d2b6"
+    }
+  ],
+  "scenario": "historical-v0.4.0-current-v0.4.0",
+  "sources_sha256": {
+    "scripts/check_acceptance.py": "49f3dd9aba6d14a66d10bc521765546dcd15d69c6a9e787e4dd84315b5e32dd7",
+    "scripts/check_upgrade_rollback.py": "e8bea3c347184749b688f9c8244a54256719722751ebdc8dc4bce8b2f88229ff",
+    "scripts/docker_scanner.py": "171753dc0cbbc8bc3d21f756a7a112a850013e458e31756f5ec32a9903285f44"
+  },
+  "status": "passed",
+  "verification_version": 1
+}

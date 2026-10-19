@@ -1,0 +1,89 @@
+{
+  "changed_exported_files": {
+    "README.md": {
+      "new_sha256": "61a56e9c3aaa911c2df1033b284766e4638ce66e9c4eab09316b84cfe749afb8",
+      "old_sha256": "f5832320322f64be442ce283642224f9c3a605af0abe90f86dfccbdf88f8940c"
+    },
+    "litellm_guardrails/dictionary_policy.py": {
+      "new_sha256": "9709364660baa4f5ac551b42fbbd411c6d2eaf8093ac1579ca8ea4a30696d099",
+      "old_sha256": "94036ceccfff2453c57436e9f368a62adaa413dc19bbd89b3dcc6daca0f79dea"
+    },
+    "presidio/analyzer_server.py": {
+      "new_sha256": "3517fdda1288483ec366fdd636e3e92bcd0412c3d511af805bf2130adb0b67c5",
+      "old_sha256": "524b44a3e8c357d28af39dca7f3395932c785f800c879f3d17b22628dcd991ca"
+    },
+    "presidio/evaluation/README.md": {
+      "new_sha256": "45e6ef6c9aa473f1565c44eaf3a093752ed881435d684d23c32c1f6d7d49624d",
+      "old_sha256": "a4fb6e43325a7c287f7f30c903a0056c223862792e09798902786a8d61e28727"
+    },
+    "presidio/evaluation/corpus.py": {
+      "new_sha256": "180ff6b7486cc07f4514d3825695592b886fe70b36f96ccad06cad070fdc7800",
+      "old_sha256": "1af184fd09eb4a01fb54e7edaebc647640f55afd43972c34cd1342e3bc005011"
+    },
+    "presidio/evaluation/data/instruction_regressions.jsonl": {
+      "new_sha256": "5096b3fbe0f368976447d1e9a4c1eccddd2f38ce9f50123a8bc85eedf1132f06",
+      "old_sha256": "7843822d0f8b28d91166787d4959c609df12241a85232ec7d4a504e36b9324ff"
+    },
+    "presidio/evaluation/data/person_dialogue_research.jsonl": {
+      "new_sha256": "a3f7fcc7712ea021b54b59e1756175ffbe6d07392b2bd80f8a1d76de189f073c",
+      "old_sha256": null
+    },
+    "presidio/evaluation/metrics.py": {
+      "new_sha256": "d7bb78b1532abf8fb2bf8d404ccc34fb84bcc864025369ff4daea356866952ed",
+      "old_sha256": "d0a9a03d3b3241412bbf19c52adace596be155171670499a53863268ae32d64e"
+    },
+    "presidio/ner/__init__.py": {
+      "new_sha256": "a7b3f2a53984b3e778bcda03e1091ad96a71274ebb19e54a8daa40593e387d53",
+      "old_sha256": "32873eb834c4ab08da9851bfd7f0c0eba96f4ffba0e6d5520322192ed076ba79"
+    },
+    "presidio/recognizers/credential_rules.py": {
+      "new_sha256": "0d17a7c7f3e0a98167cfead36e8fa31e068ec31d8236ee5fda9207ea97feff93",
+      "old_sha256": "625b1aeff5bd3d1778c6b59491a63f78654e90d2008fd4bf14ccc21fa4f3de94"
+    },
+    "presidio/recognizers/json_strings.py": {
+      "new_sha256": "b413ecf3b232d6968144ef4f47480f8a1af48f7afd6e11d3a59acdaeed7df358",
+      "old_sha256": "0dbd3dddeb83de6b75b8529ccc3e567f1668959430167e7db2e2f63b85a52ebe"
+    },
+    "presidio/result_merging.py": {
+      "new_sha256": "05fba49c4b4c4a1fc4aa1878a8834b8f9164df499feb35c93ffe2fefb4646409",
+      "old_sha256": "2befd898d8f4133b532c21a78706e226f070bb8e07816edf409f8833dfd4698a"
+    },
+    "presidio/tests/test_analyzer_api_thresholds.py": {
+      "new_sha256": "b4e48d583033df624e4d1edd028d9e8736bf9140e54f3e64daf2df34854aa64c",
+      "old_sha256": "8877891751412444b0baf0e6e6600fa1366a58d4c3fed9f4ccd006b51b39b5b0"
+    },
+    "presidio/tests/test_analyzer_server_capacity.py": {
+      "new_sha256": "fb2f9e4d10f286ad1005afcc29adc5848b294bce0b7c70f532ff86e40c9d3c31",
+      "old_sha256": "c1a8753d8fbae394e57fc435f9fb6e001bb5cad71ab92d9689c84f9c925efe02"
+    },
+    "presidio/tests/test_credential_rules.py": {
+      "new_sha256": "8bfa61a96924b159dc047ce31fe9beacbee10dfd972b9c0702dffcfd3999f8ff",
+      "old_sha256": "da914158bc58aa4646c730947769ef3397278f3fa186f90db915a40cec5f8b04"
+    },
+    "presidio/tests/test_encoded_secrets.py": {
+      "new_sha256": "58ab43335844a0b9397b047e780793b3c2153d48179a70b7cd0e1dc211f0afbe",
+      "old_sha256": "52a2deb961e12ba8cc526e80aefc605ea0a6d8657bfb8e9cd30dc9b20c8d9f2a"
+    },
+    "presidio/tests/test_evaluation.py": {
+      "new_sha256": "b2f34c8feaa2b92b3e6b15ba89215e0595263831e17b994388974edc0ee74c27",
+      "old_sha256": "1218fe6b1c7c65cbc4b4b159f2f78383a9f287b924009d53964f183f21c35507"
+    },
+    "presidio/tests/test_login_instruction_context.py": {
+      "new_sha256": "e0451fb2e5976930ec92623f07672050a13ddca8c213dddef167524b631d8aec",
+      "old_sha256": null
+    }
+  },
+  "dependencies_unchanged": true,
+  "dictionary_policy_changed": true,
+  "main_lock_unchanged": true,
+  "model_unchanged": true,
+  "new_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
+  "new_sources": 97,
+  "notices_unchanged": true,
+  "old_commit": "dd403a182494a1c439f552666f21e7c4c8e7e080",
+  "old_sources": 95,
+  "patch_sha256": "d97a801bd4347413c0f0bcb0648a403889628339a9af21b007e8ca55dbf9053c",
+  "preparation_script_sha256": "52111cf83fe3f702fa96cbfd2a5ecbc4c7c217b98c7147542a5a537adb04f29f",
+  "review_version": 1,
+  "source_lock_sha256": "9e389ede5788d5c3d3f25fdba92e590671486df7be590b255b0a7cf98be29b2d"
+}
