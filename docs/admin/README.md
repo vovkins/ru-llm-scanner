@@ -23,7 +23,7 @@ Git-клон по [своему руководству](../user/README.md). Вн
 
 Проверено на macOS Apple Silicon с Docker Desktop 29.6.1/Compose 5.2.0,
 CPU Linux ARM64 внутри VM. Host tools проверялись на Python 3.12.14,
-образы — на Python 3.11.16. [Матрица свидетельств](../../verification/README.md)
+исторические образы — на Python 3.11.16; кандидат #24 — на 3.11.17. [Матрица свидетельств](../../verification/README.md)
 указывает границы. Настоящие Linux-host UID/ACL, AMD64, CUDA/GPU, другой
 физический offline host, Jenkins controller и корпоративный PKI требуют проверки
 в целевом окружении. Наличие upstream GPU Dockerfile не означает готовый GPU deployment.

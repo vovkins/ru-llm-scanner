@@ -16,9 +16,11 @@
 ```mermaid
 flowchart LR
   S[Source lock и tracked upstream] --> P[Prepared Analyzer context]
-  P --> A[Analyzer image]
+  H[Закреплённый artifact lock и hash-cache] --> F[Полный offline context]
+  P --> F
+  F --> A[Analyzer image]
   A --> R[Новый runtime lock через seal]
-  P --> E[Engine bundle]
+  F --> E[Engine bundle]
   R --> E
   E --> C[Scanner context и wheel]
   C --> I[Scanner image]

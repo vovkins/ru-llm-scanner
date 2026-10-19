@@ -3,7 +3,7 @@
 Измерения ёмкости, реальные OOM/отмена и operator cleanup после SIGKILL:
 [проверка #22](../../verification/operations-stage-4/README.md).
 Состояние зависимостей и отдельный план до итогового допуска:
-[DEP-01/DEP-02](../../verification/operations-stage-4/dependencies.md).
+[DEP-01/DEP-02, исправления и остаточные риски](../../verification/operations-dependencies/README.md).
 
 Основной запуск описан в [руководстве пользователя](../user/README.md),
 состав/бюджеты — в [runtime](../reference/runtime.md).
@@ -66,3 +66,9 @@ Docker daemon и host operator доверенные; это не защита о
 Нет обещания транзакционной публикации двух отчётов, жёсткого времени CPU join,
 обнаружения каждого секрета или приёмки неподдерживаемых Git layout/форматов.
 [SECURITY](../../SECURITY.md), [результаты этапа 6](../../verification/stage-6/README.md).
+
+## Длинный текст и отмена
+
+Размер файла не определяет время NER: плотный SVG с числовыми координатами может дать сотни тысяч BERT tokens. Scanner читает SVG как текст и не выполняет XML/JavaScript. В Requests SVG размером 883794 bytes дал 662497 tokens с учётом overlap, восемь текстовых chunks. На 2 CPU прежний analyze budget 600 s оказался недостаточен. Бюджеты и `--analyzer-cpus` задавайте после измерения именно вашей нагрузки; универсальный SLA для любого текста до 10 MiB не заявлен.
+
+Отмена HTTP-клиента не означает мгновенного завершения уже начатого CPU inference. Пока worker занят, последующий запрос может получить ограниченный 503 `analyzer_overloaded/queue_timeout`, хотя health остаётся ready. Такой файл не считается проверенным. Для восстановления дождитесь освобождения worker или завершите собственный запуск по обычной процедуре; не переводите partial report в clean baseline. Согласованный patch RV-06 добавляет контексты только для нерешённых границ, а неподтверждённые или слишком длинные spans по-прежнему дают ошибку. [Проверки полного ввода и отмены](../../verification/operations-ner-windowing/README.md).

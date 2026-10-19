@@ -46,9 +46,9 @@ types; неправильные special IDs вызывают отказ. Мод�
 Последовательные patches одного файла требуют совпадения каждого `before` с
 предыдущим `after`; перестановка отклоняется до экспорта.
 
-Прошли 478 upstream tests, 93 NER tests, 77 NER/4 dictionary parity, 46 code-v1
+Прошли [478 upstream tests](upstream-tests.json), [96 NER tests](ner-regressions.json), [77 NER/4 dictionary parity](offline-verification.json), [46 code-v1](scan-verification.json)
 direct parity с TP 33 / FP 13 / FN 4. Прямое сравнение старого NER-кандидата и
-новых библиотек на всех 77 случаях: ноль изменений обнаружений и maximum score
+новых библиотек на [всех 77 случаях](detection-drift.json): ноль изменений обнаружений и maximum score
 absolute delta **0.0**. Это результат корпуса, не гарантия для любого ввода.
 Новый image/profile требует нового snapshot/baseline.
 
@@ -56,11 +56,11 @@ absolute delta **0.0**. Это результат корпуса, не гара�
 
 [Сборщик](../../scripts/check_dependency_advisories.py) отправляет только публичные
 package names/versions verified images. Repository/report input отсутствует.
-UTC timestamps, response SHA-256/ETag/Last-Modified сохранены в evidence.
+UTC timestamps, response SHA-256/ETag/Last-Modified сохранены в [fetch evidence](final-fetches.json).
 Scanner во время анализа к advisory-сервисам не обращается.
 
 [23 PyPI alias groups](pypi-dispositions.json) разобраны по вызываемым функциям,
-build/runtime и платформе. Initial audit фактических images: 91 уникальная пара
+build/runtime и платформе. [Повторный audit окончательных images](final-images.json): 91 уникальная пара
 name/version, **0 OSV matches**. Для `last_affected` не придуман fixed event.
 Это не сертификат отсутствия уязвимостей.
 
@@ -99,3 +99,13 @@ IDNA и urllib credential schemes. Runtime читает Git blobs, не извл
 Audit ограничен датой источников. Полный native wheel SBOM, неизвестные проблемы,
 OS хоста/daemon и Jenkins controller не покрыты. [License inventory](analyzer-licenses.json)
 описывает сохранённые package notice files. Лицензия scanner не выбиралась.
+
+Для zlib `CVE-2026-85091` описание upstream range и статус Debian расходятся: [tracker](https://security-tracker.debian.org/tracker/CVE-2026-85091) помечает trixie 1.3.1 как vulnerable и ссылается на обсуждение диапазона. Запись не исключена только по номеру версии. Изменение stable native closure или собственный backport потребует отдельной проверки совместимости и provenance; sid-пакеты в кандидат молча не добавлялись.
+
+## Окончательный комплект и проверки
+
+[Runtime lock](candidate.runtime.lock.json) и [deployment lock](candidate.deployment.json) фиксируют отдельные локальные images, не меняя штатный комплект. Это записи измерения, а не опубликованный registry/release. Source checkpoint для новой сборки — `2588571`; NER parent — `5097ea5`.
+
+[Fresh walkthrough](fresh-walkthrough.json) пройден из `git archive` в отдельном каталоге без `.git`, с новым venv: source prepare, cache-only полный context, offline RUN build, seal, реальная parity, engine/wheel, scanner build, verify, [9 CLI scenarios](cli-verification.json), export. Online шаги установки dev dependencies/build backend выделены. Использовались доступный официальный base, доверенный hash-cache и Docker store того же стенда; сборка не заявлена cache-free/на другом физическом host.
+
+[155 host tests](unit-tests.json) прошли без skips. Первый запуск внутри sandbox не мог bind loopback HTTP fixtures; после выполнения с разрешённым локальным loopback прошёл весь набор. Пропусками эту проверку не заменяли. [Проверка документации](documentation.json) не подменяет runtime acceptance. Остальные эксплуатационные gates и полный Requests выполняются последовательно; их результаты добавляются после завершения.
