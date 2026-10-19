@@ -55,7 +55,11 @@ def main():
         == runtime["runtime"]["dictionary"]["rules_path"],
         "Dictionary asset mismatch",
     )
-    files = {p.relative_to(ROOT).as_posix(): p for p in (ROOT / "src").rglob("*.py")}
+    files = {
+        p.relative_to(ROOT).as_posix(): p
+        for p in (ROOT / "src").rglob("*")
+        if p.is_file() and p.suffix in {".py", ".json"}
+    }
     files.update(
         {
             name: ROOT / name
@@ -82,6 +86,42 @@ def main():
             shutil.copyfile(path, destination)
         results.mkdir()
         results.chmod(0o777)
+        # Fail before starting the heavy Analyzer if dependencies/resources are
+        # missing, using precisely the curated input of the real run.
+        subprocess.run(
+            [
+                "docker",
+                "run",
+                "--rm",
+                "--pull",
+                "never",
+                "--platform",
+                runtime["platform"],
+                "--network",
+                "none",
+                "--read-only",
+                "--user",
+                "65534:65534",
+                "--cap-drop",
+                "ALL",
+                "--security-opt",
+                "no-new-privileges",
+                "--mount",
+                f"type=bind,src={workspace},dst=/workspace,readonly",
+                "-e",
+                "PYTHONPATH=/workspace/src",
+                "--entrypoint",
+                "python",
+                scanner_reference,
+                "-c",
+                "import json; from importlib.resources import files; "
+                "from jsonschema import Draft202012Validator; "
+                "import ru_llm_scanner.pipeline; "
+                "s=json.loads(files('ru_llm_scanner').joinpath('report-v1.schema.json').read_text()); "
+                "Draft202012Validator.check_schema(s)",
+            ],
+            check=True,
+        )
         name = "ru-llm-scanner-stage4-" + uuid.uuid4().hex[:10]
         started = False
         try:
