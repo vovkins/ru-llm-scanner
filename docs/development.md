@@ -1,8 +1,9 @@
 # Разработка и проверки
 
 Доступны спецификации, JSON Schema, синтетические отчёты и механизм анализа:
-подготовка/сборка Analyzer, API-адаптер и словарь. Чтение пользовательского Git,
-CLI snapshot/diff, renderer и Jenkins ещё не реализованы.
+подготовка/сборка Analyzer, API-адаптер и словарь. Доступен внутренний Git API:
+снимки/сравнение, классификация и строгая подготовка текста.
+Scan pipeline, CLI snapshot/diff, renderer и Jenkins ещё не реализованы.
 
 ## Структура
 
@@ -15,6 +16,8 @@ CLI snapshot/diff, renderer и Jenkins ещё не реализованы.
 | `scripts/check_contracts.py` | Dev-проверка схемы, примеров, инвариантов и ссылок |
 | `requirements-dev.txt` | Версия инструмента валидации; не зависимости Analyzer |
 | `src/ru_llm_scanner/` | Async API-адаптер, словарь, артефакты и инструменты подготовки |
+| `git_repository.py`, `git_plan.py`, `text_policy.py` в `src/ru_llm_scanner/` | Изолированное чтение Git, выбор A/B и подготовка text-v1 |
+| `scripts/check_git_layer.py`, `docker/git-test.Dockerfile` | Синтетический dev-прогон Git/text, включая Linux без сети |
 | `upstream.lock.json`, `locks/` | Закреплённые источники, constraints и измеренный runtime |
 | `patches/`, `docker/` | Минимальная адаптация API и offline inventory helpers |
 | `tests/`, `scripts/check_*` | Модульные и изолированные интеграционные проверки |
@@ -22,7 +25,7 @@ CLI snapshot/diff, renderer и Jenkins ещё не реализованы.
 
 ## Запуск доступной проверки
 
-Нужен Python 3.11+ и `venv`. Установка инструментов разработки может требовать
+Нужны Python 3.11+, Git и `venv`. Установка инструментов разработки может требовать
 индекс пакетов/корпоративное зеркало; сама проверка схемы работает локально.
 
 ```bash
@@ -53,7 +56,7 @@ Unicode/CRLF, ссылки внутри Markdown и закрытие code fences
 .venv/bin/python -m unittest discover -s tests -v
 .venv/bin/python -m black --check src tests docker scripts/analyzer.py \
   scripts/check_analyzer_integration.py scripts/check_upstream_tests.py \
-  scripts/capture_licenses.py
+  scripts/capture_licenses.py scripts/check_git_layer.py
 ```
 
 Для словарных parity-тестов сначала выполните `prepare --output .build/analyzer`
@@ -66,12 +69,27 @@ runtime-клиент использует `httpx==0.28.1` из pyproject.toml.
 Фактически выполненные проверки, измеренный runtime lock и границы стенда
 собраны в [результатах этапа 2](../verification/stage-2/README.md).
 
+Этап 3 добавляет отдельный набор без модели и сторонних Python-зависимостей:
+
+```bash
+.venv/bin/python scripts/check_git_layer.py --output .build/stage-3/host-tests.json
+```
+
+Он проверяет реальные временные Git-репозитории, SHA-1/SHA-256, pack/shallow,
+missing/promisor, сырые пути, изменения деревьев, неизменность входа, hooks/
+filters/includes/helpers, лимиты, сигнатуры и строгие кодировки. Linux-прогон
+с read-only FS, без сети и от UID 65534 описан в [Git reader](git-reader.md).
+Отчёт сохраняет версии, Image ID при Docker и хеши проверенного кода;
+[результаты этапа 3](../verification/stage-3/README.md) не являются scan-отчётами.
+NER не повторяется для независимого Git-изменения: её исходники/артефакты
+на этом этапе не менялись.
+
 ## Стратегия следующих этапов
 
 | Этап | Проверки, которые появятся с реализацией |
 | --- | --- |
 | 2 (реализовано) | Контракт API, readiness, источник, каталог, словарь, соответствие upstream |
-| 3 | Git-деревья, refs, добавления/удаления/переименования, пути, хуки/фильтры, missing objects |
+| 3 (реализовано) | Git-деревья, refs, добавления/удаления/переименования, пути, хуки/фильтры, missing objects |
 | 4 | Полные файлы, координаты, длинные/многострочные значения, положительный и отрицательный корпус кода |
 | 5 | Реальные отчёты, semantic validation, цепочка baseline, экранирование и визуальная QA HTML |
 | 6 | Изолированный Docker, mounts, CPU/GPU, отсутствие внешних соединений, Jenkins артефакты |

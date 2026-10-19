@@ -1,0 +1,28 @@
+{
+  "verification_version": 1,
+  "status": "passed",
+  "python": "3.12.14",
+  "system": "Darwin",
+  "machine": "arm64",
+  "effective_uid": 501,
+  "git": "git version 2.39.5 (Apple Git-154)",
+  "tests_run": 41,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "network_only_loopback": null,
+  "code_unchanged_during_run": true,
+  "sources_sha256": {
+    "src/ru_llm_scanner/__init__.py": "de1f14dbc811a9355621d1fd9a786982786fd1f4446c415cdf7136736e635ab3",
+    "src/ru_llm_scanner/git_repository.py": "020bb53c3989a7e752fd25894c29d1f256d38137d942f40c3e9d373cb343bf27",
+    "src/ru_llm_scanner/git_plan.py": "5b1dbd8b80424b9edb97157bcce3acd470af6c23cbea4befe126a46401c9f855",
+    "src/ru_llm_scanner/text_policy.py": "53ab4ea4a072b76af5ca7df9faaae4ad0820bd25934805133244bc50a46e32d1",
+    "tests/git_fixtures.py": "5c7d05e8b5c896af805aee66e2837eb1c9b173469c9f763551b5e6415a671c89",
+    "tests/test_git_repository.py": "29c9ca9da8a595a0ec28fb5d333a521d9f5fe9d47bdca69a95d9829ef461b470",
+    "tests/test_git_security.py": "699662f501da067f7238ea27852e0e5be700400f8de3ce7abc8635de584494a1",
+    "tests/test_git_plan.py": "d2188ffd2e7086d2485464832a6cb45113caece0e81192d118c98a7b786047bb",
+    "tests/test_text_policy.py": "e804870951116b1fab6704eca324564357d4ee94d80ecf961e0598a0c054d477",
+    "scripts/check_git_layer.py": "0c0b25e69500f6e718ff225f4a42106646006a9ac959d10c1c45393d7c6ce62b",
+    "docker/git-test.Dockerfile": "06292564a0bb33c9760a602ca85495e0a15efe74f42145a8569c83346f8023bf"
+  }
+}
