@@ -1,0 +1,1124 @@
+{
+  "assessment_scope": "Linux ARM64 candidate images; dev host dependencies are separate; no exploit execution",
+  "records": [
+    {
+      "advisory": "GHSA-4xh5-x5gv-qwph",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "pip",
+            "purl": "pkg:pypi/pip"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "25.3"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2025-8869",
+        "GHSA-4xh5-x5gv-qwph",
+        "PYSEC-2026-1795"
+      ],
+      "assessment": "pip fallback tar extraction; build only. Wheel-only hash closure and CPython 3.11.17 filters; pip 26.2.1 outside affected range.",
+      "candidate_version": "26.2.1",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "25.3"
+      ],
+      "images": [
+        "analyzer",
+        "scanner"
+      ],
+      "modified": "2026-09-10T03:50:27.949321787Z",
+      "package": "pip",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-8869",
+        "https://github.com/pypa/pip/pull/13550",
+        "https://github.com/pypa/pip/commit/f2b92314da012b9fffa36b3f3e67748a37ef464a",
+        "https://lists.debian.org/debian-lts-announce/2025/10/msg00028.html"
+      ],
+      "severity": "MODERATE",
+      "version": "24.0"
+    },
+    {
+      "advisory": "GHSA-58qw-9mgm-455v",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "pip",
+            "purl": "pkg:pypi/pip"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "26.1"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-3219",
+        "GHSA-58qw-9mgm-455v",
+        "PYSEC-2026-2875"
+      ],
+      "assessment": "pip archive-type interpretation; build only, fixed wheel artifacts are reviewed by hash. No archive from scanned Git is installed.",
+      "candidate_version": "26.2.1",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "26.1"
+      ],
+      "images": [
+        "analyzer",
+        "scanner"
+      ],
+      "modified": "2026-09-10T03:50:42.838011658Z",
+      "package": "pip",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-3219",
+        "https://github.com/pypa/pip/issues/13867",
+        "https://github.com/pypa/pip/pull/13870",
+        "https://mail.python.org/archives/list/security-announce@python.org/thread/QAJ5JIVWWCAJ4EZL2FP5MOOW35JS7LRJ"
+      ],
+      "severity": "MODERATE",
+      "version": "24.0"
+    },
+    {
+      "advisory": "GHSA-6vgw-5pg2-w6jp",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "pip",
+            "purl": "pkg:pypi/pip"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "26.0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-1703",
+        "GHSA-6vgw-5pg2-w6jp",
+        "PYSEC-2026-1796"
+      ],
+      "assessment": "pip wheel extraction path traversal; build only. New pinned pip used with reviewed wheel hashes.",
+      "candidate_version": "26.2.1",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "26.0"
+      ],
+      "images": [
+        "analyzer",
+        "scanner"
+      ],
+      "modified": "2026-09-10T03:50:34.266257578Z",
+      "package": "pip",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-1703",
+        "https://github.com/pypa/pip/pull/13777",
+        "https://github.com/pypa/pip/commit/8e227a9be4faa9594e05d02ca05a413a2a4e7735",
+        "https://mail.python.org/archives/list/security-announce@python.org/thread/WIEA34D4TABF2UNQJAOMXKCICSPBE2DJ"
+      ],
+      "severity": "LOW",
+      "version": "24.0"
+    },
+    {
+      "advisory": "GHSA-jp4c-xjxw-mgf9",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "pip",
+            "purl": "pkg:pypi/pip"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "26.1"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-6357",
+        "GHSA-jp4c-xjxw-mgf9",
+        "PYSEC-2026-2876"
+      ],
+      "assessment": "pip self-update imports after install; build only. Offline/no-index installation; fixed pip candidate.",
+      "candidate_version": "26.2.1",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "26.1"
+      ],
+      "images": [
+        "analyzer",
+        "scanner"
+      ],
+      "modified": "2026-09-10T03:50:44.656580653Z",
+      "package": "pip",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-6357",
+        "https://github.com/pypa/pip/pull/13923",
+        "https://github.com/pypa/pip/commit/b369bfc96cc524e00c267e1693290e6599c36bad",
+        "https://ichard26.github.io/blog/2026/04/whats-new-in-pip-26.1/#security-fixes"
+      ],
+      "severity": "MODERATE",
+      "version": "24.0"
+    },
+    {
+      "advisory": "GHSA-qwm4-qh6w-59xr",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "pip",
+            "purl": "pkg:pypi/pip"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "26.2.0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-13346",
+        "GHSA-qwm4-qh6w-59xr",
+        "PYSEC-2026-3721"
+      ],
+      "assessment": "pip double-encoded index URL; new preparation downloads exact HTTPS artifact URLs verified by SHA-256, not runtime indexes.",
+      "candidate_version": "26.2.1",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "26.2.0"
+      ],
+      "images": [
+        "analyzer",
+        "scanner"
+      ],
+      "modified": "2026-09-10T03:50:52.923367736Z",
+      "package": "pip",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-13346",
+        "https://github.com/pypa/pip/pull/14110",
+        "https://github.com/pypa/pip/commit/10dfb6b9005484578b386f64b9f36982e3dc6679",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/pip/PYSEC-2026-3721.yaml"
+      ],
+      "severity": "MODERATE",
+      "version": "24.0"
+    },
+    {
+      "advisory": "GHSA-wf93-45jw-7689",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "pip",
+            "purl": "pkg:pypi/pip"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "26.1.2"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-8643",
+        "GHSA-wf93-45jw-7689",
+        "PYSEC-2026-196"
+      ],
+      "assessment": "pip entry-point path traversal; build only, fixed pip and reviewed wheels; repository code is never installed.",
+      "candidate_version": "26.2.1",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "26.1.2"
+      ],
+      "images": [
+        "analyzer",
+        "scanner"
+      ],
+      "modified": "2026-09-10T03:51:09.636289073Z",
+      "package": "pip",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-8643",
+        "https://github.com/pypa/pip/pull/14000",
+        "https://access.redhat.com/errata/RHSA-2026:33313",
+        "https://access.redhat.com/errata/RHSA-2026:34776"
+      ],
+      "severity": "MODERATE",
+      "version": "24.0"
+    },
+    {
+      "advisory": "GHSA-h35f-9h28-mq5c",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "setuptools",
+            "purl": "pkg:pypi/setuptools"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "83.0.0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "BIT-setuptools-2026-59890",
+        "CVE-2026-59890",
+        "GHSA-h35f-9h28-mq5c",
+        "PYSEC-2026-3447"
+      ],
+      "assessment": "setuptools sdist Unicode matching on macOS; Linux runtime does not build sdist. Fixed setuptools 84.1.0 in candidate; host dev venv is separate.",
+      "candidate_version": "84.1.0",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "83.0.0"
+      ],
+      "images": [
+        "analyzer",
+        "scanner"
+      ],
+      "modified": "2026-09-10T03:50:52.323347787Z",
+      "package": "setuptools",
+      "references": [
+        "https://github.com/pypa/setuptools/security/advisories/GHSA-h35f-9h28-mq5c",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-59890",
+        "https://github.com/pypa/setuptools/commit/dd9f436a36486b4cb8a4c70a2321548b0be09b8f",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/setuptools/PYSEC-2026-3447.yaml"
+      ],
+      "severity": "MODERATE",
+      "version": "79.0.1"
+    },
+    {
+      "advisory": "GHSA-2c2j-9gv5-cj73",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "starlette",
+            "purl": "pkg:pypi/starlette"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "0.47.2"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2025-54121",
+        "GHSA-2c2j-9gv5-cj73",
+        "PYSEC-2026-1941"
+      ],
+      "assessment": "multipart rollover; JSON-only Analyzer endpoint does not parse forms. Starlette upgraded, not accepted solely as unreachable.",
+      "candidate_version": "1.9.0",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "0.47.2"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-09-10T03:50:25.704876348Z",
+      "package": "starlette",
+      "references": [
+        "https://github.com/encode/starlette/security/advisories/GHSA-2c2j-9gv5-cj73",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-54121",
+        "https://github.com/encode/starlette/commit/9f7ec2eb512fcc3fe90b43cb9dd9e1d08696bec1",
+        "https://github.com/encode/starlette/blob/fa5355442753f794965ae1af0f87f9fec1b9a3de/starlette/datastructures.py#L436C5-L447C14"
+      ],
+      "severity": "MODERATE",
+      "version": "0.46.2"
+    },
+    {
+      "advisory": "GHSA-7f5h-v6xp-fcq8",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "starlette",
+            "purl": "pkg:pypi/starlette"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0.39.0"
+                },
+                {
+                  "fixed": "0.49.1"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2025-62727",
+        "GHSA-7f5h-v6xp-fcq8",
+        "PYSEC-2026-1942"
+      ],
+      "assessment": "FileResponse Range merging; no FileResponse/StaticFiles route. Starlette upgraded.",
+      "candidate_version": "1.9.0",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "0.49.1"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-09-10T03:50:29.490992457Z",
+      "package": "starlette",
+      "references": [
+        "https://github.com/Kludex/starlette/security/advisories/GHSA-7f5h-v6xp-fcq8",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-62727",
+        "https://github.com/Kludex/starlette/commit/4ea6e22b489ec388d6004cfbca52dd5b147127c5",
+        "https://github.com/Kludex/starlette/commit/69ed26a85956ef4bd0161807eb27abf49be7cd3c"
+      ],
+      "severity": "HIGH",
+      "version": "0.46.2"
+    },
+    {
+      "advisory": "GHSA-82w8-qh3p-5jfq",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "starlette",
+            "purl": "pkg:pypi/starlette"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0.4.1"
+                },
+                {
+                  "fixed": "1.3.1"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-54283",
+        "GHSA-82w8-qh3p-5jfq",
+        "PYSEC-2026-249"
+      ],
+      "assessment": "urlencoded request.form limits; JSON-only endpoint, no form parser. Starlette upgraded.",
+      "candidate_version": "1.9.0",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "1.3.1"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-09-10T03:51:08.156199030Z",
+      "package": "starlette",
+      "references": [
+        "https://github.com/Kludex/starlette/security/advisories/GHSA-82w8-qh3p-5jfq"
+      ],
+      "severity": "HIGH",
+      "version": "0.46.2"
+    },
+    {
+      "advisory": "GHSA-86qp-5c8j-p5mr",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "starlette",
+            "purl": "pkg:pypi/starlette"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "1.0.1"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-48710",
+        "GHSA-86qp-5c8j-p5mr",
+        "PYSEC-2026-161",
+        "X41-2026-002"
+      ],
+      "assessment": "Host-derived URL path reconstruction can be relevant to ASGI; not blanket-dismissed. Candidate Starlette version outside affected range.",
+      "candidate_version": "1.9.0",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "1.0.1"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-09-10T03:51:08.121685407Z",
+      "package": "starlette",
+      "references": [
+        "https://github.com/Kludex/starlette/security/advisories/GHSA-86qp-5c8j-p5mr",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-48710",
+        "https://github.com/Kludex/starlette/commit/764dab0dcfb9033d75442d7a359645c9f94648c6",
+        "https://www.x41-dsec.de/lab/advisories/x41-2026-002-starlette"
+      ],
+      "severity": "MODERATE",
+      "version": "0.46.2"
+    },
+    {
+      "advisory": "GHSA-jp82-jpqv-5vv3",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "starlette",
+            "purl": "pkg:pypi/starlette"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "1.3.0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-54282",
+        "GHSA-jp82-jpqv-5vv3",
+        "PYSEC-2026-248"
+      ],
+      "assessment": "authority reconstruction from malformed HTTP path can be relevant to ASGI; fixed dependency candidate, internal network only.",
+      "candidate_version": "1.9.0",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "1.3.0"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-09-10T03:50:50.050800090Z",
+      "package": "starlette",
+      "references": [
+        "https://github.com/Kludex/starlette/security/advisories/GHSA-jp82-jpqv-5vv3",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-54282",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/starlette/PYSEC-2026-248.yaml"
+      ],
+      "severity": "LOW",
+      "version": "0.46.2"
+    },
+    {
+      "advisory": "GHSA-wqp7-x3pw-xc5r",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "starlette",
+            "purl": "pkg:pypi/starlette"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "1.1.0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-48818",
+        "GHSA-wqp7-x3pw-xc5r",
+        "PYSEC-2026-2281"
+      ],
+      "assessment": "UNC StaticFiles path on Windows; Linux ARM64 and no StaticFiles route. Dependency upgraded.",
+      "candidate_version": "1.9.0",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "1.1.0"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-09-10T03:50:51.079936646Z",
+      "package": "starlette",
+      "references": [
+        "https://github.com/Kludex/starlette/security/advisories/GHSA-wqp7-x3pw-xc5r"
+      ],
+      "severity": "HIGH",
+      "version": "0.46.2"
+    },
+    {
+      "advisory": "GHSA-x746-7m8f-x49c",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "starlette",
+            "purl": "pkg:pypi/starlette"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "1.1.0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-48817",
+        "GHSA-x746-7m8f-x49c",
+        "PYSEC-2026-2280"
+      ],
+      "assessment": "HTTPEndpoint dynamic attribute dispatch; FastAPI function routes, no such endpoint subclass. Dependency upgraded.",
+      "candidate_version": "1.9.0",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "1.1.0"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-09-10T03:50:12.272722043Z",
+      "package": "starlette",
+      "references": [
+        "https://github.com/Kludex/starlette/security/advisories/GHSA-x746-7m8f-x49c",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-48817",
+        "https://github.com/Kludex/starlette/releases/tag/1.1.0"
+      ],
+      "severity": "MODERATE",
+      "version": "0.46.2"
+    },
+    {
+      "advisory": "GHSA-29pf-2h5f-8g72",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "transformers",
+            "purl": "pkg:pypi/transformers"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "5.3.0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-4372",
+        "GHSA-29pf-2h5f-8g72",
+        "PYSEC-2026-2289"
+      ],
+      "assessment": "untrusted attention implementation in model config; only hash-verified local BERT config, local_files_only and trust_remote_code=False. Transformers upgraded.",
+      "candidate_version": "5.20.2",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "5.3.0"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-09-10T03:50:45.254378086Z",
+      "package": "transformers",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-4372",
+        "https://github.com/huggingface/transformers/commit/a7f8e7ff37d87d1a1a0c8cf607971c607741452f",
+        "https://huntr.com/bounties/1f693a6e-6836-4b8b-a0bd-ca036fba8884"
+      ],
+      "severity": "HIGH",
+      "version": "4.57.6"
+    },
+    {
+      "advisory": "GHSA-69w3-r845-3855",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "transformers",
+            "purl": "pkg:pypi/transformers"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "5.0.0rc3"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-1839",
+        "GHSA-69w3-r845-3855",
+        "PYSEC-2026-2288"
+      ],
+      "assessment": "Trainer RNG pickle load; no Trainer/checkpoint resume; torch 2.13 CPU. Transformers upgraded.",
+      "candidate_version": "5.20.2",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "5.0.0rc3"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-09-10T03:50:43.300048881Z",
+      "package": "transformers",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-1839",
+        "https://github.com/huggingface/transformers/commit/03c8082ba4594c9b8d6fe190ca9bed0e5f8ca396",
+        "https://github.com/huggingface/transformers/releases/tag/v5.0.0rc3",
+        "https://huntr.com/bounties/3c77bb97-e493-493d-9a88-c57f5c536485"
+      ],
+      "severity": "MODERATE",
+      "version": "4.57.6"
+    },
+    {
+      "advisory": "GHSA-fgcw-684q-jj6r",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "transformers",
+            "purl": "pkg:pypi/transformers"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "5.5.0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-5241",
+        "GHSA-fgcw-684q-jj6r",
+        "PYSEC-2026-2290"
+      ],
+      "assessment": "LightGlue nested model config; fixed BERT token classification only. Transformers upgraded.",
+      "candidate_version": "5.20.2",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "5.5.0"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-09-10T03:50:49.345942449Z",
+      "package": "transformers",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-5241",
+        "https://github.com/huggingface/transformers/commit/676559d5022b74aaa0cee1cee0842b7f27c5320e",
+        "https://access.redhat.com/errata/RHSA-2026:34456",
+        "https://access.redhat.com/errata/RHSA-2026:37275"
+      ],
+      "severity": "HIGH",
+      "version": "4.57.6"
+    },
+    {
+      "advisory": "GHSA-x9r9-c232-4q39",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "transformers",
+            "purl": "pkg:pypi/transformers"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "4.49.0"
+                },
+                {
+                  "last_affected": "5.8.1"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-80047",
+        "GHSA-x9r9-c232-4q39",
+        "PYSEC-2026-4174"
+      ],
+      "assessment": "custom generation downloader before trust check; no generation or remote modules. Candidate above recorded last_affected 5.8.1; no invented fixed event.",
+      "candidate_version": "5.20.2",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-10-01T17:55:55.397425521Z",
+      "package": "transformers",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-80047",
+        "https://github.com/huggingface/transformers/pull/48620",
+        "https://github.com/huggingface/transformers/commit/cbc1651a032b923da7f4b44b3d0e6f68e6ba6b55",
+        "https://kb.cert.org/vuls/id/456290"
+      ],
+      "severity": "HIGH",
+      "version": "4.57.6"
+    },
+    {
+      "advisory": "GHSA-xrqw-3rrv-vx5w",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "transformers",
+            "purl": "pkg:pypi/transformers"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "fixed": "5.10.0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-9856",
+        "GHSA-xrqw-3rrv-vx5w",
+        "PYSEC-2026-3929"
+      ],
+      "assessment": "save_pretrained chat-template paths; no save/tokenizer conversion path. Transformers upgraded.",
+      "candidate_version": "5.20.2",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "5.10.0"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-09-10T12:25:36.528730268Z",
+      "package": "transformers",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-9856",
+        "https://github.com/huggingface/transformers/pull/46191",
+        "https://github.com/huggingface/transformers/commit/eaaaf8494dd5386634ae37d1d122212fdc315be5",
+        "https://huntr.com/bounties/362824d5-fe18-40e8-a6cf-62277f97a170"
+      ],
+      "severity": "HIGH",
+      "version": "4.57.6"
+    },
+    {
+      "advisory": "PYSEC-2025-217",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "transformers",
+            "purl": "pkg:pypi/transformers"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "0"
+                },
+                {
+                  "last_affected": "5.0.0-rc0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2025-14929",
+        "PYSEC-2025-217"
+      ],
+      "assessment": "X-CLIP conversion torch.load; no checkpoint conversion. Candidate above recorded last_affected 5.0.0rc0; no invented fixed event.",
+      "candidate_version": "5.20.2",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-05-21T15:00:24.271970226Z",
+      "package": "transformers",
+      "references": [
+        "https://www.zerodayinitiative.com/advisories/ZDI-25-1144/"
+      ],
+      "severity": null,
+      "version": "4.57.6"
+    },
+    {
+      "advisory": "GHSA-8988-9cw3-xx77",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "urllib3",
+            "purl": "pkg:pypi/urllib3"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "1.26.0"
+                },
+                {
+                  "fixed": "2.8.0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-97687",
+        "GHSA-8988-9cw3-xx77",
+        "PYSEC-2026-4175"
+      ],
+      "assessment": "urllib3 proxy/target TLS separation; scanner transport uses httpx, Analyzer has no external network. urllib3 upgraded to 2.8.0 for build/runtime inventory.",
+      "candidate_version": "2.8.0",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "2.8.0"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-10-01T17:55:53.793608550Z",
+      "package": "urllib3",
+      "references": [
+        "https://github.com/urllib3/urllib3/security/advisories/GHSA-8988-9cw3-xx77",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-97687",
+        "https://github.com/urllib3/urllib3/pull/5093",
+        "https://github.com/urllib3/urllib3/commit/07408cec79d1856d81bb42c74a904a24fdb9e465"
+      ],
+      "severity": "HIGH",
+      "version": "2.7.0"
+    },
+    {
+      "advisory": "GHSA-gh4c-6fx4-qh6g",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "urllib3",
+            "purl": "pkg:pypi/urllib3"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "2.6.2"
+                },
+                {
+                  "fixed": "2.8.0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-97688",
+        "GHSA-gh4c-6fx4-qh6g",
+        "PYSEC-2026-4176"
+      ],
+      "assessment": "urllib3 chunked deflate streaming loop; no external response streaming in scan. urllib3 upgraded.",
+      "candidate_version": "2.8.0",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "2.8.0"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-10-01T17:55:40.608255720Z",
+      "package": "urllib3",
+      "references": [
+        "https://github.com/urllib3/urllib3/security/advisories/GHSA-gh4c-6fx4-qh6g",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-97688",
+        "https://github.com/urllib3/urllib3/commit/ea2ad7b21a80da3632f80016526a18864586077f",
+        "https://github.com/urllib3/urllib3/releases/tag/2.8.0"
+      ],
+      "severity": "MODERATE",
+      "version": "2.7.0"
+    },
+    {
+      "advisory": "GHSA-vxq7-64xx-v4gw",
+      "affected_ranges": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "urllib3",
+            "purl": "pkg:pypi/urllib3"
+          },
+          "ranges": [
+            {
+              "events": [
+                {
+                  "introduced": "1.10.3"
+                },
+                {
+                  "fixed": "2.8.0"
+                }
+              ],
+              "type": "ECOSYSTEM"
+            }
+          ]
+        }
+      ],
+      "aliases": [
+        "CVE-2026-97689",
+        "GHSA-vxq7-64xx-v4gw",
+        "PYSEC-2026-4177"
+      ],
+      "assessment": "urllib3 unbounded chunk-size line; no external response streaming in scan. urllib3 upgraded.",
+      "candidate_version": "2.8.0",
+      "disposition": "candidate_not_in_OSV_affected_range",
+      "fixed_events": [
+        "2.8.0"
+      ],
+      "images": [
+        "analyzer"
+      ],
+      "modified": "2026-10-01T17:55:57.514829071Z",
+      "package": "urllib3",
+      "references": [
+        "https://github.com/urllib3/urllib3/security/advisories/GHSA-vxq7-64xx-v4gw",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-97689",
+        "https://github.com/urllib3/urllib3/commit/cd770b059b543be29298ea5c52afb0b1b090f5ed",
+        "https://github.com/urllib3/urllib3/releases/tag/2.8.0"
+      ],
+      "severity": "HIGH",
+      "version": "2.7.0"
+    }
+  ]
+}

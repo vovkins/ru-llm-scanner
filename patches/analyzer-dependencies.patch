@@ -1,0 +1,18 @@
+--- a/presidio/requirements-analyzer.txt
++++ b/presidio/requirements-analyzer.txt
+@@ -4,12 +4,12 @@
+ 
+ presidio-analyzer>=2.2.362,<3.0
+ spacy>=3.8,<3.9
+-fastapi>=0.115,<0.116
++fastapi==0.149.0
+ uvicorn>=0.34,<0.35
+ 
+ # Fixed inference stack for fef2/ner_rus_bert-secret_detection.
+ # PyTorch is installed separately from requirements-analyzer-cpu.txt.
+-transformers==4.57.6
+-huggingface-hub==0.36.2
++transformers==5.20.2
++huggingface-hub==1.33.0
+ safetensors==0.8.0
+ regex>=2026.1,<2027

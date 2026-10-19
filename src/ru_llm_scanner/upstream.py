@@ -127,6 +127,7 @@ def _load_source_lock(path: Path):
     require(
         isinstance(lock.get("patches"), list) and lock["patches"], "Missing patches"
     )
+    target_versions = dict(lock["sources"])
     for patch in lock["patches"]:
         safe_path(patch["path"])
         require(
@@ -136,10 +137,11 @@ def _load_source_lock(path: Path):
         for name, hashes in patch["targets"].items():
             require(
                 name in lock["sources"]
-                and hashes.get("before") == lock["sources"][name]
+                and hashes.get("before") == target_versions[name]
                 and bool(SHA256.fullmatch(hashes.get("after", ""))),
                 "Invalid patch target",
             )
+            target_versions[name] = hashes["after"]
     require(
         lock.get("dictionary", {}).get("policy_path") in lock["sources"]
         and lock["dictionary"].get("rules_path") in lock["sources"],
@@ -169,6 +171,15 @@ def _load_source_lock(path: Path):
             bool(SHA256.fullmatch(profile.get("constraints_sha256", ""))),
             "Invalid constraints hash",
         )
+        if "offline_artifacts_path" in profile:
+            safe_path(profile["offline_artifacts_path"])
+            require(
+                all(
+                    bool(SHA256.fullmatch(profile.get(key, "")))
+                    for key in ("offline_artifacts_sha256", "offline_dockerfile_sha256")
+                ),
+                "Invalid offline build hashes",
+            )
     require(
         isinstance(lock.get("analyzer_environment"), dict),
         "Missing Analyzer environment",
@@ -613,8 +624,20 @@ def build(context: Path, tag: str, extra_args: list[str], *, test_image: bool = 
             profile["profile"] == "cpu", "Upstream test image requires a CPU profile"
         )
         target = "analyzer-test"
+    offline_args = []
+    if "offline_artifacts_path" in profile:
+        require(
+            not extra_args, "Offline build uses prepared inputs, not build arguments"
+        )
+        require(
+            manifest.get("offline_artifacts_sha256")
+            == profile["offline_artifacts_sha256"],
+            "Complete offline context required; run prepare_offline_analyzer.py",
+        )
+        offline_args = ["--network", "none", "--pull=false"]
     docker(
         "build",
+        *offline_args,
         "--platform",
         profile["platform"],
         "--progress",

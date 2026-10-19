@@ -1,5 +1,11 @@
 # Лицензирование и происхождение
 
+Для dependency-кандидата #24 сохранён отдельный
+[inventory фактически установленных пакетов](../verification/operations-dependencies/analyzer-licenses.json)
+и [описание происхождения](../verification/operations-dependencies/README.md).
+Исходные license/notice files wheels и Debian packages сохраняются в images.
+Это inventory, а не выбор лицензии scanner или разрешение публикации.
+
 В текущем checkout `ru-llm-scanner` нет файла LICENSE; лицензия scanner пока
 не выбрана владельцем. Историческая read-only проверка GitHub 2026-10-18
 также вернула `license=null`; это не новая проверка внешних настроек.

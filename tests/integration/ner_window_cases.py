@@ -124,3 +124,30 @@ def test_alternate_forward_failure_is_not_clean():
     with pytest.raises(NERProcessingError) as error:
         detector.analyze("x" * 500)
     assert error.value.failure_class == "forward_pass_failed"
+
+
+class TokenizerV5(FakeTokenizer):
+    build_inputs_with_special_tokens = None
+    create_token_type_ids_from_sequences = None
+    cls_token_id = 101
+    sep_token_id = 102
+
+
+def test_v5_bert_special_tokens_preserve_predictions_and_offsets():
+    legacy = recognizer()
+    adapted = recognizer()
+    adapted._tokenizer = TokenizerV5([(i, i + 1) for i in range(500)])
+    expected = legacy.analyze("x" * 500)
+    actual = adapted.analyze("x" * 500)
+    assert [(r.entity_type, r.start, r.end, r.score) for r in actual] == [
+        (r.entity_type, r.start, r.end, r.score) for r in expected
+    ]
+
+
+@pytest.mark.parametrize("special", [None, True])
+def test_v5_invalid_special_token_ids_fail_closed(special):
+    detector = recognizer()
+    detector._tokenizer = TokenizerV5([(i, i + 1) for i in range(500)])
+    detector._tokenizer.cls_token_id = special
+    with pytest.raises(NERProcessingError):
+        detector.analyze("x" * 500)

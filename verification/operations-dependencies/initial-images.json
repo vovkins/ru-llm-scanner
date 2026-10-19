@@ -1,0 +1,11 @@
+{
+  "analyzer": {
+    "image_id": "sha256:337a5152ee8422a8400482ce57a72d1884bf532e0ed694ea989f045f16fbf579",
+    "image_reference_id": "sha256:1e3c6511ff50f97dac5ecf9450f85669a29fb36eb146266f9102f31c0ed87ebc"
+  },
+  "platform": "linux/arm64",
+  "scanner": {
+    "image_id": "sha256:e6663e3ae1a929afc6fd36e02251f870d2821e4f5c9a73e1009e561824448663",
+    "image_reference_id": "sha256:e6663e3ae1a929afc6fd36e02251f870d2821e4f5c9a73e1009e561824448663"
+  }
+}

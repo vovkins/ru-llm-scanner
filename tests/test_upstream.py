@@ -140,6 +140,41 @@ class PreparationTests(unittest.TestCase):
         with self.assertRaises(ArtifactError):
             verify_context(self.output)
 
+    def test_sequential_patches_require_exact_predecessor_hash(self):
+        before = "line one\nline two\nline three\n"
+        after = before + "line four\n"
+        target = "presidio/analyzer_server.py"
+        patch = "".join(
+            difflib.unified_diff(
+                before.splitlines(True),
+                after.splitlines(True),
+                fromfile="a/" + target,
+                tofile="b/" + target,
+            )
+        )
+        path = self.project / "patches/second.patch"
+        path.write_text(patch)
+        self.lock["patches"].append(
+            {
+                "path": "patches/second.patch",
+                "sha256": file_hash(path),
+                "targets": {
+                    target: {
+                        "before": sha256(before.encode()),
+                        "after": sha256(after.encode()),
+                    }
+                },
+            }
+        )
+        write_json(self.path, self.lock)
+        self.run_prepare()
+        verify_context(self.output)
+        self.assertEqual((self.output / target).read_text(), after)
+        self.lock["patches"].reverse()
+        write_json(self.path, self.lock)
+        with self.assertRaisesRegex(ArtifactError, "Invalid patch target"):
+            load_source_lock(self.path)
+
     def test_destination_not_overwritten(self):
         self.run_prepare()
         with self.assertRaisesRegex(ArtifactError, "already exists"):

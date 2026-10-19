@@ -11,6 +11,7 @@
 
 ```sh
 python3.11 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip==26.2.1
 .venv/bin/python -m pip install -e . -r requirements-dev.txt
 ```
 

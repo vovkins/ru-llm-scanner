@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Prepare a small explicit context, build offline, seal the local scanner ID.
 
-Preparation is the only online operation. Secret pip/apt configurations and CA
-are mounted into a disposable preparation container, never copied into context.
+Preparation can explicitly download reviewed artifacts, or read a hash cache.
+Scanning and builds remain offline. Credentials/CA never enter build contexts.
 """
 
 import argparse
@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import ssl
 import subprocess
 import sys
 
@@ -23,7 +24,7 @@ from docker_scanner import (
     write_private,
 )
 
-BASE = "python@sha256:9534e5a8e315485d4061ed659af0fd78a284c015f9b73661b41d6bab25604534"
+BASE = "python@sha256:e88e9763f943ec1834f992a4b51e0f24500486803e8bc534e5767af9ea65f6ce"
 PLATFORM = "linux/arm64"
 GIT = "1:2.47.3-0+deb13u1"
 ASSETS = (
@@ -49,12 +50,36 @@ def prepare(args):
     # Validate the engine before copying its four allowlisted assets.
     sys.path.insert(0, str(ROOT / "src"))
     from ru_llm_scanner.engine import ScanEngine
+    from ru_llm_scanner.offline_assets import (
+        load_artifacts,
+        materialize,
+        validate_closure,
+    )
+    from ru_llm_scanner.artifacts import read_json, require
 
     ScanEngine.from_artifacts(
         source_lock=args.engine_dir / ASSETS[0],
         runtime_lock=args.engine_dir / ASSETS[1],
         policy_file=args.engine_dir / ASSETS[2],
         rules_file=args.engine_dir / ASSETS[3],
+    )
+    if args.pip_config or args.apt_config:
+        raise Failure("locked_artifacts_use_cache_or_explicit_download")
+    profile = read_json(ROOT / "upstream.lock.json")["build_profiles"][
+        "cpu-linux-arm64"
+    ]
+    artifact_path = ROOT / profile["offline_artifacts_path"]
+    require(
+        digest(artifact_path) == profile["offline_artifacts_sha256"],
+        "Artifact lock checksum mismatch",
+    )
+    artifacts = load_artifacts(artifact_path)
+    require(
+        artifacts["base"] == BASE and artifacts["platform"] == PLATFORM,
+        "Artifact base/platform mismatch",
+    )
+    validate_closure(
+        artifacts, "scanner", ROOT / "locks/requirements-scanner-linux-arm64.txt"
     )
     context = args.context.resolve()
     context.mkdir(mode=0o700, parents=False, exist_ok=False)
@@ -63,38 +88,18 @@ def prepare(args):
     for name in ASSETS:
         shutil.copyfile(args.engine_dir / name, context / "engine" / name)
     shutil.copyfile(ROOT / "docker/scanner.Dockerfile", context / "Dockerfile")
+    shutil.copyfile(ROOT / "docker/probe_runtime.py", context / "probe_runtime.py")
     shutil.copyfile(args.wheel, context / "wheels" / args.wheel.name)
-    command = ["run", "--rm", "--pull", "never", "--platform", PLATFORM]
-    command += bind(context / "wheels", "/out/wheels", False)
-    command += bind(context / "debs", "/var/cache/apt/archives", False)
-    command += bind(
-        ROOT / "locks/requirements-scanner-linux-arm64.txt", "/runtime-requirements.txt"
+    tls = ssl.create_default_context(cafile=args.ca) if args.ca else None
+    materialize(
+        artifacts,
+        "scanner",
+        context,
+        args.artifact_cache,
+        download=args.download_artifacts,
+        ssl_context=tls,
     )
-    if args.pip_config:
-        command += bind(args.pip_config, "/run/secrets/pip.conf")
-        command += ["-e", "PIP_CONFIG_FILE=/run/secrets/pip.conf"]
-    if args.apt_config:
-        command += bind(args.apt_config, "/run/secrets/apt.conf")
-        command += ["-e", "APT_CONFIG=/run/secrets/apt.conf"]
-    if args.ca:
-        command += bind(args.ca, "/run/secrets/ca.pem")
-        command += ["-e", "PIP_CERT=/run/secrets/ca.pem"]
-    # Literal shell program; no user values interpolated. Proxy credentials, if
-    # needed, are supplied inside secret files. Output is captured, not printed.
-    program = (
-        "set -eu; "
-        "if [ -f /run/secrets/ca.pem ]; then "
-        "export APT_CA_OPTION='Acquire::https::CaInfo=/run/secrets/ca.pem'; "
-        "else export APT_CA_OPTION='Acquire::https::Verify-Peer=true'; fi; "
-        'apt-get -o "$APT_CA_OPTION" update; '
-        f'apt-get -o "$APT_CA_OPTION" install --download-only --no-install-recommends -y git={GIT}; '
-        "python -m pip download --only-binary=:all: --no-deps --dest /out/wheels -r /runtime-requirements.txt"
-    )
-    command += [BASE, "sh", "-c", program]
-    docker(*command, timeout=1800)
-    # Apt's lock/partial are not build inputs. Copy no secret or source directory.
-    (context / "debs/lock").unlink(missing_ok=True)
-    shutil.rmtree(context / "debs/partial", ignore_errors=True)
+    shutil.copyfile(artifact_path, context / "artifacts.lock.json")
     inventory = {
         "inventory_version": 1,
         "base": BASE,
@@ -104,6 +109,7 @@ def prepare(args):
         "requirements_sha256": digest(
             ROOT / "locks/requirements-scanner-linux-arm64.txt"
         ),
+        "offline_artifacts_sha256": digest(artifact_path),
         "files": {
             str(p.relative_to(context)): digest(p)
             for p in sorted(context.rglob("*"))
@@ -131,6 +137,8 @@ def verify_context(context):
     ):
         raise Failure("context_integrity_error")
     if digest(context / "Dockerfile") != digest(ROOT / "docker/scanner.Dockerfile"):
+        raise Failure("context_integrity_error")
+    if digest(context / "probe_runtime.py") != digest(ROOT / "docker/probe_runtime.py"):
         raise Failure("context_integrity_error")
     return inventory
 
@@ -209,6 +217,8 @@ def main():
     prep.add_argument("--context", type=Path, required=True)
     prep.add_argument("--engine-dir", type=Path, required=True)
     prep.add_argument("--wheel", type=Path, required=True)
+    prep.add_argument("--artifact-cache", type=Path, required=True)
+    prep.add_argument("--download-artifacts", action="store_true")
     for name in ("pip-config", "apt-config", "ca"):
         prep.add_argument("--" + name, type=Path)
     b = sub.add_parser("build")
