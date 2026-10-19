@@ -6,6 +6,8 @@ import json
 import os
 from pathlib import Path
 import tempfile
+import subprocess
+import sys
 import unittest
 from unittest.mock import patch
 
@@ -16,6 +18,76 @@ spec.loader.exec_module(launcher)
 
 
 class DockerLauncherTests(unittest.TestCase):
+    def test_metadata_regular_bounded_strict_json_and_final_symlink_policy(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            path = root / "metadata.json"
+            path.write_text('{"valid": 1}')
+            self.assertEqual(launcher.strict_json(path), {"valid": 1})
+            link = root / "link.json"
+            link.symlink_to(path)
+            for invalid in (link, root, root / "missing"):
+                with self.assertRaises(launcher.Failure) as error:
+                    launcher.strict_json(invalid)
+                self.assertEqual(error.exception.code, "invalid_lock")
+            for data in (
+                b'{"a":1,"a":2}',
+                b'{"a":NaN}',
+                b"[] trailing",
+                b"\xff",
+                b" " * (4 * 1024 * 1024 + 1),
+            ):
+                path.write_bytes(data)
+                with self.assertRaises(launcher.Failure):
+                    launcher.strict_json(path)
+            # A file can grow after fstat; the actual read is still capped.
+            path.write_bytes(b" " * (4 * 1024 * 1024 + 1))
+            info = path.stat()
+            values = list(info)
+            values[6] = 0
+            with patch.object(
+                launcher.os, "fstat", return_value=os.stat_result(values)
+            ):
+                with self.assertRaises(launcher.Failure):
+                    launcher.strict_json(path)
+
+    def test_fifo_metadata_returns_before_docker_without_a_writer(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            fifo = root / "lock.json"
+            os.mkfifo(fifo)
+            docker = root / "docker"
+            docker.write_text('#!/bin/sh\ntouch "$DOCKER_MARKER"\nexit 1\n')
+            docker.chmod(0o700)
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPT),
+                    "snapshot",
+                    "--repo",
+                    folder,
+                    "--commit",
+                    "HEAD",
+                    "--output",
+                    str(root / "out"),
+                    "--deployment-lock",
+                    str(fifo),
+                ],
+                env={
+                    **os.environ,
+                    "PATH": str(root) + os.pathsep + os.environ.get("PATH", ""),
+                    "DOCKER_MARKER": str(root / "called"),
+                },
+                capture_output=True,
+                timeout=3,
+            )
+            self.assertEqual(result.returncode, 2, result.stderr)
+            self.assertEqual(
+                json.loads(result.stdout), {"exit_code": 2, "error": "invalid_lock"}
+            )
+            self.assertFalse((root / "called").exists())
+            self.assertFalse((root / "out").exists())
+
     def test_special_paths_refs_are_literal_and_mounts_are_separate(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder).resolve()

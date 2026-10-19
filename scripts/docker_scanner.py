@@ -16,6 +16,7 @@ import os
 from pathlib import Path
 import re
 import signal
+import stat
 import subprocess
 import sys
 import tempfile
@@ -61,10 +62,18 @@ def strict_json(path):
         return result
 
     try:
-        if path.stat().st_size > 4 * 1024 * 1024:
-            raise ValueError()
+        # Refuse final symlinks and special files before any blocking read.
+        fd = os.open(path, os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW | os.O_CLOEXEC)
+        with os.fdopen(fd, "rb") as stream:
+            info = os.fstat(stream.fileno())
+            limit = 4 * 1024 * 1024
+            if not stat.S_ISREG(info.st_mode) or info.st_size > limit:
+                raise ValueError()
+            data = stream.read(limit + 1)
+            if len(data) > limit:
+                raise ValueError()
         return json.loads(
-            path.read_text(),
+            data.decode("utf-8"),
             object_pairs_hook=pairs,
             parse_constant=lambda _: (_ for _ in ()).throw(ValueError()),
         )
