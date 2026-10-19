@@ -1,11 +1,11 @@
 # Документация
 
 Статус: спецификация и локальный механизм обнаружения готовы. Команды
-сканирования репозитория пока проектируемые. Работают подготовка/сборка Analyzer,
+snapshot/diff, JSON/HTML и baseline работают через CLI. Доступны подготовка/сборка Analyzer,
 проверки адаптера и JSON Schema. Внутренний Git API читает снимки/сравнения
 деревьев и готовит тексты. Scan API соединяет его с Analyzer/словарём,
 сохраняет находки/координаты/охват и возвращает безопасную сводку.
-Пользовательские CLI, JSON/HTML writer и baseline ещё не подключены.
+Production Docker/Compose и Jenkins ещё не подключены.
 
 ## Пользователю и оператору CI
 
@@ -13,6 +13,7 @@
 | --- | --- |
 | Понять назначение и готовность | [README](../README.md) |
 | Выбрать снимок или переход и понять охват | [Режимы](scan-modes.md) |
+| Запустить доступный CLI | [Dev quickstart](cli-quickstart.md) |
 | Задать аргументы и профиль проверки | [CLI и конфигурация](configuration.md) |
 | Читать JSON/HTML и трактовать результат | [Отчёты](reports.md) |
 | Переиспользовать предыдущую проверку | [Baseline](baseline.md) |
@@ -23,7 +24,7 @@
 | Выполнить внутренний snapshot/diff и offline-проверку | [Scan API](scan-api.md) |
 | Работать с чувствительными отчётами | [Безопасность](../SECURITY.md) |
 
-Руководства по запуску полного сканера, переносу его образов, Jenkins и
+Руководства по штатному Docker-запуску, переносу образов, Jenkins и
 эксплуатационной диагностике добавляются на этапе 6. Текущие команды Docker
 предназначены для dev-проверок механизма и синтетического scan pipeline.
 
@@ -36,6 +37,7 @@
 - [Результаты проверки Analyzer на этапе 2](../verification/stage-2/README.md).
 - [Результаты проверки Git/text на этапе 3](../verification/stage-3/README.md).
 - [Результаты scan pipeline и качества кода на этапе 4](../verification/stage-4/README.md).
+- [Результаты CLI/отчётов/baseline на этапе 5](../verification/stage-5/README.md).
 - [Лицензирование](licensing.md), [постоянные инструкции](../AGENTS.md).
 
 Источником договорённостей служит [общая задача #1](https://github.com/vovkins/ru-llm-scanner/issues/1).
@@ -47,5 +49,7 @@ Analyzer. [Этап 3](https://github.com/vovkins/ru-llm-scanner/issues/5)
 согласован 2026-10-19; Git API и классификация реализованы, результаты описаны
 в отдельном руководстве. [Этап 4](https://github.com/vovkins/ru-llm-scanner/issues/7)
 согласован 2026-10-19; scan API и отдельная оценка качества реализованы.
-[План этапа 5](https://github.com/vovkins/ru-llm-scanner/issues/9) ожидает
-отдельного согласования; его реализация не начата.
+[Этап 5](https://github.com/vovkins/ru-llm-scanner/issues/9) согласован
+2026-10-19: CLI, отчёты и baseline реализованы.
+[План этапа 6](https://github.com/vovkins/ru-llm-scanner/issues/11) подготовлен
+для отдельного согласования; реализация не начата.

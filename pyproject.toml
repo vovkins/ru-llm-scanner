@@ -8,7 +8,13 @@ version = "0.1.0.dev0"
 description = "Local sensitive-data detection for Git repository scanning"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = ["httpx==0.28.1"]
+dependencies = ["httpx==0.28.1", "jsonschema[format]==4.26.0"]
+
+[project.scripts]
+ru-llm-scanner = "ru_llm_scanner.cli:main"
+
+[tool.setuptools.package-data]
+ru_llm_scanner = ["report-v1.schema.json"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

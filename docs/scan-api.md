@@ -1,8 +1,8 @@
 # Внутренний API сканирования
 
 Этап 4 соединяет Git/text API, закреплённый Analyzer и словарь. Работает
-Python API для snapshot/diff; пользовательские команды, JSON/HTML writer и
-baseline подключаются на этапе 5. Это руководство для разработки и проверки,
+Python API для snapshot/diff; CLI, JSON/HTML writer и baseline подключены
+на этапе 5. [Dev quickstart](cli-quickstart.md). Это руководство для разработки,
 не инструкция production-развёртывания.
 
 ## Подготовка и вызов
@@ -38,6 +38,9 @@ print(result.summary())  # Без значений, контекста и тек
 
 Для перехода передайте `mode="diff", from_commit="COMMIT_A",
 to_commit="COMMIT_B"` вместо `commit`. Комбинации аргументов проверяются.
+Для доверенного отчёта A передайте `baseline=Path("/trusted/report.json")`,
+при строгом запуске также `require_baseline=True`. Отчёт проходит runtime
+validation и сверяется с полным деревом A/профилем; отказ не включает fallback.
 Ревизии фиксируются в полные OID; checkout/fetch не выполняются. Подробные
 ограничения клонов, refs, scope и кодировок — в [Git reader](git-reader.md).
 
@@ -67,7 +70,7 @@ HTTP-подпись/каталог/модель проверяются при р
 | Поле/свойство | Смысл |
 | --- | --- |
 | `ScanFile.selection` | Git entry: raw/display path, OID/mode и тип изменения |
-| `ScanFile.status`, `reason` | analyzed/unverified/excluded/unsupported/error и машинная причина |
+| `ScanFile.status`, `reason` | analyzed/inherited/unverified/excluded/unsupported/error и машинная причина |
 | `size_bytes`, `encoding` | Фактически установленный размер/кодировка либо `None` |
 | `ScanFile.findings` | Проверенные находки успешно завершённого файла |
 | `result.findings` | Все находки в порядке путь/смещения/категория/source/rule |
@@ -113,20 +116,26 @@ Readiness проверяется до Git, даже для пустого дер
 | --- | --- | --- |
 | Завершённый snapshot, нет/есть находки | 0/1 | snapshot_verified |
 | Завершённый diff без baseline, нет/есть находки | 0/1 | changed_files_only |
+| Завершённый diff с проверенным baseline | 0/1 | baseline_verified |
 | Ошибка файла или финальной проверки | 2, incomplete | none |
 | Ошибка до полного плана/preflight | 2, error | none |
 
 `complete` означает завершение заданной поддерживаемой текстовой обработки,
 а не отсутствие секретов во всех объектах. Excluded/unsupported перечисляются
 явно и не становятся обработанными. Неизменённые файлы diff имеют
-`unverified/no_baseline`; даже A=B не подтверждает весь B. На этом этапе нет
-`inherited` и `baseline_verified`. Приоритет 2 → 1 → 0, включая частичные находки.
+`unverified/no_baseline` без baseline; даже A=B тогда не подтверждает весь B.
+При проверенном baseline unchanged analyzed/inherited наследуют encoding/size
+и `evidence_report_id` непосредственно предыдущего отчёта. Unsupported заново
+классифицируются той же политикой. Приоритет 2 → 1 → 0, включая частичные находки.
 
 Ошибки config/artifact/аргументов до запуска могут быть исключениями
 `ConfigError`/`AnalysisError` с безопасным кодом. Операционные ошибки внутри
 запуска превращаются в `ScanError`; отмена распространяется как
-`asyncio.CancelledError` после очистки. `summary()` — dev API, не сериализованный
-`scan_report` и не доказательство baseline. Writer/semantic validator — этап 5.
+`asyncio.CancelledError` после очистки по умолчанию. Для CLI предусмотрен
+`capture_cancelled=True`: после очистки возвращается неполный ScanResult со
+завершёнными находками и ошибкой scan_cancelled. `summary()` — dev API, не
+сериализованный scan_report и не доказательство baseline. `reports.build_report`
+строит JSON v1, `report_validation.validate_report` проверяет runtime-инварианты.
 
 ## Нагрузка и завершение
 
@@ -151,40 +160,22 @@ Readiness проверяется до Git, даже для пустого дер
 Закрытие HTTP не гарантирует остановку вычислений внутри удалённого Analyzer:
 управление процессом контейнера относится к оператору/этапу 6.
 
-На доступном CPU ARM64 стенде создание синтетического Git-репозитория и
+В измерении этапа 4 на CPU ARM64 создание синтетического Git-репозитория и
 snapshot 46 небольших файлов, включая ожидание readiness, заняли около
 8.2 секунды. Это не SLA для 10 MiB, произвольных
 репозиториев или concurrency>1. GPU/другие архитектуры не проверены.
 
 ## Воспроизводимая offline-проверка
 
-Сначала подготовьте и seal CPU-образ по [Analyzer](analyzer.md).
-Dev-образ ниже содержит только Python/Git/HTTPX, без модели. Сборка требует
-источники зависимостей; build context включает только Dockerfile.
+Объединённый текущий прогон — в [CLI quickstart](cli-quickstart.md): он проверяет
+установленный wheel и включает прежнюю direct-model parity на всём code-v1,
+независимые координаты/value/context, длинный хвост, full-file diff и ошибки.
+Scanner работает UID 65534/read-only без capabilities в loopback namespace
+временного Analyzer с --network none; внешнего маршрута нет.
 
-```bash
-mkdir -p .build/stage-4/image-context
-cp docker/scan-test.Dockerfile .build/stage-4/image-context/Dockerfile
-docker build --platform linux/arm64 -t ru-llm-scanner-scan-tests:stage4 \
-  .build/stage-4/image-context
-.venv/bin/python scripts/check_scan_integration.py \
-  --runtime-lock locks/analyzer-cpu-linux-arm64.runtime.lock.json \
-  --context .build/analyzer --scanner-image ru-llm-scanner-scan-tests:stage4 \
-  --output-dir .build/stage-4/real-model
-```
-
-Launcher проверяет фактический platform Image ID Analyzer и хеши словаря,
-запускает собственный временный Analyzer с `--network none`; scanner разделяет
-только его сетевое пространство, общается по loopback. Снаружи маршрута нет.
-Scanner работает от UID 65534, read-only FS, без capabilities; получает только
-явный список исходников/синтетических fixtures/locks/словарных assets read-only.
-Рабочий репозиторий, `.git`, secrets и конфиги пользователя не монтируются.
-Собственный Analyzer останавливается в `finally`; существующие сервисы не нужны.
-Это dev-harness для проверенного ARM64 runtime, не штатная упаковка scanner.
-
-Проверка сопоставляет pipeline с прямым Analyzer+словарём на всех файлах,
-независимо проверяет координаты, full-file diff, ошибки и профиль. Отдельно
-измеряет качество по [разметке code-v1](../tests/corpus/README.md), не требуя
-фиктивных 100%. Результат содержит версии/хеши и ошибки категорий/границ без
-значений. Фактические метрики и пропуски — в
-[результатах этапа 4](../verification/stage-4/README.md).
+Dev-образ этапа 5 содержит текущие runtime-зависимости, включая jsonschema;
+старый dev-образ этапа 4 предназначен для того исторического состояния кода.
+Сохранённые [результаты этапа 4](../verification/stage-4/README.md) остаются
+историческим evidence, [этап 5](../verification/stage-5/README.md) фиксирует новый
+код/образы и фактические ограничения QA. Формирование реальных отчётов не
+устраняет известных ошибок модели на независимой разметке.

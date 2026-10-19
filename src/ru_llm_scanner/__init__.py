@@ -1,3 +1,3 @@
-"""Local detection components; repository-scanning CLI is not implemented yet."""
+"""Local Git sensitive-data scanner and report API."""
 
 __version__ = "0.1.0.dev0"

@@ -13,8 +13,9 @@ CPU-образа. Подготовлены спецификации, JSON Schema
 чтение объектов и подготовка текста `text-v1`.
 Работает внутренний scan API: конфигурация/профиль, анализ полных файлов,
 находки/координаты/контекст, ограниченная очередь и явные ошибки/охват.
-CLI `snapshot/diff`, формирование HTML/JSON, baseline и Jenkins
-**ещё не реализованы**. Ниже — проектируемый пользовательский интерфейс.
+Доступны CLI `snapshot/diff`, реальные JSON/HTML и проверяемая цепочка baseline.
+Штатный Docker/Compose и Jenkins ещё относятся к следующему этапу.
+[Dev quickstart CLI](docs/cli-quickstart.md).
 
 Для проверки уже доступного механизма см. [руководство Analyzer](docs/analyzer.md).
 Проверенная платформа — CPU `linux/arm64`. GPU-цели upstream сохранены, но
@@ -24,6 +25,7 @@ CLI `snapshot/diff`, формирование HTML/JSON, baseline и Jenkins
 [результаты этапа 3](verification/stage-3/README.md).
 [Scan API и воспроизводимый offline-прогон](docs/scan-api.md),
 [результаты этапа 4](verification/stage-4/README.md).
+[Проверки CLI/отчётов/baseline](verification/stage-5/README.md).
 
 На отдельном синтетическом корпусе кода получены exact precision 71.74% и
 recall 89.19% (37 размеченных мест). Ограничения текущей модели, включая
@@ -36,19 +38,20 @@ recall 89.19% (37 размеченных мест). Ограничения те�
 [Этап 2](https://github.com/vovkins/ru-llm-scanner/issues/3) ·
 [Этап 3](https://github.com/vovkins/ru-llm-scanner/issues/5) ·
 [Этап 4](https://github.com/vovkins/ru-llm-scanner/issues/7) ·
-[План этапа 5](https://github.com/vovkins/ru-llm-scanner/issues/9) ·
+[Этап 5](https://github.com/vovkins/ru-llm-scanner/issues/9) ·
+[План этапа 6](https://github.com/vovkins/ru-llm-scanner/issues/11) ·
 [Документация](docs/README.md)
 
 ## Сценарии первой версии
 
-| Сценарий | Проектируемая команда | Область проверки |
+| Сценарий | Команда | Область проверки |
 | --- | --- | --- |
 | Первый аудит | `snapshot` | Поддерживаемые текстовые файлы указанного коммита |
 | Проверка нового состояния | `diff` | Полное содержимое добавленных, изменённых и переименованных файлов в B |
 | Последовательная проверка в CI | `diff --baseline ... --require-baseline` | Изменённые файлы B и подтверждённый охват неизменённых файлов из A |
 
 ```bash
-# Проектируемые команды внутри будущего контейнера.
+# CLI: доверенные assets и доступный Analyzer задаются по dev quickstart.
 ru-llm-scanner snapshot --repo /repo --commit HEAD --output /reports/initial
 
 ru-llm-scanner diff --repo /repo --from COMMIT_A --to COMMIT_B \
@@ -81,7 +84,7 @@ Docker. Репозиторий монтируется только для чте
 истории не входят в неё. Все исключения и ошибки должны отражаться в охвате.
 Нулевой результат не гарантирует абсолютную полноту обнаружения.
 
-| Код будущей команды | Значение |
+| Код команды | Значение |
 | --- | --- |
 | `0` | Проверка завершена, в проверенной области нет находок |
 | `1` | Проверка завершена, есть находки |
@@ -95,6 +98,7 @@ Docker. Репозиторий монтируется только для чте
 - [Проверка спецификаций](docs/development.md), [участие](CONTRIBUTING.md), [безопасность](SECURITY.md).
 - [Происхождение компонентов и статус лицензии](docs/licensing.md).
 
-Инструкции запуска полного сканера и Jenkins pipeline появятся на этапе 6.
+Штатные инструкции Docker/Compose и Jenkins pipeline появятся на этапе 6.
+[Запуск доступного CLI и отчёты](docs/cli-quickstart.md).
 [Сборка и offline-проверка Analyzer](docs/analyzer.md) уже доступны.
 Лицензия самого проекта пока не выбрана.

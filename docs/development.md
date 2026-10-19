@@ -4,7 +4,8 @@
 подготовка/сборка Analyzer, API-адаптер и словарь. Доступен внутренний Git API:
 снимки/сравнение, классификация и строгая подготовка текста.
 Внутренний scan pipeline, профиль и находки/координаты реализованы на этапе 4.
-CLI snapshot/diff, renderer/baseline и Jenkins ещё не реализованы.
+CLI snapshot/diff, renderer и baseline реализованы на этапе 5. Штатный
+Docker/Compose и Jenkins ещё не реализованы.
 
 ## Структура
 
@@ -38,7 +39,7 @@ python3.11 -m venv .venv
 git diff --check
 ```
 
-`jsonschema[format]==4.26.0` закреплён как dev-инструмент, включая зависимости
+`jsonschema[format]==4.26.0` закреплён как runtime/dev dependency, включая зависимости
 проверки форматов date-time/UUID. Скрипт использует явный
 Draft 2020-12 validator и format checker. Данные читаются строгим JSON без
 дублирующихся ключей, NaN и Infinity. Внешние `$ref` не используются.
@@ -51,7 +52,9 @@ Unicode/CRLF, ссылки внутри Markdown и закрытие code fences
 Она не проверяет реальное Git-дерево, доверие к артефакту, доступность модели,
 качество детекторов, автономность контейнеров или HTML. Скрипт предназначен
 только для спецификационных fixtures и не является production-валидатором
-произвольных отчётов. Не импортировать его в будущий runtime.
+произвольных отчётов. Runtime не импортирует этот скрипт: отдельный validator находится в
+`report_validation.py`, использует упакованную копию schema v1 и смысловые
+инварианты. Тождество публичной и packaged schema проверяется unit-тестом.
 
 На этапе 2 добавлены проверки артефактов и async адаптера:
 
@@ -59,7 +62,8 @@ Unicode/CRLF, ссылки внутри Markdown и закрытие code fences
 .venv/bin/python -m unittest discover -s tests -v
 .venv/bin/python -m black --check src tests docker scripts/analyzer.py \
   scripts/check_analyzer_integration.py scripts/check_upstream_tests.py \
-  scripts/capture_licenses.py scripts/check_git_layer.py scripts/check_scan_integration.py
+  scripts/capture_licenses.py scripts/check_git_layer.py scripts/check_scan_integration.py \
+  scripts/check_cli_integration.py scripts/check_cli_tests.py scripts/prepare_scan_engine.py
 ```
 
 Для словарных parity-тестов сначала выполните `prepare --output .build/analyzer`
@@ -97,6 +101,21 @@ pipeline; полный набор теперь содержит 96 тестов.
 [Результаты этапа 4](../verification/stage-4/README.md) сохраняют оба результата
 и известные ошибки качества без исходных значений.
 
+Этап 5 добавляет CLI subprocess и negative baseline/output/HTML сценарии.
+Полный набор — 123 test method (27 новых), с хешами кода и safe evidence:
+
+```bash
+.venv/bin/python scripts/check_cli_tests.py --output-dir .build/stage-5/unit-tests
+```
+
+На macOS sandbox может блокировать loopback bind, используемый локальным HTTP
+stub в CLI-тестах; нужен разрешённый dev runtime, без внешней сети. При отсутствии
+подготовленных assets отдельные тесты skipped; итоговый прогон требует ноль skipped.
+Логи assert остаются локально, unit-tests.json содержит только хеши/версии/счётчики.
+Реальный [offline CLI-прогон](cli-quickstart.md) проверяет установленный wheel и
+engine, отдельный корпус и A→B→C. [Результаты этапа 5](../verification/stage-5/README.md)
+отделяют его от HTTP stub/unit и браузерной визуальной QA.
+
 ## Стратегия следующих этапов
 
 | Этап | Проверки, которые появятся с реализацией |
@@ -104,7 +123,7 @@ pipeline; полный набор теперь содержит 96 тестов.
 | 2 (реализовано) | Контракт API, readiness, источник, каталог, словарь, соответствие upstream |
 | 3 (реализовано) | Git-деревья, refs, добавления/удаления/переименования, пути, хуки/фильтры, missing objects |
 | 4 (реализовано) | Полные файлы, координаты, длинные/многострочные значения, bounded queue/отмена, положительный и отрицательный корпус кода |
-| 5 | Реальные отчёты, semantic validation, цепочка baseline, экранирование и визуальная QA HTML |
+| 5 (реализовано) | Реальные отчёты, semantic validation, цепочка baseline, экранирование и визуальная QA HTML |
 | 6 | Изолированный Docker, mounts, CPU/GPU, отсутствие внешних соединений, Jenkins артефакты |
 | 7 | Сквозная приёмка, актуальность инструкций, обновление Analyzer и откат |
 
