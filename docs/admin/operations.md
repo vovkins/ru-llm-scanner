@@ -1,5 +1,10 @@
 # Эксплуатация и диагностика
 
+Измерения ёмкости, реальные OOM/отмена и operator cleanup после SIGKILL:
+[проверка #22](../../verification/operations-stage-4/README.md).
+Состояние зависимостей и отдельный план до итогового допуска:
+[DEP-01/DEP-02](../../verification/operations-stage-4/dependencies.md).
+
 Основной запуск описан в [руководстве пользователя](../user/README.md),
 состав/бюджеты — в [runtime](../reference/runtime.md).
 Консоль launcher намеренно содержит только фиксированные коды и уникальный

@@ -4,6 +4,9 @@
 [установку из пакета](installation.md). Сборка/установка dependencies может
 обращаться к одобренным источникам; сканирование готовыми images работает offline.
 Проверены CPU Linux ARM64 и [указанная среда](README.md#среда-и-ответственность).
+На `755152b` полный маршрут выполнен в новом каталоге с отдельным venv и единым
+новым runtime/deployment: [evidence](../../verification/operations-stage-4/README.md).
+Локальные base и BuildKit cache использовались; это не cache-free сборка.
 
 ## 1. Подготовить инструменты и отдельные пути
 

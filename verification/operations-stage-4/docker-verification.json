@@ -1,0 +1,224 @@
+{
+  "cases": [
+    {
+      "assurance": "snapshot_verified",
+      "case": "snapshot-a",
+      "error": null,
+      "exit_code": 0,
+      "report_available": true
+    },
+    {
+      "assurance": "baseline_verified",
+      "case": "baseline-a-b",
+      "error": null,
+      "exit_code": 0,
+      "report_available": true
+    },
+    {
+      "assurance": "baseline_verified",
+      "case": "baseline-b-c",
+      "error": null,
+      "exit_code": 0,
+      "report_available": true
+    },
+    {
+      "assurance": "snapshot_verified",
+      "case": "findings",
+      "error": null,
+      "exit_code": 1,
+      "report_available": true
+    },
+    {
+      "assurance": "none",
+      "case": "partial",
+      "error": null,
+      "exit_code": 2,
+      "report_available": true
+    },
+    {
+      "assurance": "none",
+      "case": "missing-ref",
+      "error": null,
+      "exit_code": 2,
+      "report_available": true
+    },
+    {
+      "assurance": "none",
+      "case": "literal-ref",
+      "error": null,
+      "exit_code": 2,
+      "report_available": true
+    },
+    {
+      "assurance": "none",
+      "case": "file-limit",
+      "error": null,
+      "exit_code": 2,
+      "report_available": true
+    },
+    {
+      "assurance": "none",
+      "case": "required-baseline",
+      "error": null,
+      "exit_code": 2,
+      "report_available": true
+    },
+    {
+      "assurance": "none",
+      "case": "wrong-profile",
+      "error": null,
+      "exit_code": 2,
+      "report_available": true
+    },
+    {
+      "assurance": "none",
+      "case": "bad-config",
+      "error": null,
+      "exit_code": 2,
+      "report_available": true
+    },
+    {
+      "assurance": "none",
+      "case": "bad-baseline",
+      "error": null,
+      "exit_code": 2,
+      "report_available": true
+    },
+    {
+      "assurance": "none",
+      "case": "ready-timeout",
+      "error": null,
+      "exit_code": 2,
+      "report_available": true
+    },
+    {
+      "assurance": "none",
+      "case": "analyze-timeout",
+      "error": null,
+      "exit_code": 2,
+      "report_available": true
+    },
+    {
+      "assurance": null,
+      "case": "run-timeout",
+      "error": "run_timeout",
+      "exit_code": 2,
+      "report_available": false
+    },
+    {
+      "assurance": null,
+      "case": "interrupt",
+      "error": "scan_cancelled",
+      "exit_code": 2,
+      "report_available": false
+    },
+    {
+      "assurance": null,
+      "case": "terminate",
+      "error": "scan_cancelled",
+      "exit_code": 2,
+      "report_available": false
+    },
+    {
+      "assurance": null,
+      "case": "analyzer_crash",
+      "error": "analyzer_failed",
+      "exit_code": 2,
+      "report_available": false
+    },
+    {
+      "assurance": null,
+      "case": "scanner_crash",
+      "error": "scanner_failed",
+      "exit_code": 2,
+      "report_available": false
+    },
+    {
+      "assurance": null,
+      "case": "analyzer_oom",
+      "error": "analyzer_failed",
+      "exit_code": 2,
+      "report_available": false
+    },
+    {
+      "assurance": "none",
+      "case": "missing-object",
+      "error": null,
+      "exit_code": 2,
+      "report_available": true
+    },
+    {
+      "assurance": null,
+      "case": "existing",
+      "error": "unsafe_output",
+      "exit_code": 2,
+      "report_available": false
+    },
+    {
+      "assurance": null,
+      "case": "missing-image",
+      "error": "image_identity_mismatch",
+      "exit_code": 2,
+      "report_available": false
+    },
+    {
+      "assurance": "snapshot_verified",
+      "case": "parallel-0",
+      "error": null,
+      "exit_code": 0,
+      "report_available": true
+    },
+    {
+      "assurance": "snapshot_verified",
+      "case": "parallel-1",
+      "error": null,
+      "exit_code": 0,
+      "report_available": true
+    }
+  ],
+  "environment": {
+    "compose": "5.2.0",
+    "docker": "29.6.1"
+  },
+  "foreign_running_containers_preserved": 7,
+  "gid": 20,
+  "images": {
+    "analyzer": {
+      "image_id": "sha256:dac76ca6f7f37d61f7a3ad4db1d56d68dcad14d9e44354252dcfbf3c208c5104",
+      "image_reference_id": "sha256:938b1eb4169fcaaf89882d07570fc57f2ebac23d80804e31221b18d8e4e04c00"
+    },
+    "scanner": {
+      "image_id": "sha256:dba647e777415aa7c51f9e57ade3be3120fab6a8fc99dadbac11c3e0f5d1c538",
+      "image_reference_id": "sha256:dba647e777415aa7c51f9e57ade3be3120fab6a8fc99dadbac11c3e0f5d1c538"
+    }
+  },
+  "input_unchanged": true,
+  "isolation": [
+    {
+      "containers": 2,
+      "internal": true,
+      "no_default_route": true,
+      "no_published_ports": true,
+      "nonroot": true,
+      "private_logs_disabled": true,
+      "readonly_input": true,
+      "readonly_rootfs": true
+    }
+  ],
+  "limits": {
+    "analyzer_cpus": 2,
+    "analyzer_memory": "3g",
+    "scanner_cpus": 1,
+    "scanner_memory": "1g"
+  },
+  "platform": "linux/arm64",
+  "sources_sha256": {
+    "docker/scanner.Dockerfile": "2799fd2e7b12db6fd3ed4bbdccf78a73be8465d2cd9f5e3a13802a81e644e25d",
+    "scripts/build_scanner.py": "2fb516dfaaca0e17979571b44ce24f7e6d326120f926fec15dc9c930e0809789",
+    "scripts/check_docker_integration.py": "37513fe0d582e193b36b8588033ae2ecc7faf225cc9f310bdbf92e21f4873574",
+    "scripts/docker_scanner.py": "583c0d3bfbd038fb132b661b48d4b025aee06cd856c0f209d8da6bf09e38ba05"
+  },
+  "status": "passed",
+  "uid": 501,
+  "verification_version": 1
+}

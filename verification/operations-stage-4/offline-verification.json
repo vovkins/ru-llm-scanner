@@ -1,0 +1,2002 @@
+{
+  "verification_version": 1,
+  "status": "passed",
+  "source_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
+  "source_lock_sha256": "64a2f586ef1629c8ba5ebf0665d9b6dfd923f6332e77b6095ab45c70e57a6bed",
+  "prepared_manifest_sha256": "7b17e9c6fb42f6e21147abd5d085a46d661c56889e75ef869430a4d77c7b7e8b",
+  "scanner_sources_sha256": {
+    "src/ru_llm_scanner/__init__.py": "b1a0c9ede61fc13ba6c43be7880227c4ee230506537aa3cad83425e758b205a3",
+    "src/ru_llm_scanner/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/ru_llm_scanner/analyzer.py": "4f1cf5dce228592b4c43ce6c735ae798b139b6d32c92b9fdfa5e792195f2e746",
+    "src/ru_llm_scanner/artifacts.py": "77271cce804e4fd8c92baa46c4b7ab8f137c50134e516a2e7fbbba56bc836db3",
+    "src/ru_llm_scanner/baseline.py": "23ea9247b900c975be4b9c691f60f61d8762984ffdcc4e30ee83d423086f0020",
+    "src/ru_llm_scanner/cli.py": "3d399aaf656336b37de7d760fcaa87ca05393c76cc80b972db17ca022c79645a",
+    "src/ru_llm_scanner/configuration.py": "0a6e3f90de1bb9a089855734a5a0e06b92728b1cd9d8f13e5bc4b10b1ab7c959",
+    "src/ru_llm_scanner/dictionary.py": "6eecfcfe094ca3d2f4aaa43b3093bd94c69e55734292bba824553dd4807c6238",
+    "src/ru_llm_scanner/engine.py": "8a583e0ef31b4705c75af209a36f063695c7d76704e7f8348efcda8c10b65866",
+    "src/ru_llm_scanner/findings.py": "1f9ffd4f3dce7d48f1e066447552eda238cabf36d82cfe4cd5923c7b0c44a7cf",
+    "src/ru_llm_scanner/git_plan.py": "5b1dbd8b80424b9edb97157bcce3acd470af6c23cbea4befe126a46401c9f855",
+    "src/ru_llm_scanner/git_repository.py": "020bb53c3989a7e752fd25894c29d1f256d38137d942f40c3e9d373cb343bf27",
+    "src/ru_llm_scanner/html_report.py": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
+    "src/ru_llm_scanner/output.py": "8c5abca175d5947962330f5374e2e7cddcf391caf2edcc9213e1af509b3dc39d",
+    "src/ru_llm_scanner/pipeline.py": "334658282ca1a85ef230c965f1b4e6272987ff2affae812b435ded7629270eb5",
+    "src/ru_llm_scanner/report_validation.py": "c2046099dd2a52b748a6a91f023ea0e653997777e33fc68a58a7585c17d6ec21",
+    "src/ru_llm_scanner/reports.py": "53b31d86e46ddf23e4c21fc479d87f41de943e06e53ea5bdcec5a788893144c3",
+    "src/ru_llm_scanner/text_policy.py": "53ab4ea4a072b76af5ca7df9faaae4ad0820bd25934805133244bc50a46e32d1",
+    "src/ru_llm_scanner/upstream.py": "d28a0623470615dd369afecd3facb5640e525ff4d49b7748436c18af681e95cb",
+    "tests/integration/offline.py": "185106d35cb106412d4025d065b1a2a9502e5418f58d0ebba02f06e984b88671"
+  },
+  "runtime_image_id": "sha256:dac76ca6f7f37d61f7a3ad4db1d56d68dcad14d9e44354252dcfbf3c208c5104",
+  "corpus_sha256": "8bc2f6e3f10a9d123651839de21bae09b35c708622f9bfcada2f908ec0b5582f",
+  "cases": 77,
+  "parity_cases": 77,
+  "score_absolute_tolerance": 1e-07,
+  "observed_sources": [
+    "contextual_contract",
+    "native_credential",
+    "ner",
+    "structural"
+  ],
+  "rule_ids_observed": 8,
+  "dictionary_cases": 4,
+  "checks": {
+    "network_only_loopback": true,
+    "long_window_tail": true,
+    "unicode_offsets": true,
+    "unpatched_api_rejected": true,
+    "wrong_profile_rejected": true,
+    "stopped_service_rejected": true,
+    "missing_model_fail_closed": true,
+    "corrupted_hash_rejected": true,
+    "gpu_request_does_not_fallback_to_cpu": true
+  },
+  "metrics": {
+    "aggregate": {
+      "expected": 67,
+      "predicted": 67,
+      "true_positives": 67,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "typed_covered": 67,
+      "typed_coverage_recall": 1.0,
+      "masking_covered": 67,
+      "masking_coverage_recall": 1.0,
+      "critical_expected": 17,
+      "critical_covered": 17,
+      "critical_coverage_recall": 1.0
+    },
+    "per_entity": {
+      "AUTH_TOKEN": {
+        "expected": 8,
+        "predicted": 8,
+        "true_positives": 8,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 8,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 8,
+        "masking_coverage_recall": 1.0
+      },
+      "CONTRACT_NUMBER": {
+        "expected": 14,
+        "predicted": 14,
+        "true_positives": 14,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 14,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 14,
+        "masking_coverage_recall": 1.0
+      },
+      "LOCATION": {
+        "expected": 7,
+        "predicted": 7,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 7,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 7,
+        "masking_coverage_recall": 1.0
+      },
+      "LOGIN": {
+        "expected": 7,
+        "predicted": 7,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 7,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 7,
+        "masking_coverage_recall": 1.0
+      },
+      "ORGANIZATION": {
+        "expected": 7,
+        "predicted": 7,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 7,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 7,
+        "masking_coverage_recall": 1.0
+      },
+      "PASSWORD": {
+        "expected": 8,
+        "predicted": 8,
+        "true_positives": 8,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 8,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 8,
+        "masking_coverage_recall": 1.0
+      },
+      "PERSON": {
+        "expected": 9,
+        "predicted": 9,
+        "true_positives": 9,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 9,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 9,
+        "masking_coverage_recall": 1.0
+      },
+      "SECRET_KEY": {
+        "expected": 7,
+        "predicted": 7,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "typed_covered": 7,
+        "typed_coverage_recall": 1.0,
+        "masking_covered": 7,
+        "masking_coverage_recall": 1.0
+      }
+    },
+    "prediction_type_counts": {
+      "AUTH_TOKEN": 8,
+      "CONTRACT_NUMBER": 14,
+      "LOCATION": 7,
+      "LOGIN": 7,
+      "ORGANIZATION": 7,
+      "PASSWORD": 8,
+      "PERSON": 9,
+      "SECRET_KEY": 7
+    },
+    "critical_misses": [],
+    "cases": [
+      {
+        "case_id": "person_full_name_ru",
+        "tags": [
+          "positive",
+          "person",
+          "ru",
+          "basic"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_full_name_en",
+        "tags": [
+          "positive",
+          "person",
+          "en",
+          "basic"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_initials_ru",
+        "tags": [
+          "positive",
+          "person",
+          "ru",
+          "punctuation"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_repeated_value",
+        "tags": [
+          "positive",
+          "person",
+          "ru",
+          "repeated"
+        ],
+        "critical": false,
+        "expected": 2,
+        "target_predictions": 2,
+        "all_predictions": 2,
+        "exact_matches": 2,
+        "typed_covered": 2,
+        "masking_covered": 2,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_decomposed_unicode",
+        "tags": [
+          "positive",
+          "person",
+          "ru",
+          "unicode",
+          "nfd"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_after_emoji",
+        "tags": [
+          "positive",
+          "person",
+          "ru",
+          "unicode",
+          "emoji"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_after_long_prefix",
+        "tags": [
+          "positive",
+          "person",
+          "ru",
+          "long_input",
+          "boundary"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "person_label_negative",
+        "tags": [
+          "negative",
+          "person",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "person_role_negative",
+        "tags": [
+          "negative",
+          "person",
+          "ru",
+          "missing_value"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "location_city_ru",
+        "tags": [
+          "positive",
+          "location",
+          "ru",
+          "basic"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOCATION"
+        ]
+      },
+      {
+        "case_id": "location_city_en",
+        "tags": [
+          "positive",
+          "location",
+          "en",
+          "basic"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOCATION"
+        ]
+      },
+      {
+        "case_id": "location_multiword_ru",
+        "tags": [
+          "positive",
+          "location",
+          "ru",
+          "multiword"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOCATION"
+        ]
+      },
+      {
+        "case_id": "location_region_ru",
+        "tags": [
+          "positive",
+          "location",
+          "ru",
+          "region"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOCATION"
+        ]
+      },
+      {
+        "case_id": "location_repeated",
+        "tags": [
+          "positive",
+          "location",
+          "ru",
+          "repeated"
+        ],
+        "critical": false,
+        "expected": 2,
+        "target_predictions": 2,
+        "all_predictions": 2,
+        "exact_matches": 2,
+        "typed_covered": 2,
+        "masking_covered": 2,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOCATION"
+        ]
+      },
+      {
+        "case_id": "location_label_negative",
+        "tags": [
+          "negative",
+          "location",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "location_direction_negative",
+        "tags": [
+          "negative",
+          "location",
+          "ru",
+          "no_named_place"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "organization_bank_ru",
+        "tags": [
+          "positive",
+          "organization",
+          "ru",
+          "basic"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "ORGANIZATION"
+        ]
+      },
+      {
+        "case_id": "organization_legal_form_ru",
+        "tags": [
+          "positive",
+          "organization",
+          "ru",
+          "legal_form"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "ORGANIZATION"
+        ]
+      },
+      {
+        "case_id": "organization_en",
+        "tags": [
+          "positive",
+          "organization",
+          "en",
+          "basic"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "ORGANIZATION"
+        ]
+      },
+      {
+        "case_id": "organization_quoted_ru",
+        "tags": [
+          "positive",
+          "organization",
+          "ru",
+          "punctuation"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "ORGANIZATION"
+        ]
+      },
+      {
+        "case_id": "organization_repeated",
+        "tags": [
+          "positive",
+          "organization",
+          "ru",
+          "repeated"
+        ],
+        "critical": false,
+        "expected": 2,
+        "target_predictions": 2,
+        "all_predictions": 2,
+        "exact_matches": 2,
+        "typed_covered": 2,
+        "masking_covered": 2,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "ORGANIZATION"
+        ]
+      },
+      {
+        "case_id": "organization_process_negative",
+        "tags": [
+          "negative",
+          "organization",
+          "ru",
+          "common_noun"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "organization_field_negative",
+        "tags": [
+          "negative",
+          "organization",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "login_assignment_en",
+        "tags": [
+          "positive",
+          "login",
+          "en",
+          "assignment"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOGIN"
+        ]
+      },
+      {
+        "case_id": "login_assignment_ru",
+        "tags": [
+          "positive",
+          "login",
+          "ru",
+          "assignment"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOGIN"
+        ]
+      },
+      {
+        "case_id": "login_username_en",
+        "tags": [
+          "positive",
+          "login",
+          "en",
+          "quoted"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOGIN"
+        ]
+      },
+      {
+        "case_id": "login_cyrillic",
+        "tags": [
+          "positive",
+          "login",
+          "ru",
+          "unicode"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOGIN"
+        ]
+      },
+      {
+        "case_id": "login_email_style",
+        "tags": [
+          "positive",
+          "login",
+          "ru",
+          "email_style"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOGIN"
+        ]
+      },
+      {
+        "case_id": "login_after_emoji",
+        "tags": [
+          "positive",
+          "login",
+          "en",
+          "emoji",
+          "offset"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "LOGIN"
+        ]
+      },
+      {
+        "case_id": "login_placeholder_negative",
+        "tags": [
+          "negative",
+          "login",
+          "en",
+          "placeholder"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "login_explanation_negative",
+        "tags": [
+          "negative",
+          "login",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "password_assignment_en",
+        "tags": [
+          "positive",
+          "password",
+          "en",
+          "assignment"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_assignment_ru",
+        "tags": [
+          "positive",
+          "password",
+          "ru",
+          "assignment"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_hash_symbol",
+        "tags": [
+          "positive",
+          "password",
+          "en",
+          "punctuation"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_cyrillic",
+        "tags": [
+          "positive",
+          "password",
+          "ru",
+          "unicode"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_short_boundary",
+        "tags": [
+          "positive",
+          "password",
+          "en",
+          "boundary"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_with_spaces",
+        "tags": [
+          "positive",
+          "password",
+          "ru",
+          "spaces"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_multiline",
+        "tags": [
+          "positive",
+          "password",
+          "ru",
+          "multiline"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "PASSWORD"
+        ]
+      },
+      {
+        "case_id": "password_placeholder_negative",
+        "tags": [
+          "negative",
+          "password",
+          "en",
+          "placeholder"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "password_explanation_negative",
+        "tags": [
+          "negative",
+          "password",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "auth_token_assignment",
+        "tags": [
+          "positive",
+          "auth_token",
+          "en",
+          "assignment"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN"
+        ]
+      },
+      {
+        "case_id": "auth_token_ru_context",
+        "tags": [
+          "positive",
+          "auth_token",
+          "ru",
+          "context"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN"
+        ]
+      },
+      {
+        "case_id": "auth_token_bearer",
+        "tags": [
+          "positive",
+          "auth_token",
+          "en",
+          "bearer"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN"
+        ]
+      },
+      {
+        "case_id": "auth_token_quoted",
+        "tags": [
+          "positive",
+          "auth_token",
+          "en",
+          "quoted"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN"
+        ]
+      },
+      {
+        "case_id": "auth_token_multiline",
+        "tags": [
+          "positive",
+          "auth_token",
+          "en",
+          "multiline"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN"
+        ]
+      },
+      {
+        "case_id": "auth_token_repeated",
+        "tags": [
+          "positive",
+          "auth_token",
+          "ru",
+          "repeated"
+        ],
+        "critical": false,
+        "expected": 2,
+        "target_predictions": 2,
+        "all_predictions": 2,
+        "exact_matches": 2,
+        "typed_covered": 2,
+        "masking_covered": 2,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN"
+        ]
+      },
+      {
+        "case_id": "auth_token_placeholder_negative",
+        "tags": [
+          "negative",
+          "auth_token",
+          "en",
+          "placeholder"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "auth_token_explanation_negative",
+        "tags": [
+          "negative",
+          "auth_token",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "secret_key_assignment",
+        "tags": [
+          "positive",
+          "secret_key",
+          "en",
+          "assignment"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "SECRET_KEY"
+        ]
+      },
+      {
+        "case_id": "secret_key_ru_context",
+        "tags": [
+          "positive",
+          "secret_key",
+          "ru",
+          "context"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "SECRET_KEY"
+        ]
+      },
+      {
+        "case_id": "secret_key_client_secret",
+        "tags": [
+          "positive",
+          "secret_key",
+          "en",
+          "client_secret"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "SECRET_KEY"
+        ]
+      },
+      {
+        "case_id": "secret_key_punctuation",
+        "tags": [
+          "positive",
+          "secret_key",
+          "en",
+          "punctuation"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "SECRET_KEY"
+        ]
+      },
+      {
+        "case_id": "secret_key_multiline",
+        "tags": [
+          "positive",
+          "secret_key",
+          "ru",
+          "multiline"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "SECRET_KEY"
+        ]
+      },
+      {
+        "case_id": "secret_key_long_context",
+        "tags": [
+          "positive",
+          "secret_key",
+          "en",
+          "long_input",
+          "boundary"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "SECRET_KEY"
+        ]
+      },
+      {
+        "case_id": "secret_key_placeholder_negative",
+        "tags": [
+          "negative",
+          "secret_key",
+          "en",
+          "placeholder"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "secret_key_explanation_negative",
+        "tags": [
+          "negative",
+          "secret_key",
+          "ru",
+          "explanatory"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_number_symbol_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "symbol"
+        ],
+        "critical": true,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_number_digits_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "digits"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_number_cyrillic_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "cyrillic"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_number_en",
+        "tags": [
+          "positive",
+          "contract_number",
+          "en",
+          "basic"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_number_repeated",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "repeated"
+        ],
+        "critical": false,
+        "expected": 2,
+        "target_predictions": 2,
+        "all_predictions": 2,
+        "exact_matches": 2,
+        "typed_covered": 2,
+        "masking_covered": 2,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_number_pdf_copy",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "pdf_copy",
+          "unicode"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_version_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "wrong_context"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_request_number_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "wrong_context"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_without_number_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "missing_value"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_random_code_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "wrong_context"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_inflected_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "inflection"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_agreement_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "agreement"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_agreement_en",
+        "tags": [
+          "positive",
+          "contract_number",
+          "en",
+          "agreement"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_two_contexts_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "multiple_contexts"
+        ],
+        "critical": false,
+        "expected": 2,
+        "target_predictions": 2,
+        "all_predictions": 2,
+        "exact_matches": 2,
+        "typed_covered": 2,
+        "masking_covered": 2,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_multiline_ru",
+        "tags": [
+          "positive",
+          "contract_number",
+          "ru",
+          "multiline"
+        ],
+        "critical": false,
+        "expected": 1,
+        "target_predictions": 1,
+        "all_predictions": 1,
+        "exact_matches": 1,
+        "typed_covered": 1,
+        "masking_covered": 1,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER"
+        ]
+      },
+      {
+        "case_id": "contract_document_version_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "document_version"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_template_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "template"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_date_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "date"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "contract_dotted_version_negative",
+        "tags": [
+          "negative",
+          "contract_number",
+          "ru",
+          "version"
+        ],
+        "critical": false,
+        "expected": 0,
+        "target_predictions": 0,
+        "all_predictions": 0,
+        "exact_matches": 0,
+        "typed_covered": 0,
+        "masking_covered": 0,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": []
+      },
+      {
+        "case_id": "mixed_identity_and_contract",
+        "tags": [
+          "positive",
+          "mixed",
+          "ru",
+          "multiple_entities"
+        ],
+        "critical": true,
+        "expected": 4,
+        "target_predictions": 4,
+        "all_predictions": 4,
+        "exact_matches": 4,
+        "typed_covered": 4,
+        "masking_covered": 4,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "CONTRACT_NUMBER",
+          "LOGIN",
+          "PASSWORD",
+          "PERSON"
+        ]
+      },
+      {
+        "case_id": "mixed_org_location_secrets",
+        "tags": [
+          "positive",
+          "mixed",
+          "ru",
+          "multiple_entities"
+        ],
+        "critical": true,
+        "expected": 4,
+        "target_predictions": 4,
+        "all_predictions": 4,
+        "exact_matches": 4,
+        "typed_covered": 4,
+        "masking_covered": 4,
+        "missing_entity_types": [],
+        "unexpected_target_types": [],
+        "all_prediction_types": [
+          "AUTH_TOKEN",
+          "LOCATION",
+          "ORGANIZATION",
+          "SECRET_KEY"
+        ]
+      }
+    ]
+  },
+  "quality_gate": [
+    {
+      "name": "critical_coverage_recall",
+      "actual": 1.0,
+      "minimum": 1.0,
+      "passed": true
+    },
+    {
+      "name": "LOGIN.precision",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "LOGIN.recall",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "PASSWORD.precision",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "PASSWORD.recall",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "AUTH_TOKEN.precision",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "AUTH_TOKEN.recall",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "SECRET_KEY.precision",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "SECRET_KEY.recall",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "CONTRACT_NUMBER.precision",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "CONTRACT_NUMBER.recall",
+      "actual": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    {
+      "name": "PERSON.recall_vs_baseline",
+      "actual": 1.0,
+      "minimum": 0.757778,
+      "passed": true
+    },
+    {
+      "name": "LOCATION.recall_vs_baseline",
+      "actual": 1.0,
+      "minimum": 0.837143,
+      "passed": true
+    },
+    {
+      "name": "ORGANIZATION.recall_vs_baseline",
+      "actual": 1.0,
+      "minimum": 0.837143,
+      "passed": true
+    }
+  ],
+  "gpu_inference": "not_tested_no_cuda",
+  "launcher_sha256": "a6441500fc4c541afd5ff4f9698603bfa066c9bb8897cbcc7952c64135288c6f",
+  "shared_helper_sha256": "f46404515e8e7f294779e7860ee6e84a645def775c3ce80baa20a14f4bc541f0",
+  "curated_input_sha256": {
+    "src/ru_llm_scanner/configuration.py": "0a6e3f90de1bb9a089855734a5a0e06b92728b1cd9d8f13e5bc4b10b1ab7c959",
+    "src/ru_llm_scanner/findings.py": "1f9ffd4f3dce7d48f1e066447552eda238cabf36d82cfe4cd5923c7b0c44a7cf",
+    "src/ru_llm_scanner/text_policy.py": "53ab4ea4a072b76af5ca7df9faaae4ad0820bd25934805133244bc50a46e32d1",
+    "src/ru_llm_scanner/baseline.py": "23ea9247b900c975be4b9c691f60f61d8762984ffdcc4e30ee83d423086f0020",
+    "src/ru_llm_scanner/html_report.py": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
+    "src/ru_llm_scanner/analyzer.py": "4f1cf5dce228592b4c43ce6c735ae798b139b6d32c92b9fdfa5e792195f2e746",
+    "src/ru_llm_scanner/__init__.py": "b1a0c9ede61fc13ba6c43be7880227c4ee230506537aa3cad83425e758b205a3",
+    "src/ru_llm_scanner/engine.py": "8a583e0ef31b4705c75af209a36f063695c7d76704e7f8348efcda8c10b65866",
+    "src/ru_llm_scanner/cli.py": "3d399aaf656336b37de7d760fcaa87ca05393c76cc80b972db17ca022c79645a",
+    "src/ru_llm_scanner/pipeline.py": "334658282ca1a85ef230c965f1b4e6272987ff2affae812b435ded7629270eb5",
+    "src/ru_llm_scanner/reports.py": "53b31d86e46ddf23e4c21fc479d87f41de943e06e53ea5bdcec5a788893144c3",
+    "src/ru_llm_scanner/upstream.py": "d28a0623470615dd369afecd3facb5640e525ff4d49b7748436c18af681e95cb",
+    "src/ru_llm_scanner/artifacts.py": "77271cce804e4fd8c92baa46c4b7ab8f137c50134e516a2e7fbbba56bc836db3",
+    "src/ru_llm_scanner/dictionary.py": "6eecfcfe094ca3d2f4aaa43b3093bd94c69e55734292bba824553dd4807c6238",
+    "src/ru_llm_scanner/report_validation.py": "c2046099dd2a52b748a6a91f023ea0e653997777e33fc68a58a7585c17d6ec21",
+    "src/ru_llm_scanner/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
+    "src/ru_llm_scanner/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/ru_llm_scanner/git_plan.py": "5b1dbd8b80424b9edb97157bcce3acd470af6c23cbea4befe126a46401c9f855",
+    "src/ru_llm_scanner/git_repository.py": "020bb53c3989a7e752fd25894c29d1f256d38137d942f40c3e9d373cb343bf27",
+    "src/ru_llm_scanner/output.py": "8c5abca175d5947962330f5374e2e7cddcf391caf2edcc9213e1af509b3dc39d",
+    "tests/integration/offline.py": "185106d35cb106412d4025d065b1a2a9502e5418f58d0ebba02f06e984b88671",
+    "runtime.json": "27065047da5fe477e8e60009cf8ccb649531ce0f36abe7a10596e25a2a7295eb",
+    "context/README.md": "61a56e9c3aaa911c2df1033b284766e4638ce66e9c4eab09316b84cfe749afb8",
+    "context/THIRD_PARTY_NOTICES.md": "79b0dc96e17376d526039c2a740d40c2e9da48f0a29a87770062e17d77493264",
+    "context/certs/README.md": "d20e192e80ae69c0f57d7df4172454bc50d3aeac52a7b6b4ada5bb0a3fdb55c5",
+    "context/litellm_guardrails/dictionary-substitutions.default.json": "126805a93906873c7cd1fd7a3586c106a4c68d9329cfbe5169132d9bfc9a244e",
+    "context/litellm_guardrails/dictionary_policy.py": "9709364660baa4f5ac551b42fbbd411c6d2eaf8093ac1579ca8ea4a30696d099",
+    "context/presidio/Dockerfile": "820b8b9380c080250ebdf71d1f1e463d1ba5c5d8b64196e4cf8b6317b71ea851",
+    "context/presidio/analyzer_server.py": "b6d1adefcd6a4fe13a8b43757b4680b80243433c311967caa6a6f40b80b264a9",
+    "context/presidio/capacity.py": "aceeadddfce4cfefcb7bf4e6417548dbea25fcc9e8c550cd95cdb384cfda5479",
+    "context/presidio/download_hf_model.py": "fc8d97ff42fae63f83a947c8bbc1de46683eec5e52c4cf373f867b3014489b40",
+    "context/presidio/entity_types.py": "68da0fed596f8682b60bcf4b33617e0eb0f4b757bcce703a0224b531edc46f4f",
+    "context/presidio/evaluation/README.md": "45e6ef6c9aa473f1565c44eaf3a093752ed881435d684d23c32c1f6d7d49624d",
+    "context/presidio/evaluation/__init__.py": "f73edf08610c98e7971e8411264042b2dcf23664ab60c9d978b95bd92b43db4f",
+    "context/presidio/evaluation/corpus.py": "180ff6b7486cc07f4514d3825695592b886fe70b36f96ccad06cad070fdc7800",
+    "context/presidio/evaluation/data/deterministic_rules_review.jsonl": "0f7173f3778faa89f2c69c6269eb38e3c7028ae8144f9ddca1cd6bf8db6dbda2",
+    "context/presidio/evaluation/data/instruction_regressions.jsonl": "5096b3fbe0f368976447d1e9a4c1eccddd2f38ce9f50123a8bc85eedf1132f06",
+    "context/presidio/evaluation/data/name_context_regressions.jsonl": "505895aa022cf8c04cbda12c775d79ec7a552ba54e7315ce82913a0b7264f9c9",
+    "context/presidio/evaluation/data/name_field_header_control.jsonl": "ae588faaf27cb56313fce2ec220b9a2804484569e20255ae1f55e4714f344c2d",
+    "context/presidio/evaluation/data/name_field_holdout.jsonl": "67c10f77c85b8ec0fd53d5363fc66d87cabb7a03d119d31dab11df9ffc36b6a1",
+    "context/presidio/evaluation/data/ner_migration.jsonl": "8bc2f6e3f10a9d123651839de21bae09b35c708622f9bfcada2f908ec0b5582f",
+    "context/presidio/evaluation/data/person_dialogue_research.jsonl": "a3f7fcc7712ea021b54b59e1756175ffbe6d07392b2bd80f8a1d76de189f073c",
+    "context/presidio/evaluation/data/person_organization_regressions.jsonl": "01375f04ff42de73a6ea7bd6dbfc8e693a9fea82d289da150bfaabaafa1e6a74",
+    "context/presidio/evaluation/deterministic_rule_source_manifest.json": "c86ce785f4c7d004bfaa377f8f8da829f0e0620dd2b27a99dc66d56a1a13c1f0",
+    "context/presidio/evaluation/metrics.py": "d7bb78b1532abf8fb2bf8d404ccc34fb84bcc864025369ff4daea356866952ed",
+    "context/presidio/evaluation/name_recheck_experiment.py": "e13cee91435b47ba6970f66cf81099d86c551c63b6490cd17e9b38e3306438a2",
+    "context/presidio/evaluation/reports/deeppavlov-baseline.json": "6754a55e7ca7b1b5b33575285c941b51f65c596a98572fb21d1fd0590b6dd4a1",
+    "context/presidio/evaluation/reports/deterministic-rule-inventory.json": "9cce17fcbec59d061fab94c1460c0341295a086f5b4662c6e319d3a293f8212f",
+    "context/presidio/evaluation/reports/deterministic-rule-review.json": "506c64726bbda1b71e3346c2bc7479f9f13e3fabe9f3d7282259aff329f63e90",
+    "context/presidio/evaluation/reports/huggingface-candidate.json": "71be1dc3bab889cd8ab8713ceadef1c9abfa60e573a987170f4737c055cceec7",
+    "context/presidio/evaluation/review_deterministic_rules.py": "13d8b5e46ce7d83df3ea7769a7e5ffd2d43e48c6600f41ef1836df1f0b685eed",
+    "context/presidio/evaluation/run_baseline.py": "ab3ade13dba972e97dccc7d3670795e552718839052bb4e030d480cbee7877cf",
+    "context/presidio/evaluation/spacy_ablation.py": "f08a3a73a9f5655620f40e49fa4839ee0399a0221020571c6b71312844656dc0",
+    "context/presidio/model_artifact.py": "c49d442a42ed7e667708e6b13b500e0c589da03ae2c7c57d4db5433bbd32bd95",
+    "context/presidio/model_manifest.json": "79aeb5fbd1ed93f37c811704e6b1237be191551821092d08b1fe9869ba2fb9a7",
+    "context/presidio/ner/__init__.py": "a7b3f2a53984b3e778bcda03e1091ad96a71274ebb19e54a8daa40593e387d53",
+    "context/presidio/ner/huggingface_recognizer.py": "9f7794c43cb365b0e3aca626473889330f56225da279e29afd956e026cfc7a52",
+    "context/presidio/ner/text_processing.py": "b0a826c41012ffb5dabfaf314216070ccddfecb691203e0a07de485aa6b096e4",
+    "context/presidio/real_model_smoke.py": "8ed1563b7058876bc47ea8efe53938443526a8316b8c5c1a939173b496b3e959",
+    "context/presidio/recognizers/__init__.py": "3043f2220709038c6a62ee9c4f4706b5ffe6a49ac46499ef3b343d5311e6ccb7",
+    "context/presidio/recognizers/base64_data.py": "73c2aa1ad7b4a7ab40e2aded8d3d2ee68d30f503a6ee4cc1424541a7a07f6937",
+    "context/presidio/recognizers/credential_rules.py": "0d17a7c7f3e0a98167cfead36e8fa31e068ec31d8236ee5fda9207ea97feff93",
+    "context/presidio/recognizers/infra_secrets.py": "727d41e1cfb00a1710985f3643d4864773d060d19dbf121d4b1be19e999bdada",
+    "context/presidio/recognizers/json_strings.py": "b413ecf3b232d6968144ef4f47480f8a1af48f7afd6e11d3a59acdaeed7df358",
+    "context/presidio/recognizers/ru_address.py": "efea5ecba9608f2b2a76c9a04644314911ea35fb5e9487c6b4e3bdb3b02b551a",
+    "context/presidio/recognizers/ru_bank_card.py": "f82be91f5e5e64d6a4c602cdcc662c2db33d2b0ef658e21141545bbd62518165",
+    "context/presidio/recognizers/ru_bank_requisites.py": "167859f84f592a261e71cd735fc765cbe7e9575778a837f9c5d619e4e9269965",
+    "context/presidio/recognizers/ru_email.py": "14c8b406e144d78b514adf60b8caa1be9fd5a3a122848d47a2020e71db9fc1cd",
+    "context/presidio/recognizers/ru_inn.py": "da4c3cd77b09e753aa30412d66aa31cdaff42c040ad9f75d95c4459d5a666631",
+    "context/presidio/recognizers/ru_passport.py": "2df9ad0e1dc4b8abd6a04553aa1b1fc45a8df7837b40430e2da329f50a4a8c9d",
+    "context/presidio/recognizers/ru_phone.py": "79e1fd63dcb713171207ec445add6b2ef1f4ffff3fdf0798e4cc7f70ca4bef72",
+    "context/presidio/recognizers/ru_snils.py": "bd7148b465ac96fcc9f1bd66f60de1c98b6d48a7a6edb21ca195102c542c4bad",
+    "context/presidio/recognizers/sql_credentials.py": "0473ad3701d48f71ad5975c6babb8f7829bdd66d71ede7dce4021cd9ddc166f5",
+    "context/presidio/requirements-analyzer-cpu.txt": "b3290f7c992195eaf748397ed8ca7a273a62aa5e5e499c1f42052cc43efdf077",
+    "context/presidio/requirements-analyzer-gpu.txt": "9f38f25ab81168f2c5a7173fb68bf14874764f11e648226d295f31c05fbe2f9b",
+    "context/presidio/requirements-analyzer-test.txt": "a1c4d57a0907cbc50a8970ffd6cccd48e8add0d09a840a12073fa65d62d68755",
+    "context/presidio/requirements-analyzer.txt": "cfe2e573443f293c8263456454ca84d3b795cc5220789139a3afe56d9e94c34a",
+    "context/presidio/result_merging.py": "05fba49c4b4c4a1fc4aa1878a8834b8f9164df499feb35c93ffe2fefb4646409",
+    "context/presidio/tests/test_analyzer_api_thresholds.py": "b4e48d583033df624e4d1edd028d9e8736bf9140e54f3e64daf2df34854aa64c",
+    "context/presidio/tests/test_analyzer_entity_filters.py": "aae10cb705a4017e3edb643371640dc15b818b7eb4dcc4b9d6d138083df0328f",
+    "context/presidio/tests/test_analyzer_server_capacity.py": "fb2f9e4d10f286ad1005afcc29adc5848b294bce0b7c70f532ff86e40c9d3c31",
+    "context/presidio/tests/test_capacity.py": "98451530d274a3da4eadb3bfe6e83e4a03cbf1aff0619db42f40943da88180d8",
+    "context/presidio/tests/test_credential_rules.py": "8bfa61a96924b159dc047ce31fe9beacbee10dfd972b9c0702dffcfd3999f8ff",
+    "context/presidio/tests/test_download_model.py": "88446c14f2191cbb237d71f2b5e14dc38108b2d4cce25184578369c4455534b9",
+    "context/presidio/tests/test_encoded_secrets.py": "58ab43335844a0b9397b047e780793b3c2153d48179a70b7cd0e1dc211f0afbe",
+    "context/presidio/tests/test_evaluation.py": "b2f34c8feaa2b92b3e6b15ba89215e0595263831e17b994388974edc0ee74c27",
+    "context/presidio/tests/test_login_instruction_context.py": "e0451fb2e5976930ec92623f07672050a13ddca8c213dddef167524b631d8aec",
+    "context/presidio/tests/test_name_recheck_experiment.py": "8fbe9b0874e1f1ef2a9953dde9948a53faaf54ec9b47b6b1766646034559174d",
+    "context/presidio/tests/test_name_refinement.py": "8d512c187399a075735761eff7f954bfb63fde930458ed78c8a3f303d1a25317",
+    "context/presidio/tests/test_ner.py": "affeb8650147f344925f3afa20821e1650eca11233031cd9c127ef2c2ddfa672",
+    "context/presidio/tests/test_ner_text_processing.py": "d75e33e5c30a5f783b5d2d3399e6d8c0f658c09cef3f17c65dea04485eec9642",
+    "context/presidio/tests/test_nlp_context_contract.py": "f1b9a48d2e2a701a6e166a3a9d358a97fb25df52faa4639dbd7077dfe269baa6",
+    "context/presidio/tests/test_recognizers.py": "5581b77ecf0320b86a93fc1773a263e281a92ecdc6ba817a04ef4da69d729ed5",
+    "context/presidio/tests/test_result_merging.py": "5ddd309b1b47ad97a986718eb1a89bec07e474cdff53bc4c74ac4147c4c4a7bb",
+    "context/presidio/tests/test_spacy_ablation.py": "a0eb4cfe72a001c66662387408ee84b76d3c739932ff8ee14b96f64f5312ef74",
+    "context/presidio/tests/test_text_chunking.py": "761cc21b2fb9539f530046a6dbee08c08d5d996f472d8bbf9b796d0b9cc93f63",
+    "context/presidio/text_chunking.py": "0f9f44978a949d5de798db6f9fae913147d7e5b5461ce3d7e00612e9fd03c521",
+    "context/presidio/verify_cpu_runtime.py": "f14ddb5b26422603aaeb03110059cbaa4ede51b28911eba0836ac3db9531b483",
+    "context/presidio/verify_gpu_runtime.py": "8be1db150f8832f2b16a4f58b06ed1dd18d89726aebc37462537365c400bddb0",
+    "context/scanner_build/Dockerfile": "4d10df4544fdde873d2fda813fb31d780369dd8530fbfb303fe249dadd3e115c",
+    "context/scanner_build/constraints.txt": "8ba7d4b93b1a38d869c9aa9fffffe0aaf040fefe914008ae312a3a23634e6730",
+    "context/scanner_build/original_analyzer_server.py": "3517fdda1288483ec366fdd636e3e92bcd0412c3d511af805bf2130adb0b67c5",
+    "context/scanner_build/probe_runtime.py": "02669375d8520ede5993b29430d642362101e4830d8b1207b1299d25952da270",
+    "context/scanner_build/source-lock.json": "64a2f586ef1629c8ba5ebf0665d9b6dfd923f6332e77b6095ab45c70e57a6bed",
+    "context/tests/fixtures/dkb/1.txt": "ac4c829a0f9ab773405924b414140e0903fca8062c715f5b6bda893f288c9249",
+    "context/tests/fixtures/dkb/10.txt": "c0f801a856eca4255a0c35ea15b7e265b8519062606848c783318e4a3cfec6c4",
+    "context/tests/fixtures/dkb/11.txt": "478ec51eacf139349b75249116cf576e753eec64922e8b71dcbe720ad4701494",
+    "context/tests/fixtures/dkb/12.txt": "4c53b87a13dd7385070769dcfda989a584aa3a40c94611f31c2e1442fad8f0c0",
+    "context/tests/fixtures/dkb/13.txt": "cac7c051d5c502effc3c731bafa1bccaad8b6d1489f729ce426f9e88449f0c0c",
+    "context/tests/fixtures/dkb/14.txt": "82f2192342cf64d5df54e419c8482523e6e5bc6fcf66582c7b5b21d8c854ff70",
+    "context/tests/fixtures/dkb/15.txt": "36be10a605652e68fef4769d30a7a84d0215c272d5892ad268178e065cfcdb35",
+    "context/tests/fixtures/dkb/16.txt": "08587dfe8b86785ef313c17697a765336e556f5c7616fc9d8a06519b8fa794b6",
+    "context/tests/fixtures/dkb/17.txt": "5be7684be98593085af6723a662533c5ff02803b0d88a7cc0d46f47d79b75c2c",
+    "context/tests/fixtures/dkb/18.txt": "74d06b246620e2241fb2d0ddcd75d30902fe1c470c64aa04e883b4a48028587b",
+    "context/tests/fixtures/dkb/2.txt": "b87876e86d78ea1bcb26115901da755cf63d50b781f091875a0e46fb2570896d",
+    "context/tests/fixtures/dkb/3.txt": "6ab36ef1704b5fad828af4a3931badb2065276f98237d3c816148333d9de8710",
+    "context/tests/fixtures/dkb/4.txt": "866dcabe7c2ef04f32182b29ed21b93d880f13198179ba59ae202ece6850f6e4",
+    "context/tests/fixtures/dkb/5.txt": "fd6f7d9a41af19969f8593bc846407f25ba2fd93d72724607339c7e45633e70b",
+    "context/tests/fixtures/dkb/6.txt": "0de72df7d31f6c3030cd63a08ca0e53fdfdc542fd723173f5132d87d11e08312",
+    "context/tests/fixtures/dkb/7.txt": "47dece9ea003363a7b2d63acdf795206d57b263ebb1c63dd358c7b839547905d",
+    "context/tests/fixtures/dkb/8.txt": "eea3b3e780c848faa6cb6da425c1ab525354002077b601df65403f9db0bef8cd",
+    "context/tests/fixtures/dkb/9.txt": "2c08d99d157de8455179373fa7fe22f4768f921d1fdea59995962decddd43e2d",
+    "context/tests/fixtures/dkb/README.md": "605148a3c21ad035fb1e66577cee339c6ebefb709a8151d02c45a7cf724d79e2",
+    "context/tests/fixtures/dkb/manifest.json": "8693cd751b6980b3b23010727ecfd467aad6f473c2913120ae47b3824a7adf18",
+    "context/scanner_build/manifest.json": "7b17e9c6fb42f6e21147abd5d085a46d661c56889e75ef869430a4d77c7b7e8b"
+  },
+  "image_reference_id": "sha256:938b1eb4169fcaaf89882d07570fc57f2ebac23d80804e31221b18d8e4e04c00",
+  "image_platform_id": "sha256:dac76ca6f7f37d61f7a3ad4db1d56d68dcad14d9e44354252dcfbf3c208c5104"
+}

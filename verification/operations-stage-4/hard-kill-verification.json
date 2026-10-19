@@ -1,0 +1,11 @@
+{
+  "cleanup": true,
+  "daemon_loss_simulated_by_launcher_loss_only": true,
+  "daemon_restart_performed": false,
+  "input_unchanged": true,
+  "launcher_return_code": -9,
+  "operator_cleanup_exact_project": true,
+  "orphan_containers_observed": 2,
+  "orphan_networks_observed": 1,
+  "status": "passed"
+}

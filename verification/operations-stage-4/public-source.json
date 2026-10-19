@@ -1,0 +1,11 @@
+{
+  "url": "https://github.com/psf/requests.git",
+  "tag": "v2.32.5",
+  "commit": "b25c87d7cb8d6a18a37fa12442b5f883f9e41741",
+  "tree": "2663dda7dbb8ce123af703b4573d85d09383ba0f",
+  "files": 132,
+  "blob_bytes": 5190867,
+  "largest_blob_bytes": 2189478,
+  "clone_without_checkout": true,
+  "code_executed": false
+}

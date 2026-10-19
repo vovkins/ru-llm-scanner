@@ -12,10 +12,17 @@
 | Ревью на `336feb6` | [Отчёт и карта рисков](../docs/review/README.md) | Статическое ревью, focused unit и воспроизведения; исходные JSON сохранены |
 | Исправления RV-01–RV-05 | [operations-stage-2](operations-stage-2/README.md) | 144 unit без skipped, реальные parity/CLI/Compose/Jenkins adapter и private output |
 | Документация по ролям | [operations-stage-3](operations-stage-3/README.md) | Сверка команд/путей/locks, валидные синтетические примеры, ссылки и неизменность runtime |
+| Комплексные проверки #22 | [operations-stage-4](operations-stage-4/README.md) | Новый комплект, оба walkthrough, реальные модель/CLI/Compose/faults, browser, ёмкость, публичный snapshot и свежие advisories |
 
-Clean walkthrough новых руководств, capacity measurements, новый dependency
-advisory scan и browser acceptance относятся к следующему отдельно согласуемому
-этапу. Подготовленная процедура не выдаётся за уже выполненную чистую установку.
+Оба руководства пройдены в новых каталогах на том же Docker Desktop store.
+Это не испытание другого физического offline host. Обнаруженные dependency
+риски и смешанный packaging inventory имеют отдельный
+[план #24](https://github.com/vovkins/ru-llm-scanner/issues/24), ожидающий согласования.
+Итоговая приёмка [#25](https://github.com/vovkins/ru-llm-scanner/issues/25) ещё не начата.
+На реальном Requests дополнительно воспроизведён RV-06: NER window boundary
+не разрешается на `AUTHORS.rst`, результат 2. Исправление вынесено в
+[план #26](https://github.com/vovkins/ru-llm-scanner/issues/26); полный snapshot
+Pallets ItsDangerous завершён с находками и без ошибок.
 
 ## История первой реализации
 
