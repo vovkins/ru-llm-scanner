@@ -1,0 +1,128 @@
+#!/usr/bin/env python3
+"""Run pinned upstream unit tests with their complete synthetic fixture bundle."""
+
+import argparse
+import json
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from ru_llm_scanner.artifacts import file_hash, require, strict_json, write_json
+from ru_llm_scanner.upstream import verify_context
+
+TESTS = (
+    "test_recognizers.py",
+    "test_credential_rules.py",
+    "test_result_merging.py",
+    "test_text_chunking.py",
+    "test_encoded_secrets.py",
+    "test_ner_text_processing.py",
+    "test_nlp_context_contract.py",
+)
+
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument("--context", type=Path, required=True)
+    p.add_argument("--image", required=True)
+    p.add_argument("--output", type=Path, required=True)
+    args = p.parse_args()
+    context = args.context.resolve()
+    manifest, lock = verify_context(context)
+    platform = manifest["profile"]["platform"]
+    raw = subprocess.check_output(["docker", "image", "inspect", args.image])
+    reference = strict_json(raw)[0]["Id"]
+    info = strict_json(
+        subprocess.check_output(
+            ["docker", "image", "inspect", "--platform", platform, reference]
+        )
+    )[0]
+    labels = info["Config"].get("Labels") or {}
+    require(
+        labels.get("org.ru-llm-scanner.source-lock-sha256")
+        == manifest["source_lock_sha256"]
+        and labels.get("org.ru-llm-scanner.context-sha256")
+        == file_hash(context / "scanner_build/manifest.json"),
+        "Test image does not match pinned context",
+    )
+    base = [
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--platform",
+        platform,
+        "--read-only",
+        "--tmpfs",
+        "/tmp:rw,size=1g",
+        "-e",
+        "PYTHONPATH=/workspace/presidio:/workspace",
+        "-e",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "-e",
+        "XDG_CACHE_HOME=/tmp/cache",
+        "--mount",
+        f"type=bind,src={context},dst=/workspace,readonly",
+        "--workdir",
+        "/workspace",
+        reference,
+    ]
+    packages = strict_json(
+        subprocess.check_output(
+            [
+                *base,
+                "python",
+                "-c",
+                "import importlib.metadata as m,json; print(json.dumps({d.metadata['Name']:d.version for d in m.distributions()}))",
+            ]
+        )
+    )
+    result = subprocess.run(
+        [
+            *base,
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "-p",
+            "no:cacheprovider",
+            *("presidio/tests/" + name for name in TESTS),
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+    )
+    # Logs may include synthetic fixture values; they stay local and are not report data.
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.with_suffix(".log").write_text(result.stdout)
+    passed = re.findall(r"(\d+) passed", result.stdout)
+    report = {
+        "verification_version": 1,
+        "status": "passed" if result.returncode == 0 else "failed",
+        "source_commit": lock["upstream"]["commit"],
+        "source_lock_sha256": manifest["source_lock_sha256"],
+        "test_image_id": info["Id"],
+        "platform": platform,
+        "test_files": list(TESTS),
+        "packages": packages,
+        "passed": int(passed[-1]) if passed else 0,
+        "return_code": result.returncode,
+    }
+    write_json(args.output, report)
+    print(
+        json.dumps(
+            {
+                "status": report["status"],
+                "passed": report["passed"],
+                "test_files": len(TESTS),
+            }
+        )
+    )
+    raise SystemExit(result.returncode)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,7 +1,8 @@
 # Разработка и проверки
 
-Сейчас доступны спецификации, JSON Schema и синтетические примеры. Scanner
-runtime, Analyzer-адаптер, Docker и Jenkins ещё не реализованы.
+Доступны спецификации, JSON Schema, синтетические отчёты и механизм анализа:
+подготовка/сборка Analyzer, API-адаптер и словарь. Чтение пользовательского Git,
+CLI snapshot/diff, renderer и Jenkins ещё не реализованы.
 
 ## Структура
 
@@ -13,6 +14,10 @@ runtime, Analyzer-адаптер, Docker и Jenkins ещё не реализов
 | `examples/report-fixtures.json` | Исходные тексты/индекс для контрактной проверки |
 | `scripts/check_contracts.py` | Dev-проверка схемы, примеров, инвариантов и ссылок |
 | `requirements-dev.txt` | Версия инструмента валидации; не зависимости Analyzer |
+| `src/ru_llm_scanner/` | Async API-адаптер, словарь, артефакты и инструменты подготовки |
+| `upstream.lock.json`, `locks/` | Закреплённые источники, constraints и измеренный runtime |
+| `patches/`, `docker/` | Минимальная адаптация API и offline inventory helpers |
+| `tests/`, `scripts/check_*` | Модульные и изолированные интеграционные проверки |
 | `AGENTS.md` | Постоянный порядок согласования и обновления прогресса |
 
 ## Запуск доступной проверки
@@ -21,8 +26,8 @@ runtime, Analyzer-адаптер, Docker и Jenkins ещё не реализов
 индекс пакетов/корпоративное зеркало; сама проверка схемы работает локально.
 
 ```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements-dev.txt
+python3.11 -m venv .venv
+.venv/bin/python -m pip install -e . -r requirements-dev.txt
 .venv/bin/python scripts/check_contracts.py
 git diff --check
 ```
@@ -42,11 +47,30 @@ Unicode/CRLF, ссылки внутри Markdown и закрытие code fences
 только для спецификационных fixtures и не является production-валидатором
 произвольных отчётов. Не импортировать его в будущий runtime.
 
+На этапе 2 добавлены проверки артефактов и async адаптера:
+
+```bash
+.venv/bin/python -m unittest discover -s tests -v
+.venv/bin/python -m black --check src tests docker scripts/analyzer.py \
+  scripts/check_analyzer_integration.py scripts/check_upstream_tests.py \
+  scripts/capture_licenses.py
+```
+
+Для словарных parity-тестов сначала выполните `prepare --output .build/analyzer`
+по [руководству](analyzer.md); без assets они явно помечаются skipped.
+Итоговая проверка этапа требует полного прогона без skipped. Остальные unit-тесты
+не требуют Docker. Реальные модельные и upstream-проверки выполняются командами
+из руководства, отдельно от unittest/JSON Schema. `black==25.1.0` — dev-tool,
+runtime-клиент использует `httpx==0.28.1` из pyproject.toml.
+
+Фактически выполненные проверки, измеренный runtime lock и границы стенда
+собраны в [результатах этапа 2](../verification/stage-2/README.md).
+
 ## Стратегия следующих этапов
 
 | Этап | Проверки, которые появятся с реализацией |
 | --- | --- |
-| 2 | Контракт API, readiness, источник, каталог, словарь, соответствие upstream |
+| 2 (реализовано) | Контракт API, readiness, источник, каталог, словарь, соответствие upstream |
 | 3 | Git-деревья, refs, добавления/удаления/переименования, пути, хуки/фильтры, missing objects |
 | 4 | Полные файлы, координаты, длинные/многострочные значения, положительный и отрицательный корпус кода |
 | 5 | Реальные отчёты, semantic validation, цепочка baseline, экранирование и визуальная QA HTML |
