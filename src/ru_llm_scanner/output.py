@@ -40,7 +40,8 @@ class ReportDirectory:
                     child = os.open(component, flags, dir_fd=fd)
                     os.close(fd)
                     fd = child
-                if os.listdir(fd):
+                info = os.fstat(fd)
+                if info.st_uid != os.getuid() or info.st_mode & 0o077 or os.listdir(fd):
                     raise OutputError()
                 lock = os.open(
                     ".scanner.lock",
