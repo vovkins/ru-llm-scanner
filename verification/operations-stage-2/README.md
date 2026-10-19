@@ -29,7 +29,7 @@ CPU Linux ARM64 внутри Docker Desktop. Runtime выполнялся без
 
 | Свидетельство | Фактический результат |
 | --- | --- |
-| [Полный unit](unit-tests.json) | 143 tests, 0 failures/errors/skipped, подготовленные trusted assets; HTTP stub отделён от модели |
+| [Полный unit](unit-tests.json) | 144 tests, 0 failures/errors/skipped, подготовленные trusted assets; HTTP stub отделён от модели |
 | [Dev scan](scan-verification.json) | Новый dev image, import/schema smoke, code-v1 46/46 direct parity, исходные координаты/value/context |
 | [Raw/patched](offline-verification.json) | 77/77 NER parity, 4 dictionary cases, существующие quality gates прошли; ограниченный curated mount |
 | [Установленный CLI](cli-verification.json) | Wheel совпадает с source/schema, 9 реальных сценариев 0/1/2, snapshot/diff/baseline/error |

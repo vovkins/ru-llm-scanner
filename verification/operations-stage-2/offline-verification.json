@@ -1869,7 +1869,7 @@
   ],
   "gpu_inference": "not_tested_no_cuda",
   "launcher_sha256": "a6441500fc4c541afd5ff4f9698603bfa066c9bb8897cbcc7952c64135288c6f",
-  "shared_helper_sha256": "3fbc3a845a2002a1b05972bc9cf3e1a5eaa2121e84c4b5c3c32eaecc844868db",
+  "shared_helper_sha256": "f46404515e8e7f294779e7860ee6e84a645def775c3ce80baa20a14f4bc541f0",
   "curated_input_sha256": {
     "src/ru_llm_scanner/configuration.py": "0a6e3f90de1bb9a089855734a5a0e06b92728b1cd9d8f13e5bc4b10b1ab7c959",
     "src/ru_llm_scanner/findings.py": "1f9ffd4f3dce7d48f1e066447552eda238cabf36d82cfe4cd5923c7b0c44a7cf",

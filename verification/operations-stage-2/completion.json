@@ -12,6 +12,7 @@
       "image_reference_id": "sha256:257f7d6918bc360a28fb52e09022a40940691c691a9556f6aa5b9ea32485c73d"
     }
   },
+  "explicit_non_root_operator_preflight": true,
   "fixes_base": "fc0dcbfa4304cf504ae317f83f015b938f5b52b7",
   "foreign_containers_preserved": 7,
   "implementation_commits": {
@@ -94,5 +95,11 @@
   "published": false,
   "review_base": "336feb64b201b0e9b807059f3d60b50fdee41ebb",
   "status": "passed",
+  "verification_sources_sha256": {
+    "scripts/check_cli_tests.py": "b6f2d7cc21e960cf5341cac64cf799da19d806858c845208e0e2927becc7718d",
+    "scripts/check_deployment_extras.py": "e689142164304c31fb88c4f8b6bd044253058b57394a47eca9835576e5ba9869",
+    "scripts/parity_verification.py": "f46404515e8e7f294779e7860ee6e84a645def775c3ce80baa20a14f4bc541f0",
+    "tests/test_parity_verification.py": "a9c5c47ad44b37f30dff0356c2e19a6caf18a044095d6a2e7a4629b3672da15c"
+  },
   "verification_version": 1
 }

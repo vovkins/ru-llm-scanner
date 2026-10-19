@@ -28,6 +28,7 @@ def cleanup_owned(owner):
 
 
 def run_parity(context, runtime_lock, output_dir, *, launcher):
+    require(os.getuid() != 0, "Run verification as a non-root operator")
     manifest, _ = verify_context(context)
     runtime = load_runtime_lock(
         runtime_lock, context / "scanner_build/source-lock.json"

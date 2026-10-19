@@ -51,6 +51,16 @@ class ParityVerificationTests(unittest.TestCase):
             launcher=ROOT / "scripts/check_analyzer_integration.py",
         )
 
+    def test_root_operator_never_runs_container(self):
+        with (
+            patch.object(parity.os, "getuid", return_value=0),
+            patch.object(parity, "docker") as docker,
+        ):
+            with self.assertRaises(ValueError):
+                self.run_parity()
+            docker.assert_not_called()
+        self.assertFalse(self.out.exists())
+
     def test_identity_mismatch_or_missing_image_never_runs_container(self):
         for value in ("sha256:" + "3" * 64, None):
             with self.subTest(value=value), patch.object(parity, "docker") as docker:
