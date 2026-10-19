@@ -1,0 +1,285 @@
+{
+  "corpus_version": "code-v1",
+  "cases": [
+    {
+      "id": "python-password",
+      "path": "src/database.py",
+      "group": "credentials",
+      "annotated_text": "settings = {\"password\": \"{{PASSWORD:R7vN!2mQ9zL8}}\"}\n"
+    },
+    {
+      "id": "dotenv-login",
+      "path": "config/login.env",
+      "group": "credentials",
+      "annotated_text": "username={{LOGIN:build.operator-47}}\n"
+    },
+    {
+      "id": "yaml-auth",
+      "path": "config/auth.yaml",
+      "group": "credentials",
+      "annotated_text": "auth_token: \"{{AUTH_TOKEN:eb825ffdd0320db50676317e35dcc866cc63}}\"\n"
+    },
+    {
+      "id": "json-secret",
+      "path": "config/credentials.json",
+      "group": "credentials",
+      "annotated_text": "{\"client_secret\": \"{{SECRET_KEY:0faad2b3144018f51dad068b1f3063ff22e5}}\"}\n"
+    },
+    {
+      "id": "provider-api",
+      "path": "scripts/provider.sh",
+      "group": "credentials",
+      "annotated_text": "API_KEY=\"{{API_KEY:sk-42c40cc88c339032726be6a413099a9d1e7e}}\"\n"
+    },
+    {
+      "id": "http-jwt",
+      "path": "http/jwt.http",
+      "group": "credentials",
+      "annotated_text": "X-Session: {{JWT:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmaXh0dXJlLTQ3IiwiYXVkIjoiZXhhbXBsZS5pbnZhbGlkIn0.bm90LWEtdmFsaWQtc2lnbmF0dXJl}}\n"
+    },
+    {
+      "id": "http-bearer",
+      "path": "http/request.http",
+      "group": "credentials",
+      "annotated_text": "{{BEARER_TOKEN:Authorization: Bearer 368b26c0fd33efd7b41da508f49f92d1fcf0}}\nAccept: application/json\n"
+    },
+    {
+      "id": "multiline-key",
+      "path": "config/signing.conf",
+      "group": "credentials",
+      "annotated_text": "signing_key = \"\"\"\n{{PRIVATE_KEY:-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASC\n-----END PRIVATE KEY-----}}\n\"\"\"\n"
+    },
+    {
+      "id": "encoded-data",
+      "path": "config/encoded.env",
+      "group": "credentials",
+      "annotated_text": "payload={{BASE64_DATA:cGFzc3dvcmQ9Ujh0RjdrUDN2TTZxVzR6TjljQjJ4TDVzSDF5Sg==}}\n"
+    },
+    {
+      "id": "infra-ip",
+      "path": "deploy/service.yaml",
+      "group": "infrastructure",
+      "annotated_text": "host_ip: {{INTERNAL_IP:10.47.83.29}}\n"
+    },
+    {
+      "id": "infra-public-ip",
+      "path": "deploy/public.yaml",
+      "group": "infrastructure",
+      "annotated_text": "upstream: {{INTERNAL_IP:198.51.100.47}}\n"
+    },
+    {
+      "id": "infra-domain",
+      "path": "deploy/endpoint.toml",
+      "group": "infrastructure",
+      "annotated_text": "endpoint = \"{{INTERNAL_DOMAIN:api.scan.corp.local}}\"\n"
+    },
+    {
+      "id": "infra-hostname",
+      "path": "deploy/host.env",
+      "group": "infrastructure",
+      "annotated_text": "hostname={{HOSTNAME:scanner-prod-47}}\n"
+    },
+    {
+      "id": "database-url",
+      "path": "config/database.env",
+      "group": "infrastructure",
+      "annotated_text": "DATABASE_URL={{DB_URL:postgresql://fixture_user:829d4245e2eb24e2d690b0ea2d735d0c3629@db.corp.local:5432/fixture}}\n"
+    },
+    {
+      "id": "contact-email",
+      "path": "src/contact.py",
+      "group": "contact",
+      "annotated_text": "contact_email = \"{{EMAIL_ADDRESS:build.operator@example.invalid}}\"\n"
+    },
+    {
+      "id": "contact-phone",
+      "path": "data/contact.csv",
+      "group": "contact",
+      "annotated_text": "phone,role\n\"{{PHONE_NUMBER:+1 (202) 555-0123}}\",operator\n"
+    },
+    {
+      "id": "ru-address",
+      "path": "docs/delivery.md",
+      "group": "contact",
+      "annotated_text": "Адрес доставки: {{RU_ADDRESS:г. Тверь, ул. Новая, д. 47}}.\n"
+    },
+    {
+      "id": "person-comment",
+      "path": "src/customer.py",
+      "group": "identity",
+      "annotated_text": "# Ответственный: {{PERSON:Егор Миронов}}.\ncustomer_enabled = True\n"
+    },
+    {
+      "id": "location-doc",
+      "path": "docs/location.md",
+      "group": "identity",
+      "annotated_text": "Офис находится в {{LOCATION:Твери}}.\n"
+    },
+    {
+      "id": "organization-doc",
+      "path": "docs/organization.md",
+      "group": "identity",
+      "annotated_text": "Заказчик: {{ORGANIZATION:ООО Вектор Сканирования}}.\n"
+    },
+    {
+      "id": "contract-doc",
+      "path": "docs/agreement.md",
+      "group": "identity",
+      "annotated_text": "Договор № {{CONTRACT_NUMBER:VS-2026/0479}} подписан сторонами.\n"
+    },
+    {
+      "id": "inn-yaml",
+      "path": "data/inn.yaml",
+      "group": "documents",
+      "annotated_text": "# ИНН контрагента\ninn: {{RU_INN:9901234561}}\n"
+    },
+    {
+      "id": "kpp-doc",
+      "path": "data/kpp.txt",
+      "group": "documents",
+      "annotated_text": "КПП получателя: {{RU_KPP:990101001}}\n"
+    },
+    {
+      "id": "ogrn-doc",
+      "path": "data/ogrn.txt",
+      "group": "documents",
+      "annotated_text": "ОГРН контрагента: {{RU_OGRN:1069901234567}}\n"
+    },
+    {
+      "id": "ogrnip-doc",
+      "path": "data/ogrnip.txt",
+      "group": "documents",
+      "annotated_text": "ОГРНИП предпринимателя: {{RU_OGRNIP:306990123456781}}\n"
+    },
+    {
+      "id": "snils-doc",
+      "path": "data/snils.txt",
+      "group": "documents",
+      "annotated_text": "СНИЛС: {{RU_SNILS:990-123-456 07}}\n"
+    },
+    {
+      "id": "passport-doc",
+      "path": "data/passport.txt",
+      "group": "documents",
+      "annotated_text": "Паспорт: {{RU_PASSPORT:45 12 765432}}\n"
+    },
+    {
+      "id": "bik-doc",
+      "path": "data/bik.txt",
+      "group": "financial",
+      "annotated_text": "БИК банка: {{RU_BIK:049900123}}\n"
+    },
+    {
+      "id": "settlement-doc",
+      "path": "data/settlement.txt",
+      "group": "financial",
+      "annotated_text": "Расчётный счёт: {{RU_SETTLEMENT_ACCOUNT:40702000912345678901}}, БИК {{RU_BIK:049900123}}\n"
+    },
+    {
+      "id": "correspondent-doc",
+      "path": "data/correspondent.txt",
+      "group": "financial",
+      "annotated_text": "БИК {{RU_BIK:049900123}}, к/с {{RU_CORRESPONDENT_ACCOUNT:30101000712345678901}}\n"
+    },
+    {
+      "id": "card-json",
+      "path": "config/card.json",
+      "group": "financial",
+      "annotated_text": "{\"card_number\": \"{{CREDIT_CARD:4111 1111 1111 1111}}\"}\n"
+    },
+    {
+      "id": "dictionary-repeat",
+      "path": "docs/bank.md",
+      "group": "dictionary",
+      "annotated_text": "Партнёр {{DICTIONARY_TERM:Сбербанк}}; повторно {{DICTIONARY_TERM:Сбербанк}}.\n"
+    },
+    {
+      "id": "unicode-password",
+      "path": "src/unicode.py",
+      "group": "credentials",
+      "annotated_text": "# 😀 é\r\npassword = \"{{PASSWORD:P8k!mR47zQ2v}}\"\r\n"
+    },
+    {
+      "id": "long-tail",
+      "path": "config/long.conf",
+      "group": "credentials",
+      "annotated_text": "password=\"{{PASSWORD:N7v!kQ29rT5w}}\"\n",
+      "prefix_repeat": {
+        "text": "# runtime configuration note without values\n",
+        "count": 240
+      }
+    },
+    {
+      "id": "negative-constants",
+      "path": "src/constants.py",
+      "group": "negative",
+      "annotated_text": "MAX_RETRIES = 3\nTIMEOUT_SECONDS = 30\n"
+    },
+    {
+      "id": "negative-password-placeholder",
+      "path": "templates/password.env",
+      "group": "negative",
+      "annotated_text": "password=changeme\n"
+    },
+    {
+      "id": "negative-api-placeholder",
+      "path": "templates/api.env",
+      "group": "negative",
+      "annotated_text": "API_KEY=your-api-key-placeholder\n"
+    },
+    {
+      "id": "negative-login-placeholder",
+      "path": "templates/login.env",
+      "group": "negative",
+      "annotated_text": "login=example\n"
+    },
+    {
+      "id": "negative-description",
+      "path": "docs/security.md",
+      "group": "negative",
+      "annotated_text": "Пароль хранится отдельно. Значения ключей здесь не указаны.\n"
+    },
+    {
+      "id": "negative-host-context",
+      "path": "docs/host.md",
+      "group": "negative",
+      "annotated_text": "scanner-prod-47 — имя примера строки, контекст хоста отсутствует.\n"
+    },
+    {
+      "id": "negative-ip",
+      "path": "src/versions.py",
+      "group": "negative",
+      "annotated_text": "version = \"999.999.999.999\"\n"
+    },
+    {
+      "id": "negative-inn-checksum",
+      "path": "data/bad-inn.txt",
+      "group": "negative",
+      "annotated_text": "ИНН: 9901234562\n"
+    },
+    {
+      "id": "negative-url",
+      "path": "docs/url.md",
+      "group": "negative",
+      "annotated_text": "Документация: https://example.invalid/docs\n"
+    },
+    {
+      "id": "negative-base64",
+      "path": "src/encoding.py",
+      "group": "negative",
+      "annotated_text": "payload = \"aGVsbG8=\"\n"
+    },
+    {
+      "id": "negative-contract",
+      "path": "docs/version.md",
+      "group": "negative",
+      "annotated_text": "Версия приложения VS-2026/0479 используется при сборке.\n"
+    },
+    {
+      "id": "negative-empty",
+      "path": "data/empty",
+      "group": "negative",
+      "annotated_text": ""
+    }
+  ]
+}
