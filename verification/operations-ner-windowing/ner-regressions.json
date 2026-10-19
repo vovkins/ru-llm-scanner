@@ -75,16 +75,16 @@
     "wheel": "0.48.0",
     "wrapt": "2.4.1"
   },
-  "passed": 90,
+  "passed": 91,
   "platform": "linux/arm64",
   "return_code": 0,
-  "scanner_regression_sha256": "8263c54a1065a99bbb41cc6ad6e3d2bfd3969464c395ef08784b101b19b74241",
+  "scanner_regression_sha256": "a54249a3e019a205d0c594961cc34952374e7413ba7c0a2999691c3c426db9ba",
   "source_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
-  "source_lock_sha256": "b4d710a18c0e840b0a84cd979974ad311cf3d3647e716e99256cda6fa889091a",
+  "source_lock_sha256": "0d491e84321ed06f26018ccb373a739a6fde87c437fcba0e070a2567040e86f9",
   "status": "passed",
   "test_files": [
     "test_ner.py"
   ],
-  "test_image_id": "sha256:c311b088242b6dc1b6be608696b242b2d0090ce1bb7e78b2e83a0e40bca74384",
+  "test_image_id": "sha256:5f858433a1fcee99f207e9ac04512d58fe85bf78a7d44acbd79f4c7f0f364e99",
   "verification_version": 1
 }
