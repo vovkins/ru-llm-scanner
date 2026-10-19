@@ -1,0 +1,33 @@
+{
+  "black_checked_files": 61,
+  "complete_package_save_load_platform_verified": true,
+  "contract_examples": 11,
+  "local_markdown_links": 265,
+  "offline_rebuild_same_deployment": true,
+  "own_containers_remaining": 0,
+  "own_networks_remaining": 0,
+  "proxy_tracked_changes": false,
+  "rejected_invalid_contract_cases": 22,
+  "sources_sha256": {
+    "docker/scanner.Dockerfile": "2799fd2e7b12db6fd3ed4bbdccf78a73be8465d2cd9f5e3a13802a81e644e25d",
+    "examples/jenkins/Jenkinsfile": "17e83abc26be6624f7917dfc4f1f94eb8b616531857faea6c93394209c09248f",
+    "examples/jenkins/run_scan.py": "28af0dcd604353db59573f5e133affc71100079e29b7253dadb2e444eef04721",
+    "scripts/build_scanner.py": "2fb516dfaaca0e17979571b44ce24f7e6d326120f926fec15dc9c930e0809789",
+    "scripts/check_cli_tests.py": "12d89000a3608d15c6efaf766e1769d568347c62bcf60a5423e75b6ac2cf8a1f",
+    "scripts/check_deployment_extras.py": "1cac535849de573c0108a5597b9868b38f495b31388a61b1539de83fb512d7f5",
+    "scripts/check_docker_integration.py": "3cf73e29c6256e74bf4290914d5f098a0030b095cf5170cc103e608b2d48901c",
+    "scripts/check_runtime_faults.py": "c1d37ca2081940022786f017678fb9161538ed9e59a41d509201f72f80479f2a",
+    "scripts/docker_scanner.py": "171753dc0cbbc8bc3d21f756a7a112a850013e458e31756f5ec32a9903285f44"
+  },
+  "status": "passed",
+  "transfer_checksums": {
+    "deployment.json": "877449870cb12066e3203f8de779cb868a5ded6f20a18d3dd4432e8e2ea60bde",
+    "engine/dictionary.json": "126805a93906873c7cd1fd7a3586c106a4c68d9329cfbe5169132d9bfc9a244e",
+    "engine/dictionary_policy.py": "9709364660baa4f5ac551b42fbbd411c6d2eaf8093ac1579ca8ea4a30696d099",
+    "engine/runtime-lock.json": "a8a08bd416193af9632997afc0ba5256f2528534607eddc74015915ec9cb1a7d",
+    "engine/source-lock.json": "64a2f586ef1629c8ba5ebf0665d9b6dfd923f6332e77b6095ab45c70e57a6bed",
+    "images.tar": "c0c6a49fc413e29d164dca765da8b41afd8927c764dcb16cbef6829e80e4cd84"
+  },
+  "verification_version": 1,
+  "zero_score_zero_context_production_passed": true
+}

@@ -1,0 +1,55 @@
+// Install this trusted pipeline separately from the repository being scanned.
+// Agent paths, RBAC and artifact retention must be provisioned by the CI owner.
+pipeline {
+    agent { label 'scanner-cpu-arm64' }
+    options {
+        skipDefaultCheckout(true)
+        disableConcurrentBuilds()
+        timeout(time: 75, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '5'))
+    }
+    parameters {
+        choice(name: 'SCAN_MODE', choices: ['snapshot', 'diff'], description: 'Snapshot B or transition A to B')
+        string(name: 'REPOSITORY_NAME', defaultValue: 'prepared-repo', description: 'Prepared clone under the trusted repository root')
+        string(name: 'REF_A', defaultValue: '', description: 'Base commit for diff')
+        string(name: 'REF_B', defaultValue: 'HEAD', description: 'Target commit')
+        string(name: 'CONFIG_NAME', defaultValue: '', description: 'Optional approved configuration filename')
+        string(name: 'BASELINE_NAME', defaultValue: '', description: 'Optional approved baseline filename; no URL')
+        booleanParam(name: 'REQUIRE_BASELINE', defaultValue: true, description: 'Require a trusted clean baseline for diff')
+    }
+    environment {
+        SCANNER_HOME = '/opt/ru-llm-scanner'
+        SCANNER_REPOSITORIES = '/srv/ru-llm-scanner/repositories'
+        SCANNER_CONFIGS = '/srv/ru-llm-scanner/configs'
+        SCANNER_BASELINES = '/srv/ru-llm-scanner/baselines'
+    }
+    stages {
+        stage('Offline scan') {
+            steps {
+                // Prepared repositories/configs/baselines live outside this workspace.
+                deleteDir()
+                script {
+                    // No Groovy interpolation of user values; Python passes argv arrays.
+                    int code = sh(returnStatus: true, script: '''#!/bin/sh
+set +x
+umask 077
+exec python3 "$SCANNER_HOME/examples/jenkins/run_scan.py"
+''')
+                    if (code == 1) {
+                        unstable('Sensitive-data findings; inspect restricted artifacts')
+                    } else if (code != 0) {
+                        error('Scan incomplete or infrastructure failure; baseline must not be promoted')
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            // Missing files are expected on early infrastructure/output failure.
+            archiveArtifacts(artifacts: 'scan-results/report.json,scan-results/report.html,scan-status.json', allowEmptyArchive: true)
+            // Launcher owns container/network cleanup, including SIGINT/TERM.
+            // A hard agent/daemon loss requires the documented operator recovery.
+        }
+    }
+}

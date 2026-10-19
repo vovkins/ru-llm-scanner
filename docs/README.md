@@ -5,7 +5,7 @@ snapshot/diff, JSON/HTML и baseline работают через CLI. Досту
 проверки адаптера и JSON Schema. Внутренний Git API читает снимки/сравнения
 деревьев и готовит тексты. Scan API соединяет его с Analyzer/словарём,
 сохраняет находки/координаты/охват и возвращает безопасную сводку.
-Production Docker/Compose и Jenkins ещё не подключены.
+Production Docker/Compose, offline transfer и пример Jenkins реализованы.
 
 ## Пользователю и оператору CI
 
@@ -14,6 +14,10 @@ Production Docker/Compose и Jenkins ещё не подключены.
 | Понять назначение и готовность | [README](../README.md) |
 | Выбрать снимок или переход и понять охват | [Режимы](scan-modes.md) |
 | Запустить доступный CLI | [Dev quickstart](cli-quickstart.md) |
+| Запустить готовые контейнеры | [Docker quickstart](docker-quickstart.md) |
+| Собрать и перенести в закрытую среду | [Build и offline transfer](offline-build.md) |
+| Разобрать сбой/восстановить cleanup | [Эксплуатация](operations.md) |
+| Подключить доверенный CI | [Jenkins example](jenkins.md) |
 | Задать аргументы и профиль проверки | [CLI и конфигурация](configuration.md) |
 | Читать JSON/HTML и трактовать результат | [Отчёты](reports.md) |
 | Переиспользовать предыдущую проверку | [Baseline](baseline.md) |
@@ -24,9 +28,8 @@ Production Docker/Compose и Jenkins ещё не подключены.
 | Выполнить внутренний snapshot/diff и offline-проверку | [Scan API](scan-api.md) |
 | Работать с чувствительными отчётами | [Безопасность](../SECURITY.md) |
 
-Руководства по штатному Docker-запуску, переносу образов, Jenkins и
-эксплуатационной диагностике добавляются на этапе 6. Текущие команды Docker
-предназначены для dev-проверок механизма и синтетического scan pipeline.
+Штатный запуск проверен на CPU Linux ARM64 в Docker Desktop; реальный Jenkins,
+GPU и Linux-host/другие платформы требуют отдельной проверки.
 
 ## Разработчику
 
@@ -38,6 +41,7 @@ Production Docker/Compose и Jenkins ещё не подключены.
 - [Результаты проверки Git/text на этапе 3](../verification/stage-3/README.md).
 - [Результаты scan pipeline и качества кода на этапе 4](../verification/stage-4/README.md).
 - [Результаты CLI/отчётов/baseline на этапе 5](../verification/stage-5/README.md).
+- [Результаты production Docker/transfer на этапе 6](../verification/stage-6/README.md).
 - [Лицензирование](licensing.md), [постоянные инструкции](../AGENTS.md).
 
 Источником договорённостей служит [общая задача #1](https://github.com/vovkins/ru-llm-scanner/issues/1).
@@ -51,5 +55,7 @@ Analyzer. [Этап 3](https://github.com/vovkins/ru-llm-scanner/issues/5)
 согласован 2026-10-19; scan API и отдельная оценка качества реализованы.
 [Этап 5](https://github.com/vovkins/ru-llm-scanner/issues/9) согласован
 2026-10-19: CLI, отчёты и baseline реализованы.
-[План этапа 6](https://github.com/vovkins/ru-llm-scanner/issues/11) подготовлен
-для отдельного согласования; реализация не начата.
+[Этап 6](https://github.com/vovkins/ru-llm-scanner/issues/11) согласован
+2026-10-19: production Docker/Compose, offline transfer и пример Jenkins реализованы.
+[План этапа 7](https://github.com/vovkins/ru-llm-scanner/issues/13) подготовлен
+для отдельного согласования; приёмка/репетиция обновления не начата.

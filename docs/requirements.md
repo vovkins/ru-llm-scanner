@@ -7,8 +7,9 @@
 в результатах [этапа 2](../verification/stage-2/README.md) и
 [этапа 3](../verification/stage-3/README.md) и
 [этапа 4](../verification/stage-4/README.md) и
-[этапа 5](../verification/stage-5/README.md). Scan API и CLI/отчёты/baseline
-реализованы; штатная упаковка/Jenkins ещё впереди.
+[этапа 5](../verification/stage-5/README.md) и
+[этапа 6](../verification/stage-6/README.md). Scan API, CLI/отчёты/baseline,
+штатная упаковка и Jenkins example реализованы; настоящий Jenkins/GPU не проверены.
 
 | ID | Договорённость | Спецификация | Приёмочный сценарий / этап |
 | --- | --- | --- | --- |
@@ -31,9 +32,10 @@
 
 ## Следующие задачи
 
-Этапы 1–5 реализованы и проверены; результаты подготовлены в отдельных draft PR,
-в main пока не слиты. [Подробный план Docker/Jenkins (этап 6)](https://github.com/vovkins/ru-llm-scanner/issues/11)
-подготовлен для отдельного явного согласования; автоматически он не разрешён.
+Этапы 1–6 реализованы и проверены в заявленных границах; результаты подготовлены
+в отдельных draft PR, в main пока не слиты. [Docker/Jenkins (этап 6)](https://github.com/vovkins/ru-llm-scanner/issues/11)
+согласован 2026-10-19. [План этапа 7](https://github.com/vovkins/ru-llm-scanner/issues/13)
+требует отдельного явного согласования; реализация не начата.
 Остальные подробные планы создаются перед реализацией, после результатов
 предыдущего этапа, и отдельно согласуются.
 Лицензия scanner пока не выбрана; статус явно отражён в [licensing](licensing.md).

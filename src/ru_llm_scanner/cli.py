@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import signal
 from pathlib import Path
 
 from . import __version__
@@ -17,6 +18,25 @@ from .pipeline import scan_repository
 from .reports import build_error_report, build_report
 
 DEFAULT_ENGINE_DIR = Path("/opt/ru-llm-scanner/engine")
+
+
+async def _scan(*args, **kwargs):
+    """SIGTERM follows the same report-preserving cancellation as SIGINT."""
+    loop = asyncio.get_running_loop()
+    task = asyncio.current_task()
+    previous = signal.getsignal(signal.SIGTERM)
+    installed = False
+    try:
+        try:
+            loop.add_signal_handler(signal.SIGTERM, task.cancel)
+            installed = True
+        except (NotImplementedError, RuntimeError, ValueError):
+            pass  # Non-POSIX/non-main-thread API usage has no process handler.
+        return await scan_repository(*args, **kwargs)
+    finally:
+        if installed:
+            loop.remove_signal_handler(signal.SIGTERM)
+            signal.signal(signal.SIGTERM, previous)
 
 
 class ArgumentError(ValueError):
@@ -153,7 +173,7 @@ def main(argv=None):
                     rules_file=bundle / "dictionary.json",
                 )
                 result = asyncio.run(
-                    scan_repository(
+                    _scan(
                         args.repo,
                         engine,
                         mode=args.mode,

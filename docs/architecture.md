@@ -4,7 +4,8 @@
 Git reader, сравнение деревьев и подготовка текста реализованы на этапе 3.
 Внутренний [scan pipeline](scan-api.md) реализован на этапе 4.
 CLI, JSON/HTML writer, runtime validation и baseline подключены на этапе 5.
-Штатное контейнерное развёртывание/Jenkins — этап 6.
+[Штатный Docker/Compose](docker-quickstart.md) и [пример Jenkins](jenkins.md)
+подключены на этапе 6; реальные Jenkins/GPU не проверялись.
 
 ## Компоненты и данные
 
@@ -19,7 +20,7 @@ CLI, JSON/HTML writer, runtime validation и baseline подключены на 
 проверка ответа/координат → находки → полнота и assurance → JSON/HTML/exit code.
 Сбой любого обязательного компонента не даёт успешный результат.
 
-Git-репозиторий только читается из mount `/repo:ro`; выход `/reports` отдельный.
+Git-репозиторий читается из mount `/input/repository:ro`; выход `/output` отдельный.
 Внутренняя сеть Docker соединяет только scanner/analyzer, порт Analyzer не
 публикуется. Модель и библиотеки находятся в образе. Внешних API и загрузки
 зависимостей при сканировании нет. Готовность Analyzer проверяется до работы,
@@ -53,6 +54,13 @@ locks/словарные assets и вычисляет идентичность, 
 компоненты, сохраняя values/context в артефактах и безопасную сводку в консоли.
 [ADR-0005](decisions/0005-trusted-baseline-and-artifacts.md) описывает доверие
 и ограничения частичного отказа записи.
+
+`scripts/docker_scanner.py` — host launcher без сторонних Python-зависимостей.
+Он проверяет deployment Image IDs, генерирует уникальный Compose JSON и владеет
+cleanup точного project label. Non-root сервисы имеют только internal network,
+read-only FS/вход, tmpfs и output; logs отключены. Online prepare и offline build/
+export/import отделены от scan. Infrastructure failure имеет приоритет над
+прежним clean артефактом; [ADR-0006](decisions/0006-offline-container-lifecycle.md).
 
 ## Подготовка upstream
 
