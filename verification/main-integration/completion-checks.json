@@ -1,0 +1,71 @@
+{
+  "verification_version": 1,
+  "status": "passed",
+  "tested_main_commit": "4d958e12070569c659e27f16ab118a35055e8d53",
+  "tested_main_tree": "c756f38d0bf838ba89ab82c48908792faa035126",
+  "prepared_final_head": "33dcad24d675c99c30f53639af7b4f37a28e1030",
+  "all_seven_prs_merged_to_main": true,
+  "tree_matches_prepared_final_head": true,
+  "product_sources_unchanged_after_merge": true,
+  "unit_sources_match_working_tree": true,
+  "github_checks_configured": false,
+  "unit_tests": 131,
+  "unit_skipped": 0,
+  "production_acceptance_runs": 16,
+  "real_offline_cli_runs": 9,
+  "direct_detector_parity_files": 46,
+  "code_v1_exact_totals": {
+    "exact_tp": 33,
+    "exact_fp": 13,
+    "exact_fn": 4
+  },
+  "sealed_local_images_verified": true,
+  "foreign_running_containers_preserved": 7,
+  "own_containers_remaining": 0,
+  "own_networks_remaining": 0,
+  "original_artifact_hashes_unchanged": {
+    "locks/analyzer-cpu-linux-arm64.runtime.lock.json": "a8a08bd416193af9632997afc0ba5256f2528534607eddc74015915ec9cb1a7d",
+    "locks/scanner-cpu-linux-arm64.deployment.json": "877449870cb12066e3203f8de779cb868a5ded6f20a18d3dd4432e8e2ea60bde",
+    "schemas/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+    "upstream.lock.json": "64a2f586ef1629c8ba5ebf0665d9b6dfd923f6332e77b6095ab45c70e57a6bed"
+  },
+  "original_proxy_head": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
+  "original_proxy_tracked_changes": false,
+  "release_count_after": 0,
+  "git_tags_after": [],
+  "images_built_or_published": false,
+  "version": "0.1.0.dev0",
+  "environment": {
+    "host": {
+      "python": "3.12.14",
+      "system": "Darwin",
+      "machine": "arm64",
+      "git": "git version 2.39.5 (Apple Git-154)",
+      "httpx": "0.28.1",
+      "jsonschema": "4.26.0"
+    },
+    "docker": "29.6.1",
+    "compose": "5.2.0",
+    "container": {
+      "python": "3.11.16",
+      "git": "git version 2.47.3",
+      "httpx": "0.28.1",
+      "system": "Linux",
+      "machine": "aarch64",
+      "effective_uid": 65534
+    }
+  },
+  "evidence_sha256": {
+    "merges.json": "0e9264e9f76e557ca85e6dfe7df03e02764ff7ba0474ace41b8cfdf3d4c69ca1",
+    "unit-tests.json": "4925551a23ea268549682c6be3c86e6a2338cf0657791263c0dab4f57efd5896",
+    "acceptance-verification.json": "38e834168e258943a2622290803e88ed6e4e0956811b456e949e48248c112962",
+    "cli-verification.json": "bac35b945d29822148e388ec474ac8eb120b785d569cd2f5585da9a636d4eff6",
+    "scan-verification.json": "b240ed687c8f33ca2a503726932117fad33cd2ce9286d60daeab8c561528f398"
+  },
+  "contract_examples": 11,
+  "rejected_invalid_contract_cases": 22,
+  "local_markdown_links": 319,
+  "black_checked_files": 66,
+  "diff_check_passed": true
+}

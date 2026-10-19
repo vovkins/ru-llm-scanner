@@ -1,0 +1,82 @@
+{
+  "verification_version": 1,
+  "original_main": "d23d66fd6ea92339651d655b6a5cd74dd2b135e7",
+  "prepared_final_head": "33dcad24d675c99c30f53639af7b4f37a28e1030",
+  "prepared_final_tree": "c756f38d0bf838ba89ab82c48908792faa035126",
+  "strategy": "merge",
+  "merges": [
+    {
+      "number": 4,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/4",
+      "head": "1e8e87456805cbef147ec163d674f913e74c6cf1",
+      "merge_commit": "df164367cc3acb5c5ee5eb42f221d0d93dfacac4",
+      "base": "main",
+      "merged_at": "2026-10-19T14:49:16Z",
+      "head_in_main": true,
+      "previous_main_is_first_parent": true
+    },
+    {
+      "number": 6,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/6",
+      "head": "776cfa44d16ffed8aa9f1194d85e9aea3dd7b1a4",
+      "merge_commit": "b035110121913703c7b3f8d5cf99d5d0c7f6eed2",
+      "base": "main",
+      "merged_at": "2026-10-19T14:49:34Z",
+      "head_in_main": true,
+      "previous_main_is_first_parent": true
+    },
+    {
+      "number": 8,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/8",
+      "head": "da315b23e74c7ea877dee70dbdcd0a06983f0efb",
+      "merge_commit": "bae36dad4e5003b55f0c6a2183e86b830f7bb820",
+      "base": "main",
+      "merged_at": "2026-10-19T14:49:55Z",
+      "head_in_main": true,
+      "previous_main_is_first_parent": true
+    },
+    {
+      "number": 10,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/10",
+      "head": "0c8dfa75227256cba3006b1490bbc26f611d6611",
+      "merge_commit": "49d55a4d12ad08087c29a9d35c26da3d122ab72b",
+      "base": "main",
+      "merged_at": "2026-10-19T14:50:18Z",
+      "head_in_main": true,
+      "previous_main_is_first_parent": true
+    },
+    {
+      "number": 12,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/12",
+      "head": "e632ad0e744af395f61b081f64cc074bffa04582",
+      "merge_commit": "9f7165f8b554878ba0a93413f72d398e74b64e6a",
+      "base": "main",
+      "merged_at": "2026-10-19T14:50:37Z",
+      "head_in_main": true,
+      "previous_main_is_first_parent": true
+    },
+    {
+      "number": 14,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/14",
+      "head": "b8e062534a1e7f6061d8c74a2140173c94b7d0be",
+      "merge_commit": "2b31971ad94f2b5091c08afc568042e951cd1e27",
+      "base": "main",
+      "merged_at": "2026-10-19T14:50:55Z",
+      "head_in_main": true,
+      "previous_main_is_first_parent": true
+    },
+    {
+      "number": 15,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/15",
+      "head": "33dcad24d675c99c30f53639af7b4f37a28e1030",
+      "merge_commit": "4d958e12070569c659e27f16ab118a35055e8d53",
+      "base": "main",
+      "merged_at": "2026-10-19T14:51:16Z",
+      "head_in_main": true,
+      "previous_main_is_first_parent": true
+    }
+  ],
+  "merged_main_commit": "4d958e12070569c659e27f16ab118a35055e8d53",
+  "merged_main_tree": "c756f38d0bf838ba89ab82c48908792faa035126",
+  "tree_matches_prepared_final_head": true
+}

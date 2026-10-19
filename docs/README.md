@@ -8,6 +8,9 @@ snapshot/diff, JSON/HTML и baseline работают через CLI. Досту
 Production Docker/Compose, offline transfer и пример Jenkins реализованы.
 Сквозная приёмка и согласованная историческая репетиция обновления/отката
 Analyzer выполнены; [итоговые результаты](../verification/stage-7/README.md).
+Все семь этапов слиты в `main` после отдельного согласования;
+[результаты интеграции](../verification/main-integration/README.md).
+Релиз и публикация образов пока не выполнялись.
 
 ## Пользователю и оператору CI
 
@@ -45,6 +48,7 @@ GPU и Linux-host/другие платформы требуют отдельн�
 - [Результаты CLI/отчётов/baseline на этапе 5](../verification/stage-5/README.md).
 - [Результаты production Docker/transfer на этапе 6](../verification/stage-6/README.md).
 - [Итоговая приёмка/upgrade/rollback на этапе 7](../verification/stage-7/README.md).
+- [Последовательное слияние семи PR и проверка main](../verification/main-integration/README.md).
 - [Лицензирование](licensing.md), [постоянные инструкции](../AGENTS.md).
 
 Источником договорённостей служит [общая задача #1](https://github.com/vovkins/ru-llm-scanner/issues/1).

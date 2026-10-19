@@ -7,6 +7,10 @@
 CLI snapshot/diff, renderer и baseline реализованы на этапе 5. Штатный
 Docker/Compose и Jenkins example реализованы на этапе 6; инструкции находятся
 в [Docker quickstart](docker-quickstart.md) и [Jenkins guide](jenkins.md).
+Все семь этапов находятся в `main`;
+[результаты проверки интеграции](../verification/main-integration/README.md)
+содержат точные merge-коммиты и команды повторного прогона. Версия остаётся
+предрелизной; публикация релиза и образов не выполнялась.
 
 ## Структура
 
