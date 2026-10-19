@@ -9,18 +9,23 @@
 Доступен механизм анализа: закреплённый Analyzer из `ru-llm-proxy`, отдельный
 патч API, async HTTP-адаптер, словарные находки и инструменты подготовки/сборки
 CPU-образа. Подготовлены спецификации, JSON Schema и синтетические отчёты.
-CLI `snapshot/diff`, чтение пользовательского Git, формирование HTML/JSON и
-Jenkins **ещё не реализованы**. Ниже — проектируемый интерфейс сканера.
+Добавлен внутренний Git API: снимки/сравнение A/B, полный манифест, безопасное
+чтение объектов и подготовка текста `text-v1`.
+Scan pipeline, CLI `snapshot/diff`, формирование HTML/JSON и Jenkins
+**ещё не реализованы**. Ниже — проектируемый интерфейс сканера.
 
 Для проверки уже доступного механизма см. [руководство Analyzer](docs/analyzer.md).
 Проверенная платформа — CPU `linux/arm64`. GPU-цели upstream сохранены, но
 сборка и вывод на GPU на этом стенде не проверены.
 [Результаты проверок и артефакты этапа 2](verification/stage-2/README.md).
+[Git API и ограничения входа](docs/git-reader.md),
+[результаты этапа 3](verification/stage-3/README.md).
 
 [Общий план и прогресс](https://github.com/vovkins/ru-llm-scanner/issues/1) ·
 [Этап 1](https://github.com/vovkins/ru-llm-scanner/issues/2) ·
 [Этап 2](https://github.com/vovkins/ru-llm-scanner/issues/3) ·
-[План этапа 3](https://github.com/vovkins/ru-llm-scanner/issues/5) ·
+[Этап 3](https://github.com/vovkins/ru-llm-scanner/issues/5) ·
+[План этапа 4](https://github.com/vovkins/ru-llm-scanner/issues/7) ·
 [Документация](docs/README.md)
 
 ## Сценарии первой версии
