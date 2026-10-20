@@ -15,6 +15,7 @@
 | Комплексные проверки #22 | [operations-stage-4](operations-stage-4/README.md) | Новый комплект, оба walkthrough, реальные модель/CLI/Compose/faults, browser, ёмкость, публичный snapshot и свежие advisories |
 | RV-06 #26 | [operations-ner-windowing](operations-ner-windowing/README.md) | Ограниченное восстановление границ, полные входы, fail-closed, отмена и восстановление |
 | DEP-01/DEP-02 #24 | [operations-dependencies](operations-dependencies/README.md) | Чистый offline closure, уникальный inventory, реальная parity/quality, полный Requests; остаточные native-риски приняты владельцем для закрытого контура |
+| Итоговая приёмка #25 | [operations-stage-5](operations-stage-5/README.md) | Точный состав стека/комплекта, применимость предыдущих результатов, новый installed verify/snapshot/strict diff/negative baseline, матрица готовности |
 
 Оба руководства пройдены в новых каталогах на том же Docker Desktop store.
 Это не испытание другого физического offline host. Обнаруженные dependency
@@ -24,7 +25,10 @@
 119 analyzed/13 unsupported/0 errors, 612 кандидатов, exit 1, без дополнительных
 excludes. Риски четырёх native advisory [приняты владельцем 2026-10-20](operations-dependencies/risk-acceptance.md)
 для закрытого контура; это решение по DEP-01, исправление этих библиотек не заявлено. Итоговая приёмка
-[#25](https://github.com/vovkins/ru-llm-scanner/issues/25) не начата.
+[#25](https://github.com/vovkins/ru-llm-scanner/issues/25) выполнена в отдельном
+кандидате: [заключение для локального пилота](operations-stage-5/README.md).
+Предыдущие полные прогоны не объявлены новыми: их входы/hashes/images повторно
+сверены. PR ещё не слиты, main/default deployment сохранены.
 
 ## История первой реализации
 

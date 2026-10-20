@@ -8,6 +8,11 @@
 
 ## Вывод
 
+Актуальный статус кандидата после согласованных исправлений и итоговой приёмки —
+[матрица замечаний](../../verification/operations-stage-5/review-matrix.md).
+Исходные наблюдения на `336feb6` ниже сохранены; они не описывают уже исправленный
+кандидат как текущий дефект. `main` этим циклом ещё не изменён.
+
 Основные слои разделены: Git/text → pipeline → Analyzer/словарь → findings/report;
 подготовка upstream и запуск готовых образов имеют разные входы и обязанности.
 В проверенных путях snapshot/diff и baseline не найден подтверждённый сценарий
@@ -31,9 +36,12 @@
 | RV-03 | P2, подтверждённый дефект | Dev scan image не содержит обязательный jsonschema; текущий pipeline не импортируется | Исправлен в этапе 2 | Новый локальный dev image, import/schema smoke и реальный code-v1 |
 | RV-04 | P2, усиление защиты / сопровождение | Старый raw/patched harness монтирует весь checkout, использует постоянное имя и не задаёт pull policy | Выполнен в этапе 2; утечка ранее не наблюдалась | Общий curated helper, проверка ID, ownership cleanup |
 | RV-05 | P2, согласованное изменение политики | Python writer принимал пустой 0777 output; launcher отвергал | Выполнен в этапе 2 | Единый отказ публичному/чужому конечному output без chmod/chown |
-| DOC-01 | P2, документация / первый запуск | Fresh build смешивал новый image и прежний runtime lock | Руководство исправлено в этапе 3; clean walkthrough ещё предстоит | [Admin build](../admin/build.md), один runtime/deployment; этап 4 проверит чистую установку |
+| DOC-01 | P2, документация / первый запуск | Fresh build смешивал новый image и прежний runtime lock | Руководство исправлено; оба walkthrough пройдены для нового комплекта | [Admin build](../admin/build.md), [fresh/ready evidence](../../verification/operations-dependencies/README.md) на checkpoint `2588571` |
 | DOC-02 | P2, документация / навигация | README/docs map были историей этапов вместо маршрутов ролей; About был пуст | README/роли/справочник и текст About подготовлены; внешние metadata не применены | [Новая карта](../README.md), [About-текст](../about.md) |
-| TEST-01 | P2, ограничение воспроизводимости | Часть CLI/unit зависит от .build/analyzer и пропускается без подготовленных assets | Предусловие и группы явно документированы; зависимость сохранена | [Dev tests](../development.md), этап 4 требует full run без skipped |
+| TEST-01 | P2, ограничение воспроизводимости | Часть CLI/unit зависит от .build/analyzer и пропускается без подготовленных assets | Предусловие документировано; 155 tests без skipped, source hashes повторно совпали | [Dev tests](../development.md), [применимость результатов](../../verification/operations-stage-5/candidate-manifest.json) |
+| RV-06 | P1, дополнение этапа 4 | NER windowing отвергал обычный AUTHORS.rst | Исправлен в кандидатах #28/#29 | [Полный Requests и NER](../../verification/operations-dependencies/README.md) |
+| DEP-02 | P2, дополнение этапа 4 | Смешанные packaging metadata | Исправлен в кандидате #29 | Чистый closure и [actual inventory](../../verification/operations-dependencies/final-inventory.json) |
+| DEP-01 | P1, дополнение этапа 4 | Уязвимые зависимости / границы аудита | Обновления выполнены; четыре остаточных риска приняты владельцем для закрытого контура | [Решение 2026-10-20](../../verification/operations-dependencies/risk-acceptance.md), unfixed status сохранён |
 
 [Подробности и способы проверки](findings.md) ·
 [карта системы, ревью и тестов](coverage.md) ·

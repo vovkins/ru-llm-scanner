@@ -14,13 +14,18 @@ RV-01–RV-05 исправлены/выполнены в отдельно сог
 выполнены в [этапе 4](../../verification/operations-stage-4/README.md) на том же
 Docker store; текст About подготовлен без изменения внешних настроек.
 TEST-01 остаётся предусловием prepared assets, теперь явно разделён по группам.
-Новые DEP-01/DEP-02 и отдельный план перед итоговой приёмкой — в
-[проверке зависимостей](../../verification/operations-stage-4/dependencies.md).
-RV-06 (P1), обнаруженный на реальном Requests в этапе 4: обычный `AUTHORS.rst`
+DEP-01/DEP-02 исправлялись по отдельному плану #24; DEP-02 исправлен в кандидате,
+четыре остаточных native-риска DEP-01 [приняты владельцем](../../verification/operations-dependencies/risk-acceptance.md).
+RV-06 исправлен в кандидатах #28/#29: [полный Requests и проверки](../../verification/operations-dependencies/README.md).
+[Итоговая матрица](../../verification/operations-stage-5/review-matrix.md) отделяет
+актуальный статус от исторических наблюдений ниже.
+
+Историческое воспроизведение RV-06 (P1) на реальном Requests в этапе 4: обычный `AUTHORS.rst`
 воспроизводимо даёт Analyzer 503 `windowing/window_boundary_unresolved` и
 scanner exit 2. [Evidence и влияние](../../verification/operations-stage-4/README.md),
 [отдельный план #26](https://github.com/vovkins/ru-llm-scanner/issues/26).
-Он не исправлялся в проверочном этапе и не снимается прежними зелёными тестами.
+Он не исправлялся в проверочном этапе; исправление и новые подтверждения получены
+позднее по отдельному согласованному плану #26.
 
 ## RV-01 — P1: невалидный ответ launcher даёт Jenkins успешный exit
 
