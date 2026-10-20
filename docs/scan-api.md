@@ -173,8 +173,26 @@ snapshot 46 небольших файлов, включая ожидание rea
 Scanner работает UID 65534/read-only без capabilities в loopback namespace
 временного Analyzer с --network none; внешнего маршрута нет.
 
-Dev-образ этапа 5 содержит текущие runtime-зависимости, включая jsonschema;
-старый dev-образ этапа 4 предназначен для того исторического состояния кода.
+Для отдельной dev-проверки pipeline текущий рецепт содержит `httpx==0.28.1`
+и `jsonschema[format]==4.26.0`. Собирайте новый локальный tag из минимального
+контекста, не из корня checkout:
+
+```sh
+mkdir -p .build/scan-dev-context
+cp docker/scan-test.Dockerfile .build/scan-dev-context/Dockerfile
+docker build --platform linux/arm64 -t ru-llm-scanner-scan-tests:operations-fixes .build/scan-dev-context
+python scripts/check_scan_integration.py \
+  --context .build/analyzer \
+  --runtime-lock locks/analyzer-cpu-linux-arm64.runtime.lock.json \
+  --scanner-image ru-llm-scanner-scan-tests:operations-fixes \
+  --output-dir .build/scan-verification-new
+```
+
+Установка dependencies требует подготовленного сетевого доступа на этапе сборки;
+сам тест работает с `--pull never` и без внешнего маршрута. Harness копирует
+только исходники `.py`, packaged `.json`, синтетический корпус и проверенные
+assets; import/schema smoke выполняется до запуска модели. Старые dev images
+не обновляются автоматически и должны использоваться с соответствующим кодом.
 Сохранённые [результаты этапа 4](../verification/stage-4/README.md) остаются
 историческим evidence, [этап 5](../verification/stage-5/README.md) фиксирует новый
 код/образы и фактические ограничения QA. Формирование реальных отчётов не

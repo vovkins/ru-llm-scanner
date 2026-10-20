@@ -112,7 +112,7 @@ Docker/pip могут выводить параметры сборки в лог
 ```bash
 .venv/bin/python scripts/check_analyzer_integration.py \
   --context .build/analyzer --runtime-lock .build/runtime-cpu.lock.json \
-  --output-dir .build/verification
+  --output-dir .build/analyzer-parity-new
 ```
 
 Контейнер запускается read-only с `--network none`, отдельным tmpfs и папкой
@@ -127,6 +127,15 @@ Docker/pip могут выводить параметры сборки в лог
 Docker kernel может создавать неактивные tunnel-интерфейсы и при network=none.
 Проверка подтверждает только loopback в состоянии UP; остальные интерфейсы
 не считаются доступным интернетом по одному присутствию в sysfs.
+
+Каталог результатов должен отсутствовать: harness создаёт его с `0700`.
+Команды `check_analyzer_integration.py` и `check_rehearsal_parity.py` используют
+общий `parity_verification.py`. До запуска проверяются фактические immutable
+reference/platform IDs; отсутствующий образ не скачивается. Контейнер получает
+только allowlisted context, scanner `.py`/`.json` и тест, а не корень checkout;
+работает с `--pull never`, `--network none`, read-only input/root, UID/GID
+оператора, без capabilities и с `no-new-privileges`. У каждого запуска свои
+имя и ownership label; finally удаляет только контейнеры с этим label.
 
 Отчёт `offline-verification.json` содержит метрики/идентификаторы случаев,
 без исходных текстов и найденных значений. Это оценка корпуса upstream,

@@ -1,0 +1,105 @@
+{
+  "context_helper_sha256": "ceeec90d28943be2be849f87a6e13aa9c3d4fe6334d2e2cf28a2870c99d29fab",
+  "context_reproduction_inventory_equal": true,
+  "default_deployment_unchanged": "877449870cb12066e3203f8de779cb868a5ded6f20a18d3dd4432e8e2ea60bde",
+  "default_images_verified": {
+    "analyzer": {
+      "image_id": "sha256:dac76ca6f7f37d61f7a3ad4db1d56d68dcad14d9e44354252dcfbf3c208c5104",
+      "image_reference_id": "sha256:73a1bd28e9e74d05eb9594027e9fcb97d92197c3f36ba5c8d1aeb65d9fe5ad46"
+    },
+    "scanner": {
+      "image_id": "sha256:257f7d6918bc360a28fb52e09022a40940691c691a9556f6aa5b9ea32485c73d",
+      "image_reference_id": "sha256:257f7d6918bc360a28fb52e09022a40940691c691a9556f6aa5b9ea32485c73d"
+    }
+  },
+  "explicit_non_root_operator_preflight": true,
+  "fixes_base": "fc0dcbfa4304cf504ae317f83f015b938f5b52b7",
+  "foreign_containers_preserved": 7,
+  "implementation_commits": {
+    "RV-01": "b008c27",
+    "RV-02": "6e6cd07",
+    "RV-03": "6f687a7",
+    "RV-04": "792aa00",
+    "RV-05": "71588fd"
+  },
+  "limitations": [
+    "CPU Linux ARM64 on Docker Desktop only",
+    "no real Jenkins controller",
+    "foreign owner simulated by UID in unit test",
+    "no new capacity measurements or advisory database; cycle stage 4",
+    "no release, default deployment replacement or merge"
+  ],
+  "local_test_images": {
+    "analyzer": {
+      "image_id": "sha256:dac76ca6f7f37d61f7a3ad4db1d56d68dcad14d9e44354252dcfbf3c208c5104",
+      "image_reference_id": "sha256:73a1bd28e9e74d05eb9594027e9fcb97d92197c3f36ba5c8d1aeb65d9fe5ad46"
+    },
+    "dev_platform_id": "sha256:5ec10f846e353cde071b383f82d7c22fb7fc384d9f85c89a99bf374eb78660ff",
+    "dev_reference_id": "sha256:3dbc2733242136571767418fb549ef12ba1ac33cda78f197fdeba872c5ae9944",
+    "dev_versions": {
+      "fqdn": "1.6.0",
+      "httpx": "0.28.1",
+      "isoduration": "20.11.0",
+      "jsonpointer": "3.3",
+      "jsonschema": "4.26.0",
+      "python": "3.11.16",
+      "rfc3339-validator": "0.1.4",
+      "rfc3987": "1.3.8",
+      "uri-template": "1.3.0",
+      "webcolors": "25.10.0"
+    },
+    "scanner": {
+      "image_id": "sha256:6d4056589f5c08e2a8c202f996bc2414ae9ac7aec8b5de685ce4aa73fc9b389b",
+      "image_reference_id": "sha256:6d4056589f5c08e2a8c202f996bc2414ae9ac7aec8b5de685ce4aa73fc9b389b"
+    },
+    "scanner_context_inventory_sha256": "ec673f8917aeb9b805b501525419bf5587e62d2637f1bea22e8d8778d7b33a38",
+    "wheel_sha256": "36b9c21ab66cd7427b0a342ff420989a896f160b52f60c27df41db494194969c"
+  },
+  "next_plan": "https://github.com/vovkins/ru-llm-scanner/issues/20",
+  "next_stage_approved": false,
+  "only_product_change": "src/ru_llm_scanner/output.py",
+  "original_main_unchanged": "336feb64b201b0e9b807059f3d60b50fdee41ebb",
+  "original_proxy_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
+  "original_proxy_tracked_clean": true,
+  "own_resources_remaining": 0,
+  "prepared_analyzer_files_verified": 102,
+  "profile_unchanged": {
+    "analyzer_image_digest": "sha256:dac76ca6f7f37d61f7a3ad4db1d56d68dcad14d9e44354252dcfbf3c208c5104",
+    "analyzer_signature": "b5cfcac0f76d80601728966939f16713ee3a76094d6ed7ab66093e0ccda79ad2",
+    "dictionary_sha256": "dc2ae9065b21ba772be25067444fb1049a73342038b594400fc2a4acf2680392",
+    "model_id": "fef2/ner_rus_bert-secret_detection",
+    "model_revision": "52b5b0745aac14f73fcf2ac0f91d9b5001a85ae4",
+    "model_weights_sha256": "6a2c875d02398554ec69384f489a0bf4fe3505fc347c6cdd3385d4fd31ef21a4",
+    "patchset_sha256": "42893a3c62c4a11457f02a626726f7bf814d7e6c91f8f8e843e5b5fde8480332",
+    "profile_sha256": "172554ef20c07cf32e15cd97cd368a2510de49ab824ae2b339258078730a1864",
+    "scanner_semantics": "scanner-v1",
+    "upstream_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c"
+  },
+  "protected_paths_sha256": {
+    "docs/review/completion.json": "a62119b1bffd4a397849272a3f83f7cb2720bcc00ce875d15ca00e3f861e7cb9",
+    "docs/review/focused-unit.json": "94ba21bece37ae327907858e15dbf7bd39b86104108573f99fbe9a1e607495c8",
+    "docs/review/observations.json": "0825db1d5b0a1ea940171a1306ac3654122eb1bfaae29df3090aaa6ee4238e67",
+    "docs/review/scope.json": "4d613a488870ff189fb91d9d816a218fedebb588282bcd89c8eb7113b2ade68e",
+    "locks/analyzer-cpu-linux-arm64.runtime.lock.json": "a8a08bd416193af9632997afc0ba5256f2528534607eddc74015915ec9cb1a7d",
+    "locks/requirements-cpu-linux-arm64.txt": "8ba7d4b93b1a38d869c9aa9fffffe0aaf040fefe914008ae312a3a23634e6730",
+    "locks/requirements-scanner-linux-arm64.txt": "06e179651d60f62f704e58ec8904074d54cbc6fe457afd23937d3f1d72379981",
+    "locks/scanner-cpu-linux-arm64.deployment.json": "877449870cb12066e3203f8de779cb868a5ded6f20a18d3dd4432e8e2ea60bde",
+    "patches/analyzer-api-v1.patch": "1b81547a59a43fa57bc88cfaeaec7d894465fc2e54491b306736976f6d6a0092",
+    "schemas/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
+    "src/ru_llm_scanner/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
+    "tests/corpus/README.md": "022f4edbb787fb5ed149e0049463609bd8a88d10a1545973025608ba7edec665",
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+    "tests/corpus/load_code_corpus.py": "34570026325dc91ae26ec4102680e46f1670564ed16713f4c5da86d73b145a59",
+    "upstream.lock.json": "64a2f586ef1629c8ba5ebf0665d9b6dfd923f6332e77b6095ab45c70e57a6bed"
+  },
+  "published": false,
+  "review_base": "336feb64b201b0e9b807059f3d60b50fdee41ebb",
+  "status": "passed",
+  "verification_sources_sha256": {
+    "scripts/check_cli_tests.py": "b6f2d7cc21e960cf5341cac64cf799da19d806858c845208e0e2927becc7718d",
+    "scripts/check_deployment_extras.py": "e689142164304c31fb88c4f8b6bd044253058b57394a47eca9835576e5ba9869",
+    "scripts/parity_verification.py": "f46404515e8e7f294779e7860ee6e84a645def775c3ce80baa20a14f4bc541f0",
+    "tests/test_parity_verification.py": "a9c5c47ad44b37f30dff0356c2e19a6caf18a044095d6a2e7a4629b3672da15c"
+  },
+  "verification_version": 1
+}

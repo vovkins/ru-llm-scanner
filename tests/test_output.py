@@ -24,6 +24,33 @@ class OutputTests(unittest.TestCase):
             stage="configuration",
         )
 
+    def test_existing_private_directory_accepted_public_and_foreign_rejected_unchanged(
+        self,
+    ):
+        private = self.root / "private"
+        private.mkdir(mode=0o700)
+        with ReportDirectory(private, repository=self.repo):
+            pass
+        for mode in (0o755, 0o777):
+            target = self.root / f"public-{mode}"
+            target.mkdir()
+            target.chmod(mode)
+            for populated in (False, True):
+                if populated:
+                    (target / "keep").write_text("preserve")
+                with self.assertRaises(OutputError):
+                    ReportDirectory(target, repository=self.repo)
+                self.assertEqual(target.stat().st_mode & 0o777, mode)
+                self.assertEqual(
+                    sorted(p.name for p in target.iterdir()),
+                    ["keep"] if populated else [],
+                )
+        # Simulate a different operator without requiring root/chown on the host.
+        with patch("ru_llm_scanner.output.os.getuid", return_value=os.getuid() + 1):
+            with self.assertRaises(OutputError):
+                ReportDirectory(private, repository=self.repo)
+        self.assertEqual(list(private.iterdir()), [])
+
     def test_atomic_files_private_permissions_no_temporaries_and_repeated_run_rejected(
         self,
     ):

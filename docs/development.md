@@ -182,6 +182,14 @@ Git-объектах. Полные 0600 отчёты сохраняются то
 При раннем отказе resolved SHA может отсутствовать, requested ref сохраняется;
 baseline другого A отклоняется как invalid tree evidence.
 
+После ревью [RV-01–RV-05](../verification/operations-stage-2/README.md) добавлены
+subprocess-регрессии Jenkins/FIFO, private output и curated parity orchestration.
+`check_deployment_extras.py` принимает явный `--deployment-lock`: Jenkins получает
+малую доверенную установку с этим lock, штатный default не заменяется. Проверяются
+также права конечного output установленного Python CLI независимо от Compose.
+Точные команды, hashes локальных test images и 144 unit tests без skipped
+сохранены в evidence этого этапа; отсутствие prepared assets не считается полным прогоном.
+
 Историческое [обновление/откат](updating-analyzer.md) используют отдельные
 `prepare_rehearsal.py`, `build_rehearsal_scanner.py`, `check_upgrade_rollback.py`
 и curated `check_rehearsal_parity.py`. Общие CLI/scan dev harness принимают

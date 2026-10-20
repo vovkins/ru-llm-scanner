@@ -10,7 +10,15 @@ import shutil
 import subprocess
 import sys
 
-from docker_scanner import ROOT, Failure, digest, load_lock, write_private
+from docker_scanner import (
+    ROOT,
+    DEFAULT_LOCK,
+    Failure,
+    digest,
+    docker,
+    load_lock,
+    write_private,
+)
 from build_scanner import verify_context
 
 sys.path[:0] = [str(ROOT / "tests"), str(ROOT / "src")]
@@ -28,7 +36,9 @@ def main():
     p.add_argument("--output-dir", required=True, type=Path)
     p.add_argument("--package", required=True, type=Path)
     p.add_argument("--context", required=True, type=Path)
+    p.add_argument("--deployment-lock", type=Path, default=DEFAULT_LOCK)
     args = p.parse_args()
+    lock = load_lock(args.deployment_lock)
     root = args.output_dir.resolve()
     root.mkdir(mode=0o700, exist_ok=False)
     repositories = root / "repos"
@@ -70,6 +80,8 @@ def main():
                 sys.executable,
                 str(ROOT / "scripts/docker_scanner.py"),
                 "snapshot",
+                "--deployment-lock",
+                str(args.deployment_lock.resolve()),
                 "--repo",
                 str(repo.root),
                 "--output",
@@ -97,10 +109,81 @@ def main():
         repo.root.chmod(0o755)
     (root / "public-output").mkdir(mode=0o755)
     cli("public-output")
+    # Test the installed Python CLI independently of Compose output preflight.
+    # A missing config yields an error report without starting the Analyzer.
+    installed = root / "installed-output"
+    installed.mkdir(mode=0o700)
+    for mode in (0o700, 0o755, 0o777):
+        output = installed / str(mode)
+        output.mkdir(mode=mode)
+        output.chmod(mode)
+        result = docker(
+            "run",
+            "--rm",
+            "--pull",
+            "never",
+            "--platform",
+            lock["platform"],
+            "--network",
+            "none",
+            "--read-only",
+            "--user",
+            f"{os.getuid()}:{os.getgid()}",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges",
+            "--mount",
+            f"type=bind,src={repo.root},dst=/repo,readonly",
+            "--mount",
+            f"type=bind,src={installed},dst=/results",
+            lock["scanner"]["image_reference_id"],
+            "snapshot",
+            "--repo",
+            "/repo",
+            "--commit",
+            a,
+            "--output",
+            "/results/" + str(mode),
+            "--config",
+            "/missing-synthetic-config.json",
+            check=False,
+        )
+        require(result.returncode == 2 and not result.stderr, "installed_output_result")
+        require(output.stat().st_mode & 0o777 == mode, "existing_output_mode_changed")
+        if mode == 0o700:
+            report = validate_report(json.loads((output / "report.json").read_bytes()))
+            require(report["result"]["exit_code"] == 2, "private_output_not_written")
+            require(
+                (output / "report.json").stat().st_mode & 0o777 == 0o600,
+                "private_report_mode",
+            )
+        else:
+            require(not list(output.iterdir()), "public_output_modified")
+            require(
+                json.loads(result.stdout)
+                == {"exit_code": 2, "error": "report_write_error"},
+                "public_output_error",
+            )
+        records.append(
+            {"case": "installed-output-" + oct(mode), "exit_code": 2, "passed": True}
+        )
+    # Give the adapter a small trusted installation with this explicit lock.
+    # Do not replace the default deployment or point it at the old scanner.
+    trusted_home = root / "trusted-scanner"
+    (trusted_home / "scripts").mkdir(parents=True)
+    (trusted_home / "locks").mkdir()
+    shutil.copyfile(
+        ROOT / "scripts/docker_scanner.py", trusted_home / "scripts/docker_scanner.py"
+    )
+    shutil.copyfile(
+        args.deployment_lock,
+        trusted_home / "locks/scanner-cpu-linux-arm64.deployment.json",
+    )
     # Trust is owned by the pipeline/ACLs, not inferred from any arbitrary URL.
     base_env = {
         **os.environ,
-        "SCANNER_HOME": str(ROOT),
+        "SCANNER_HOME": str(trusted_home),
         "SCANNER_REPOSITORIES": str(repositories),
         "REPOSITORY_NAME": "prepared-repo",
         "SCANNER_CONFIGS": str(root),

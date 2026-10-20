@@ -34,6 +34,12 @@ def main():
         ROOT / "scripts/docker_scanner.py",
         ROOT / "scripts/build_scanner.py",
         ROOT / "examples/jenkins/run_scan.py",
+        ROOT / "scripts/parity_verification.py",
+        ROOT / "scripts/check_analyzer_integration.py",
+        ROOT / "scripts/check_rehearsal_parity.py",
+        ROOT / "scripts/check_scan_integration.py",
+        ROOT / "scripts/check_deployment_extras.py",
+        ROOT / "docker/scan-test.Dockerfile",
     ]
     before = {p.relative_to(ROOT).as_posix(): file_hash(p) for p in sorted(paths)}
     suite = unittest.defaultTestLoader.discover(str(ROOT / "tests"))
