@@ -75,3 +75,26 @@ Jenkins adapter codes/baseline rejection, transfer checksum и platform-ID rejec
 актуальные SECURITY/CONTRIBUTING/requirements и исправленную workflow-обвязку.
 Сканирующие/build inputs и images остаются теми же; изменение состава docs
 требует новой checksum архива, а не повторной сборки модели.
+
+## Окончательный source/docs комплект
+
+Предыдущие размеры/hash и registry receipt относятся к первому проверенному
+frozen-комплекту и первому успешному push; они сохранены как исторические evidence.
+Финальный архив включает обновлённые SECURITY/CONTRIBUTING/requirements и
+исправленную workflow-обвязку: [состав](final-assembly.json),
+[проверка inputs/сохранности](final-package-checks.json),
+[повторный local import/control](final-bundle-control.json).
+Source/docs snapshot — `b5889f0954fdeaca69c18af0d864bbc43864c832`,
+исходная image build revision — `9c92f6eec44a6ac94bf718003baa53e50ae242b2`.
+Все 106 runtime/build inputs равны прежним; images/wheel/native sources неизменны.
+497 файлов, 1 421 176 669 байт; SHA-256 основного архива
+`c88fcca1140f4d47f922e585e29ac5311f6a4469a4e336dace3693571ab50a6a`.
+
+Финальная редакция отдельно прошла
+[ARM64 workflow #39479189251](https://github.com/vovkins/ru-llm-scanner/actions/runs/39479189251):
+[installed control](final-runner-control.json),
+[итоговые GHCR digests/anonymous pull](final-registry-images.json),
+[семь загруженных assets и серверные SHA-256 перед публикацией](final-assets.json).
+Образы имеют те же digests, что при первом успешном push; stable tags не заменены
+другим содержимым. Один сетевой read timeout GHCR успешно пройден повтором чтения;
+новых изменений runtime или ослабления gates не потребовалось.
