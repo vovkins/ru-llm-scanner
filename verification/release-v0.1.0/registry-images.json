@@ -1,0 +1,46 @@
+{
+  "manifest_version": 1,
+  "version": "0.1.0",
+  "platform": "linux/arm64",
+  "build_source_revision": "9c92f6eec44a6ac94bf718003baa53e50ae242b2",
+  "publication_workflow_revision": "293b601c20f50fe62beb7d7a2fa433cc53986dda",
+  "bundle_sha256": "edce64c0be874a76458926379700d876d32ed2f9f453e9b5b2e23e7c778e1032",
+  "images": {
+    "scanner": {
+      "tag": "ghcr.io/vovkins/ru-llm-scanner:0.1.0",
+      "reference": "ghcr.io/vovkins/ru-llm-scanner@sha256:43221e25984eb1541109913b35cb3c3b2ec25a3048e4d7a9bb31af219e4dfba4",
+      "registry_manifest_digest": "sha256:43221e25984eb1541109913b35cb3c3b2ec25a3048e4d7a9bb31af219e4dfba4",
+      "image_id": "sha256:43221e25984eb1541109913b35cb3c3b2ec25a3048e4d7a9bb31af219e4dfba4",
+      "image_reference_id": "sha256:43221e25984eb1541109913b35cb3c3b2ec25a3048e4d7a9bb31af219e4dfba4",
+      "authenticated_pull_verified": true
+    },
+    "analyzer": {
+      "tag": "ghcr.io/vovkins/ru-llm-scanner-analyzer:0.1.0",
+      "reference": "ghcr.io/vovkins/ru-llm-scanner-analyzer@sha256:dc9cacfba34f1145d977418bf20bb29e6ab8b7dbf5fcc19bb25babfdea6cc0dd",
+      "registry_manifest_digest": "sha256:dc9cacfba34f1145d977418bf20bb29e6ab8b7dbf5fcc19bb25babfdea6cc0dd",
+      "image_id": "sha256:64563d151add43360aa5bf7251f24aab9305615211781c12be11dad94f9fbb35",
+      "image_reference_id": "sha256:dc9cacfba34f1145d977418bf20bb29e6ab8b7dbf5fcc19bb25babfdea6cc0dd",
+      "authenticated_pull_verified": true
+    }
+  },
+  "workflow_run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39477270345",
+  "public_visibility_verified": true,
+  "anonymous_verification": {
+    "scanner": {
+      "reference": "ghcr.io/vovkins/ru-llm-scanner@sha256:43221e25984eb1541109913b35cb3c3b2ec25a3048e4d7a9bb31af219e4dfba4",
+      "anonymous_manifest_http_status": 200,
+      "manifest_digest_checked": true,
+      "anonymous_docker_pull_verified": true,
+      "platform_id": "sha256:43221e25984eb1541109913b35cb3c3b2ec25a3048e4d7a9bb31af219e4dfba4",
+      "matches_frozen_image": true
+    },
+    "analyzer": {
+      "reference": "ghcr.io/vovkins/ru-llm-scanner-analyzer@sha256:dc9cacfba34f1145d977418bf20bb29e6ab8b7dbf5fcc19bb25babfdea6cc0dd",
+      "anonymous_manifest_http_status": 200,
+      "manifest_digest_checked": true,
+      "anonymous_docker_pull_verified": true,
+      "platform_id": "sha256:64563d151add43360aa5bf7251f24aab9305615211781c12be11dad94f9fbb35",
+      "matches_frozen_image": true
+    }
+  }
+}

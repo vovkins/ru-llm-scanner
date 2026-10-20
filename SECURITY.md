@@ -1,7 +1,7 @@
 # Безопасность и сообщения о проблемах
 
-Версия `0.1.0.dev0`, опубликованного release и гарантированного срока реакции
-на сообщения пока нет. Реальные CLI/Compose/Analyzer проверены на CPU Linux ARM64
+Текущая версия — `0.1.0`. Гарантированный срок реакции на сообщения не установлен.
+Реальные CLI/Compose/Analyzer проверены на CPU Linux ARM64
 в Docker Desktop; Jenkins adapter проверен локально без controller.
 [Матрица свидетельств](verification/README.md) отделяет static/schema/unit stub,
 real model, independent quality и production behavior. Это внутренние проверки,

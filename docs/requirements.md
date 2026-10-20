@@ -47,8 +47,8 @@
 | R11 | A→B→C, profile mismatch, неправильный A, old/new baseline rejection при upgrade/rollback | Baseline доверенный по происхождению; JSON/SHA-256 не цифровая подпись |
 | R12, R13 | Production errors/timeouts/crash/OOM/signals; unsupported/exclude/limits отражены явно | Ранний отказ может не оставить отчёта, CPU join не жёсткий deadline, JSON/HTML атомарны отдельно |
 | R14 | Hostile config/hooks/filters/textconv/includes/replace/grafts/promisor/links и неизменные input fingerprints | Host/daemon доверенные, object store не должен меняться параллельно снаружи |
-| R15 | Отдельные задачи #2/#3/#5/#7/#9/#11/#13, явные согласования этапов и последующего слияния семи PR в чате | Релиз, публикация образов и внешние настройки не разрешены |
-| R16 | Обновлённые guides/examples/status, contracts/ссылки/format и safe evidence | Лицензия scanner и приватный vulnerability contact остаются решениями владельца |
+| R15 | Отдельные задачи этапов, явные согласования реализации и слияния в чате | v0.1.0 и публичные GHCR images отдельно разрешены в #31; инфраструктура Jenkins не настраивается |
+| R16 | Обновлённые guides/examples/status, contracts/ссылки/format и safe evidence | MIT выбран владельцем; приватный vulnerability contact пока не объявлен |
 
 ## Состояние проекта
 
@@ -57,8 +57,10 @@
 последовательно слиты в `main` с сохранением исходных коммитов.
 [Результаты интеграции и повторных проверок](../verification/main-integration/README.md)
 отделены от исторических свидетельств [этапа 7](../verification/stage-7/README.md).
-Версия остаётся `0.1.0.dev0`; релиз, публикация образов и изменение внешней
-инфраструктуры не выполнялись.
-Лицензия scanner пока не выбрана; статус явно отражён в [licensing](licensing.md).
+Затем завершён цикл подготовки к эксплуатации #16 и слиты семь PR исправлений/
+документации: [интеграция](../verification/operations-main-integration/README.md).
+Для первого выпуска `0.1.0` владелец 2026-10-20 выбрал MIT и публичные GHCR images
+и разрешил публикацию после финальных проверок: [#31](https://github.com/vovkins/ru-llm-scanner/issues/31),
+[release evidence](../verification/release-v0.1.0/README.md), [лицензирование](licensing.md).
 Закрытый канал сообщения об уязвимостях пока не объявлен; фактическая процедура
 описана в [SECURITY](../SECURITY.md). Эти решения не выдаются за выполненные.

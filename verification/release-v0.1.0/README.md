@@ -57,3 +57,21 @@ CPU Linux ARM64; AMD64/GPU/Jenkins controller/PKI не объявляются п
 82 Debian source packages и CPython проверены по SHA-256.
 Build source revision `9c92f6eec44a6ac94bf718003baa53e50ae242b2`; последующие
 commits с receipts не меняют 106 runtime/build inputs frozen-комплекта.
+
+[Независимый ARM64 runner control](runner-control.json) пройден;
+[успешный workflow](https://github.com/vovkins/ru-llm-scanner/actions/runs/39477270345)
+импортировал тот же архив и подтвердил version/verify/snapshot/strict diff/error.
+[GHCR digests и анонимный pull](registry-images.json) обоих images проверены:
+scanner `sha256:43221e25984eb1541109913b35cb3c3b2ec25a3048e4d7a9bb31af219e4dfba4`,
+Analyzer index `sha256:dc9cacfba34f1145d977418bf20bb29e6ab8b7dbf5fcc19bb25babfdea6cc0dd`.
+[14 deployment extras](extras-verification.json) включают installed private output,
+Jenkins adapter codes/baseline rejection, transfer checksum и platform-ID rejection.
+Настоящий Jenkins controller этим не проверен.
+
+Первый workflow #39476857847 прошёл installed control, но остановился до push:
+временный DOCKER_CONFIG терял выбранный daemon. Исправлен только workflow
+(`set-host: true`, `293b601`); повторный запуск прошёл полностью.
+Исходный image build — `9c92f6e`; финальный source bundle также получает
+актуальные SECURITY/CONTRIBUTING/requirements и исправленную workflow-обвязку.
+Сканирующие/build inputs и images остаются теми же; изменение состава docs
+требует новой checksum архива, а не повторной сборки модели.
