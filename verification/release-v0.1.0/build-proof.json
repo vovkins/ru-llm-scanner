@@ -1,0 +1,18 @@
+{
+  "source_revision": "9c92f6eec44a6ac94bf718003baa53e50ae242b2",
+  "base_and_dependency_closure_unchanged": true,
+  "runtime_probe_byte_equal_previous": true,
+  "analyzer_context_changed_files": [
+    "scanner_build/Dockerfile",
+    "scanner_build/source-lock.json"
+  ],
+  "analyzer_context_added_files": [
+    "distribution-licenses/DISTRIBUTION_NOTICES.md",
+    "distribution-licenses/LICENSE",
+    "distribution-licenses/THIRD_PARTY_NOTICES.md",
+    "distribution-licenses/licenses/Apache-2.0.txt"
+  ],
+  "unchanged_context_files": 185,
+  "model_dictionary_and_detection_sources_unchanged": true,
+  "accepted_native_risks_fixed": false
+}

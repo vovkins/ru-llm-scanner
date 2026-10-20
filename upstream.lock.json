@@ -200,7 +200,7 @@
       "spacy_tree_sha256": "54d8e411b174d0aa053f235e46d4e5ac52e4a2a8cbcb4fcc2a0da1d13ace6a8e",
       "offline_artifacts_path": "locks/offline-cpu-linux-arm64.artifacts.json",
       "offline_artifacts_sha256": "68024c5a384ff061476cbf4f9394e4ba4c71c38faeee639a483cd67a279ff847",
-      "offline_dockerfile_sha256": "06d1c59dde324bb1e8d2bd139a20d3bf1f1e1d2002932bda22a49294fbcc3692"
+      "offline_dockerfile_sha256": "1dd326a57424b9228631b61b9ac43c3a8ef98ad8af2f258cdefd7c45954f5b13"
     }
   },
   "analyzer_environment": {

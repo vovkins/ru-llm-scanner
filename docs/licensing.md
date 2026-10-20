@@ -1,46 +1,46 @@
 # Лицензирование и происхождение
 
-Для dependency-кандидата #24 сохранён отдельный
-[inventory фактически установленных пакетов](../verification/operations-dependencies/analyzer-licenses.json)
-и [описание происхождения](../verification/operations-dependencies/README.md).
-Исходные license/notice files wheels и Debian packages сохраняются в images.
-Это inventory, а не выбор лицензии scanner или разрешение публикации.
+Владелец выбрал **MIT** для ru-llm-scanner 2026-10-20 перед первым релизом.
+Полный текст — [LICENSE](../LICENSE). Он включён в wheel, образы и офлайн-комплект.
+Лицензии сторонних компонентов сохраняются; MIT scanner их не заменяет.
 
-В текущем checkout `ru-llm-scanner` нет файла LICENSE; лицензия scanner пока
-не выбрана владельцем. Историческая read-only проверка GitHub 2026-10-18
-также вернула `license=null`; это не новая проверка внешних настроек.
-Не добавляем MIT/Apache badge или утверждение о лицензии без решения владельца.
-Это статус проекта, а не рекомендация по юридическому толкованию лицензий.
+| Компонент | Происхождение и уведомления |
+| --- | --- |
+| Scanner | Copyright (c) 2026 vovkins, MIT |
+| Analyzer/словарь | ru-llm-proxy `da4f50a`; upstream README заявляет MIT; точные hashes и изменения — upstream.lock.json/patches |
+| Правила Gitleaks | MIT, исходный copyright и текст сохранены побайтово в THIRD_PARTY_NOTICES.md |
+| NER-модель | `fef2/ner_rus_bert-secret_detection`, revision `52b5b0745aac14f73fcf2ac0f91d9b5001a85ae4`, manifest объявляет Apache-2.0; шесть файлов неизменны |
+| Python/native runtime | Собственные лицензии установленных зависимостей; notice files сохраняются в images |
 
-## Исследованные источники
+[DISTRIBUTION_NOTICES](../DISTRIBUTION_NOTICES.md) содержит атрибуцию и ссылки,
+[Apache-2.0](../licenses/Apache-2.0.txt) — полный текст лицензии модели.
+Отдельного NOTICE в закреплённом комплекте модели нет. Дополнительные тексты
+лежат вне её каталога и не меняют строгий model inventory.
 
-| Компонент | Проверенное основание | Дальнейшее действие |
-| --- | --- | --- |
-| `ru-llm-proxy` | README закреплённого SHA заявляет MIT; отдельного LICENSE в tracked tree нет | Уточнить достаточность уведомлений до распространения кода/образов |
-| Правила из Gitleaks в прокси | `THIRD_PARTY_NOTICES.md` содержит MIT notice с авторством | Сохранить уведомление при переносе соответствующего компонента |
-| NER-модель | `model_manifest.json` указывает `apache-2.0`; происхождение описано в прокси | Проверить и включить требуемые notices для фактических артефактов сборки |
-| Python/runtime-зависимости | Исторические 71 пакет — в [stage-2](../verification/stage-2/licenses.json); в кандидате #24 Analyzer содержит 72, scanner — 28 distributions | Проверить комплект перед распространением |
-| JSON Schema / проверка | Схема написана для scanner; `jsonschema[format]` — runtime/dev dependency | Отдельно учитывать лицензии распространяемых зависимостей |
+Wheel включает license-files; образы — `/opt/scanner/licenses/` (Analyzer)
+и `/opt/ru-llm-scanner/licenses/` (scanner). Лицензии wheels находятся также
+в `*.dist-info`, Debian — в `/usr/share/doc` и `/usr/share/common-licenses`.
+Release metadata содержит версии и hashes фактически установленных пакетов.
 
-Закреплённые ссылки: [инвентаризация upstream](reference/detection.md),
-[уведомления прокси](https://github.com/vovkins/ru-llm-proxy/blob/da4f50a87ddf8a6c160c5f1893f5bf526f713d1c/THIRD_PARTY_NOTICES.md).
+Рядом с бинарным офлайн-архивом публикуется архив `native-sources` с исходными
+Debian source packages точных версий обоих образов, включая `.dsc`, original
+tarballs и Debian patches/build recipes. Его manifest фиксирует HTTPS-источник,
+размер и SHA-256 каждого файла; версии связываются с native inventory.
+Это исходники для распространяемых системных компонентов, не новая сборка
+scanner и не исправление принятых native advisory. Исходники CPython и
+Docker Official Image recipe указаны в release metadata; собственные patches
+scanner и curated upstream source включены в основной комплект.
 
-На этапе 1 не копировался runtime-код детекторов или веса. На этапе 2 источники
-и веса используются в локальной сборке. [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md)
-сохранён побайтово из закреплённого upstream и включён в образ. В новой recipe установленные wheels сохраняют свои license/notice files, Debian packages — `/usr/share/doc`. Историческая recipe копировала `/usr/local`; новая использует чистую установку полного closure. Метаданные/хеши Analyzer можно получить без сети:
+Метаданные лицензий Analyzer можно получить без сети:
 
-```bash
+```sh
 .venv/bin/python scripts/capture_licenses.py \
   --runtime-lock /trusted/build/analyzer.runtime.lock.json \
   --output .build/licenses-new.json
 ```
 
-Инвентаризация содержит объявленные SPDX expressions/classifiers и SHA-256
-notice-файлов. Пустое поле означает отсутствие метаданных, а не отсутствие
-условий использования. Веса имеют заявленную лицензию из model manifest;
-отдельного license-файла в закреплённом комплекте модели нет. Выбор лицензии
-scanner и окончательная проверка комплекта уведомлений перед распространением
-остаются явными решениями владельца. Release/images не опубликованы, внешние
-настройки/лицензия этим циклом документации не меняются. Побайтовый upstream
-THIRD_PARTY_NOTICES сохраняется; ссылки на него и версии артефактов не являются
-обещанием условий для ещё не выбранной лицензии scanner.
+Inventory фиксирует объявленные SPDX expressions/classifiers и notice hashes.
+Пустое поле означает отсутствие метаданных, а не отсутствие условий.
+Исторические исследования: [dependency-кандидат](../verification/operations-dependencies/README.md)
+и [upstream detection](reference/detection.md). Их старые записи «лицензия не выбрана»
+описывают состояние до решения владельца и не являются статусом v0.1.0.

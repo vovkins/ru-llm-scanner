@@ -1,0 +1,19 @@
+{
+  "source_revision": "9c92f6eec44a6ac94bf718003baa53e50ae242b2",
+  "assets": {
+    "release-manifest.json": "2b8bae84b2ca688013b89992b9331353b55c10864ce28c1cf934d47427cf5360",
+    "ru-llm-scanner-v0.1.0-linux-arm64.tar.gz": "edce64c0be874a76458926379700d876d32ed2f9f453e9b5b2e23e7c778e1032",
+    "ru-llm-scanner-v0.1.0-native-sources.tar.gz": "50b4716387cb500d8cf06dc0cbfdfd99f6ce3e6a9778c6e8b080c035b20a5927",
+    "ru_llm_scanner-0.1.0-py3-none-any.whl": "befe95c71e04f8b7b629b17d43990543be1695293ea6cd35b71c4345498dc18f"
+  },
+  "files": 490,
+  "runtime_inputs": 106,
+  "sizes": {
+    "ru-llm-scanner-v0.1.0-native-sources.tar.gz": 398330836,
+    "ru-llm-scanner-v0.1.0-linux-arm64.tar.gz": 1421170414,
+    "release-manifest.json": 69500,
+    "ru_llm_scanner-0.1.0-py3-none-any.whl": 69605,
+    "SHA256SUMS": 409
+  },
+  "status": "assembled"
+}

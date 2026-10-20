@@ -42,6 +42,11 @@ def prepare(args):
         destination = args.output / name
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(args.context / name, destination)
+    notices = args.output / "distribution-licenses"
+    notices.mkdir()
+    for name in ("LICENSE", "DISTRIBUTION_NOTICES.md", "THIRD_PARTY_NOTICES.md"):
+        shutil.copyfile(ROOT / name, notices / name)
+    shutil.copytree(ROOT / "licenses", notices / "licenses")
     offline = args.output / "offline"
     offline.mkdir()
     tls = ssl.create_default_context(cafile=args.ca) if args.ca else None

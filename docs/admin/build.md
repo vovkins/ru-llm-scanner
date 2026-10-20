@@ -130,7 +130,7 @@ Host parity запускается non-root. [Подробности dev-про�
 .venv/bin/python -m pip wheel --no-deps . --wheel-dir "$BUILD_ROOT/wheels"
 .venv/bin/python scripts/build_scanner.py prepare \
   --engine-dir "$ENGINE_DIR" \
-  --wheel "$BUILD_ROOT/wheels/ru_llm_scanner-0.1.0.dev0-py3-none-any.whl" \
+  --wheel "$BUILD_ROOT/wheels/ru_llm_scanner-0.1.0-py3-none-any.whl" \
   --context "$SCANNER_CONTEXT" --artifact-cache "$ARTIFACT_CACHE" \
   --download-artifacts
 ```
