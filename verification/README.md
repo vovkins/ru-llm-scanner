@@ -22,7 +22,7 @@
 У нового кандидата inventory однозначен, 478 upstream/96 NER/155 host tests,
 77 NER/4 dictionary и code-v1 33/13/4 сохранены. Полный Requests завершён:
 119 analyzed/13 unsupported/0 errors, 612 кандидатов, exit 1, без дополнительных
-excludes. Пять native advisory имеют явный статус `owner_review_required`;
+excludes. Четыре native advisory имеют явный статус `owner_review_required`;
 DEP-01 не объявлен полностью устранённым. Итоговая приёмка
 [#25](https://github.com/vovkins/ru-llm-scanner/issues/25) не начата.
 

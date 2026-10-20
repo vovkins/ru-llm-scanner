@@ -154,7 +154,7 @@
       "binaries": [
         "libbz2-1.0:arm64"
       ],
-      "description": "bzip2 contains an off\u2011by\u2011one error in the bzip2recover utility. When processing a specially crafted file, the application performs an out\u2011of\u2011bounds write to a global buffer, resulting in memory corruption and a crash (denial of service).  This issue was fixed in bzip2 patch\u00a035d122a3df8b0cc4082a4d89fdc6ee99f375fe67",
+      "description": "bzip2 contains an off‑by‑one error in the bzip2recover utility. When processing a specially crafted file, the application performs an out‑of‑bounds write to a global buffer, resulting in memory corruption and a crash (denial of service).  This issue was fixed in bzip2 patch 35d122a3df8b0cc4082a4d89fdc6ee99f375fe67",
       "disposition": "affected_feature_or_prerequisite_outside_supported_workflow",
       "fixed_in_candidate": false,
       "id": "CVE-2026-42250",
@@ -240,7 +240,7 @@
       "binaries": [
         "coreutils"
       ],
-      "description": "GNU coreutils uniq is vulnerable to an out\u2011of\u2011bounds read due to incorrect handling of multibyte input when the -w (--check-chars) option is used. The find_field() function miscalculates the byte length of characters by repeatedly processing a fixed pointer instead of advancing through the input, resulting in an inflated length value.  This incorrect length is later used in a memcmp operation, causing reads beyond the allocated buffer when processing crafted multibyte input.  When running GNU coreutils uniq with attacker-provided arguments, this behavior leads to a crash and potential adjacent heap memory exposure.   This issue has been fixed in the commit d64e35a8a4c0e4608321433e0d84d917e4e36371.",
+      "description": "GNU coreutils uniq is vulnerable to an out‑of‑bounds read due to incorrect handling of multibyte input when the -w (--check-chars) option is used. The find_field() function miscalculates the byte length of characters by repeatedly processing a fixed pointer instead of advancing through the input, resulting in an inflated length value.  This incorrect length is later used in a memcmp operation, causing reads beyond the allocated buffer when processing crafted multibyte input.  When running GNU coreutils uniq with attacker-provided arguments, this behavior leads to a crash and potential adjacent heap memory exposure.   This issue has been fixed in the commit d64e35a8a4c0e4608321433e0d84d917e4e36371.",
       "disposition": "affected_feature_or_prerequisite_outside_supported_workflow",
       "fixed_in_candidate": false,
       "id": "CVE-2026-56391",
@@ -268,7 +268,7 @@
       "binaries": [
         "coreutils"
       ],
-      "description": "GNU coreutils unexpand is vulnerable to a heap-based buffer overflow due to an integer overflow during buffer allocation when processing large tab stop (-t) values. The multiplication used to calculate the allocation size can wrap around, resulting in an undersized buffer. When processing crafted input, subsequent writes exceed the allocated memory, leading to an out\u2011of\u2011bounds heap write.  When running GNU coreutils unexpand with attacker-provided large tab stop (-t) arguments, this behavior leads to a crash and potentially achieve a heap write primitive depending on memory layout.           This issue has been fixed in the commit b60a159fdc5bfcf9988d3a4cb6f53abe8ad5d35d",
+      "description": "GNU coreutils unexpand is vulnerable to a heap-based buffer overflow due to an integer overflow during buffer allocation when processing large tab stop (-t) values. The multiplication used to calculate the allocation size can wrap around, resulting in an undersized buffer. When processing crafted input, subsequent writes exceed the allocated memory, leading to an out‑of‑bounds heap write.  When running GNU coreutils unexpand with attacker-provided large tab stop (-t) arguments, this behavior leads to a crash and potentially achieve a heap write primitive depending on memory layout.           This issue has been fixed in the commit b60a159fdc5bfcf9988d3a4cb6f53abe8ad5d35d",
       "disposition": "affected_feature_or_prerequisite_outside_supported_workflow",
       "fixed_in_candidate": false,
       "id": "CVE-2026-56392",
@@ -648,7 +648,7 @@
       "binaries": [
         "libcurl3t64-gnutls:arm64"
       ],
-      "description": "When performing transfers via libcurl\u2019s multi interface, pooled TLS connections can outlive their originating easy handles. In OpenSSL 3 provider configurations, libcurl attaches an allocated library context to the easy handle's state and passes it to OpenSSL without acquiring an ownership reference; destroying the easy handle prematurely frees this context while the active connection retains a dangling pointer, leading to a heap-use-after-free upon subsequent I/O or post-handshake operations.",
+      "description": "When performing transfers via libcurl’s multi interface, pooled TLS connections can outlive their originating easy handles. In OpenSSL 3 provider configurations, libcurl attaches an allocated library context to the easy handle's state and passes it to OpenSSL without acquiring an ownership reference; destroying the easy handle prematurely frees this context while the active connection retains a dangling pointer, leading to a heap-use-after-free upon subsequent I/O or post-handshake operations.",
       "disposition": "affected_feature_or_prerequisite_outside_supported_workflow",
       "fixed_in_candidate": false,
       "id": "CVE-2026-80229",
@@ -1539,7 +1539,7 @@
       "binaries": [
         "diffutils"
       ],
-      "description": "diff3\u00a0tool from GNU diffutils\u00a0is vulnerable to a heap\u2011based buffer overflow due to multiple signed integer overflows in line\u2011mapping calculations. Incorrect arithmetic in mapping line ranges can result in corrupted values being used for memory allocation and loop bounds. When processing crafted diff output, these overflows may cause the application to allocate insufficient memory and subsequently perform out\u2011of\u2011bounds writes during internal processing.\u00a0 An attacker who can control the output of the diff program used by diff3 (e.g. via --diff-program pointing to a malicious script) can trigger out-of-bounds writes, resulting in a crash and potentially remote code execution depending on the environment.   This issue has been fixed in commit 9ff04d5b84743e331e80b589335a52c5480d1815\u00a0  NOTE: The project maintainers claim that this is not a security issue. They state that the worst outcome this issue can cause is a crash of diff and that it cannot be used to escalate privileges.",
+      "description": "diff3 tool from GNU diffutils is vulnerable to a heap‑based buffer overflow due to multiple signed integer overflows in line‑mapping calculations. Incorrect arithmetic in mapping line ranges can result in corrupted values being used for memory allocation and loop bounds. When processing crafted diff output, these overflows may cause the application to allocate insufficient memory and subsequently perform out‑of‑bounds writes during internal processing.  An attacker who can control the output of the diff program used by diff3 (e.g. via --diff-program pointing to a malicious script) can trigger out-of-bounds writes, resulting in a crash and potentially remote code execution depending on the environment.   This issue has been fixed in commit 9ff04d5b84743e331e80b589335a52c5480d1815   NOTE: The project maintainers claim that this is not a security issue. They state that the worst outcome this issue can cause is a crash of diff and that it cannot be used to escalate privileges.",
       "disposition": "affected_feature_or_prerequisite_outside_supported_workflow",
       "fixed_in_candidate": false,
       "id": "CVE-2026-53910",
@@ -1625,8 +1625,8 @@
       "version_comparison": "no_fixed_version_requires_review"
     },
     {
-      "assessment": "Native C++ runtime is used by torch, but model shapes are bounded (batch 4/content 384) and model/config files pinned. Full native call-graph exclusion of erase_if/aligned-new paths is not proven.",
-      "assessment_kind": "source/workflow/platform assessment, not exploit test or exhaustive call graph",
+      "assessment": "The exact installed AArch64 libstdc++.so.6.0.33 operator new(size_t, align_val_t) calls posix_memalign (static disassembly). Upstream states that this allocator path is unaffected by CVE-2026-95619. This is platform/build non-applicability for the system library, not a package upgrade or exhaustive audit of statically linked wheel code.",
+      "assessment_kind": "exact system ELF implementation + upstream affected-path assessment",
       "binaries": [
         "gcc-14-base:arm64",
         "libgcc-s1:arm64",
@@ -1634,14 +1634,14 @@
         "libstdc++6:arm64"
       ],
       "description": "A flaw was found in libstdc++. An integer overflow can occur when processing large inputs to the aligned operator new in the C++ library. This vulnerability could lead to an undersized memory allocation, potentially causing memory corruption or application instability.",
-      "disposition": "bounded_native_path_requires_owner_review",
+      "disposition": "platform_build_uses_unaffected_posix_memalign_path",
       "fixed_in_candidate": false,
       "id": "CVE-2026-95619",
       "images": [
         "analyzer",
         "scanner"
       ],
-      "owner_review_required": true,
+      "owner_review_required": false,
       "reference": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
       "release": {
         "nodsa": "Minor issue",
@@ -1655,7 +1655,9 @@
       "scope": "local",
       "source": "gcc-14",
       "version": "14.2.0-19",
-      "version_comparison": "no_fixed_version_requires_review"
+      "version_comparison": "no_fixed_version_requires_review",
+      "assessment_evidence": "native-reachability.json",
+      "upstream_affected_path_reference": "https://github.com/gcc-mirror/gcc/commit/200183d4ab5d57575f3dfebc6af3baf649910b9e"
     },
     {
       "assessment": "Remote sideband/server interaction is disabled during scan; no fetch/clone. GitBleed is a history-scope issue: endpoint diff does not audit deleted intermediate secrets.",
@@ -2111,7 +2113,7 @@
         "libc-bin",
         "libc6:arm64"
       ],
-      "description": "Calling wordexp with WRDE_APPEND in the GNU C Library version 2.0 to version 2.43\u00a0can cause the interface to return invalid memory in the we_wordv member, which on subsequent calls to wordfree may abort the process.",
+      "description": "Calling wordexp with WRDE_APPEND in the GNU C Library version 2.0 to version 2.43 can cause the interface to return invalid memory in the we_wordv member, which on subsequent calls to wordfree may abort the process.",
       "disposition": "affected_feature_or_prerequisite_outside_supported_workflow",
       "fixed_in_candidate": false,
       "id": "CVE-2026-6368",
@@ -2303,7 +2305,7 @@
         "libc-bin",
         "libc6:arm64"
       ],
-      "description": "The nscd service in the GNU C Library 2.3.4 onwards may crash due to a  stack overflow when a malicious DNS server returns too large a response  for a DNS query, resulting in degraded DNS resolution for the system.    Exploitation of this bug needs a system that has nscd enabled and using  an untrusted DNS server for name resolution, with the compromised DNS  server being capable of processing records large enough to result in a  stack overflow in an nscd thread stack.\u00a0 During experimentation, bind 9  was unable to handle large records, but that could change in future or  with a different name server.\u00a0 In typical installations, nscd is  executed in an isolated context as its own user without a shell, due to  which any compromise of that service is isolated.    There is a remote possibility of nscd cache corruption if an attacker  manages to get the stack pointer into a desired point in the heap,  potentially resulting in other caches in nscd being overwritten with  corrupt data through the stack overflow, until the buggy code path  eventually results in a crash.    Finally, a crash in nscd may result in performance degradation when  resolving names, but it does not result in a denial of service.",
+      "description": "The nscd service in the GNU C Library 2.3.4 onwards may crash due to a  stack overflow when a malicious DNS server returns too large a response  for a DNS query, resulting in degraded DNS resolution for the system.    Exploitation of this bug needs a system that has nscd enabled and using  an untrusted DNS server for name resolution, with the compromised DNS  server being capable of processing records large enough to result in a  stack overflow in an nscd thread stack.  During experimentation, bind 9  was unable to handle large records, but that could change in future or  with a different name server.  In typical installations, nscd is  executed in an isolated context as its own user without a shell, due to  which any compromise of that service is isolated.    There is a remote possibility of nscd cache corruption if an attacker  manages to get the stack pointer into a desired point in the heap,  potentially resulting in other caches in nscd being overwritten with  corrupt data through the stack overflow, until the buggy code path  eventually results in a crash.    Finally, a crash in nscd may result in performance degradation when  resolving names, but it does not result in a denial of service.",
       "disposition": "affected_feature_or_prerequisite_outside_supported_workflow",
       "fixed_in_candidate": false,
       "id": "CVE-2026-89092",
@@ -3792,7 +3794,7 @@
       "binaries": [
         "tar"
       ],
-      "description": "A TOCTOU (Time-of-Check Time-of-Use) vulnerability in GNU tar's incremental dumpdir 'X' rename handling allows a local attacker with write access to a directory being backed up to influence the restore process if the attacker has access to the system where the restore is being performed. During restoration, files or directories may be created, renamed or overwritten outside the intended extraction directory. This could lead to unauthorized file modification or, in some cases, privilege escalation. Exploitation does not require the attacker to modify or craft the archive, and standard backup and restore workflows\u2014including extracting into a newly created directory without using the -P option do not mitigate the issue.",
+      "description": "A TOCTOU (Time-of-Check Time-of-Use) vulnerability in GNU tar's incremental dumpdir 'X' rename handling allows a local attacker with write access to a directory being backed up to influence the restore process if the attacker has access to the system where the restore is being performed. During restoration, files or directories may be created, renamed or overwritten outside the intended extraction directory. This could lead to unauthorized file modification or, in some cases, privilege escalation. Exploitation does not require the attacker to modify or craft the archive, and standard backup and restore workflows—including extracting into a newly created directory without using the -P option do not mitigate the issue.",
       "disposition": "affected_feature_or_prerequisite_outside_supported_workflow",
       "fixed_in_candidate": false,
       "id": "CVE-2026-18477",
@@ -6144,5 +6146,6 @@
       "source": "perl"
     }
   ],
-  "owner_review_required_records": 5
+  "owner_review_required_records": 4,
+  "assessment_update_date_msk": "2026-10-20"
 }

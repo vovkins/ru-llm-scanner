@@ -70,18 +70,20 @@ name/version, **0 OSV matches**. Для `last_affected` не придуман fi
 Для каждого описаны API/предпосылка, supported workflow и источник; source match
 не доказывает запуск уязвимого инструмента или исчерпывающую достижимость.
 
-Пять записей оставлены владельцу: libstdc++ `CVE-2026-102010`, `CVE-2026-95619`,
-glibc `CVE-2026-19542`, zlib `CVE-2026-27171`, `CVE-2026-85091`. Размеры модели
-ограничены, Git читает локальные objects, но полное исключение этих native paths
-не доказано. Решение о риске не принято. Нерешённые P1 не закрываются автоматически;
-итоговая приёмка #25 не начинается.
+Первоначально владельцу были оставлены пять version matches. Точечная проверка
+2026-10-20 установила неприменимость CVE-2026-95619 к фактической системной
+ARM64 libstdc++: используется неуязвимый путь `posix_memalign`.
+[Подробный разбор и ограничения](native-risk-detail.md),
+[измеренные evidence](native-reachability.json). Остальные **четыре** записи
+оставлены `owner_review_required`. Ни одна package version этим разбором не
+изменена; отсутствие уязвимого пути не означает установку исправления.
 
-### Пять записей для решения владельца
+### Пять версионных совпадений и их применимость
 
 | Advisory | Установленный source/version | Условие и оценка |
 | --- | --- | --- |
 | [CVE-2026-102010](https://security-tracker.debian.org/tracker/CVE-2026-102010) | gcc-14 14.2.0-19 | Ошибка `erase_if` binary heap в libstdc++; штатный вызов не установлен, полного native call graph нет |
-| [CVE-2026-95619](https://security-tracker.debian.org/tracker/CVE-2026-95619) | gcc-14 14.2.0-19 | Переполнение при большом aligned allocation; фиксированные формы BERT и лимиты уменьшают ввод, но не доказывают недостижимость всех native paths |
+| [CVE-2026-95619](https://security-tracker.debian.org/tracker/CVE-2026-95619) | gcc-14 14.2.0-19 | Неприменимо к исследованной системной ARM64 library: `operator new` использует `posix_memalign`, исключённый upstream из affected path; [evidence](native-reachability.json) |
 | [CVE-2026-19542](https://security-tracker.debian.org/tracker/CVE-2026-19542) | glibc 2.41-12+deb13u4 | `tdelete` глубокого дерева, предпосылка порядка миллиона узлов; такой маршрут scanner не установлен, исключение всех библиотечных вызовов не доказано |
 | [CVE-2026-27171](https://security-tracker.debian.org/tracker/CVE-2026-27171) | zlib 1:1.3.dfsg+really1.3.1-1 | CPU DoS в CRC combine APIs; локальный Git использует zlib, исчерпывающего доказательства достижимости/недостижимости нет |
 | [CVE-2026-85091](https://security-tracker.debian.org/tracker/CVE-2026-85091) | zlib 1:1.3.dfsg+really1.3.1-1 | Nonblocking gzwrite/gzprintf после stall; scanner не вызывает gz API напрямую; Debian всё ещё помечает версию vulnerable, range обсуждается |
@@ -236,5 +238,5 @@ Main `336feb6`, default runtime/deployment, прежние images, proxy tracked
 model/dictionary/spaCy tree и frozen corpus сохранены. Все семь чужих контейнеров
 с прежними Running/StartedAt. Собственные Compose containers/networks очищены,
 prune/остановки чужих проектов не выполнялись. Реальные полные отчёты приватны.
-Оставшийся вопрос — явное решение владельца по пяти native advisory из таблицы;
+Оставшийся вопрос — явное решение владельца по четырём оставшимся native advisory из таблицы;
 DEP-02 и RV-06 исправлены, DEP-01 не объявлен полностью закрытым. #25 не начата.
