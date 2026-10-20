@@ -1,0 +1,45 @@
+{
+  "verification_version": 1,
+  "status": "passed",
+  "build_revision": "9c92f6eec44a6ac94bf718003baa53e50ae242b2",
+  "version": "0.1.0",
+  "platform": "linux/arm64",
+  "bundle_files_checked": 490,
+  "runtime_inputs_checked": 106,
+  "assets": {
+    "release-manifest.json": "2b8bae84b2ca688013b89992b9331353b55c10864ce28c1cf934d47427cf5360",
+    "ru-llm-scanner-v0.1.0-linux-arm64.tar.gz": "edce64c0be874a76458926379700d876d32ed2f9f453e9b5b2e23e7c778e1032",
+    "ru-llm-scanner-v0.1.0-native-sources.tar.gz": "50b4716387cb500d8cf06dc0cbfdfd99f6ce3e6a9778c6e8b080c035b20a5927",
+    "ru_llm_scanner-0.1.0-py3-none-any.whl": "befe95c71e04f8b7b629b17d43990543be1695293ea6cd35b71c4345498dc18f"
+  },
+  "asset_sizes": {
+    "ru-llm-scanner-v0.1.0-native-sources.tar.gz": 398330836,
+    "ru-llm-scanner-v0.1.0-linux-arm64.tar.gz": 1421170414,
+    "release-manifest.json": 69500,
+    "ru_llm_scanner-0.1.0-py3-none-any.whl": 69605,
+    "SHA256SUMS": 409
+  },
+  "native_source_packages": 82,
+  "native_source_and_cpython_files_checked": 268,
+  "runtime_probe_unchanged": true,
+  "model_dictionary_corpus_unchanged": true,
+  "default_and_previous_images_preserved": true,
+  "protected_files_sha256": {
+    "THIRD_PARTY_NOTICES.md": "79b0dc96e17376d526039c2a740d40c2e9da48f0a29a87770062e17d77493264",
+    "locks/analyzer-cpu-linux-arm64.runtime.lock.json": "a8a08bd416193af9632997afc0ba5256f2528534607eddc74015915ec9cb1a7d",
+    "locks/scanner-cpu-linux-arm64.deployment.json": "877449870cb12066e3203f8de779cb868a5ded6f20a18d3dd4432e8e2ea60bde",
+    "tests/corpus/README.md": "022f4edbb787fb5ed149e0049463609bd8a88d10a1545973025608ba7edec665",
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+    "tests/corpus/load_code_corpus.py": "34570026325dc91ae26ec4102680e46f1670564ed16713f4c5da86d73b145a59",
+    "patches/analyzer-api-v1.patch": "1b81547a59a43fa57bc88cfaeaec7d894465fc2e54491b306736976f6d6a0092",
+    "patches/analyzer-dependencies.patch": "3a062b7f632676724f4812887030e2888b90fdb97647d8eef7d44b25f1216a2e",
+    "patches/ner-window-recovery.patch": "7fbc58bab1d309e93f3cf25a3c720d6c01a438a18e4d4da1dfd4e9a23f5db670",
+    "patches/transformers-v5-tokenizer.patch": "7ffb9ce9a62faf2df1a1545a5556bb423016dd239cccbb3668925ec7e1b70f5c"
+  },
+  "foreign_containers_preserved": 7,
+  "foreign_images_and_started_at_unchanged": true,
+  "proxy_tracked_clean": true,
+  "raw_reports_published": false,
+  "accepted_native_risks_fixed": false,
+  "registry_publication_performed": false
+}

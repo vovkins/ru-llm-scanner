@@ -48,3 +48,12 @@ Frozen offline bundle, соответствующие native sources, перен
 GHCR pull/digests/public visibility и опубликованные assets проверяются отдельными
 заключительными receipts в этой задаче. Подтверждённая исходная среда — Docker Desktop
 CPU Linux ARM64; AMD64/GPU/Jenkins controller/PKI не объявляются проверенными.
+
+Локальные заключительные gates пройдены:
+[состав/сохранность](artifact-checks.json), [сборка/размеры/hashes](assembly.json),
+[равенство runtime и границы изменений](build-proof.json),
+[import → verify0 → snapshot0 → strict diff1 → invalid baseline2](bundle-control.json).
+Основной архив — 1 421 170 414 байт, native-sources — 398 330 836 байт;
+82 Debian source packages и CPython проверены по SHA-256.
+Build source revision `9c92f6eec44a6ac94bf718003baa53e50ae242b2`; последующие
+commits с receipts не меняют 106 runtime/build inputs frozen-комплекта.
