@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "cases": 77,
+  "detection_changed_cases": [],
+  "confidence_changed_cases_above_tolerance": [],
+  "score_absolute_tolerance": 1e-05,
+  "maximum_score_absolute_delta": 1.6093254089355469e-06,
+  "corpus_sha256": "8bc2f6e3f10a9d123651839de21bae09b35c708622f9bfcada2f908ec0b5582f",
+  "images": {
+    "arm64": "sha256:64563d151add43360aa5bf7251f24aab9305615211781c12be11dad94f9fbb35",
+    "amd64": "sha256:8e736082c254339e7cbb1b705acc6cb5e0c40618fe8961671768f7f09d878679"
+  },
+  "raw_values_included": false
+}

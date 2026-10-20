@@ -63,16 +63,18 @@ def main():
         result = subprocess.run(
             [
                 sys.executable,
-                str(ROOT / "scripts/docker_scanner.py"),
-                "snapshot",
+                str(ROOT / "verification/operations-ner-windowing/probe.py"),
                 "--deployment-lock",
                 str(args.deployment_lock.resolve()),
-                "--repo",
+                "--public-repo",
                 str(repo),
-                "--commit",
+                "--public-commit",
                 COMMIT,
-                "--output",
-                str(root / "report"),
+                "--output-dir",
+                str(root / "measurement"),
+                "--public-only",
+                "--run-timeout-seconds",
+                "3600",
                 "--analyze-timeout-seconds",
                 "1800",
                 "--analyzer-cpus",
@@ -83,8 +85,11 @@ def main():
             timeout=4200,
         )
     elapsed = round(time.monotonic() - started, 3)
+    require(result.returncode == 0, "Trusted resource probe failed")
+    measurement = read_json(root / "measurement/probe-summary-1.json")
+    measured = measurement["cases"][0]
     input_unchanged = fingerprint(repo) == before
-    report_path = root / "report/report.json"
+    report_path = root / "measurement/public-requests/report.json"
     report = validate_report(read_json(report_path))
     normalized = []
     scores = {}
@@ -95,7 +100,7 @@ def main():
         require(key not in scores, "Duplicate normalized Requests finding")
         scores[key] = finding["score"]
     complete = (
-        result.returncode == 1
+        measured["exit_code"] == 1
         and report["coverage"]["counts"]["error"] == 0
         and input_unchanged
     )
@@ -125,7 +130,7 @@ def main():
                 "code_executed": False,
                 "checkout_performed": False,
             },
-            "exit_code": result.returncode,
+            "exit_code": measured["exit_code"],
             "coverage": report["coverage"]["counts"],
             "findings": len(normalized),
             "finding_fingerprints_without_score": sorted(normalized),
@@ -146,6 +151,16 @@ def main():
             "score_absolute_tolerance": 1e-5,
             "analyzer_cpus": 4,
             "analyze_timeout_seconds": 1800,
+            "resources": {
+                "measurement": measurement["measurement"],
+                "cgroup_sample_maxima": measured["cgroup_sample_maxima"],
+                "sample_failures_during_start_or_cleanup": measured[
+                    "sample_failures_during_start_or_cleanup"
+                ],
+                "output_bytes": measured["output_bytes"],
+                "harness_kill": measured["harness_kill"],
+                "cleanup": measured["cleanup"],
+            },
             "raw_values_published": False,
             "no_ground_truth": True,
         },

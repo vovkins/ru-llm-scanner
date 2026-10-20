@@ -33,7 +33,7 @@ CPU Linux ARM64 внутри VM. Host tools проверялись на Python 3
 
 - Python **3.11+**, Docker Engine с platform inspect (API 1.49+) и Compose v2+;
 - non-root оператор с доступом к daemon и к выбранному Docker context;
-- заранее загруженные точные ARM64 images, соответствующие deployment lock;
+- заранее загруженные точные images выбранной архитектуры, соответствующие deployment lock;
 - подготовленный self-contained клон, доверенные внешние config/baseline roots;
 - Docker-доступ к bind-путям, место для image store, приватных отчётов и временных файлов.
 

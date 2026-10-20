@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "platform": "linux/arm64",
+  "prepared_inputs_equal": true,
+  "runtime_inventory_equal": true,
+  "cache_only_preparation": true,
+  "build_cache_disabled": true,
+  "builder_https_blocked": true,
+  "image_ids": [
+    "sha256:2c991a54ff063ca5f3cd9f8b18b3b50b67004cd762034fbbb8649702e9dd6033",
+    "sha256:31c52ea8baae68a6d60d547694d25735d99c14ea05701c66a09979af88e6ad21"
+  ],
+  "bit_identical_images_required": false
+}

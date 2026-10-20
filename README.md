@@ -43,6 +43,12 @@ Docker/Compose и non-root доступ к daemon; venv/исходный proxy �
 `ghcr.io/vovkins/ru-llm-scanner-analyzer:0.1.0`.
 [Получение релиза, проверка и офлайн-установка](docs/admin/releases.md).
 
+Ветка поддержки **Linux AMD64** добавляет отдельный закреплённый профиль сборки
+и пример настоящего Jenkins pipeline. Это неопубликованный кандидат:
+[серверная инструкция](docs/admin/linux-amd64.md),
+[прогресс нативной приёмки](verification/linux-amd64/README.md).
+Теги GHCR `:0.1.0` остаются ARM64; AMD64-образов под этими тегами нет.
+
 ## Возможности
 
 | Режим | Что проверяется |
@@ -87,8 +93,9 @@ Staged/untracked/незакоммиченные изменения не вход
 
 Версия **`0.1.0`**, первый выпуск для локального использования с явными
 ограничениями ниже. Подтверждённая среда — CPU Linux ARM64 внутри
-Docker Desktop на Apple Silicon. AMD64/GPU, реальный Linux host/Jenkins controller
-и другой физический offline host не объявлены проверенными.
+Docker Desktop на Apple Silicon. Новые нативные Linux AMD64/ARM64 и Jenkins
+проверки относятся к отдельному кандидату #33 и не расширяют состав v0.1.0.
+GPU и другой физический закрытый host не объявлены проверенными.
 [Матрица выполненных проверок](verification/README.md).
 Новый [комплексный прогон](verification/operations-stage-4/README.md) включает
 прохождение руководств, браузер, нагрузку и публичный репозиторий.

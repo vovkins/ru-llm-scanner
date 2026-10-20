@@ -71,6 +71,7 @@ jobs:
         run: |
           python scripts/check_cpu_candidate.py build --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache --download --offline-firewall
       - name: Run native integration gates
+        id: integration
         run: |
           python scripts/check_cpu_candidate.py integration --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -114,12 +115,13 @@ jobs:
           path: .build/jenkins/jenkins-verification.json
           retention-days: 3
       - name: Freeze candidate and import into an empty Docker store
+        id: fresh
         if: always() && steps.build.outcome == 'success'
         run: |
           python scripts/assemble_cpu_bundle.py --candidate .build/native --output .build/candidate-bundle
           python scripts/check_fresh_install.py --bundle .build/candidate-bundle --output-dir .build/native/fresh-install
       - name: Scan pinned public Requests offline
-        if: always() && steps.build.outcome == 'success'
+        if: always() && steps.build.outcome == 'success' && steps.integration.outcome == 'success' && steps.fresh.outcome == 'success'
         run: python scripts/check_public_repository.py --deployment-lock .build/native/deployment.json --output-dir .build/native/public-requests --fetch
       - name: Collect safe evidence
         if: always()
@@ -183,5 +185,8 @@ jobs:
         if: always()
         with:
           name: cross-platform-evidence
-          path: .build/*cross-platform.json
+          path: |
+            .build/cross-platform.json
+            .build/public-cross-platform.json
+          include-hidden-files: true
           retention-days: 14

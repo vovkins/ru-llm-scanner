@@ -1,0 +1,8 @@
+{
+  "native_reference_run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39499303334",
+  "native_integration_and_jenkins_run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39502373014",
+  "current_full_run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39504766172",
+  "acceptance_complete": false,
+  "remaining": "final full production/fault/transfer gates and Requests with exact reference configuration; certifi owner decision #34 separate",
+  "old_run_cancelled_after_jenkins_to_avoid_repeating_known_short_timeout": true
+}

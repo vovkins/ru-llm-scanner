@@ -2,17 +2,19 @@
 
 [Jenkinsfile](../../examples/jenkins/Jenkinsfile) и
 [Python adapter](../../examples/jenkins/run_scan.py) — пример доверенного pipeline.
-Действующий Jenkins, credentials/jobs/RBAC пользователя не изменяются. На данном
-стенде выполнена локальная последовательность adapter → production launcher →
-реальные контейнеры с кодами 0/1/2 и baseline; Jenkins controller/Groovy plugins
-здесь отсутствовали. Нативная AMD64 проверка настоящего Jenkins разрабатывается
-в [#33](https://github.com/vovkins/ru-llm-scanner/issues/33);
-[текущий статус](../../verification/linux-amd64/README.md). До её завершения
-прохождение Declarative validation и полноценного pipeline не заявляется.
+Действующий Jenkins, credentials/jobs/RBAC пользователя не изменяются.
+На изолированном нативном AMD64 стенде Jenkins LTS 2.580.1 с 51 закреплённым
+plugin прошли Declarative validation и 13 сценариев настоящего pipeline:
+0/1/2, snapshot/strict diff, неверные входы, параллельные jobs, отмена, timeout
+и потеря агента с операторским восстановлением. Проверены private artifacts,
+отсутствие найденных значений в console и неизменность baseline.
+[Протокол](../../verification/linux-amd64/native-progress/jenkins-native-amd64.json).
+Итоговая приёмка всего AMD64 комплекта отслеживается отдельно в
+[#33](https://github.com/vovkins/ru-llm-scanner/issues/33).
 
 ## Подготовка агентом CI
 
-Владелец предоставляет dedicated non-root CPU ARM64 agent с Python 3.11+,
+Владелец предоставляет dedicated non-root CPU AMD64 или ARM64 agent с Python 3.11+,
 Docker/Compose и готовыми образами из [доверенного offline-пакета](build.md).
 Установите scanner/scripts/пример в `/opt/ru-llm-scanner`, доступный агенту для
 чтения. Pipeline/script берутся из доверенной версии scanner, **никогда из
@@ -26,7 +28,7 @@ Docker-доступ привилегирован; не выдавайте это
 Выбранный комплект должен соответствовать архитектуре Docker daemon.
 
 [AMD64 Jenkinsfile](../../examples/jenkins/Jenkinsfile.amd64) уже содержит эту
-переменную и label `scanner-cpu-amd64`; его приёмка ещё выполняется.
+переменную и label `scanner-cpu-amd64`.
 Для совместимости без переменной остаётся исторический default
 `$SCANNER_HOME/locks/scanner-cpu-linux-arm64.deployment.json`. Это поведение
 старого ARM64 примера, а не автоматический выбор актуального image после сборки.

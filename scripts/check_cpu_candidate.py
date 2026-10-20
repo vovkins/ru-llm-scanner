@@ -39,6 +39,8 @@ class Candidate:
             if (self.root / "steps.json").exists()
             else []
         )
+        self.collect_failures = False
+        self.failures = []
 
     def invoke(self, name, command, *, expected=0, timeout=3600, env=None):
         started = time.monotonic()
@@ -67,7 +69,9 @@ class Candidate:
                 (self.root / (name + ".log")).read_text(errors="replace")[-10000:],
                 flush=True,
             )
-        require(result.returncode == expected, "Candidate step failed: " + name)
+        if result.returncode != expected:
+            self.failures.append(name)
+            require(self.collect_failures, "Candidate step failed: " + name)
 
     def python(self, name, script, *args, **kwargs):
         self.invoke(
@@ -274,6 +278,9 @@ class Candidate:
 
     def integration(self):
         verify_daemon_platform(self.platform)
+        # These suites use separate outputs/owned resources. Exercise every suite
+        # before failing the gate, so a harness error does not hide other defects.
+        self.collect_failures = True
         self.python(
             "upstream-test-image",
             "analyzer.py",
@@ -354,6 +361,9 @@ class Candidate:
             self.scanner,
             "--output",
             self.root / "linux-git.json",
+        )
+        require(
+            not self.failures, "Failed candidate suites: " + ", ".join(self.failures)
         )
 
     def repeat(self):

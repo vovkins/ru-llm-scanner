@@ -40,9 +40,29 @@ Launcher сверяет архитектуру Docker server и отказыва
 разрешённые сводки. Образы, полные отчёты, context/cache и логи не загружаются
 в публичные CI artifacts. Исторический `publish-release.yml` не запускается.
 
+## Нативные результаты
+
+[Промежуточные протоколы](native-progress/provenance.json) сохраняют происхождение
+каждого прогона; они не обозначают завершение всей приёмки.
+
+| Проверка | Результат |
+| --- | --- |
+| Native AMD64 и ARM64 build/seal/verify/export | Пройдены, без build cache и с блокировкой root HTTP/HTTPS builder |
+| Повторная cache-only подготовка и uncached build | Пройдены на обеих архитектурах, material inputs/runtime inventories совпали |
+| Upstream core / NER | 478 / 96 на каждой архитектуре |
+| NER / dictionary parity | 77 / 4 |
+| Independent code-v1 | TP33 / FP13 / FN4; модель/порог/ожидания сохранены |
+| [Native cross-platform NER](native-prediction-comparison.json) | Решения 77 случаев совпали; max confidence delta 2.265e-6 |
+| [Published v0.1.0 ARM64 → AMD64](published-reference-comparison.json) | Решения совпали; max delta 1.609e-6 |
+| [Настоящий Jenkins AMD64](native-progress/jenkins-native-amd64.json) | 13 сценариев, включая cancel/timeout/agent-loss recovery |
+| Native source closure | 82 retained sources; фактические версии совпали на обеих архитектурах |
+| Прежний system libstdc++ aligned-new exclusion | Повторно проверен вызов posix_memalign в ELF обеих архитектур; не распространяется на все static wheel paths |
+
 ## Оставшиеся проверки
 
-Полная нативная сборка/повторная offline-сборка, parity/quality/Requests,
-эксплуатационные отказы, clean import, настоящий Jenkins, архитектурная
-применимость advisory, ARM64 регрессия и итоговая документация. Результаты
-фиксируются по факту; задача #33 остаётся открытой.
+Полный Requests с точной конфигурацией прежнего reference, все production/fault
+gates и чистый image store, измерение ресурсов, финальная документация и контроль
+комплекта. Исправляются ошибки Linux test harness, которые не были видны через
+Docker Desktop bind mounts. Результаты фиксируются по факту; #33 остаётся открытой.
+Новый [certifi advisory](certifi-advisory.md) и конкретное предложение #34 ожидают
+решения владельца; прежнее принятие четырёх native-рисков этим не меняется.
