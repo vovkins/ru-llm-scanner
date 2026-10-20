@@ -1,0 +1,19 @@
+{
+  "bounded_detail": {
+    "code": "required_ner_unavailable",
+    "failure_class": "window_boundary_unresolved",
+    "phase": "windowing"
+  },
+  "cleanup": true,
+  "elapsed_seconds": 8.252,
+  "http_status": 503,
+  "image": {
+    "image_id": "sha256:dac76ca6f7f37d61f7a3ad4db1d56d68dcad14d9e44354252dcfbf3c208c5104",
+    "image_reference_id": "sha256:938b1eb4169fcaaf89882d07570fc57f2ebac23d80804e31221b18d8e4e04c00"
+  },
+  "network": "none; loopback only",
+  "readonly_nonroot_no_caps_no_logs": true,
+  "response_bytes": 111,
+  "response_sha256": "630090c6fe588d309beab68b4cf30a766aa2c1a2647b94539ad02c883e7635ad",
+  "source_sha256": "67b09ec1002aef944fec0a4c6ab76d5662e0f596f289e1c7b280c24cbb749678"
+}

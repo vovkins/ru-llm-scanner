@@ -1,0 +1,80 @@
+{
+  "analyzer_memory": "2g",
+  "artifacts_sha256": {
+    "report.html": "eeba41e06f52a7f58c2dd0887e4495aebd6857ae19e7f01d1a1e06c404beb07e",
+    "report.json": "bab3684e6ec007cb90240a20ce08f9716dfd755e38b71668fd79ef206db07176"
+  },
+  "background": "seven original containers and one bounded Requests900 run; elapsed time is not an isolated benchmark",
+  "categories": {
+    "AUTH_TOKEN": 1,
+    "EMAIL_ADDRESS": 2,
+    "INTERNAL_IP": 81,
+    "LOGIN": 1,
+    "PERSON": 2,
+    "SECRET_KEY": 15
+  },
+  "cleanup": true,
+  "code_executed": false,
+  "coverage": {
+    "complete": true,
+    "counts": {
+      "analyzed": 58,
+      "deleted": 0,
+      "error": 0,
+      "excluded": 0,
+      "inherited": 0,
+      "target": 60,
+      "unsupported": 2,
+      "unverified": 0
+    },
+    "enumeration_complete": true,
+    "manifest_sha256": "0b166d458ca1f5c527c39bcdef61ec462d7de9fe70f47f08573d935af06daefd"
+  },
+  "elapsed_seconds": 100.106,
+  "exit_code": 1,
+  "findings": 102,
+  "full_reports_private": true,
+  "images": {
+    "analyzer": {
+      "image_id": "sha256:dac76ca6f7f37d61f7a3ad4db1d56d68dcad14d9e44354252dcfbf3c208c5104",
+      "image_reference_id": "sha256:938b1eb4169fcaaf89882d07570fc57f2ebac23d80804e31221b18d8e4e04c00"
+    },
+    "scanner": {
+      "image_id": "sha256:dba647e777415aa7c51f9e57ade3be3120fab6a8fc99dadbac11c3e0f5d1c538",
+      "image_reference_id": "sha256:dba647e777415aa7c51f9e57ade3be3120fab6a8fc99dadbac11c3e0f5d1c538"
+    }
+  },
+  "input_unchanged": true,
+  "interpretation": "All findings are candidates under the inherited proxy catalog; public test/example values and contact details do not prove a leak. No credentials validated against external services.",
+  "no_ground_truth": true,
+  "profile_sha256": "172554ef20c07cf32e15cd97cd368a2510de49ab824ae2b339258078730a1864",
+  "result": {
+    "assurance": "snapshot_verified",
+    "exit_code": 1,
+    "findings_count": 102,
+    "status": "findings"
+  },
+  "runtime_budget_seconds": 300,
+  "score_max": 1.0,
+  "score_min": 0.5054118037223816,
+  "source": {
+    "blob_bytes": 135624,
+    "clone_without_checkout": true,
+    "code_executed": false,
+    "commit": "096c8d42545d3b68ea21a4f890fb2b2d8979c0bd",
+    "files": 60,
+    "largest_blob_bytes": 18971,
+    "tag": "2.2.0",
+    "tree": "3ff0edaf2d039896397fe8d91d558935a038f823",
+    "url": "https://github.com/pallets/itsdangerous.git"
+  },
+  "sources": {
+    "native_credential": 11,
+    "ner": 8,
+    "structural": 83
+  },
+  "start_utc": "2026-10-19T19:48:49.011702+00:00",
+  "unsupported_reasons": {
+    "image": 2
+  }
+}

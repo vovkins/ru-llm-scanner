@@ -1,0 +1,43 @@
+{
+  "artifacts_sha256": {
+    "report.html": "ea609f6ed0d56f4deb0f171594c6d7935ef68e4e2fab44ea547c64103776dc69",
+    "report.json": "757592a153952f3496e9fbadd2781c4f7c82d6da95125bae236c672dbca6bb00"
+  },
+  "case": "Requests AUTHORS.rst isolated",
+  "cleanup": true,
+  "coverage": {
+    "complete": false,
+    "counts": {
+      "analyzed": 0,
+      "deleted": 0,
+      "error": 1,
+      "excluded": 0,
+      "inherited": 0,
+      "target": 1,
+      "unsupported": 0,
+      "unverified": 0
+    },
+    "enumeration_complete": true,
+    "manifest_sha256": "5bafccf26179e7bdf5777d91e572ed1e8f9c27617c7dee28fd1998e7103f7959"
+  },
+  "errors": {
+    "analyzer_unavailable": 1
+  },
+  "exit_code": 2,
+  "findings": 0,
+  "http_status_or_cause_not_inferred_from_bounded_error": true,
+  "input_unchanged": true,
+  "profile_sha256": "172554ef20c07cf32e15cd97cd368a2510de49ab824ae2b339258078730a1864",
+  "result": {
+    "assurance": "none",
+    "exit_code": 2,
+    "findings_count": 0,
+    "status": "incomplete"
+  },
+  "source_bytes": 8037,
+  "source_commit": "b25c87d7cb8d6a18a37fa12442b5f883f9e41741",
+  "source_path": "AUTHORS.rst",
+  "source_sha256": "67b09ec1002aef944fec0a4c6ab76d5662e0f596f289e1c7b280c24cbb749678",
+  "values_published": false,
+  "wall_seconds": 14.83
+}

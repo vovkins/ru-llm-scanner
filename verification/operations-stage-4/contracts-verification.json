@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "synthetic_valid_reports": 11,
+  "invalid_cases_rejected": 22,
+  "local_links": 565,
+  "scope": "structural/semantic examples and links, not runtime",
+  "log": "Valid schema; 11 synthetic reports; 22 rejected invalid cases; 565 local links.\nNo Git scanning, detector-quality or runtime validation is implied."
+}

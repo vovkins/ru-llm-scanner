@@ -10,9 +10,17 @@ RV-01–RV-05 исправлены/выполнены в отдельно сог
 исторических воспроизведений ниже; ссылки на `336feb6` остаются доказательством
 исходного поведения. Документационные DOC-01/DOC-02 обработаны в
 [этапе 3](../../verification/operations-stage-3/README.md): роль пользователя,
-администратора, единый fresh-build lock и справочник. Clean walkthrough
-запланирован отдельно; текст About подготовлен без изменения внешних настроек.
+администратора, единый fresh-build lock и справочник. Оба clean walkthrough
+выполнены в [этапе 4](../../verification/operations-stage-4/README.md) на том же
+Docker store; текст About подготовлен без изменения внешних настроек.
 TEST-01 остаётся предусловием prepared assets, теперь явно разделён по группам.
+Новые DEP-01/DEP-02 и отдельный план перед итоговой приёмкой — в
+[проверке зависимостей](../../verification/operations-stage-4/dependencies.md).
+RV-06 (P1), обнаруженный на реальном Requests в этапе 4: обычный `AUTHORS.rst`
+воспроизводимо даёт Analyzer 503 `windowing/window_boundary_unresolved` и
+scanner exit 2. [Evidence и влияние](../../verification/operations-stage-4/README.md),
+[отдельный план #26](https://github.com/vovkins/ru-llm-scanner/issues/26).
+Он не исправлялся в проверочном этапе и не снимается прежними зелёными тестами.
 
 ## RV-01 — P1: невалидный ответ launcher даёт Jenkins успешный exit
 
@@ -138,6 +146,10 @@ DOC-01: [Analyzer build/seal](../analyzer.md) создаёт `.build/runtime-cpu
 build с передачей именно его lock во все дальнейшие команды. Статически
 подтверждена необходимость ручного выбора; новый clean-host walkthrough не выполнялся.
 Исправление относится к этапу 3, проверка — к этапу 4; ослаблять Image ID validation нельзя.
+Обновлённый статус DOC-01: оба маршрута фактически пройдены на `755152b`
+в новых каталогах с единым новым runtime/deployment. Ручной подмены IDs/default
+lock нет. [Evidence](../../verification/operations-stage-4/README.md); другой
+физический offline host остаётся непроверенным. Исходное наблюдение выше историческое.
 
 DOC-02: в README/docs map смешаны хронология этапов, API и эксплуатационные ссылки.
 Нет отдельных завершённых руководств двух ролей, GitHub description пуст.

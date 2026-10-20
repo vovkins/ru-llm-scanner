@@ -1,0 +1,7014 @@
+{
+  "date_utc": "2026-10-19",
+  "debian": {
+    "candidate_records": 1714,
+    "codename": "trixie",
+    "comparison": "dpkg --compare-versions in verified scanner image",
+    "installed_at_or_after_fix": 1529,
+    "potential_matches": [
+      {
+        "binaries": [
+          "apt",
+          "libapt-pkg7.0:arm64"
+        ],
+        "id": "CVE-2011-3374",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "3.0.3"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "apt",
+        "version": "3.0.3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "bash"
+        ],
+        "id": "TEMP-0841856-B18BAF",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "5.2.37-2"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": null,
+        "source": "bash",
+        "version": "5.2.37-2",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "bsdutils",
+          "libblkid1:arm64",
+          "liblastlog2-2:arm64",
+          "libmount1:arm64",
+          "libsmartcols1:arm64",
+          "libuuid1:arm64",
+          "login",
+          "mount",
+          "util-linux"
+        ],
+        "id": "CVE-2022-0563",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.41.5-0+deb13u1",
+            "trixie-security": "2.41.5-0+deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "util-linux",
+        "version": "2.41.5-0+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "bsdutils",
+          "libblkid1:arm64",
+          "liblastlog2-2:arm64",
+          "libmount1:arm64",
+          "libsmartcols1:arm64",
+          "libuuid1:arm64",
+          "login",
+          "mount",
+          "util-linux"
+        ],
+        "id": "CVE-2026-3184",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41.5-0+deb13u1",
+            "trixie-security": "2.41.5-0+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "util-linux",
+        "version": "2.41.5-0+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "bsdutils",
+          "libblkid1:arm64",
+          "liblastlog2-2:arm64",
+          "libmount1:arm64",
+          "libsmartcols1:arm64",
+          "libuuid1:arm64",
+          "login",
+          "mount",
+          "util-linux"
+        ],
+        "id": "CVE-2026-76642",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41.5-0+deb13u1",
+            "trixie-security": "2.41.5-0+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "util-linux",
+        "version": "2.41.5-0+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "bsdutils",
+          "libblkid1:arm64",
+          "liblastlog2-2:arm64",
+          "libmount1:arm64",
+          "libsmartcols1:arm64",
+          "libuuid1:arm64",
+          "login",
+          "mount",
+          "util-linux"
+        ],
+        "id": "CVE-2026-78408",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41.5-0+deb13u1",
+            "trixie-security": "2.41.5-0+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "util-linux",
+        "version": "2.41.5-0+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "bsdutils",
+          "libblkid1:arm64",
+          "liblastlog2-2:arm64",
+          "libmount1:arm64",
+          "libsmartcols1:arm64",
+          "libuuid1:arm64",
+          "login",
+          "mount",
+          "util-linux"
+        ],
+        "id": "CVE-2026-78409",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41.5-0+deb13u1",
+            "trixie-security": "2.41.5-0+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "util-linux",
+        "version": "2.41.5-0+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "bsdutils",
+          "libblkid1:arm64",
+          "liblastlog2-2:arm64",
+          "libmount1:arm64",
+          "libsmartcols1:arm64",
+          "libuuid1:arm64",
+          "login",
+          "mount",
+          "util-linux"
+        ],
+        "id": "CVE-2026-78410",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41.5-0+deb13u1",
+            "trixie-security": "2.41.5-0+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "util-linux",
+        "version": "2.41.5-0+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "coreutils"
+        ],
+        "id": "CVE-2017-18018",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "9.7-3"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "coreutils",
+        "version": "9.7-3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "coreutils"
+        ],
+        "id": "CVE-2025-5278",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "9.7-3"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "coreutils",
+        "version": "9.7-3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "coreutils"
+        ],
+        "id": "CVE-2026-56391",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "9.7-3"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "coreutils",
+        "version": "9.7-3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "coreutils"
+        ],
+        "id": "CVE-2026-56392",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "9.7-3"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "coreutils",
+        "version": "9.7-3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "dash"
+        ],
+        "id": "CVE-2026-102473",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "0.5.12-12"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "dash",
+        "version": "0.5.12-12",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "dash"
+        ],
+        "id": "CVE-2026-102474",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "0.5.12-12"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "dash",
+        "version": "0.5.12-12",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "diffutils"
+        ],
+        "id": "CVE-2026-53910",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1:3.10-4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "diffutils",
+        "version": "1:3.10-4",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "gcc-14-base:arm64",
+          "libgcc-s1:arm64",
+          "libgomp1:arm64",
+          "libstdc++6:arm64"
+        ],
+        "id": "CVE-2026-102010",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "14.2.0-19"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "gcc-14",
+        "version": "14.2.0-19",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "gcc-14-base:arm64",
+          "libgcc-s1:arm64",
+          "libgomp1:arm64",
+          "libstdc++6:arm64"
+        ],
+        "id": "CVE-2026-95619",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "14.2.0-19"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "gcc-14",
+        "version": "14.2.0-19",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "git",
+          "git-man"
+        ],
+        "id": "CVE-2018-1000021",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1:2.47.3-0+deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "git",
+        "version": "1:2.47.3-0+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "git",
+          "git-man"
+        ],
+        "id": "CVE-2022-24975",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1:2.47.3-0+deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "git",
+        "version": "1:2.47.3-0+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "git",
+          "git-man"
+        ],
+        "id": "CVE-2024-52005",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1:2.47.3-0+deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "git",
+        "version": "1:2.47.3-0+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "gzip"
+        ],
+        "id": "CVE-2026-41991",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "1.13-1+deb13u1",
+          "repositories": {
+            "trixie": "1.13-1+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "gzip",
+        "version": "1.13-1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "gzip"
+        ],
+        "id": "CVE-2026-41992",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "1.13-1+deb13u1",
+          "repositories": {
+            "trixie": "1.13-1+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "gzip",
+        "version": "1.13-1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libacl1:arm64"
+        ],
+        "id": "CVE-2026-54369",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Will be fixed first in unstable, then point release update; not to be backported by individual patches",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.3.2-2"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "acl",
+        "version": "2.3.2-2",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libacl1:arm64"
+        ],
+        "id": "CVE-2026-54370",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Will be fixed first in unstable, then point release update; not to be backported by individual patches",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.3.2-2"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "acl",
+        "version": "2.3.2-2",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libattr1:arm64"
+        ],
+        "id": "CVE-2026-54371",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Will be fixed first in unstable, then point release update; not to be backported by individual patches",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "1:2.5.2-3"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "attr",
+        "version": "1:2.5.2-3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libbz2-1.0:arm64"
+        ],
+        "id": "CVE-2026-42250",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "1.0.8-6"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "bzip2",
+        "version": "1.0.8-6",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2010-4756",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2018-20796",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2019-1010022",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2019-1010023",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2019-1010024",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2019-1010025",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2019-9192",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-18374",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-19499",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-19542",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-5435",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-5450",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "2.41-12+deb13u4",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-5928",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "2.41-12+deb13u4",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-6238",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-6368",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-6791",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-77117",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-80489",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-8674",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-86805",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-89092",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-95818",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libc-bin",
+          "libc6:arm64"
+        ],
+        "id": "CVE-2026-97399",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.41-12+deb13u4"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "glibc",
+        "version": "2.41-12+deb13u3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2025-10966",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2025-14017",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2025-15079",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2025-15224",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-10536",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-107928",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-107929",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-11856",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-12064",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-13608",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-18924",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-19931",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-80229",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-80230",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-80255",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-82208",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-82209",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-8458",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-86409",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-86410",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-86414",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-87862",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-87863",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-87864",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-87865",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-87866",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-8926",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-8932",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-9079",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-9080",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-92386",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-92387",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-92388",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-92389",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-92390",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-92391",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-94266",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-9545",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libcurl3t64-gnutls:arm64"
+        ],
+        "id": "CVE-2026-9547",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "8.14.1-2+deb13u5",
+            "trixie-security": "8.14.1-2+deb13u7"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "curl",
+        "version": "8.14.1-2+deb13u7",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libexpat1:arm64"
+        ],
+        "id": "CVE-2025-66382",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue, revisit when fixed upstream",
+          "nodsa_reason": "postponed",
+          "repositories": {
+            "trixie": "2.8.3-1~deb13u1",
+            "trixie-security": "2.9.0-1~deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "expat",
+        "version": "2.9.0-1~deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgnutls30t64:arm64"
+        ],
+        "id": "CVE-2011-3389",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "3.8.9-3+deb13u4",
+            "trixie-security": "3.8.9-3+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "gnutls28",
+        "version": "3.8.9-3+deb13u4",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgnutls30t64:arm64"
+        ],
+        "id": "CVE-2026-67693",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "3.8.9-3+deb13u4",
+            "trixie-security": "3.8.9-3+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "gnutls28",
+        "version": "3.8.9-3+deb13u4",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgnutls30t64:arm64"
+        ],
+        "id": "CVE-2026-88647",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "3.8.9-3+deb13u4",
+            "trixie-security": "3.8.9-3+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "gnutls28",
+        "version": "3.8.9-3+deb13u4",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgnutls30t64:arm64"
+        ],
+        "id": "CVE-2026-88648",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "3.8.9-3+deb13u4",
+            "trixie-security": "3.8.9-3+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "gnutls28",
+        "version": "3.8.9-3+deb13u4",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgnutls30t64:arm64"
+        ],
+        "id": "CVE-2026-95184",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "3.8.9-3+deb13u4",
+            "trixie-security": "3.8.9-3+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "gnutls28",
+        "version": "3.8.9-3+deb13u4",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgnutls30t64:arm64"
+        ],
+        "id": "CVE-2026-95209",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "3.8.9-3+deb13u4",
+            "trixie-security": "3.8.9-3+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "gnutls28",
+        "version": "3.8.9-3+deb13u4",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgnutls30t64:arm64"
+        ],
+        "id": "CVE-2026-95210",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "3.8.9-3+deb13u4",
+            "trixie-security": "3.8.9-3+deb13u4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "gnutls28",
+        "version": "3.8.9-3+deb13u4",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgssapi-krb5-2:arm64",
+          "libk5crypto3:arm64",
+          "libkrb5-3:arm64",
+          "libkrb5support0:arm64"
+        ],
+        "id": "CVE-2018-5709",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1.21.3-5+deb13u1",
+            "trixie-security": "1.21.3-5+deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "krb5",
+        "version": "1.21.3-5+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgssapi-krb5-2:arm64",
+          "libk5crypto3:arm64",
+          "libkrb5-3:arm64",
+          "libkrb5support0:arm64"
+        ],
+        "id": "CVE-2024-26458",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1.21.3-5+deb13u1",
+            "trixie-security": "1.21.3-5+deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "krb5",
+        "version": "1.21.3-5+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgssapi-krb5-2:arm64",
+          "libk5crypto3:arm64",
+          "libkrb5-3:arm64",
+          "libkrb5support0:arm64"
+        ],
+        "id": "CVE-2024-26461",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1.21.3-5+deb13u1",
+            "trixie-security": "1.21.3-5+deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "krb5",
+        "version": "1.21.3-5+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgssapi-krb5-2:arm64",
+          "libk5crypto3:arm64",
+          "libkrb5-3:arm64",
+          "libkrb5support0:arm64"
+        ],
+        "id": "CVE-2026-107708",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "1.21.3-5+deb13u1",
+            "trixie-security": "1.21.3-5+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "krb5",
+        "version": "1.21.3-5+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgssapi-krb5-2:arm64",
+          "libk5crypto3:arm64",
+          "libkrb5-3:arm64",
+          "libkrb5support0:arm64"
+        ],
+        "id": "CVE-2026-107778",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "1.21.3-5+deb13u1",
+            "trixie-security": "1.21.3-5+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "krb5",
+        "version": "1.21.3-5+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libgssapi-krb5-2:arm64",
+          "libk5crypto3:arm64",
+          "libkrb5-3:arm64",
+          "libkrb5support0:arm64"
+        ],
+        "id": "CVE-2026-11850",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1.21.3-5+deb13u1",
+            "trixie-security": "1.21.3-5+deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "krb5",
+        "version": "1.21.3-5+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libldap2:arm64"
+        ],
+        "id": "CVE-2015-3276",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.6.10+dfsg-1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "openldap",
+        "version": "2.6.10+dfsg-1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libldap2:arm64"
+        ],
+        "id": "CVE-2017-14159",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.6.10+dfsg-1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "openldap",
+        "version": "2.6.10+dfsg-1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libldap2:arm64"
+        ],
+        "id": "CVE-2017-17740",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.6.10+dfsg-1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "openldap",
+        "version": "2.6.10+dfsg-1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libldap2:arm64"
+        ],
+        "id": "CVE-2020-15719",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.6.10+dfsg-1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "openldap",
+        "version": "2.6.10+dfsg-1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libldap2:arm64"
+        ],
+        "id": "CVE-2026-22185",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.6.10+dfsg-1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "openldap",
+        "version": "2.6.10+dfsg-1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "liblzma5:arm64"
+        ],
+        "id": "TEMP-1147318-639065",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "5.8.1-1+deb13u2",
+          "repositories": {
+            "trixie": "5.8.1-1+deb13u1",
+            "trixie-security": "5.8.1-1+deb13u2"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": null,
+        "source": "xz-utils",
+        "version": "5.8.1-1+deb13u1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libncursesw6:arm64",
+          "libtinfo6:arm64",
+          "ncurses-base",
+          "ncurses-bin"
+        ],
+        "id": "CVE-2025-6141",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "6.5+20250216-2"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "ncurses",
+        "version": "6.5+20250216-2",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libncursesw6:arm64",
+          "libtinfo6:arm64",
+          "ncurses-base",
+          "ncurses-bin"
+        ],
+        "id": "CVE-2025-69720",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "6.5+20250216-2"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "ncurses",
+        "version": "6.5+20250216-2",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libnghttp2-14:arm64"
+        ],
+        "id": "CVE-2026-58055",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "1.64.0-1.1+deb13u1",
+            "trixie-security": "1.64.0-1.1+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "nghttp2",
+        "version": "1.64.0-1.1+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libp11-kit0:arm64"
+        ],
+        "id": "CVE-2026-13757",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "0.25.5-3"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "p11-kit",
+        "version": "0.25.5-3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libp11-kit0:arm64"
+        ],
+        "id": "CVE-2026-18938",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "0.25.5-3"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "p11-kit",
+        "version": "0.25.5-3",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libpam-modules-bin",
+          "libpam-modules:arm64",
+          "libpam-runtime",
+          "libpam0g:arm64"
+        ],
+        "id": "CVE-2025-8941",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1.7.0-5"
+          },
+          "status": "undetermined",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "pam",
+        "version": "1.7.0-5",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libpam-modules-bin",
+          "libpam-modules:arm64",
+          "libpam-runtime",
+          "libpam0g:arm64"
+        ],
+        "id": "CVE-2026-54411",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "1.7.0-5"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "pam",
+        "version": "1.7.0-5",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libpcre2-8-0:arm64"
+        ],
+        "id": "CVE-2026-103111",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "10.46-1~deb13u3",
+          "repositories": {
+            "trixie": "10.46-1~deb13u2",
+            "trixie-security": "10.46-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "pcre2",
+        "version": "10.46-1~deb13u1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libpcre2-8-0:arm64"
+        ],
+        "id": "CVE-2026-86145",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "10.46-1~deb13u2",
+          "repositories": {
+            "trixie": "10.46-1~deb13u2",
+            "trixie-security": "10.46-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "pcre2",
+        "version": "10.46-1~deb13u1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libpcre2-8-0:arm64"
+        ],
+        "id": "CVE-2026-89156",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "10.46-1~deb13u2",
+          "repositories": {
+            "trixie": "10.46-1~deb13u2",
+            "trixie-security": "10.46-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "pcre2",
+        "version": "10.46-1~deb13u1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libpcre2-8-0:arm64"
+        ],
+        "id": "CVE-2026-89157",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "10.46-1~deb13u2",
+          "repositories": {
+            "trixie": "10.46-1~deb13u2",
+            "trixie-security": "10.46-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "pcre2",
+        "version": "10.46-1~deb13u1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libpcre2-8-0:arm64"
+        ],
+        "id": "CVE-2026-89158",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "10.46-1~deb13u2",
+          "repositories": {
+            "trixie": "10.46-1~deb13u2",
+            "trixie-security": "10.46-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "pcre2",
+        "version": "10.46-1~deb13u1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libpcre2-8-0:arm64"
+        ],
+        "id": "CVE-2026-89160",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "10.46-1~deb13u2",
+          "repositories": {
+            "trixie": "10.46-1~deb13u2",
+            "trixie-security": "10.46-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "pcre2",
+        "version": "10.46-1~deb13u1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libpcre2-8-0:arm64"
+        ],
+        "id": "CVE-2026-89161",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "10.46-1~deb13u2",
+          "repositories": {
+            "trixie": "10.46-1~deb13u2",
+            "trixie-security": "10.46-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "pcre2",
+        "version": "10.46-1~deb13u1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libpcre2-8-0:arm64"
+        ],
+        "id": "CVE-2026-89162",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "10.46-1~deb13u2",
+          "repositories": {
+            "trixie": "10.46-1~deb13u2",
+            "trixie-security": "10.46-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "pcre2",
+        "version": "10.46-1~deb13u1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libperl5.40:arm64",
+          "perl",
+          "perl-base",
+          "perl-modules-5.40"
+        ],
+        "id": "CVE-2011-4116",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libperl5.40:arm64",
+          "perl",
+          "perl-base",
+          "perl-modules-5.40"
+        ],
+        "id": "CVE-2026-15534",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Wait for exposure unstable and coordinate with Perl maintainers",
+          "nodsa_reason": "postponed",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libperl5.40:arm64",
+          "perl",
+          "perl-base",
+          "perl-modules-5.40"
+        ],
+        "id": "CVE-2026-82560",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libperl5.40:arm64",
+          "perl",
+          "perl-base",
+          "perl-modules-5.40"
+        ],
+        "id": "CVE-2026-9538",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue; wait for regressions upstream sorted out",
+          "nodsa_reason": "postponed",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "librtmp1:arm64"
+        ],
+        "id": "CVE-2026-112060",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.4+20151223.gitfa8646d.1-2"
+          },
+          "status": "undetermined",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "rtmpdump",
+        "version": "2.4+20151223.gitfa8646d.1-2",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "librtmp1:arm64"
+        ],
+        "id": "CVE-2026-112061",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "2.4+20151223.gitfa8646d.1-2"
+          },
+          "status": "undetermined",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "rtmpdump",
+        "version": "2.4+20151223.gitfa8646d.1-2",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libsasl2-2:arm64",
+          "libsasl2-modules-db:arm64"
+        ],
+        "id": "CVE-2026-107161",
+        "images": [
+          "scanner"
+        ],
+        "release": {
+          "next_point_update": true,
+          "nodsa": "Will be fixed via point release; suggested patch taken for update",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "2.1.28+dfsg1-9"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "cyrus-sasl2",
+        "version": "2.1.28+dfsg1-9",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libsqlite3-0:arm64"
+        ],
+        "id": "CVE-2021-45346",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "3.46.1-7+deb13u2"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "sqlite3",
+        "version": "3.46.1-7+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libsqlite3-0:arm64"
+        ],
+        "id": "CVE-2025-70873",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "3.46.1-7+deb13u2"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "sqlite3",
+        "version": "3.46.1-7+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libsqlite3-0:arm64"
+        ],
+        "id": "CVE-2026-11822",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.46.1-7+deb13u2",
+          "repositories": {
+            "trixie": "3.46.1-7+deb13u2"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "sqlite3",
+        "version": "3.46.1-7+deb13u1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libsqlite3-0:arm64"
+        ],
+        "id": "CVE-2026-11824",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.46.1-7+deb13u2",
+          "repositories": {
+            "trixie": "3.46.1-7+deb13u2"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "sqlite3",
+        "version": "3.46.1-7+deb13u1",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libsqlite3-0:arm64"
+        ],
+        "id": "CVE-2026-50812",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "3.46.1-7+deb13u2"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "sqlite3",
+        "version": "3.46.1-7+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libsqlite3-0:arm64"
+        ],
+        "id": "CVE-2026-50813",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "3.46.1-7+deb13u2"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "sqlite3",
+        "version": "3.46.1-7+deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-35189",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-35191",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-42772",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-54872",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-54873",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-54875",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-72897",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-75804",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-75805",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-75806",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-77696",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-84782",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libssl3t64:arm64",
+          "openssl",
+          "openssl-provider-legacy"
+        ],
+        "id": "CVE-2026-84784",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "fixed_version": "3.5.7-1~deb13u3",
+          "repositories": {
+            "trixie": "3.5.7-1~deb13u2",
+            "trixie-security": "3.5.7-1~deb13u3"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "openssl",
+        "version": "3.5.7-1~deb13u2",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "libsystemd0:arm64",
+          "libudev1:arm64"
+        ],
+        "id": "CVE-2013-4392",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "257.13-1~deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "systemd",
+        "version": "257.13-1~deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libsystemd0:arm64",
+          "libudev1:arm64"
+        ],
+        "id": "CVE-2023-31437",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "257.13-1~deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "systemd",
+        "version": "257.13-1~deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libsystemd0:arm64",
+          "libudev1:arm64"
+        ],
+        "id": "CVE-2023-31438",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "257.13-1~deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "systemd",
+        "version": "257.13-1~deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libsystemd0:arm64",
+          "libudev1:arm64"
+        ],
+        "id": "CVE-2023-31439",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "257.13-1~deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "systemd",
+        "version": "257.13-1~deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libsystemd0:arm64",
+          "libudev1:arm64"
+        ],
+        "id": "CVE-2026-15059",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "257.13-1~deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "systemd",
+        "version": "257.13-1~deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libsystemd0:arm64",
+          "libudev1:arm64"
+        ],
+        "id": "CVE-2026-16742",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "257.13-1~deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "systemd",
+        "version": "257.13-1~deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "libsystemd0:arm64",
+          "libudev1:arm64"
+        ],
+        "id": "CVE-2026-40228",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "257.13-1~deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "systemd",
+        "version": "257.13-1~deb13u1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "login.defs",
+          "passwd"
+        ],
+        "id": "CVE-2007-5686",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1:4.17.4-2"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "shadow",
+        "version": "1:4.17.4-2",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "login.defs",
+          "passwd"
+        ],
+        "id": "CVE-2024-56433",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "1:4.17.4-2"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "shadow",
+        "version": "1:4.17.4-2",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "login.defs",
+          "passwd"
+        ],
+        "id": "TEMP-0628843-DBAD28",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1:4.17.4-2"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": null,
+        "source": "shadow",
+        "version": "1:4.17.4-2",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "sysvinit-utils"
+        ],
+        "id": "TEMP-0517018-A83CE6",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "3.14-4"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": null,
+        "source": "sysvinit",
+        "version": "3.14-4",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "tar"
+        ],
+        "id": "CVE-2005-2541",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1.35+dfsg-3.1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "tar",
+        "version": "1.35+dfsg-3.1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "tar"
+        ],
+        "id": "CVE-2026-18477",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "1.35+dfsg-3.1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "tar",
+        "version": "1.35+dfsg-3.1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "tar"
+        ],
+        "id": "CVE-2026-18508",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "1.35+dfsg-3.1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "tar",
+        "version": "1.35+dfsg-3.1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "tar"
+        ],
+        "id": "CVE-2026-5704",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "1.35+dfsg-3.1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "tar",
+        "version": "1.35+dfsg-3.1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "tar"
+        ],
+        "id": "TEMP-0290435-0B57B5",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1.35+dfsg-3.1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": null,
+        "source": "tar",
+        "version": "1.35+dfsg-3.1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "zlib1g:arm64"
+        ],
+        "id": "CVE-2026-27171",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "1:1.3.dfsg+really1.3.1-1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "zlib",
+        "version": "1:1.3.dfsg+really1.3.1-1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "zlib1g:arm64"
+        ],
+        "id": "CVE-2026-85091",
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "1:1.3.dfsg+really1.3.1-1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "zlib",
+        "version": "1:1.3.dfsg+really1.3.1-1",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2011-4116",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "open",
+          "urgency": "unimportant"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2025-15649",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-12087",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-13221",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-15534",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "nodsa": "Wait for exposure unstable and coordinate with Perl maintainers",
+          "nodsa_reason": "postponed",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-19487",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-42496",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-42497",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-48959",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-48961",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-48962",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-57432",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-57433",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-7010",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-7017",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-82560",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "nodsa": "Minor issue",
+          "nodsa_reason": "",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "no_fixed_version_requires_review"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-8376",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "fixed_version": "5.40.1-6+deb13u1",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "resolved",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "installed_before_fixed"
+      },
+      {
+        "binaries": [
+          "perl-base"
+        ],
+        "id": "CVE-2026-9538",
+        "images": [
+          "analyzer"
+        ],
+        "release": {
+          "nodsa": "Minor issue; wait for regressions upstream sorted out",
+          "nodsa_reason": "postponed",
+          "repositories": {
+            "trixie": "5.40.1-6+deb13u1"
+          },
+          "status": "open",
+          "urgency": "not yet assigned"
+        },
+        "scope": "local",
+        "source": "perl",
+        "version": "5.40.1-6",
+        "version_comparison": "no_fixed_version_requires_review"
+      }
+    ],
+    "query_time_utc": "2026-10-19T19:33:01.176734+00:00",
+    "source_versions": 83,
+    "status": "available",
+    "unique_advisory_ids": 181,
+    "urgency_counts": {
+      "not yet assigned": 129,
+      "unimportant": 56
+    },
+    "with_known_fix": 42
+  },
+  "fetches": [
+    {
+      "bytes": 3390,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:55.882568+00:00",
+      "sha256": "6ea0e4e716adcc4f9aa59afd82e15f1ece2a5cae792c646b83b024e9753570cc",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/querybatch"
+    },
+    {
+      "bytes": 4101,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:56.446793+00:00",
+      "sha256": "f10ab4df40dd2e11fb1d1c8e536e8e1eca72f61936e96f30c83e6114f9760108",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-29pf-2h5f-8g72"
+    },
+    {
+      "bytes": 4936,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:56.738308+00:00",
+      "sha256": "a84139dff5cad3aa6d57e63f97872e5b0ee59f5a1823f5a6f4430def3782b56a",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-2c2j-9gv5-cj73"
+    },
+    {
+      "bytes": 3743,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:57.039722+00:00",
+      "sha256": "c82fed6e12b08e8d6edf9ba670b23adb801b34b18c2ed589a23ba8061b365c0a",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-4xh5-x5gv-qwph"
+    },
+    {
+      "bytes": 3076,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:57.348093+00:00",
+      "sha256": "0aac4b0c17153687822dbc2b8341899e45bde73567bcb8d8b485ad818c4261d4",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-58qw-9mgm-455v"
+    },
+    {
+      "bytes": 3864,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:57.668755+00:00",
+      "sha256": "275a8d5a753f419f75928f89e199b30058bb2393c7b7bc48cf0bf94f8a8864d5",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-69w3-r845-3855"
+    },
+    {
+      "bytes": 2792,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:57.983745+00:00",
+      "sha256": "e9a903410ed50a5432b4ec9314ed8e03ef2a9862a4e69081708223a1a6bf6980",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-6vgw-5pg2-w6jp"
+    },
+    {
+      "bytes": 5726,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:58.284410+00:00",
+      "sha256": "f2b3aa374e2e0ed45290c8addcd73ea41a6ba87fcb40d586477a7192dcb48b2b",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-7f5h-v6xp-fcq8"
+    },
+    {
+      "bytes": 5239,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:58.597339+00:00",
+      "sha256": "ee0d11c334ea36b9c3867d51b62b18e73cf0653e496f7f8687bfd52c2d5524f5",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-82w8-qh3p-5jfq"
+    },
+    {
+      "bytes": 7361,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:58.898155+00:00",
+      "sha256": "032ff01f42699b0b302565450500858566d50ebd34c595baddf2b514bd8cb674",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-86qp-5c8j-p5mr"
+    },
+    {
+      "bytes": 7532,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:59.205880+00:00",
+      "sha256": "c89146f40e4c4be64ac74f93eba4853e0b38e669289379f69f7eabba364d6b7d",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-8988-9cw3-xx77"
+    },
+    {
+      "bytes": 4790,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:59.527305+00:00",
+      "sha256": "bc011417c43f1c719a80ad5680cd59a552c9ec5acbd8609e215430941773bf1e",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-fgcw-684q-jj6r"
+    },
+    {
+      "bytes": 3771,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:31:59.852013+00:00",
+      "sha256": "f0d0779f7737ebf210e130713cccd93c4a4c5600ab2a5f0f71806630743623fa",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-gh4c-6fx4-qh6g"
+    },
+    {
+      "bytes": 10284,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:00.156777+00:00",
+      "sha256": "979f661a408d67bf71ed9e932530c573594177c2195d27ba86530118377597c4",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-h35f-9h28-mq5c"
+    },
+    {
+      "bytes": 3116,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:00.512681+00:00",
+      "sha256": "917dbb7074cf2e72c707e8a96ec0f13fe874c187d13129a165824cf3c97a2756",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-jp4c-xjxw-mgf9"
+    },
+    {
+      "bytes": 5661,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:00.862831+00:00",
+      "sha256": "9ba389d8f537d8d37758600ef289ea38130ee1e00ade2b6dff81af122710d5dd",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-jp82-jpqv-5vv3"
+    },
+    {
+      "bytes": 3366,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:01.222119+00:00",
+      "sha256": "c5eb326f447e3a016b095b736706253726438032c67b3899e98c8ec202d280ba",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-qwm4-qh6w-59xr"
+    },
+    {
+      "bytes": 4092,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:01.547195+00:00",
+      "sha256": "b820ccdb9eed03db4a08dbadcc60250bd147bd1ef0977bbccb6683c853371c52",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-vxq7-64xx-v4gw"
+    },
+    {
+      "bytes": 5221,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:01.903620+00:00",
+      "sha256": "4b396a5d05e61bf3315e18f5de4d63e149797209b0d56ab54d840e91e19fb508",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-wf93-45jw-7689"
+    },
+    {
+      "bytes": 5136,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:02.249581+00:00",
+      "sha256": "9c72ade19627a4cd7baf94c8d255b1343ddd220948f0375cd931eb8711a4b594",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-wqp7-x3pw-xc5r"
+    },
+    {
+      "bytes": 4905,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:02.556529+00:00",
+      "sha256": "5aaf14d27606e5360dce4e46e5829dc699ff7da8a0971624d35c2605537f6add",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-x746-7m8f-x49c"
+    },
+    {
+      "bytes": 2890,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:02.886132+00:00",
+      "sha256": "73feb6d59a5be500a9f606098489ab12847139fa58ad9d06f73f7ee2ab394cde",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-x9r9-c232-4q39"
+    },
+    {
+      "bytes": 4143,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:03.204720+00:00",
+      "sha256": "90d4d12c607a661046fe2b7f8f31b7ef593161ca741a5a9c1e0cedc7c630b9bf",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/GHSA-xrqw-3rrv-vx5w"
+    },
+    {
+      "bytes": 3213,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:03.545597+00:00",
+      "sha256": "3adf5df151de0a18f3feadfd2650ba305d3f237118ed1b132f2e842257b1e49d",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2025-217"
+    },
+    {
+      "bytes": 3464,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:03.861221+00:00",
+      "sha256": "7ccac0f8db596c87c0e06bca593dd9c2a9809e9d8e2df5bf9286e153d9397096",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-161"
+    },
+    {
+      "bytes": 3608,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:04.168394+00:00",
+      "sha256": "652bdeb2ae4f2459f50c9500fc221f8363e963ed1d9bb4d859a929b2b82d678c",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-1795"
+    },
+    {
+      "bytes": 2713,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:04.478750+00:00",
+      "sha256": "1271b7823b9cc9b3921e0a95092cd6846875b7a73aff0191e4e7af12fbc28680",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-1796"
+    },
+    {
+      "bytes": 4863,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:04.843089+00:00",
+      "sha256": "e6b33c8de6a49cc3ab794fc98f7ab46b0a10ee1033b383e1cae4499856f01bca",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-1941"
+    },
+    {
+      "bytes": 5601,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:05.362442+00:00",
+      "sha256": "40de4834d8e5199dbaff89f3add45a746b4ec7b2b7c9f1473670addaad0f3407",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-1942"
+    },
+    {
+      "bytes": 2453,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:05.850179+00:00",
+      "sha256": "77646b2de8685ab9f3af4ed07ecc912fa8762afe4f75e759a1d1653251667127",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-196"
+    },
+    {
+      "bytes": 3678,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:06.336393+00:00",
+      "sha256": "0d2dd7630b7af3775cfb8f87137ad638dbb9ca8687e9b6ccdd4f7d062d4112d1",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-2280"
+    },
+    {
+      "bytes": 3763,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:07.642463+00:00",
+      "sha256": "765c195eb20b86617bf78c1aa24573e858bc61f04e7d5d519cb4e37ac42ac562",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-2281"
+    },
+    {
+      "bytes": 3434,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:07.987609+00:00",
+      "sha256": "0bd5fbb352408d200b6c825b238bebc01f9343eb5248b26d1b1f586f18304d0f",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-2288"
+    },
+    {
+      "bytes": 3769,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:08.295808+00:00",
+      "sha256": "eae41fcaa0e12808b9c66dd26291e5f09b6d87fbfb92f5741cc79d5afeef5c0c",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-2289"
+    },
+    {
+      "bytes": 4233,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:08.647337+00:00",
+      "sha256": "4f31cb8878a67adbdbac2e70b5820ec7e77e39847ba89069dd050f40e28ce260",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-2290"
+    },
+    {
+      "bytes": 3059,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:08.966538+00:00",
+      "sha256": "6dac7c0e2bb53cdd8590493093e0de081b307474f87f2c76c5543d7ab9f89e39",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-248"
+    },
+    {
+      "bytes": 2741,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:09.270341+00:00",
+      "sha256": "040bd248f859ed74760ef2ba678d79fd5197adeef541efc748cc2cccc7d6480c",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-249"
+    },
+    {
+      "bytes": 2938,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:09.599030+00:00",
+      "sha256": "56174867fb3d81ac4053b7f000dd7c86b3200df31ff3842ab163677a0bfe0e88",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-2875"
+    },
+    {
+      "bytes": 3031,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:09.968666+00:00",
+      "sha256": "6066dae17217d75b6e9b7a7a8e63ad29502c0beb0910b6aa175fde0ed1c55a0f",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-2876"
+    },
+    {
+      "bytes": 6787,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:10.274818+00:00",
+      "sha256": "e1c11dec8038932a21d576c16fe50d09e3a87540c114f6d280576a7027d3e055",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-3447"
+    },
+    {
+      "bytes": 2825,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:10.610396+00:00",
+      "sha256": "6c753633e85fa7b357e9ecafca983995237ca54dd99f37420fb4ef8566284c7b",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-3721"
+    },
+    {
+      "bytes": 4081,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:10.921182+00:00",
+      "sha256": "f26041b6f2fa23a42b5fe0c07f5275fc50c17259af4579a1af845736bd6197bb",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-3929"
+    },
+    {
+      "bytes": 2827,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:11.359430+00:00",
+      "sha256": "8ed3a78f944a7c1319923a47c7be3ad8f437617b49b8147fcbfafed817ed8f80",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-4174"
+    },
+    {
+      "bytes": 7449,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:11.769288+00:00",
+      "sha256": "b0b0123f8b644c3a740ece40b1b06b8b70d7f3b9bd4f29bbd4a92aa9fc66d93b",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-4175"
+    },
+    {
+      "bytes": 3694,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:12.134993+00:00",
+      "sha256": "96720ae538ce0ed07cace0c5f1aeb16cefea981cb9404df718cf232df610b24f",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-4176"
+    },
+    {
+      "bytes": 4019,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T19:32:12.507831+00:00",
+      "sha256": "4c888e2e5494d117811c5ad58f7fd09a78bf55613a15ab87b87420f9244556e6",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-4177"
+    },
+    {
+      "bytes": 84066905,
+      "etag": null,
+      "last_modified": "Mon, 19 Oct 2026 18:20:23 GMT",
+      "retrieved_utc": "2026-10-19T19:32:12.811622+00:00",
+      "sha256": "6477ede2d90546b3c566a1985b607075f0d559968e95fa27d369f0844531eda8",
+      "status": 200,
+      "url": "https://security-tracker.debian.org/tracker/data/json"
+    }
+  ],
+  "inventory": {
+    "analyzer": {
+      "debian": [
+        [
+          "adduser",
+          "adduser",
+          "3.152",
+          "3.152"
+        ],
+        [
+          "apt",
+          "apt",
+          "3.0.3",
+          "3.0.3"
+        ],
+        [
+          "base-files",
+          "base-files",
+          "13.8+deb13u6",
+          "13.8+deb13u6"
+        ],
+        [
+          "base-passwd",
+          "base-passwd",
+          "3.6.7",
+          "3.6.7"
+        ],
+        [
+          "bash",
+          "bash",
+          "5.2.37-2+b9",
+          "5.2.37-2"
+        ],
+        [
+          "bsdutils",
+          "util-linux",
+          "1:2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "ca-certificates",
+          "ca-certificates",
+          "20250419",
+          "20250419"
+        ],
+        [
+          "coreutils",
+          "coreutils",
+          "9.7-3",
+          "9.7-3"
+        ],
+        [
+          "dash",
+          "dash",
+          "0.5.12-12",
+          "0.5.12-12"
+        ],
+        [
+          "debconf",
+          "debconf",
+          "1.5.91",
+          "1.5.91"
+        ],
+        [
+          "debian-archive-keyring",
+          "debian-archive-keyring",
+          "2025.1",
+          "2025.1"
+        ],
+        [
+          "debianutils",
+          "debianutils",
+          "5.23.2",
+          "5.23.2"
+        ],
+        [
+          "diffutils",
+          "diffutils",
+          "1:3.10-4",
+          "1:3.10-4"
+        ],
+        [
+          "dpkg",
+          "dpkg",
+          "1.22.22",
+          "1.22.22"
+        ],
+        [
+          "findutils",
+          "findutils",
+          "4.10.0-3",
+          "4.10.0-3"
+        ],
+        [
+          "gcc-14-base:arm64",
+          "gcc-14",
+          "14.2.0-19",
+          "14.2.0-19"
+        ],
+        [
+          "grep",
+          "grep",
+          "3.11-4+b1",
+          "3.11-4"
+        ],
+        [
+          "gzip",
+          "gzip",
+          "1.13-1",
+          "1.13-1"
+        ],
+        [
+          "hostname",
+          "hostname",
+          "3.25",
+          "3.25"
+        ],
+        [
+          "init-system-helpers",
+          "init-system-helpers",
+          "1.69~deb13u1",
+          "1.69~deb13u1"
+        ],
+        [
+          "libacl1:arm64",
+          "acl",
+          "2.3.2-2+b1",
+          "2.3.2-2"
+        ],
+        [
+          "libapt-pkg7.0:arm64",
+          "apt",
+          "3.0.3",
+          "3.0.3"
+        ],
+        [
+          "libattr1:arm64",
+          "attr",
+          "1:2.5.2-3",
+          "1:2.5.2-3"
+        ],
+        [
+          "libaudit-common",
+          "audit",
+          "1:4.0.2-2",
+          "1:4.0.2-2"
+        ],
+        [
+          "libaudit1:arm64",
+          "audit",
+          "1:4.0.2-2+b2",
+          "1:4.0.2-2"
+        ],
+        [
+          "libblkid1:arm64",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "libbsd0:arm64",
+          "libbsd",
+          "0.12.2-2",
+          "0.12.2-2"
+        ],
+        [
+          "libbz2-1.0:arm64",
+          "bzip2",
+          "1.0.8-6",
+          "1.0.8-6"
+        ],
+        [
+          "libc-bin",
+          "glibc",
+          "2.41-12+deb13u3",
+          "2.41-12+deb13u3"
+        ],
+        [
+          "libc6:arm64",
+          "glibc",
+          "2.41-12+deb13u3",
+          "2.41-12+deb13u3"
+        ],
+        [
+          "libcap-ng0:arm64",
+          "libcap-ng",
+          "0.8.5-4+b1",
+          "0.8.5-4"
+        ],
+        [
+          "libcap2:arm64",
+          "libcap2",
+          "1:2.75-10+deb13u1+b1",
+          "1:2.75-10+deb13u1"
+        ],
+        [
+          "libcrypt1:arm64",
+          "libxcrypt",
+          "1:4.4.38-1",
+          "1:4.4.38-1"
+        ],
+        [
+          "libdb5.3t64:arm64",
+          "db5.3",
+          "5.3.28+dfsg2-9",
+          "5.3.28+dfsg2-9"
+        ],
+        [
+          "libdebconfclient0:arm64",
+          "cdebconf",
+          "0.280",
+          "0.280"
+        ],
+        [
+          "libffi8:arm64",
+          "libffi",
+          "3.4.8-2",
+          "3.4.8-2"
+        ],
+        [
+          "libgcc-s1:arm64",
+          "gcc-14",
+          "14.2.0-19",
+          "14.2.0-19"
+        ],
+        [
+          "libgdbm6t64:arm64",
+          "gdbm",
+          "1.24-2",
+          "1.24-2"
+        ],
+        [
+          "libgmp10:arm64",
+          "gmp",
+          "2:6.3.0+dfsg-3",
+          "2:6.3.0+dfsg-3"
+        ],
+        [
+          "libgomp1:arm64",
+          "gcc-14",
+          "14.2.0-19",
+          "14.2.0-19"
+        ],
+        [
+          "libhogweed6t64:arm64",
+          "nettle",
+          "3.10.1-1",
+          "3.10.1-1"
+        ],
+        [
+          "liblastlog2-2:arm64",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "liblz4-1:arm64",
+          "lz4",
+          "1.10.0-4",
+          "1.10.0-4"
+        ],
+        [
+          "liblzma5:arm64",
+          "xz-utils",
+          "5.8.1-1+deb13u1",
+          "5.8.1-1+deb13u1"
+        ],
+        [
+          "libmd0:arm64",
+          "libmd",
+          "1.1.0-2+b1",
+          "1.1.0-2"
+        ],
+        [
+          "libmount1:arm64",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "libncursesw6:arm64",
+          "ncurses",
+          "6.5+20250216-2",
+          "6.5+20250216-2"
+        ],
+        [
+          "libnettle8t64:arm64",
+          "nettle",
+          "3.10.1-1",
+          "3.10.1-1"
+        ],
+        [
+          "libpam-modules:arm64",
+          "pam",
+          "1.7.0-5",
+          "1.7.0-5"
+        ],
+        [
+          "libpam-modules-bin",
+          "pam",
+          "1.7.0-5",
+          "1.7.0-5"
+        ],
+        [
+          "libpam-runtime",
+          "pam",
+          "1.7.0-5",
+          "1.7.0-5"
+        ],
+        [
+          "libpam0g:arm64",
+          "pam",
+          "1.7.0-5",
+          "1.7.0-5"
+        ],
+        [
+          "libpcre2-8-0:arm64",
+          "pcre2",
+          "10.46-1~deb13u1",
+          "10.46-1~deb13u1"
+        ],
+        [
+          "libreadline8t64:arm64",
+          "readline",
+          "8.2-6",
+          "8.2-6"
+        ],
+        [
+          "libseccomp2:arm64",
+          "libseccomp",
+          "2.6.0-2",
+          "2.6.0-2"
+        ],
+        [
+          "libselinux1:arm64",
+          "libselinux",
+          "3.8.1-1",
+          "3.8.1-1"
+        ],
+        [
+          "libsemanage-common",
+          "libsemanage",
+          "3.8.1-1",
+          "3.8.1-1"
+        ],
+        [
+          "libsemanage2:arm64",
+          "libsemanage",
+          "3.8.1-1",
+          "3.8.1-1"
+        ],
+        [
+          "libsepol2:arm64",
+          "libsepol",
+          "3.8.1-1",
+          "3.8.1-1"
+        ],
+        [
+          "libsmartcols1:arm64",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "libsqlite3-0:arm64",
+          "sqlite3",
+          "3.46.1-7+deb13u1",
+          "3.46.1-7+deb13u1"
+        ],
+        [
+          "libssl3t64:arm64",
+          "openssl",
+          "3.5.7-1~deb13u2",
+          "3.5.7-1~deb13u2"
+        ],
+        [
+          "libstdc++6:arm64",
+          "gcc-14",
+          "14.2.0-19",
+          "14.2.0-19"
+        ],
+        [
+          "libsystemd0:arm64",
+          "systemd",
+          "257.13-1~deb13u1",
+          "257.13-1~deb13u1"
+        ],
+        [
+          "libtinfo6:arm64",
+          "ncurses",
+          "6.5+20250216-2",
+          "6.5+20250216-2"
+        ],
+        [
+          "libudev1:arm64",
+          "systemd",
+          "257.13-1~deb13u1",
+          "257.13-1~deb13u1"
+        ],
+        [
+          "libuuid1:arm64",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "libxxhash0:arm64",
+          "xxhash",
+          "0.8.3-2",
+          "0.8.3-2"
+        ],
+        [
+          "libzstd1:arm64",
+          "libzstd",
+          "1.5.7+dfsg-1",
+          "1.5.7+dfsg-1"
+        ],
+        [
+          "login",
+          "util-linux",
+          "1:4.16.0-2+really2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "login.defs",
+          "shadow",
+          "1:4.17.4-2",
+          "1:4.17.4-2"
+        ],
+        [
+          "mawk",
+          "mawk",
+          "1.3.4.20250131-1",
+          "1.3.4.20250131-1"
+        ],
+        [
+          "mount",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "ncurses-base",
+          "ncurses",
+          "6.5+20250216-2",
+          "6.5+20250216-2"
+        ],
+        [
+          "ncurses-bin",
+          "ncurses",
+          "6.5+20250216-2",
+          "6.5+20250216-2"
+        ],
+        [
+          "netbase",
+          "netbase",
+          "6.5",
+          "6.5"
+        ],
+        [
+          "openssl",
+          "openssl",
+          "3.5.7-1~deb13u2",
+          "3.5.7-1~deb13u2"
+        ],
+        [
+          "openssl-provider-legacy",
+          "openssl",
+          "3.5.7-1~deb13u2",
+          "3.5.7-1~deb13u2"
+        ],
+        [
+          "passwd",
+          "shadow",
+          "1:4.17.4-2",
+          "1:4.17.4-2"
+        ],
+        [
+          "perl-base",
+          "perl",
+          "5.40.1-6",
+          "5.40.1-6"
+        ],
+        [
+          "readline-common",
+          "readline",
+          "8.2-6",
+          "8.2-6"
+        ],
+        [
+          "sed",
+          "sed",
+          "4.9-2+deb13u1",
+          "4.9-2+deb13u1"
+        ],
+        [
+          "sqv",
+          "rust-sequoia-sqv",
+          "1.3.0-3+b2",
+          "1.3.0-3"
+        ],
+        [
+          "sysvinit-utils",
+          "sysvinit",
+          "3.14-4",
+          "3.14-4"
+        ],
+        [
+          "tar",
+          "tar",
+          "1.35+dfsg-3.1",
+          "1.35+dfsg-3.1"
+        ],
+        [
+          "tzdata",
+          "tzdata",
+          "2026b-0+deb13u1",
+          "2026b-0+deb13u1"
+        ],
+        [
+          "util-linux",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "zlib1g:arm64",
+          "zlib",
+          "1:1.3.dfsg+really1.3.1-1+b1",
+          "1:1.3.dfsg+really1.3.1-1"
+        ]
+      ],
+      "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+      "os": {
+        "BUG_REPORT_URL": "\"https://bugs.debian.org/\"",
+        "DEBIAN_VERSION_FULL": "13.6",
+        "HOME_URL": "\"https://www.debian.org/\"",
+        "ID": "debian",
+        "NAME": "\"Debian GNU/Linux\"",
+        "PRETTY_NAME": "\"Debian GNU/Linux 13 (trixie)\"",
+        "SUPPORT_URL": "\"https://www.debian.org/support\"",
+        "VERSION": "\"13 (trixie)\"",
+        "VERSION_CODENAME": "trixie",
+        "VERSION_ID": "\"13\""
+      },
+      "pypi": [
+        [
+          "DAWG2-Python",
+          "0.9.0"
+        ],
+        [
+          "Jinja2",
+          "3.1.6"
+        ],
+        [
+          "MarkupSafe",
+          "3.0.3"
+        ],
+        [
+          "PyYAML",
+          "6.0.3"
+        ],
+        [
+          "Pygments",
+          "2.21.0"
+        ],
+        [
+          "annotated-doc",
+          "0.0.5"
+        ],
+        [
+          "annotated-types",
+          "0.8.0"
+        ],
+        [
+          "anyio",
+          "4.15.1"
+        ],
+        [
+          "blis",
+          "1.3.3"
+        ],
+        [
+          "catalogue",
+          "2.0.10"
+        ],
+        [
+          "certifi",
+          "2026.7.22"
+        ],
+        [
+          "charset-normalizer",
+          "3.5.1"
+        ],
+        [
+          "click",
+          "8.5.0"
+        ],
+        [
+          "cloudpathlib",
+          "0.25.0"
+        ],
+        [
+          "confection",
+          "1.3.3"
+        ],
+        [
+          "cymem",
+          "2.0.13"
+        ],
+        [
+          "fastapi",
+          "0.115.14"
+        ],
+        [
+          "filelock",
+          "3.32.6"
+        ],
+        [
+          "fsspec",
+          "2026.7.0"
+        ],
+        [
+          "h11",
+          "0.16.0"
+        ],
+        [
+          "hf-xet",
+          "1.6.0"
+        ],
+        [
+          "httpcore",
+          "1.0.9"
+        ],
+        [
+          "httpx",
+          "0.28.1"
+        ],
+        [
+          "huggingface_hub",
+          "0.36.2"
+        ],
+        [
+          "idna",
+          "3.19"
+        ],
+        [
+          "markdown-it-py",
+          "4.2.0"
+        ],
+        [
+          "mdurl",
+          "0.1.2"
+        ],
+        [
+          "mpmath",
+          "1.3.0"
+        ],
+        [
+          "murmurhash",
+          "1.0.15"
+        ],
+        [
+          "networkx",
+          "3.6.1"
+        ],
+        [
+          "numpy",
+          "2.4.6"
+        ],
+        [
+          "packaging",
+          "26.3"
+        ],
+        [
+          "phonenumbers",
+          "9.0.39"
+        ],
+        [
+          "pip",
+          "24.0"
+        ],
+        [
+          "pip",
+          "26.2.1"
+        ],
+        [
+          "preshed",
+          "3.0.13"
+        ],
+        [
+          "presidio_analyzer",
+          "2.2.364"
+        ],
+        [
+          "prometheus_client",
+          "0.26.0"
+        ],
+        [
+          "pydantic",
+          "2.13.5"
+        ],
+        [
+          "pydantic_core",
+          "2.46.5"
+        ],
+        [
+          "pymorphy3",
+          "2.0.6"
+        ],
+        [
+          "pymorphy3-dicts-ru",
+          "2.4.417150.4580142"
+        ],
+        [
+          "regex",
+          "2026.9.10"
+        ],
+        [
+          "requests",
+          "2.34.2"
+        ],
+        [
+          "requests-file",
+          "3.0.1"
+        ],
+        [
+          "rich",
+          "15.0.0"
+        ],
+        [
+          "ru_core_news_sm",
+          "3.8.0"
+        ],
+        [
+          "safetensors",
+          "0.8.0"
+        ],
+        [
+          "setuptools",
+          "79.0.1"
+        ],
+        [
+          "setuptools",
+          "84.0.0"
+        ],
+        [
+          "shellingham",
+          "1.5.4"
+        ],
+        [
+          "smart_open",
+          "8.0.1"
+        ],
+        [
+          "spacy",
+          "3.8.16"
+        ],
+        [
+          "spacy-legacy",
+          "3.0.12"
+        ],
+        [
+          "spacy-loggers",
+          "1.0.5"
+        ],
+        [
+          "srsly",
+          "2.5.3"
+        ],
+        [
+          "starlette",
+          "0.46.2"
+        ],
+        [
+          "sympy",
+          "1.14.0"
+        ],
+        [
+          "thinc",
+          "8.3.13"
+        ],
+        [
+          "tldextract",
+          "5.3.2"
+        ],
+        [
+          "tokenizers",
+          "0.22.2"
+        ],
+        [
+          "torch",
+          "2.13.0+cpu"
+        ],
+        [
+          "tqdm",
+          "4.70.1"
+        ],
+        [
+          "transformers",
+          "4.57.6"
+        ],
+        [
+          "typer",
+          "0.27.2"
+        ],
+        [
+          "typing-inspection",
+          "0.4.4"
+        ],
+        [
+          "typing_extensions",
+          "4.16.0"
+        ],
+        [
+          "urllib3",
+          "2.7.0"
+        ],
+        [
+          "uvicorn",
+          "0.34.3"
+        ],
+        [
+          "wasabi",
+          "1.1.3"
+        ],
+        [
+          "weasel",
+          "1.0.0"
+        ],
+        [
+          "wheel",
+          "0.46.3"
+        ],
+        [
+          "wheel",
+          "0.48.0"
+        ],
+        [
+          "wrapt",
+          "2.4.1"
+        ]
+      ],
+      "python": "3.11.16"
+    },
+    "scanner": {
+      "debian": [
+        [
+          "adduser",
+          "adduser",
+          "3.152",
+          "3.152"
+        ],
+        [
+          "apt",
+          "apt",
+          "3.0.3",
+          "3.0.3"
+        ],
+        [
+          "base-files",
+          "base-files",
+          "13.8+deb13u6",
+          "13.8+deb13u6"
+        ],
+        [
+          "base-passwd",
+          "base-passwd",
+          "3.6.7",
+          "3.6.7"
+        ],
+        [
+          "bash",
+          "bash",
+          "5.2.37-2+b9",
+          "5.2.37-2"
+        ],
+        [
+          "bsdutils",
+          "util-linux",
+          "1:2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "ca-certificates",
+          "ca-certificates",
+          "20250419",
+          "20250419"
+        ],
+        [
+          "coreutils",
+          "coreutils",
+          "9.7-3",
+          "9.7-3"
+        ],
+        [
+          "dash",
+          "dash",
+          "0.5.12-12",
+          "0.5.12-12"
+        ],
+        [
+          "debconf",
+          "debconf",
+          "1.5.91",
+          "1.5.91"
+        ],
+        [
+          "debian-archive-keyring",
+          "debian-archive-keyring",
+          "2025.1",
+          "2025.1"
+        ],
+        [
+          "debianutils",
+          "debianutils",
+          "5.23.2",
+          "5.23.2"
+        ],
+        [
+          "diffutils",
+          "diffutils",
+          "1:3.10-4",
+          "1:3.10-4"
+        ],
+        [
+          "dpkg",
+          "dpkg",
+          "1.22.22",
+          "1.22.22"
+        ],
+        [
+          "findutils",
+          "findutils",
+          "4.10.0-3",
+          "4.10.0-3"
+        ],
+        [
+          "gcc-14-base:arm64",
+          "gcc-14",
+          "14.2.0-19",
+          "14.2.0-19"
+        ],
+        [
+          "git",
+          "git",
+          "1:2.47.3-0+deb13u1",
+          "1:2.47.3-0+deb13u1"
+        ],
+        [
+          "git-man",
+          "git",
+          "1:2.47.3-0+deb13u1",
+          "1:2.47.3-0+deb13u1"
+        ],
+        [
+          "grep",
+          "grep",
+          "3.11-4+b1",
+          "3.11-4"
+        ],
+        [
+          "gzip",
+          "gzip",
+          "1.13-1",
+          "1.13-1"
+        ],
+        [
+          "hostname",
+          "hostname",
+          "3.25",
+          "3.25"
+        ],
+        [
+          "init-system-helpers",
+          "init-system-helpers",
+          "1.69~deb13u1",
+          "1.69~deb13u1"
+        ],
+        [
+          "libacl1:arm64",
+          "acl",
+          "2.3.2-2+b1",
+          "2.3.2-2"
+        ],
+        [
+          "libapt-pkg7.0:arm64",
+          "apt",
+          "3.0.3",
+          "3.0.3"
+        ],
+        [
+          "libattr1:arm64",
+          "attr",
+          "1:2.5.2-3",
+          "1:2.5.2-3"
+        ],
+        [
+          "libaudit-common",
+          "audit",
+          "1:4.0.2-2",
+          "1:4.0.2-2"
+        ],
+        [
+          "libaudit1:arm64",
+          "audit",
+          "1:4.0.2-2+b2",
+          "1:4.0.2-2"
+        ],
+        [
+          "libblkid1:arm64",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "libbrotli1:arm64",
+          "brotli",
+          "1.1.0-2+b7",
+          "1.1.0-2"
+        ],
+        [
+          "libbsd0:arm64",
+          "libbsd",
+          "0.12.2-2",
+          "0.12.2-2"
+        ],
+        [
+          "libbz2-1.0:arm64",
+          "bzip2",
+          "1.0.8-6",
+          "1.0.8-6"
+        ],
+        [
+          "libc-bin",
+          "glibc",
+          "2.41-12+deb13u3",
+          "2.41-12+deb13u3"
+        ],
+        [
+          "libc6:arm64",
+          "glibc",
+          "2.41-12+deb13u3",
+          "2.41-12+deb13u3"
+        ],
+        [
+          "libcap-ng0:arm64",
+          "libcap-ng",
+          "0.8.5-4+b1",
+          "0.8.5-4"
+        ],
+        [
+          "libcap2:arm64",
+          "libcap2",
+          "1:2.75-10+deb13u1+b1",
+          "1:2.75-10+deb13u1"
+        ],
+        [
+          "libcom-err2:arm64",
+          "e2fsprogs",
+          "1.47.2-3+b12",
+          "1.47.2-3"
+        ],
+        [
+          "libcrypt1:arm64",
+          "libxcrypt",
+          "1:4.4.38-1",
+          "1:4.4.38-1"
+        ],
+        [
+          "libcurl3t64-gnutls:arm64",
+          "curl",
+          "8.14.1-2+deb13u7",
+          "8.14.1-2+deb13u7"
+        ],
+        [
+          "libdb5.3t64:arm64",
+          "db5.3",
+          "5.3.28+dfsg2-9",
+          "5.3.28+dfsg2-9"
+        ],
+        [
+          "libdebconfclient0:arm64",
+          "cdebconf",
+          "0.280",
+          "0.280"
+        ],
+        [
+          "liberror-perl",
+          "liberror-perl",
+          "0.17030-1",
+          "0.17030-1"
+        ],
+        [
+          "libexpat1:arm64",
+          "expat",
+          "2.9.0-1~deb13u1",
+          "2.9.0-1~deb13u1"
+        ],
+        [
+          "libffi8:arm64",
+          "libffi",
+          "3.4.8-2",
+          "3.4.8-2"
+        ],
+        [
+          "libgcc-s1:arm64",
+          "gcc-14",
+          "14.2.0-19",
+          "14.2.0-19"
+        ],
+        [
+          "libgdbm-compat4t64:arm64",
+          "gdbm",
+          "1.24-2",
+          "1.24-2"
+        ],
+        [
+          "libgdbm6t64:arm64",
+          "gdbm",
+          "1.24-2",
+          "1.24-2"
+        ],
+        [
+          "libgmp10:arm64",
+          "gmp",
+          "2:6.3.0+dfsg-3",
+          "2:6.3.0+dfsg-3"
+        ],
+        [
+          "libgnutls30t64:arm64",
+          "gnutls28",
+          "3.8.9-3+deb13u4",
+          "3.8.9-3+deb13u4"
+        ],
+        [
+          "libgssapi-krb5-2:arm64",
+          "krb5",
+          "1.21.3-5+deb13u1",
+          "1.21.3-5+deb13u1"
+        ],
+        [
+          "libhogweed6t64:arm64",
+          "nettle",
+          "3.10.1-1",
+          "3.10.1-1"
+        ],
+        [
+          "libidn2-0:arm64",
+          "libidn2",
+          "2.3.8-2",
+          "2.3.8-2"
+        ],
+        [
+          "libk5crypto3:arm64",
+          "krb5",
+          "1.21.3-5+deb13u1",
+          "1.21.3-5+deb13u1"
+        ],
+        [
+          "libkeyutils1:arm64",
+          "keyutils",
+          "1.6.3-6",
+          "1.6.3-6"
+        ],
+        [
+          "libkrb5-3:arm64",
+          "krb5",
+          "1.21.3-5+deb13u1",
+          "1.21.3-5+deb13u1"
+        ],
+        [
+          "libkrb5support0:arm64",
+          "krb5",
+          "1.21.3-5+deb13u1",
+          "1.21.3-5+deb13u1"
+        ],
+        [
+          "liblastlog2-2:arm64",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "libldap2:arm64",
+          "openldap",
+          "2.6.10+dfsg-1",
+          "2.6.10+dfsg-1"
+        ],
+        [
+          "liblz4-1:arm64",
+          "lz4",
+          "1.10.0-4",
+          "1.10.0-4"
+        ],
+        [
+          "liblzma5:arm64",
+          "xz-utils",
+          "5.8.1-1+deb13u1",
+          "5.8.1-1+deb13u1"
+        ],
+        [
+          "libmd0:arm64",
+          "libmd",
+          "1.1.0-2+b1",
+          "1.1.0-2"
+        ],
+        [
+          "libmount1:arm64",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "libncursesw6:arm64",
+          "ncurses",
+          "6.5+20250216-2",
+          "6.5+20250216-2"
+        ],
+        [
+          "libnettle8t64:arm64",
+          "nettle",
+          "3.10.1-1",
+          "3.10.1-1"
+        ],
+        [
+          "libnghttp2-14:arm64",
+          "nghttp2",
+          "1.64.0-1.1+deb13u1",
+          "1.64.0-1.1+deb13u1"
+        ],
+        [
+          "libnghttp3-9:arm64",
+          "nghttp3",
+          "1.8.0-1",
+          "1.8.0-1"
+        ],
+        [
+          "libngtcp2-16:arm64",
+          "ngtcp2",
+          "1.11.0-1+deb13u1",
+          "1.11.0-1+deb13u1"
+        ],
+        [
+          "libngtcp2-crypto-gnutls8:arm64",
+          "ngtcp2",
+          "1.11.0-1+deb13u1",
+          "1.11.0-1+deb13u1"
+        ],
+        [
+          "libp11-kit0:arm64",
+          "p11-kit",
+          "0.25.5-3",
+          "0.25.5-3"
+        ],
+        [
+          "libpam-modules:arm64",
+          "pam",
+          "1.7.0-5",
+          "1.7.0-5"
+        ],
+        [
+          "libpam-modules-bin",
+          "pam",
+          "1.7.0-5",
+          "1.7.0-5"
+        ],
+        [
+          "libpam-runtime",
+          "pam",
+          "1.7.0-5",
+          "1.7.0-5"
+        ],
+        [
+          "libpam0g:arm64",
+          "pam",
+          "1.7.0-5",
+          "1.7.0-5"
+        ],
+        [
+          "libpcre2-8-0:arm64",
+          "pcre2",
+          "10.46-1~deb13u1",
+          "10.46-1~deb13u1"
+        ],
+        [
+          "libperl5.40:arm64",
+          "perl",
+          "5.40.1-6+deb13u1",
+          "5.40.1-6+deb13u1"
+        ],
+        [
+          "libpsl5t64:arm64",
+          "libpsl",
+          "0.21.2-1.1+b1",
+          "0.21.2-1.1"
+        ],
+        [
+          "libreadline8t64:arm64",
+          "readline",
+          "8.2-6",
+          "8.2-6"
+        ],
+        [
+          "librtmp1:arm64",
+          "rtmpdump",
+          "2.4+20151223.gitfa8646d.1-2+b5",
+          "2.4+20151223.gitfa8646d.1-2"
+        ],
+        [
+          "libsasl2-2:arm64",
+          "cyrus-sasl2",
+          "2.1.28+dfsg1-9",
+          "2.1.28+dfsg1-9"
+        ],
+        [
+          "libsasl2-modules-db:arm64",
+          "cyrus-sasl2",
+          "2.1.28+dfsg1-9",
+          "2.1.28+dfsg1-9"
+        ],
+        [
+          "libseccomp2:arm64",
+          "libseccomp",
+          "2.6.0-2",
+          "2.6.0-2"
+        ],
+        [
+          "libselinux1:arm64",
+          "libselinux",
+          "3.8.1-1",
+          "3.8.1-1"
+        ],
+        [
+          "libsemanage-common",
+          "libsemanage",
+          "3.8.1-1",
+          "3.8.1-1"
+        ],
+        [
+          "libsemanage2:arm64",
+          "libsemanage",
+          "3.8.1-1",
+          "3.8.1-1"
+        ],
+        [
+          "libsepol2:arm64",
+          "libsepol",
+          "3.8.1-1",
+          "3.8.1-1"
+        ],
+        [
+          "libsmartcols1:arm64",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "libsqlite3-0:arm64",
+          "sqlite3",
+          "3.46.1-7+deb13u1",
+          "3.46.1-7+deb13u1"
+        ],
+        [
+          "libssh2-1t64:arm64",
+          "libssh2",
+          "1.11.1-1+deb13u2",
+          "1.11.1-1+deb13u2"
+        ],
+        [
+          "libssl3t64:arm64",
+          "openssl",
+          "3.5.7-1~deb13u2",
+          "3.5.7-1~deb13u2"
+        ],
+        [
+          "libstdc++6:arm64",
+          "gcc-14",
+          "14.2.0-19",
+          "14.2.0-19"
+        ],
+        [
+          "libsystemd0:arm64",
+          "systemd",
+          "257.13-1~deb13u1",
+          "257.13-1~deb13u1"
+        ],
+        [
+          "libtasn1-6:arm64",
+          "libtasn1-6",
+          "4.20.0-2+deb13u1",
+          "4.20.0-2+deb13u1"
+        ],
+        [
+          "libtinfo6:arm64",
+          "ncurses",
+          "6.5+20250216-2",
+          "6.5+20250216-2"
+        ],
+        [
+          "libudev1:arm64",
+          "systemd",
+          "257.13-1~deb13u1",
+          "257.13-1~deb13u1"
+        ],
+        [
+          "libunistring5:arm64",
+          "libunistring",
+          "1.3-2",
+          "1.3-2"
+        ],
+        [
+          "libuuid1:arm64",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "libxxhash0:arm64",
+          "xxhash",
+          "0.8.3-2",
+          "0.8.3-2"
+        ],
+        [
+          "libzstd1:arm64",
+          "libzstd",
+          "1.5.7+dfsg-1",
+          "1.5.7+dfsg-1"
+        ],
+        [
+          "login",
+          "util-linux",
+          "1:4.16.0-2+really2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "login.defs",
+          "shadow",
+          "1:4.17.4-2",
+          "1:4.17.4-2"
+        ],
+        [
+          "mawk",
+          "mawk",
+          "1.3.4.20250131-1",
+          "1.3.4.20250131-1"
+        ],
+        [
+          "mount",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "ncurses-base",
+          "ncurses",
+          "6.5+20250216-2",
+          "6.5+20250216-2"
+        ],
+        [
+          "ncurses-bin",
+          "ncurses",
+          "6.5+20250216-2",
+          "6.5+20250216-2"
+        ],
+        [
+          "netbase",
+          "netbase",
+          "6.5",
+          "6.5"
+        ],
+        [
+          "openssl",
+          "openssl",
+          "3.5.7-1~deb13u2",
+          "3.5.7-1~deb13u2"
+        ],
+        [
+          "openssl-provider-legacy",
+          "openssl",
+          "3.5.7-1~deb13u2",
+          "3.5.7-1~deb13u2"
+        ],
+        [
+          "passwd",
+          "shadow",
+          "1:4.17.4-2",
+          "1:4.17.4-2"
+        ],
+        [
+          "perl",
+          "perl",
+          "5.40.1-6+deb13u1",
+          "5.40.1-6+deb13u1"
+        ],
+        [
+          "perl-base",
+          "perl",
+          "5.40.1-6+deb13u1",
+          "5.40.1-6+deb13u1"
+        ],
+        [
+          "perl-modules-5.40",
+          "perl",
+          "5.40.1-6+deb13u1",
+          "5.40.1-6+deb13u1"
+        ],
+        [
+          "readline-common",
+          "readline",
+          "8.2-6",
+          "8.2-6"
+        ],
+        [
+          "sed",
+          "sed",
+          "4.9-2+deb13u1",
+          "4.9-2+deb13u1"
+        ],
+        [
+          "sqv",
+          "rust-sequoia-sqv",
+          "1.3.0-3+b2",
+          "1.3.0-3"
+        ],
+        [
+          "sysvinit-utils",
+          "sysvinit",
+          "3.14-4",
+          "3.14-4"
+        ],
+        [
+          "tar",
+          "tar",
+          "1.35+dfsg-3.1",
+          "1.35+dfsg-3.1"
+        ],
+        [
+          "tzdata",
+          "tzdata",
+          "2026b-0+deb13u1",
+          "2026b-0+deb13u1"
+        ],
+        [
+          "util-linux",
+          "util-linux",
+          "2.41.5-0+deb13u1",
+          "2.41.5-0+deb13u1"
+        ],
+        [
+          "zlib1g:arm64",
+          "zlib",
+          "1:1.3.dfsg+really1.3.1-1+b1",
+          "1:1.3.dfsg+really1.3.1-1"
+        ]
+      ],
+      "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+      "os": {
+        "BUG_REPORT_URL": "\"https://bugs.debian.org/\"",
+        "DEBIAN_VERSION_FULL": "13.6",
+        "HOME_URL": "\"https://www.debian.org/\"",
+        "ID": "debian",
+        "NAME": "\"Debian GNU/Linux\"",
+        "PRETTY_NAME": "\"Debian GNU/Linux 13 (trixie)\"",
+        "SUPPORT_URL": "\"https://www.debian.org/support\"",
+        "VERSION": "\"13 (trixie)\"",
+        "VERSION_CODENAME": "trixie",
+        "VERSION_ID": "\"13\""
+      },
+      "pypi": [
+        [
+          "anyio",
+          "4.15.1"
+        ],
+        [
+          "arrow",
+          "1.4.0"
+        ],
+        [
+          "attrs",
+          "26.1.0"
+        ],
+        [
+          "certifi",
+          "2026.10.18"
+        ],
+        [
+          "fqdn",
+          "1.6.0"
+        ],
+        [
+          "h11",
+          "0.16.0"
+        ],
+        [
+          "httpcore",
+          "1.0.9"
+        ],
+        [
+          "httpx",
+          "0.28.1"
+        ],
+        [
+          "idna",
+          "3.20"
+        ],
+        [
+          "isoduration",
+          "20.11.0"
+        ],
+        [
+          "jsonpointer",
+          "3.3"
+        ],
+        [
+          "jsonschema",
+          "4.26.0"
+        ],
+        [
+          "jsonschema-specifications",
+          "2025.9.1"
+        ],
+        [
+          "packaging",
+          "26.3"
+        ],
+        [
+          "pip",
+          "24.0"
+        ],
+        [
+          "python-dateutil",
+          "2.9.0.post0"
+        ],
+        [
+          "referencing",
+          "0.37.0"
+        ],
+        [
+          "rfc3339-validator",
+          "0.1.4"
+        ],
+        [
+          "rfc3987",
+          "1.3.8"
+        ],
+        [
+          "rpds-py",
+          "2026.9.1"
+        ],
+        [
+          "ru-llm-scanner",
+          "0.1.0.dev0"
+        ],
+        [
+          "setuptools",
+          "79.0.1"
+        ],
+        [
+          "six",
+          "1.17.0"
+        ],
+        [
+          "typing_extensions",
+          "4.16.0"
+        ],
+        [
+          "tzdata",
+          "2026.5"
+        ],
+        [
+          "uri-template",
+          "1.3.0"
+        ],
+        [
+          "webcolors",
+          "25.10.0"
+        ],
+        [
+          "wheel",
+          "0.46.3"
+        ]
+      ],
+      "python": "3.11.16"
+    }
+  },
+  "limitations": [
+    "No binary/SBOM completeness guarantee; CPython copied into official python image is inventoried but not covered by PyPI or Debian python package queries.",
+    "Debian open/unimportant/undetermined matches are potential applicability, not confirmed exploitable vulnerabilities.",
+    "No proof that all transitive/runtime paths are unreachable; Linux/internal network/local trusted model mitigate some paths without patching versions.",
+    "Bases have no single database release version; retrieval timestamps, OSV per-record modified timestamps, Debian Last-Modified/ETag and response SHA256 recorded."
+  ],
+  "osv": {
+    "alias_groups": 23,
+    "duplicate_metadata": "Analyzer pip has 24.0/26.2.1 dist-info; metadata selects24.0 but imported pip module is26.2.1. Analyzer setuptools has79.0.1/84.0.0 dist-info and reports79.0.1. Scanner pip module24.0 confirmed. Distribution matches are not executable reachability.",
+    "matches": [
+      {
+        "advisory": "GHSA-4xh5-x5gv-qwph",
+        "aliases": [
+          "CVE-2025-8869",
+          "GHSA-4xh5-x5gv-qwph",
+          "PYSEC-2026-1795"
+        ],
+        "fixed_events": [
+          "25.3"
+        ],
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "modified": "2026-09-10T03:50:27.949321787Z",
+        "package": "pip",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-8869",
+          "https://github.com/pypa/pip/pull/13550",
+          "https://github.com/pypa/pip/commit/f2b92314da012b9fffa36b3f3e67748a37ef464a",
+          "https://lists.debian.org/debian-lts-announce/2025/10/msg00028.html"
+        ],
+        "severity": "MODERATE",
+        "version": "24.0"
+      },
+      {
+        "advisory": "GHSA-58qw-9mgm-455v",
+        "aliases": [
+          "CVE-2026-3219",
+          "GHSA-58qw-9mgm-455v",
+          "PYSEC-2026-2875"
+        ],
+        "fixed_events": [
+          "26.1"
+        ],
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "modified": "2026-09-10T03:50:42.838011658Z",
+        "package": "pip",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-3219",
+          "https://github.com/pypa/pip/issues/13867",
+          "https://github.com/pypa/pip/pull/13870",
+          "https://mail.python.org/archives/list/security-announce@python.org/thread/QAJ5JIVWWCAJ4EZL2FP5MOOW35JS7LRJ"
+        ],
+        "severity": "MODERATE",
+        "version": "24.0"
+      },
+      {
+        "advisory": "GHSA-6vgw-5pg2-w6jp",
+        "aliases": [
+          "CVE-2026-1703",
+          "GHSA-6vgw-5pg2-w6jp",
+          "PYSEC-2026-1796"
+        ],
+        "fixed_events": [
+          "26.0"
+        ],
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "modified": "2026-09-10T03:50:34.266257578Z",
+        "package": "pip",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-1703",
+          "https://github.com/pypa/pip/pull/13777",
+          "https://github.com/pypa/pip/commit/8e227a9be4faa9594e05d02ca05a413a2a4e7735",
+          "https://mail.python.org/archives/list/security-announce@python.org/thread/WIEA34D4TABF2UNQJAOMXKCICSPBE2DJ"
+        ],
+        "severity": "LOW",
+        "version": "24.0"
+      },
+      {
+        "advisory": "GHSA-jp4c-xjxw-mgf9",
+        "aliases": [
+          "CVE-2026-6357",
+          "GHSA-jp4c-xjxw-mgf9",
+          "PYSEC-2026-2876"
+        ],
+        "fixed_events": [
+          "26.1"
+        ],
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "modified": "2026-09-10T03:50:44.656580653Z",
+        "package": "pip",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-6357",
+          "https://github.com/pypa/pip/pull/13923",
+          "https://github.com/pypa/pip/commit/b369bfc96cc524e00c267e1693290e6599c36bad",
+          "https://ichard26.github.io/blog/2026/04/whats-new-in-pip-26.1/#security-fixes"
+        ],
+        "severity": "MODERATE",
+        "version": "24.0"
+      },
+      {
+        "advisory": "GHSA-qwm4-qh6w-59xr",
+        "aliases": [
+          "CVE-2026-13346",
+          "GHSA-qwm4-qh6w-59xr",
+          "PYSEC-2026-3721"
+        ],
+        "fixed_events": [
+          "26.2.0"
+        ],
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "modified": "2026-09-10T03:50:52.923367736Z",
+        "package": "pip",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-13346",
+          "https://github.com/pypa/pip/pull/14110",
+          "https://github.com/pypa/pip/commit/10dfb6b9005484578b386f64b9f36982e3dc6679",
+          "https://github.com/pypa/advisory-database/tree/main/vulns/pip/PYSEC-2026-3721.yaml"
+        ],
+        "severity": "MODERATE",
+        "version": "24.0"
+      },
+      {
+        "advisory": "GHSA-wf93-45jw-7689",
+        "aliases": [
+          "CVE-2026-8643",
+          "GHSA-wf93-45jw-7689",
+          "PYSEC-2026-196"
+        ],
+        "fixed_events": [
+          "26.1.2"
+        ],
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "modified": "2026-09-10T03:51:09.636289073Z",
+        "package": "pip",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-8643",
+          "https://github.com/pypa/pip/pull/14000",
+          "https://access.redhat.com/errata/RHSA-2026:33313",
+          "https://access.redhat.com/errata/RHSA-2026:34776"
+        ],
+        "severity": "MODERATE",
+        "version": "24.0"
+      },
+      {
+        "advisory": "GHSA-h35f-9h28-mq5c",
+        "aliases": [
+          "BIT-setuptools-2026-59890",
+          "CVE-2026-59890",
+          "GHSA-h35f-9h28-mq5c",
+          "PYSEC-2026-3447"
+        ],
+        "fixed_events": [
+          "83.0.0"
+        ],
+        "images": [
+          "analyzer",
+          "scanner"
+        ],
+        "modified": "2026-09-10T03:50:52.323347787Z",
+        "package": "setuptools",
+        "references": [
+          "https://github.com/pypa/setuptools/security/advisories/GHSA-h35f-9h28-mq5c",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-59890",
+          "https://github.com/pypa/setuptools/commit/dd9f436a36486b4cb8a4c70a2321548b0be09b8f",
+          "https://github.com/pypa/advisory-database/tree/main/vulns/setuptools/PYSEC-2026-3447.yaml"
+        ],
+        "severity": "MODERATE",
+        "version": "79.0.1"
+      },
+      {
+        "advisory": "GHSA-2c2j-9gv5-cj73",
+        "aliases": [
+          "CVE-2025-54121",
+          "GHSA-2c2j-9gv5-cj73",
+          "PYSEC-2026-1941"
+        ],
+        "fixed_events": [
+          "0.47.2"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-09-10T03:50:25.704876348Z",
+        "package": "starlette",
+        "references": [
+          "https://github.com/encode/starlette/security/advisories/GHSA-2c2j-9gv5-cj73",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-54121",
+          "https://github.com/encode/starlette/commit/9f7ec2eb512fcc3fe90b43cb9dd9e1d08696bec1",
+          "https://github.com/encode/starlette/blob/fa5355442753f794965ae1af0f87f9fec1b9a3de/starlette/datastructures.py#L436C5-L447C14"
+        ],
+        "severity": "MODERATE",
+        "version": "0.46.2"
+      },
+      {
+        "advisory": "GHSA-7f5h-v6xp-fcq8",
+        "aliases": [
+          "CVE-2025-62727",
+          "GHSA-7f5h-v6xp-fcq8",
+          "PYSEC-2026-1942"
+        ],
+        "fixed_events": [
+          "0.49.1"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-09-10T03:50:29.490992457Z",
+        "package": "starlette",
+        "references": [
+          "https://github.com/Kludex/starlette/security/advisories/GHSA-7f5h-v6xp-fcq8",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-62727",
+          "https://github.com/Kludex/starlette/commit/4ea6e22b489ec388d6004cfbca52dd5b147127c5",
+          "https://github.com/Kludex/starlette/commit/69ed26a85956ef4bd0161807eb27abf49be7cd3c"
+        ],
+        "severity": "HIGH",
+        "version": "0.46.2"
+      },
+      {
+        "advisory": "GHSA-82w8-qh3p-5jfq",
+        "aliases": [
+          "CVE-2026-54283",
+          "GHSA-82w8-qh3p-5jfq",
+          "PYSEC-2026-249"
+        ],
+        "fixed_events": [
+          "1.3.1"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-09-10T03:51:08.156199030Z",
+        "package": "starlette",
+        "references": [
+          "https://github.com/Kludex/starlette/security/advisories/GHSA-82w8-qh3p-5jfq"
+        ],
+        "severity": "HIGH",
+        "version": "0.46.2"
+      },
+      {
+        "advisory": "GHSA-86qp-5c8j-p5mr",
+        "aliases": [
+          "CVE-2026-48710",
+          "GHSA-86qp-5c8j-p5mr",
+          "PYSEC-2026-161",
+          "X41-2026-002"
+        ],
+        "fixed_events": [
+          "1.0.1"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-09-10T03:51:08.121685407Z",
+        "package": "starlette",
+        "references": [
+          "https://github.com/Kludex/starlette/security/advisories/GHSA-86qp-5c8j-p5mr",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-48710",
+          "https://github.com/Kludex/starlette/commit/764dab0dcfb9033d75442d7a359645c9f94648c6",
+          "https://www.x41-dsec.de/lab/advisories/x41-2026-002-starlette"
+        ],
+        "severity": "MODERATE",
+        "version": "0.46.2"
+      },
+      {
+        "advisory": "GHSA-jp82-jpqv-5vv3",
+        "aliases": [
+          "CVE-2026-54282",
+          "GHSA-jp82-jpqv-5vv3",
+          "PYSEC-2026-248"
+        ],
+        "fixed_events": [
+          "1.3.0"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-09-10T03:50:50.050800090Z",
+        "package": "starlette",
+        "references": [
+          "https://github.com/Kludex/starlette/security/advisories/GHSA-jp82-jpqv-5vv3",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-54282",
+          "https://github.com/pypa/advisory-database/tree/main/vulns/starlette/PYSEC-2026-248.yaml"
+        ],
+        "severity": "LOW",
+        "version": "0.46.2"
+      },
+      {
+        "advisory": "GHSA-wqp7-x3pw-xc5r",
+        "aliases": [
+          "CVE-2026-48818",
+          "GHSA-wqp7-x3pw-xc5r",
+          "PYSEC-2026-2281"
+        ],
+        "fixed_events": [
+          "1.1.0"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-09-10T03:50:51.079936646Z",
+        "package": "starlette",
+        "references": [
+          "https://github.com/Kludex/starlette/security/advisories/GHSA-wqp7-x3pw-xc5r"
+        ],
+        "severity": "HIGH",
+        "version": "0.46.2"
+      },
+      {
+        "advisory": "GHSA-x746-7m8f-x49c",
+        "aliases": [
+          "CVE-2026-48817",
+          "GHSA-x746-7m8f-x49c",
+          "PYSEC-2026-2280"
+        ],
+        "fixed_events": [
+          "1.1.0"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-09-10T03:50:12.272722043Z",
+        "package": "starlette",
+        "references": [
+          "https://github.com/Kludex/starlette/security/advisories/GHSA-x746-7m8f-x49c",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-48817",
+          "https://github.com/Kludex/starlette/releases/tag/1.1.0"
+        ],
+        "severity": "MODERATE",
+        "version": "0.46.2"
+      },
+      {
+        "advisory": "GHSA-29pf-2h5f-8g72",
+        "aliases": [
+          "CVE-2026-4372",
+          "GHSA-29pf-2h5f-8g72",
+          "PYSEC-2026-2289"
+        ],
+        "fixed_events": [
+          "5.3.0"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-09-10T03:50:45.254378086Z",
+        "package": "transformers",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-4372",
+          "https://github.com/huggingface/transformers/commit/a7f8e7ff37d87d1a1a0c8cf607971c607741452f",
+          "https://huntr.com/bounties/1f693a6e-6836-4b8b-a0bd-ca036fba8884"
+        ],
+        "severity": "HIGH",
+        "version": "4.57.6"
+      },
+      {
+        "advisory": "GHSA-69w3-r845-3855",
+        "aliases": [
+          "CVE-2026-1839",
+          "GHSA-69w3-r845-3855",
+          "PYSEC-2026-2288"
+        ],
+        "fixed_events": [
+          "5.0.0rc3"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-09-10T03:50:43.300048881Z",
+        "package": "transformers",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-1839",
+          "https://github.com/huggingface/transformers/commit/03c8082ba4594c9b8d6fe190ca9bed0e5f8ca396",
+          "https://github.com/huggingface/transformers/releases/tag/v5.0.0rc3",
+          "https://huntr.com/bounties/3c77bb97-e493-493d-9a88-c57f5c536485"
+        ],
+        "severity": "MODERATE",
+        "version": "4.57.6"
+      },
+      {
+        "advisory": "GHSA-fgcw-684q-jj6r",
+        "aliases": [
+          "CVE-2026-5241",
+          "GHSA-fgcw-684q-jj6r",
+          "PYSEC-2026-2290"
+        ],
+        "fixed_events": [
+          "5.5.0"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-09-10T03:50:49.345942449Z",
+        "package": "transformers",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-5241",
+          "https://github.com/huggingface/transformers/commit/676559d5022b74aaa0cee1cee0842b7f27c5320e",
+          "https://access.redhat.com/errata/RHSA-2026:34456",
+          "https://access.redhat.com/errata/RHSA-2026:37275"
+        ],
+        "severity": "HIGH",
+        "version": "4.57.6"
+      },
+      {
+        "advisory": "GHSA-x9r9-c232-4q39",
+        "aliases": [
+          "CVE-2026-80047",
+          "GHSA-x9r9-c232-4q39",
+          "PYSEC-2026-4174"
+        ],
+        "fixed_events": [],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-10-01T17:55:55.397425521Z",
+        "package": "transformers",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-80047",
+          "https://github.com/huggingface/transformers/pull/48620",
+          "https://github.com/huggingface/transformers/commit/cbc1651a032b923da7f4b44b3d0e6f68e6ba6b55",
+          "https://kb.cert.org/vuls/id/456290"
+        ],
+        "severity": "HIGH",
+        "version": "4.57.6"
+      },
+      {
+        "advisory": "GHSA-xrqw-3rrv-vx5w",
+        "aliases": [
+          "CVE-2026-9856",
+          "GHSA-xrqw-3rrv-vx5w",
+          "PYSEC-2026-3929"
+        ],
+        "fixed_events": [
+          "5.10.0"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-09-10T12:25:36.528730268Z",
+        "package": "transformers",
+        "references": [
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-9856",
+          "https://github.com/huggingface/transformers/pull/46191",
+          "https://github.com/huggingface/transformers/commit/eaaaf8494dd5386634ae37d1d122212fdc315be5",
+          "https://huntr.com/bounties/362824d5-fe18-40e8-a6cf-62277f97a170"
+        ],
+        "severity": "HIGH",
+        "version": "4.57.6"
+      },
+      {
+        "advisory": "PYSEC-2025-217",
+        "aliases": [
+          "CVE-2025-14929",
+          "PYSEC-2025-217"
+        ],
+        "fixed_events": [],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-05-21T15:00:24.271970226Z",
+        "package": "transformers",
+        "references": [
+          "https://www.zerodayinitiative.com/advisories/ZDI-25-1144/"
+        ],
+        "severity": null,
+        "version": "4.57.6"
+      },
+      {
+        "advisory": "GHSA-8988-9cw3-xx77",
+        "aliases": [
+          "CVE-2026-97687",
+          "GHSA-8988-9cw3-xx77",
+          "PYSEC-2026-4175"
+        ],
+        "fixed_events": [
+          "2.8.0"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-10-01T17:55:53.793608550Z",
+        "package": "urllib3",
+        "references": [
+          "https://github.com/urllib3/urllib3/security/advisories/GHSA-8988-9cw3-xx77",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-97687",
+          "https://github.com/urllib3/urllib3/pull/5093",
+          "https://github.com/urllib3/urllib3/commit/07408cec79d1856d81bb42c74a904a24fdb9e465"
+        ],
+        "severity": "HIGH",
+        "version": "2.7.0"
+      },
+      {
+        "advisory": "GHSA-gh4c-6fx4-qh6g",
+        "aliases": [
+          "CVE-2026-97688",
+          "GHSA-gh4c-6fx4-qh6g",
+          "PYSEC-2026-4176"
+        ],
+        "fixed_events": [
+          "2.8.0"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-10-01T17:55:40.608255720Z",
+        "package": "urllib3",
+        "references": [
+          "https://github.com/urllib3/urllib3/security/advisories/GHSA-gh4c-6fx4-qh6g",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-97688",
+          "https://github.com/urllib3/urllib3/commit/ea2ad7b21a80da3632f80016526a18864586077f",
+          "https://github.com/urllib3/urllib3/releases/tag/2.8.0"
+        ],
+        "severity": "MODERATE",
+        "version": "2.7.0"
+      },
+      {
+        "advisory": "GHSA-vxq7-64xx-v4gw",
+        "aliases": [
+          "CVE-2026-97689",
+          "GHSA-vxq7-64xx-v4gw",
+          "PYSEC-2026-4177"
+        ],
+        "fixed_events": [
+          "2.8.0"
+        ],
+        "images": [
+          "analyzer"
+        ],
+        "modified": "2026-10-01T17:55:57.514829071Z",
+        "package": "urllib3",
+        "references": [
+          "https://github.com/urllib3/urllib3/security/advisories/GHSA-vxq7-64xx-v4gw",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-97689",
+          "https://github.com/urllib3/urllib3/commit/cd770b059b543be29298ea5c52afb0b1b090f5ed",
+          "https://github.com/urllib3/urllib3/releases/tag/2.8.0"
+        ],
+        "severity": "HIGH",
+        "version": "2.7.0"
+      }
+    ],
+    "queried_package_versions": 93,
+    "raw_package_advisory_records": 45
+  },
+  "packaging_imports": {
+    "analyzer": {
+      "pip": {
+        "return_code": 0,
+        "stderr": "",
+        "stdout": "{\"version\": \"26.2.1\", \"file\": \"/usr/local/lib/python3.11/site-packages/pip/__init__.py\"}\n"
+      },
+      "setuptools": {
+        "return_code": 0,
+        "stderr": "",
+        "stdout": "{\"version\": \"79.0.1\", \"file\": \"/usr/local/lib/python3.11/site-packages/setuptools/__init__.py\"}\n"
+      }
+    },
+    "scanner": {
+      "pip": {
+        "return_code": 0,
+        "stderr": "",
+        "stdout": "{\"version\": \"24.0\", \"file\": \"/usr/local/lib/python3.11/site-packages/pip/__init__.py\"}\n"
+      },
+      "setuptools": {
+        "return_code": 0,
+        "stderr": "",
+        "stdout": "{\"version\": \"79.0.1\", \"file\": \"/usr/local/lib/python3.11/site-packages/setuptools/__init__.py\"}\n"
+      }
+    }
+  },
+  "packaging_metadata": {
+    "analyzer": {
+      "pip": {
+        "metadata_paths": [
+          "/usr/local/lib/python3.11/site-packages/pip-24.0.dist-info",
+          "/usr/local/lib/python3.11/site-packages/pip-26.2.1.dist-info"
+        ],
+        "module_origin": "/usr/local/lib/python3.11/site-packages/pip/__init__.py",
+        "selected_version": "24.0"
+      },
+      "setuptools": {
+        "metadata_paths": [
+          "/usr/local/lib/python3.11/site-packages/setuptools-79.0.1.dist-info",
+          "/usr/local/lib/python3.11/site-packages/setuptools-84.0.0.dist-info"
+        ],
+        "module_origin": "/usr/local/lib/python3.11/site-packages/setuptools/__init__.py",
+        "selected_version": "79.0.1"
+      }
+    },
+    "scanner": {
+      "pip": {
+        "metadata_paths": [
+          "/usr/local/lib/python3.11/site-packages/pip-24.0.dist-info"
+        ],
+        "module_origin": "/usr/local/lib/python3.11/site-packages/pip/__init__.py",
+        "selected_version": "24.0"
+      },
+      "setuptools": {
+        "metadata_paths": [
+          "/usr/local/lib/python3.11/site-packages/setuptools-79.0.1.dist-info"
+        ],
+        "module_origin": "/usr/local/lib/python3.11/site-packages/setuptools/__init__.py",
+        "selected_version": "79.0.1"
+      }
+    }
+  },
+  "scope": "exact image distribution metadata; no exploit execution; no dependency mutation"
+}

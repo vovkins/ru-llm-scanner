@@ -1,0 +1,80 @@
+[
+  {
+    "step": "prepare",
+    "return_code": 0,
+    "elapsed_seconds": 0.931,
+    "online_preparation": false
+  },
+  {
+    "step": "verify-context",
+    "return_code": 0,
+    "elapsed_seconds": 0.034,
+    "online_preparation": false
+  },
+  {
+    "step": "analyzer-build",
+    "return_code": 0,
+    "elapsed_seconds": 1.75,
+    "online_preparation": true
+  },
+  {
+    "step": "seal",
+    "return_code": 0,
+    "elapsed_seconds": 5.296,
+    "online_preparation": false
+  },
+  {
+    "step": "parity",
+    "return_code": 0,
+    "elapsed_seconds": 19.807,
+    "online_preparation": false
+  },
+  {
+    "step": "engine",
+    "return_code": 0,
+    "elapsed_seconds": 0.115,
+    "online_preparation": false
+  },
+  {
+    "step": "wheel",
+    "return_code": 0,
+    "elapsed_seconds": 1.443,
+    "online_preparation": true
+  },
+  {
+    "step": "scanner-prepare",
+    "return_code": 0,
+    "elapsed_seconds": 19.291,
+    "online_preparation": true
+  },
+  {
+    "step": "scanner-build",
+    "return_code": 0,
+    "elapsed_seconds": 5.349,
+    "online_preparation": false
+  },
+  {
+    "step": "verify",
+    "return_code": 0,
+    "elapsed_seconds": 0.133,
+    "online_preparation": false
+  },
+  {
+    "step": "cli",
+    "return_code": 0,
+    "elapsed_seconds": 19.102,
+    "online_preparation": false
+  },
+  {
+    "step": "acceptance",
+    "return_code": 0,
+    "elapsed_seconds": 84.777,
+    "online_preparation": false
+  },
+  {
+    "step": "export",
+    "return_code": 0,
+    "elapsed_seconds": 10.638,
+    "online_preparation": false
+  }
+]

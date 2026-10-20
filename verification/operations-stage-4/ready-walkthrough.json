@@ -1,0 +1,380 @@
+{
+  "status": "passed",
+  "product_commit": "755152b8d658506ddb3da819569270ca46f2ae57",
+  "python": "Python 3.12.14",
+  "stdlib_flags": [
+    "-I",
+    "-S"
+  ],
+  "images": {
+    "analyzer": {
+      "image_id": "sha256:dac76ca6f7f37d61f7a3ad4db1d56d68dcad14d9e44354252dcfbf3c208c5104",
+      "image_reference_id": "sha256:938b1eb4169fcaaf89882d07570fc57f2ebac23d80804e31221b18d8e4e04c00"
+    },
+    "scanner": {
+      "image_id": "sha256:dba647e777415aa7c51f9e57ade3be3120fab6a8fc99dadbac11c3e0f5d1c538",
+      "image_reference_id": "sha256:dba647e777415aa7c51f9e57ade3be3120fab6a8fc99dadbac11c3e0f5d1c538"
+    }
+  },
+  "steps": [
+    {
+      "step": "import",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 8.018
+    },
+    {
+      "step": "verify",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.094
+    },
+    {
+      "step": "git-init",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.027
+    },
+    {
+      "step": "git-config-user.name",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.009
+    },
+    {
+      "step": "git-config-user.email",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.008
+    },
+    {
+      "step": "git-config-commit.gpgsign",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.008
+    },
+    {
+      "step": "git-config-core.hooksPath",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.008
+    },
+    {
+      "step": "git-add",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.01
+    },
+    {
+      "step": "git-commit-A",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.014
+    },
+    {
+      "step": "snapshot-A",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 5.212,
+      "assurance": "snapshot_verified",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "1c743be6da0cd8655026827badf9cef798febe59953db88f95b36b398f01267f",
+        "counts": {
+          "analyzed": 1,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "0c3cb88a8329248fece68653edf872445f30090b6836498ee6b7c32140bfe786"
+    },
+    {
+      "step": "git-add-B",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.011
+    },
+    {
+      "step": "git-commit-B",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.015
+    },
+    {
+      "step": "snapshot-B",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 5.087,
+      "assurance": "snapshot_verified",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "201fd3343fc061a175e22f8a6be3b32fe61fcbfea3c0e2f3602fc29b366e4775",
+        "counts": {
+          "analyzed": 1,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "09cedc125ae81e3ccbcc380a4e61509f31feb1de87740404d599cb0d23c1c8b2"
+    },
+    {
+      "step": "diff-A-B",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 4.338,
+      "assurance": "changed_files_only",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "201fd3343fc061a175e22f8a6be3b32fe61fcbfea3c0e2f3602fc29b366e4775",
+        "counts": {
+          "analyzed": 1,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "6f3849ef00350f8816412d07a3583c07510d09e0f83f8e6bd926b77ee157ea34"
+    },
+    {
+      "step": "verified-A-B",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 5.142,
+      "assurance": "baseline_verified",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "201fd3343fc061a175e22f8a6be3b32fe61fcbfea3c0e2f3602fc29b366e4775",
+        "counts": {
+          "analyzed": 1,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "f1b96fea8168e180ee1bcc2af3150b1be3cfdacbc2ac15b766ba8a0be260bec0"
+    },
+    {
+      "step": "equal-A-A",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 5.363,
+      "assurance": "changed_files_only",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "82d69e5f2eb1a544ad41643598ce9d92b5d2cb1b5b58bf02aad4eb4428eaa429",
+        "counts": {
+          "analyzed": 0,
+          "inherited": 0,
+          "unverified": 1,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "508a9fe2a4f72ffa1b175afa1d7600f4816f0b7a01bd4cb1f7d61dea33b9a6bf"
+    },
+    {
+      "step": "verified-A-A",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 5.467,
+      "assurance": "baseline_verified",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "acc3ea722cf71c101d1b02d8898a25871b04b6c212bf312dcad7d73e24143342",
+        "counts": {
+          "analyzed": 0,
+          "inherited": 1,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "f4823a36d97b3228be241fe90e93e43093e8a087247d8c6e41c52304790d2808"
+    },
+    {
+      "step": "configured-B",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 6.38,
+      "assurance": "snapshot_verified",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "201fd3343fc061a175e22f8a6be3b32fe61fcbfea3c0e2f3602fc29b366e4775",
+        "counts": {
+          "analyzed": 1,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "c3011ced1e41cb0508cdd5ee202d3f19c13106cf1592ac8e1c532212ddabbeeb"
+    },
+    {
+      "step": "wrong-ref",
+      "return_code": 2,
+      "expected": 2,
+      "passed": true,
+      "elapsed_seconds": 5.367,
+      "assurance": "none",
+      "coverage": {
+        "complete": false,
+        "enumeration_complete": false,
+        "manifest_sha256": null,
+        "counts": {
+          "analyzed": 0,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 0,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "e839389d1997a86f378dee5e9154cfad901ec44eb65cd005ee52ce4715408874"
+    },
+    {
+      "step": "strict-without-baseline",
+      "return_code": 2,
+      "expected": 2,
+      "passed": true,
+      "elapsed_seconds": 1.978,
+      "assurance": "none",
+      "coverage": {
+        "complete": false,
+        "enumeration_complete": false,
+        "manifest_sha256": null,
+        "counts": {
+          "target": 0,
+          "analyzed": 0,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "d4edf6b1ccaa1c04ca76daaac3ac7de5321f09ccc86f7c08a97af666800eca21"
+    },
+    {
+      "step": "public-output",
+      "return_code": 2,
+      "expected": 2,
+      "passed": true,
+      "elapsed_seconds": 0.085
+    },
+    {
+      "step": "git-add-secret",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.019
+    },
+    {
+      "step": "git-commit-secret",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.015
+    },
+    {
+      "step": "findings",
+      "return_code": 1,
+      "expected": 1,
+      "passed": true,
+      "elapsed_seconds": 5.436,
+      "assurance": "snapshot_verified",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "3fda339478c11d5fd7ee075673847d7087300f252e60c3569eab528813153ca5",
+        "counts": {
+          "analyzed": 2,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 2,
+          "deleted": 0
+        }
+      },
+      "findings": 1,
+      "report_sha256": "6c66c552ebe31bef5fafd322941a04c6210510a0b5dda497656cfdeb17cf6eba"
+    }
+  ],
+  "report_permissions": "0700 directories / 0600 files",
+  "input_unchanged_after_each_scan": true,
+  "package_copy": "hard links of trusted complete export, hashes verified by import",
+  "different_physical_host": false,
+  "contents": [
+    "scripts/docker_scanner.py",
+    "docs/",
+    "package/",
+    "trusted-scanner.json",
+    "check-001/"
+  ]
+}
