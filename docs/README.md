@@ -49,6 +49,7 @@ GPU и Linux-host/другие платформы требуют отдельн�
 - [Результаты production Docker/transfer на этапе 6](../verification/stage-6/README.md).
 - [Итоговая приёмка/upgrade/rollback на этапе 7](../verification/stage-7/README.md).
 - [Последовательное слияние семи PR и проверка main](../verification/main-integration/README.md).
+- [Ревью перед подготовкой к эксплуатации: замечания и матрица проверок](review/README.md).
 - [Лицензирование](licensing.md), [постоянные инструкции](../AGENTS.md).
 
 Источником договорённостей служит [общая задача #1](https://github.com/vovkins/ru-llm-scanner/issues/1).

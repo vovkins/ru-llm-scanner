@@ -1,0 +1,22 @@
+{
+  "verification_version": 1,
+  "status": "passed",
+  "modules": [
+    "test_jenkins_example",
+    "test_output",
+    "test_docker_launcher"
+  ],
+  "tests_run": 13,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "python": "3.12.14",
+  "sources_sha256": {
+    "examples/jenkins/run_scan.py": "28af0dcd604353db59573f5e133affc71100079e29b7253dadb2e444eef04721",
+    "scripts/docker_scanner.py": "171753dc0cbbc8bc3d21f756a7a112a850013e458e31756f5ec32a9903285f44",
+    "src/ru_llm_scanner/output.py": "c2046f35fbe63219857e4cac740bdaa1cab334dc05f8bf82e28f892aaa6e38e5",
+    "tests/test_jenkins_example.py": "91ef5cb11e735fb82ded2fcbfd0f51461b21bf34784917fbfb807aa2f17c9959",
+    "tests/test_output.py": "2958aceb6eee1447e3f0cdd7967414d5854fa6dad2f7ad996ae02c830519f5d2",
+    "tests/test_docker_launcher.py": "17b9317d5d9b7eaf21b1a93fa37eb1d672638fa02b085ed22214f9b9a4fb0b3a"
+  }
+}
