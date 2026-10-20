@@ -36,6 +36,7 @@ def main():
     os.umask(0o077)
     root = args.output_dir.resolve()
     root.mkdir(mode=0o700, parents=True, exist_ok=False)
+    reference = read_json(ROOT / "verification/linux-amd64/requests-reference.json")
     repo = root / "requests"
     repo.mkdir()
     env = {**os.environ, "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.devnull}
@@ -72,20 +73,19 @@ def main():
                 COMMIT,
                 "--output",
                 str(root / "report"),
+                "--analyze-timeout-seconds",
+                "1800",
+                "--analyzer-cpus",
+                "4",
             ],
             stdout=log,
             stderr=subprocess.STDOUT,
             timeout=4200,
         )
     elapsed = round(time.monotonic() - started, 3)
-    require(
-        result.returncode == 1,
-        "Requests scan failed or unexpectedly clean; inspect private results",
-    )
-    require(fingerprint(repo) == before, "Public repository was modified")
+    input_unchanged = fingerprint(repo) == before
     report_path = root / "report/report.json"
     report = validate_report(read_json(report_path))
-    require(report["coverage"]["counts"]["error"] == 0, "Requests scan incomplete")
     normalized = []
     scores = {}
     for finding in report["findings"]:
@@ -94,10 +94,29 @@ def main():
         normalized.append(key)
         require(key not in scores, "Duplicate normalized Requests finding")
         scores[key] = finding["score"]
+    complete = (
+        result.returncode == 1
+        and report["coverage"]["counts"]["error"] == 0
+        and input_unchanged
+    )
+    config_equal = report["configuration"] == reference["configuration"]
+    decisions_equal = scores.keys() == reference["finding_scores"].keys()
+    delta = (
+        max(
+            (abs(scores[key] - reference["finding_scores"][key]) for key in scores),
+            default=0,
+        )
+        if decisions_equal
+        else None
+    )
+    passed = complete and config_equal and decisions_equal and delta <= 1e-5
+    errors = {}
+    for error in report["errors"]:
+        errors[error["code"]] = errors.get(error["code"], 0) + 1
     write_json(
         root / "public-repository.json",
         {
-            "status": "passed",
+            "status": "passed" if passed else "failed",
             "platform": read_json(args.deployment_lock)["platform"],
             "source": {
                 "url": URL,
@@ -116,6 +135,17 @@ def main():
             ).hexdigest(),
             "report_sha256": file_hash(report_path),
             "elapsed_seconds": elapsed,
+            "input_unchanged": input_unchanged,
+            "error_counts": errors,
+            "error_files": sorted(
+                f["path"] for f in report["files"] if f["status"] == "error"
+            ),
+            "reference_configuration_equal": config_equal,
+            "reference_decisions_equal": decisions_equal,
+            "reference_maximum_score_absolute_delta": delta,
+            "score_absolute_tolerance": 1e-5,
+            "analyzer_cpus": 4,
+            "analyze_timeout_seconds": 1800,
             "raw_values_published": False,
             "no_ground_truth": True,
         },
@@ -123,13 +153,18 @@ def main():
     print(
         json.dumps(
             {
-                "status": "passed",
+                "status": "passed" if passed else "failed",
                 "findings": len(normalized),
                 "coverage": report["coverage"]["counts"],
                 "elapsed_seconds": elapsed,
                 "raw_values_published": False,
+                "error_counts": errors,
             }
         )
+    )
+    require(
+        passed,
+        "Requests candidate differs from the pinned accepted reference; inspect safe summary",
     )
 
 

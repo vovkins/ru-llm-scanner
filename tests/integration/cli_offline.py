@@ -54,6 +54,7 @@ def main():
     results = Path("/results")
     qa = results / "qa"
     qa.mkdir()
+    qa.chmod(0o755)
     env = {k: v for k, v in os.environ.items() if k != "PYTHONPATH"}
     runs = []
     with tempfile.TemporaryDirectory(prefix="scanner-cli-") as directory:
@@ -245,6 +246,7 @@ def main():
         ]:
             target = qa / label
             target.mkdir()
+            target.chmod(0o755)
             for name in ("report.json", "report.html"):
                 shutil.copyfile(source / name, target / name)
                 # Only synthetic QA exports are made host-readable; CLI outputs are 0600.

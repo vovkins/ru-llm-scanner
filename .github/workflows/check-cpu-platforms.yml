@@ -171,6 +171,7 @@ jobs:
           import json
           from pathlib import Path
           a,b=[json.loads(Path('.build/evidence/cpu-'+arch+'-evidence/public-requests-public-repository.json').read_text()) for arch in ('arm64','amd64')]
+          assert a['status']==b['status']=='passed' and a['exit_code']==b['exit_code']==1
           assert a['source']==b['source'] and a['coverage']==b['coverage']
           assert a['effective_configuration_sha256']==b['effective_configuration_sha256']
           assert a['finding_fingerprints_without_score']==b['finding_fingerprints_without_score'], 'Requests detection drift requires review'

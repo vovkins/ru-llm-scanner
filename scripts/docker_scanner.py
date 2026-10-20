@@ -115,20 +115,15 @@ def image_identity(reference, platform):
 def load_lock(path, *, verify=True):
     lock = strict_json(path)
     try:
-        if lock["deployment_version"] != 1 or lock["platform"] not in (
-            "linux/arm64",
-            "linux/amd64",
+        if (
+            type(lock["deployment_version"]) is not int
+            or lock["deployment_version"] != 1
+            or lock["platform"] not in ("linux/arm64", "linux/amd64")
         ):
             raise ValueError()
         for name in ("scanner", "analyzer"):
             for key in ("image_reference_id", "image_id"):
                 if not DIGEST.fullmatch(lock[name][key]):
-                    raise ValueError()
-            if verify:
-                if not (
-                    image_identity(lock[name]["image_reference_id"], lock["platform"])
-                    == lock[name]["image_id"]
-                ):
                     raise ValueError()
         if not re.fullmatch(r"[0-9a-f]{64}", lock["engine_runtime_sha256"]):
             raise ValueError()
@@ -136,6 +131,12 @@ def load_lock(path, *, verify=True):
         raise Failure("invalid_deployment") from None
     if verify:
         verify_daemon_platform(lock["platform"])
+        for name in ("scanner", "analyzer"):
+            if (
+                image_identity(lock[name]["image_reference_id"], lock["platform"])
+                != lock[name]["image_id"]
+            ):
+                raise Failure("invalid_deployment")
     return lock
 
 

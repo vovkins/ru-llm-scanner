@@ -9,6 +9,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,11 +27,14 @@ def main():
     os.umask(0o077)
     root = args.output_dir.resolve()
     root.mkdir(mode=0o700, parents=True, exist_ok=False)
-    socket = root / "docker.sock"
-    pidfile = root / "dockerd.pid"
+    # Managed containerd also creates Unix sockets below exec-root. Keep their
+    # complete paths below Linux's Unix socket length limit.
+    runtime = Path(tempfile.mkdtemp(prefix="rlscan-daemon-", dir="/tmp"))
+    socket = runtime / "docker.sock"
+    pidfile = runtime / "dockerd.pid"
     config = {
         "data-root": str(root / "data"),
-        "exec-root": str(root / "exec"),
+        "exec-root": str(runtime / "exec"),
         "pidfile": str(pidfile),
         "hosts": ["unix://" + str(socket)],
         "group": grp.getgrgid(os.getgid()).gr_name,
@@ -66,6 +70,7 @@ def main():
                 info = json.loads(result.stdout)
                 break
             if daemon.poll() is not None:
+                print((root / "daemon.log").read_text(errors="replace")[-8000:])
                 raise RuntimeError("Fresh Docker daemon failed to start")
             time.sleep(0.5)
         else:
@@ -116,6 +121,8 @@ def main():
                 raise RuntimeError("Invalid private daemon pidfile")
             subprocess.run(["sudo", "kill", "-TERM", pid], check=True)
             daemon.wait(timeout=45)
+        if daemon.poll() is not None:
+            subprocess.run(["sudo", "rm", "-rf", "--", str(runtime)], check=True)
     print("Fresh-store offline import and installed control passed")
 
 
