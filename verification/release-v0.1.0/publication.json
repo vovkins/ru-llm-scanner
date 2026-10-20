@@ -1,0 +1,162 @@
+{
+  "verification_version": 1,
+  "status": "passed",
+  "release_url": "https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.1.0",
+  "tag": "v0.1.0",
+  "target_commit": "e66b9e888948d038ee07446c5948fdca9376abcf",
+  "prerelease": false,
+  "draft": false,
+  "published_at": "2026-10-20T19:02:36Z",
+  "public_assets": [
+    {
+      "name": "registry-images.json",
+      "size": 2761,
+      "sha256": "1e60dd194d1f99cf0b1f996c6041db9be70ed03ba26268a26ee9c7354e88da5e",
+      "validation": "anonymous full GET + SHA-256",
+      "http_status": 200,
+      "bytes": 2761
+    },
+    {
+      "name": "release-manifest.json",
+      "size": 70436,
+      "sha256": "2372e9e67acbb901c9a47ec606c8b53b97ce9990d0cf4d0630416e9381d81fe4",
+      "validation": "anonymous full GET + SHA-256",
+      "http_status": 200,
+      "bytes": 70436
+    },
+    {
+      "name": "ru-llm-scanner-v0.1.0-linux-arm64.tar.gz",
+      "size": 1421176669,
+      "sha256": "c88fcca1140f4d47f922e585e29ac5311f6a4469a4e336dace3693571ab50a6a",
+      "validation": "anonymous ranged GET + SHA-256",
+      "http_status": 206,
+      "bytes": 1421176669,
+      "parallel_range_proof": {
+        "status": "passed",
+        "anonymous": true,
+        "initial_full_get_http_status": 200,
+        "initial_prefix_bytes": 465567744,
+        "resumed_ranges": [
+          {
+            "range": [
+              465567744,
+              624835898
+            ],
+            "http_status": 206,
+            "bytes": 159268155
+          },
+          {
+            "range": [
+              624835899,
+              784104053
+            ],
+            "http_status": 206,
+            "bytes": 159268155
+          },
+          {
+            "range": [
+              784104054,
+              943372208
+            ],
+            "http_status": 206,
+            "bytes": 159268155
+          },
+          {
+            "range": [
+              943372209,
+              1102640363
+            ],
+            "http_status": 206,
+            "bytes": 159268155
+          },
+          {
+            "range": [
+              1102640364,
+              1261908518
+            ],
+            "http_status": 206,
+            "bytes": 159268155
+          },
+          {
+            "range": [
+              1261908519,
+              1421176668
+            ],
+            "http_status": 206,
+            "bytes": 159268150
+          }
+        ],
+        "bytes": 1421176669,
+        "sha256": "c88fcca1140f4d47f922e585e29ac5311f6a4469a4e336dace3693571ab50a6a"
+      }
+    },
+    {
+      "name": "ru-llm-scanner-v0.1.0-native-sources.tar.gz",
+      "size": 398330836,
+      "sha256": "50b4716387cb500d8cf06dc0cbfdfd99f6ce3e6a9778c6e8b080c035b20a5927",
+      "validation": "anonymous HEAD + server SHA-256 + previously verified local source closure",
+      "http_status": 200,
+      "content_length": "398330836"
+    },
+    {
+      "name": "runner-control.json",
+      "size": 668,
+      "sha256": "8a98e587bb2839e78d6c397ab09af9a8c93e0f25dc827a4132f09901eb614fa9",
+      "validation": "anonymous full GET + SHA-256",
+      "http_status": 200,
+      "bytes": 668
+    },
+    {
+      "name": "ru_llm_scanner-0.1.0-py3-none-any.whl",
+      "size": 69605,
+      "sha256": "befe95c71e04f8b7b629b17d43990543be1695293ea6cd35b71c4345498dc18f",
+      "validation": "anonymous full GET + SHA-256",
+      "http_status": 200,
+      "bytes": 69605
+    },
+    {
+      "name": "SHA256SUMS",
+      "size": 582,
+      "sha256": "9a8f3189b6b2ce9bffbf39db3f79b1d40f47a8eb2ac3fbca5de2ccb46b1cd6e5",
+      "validation": "anonymous full GET + SHA-256",
+      "http_status": 200,
+      "bytes": 582
+    }
+  ],
+  "downloaded_bundle_sha256": "c88fcca1140f4d47f922e585e29ac5311f6a4469a4e336dace3693571ab50a6a",
+  "downloaded_bundle_control": {
+    "status": "passed",
+    "version": "0.1.0",
+    "platform": "linux/arm64",
+    "verify_exit_code": 0,
+    "steps": [
+      {
+        "operation": "snapshot",
+        "exit_code": 0,
+        "assurance": "snapshot_verified",
+        "findings": 0,
+        "private_output": true
+      },
+      {
+        "operation": "strict-diff",
+        "exit_code": 1,
+        "assurance": "baseline_verified",
+        "findings": 1,
+        "private_output": true
+      },
+      {
+        "operation": "invalid-baseline",
+        "exit_code": 2,
+        "assurance": "none",
+        "findings": 0,
+        "private_output": true
+      }
+    ],
+    "input_unchanged": true,
+    "reports_published": false,
+    "imported_images": true
+  },
+  "anonymous_download": true,
+  "credential_used_for_download": false,
+  "raw_reports_published": false
+}

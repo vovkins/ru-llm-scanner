@@ -98,3 +98,19 @@ Source/docs snapshot — `b5889f0954fdeaca69c18af0d864bbc43864c832`,
 Образы имеют те же digests, что при первом успешном push; stable tags не заменены
 другим содержимым. Один сетевой read timeout GHCR успешно пройден повтором чтения;
 новых изменений runtime или ослабления gates не потребовалось.
+
+## Опубликованный результат
+
+[Обычный релиз v0.1.0](https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.1.0)
+опубликован 2026-10-20, tag `e66b9e888948d038ee07446c5948fdca9376abcf`.
+[Проверка публичной поставки](publication.json): anonymous GitHub API, все семь
+ссылок и серверные SHA-256; основной архив и малые assets получены без credentials,
+полный архив проверен по SHA-256 и импортирован. Шесть проверенных HTTP ranges
+возобновили медленную первоначальную загрузку; полный digest совпал.
+Native source asset проверен anonymous HEAD/серверным SHA-256 и ранее сверенным
+локальным source closure (не объявляется повторным полным скачиванием).
+Installed контроль скачанной копии: verify0/snapshot0/strict diff1/invalid baseline2,
+private reports, неизменный вход и cleanup. Raw reports не опубликованы.
+[Сохранность после публикации](post-publication-preservation.json): 7 чужих
+контейнеров/их StartedAt, default locks/старые images, proxy/model/dictionary/corpus
+сохранены; 65 unit hashes и все 106 inputs по-прежнему совпадают.
