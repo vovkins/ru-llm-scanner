@@ -6,8 +6,10 @@
 Маршрут import→verify→snapshot и последующие пользовательские команды пройдены
 на source checkpoint `2588571` в новой минимальной установке без dev venv/src/proxy/context:
 [ready walkthrough](../../verification/operations-dependencies/ready-walkthrough.json).
-[Итоговый контроль](../../verification/operations-stage-5/README.md) повторно проверил
-этот комплект на кандидате `e5e3115`; другой физический offline host не испытывался.
+[Итоговый контроль](../../verification/operations-stage-5/README.md) проверил
+этот комплект на кандидате `e5e3115`; после слияния выполнен
+[новый control на main](../../verification/operations-main-integration/README.md).
+Другой физический offline host не испытывался.
 
 ## Получить и разместить комплект
 

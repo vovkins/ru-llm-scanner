@@ -103,10 +103,10 @@ checks выполняются отдельной матрицей, не объя
 
 Full unit collector требует 0 skipped и сохраняет hashes/versions/counts;
 сырой log остаётся локальным. Последнее evidence содержит
-[155 tests](../verification/operations-dependencies/unit-tests.json), не обещание
+[155 tests на слитом main](../verification/operations-main-integration/unit-tests.json), не обещание
 неизменного количества тестов при будущих правках.
 [Итоговая приёмка](../verification/operations-stage-5/README.md) повторно сверила
-все 64 source hashes этого набора; это не новый unit-прогон.
+все 64 source hashes предыдущего набора; после слияния полный unit выполнен заново.
 
 ## Реальная модель и контейнеры
 

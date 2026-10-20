@@ -2,7 +2,7 @@
 
 План [#24](https://github.com/vovkins/ru-llm-scanner/issues/24) согласован
 2026-10-19. Ветка построена поверх [RV-06](../operations-ner-windowing/README.md).
-Это результаты отдельного кандидата; итоговый Requests, runtime gates и оба walkthrough завершены и зафиксированы ниже. Прежние images/default deployment/main сохранены.
+Это результаты отдельного комплекта; итоговый Requests, runtime gates и оба walkthrough завершены и зафиксированы ниже. После отдельного согласования PR #29 включён в main: [интеграция](../operations-main-integration/README.md). Прежние images/default deployment сохранены.
 Принятия остаточных рисков, merge/release/tags/публикации нет.
 
 ## Выбор и воспроизводимость
@@ -246,5 +246,6 @@ prune/остановки чужих проектов не выполнялись
 DEP-02 и RV-06 исправлены в кандидатах; решение владельца по четырём остаточным
 native-рискам DEP-01 [зафиксировано](risk-acceptance.md).
 [Итоговая приёмка #25](../operations-stage-5/README.md) отдельно согласована и
-выполнена на неизменном комплекте. Текущие PR ещё не слиты; merge/release/registry
-и замена default deployment не выполнялись.
+выполнена на неизменном комплекте. Затем все семь PR отдельно согласованы и
+[слиты в main](../operations-main-integration/README.md). Релиз/registry и замена
+default deployment не выполнялись; сами images не пересобирались.

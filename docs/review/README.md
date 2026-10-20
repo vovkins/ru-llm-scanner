@@ -11,7 +11,8 @@
 Актуальный статус кандидата после согласованных исправлений и итоговой приёмки —
 [матрица замечаний](../../verification/operations-stage-5/review-matrix.md).
 Исходные наблюдения на `336feb6` ниже сохранены; они не описывают уже исправленный
-кандидат как текущий дефект. `main` этим циклом ещё не изменён.
+комплект как текущий дефект. Проверенные исправления теперь включены в `main`:
+[последовательное слияние и проверки](../../verification/operations-main-integration/README.md).
 
 Основные слои разделены: Git/text → pipeline → Analyzer/словарь → findings/report;
 подготовка upstream и запуск готовых образов имеют разные входы и обязанности.
@@ -39,8 +40,8 @@
 | DOC-01 | P2, документация / первый запуск | Fresh build смешивал новый image и прежний runtime lock | Руководство исправлено; оба walkthrough пройдены для нового комплекта | [Admin build](../admin/build.md), [fresh/ready evidence](../../verification/operations-dependencies/README.md) на checkpoint `2588571` |
 | DOC-02 | P2, документация / навигация | README/docs map были историей этапов вместо маршрутов ролей; About был пуст | README/роли/справочник и текст About подготовлены; внешние metadata не применены | [Новая карта](../README.md), [About-текст](../about.md) |
 | TEST-01 | P2, ограничение воспроизводимости | Часть CLI/unit зависит от .build/analyzer и пропускается без подготовленных assets | Предусловие документировано; 155 tests без skipped, source hashes повторно совпали | [Dev tests](../development.md), [применимость результатов](../../verification/operations-stage-5/candidate-manifest.json) |
-| RV-06 | P1, дополнение этапа 4 | NER windowing отвергал обычный AUTHORS.rst | Исправлен в кандидатах #28/#29 | [Полный Requests и NER](../../verification/operations-dependencies/README.md) |
-| DEP-02 | P2, дополнение этапа 4 | Смешанные packaging metadata | Исправлен в кандидате #29 | Чистый closure и [actual inventory](../../verification/operations-dependencies/final-inventory.json) |
+| RV-06 | P1, дополнение этапа 4 | NER windowing отвергал обычный AUTHORS.rst | Исправление #28/#29 включено в main | [Полный Requests и NER](../../verification/operations-dependencies/README.md) |
+| DEP-02 | P2, дополнение этапа 4 | Смешанные packaging metadata | Чистая recipe #29 включена в main | [Actual inventory проверенного комплекта](../../verification/operations-dependencies/final-inventory.json) |
 | DEP-01 | P1, дополнение этапа 4 | Уязвимые зависимости / границы аудита | Обновления выполнены; четыре остаточных риска приняты владельцем для закрытого контура | [Решение 2026-10-20](../../verification/operations-dependencies/risk-acceptance.md), unfixed status сохранён |
 
 [Подробности и способы проверки](findings.md) ·

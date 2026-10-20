@@ -1,0 +1,18 @@
+{
+  "verification_version": 1,
+  "status": "passed",
+  "starting_main": "336feb64b201b0e9b807059f3d60b50fdee41ebb",
+  "merged_main_commit": "09abd6c6f0b5db08d36e624552e40cae4cf89500",
+  "approved_head": "2e25402953d51fe2a6f19e7defc185479ce020e8",
+  "identical_tree": "2381c8cf2ac902fafed391348ec241afd0fa05e8",
+  "all_seven_approved_heads_are_ancestors": true,
+  "each_merge_has_expected_two_parents": true,
+  "each_merge_tree_equals_corresponding_approved_head": true,
+  "changed_files_against_approved_head": [],
+  "matched_previous_unit_source_files": 64,
+  "github_checks_present": false,
+  "local_checks_are_not_github_ci": true,
+  "branch_deletion_performed": false,
+  "runtime_or_dependency_changes_during_integration": false,
+  "release_or_images_published": false
+}

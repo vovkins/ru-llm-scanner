@@ -1,0 +1,116 @@
+{
+  "verification_version": 1,
+  "status": "passed",
+  "main_commit": "09abd6c6f0b5db08d36e624552e40cae4cf89500",
+  "installed_launcher_sha256": "583c0d3bfbd038fb132b661b48d4b025aee06cd856c0f209d8da6bf09e38ba05",
+  "deployment_sha256": "b370fc32491aa396da5966f02b5197993b6da9f36627ebbebbc3cb38cc115bfe",
+  "python_stdlib_only_flags": [
+    "-I",
+    "-S"
+  ],
+  "installation_contains_source_or_dev_environment": false,
+  "platform": "linux/arm64",
+  "images": {
+    "analyzer": {
+      "image_id": "sha256:40cb971b58e2144749080fd50e6cb5c7bad8b74ce2c4d237e8a9800165d7e8fc",
+      "image_reference_id": "sha256:ee65eede670207d518c911702958f8e4d07c72f45d694f016558e68e03a46927"
+    },
+    "platform": "linux/arm64",
+    "scanner": {
+      "image_id": "sha256:358e0664733bf571d510d23f213339661bcb8b4737c8eab322cc79f3f7ca7095",
+      "image_reference_id": "sha256:358e0664733bf571d510d23f213339661bcb8b4737c8eab322cc79f3f7ca7095"
+    }
+  },
+  "synthetic_fixture_case": "python-password",
+  "synthetic_commits": {
+    "a": "7e0d183897fd2016459f4d15b333fc17514f0eab",
+    "b": "5fffea7899494e872f20dd11d8a2ac5497548837"
+  },
+  "steps": [
+    {
+      "operation": "verify",
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "seconds": 0.14,
+      "passed": true,
+      "input_unchanged": true
+    },
+    {
+      "operation": "snapshot-a",
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "seconds": 4.879,
+      "passed": true,
+      "input_unchanged": true,
+      "assurance": "snapshot_verified",
+      "coverage": {
+        "analyzed": 2,
+        "inherited": 0,
+        "unverified": 0,
+        "excluded": 0,
+        "unsupported": 0,
+        "error": 0,
+        "target": 2,
+        "deleted": 0
+      },
+      "findings": 0,
+      "report_sha256": "646a0fa0b00e5a339a08f9cec73fb8c7ed6aee1a875fa584b365bbd187789a19",
+      "private_permissions": "0700/0600",
+      "resources_cleaned": true
+    },
+    {
+      "operation": "strict-diff-a-b",
+      "expected_exit_code": 1,
+      "actual_exit_code": 1,
+      "seconds": 4.149,
+      "passed": true,
+      "input_unchanged": true,
+      "assurance": "baseline_verified",
+      "coverage": {
+        "analyzed": 1,
+        "inherited": 1,
+        "unverified": 0,
+        "excluded": 0,
+        "unsupported": 0,
+        "error": 0,
+        "target": 2,
+        "deleted": 0
+      },
+      "findings": 1,
+      "report_sha256": "fb1e098f63760d4ddc5c8704513b8282b2b50ee7e42ce90c903c54249cc66c80",
+      "private_permissions": "0700/0600",
+      "resources_cleaned": true
+    },
+    {
+      "operation": "wrong-baseline-commit",
+      "expected_exit_code": 2,
+      "actual_exit_code": 2,
+      "seconds": 4.09,
+      "passed": true,
+      "input_unchanged": true,
+      "assurance": "none",
+      "coverage": {
+        "analyzed": 0,
+        "inherited": 0,
+        "unverified": 0,
+        "excluded": 0,
+        "unsupported": 0,
+        "error": 0,
+        "target": 0,
+        "deleted": 0
+      },
+      "findings": 0,
+      "report_sha256": "63c00db45cf00898e5fbf66f806804811e5e01dcb3571bd8bab193c0a3a62f1c",
+      "private_permissions": "0700/0600",
+      "resources_cleaned": true
+    }
+  ],
+  "full_values_and_context_checked_in_json_and_html": true,
+  "coordinates_checked": true,
+  "console_contains_values": false,
+  "expected_password_findings_checked": 1,
+  "source_code_or_hooks_of_input_executed": false,
+  "input_unchanged": true,
+  "different_physical_offline_host": false,
+  "full_reports_published": false
+}

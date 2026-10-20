@@ -95,7 +95,9 @@ Docker Desktop на Apple Silicon. AMD64/GPU, реальный Linux host/Jenkin
 [итоговая приёмка #25](verification/operations-stage-5/README.md) подтверждает
 готовность кандидата к локальному пилоту в указанной среде.
 [Матрица готовности и ограничений](verification/operations-stage-5/readiness-matrix.md).
-Подготовленные PR ещё не слиты в `main`.
+Изменения объединены в `main`: [результаты интеграции](verification/operations-main-integration/README.md).
+Для пилота выбирайте проверенный комплект явным deployment lock;
+исторический default сохранён.
 
 Diff сравнивает конечные A/B и **не сканирует промежуточную историю**. Секрет,
 добавленный и удалённый между ними, может остаться в Git. PDF/Office/OCR,
