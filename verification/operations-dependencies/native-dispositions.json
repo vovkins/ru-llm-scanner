@@ -1,5 +1,5 @@
 {
-  "acceptance": "No owner risk decision inferred; residuals remain visible for #25.",
+  "acceptance": "Explicit owner decision on 2026-10-20: four remaining native risks accepted for the current candidate in the closed environment; technical assessments and unfixed status retained. Stage #25 approval is separate.",
   "candidate_residual_records": [
     {
       "assessment": "Privileged pathname ACL operations are not called; read-only non-root source, no-new-privileges/cap-drop ALL.",
@@ -1601,14 +1601,14 @@
         "libstdc++6:arm64"
       ],
       "description": "A flaw was found in GCC. When an application calls the erase_if function on a binary heap priority queue in libstdc++, the library reallocates storage but fails to update its internal entry pointer. An attacker capable of triggering this operation can exploit this use-after-free condition, leading to a Denial of Service (DoS) via an application crash or potential memory corruption.",
-      "disposition": "bounded_native_path_requires_owner_review",
+      "disposition": "bounded_native_path_risk_accepted_by_owner",
       "fixed_in_candidate": false,
       "id": "CVE-2026-102010",
       "images": [
         "analyzer",
         "scanner"
       ],
-      "owner_review_required": true,
+      "owner_review_required": false,
       "reference": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
       "release": {
         "nodsa": "Minor issue",
@@ -1622,7 +1622,12 @@
       "scope": "local",
       "source": "gcc-14",
       "version": "14.2.0-19",
-      "version_comparison": "no_fixed_version_requires_review"
+      "version_comparison": "no_fixed_version_requires_review",
+      "owner_decision": {
+        "date_msk": "2026-10-20",
+        "status": "accepted_for_closed_environment",
+        "reference": "risk-acceptance.md"
+      }
     },
     {
       "assessment": "The exact installed AArch64 libstdc++.so.6.0.33 operator new(size_t, align_val_t) calls posix_memalign (static disassembly). Upstream states that this allocator path is unaffected by CVE-2026-95619. This is platform/build non-applicability for the system library, not a package upgrade or exhaustive audit of statically linked wheel code.",
@@ -2018,14 +2023,14 @@
         "libc6:arm64"
       ],
       "description": "Calling tdelete on a sufficiently deep tree in the GNU C Library version 2.1 to 2.44 may write one pointer past the end of an alloca-allocated array on the stack, which may crash the application.  The tdelete implementation keeps an explicit stack of parent nodes for rebalancing, which is grown as needed while descending the tree.  Two rebalancing branches push an additional entry without checking the capacity, and write past the array when the stack is exactly full. Triggering this requires a node at a depth of exactly 40 (or 40 plus a multiple of 20), which implies a tree with at least a million nodes, so an attacker must drive a large number of insertions and deletions through an application that uses tsearch and tdelete.  The written value is a pointer into a tree node and is not directly attacker controlled.  No affected application in common distributions has been identified.",
-      "disposition": "bounded_native_path_requires_owner_review",
+      "disposition": "bounded_native_path_risk_accepted_by_owner",
       "fixed_in_candidate": false,
       "id": "CVE-2026-19542",
       "images": [
         "analyzer",
         "scanner"
       ],
-      "owner_review_required": true,
+      "owner_review_required": false,
       "reference": "https://security-tracker.debian.org/tracker/CVE-2026-19542",
       "release": {
         "next_point_update": true,
@@ -2040,7 +2045,12 @@
       "scope": "local",
       "source": "glibc",
       "version": "2.41-12+deb13u4",
-      "version_comparison": "no_fixed_version_requires_review"
+      "version_comparison": "no_fixed_version_requires_review",
+      "owner_decision": {
+        "date_msk": "2026-10-20",
+        "status": "accepted_for_closed_environment",
+        "reference": "risk-acceptance.md"
+      }
     },
     {
       "assessment": "No deprecated DNS record pretty-printing APIs; ordinary resolver lookup does not invoke them.",
@@ -4145,14 +4155,14 @@
         "zlib1g:arm64"
       ],
       "description": "zlib before 1.3.2 allows CPU consumption via crc32_combine64 and crc32_combine_gen64 because x2nmodp can do right shifts within a loop that has no termination condition.",
-      "disposition": "bounded_native_path_requires_owner_review",
+      "disposition": "bounded_native_path_risk_accepted_by_owner",
       "fixed_in_candidate": false,
       "id": "CVE-2026-27171",
       "images": [
         "analyzer",
         "scanner"
       ],
-      "owner_review_required": true,
+      "owner_review_required": false,
       "reference": "https://security-tracker.debian.org/tracker/CVE-2026-27171",
       "release": {
         "nodsa": "Minor issue",
@@ -4166,7 +4176,12 @@
       "scope": "local",
       "source": "zlib",
       "version": "1:1.3.dfsg+really1.3.1-1",
-      "version_comparison": "no_fixed_version_requires_review"
+      "version_comparison": "no_fixed_version_requires_review",
+      "owner_decision": {
+        "date_msk": "2026-10-20",
+        "status": "accepted_for_closed_environment",
+        "reference": "risk-acceptance.md"
+      }
     },
     {
       "assessment": "Git inflate/CRC paths are used, but no repository-driven gzprintf/gzwrite or CRC combine API is exposed; binary/library call-graph proof is incomplete.",
@@ -4175,14 +4190,14 @@
         "zlib1g:arm64"
       ],
       "description": "zlib versions 1.3.1.2 through 1.3.2 contain a heap buffer overflow vulnerability in the gz_vacate() function when processing non-blocking gzwrite() operations with stale external buffer pointers. Attackers can trigger the overflow by calling gzprintf() or gzvprintf() after a write stall, causing an unchecked memmove() to write beyond the internal input buffer boundary.",
-      "disposition": "bounded_native_path_requires_owner_review",
+      "disposition": "bounded_native_path_risk_accepted_by_owner",
       "fixed_in_candidate": false,
       "id": "CVE-2026-85091",
       "images": [
         "analyzer",
         "scanner"
       ],
-      "owner_review_required": true,
+      "owner_review_required": false,
       "reference": "https://security-tracker.debian.org/tracker/CVE-2026-85091",
       "release": {
         "repositories": {
@@ -4194,7 +4209,12 @@
       "scope": "local",
       "source": "zlib",
       "version": "1:1.3.dfsg+really1.3.1-1",
-      "version_comparison": "no_fixed_version_requires_review"
+      "version_comparison": "no_fixed_version_requires_review",
+      "owner_decision": {
+        "date_msk": "2026-10-20",
+        "status": "accepted_for_closed_environment",
+        "reference": "risk-acceptance.md"
+      }
     }
   ],
   "known_fixed_old_records": 42,
@@ -6146,6 +6166,8 @@
       "source": "perl"
     }
   ],
-  "owner_review_required_records": 4,
-  "assessment_update_date_msk": "2026-10-20"
+  "owner_review_required_records": 0,
+  "assessment_update_date_msk": "2026-10-20",
+  "owner_accepted_risk_records": 4,
+  "owner_risk_decision_reference": "risk-acceptance.md"
 }
