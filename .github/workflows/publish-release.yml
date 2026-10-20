@@ -26,6 +26,8 @@ jobs:
       - uses: docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4
         with:
           version: v29.6.1
+          # Keep this daemon when the publisher creates an ephemeral DOCKER_CONFIG.
+          set-host: true
           daemon-config: '{"features":{"containerd-snapshotter":true}}'
       - name: Verify frozen artifacts, exercise offline runtime, push exact images
         env:
