@@ -1,0 +1,72 @@
+[
+  {
+    "step": "test-image",
+    "return_code": 0,
+    "seconds": 2.197
+  },
+  {
+    "step": "core",
+    "return_code": 0,
+    "seconds": 37.815
+  },
+  {
+    "step": "ner",
+    "return_code": 0,
+    "seconds": 4.063
+  },
+  {
+    "step": "scan",
+    "return_code": 0,
+    "seconds": 13.598
+  },
+  {
+    "step": "drift",
+    "return_code": 0,
+    "seconds": 26.023
+  },
+  {
+    "step": "public",
+    "return_code": 0,
+    "seconds": 734.412
+  },
+  {
+    "step": "acceptance",
+    "return_code": 0,
+    "seconds": 71.253
+  },
+  {
+    "step": "docker",
+    "return_code": 0,
+    "seconds": 75.028
+  },
+  {
+    "step": "faults",
+    "return_code": 0,
+    "seconds": 15.46
+  },
+  {
+    "step": "extras-final",
+    "return_code": 0,
+    "seconds": 21.737
+  },
+  {
+    "step": "rollback",
+    "return_code": 0,
+    "seconds": 36.02
+  },
+  {
+    "step": "capacity",
+    "return_code": 0,
+    "seconds": 165.52
+  },
+  {
+    "step": "git-linux",
+    "return_code": 0,
+    "seconds": 1.208
+  },
+  {
+    "step": "licenses",
+    "return_code": 0,
+    "seconds": 0.467
+  }
+]

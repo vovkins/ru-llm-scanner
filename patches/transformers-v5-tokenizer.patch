@@ -1,0 +1,35 @@
+--- a/presidio/ner/huggingface_recognizer.py
++++ b/presidio/ner/huggingface_recognizer.py
+@@ -1584,9 +1584,17 @@
+         for input_ids, offsets in zip(input_id_batches, offset_batches):
+             if len(input_ids) != len(offsets):
+                 raise NERConfigurationError("NER ids and offsets do not match")
+-            prepared_ids = self._tokenizer.build_inputs_with_special_tokens(
+-                input_ids
+-            )
++            build_special = getattr(self._tokenizer, "build_inputs_with_special_tokens", None)
++            if callable(build_special):
++                prepared_ids = build_special(input_ids)
++            else:
++                # Transformers 5 removed the legacy helpers. This adapter accepts
++                # only the pinned single-sequence BERT architecture, never pairs.
++                cls_id = getattr(self._tokenizer, "cls_token_id", None)
++                sep_id = getattr(self._tokenizer, "sep_token_id", None)
++                if any(type(value) is not int or value < 0 for value in (cls_id, sep_id)) or cls_id == sep_id:
++                    raise NERConfigurationError("NER tokenizer has invalid BERT special token IDs")
++                prepared_ids = [cls_id, *input_ids, sep_id]
+             if (
+                 not isinstance(prepared_ids, list)
+                 or len(prepared_ids) != len(input_ids) + 2
+@@ -1595,9 +1603,8 @@
+                 raise NERConfigurationError(
+                     "NER tokenizer does not implement expected BERT special tokens"
+                 )
+-            token_type_ids = self._tokenizer.create_token_type_ids_from_sequences(
+-                input_ids
+-            )
++            build_types = getattr(self._tokenizer, "create_token_type_ids_from_sequences", None)
++            token_type_ids = build_types(input_ids) if callable(build_types) else [0] * len(prepared_ids)
+             if (
+                 not isinstance(token_type_ids, list)
+                 or len(token_type_ids) != len(prepared_ids)

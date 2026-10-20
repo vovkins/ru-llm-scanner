@@ -1,6 +1,7 @@
 """Offline build/runtime inventory. Never reads prompts or environment secrets."""
 
 import hashlib
+import importlib
 import importlib.metadata
 import json
 import os
@@ -22,6 +23,31 @@ def canonical(value):
     return json.dumps(
         value, ensure_ascii=True, sort_keys=True, separators=(",", ":")
     ).encode()
+
+
+def installed_packages(distributions=None):
+    packages = {}
+    if distributions is None:
+        distributions = importlib.metadata.distributions()
+    for distribution in distributions:
+        name = re.sub(r"[-_.]+", "-", distribution.metadata["Name"]).lower()
+        if name in packages:
+            raise RuntimeError("Duplicate installed package metadata")
+        packages[name] = distribution.version
+    return packages
+
+
+def packaging_imports(packages):
+    result = {}
+    # Import setuptools before pip: importing pip first can select stdlib
+    # distutils and conflict with setuptools' own distutils implementation.
+    for name in ("setuptools", "pip", "wheel"):
+        module = importlib.import_module(name)
+        version = getattr(module, "__version__", None)
+        if version != packages.get(name):
+            raise RuntimeError("Imported packaging module differs from metadata")
+        result[name] = {"version": version, "path": module.__file__}
+    return result
 
 
 def main():
@@ -57,10 +83,8 @@ def main():
     if {f.path: (f.size, f.sha256) for f in manifest.files} != expected_files:
         raise RuntimeError("Runtime model manifest differs from source lock")
 
-    packages = {
-        re.sub(r"[-_.]+", "-", d.metadata["Name"]).lower(): d.version
-        for d in importlib.metadata.distributions()
-    }
+    packages = installed_packages()
+    imported_packaging = packaging_imports(packages)
     spacy_root = Path(
         importlib.metadata.distribution("ru-core-news-sm").locate_file(
             "ru_core_news_sm"
@@ -95,6 +119,7 @@ def main():
                 "python": platform.python_version(),
                 "machine": platform.machine(),
                 "packages": dict(sorted(packages.items())),
+                "packaging_imports": imported_packaging,
                 "sources": actual_sources,
                 "model": lock["model"],
                 "spacy": {

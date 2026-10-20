@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "source_checkpoint": "2588571392adb28907963222315f828de7956f78",
+  "unit_source_hashes_still_match": true,
+  "unit_source_files_checked": 64,
+  "changed_python_files_black_checked": 15,
+  "contracts": {
+    "valid_synthetic_reports": 11,
+    "invalid_rejected": 22,
+    "local_links_checked": 622
+  },
+  "documentation": "49 argv sets / 19 defaults / 37 shell blocks / 8 navigation anchors",
+  "git_diff_check": true,
+  "runtime_post_checks": {
+    "status": "passed",
+    "final_cancel_and_recovery": true,
+    "retained_notices_collected": true,
+    "preservation_checked": true
+  },
+  "raw_public_reports_published": false
+}

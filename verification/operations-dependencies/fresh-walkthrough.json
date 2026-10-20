@@ -1,0 +1,117 @@
+{
+  "status": "passed",
+  "product_commit": "2588571392adb28907963222315f828de7956f78",
+  "archive_without_git": true,
+  "separate_venv": true,
+  "cache_only_artifact_preparation": true,
+  "offline_RUN": true,
+  "FROM_metadata_registry_access_possible": true,
+  "steps": [
+    {
+      "step": "venv",
+      "return_code": 0,
+      "elapsed_seconds": 0.983,
+      "online_preparation": false
+    },
+    {
+      "step": "pip",
+      "return_code": 0,
+      "elapsed_seconds": 1.164,
+      "online_preparation": true
+    },
+    {
+      "step": "dev-install",
+      "return_code": 0,
+      "elapsed_seconds": 3.844,
+      "online_preparation": true
+    },
+    {
+      "step": "prepare-source",
+      "return_code": 0,
+      "elapsed_seconds": 0.815,
+      "online_preparation": false
+    },
+    {
+      "step": "prepare-offline",
+      "return_code": 0,
+      "elapsed_seconds": 2.027,
+      "online_preparation": false
+    },
+    {
+      "step": "verify-context",
+      "return_code": 0,
+      "elapsed_seconds": 0.415,
+      "online_preparation": false
+    },
+    {
+      "step": "analyzer-build",
+      "return_code": 0,
+      "elapsed_seconds": 29.038,
+      "online_preparation": false
+    },
+    {
+      "step": "seal",
+      "return_code": 0,
+      "elapsed_seconds": 6.744,
+      "online_preparation": false
+    },
+    {
+      "step": "parity",
+      "return_code": 0,
+      "elapsed_seconds": 26.736,
+      "online_preparation": false
+    },
+    {
+      "step": "engine",
+      "return_code": 0,
+      "elapsed_seconds": 0.499,
+      "online_preparation": false
+    },
+    {
+      "step": "wheel",
+      "return_code": 0,
+      "elapsed_seconds": 0.829,
+      "online_preparation": true
+    },
+    {
+      "step": "scanner-prepare",
+      "return_code": 0,
+      "elapsed_seconds": 0.144,
+      "online_preparation": false
+    },
+    {
+      "step": "scanner-build",
+      "return_code": 0,
+      "elapsed_seconds": 5.828,
+      "online_preparation": false
+    },
+    {
+      "step": "verify",
+      "return_code": 0,
+      "elapsed_seconds": 0.122,
+      "online_preparation": false
+    },
+    {
+      "step": "cli",
+      "return_code": 0,
+      "elapsed_seconds": 18.788,
+      "online_preparation": false
+    },
+    {
+      "step": "export",
+      "return_code": 0,
+      "elapsed_seconds": 12.773,
+      "online_preparation": false
+    }
+  ],
+  "default_deployment_replaced": false,
+  "different_physical_host": false,
+  "package_checksums": {
+    "deployment.json": "b370fc32491aa396da5966f02b5197993b6da9f36627ebbebbc3cb38cc115bfe",
+    "engine/dictionary.json": "126805a93906873c7cd1fd7a3586c106a4c68d9329cfbe5169132d9bfc9a244e",
+    "engine/dictionary_policy.py": "9709364660baa4f5ac551b42fbbd411c6d2eaf8093ac1579ca8ea4a30696d099",
+    "engine/runtime-lock.json": "f9e91eb24d5e82ce064614a4d0f39c9a1f1c839fc90e7ea6c74a733be13981a6",
+    "engine/source-lock.json": "b088772c5ec2cb61356e3b6c6181ff0085652ebe51941fe99d9eedffae28bd3d",
+    "images.tar": "b19895f4694730a968c9ab928d79c6f83cd66ffa53bd0b653490aa697d650014"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "status": "unchanged_on_common_successful_files",
+  "source": {
+    "url": "https://github.com/psf/requests.git",
+    "tag": "v2.32.5",
+    "commit": "b25c87d7cb8d6a18a37fa12442b5f883f9e41741",
+    "tree": "2663dda7dbb8ce123af703b4573d85d09383ba0f",
+    "files": 132,
+    "blob_bytes": 5190867,
+    "largest_blob_bytes": 2189478,
+    "clone_without_checkout": true,
+    "code_executed": false
+  },
+  "before_report_sha256": "ac0f91b0c742ed48127474066451f175ecce77b3bd9a2c0dae3fcec3ebd1f765",
+  "after_report_sha256": "9467d7751b9e1905aa36d71d71271120fc3afedec6da63b0f9e5d596c1cc5208",
+  "common_analyzed_files": 118,
+  "before_common_findings": 581,
+  "after_common_findings": 581,
+  "exact_fields_compared": "all finding fields including value/context/coordinates/score/source/rule_id, excluding report-specific id/file_id",
+  "newly_analyzed_files": [
+    "tests/test_requests.py"
+  ],
+  "new_file_findings": 31,
+  "values_published": false,
+  "no_ground_truth": true,
+  "before_candidate": "NER quarter fallback with legacy dependencies; one file failed window recovery",
+  "after_candidate": "final bounded NER recovery with clean dependency closure"
+}

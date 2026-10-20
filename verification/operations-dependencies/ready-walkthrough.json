@@ -1,0 +1,380 @@
+{
+  "status": "passed",
+  "product_commit": "2588571392adb28907963222315f828de7956f78",
+  "python": "Python 3.12.14",
+  "stdlib_flags": [
+    "-I",
+    "-S"
+  ],
+  "images": {
+    "analyzer": {
+      "image_id": "sha256:40cb971b58e2144749080fd50e6cb5c7bad8b74ce2c4d237e8a9800165d7e8fc",
+      "image_reference_id": "sha256:ee65eede670207d518c911702958f8e4d07c72f45d694f016558e68e03a46927"
+    },
+    "scanner": {
+      "image_id": "sha256:358e0664733bf571d510d23f213339661bcb8b4737c8eab322cc79f3f7ca7095",
+      "image_reference_id": "sha256:358e0664733bf571d510d23f213339661bcb8b4737c8eab322cc79f3f7ca7095"
+    }
+  },
+  "steps": [
+    {
+      "step": "import",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 10.159
+    },
+    {
+      "step": "verify",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.087
+    },
+    {
+      "step": "git-init",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.022
+    },
+    {
+      "step": "git-config-user.name",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.009
+    },
+    {
+      "step": "git-config-user.email",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.008
+    },
+    {
+      "step": "git-config-commit.gpgsign",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.007
+    },
+    {
+      "step": "git-config-core.hooksPath",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.008
+    },
+    {
+      "step": "git-add",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.009
+    },
+    {
+      "step": "git-commit-A",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.013
+    },
+    {
+      "step": "snapshot-A",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 4.853,
+      "assurance": "snapshot_verified",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "1c743be6da0cd8655026827badf9cef798febe59953db88f95b36b398f01267f",
+        "counts": {
+          "analyzed": 1,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "b5d8b82ce9d1dff048ecf895208617b96892656c1f6e82113358e99e29b8784e"
+    },
+    {
+      "step": "git-add-B",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.011
+    },
+    {
+      "step": "git-commit-B",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.015
+    },
+    {
+      "step": "snapshot-B",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 4.182,
+      "assurance": "snapshot_verified",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "201fd3343fc061a175e22f8a6be3b32fe61fcbfea3c0e2f3602fc29b366e4775",
+        "counts": {
+          "analyzed": 1,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "c658db9f5085a57356d97e1c36a05b5b4b7e0c79f9a2fb057538432d2167b868"
+    },
+    {
+      "step": "diff-A-B",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 4.41,
+      "assurance": "changed_files_only",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "201fd3343fc061a175e22f8a6be3b32fe61fcbfea3c0e2f3602fc29b366e4775",
+        "counts": {
+          "analyzed": 1,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "aa9e75534bd834fe67499c201b8b61b242fa635f5477377706d28744bf2d8e73"
+    },
+    {
+      "step": "verified-A-B",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 4.11,
+      "assurance": "baseline_verified",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "201fd3343fc061a175e22f8a6be3b32fe61fcbfea3c0e2f3602fc29b366e4775",
+        "counts": {
+          "analyzed": 1,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "8ec9d8616a1fddbe66c1e0598d6e22ef2c942e18f7493f8c92ec387d66d75f49"
+    },
+    {
+      "step": "equal-A-A",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 4.051,
+      "assurance": "changed_files_only",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "82d69e5f2eb1a544ad41643598ce9d92b5d2cb1b5b58bf02aad4eb4428eaa429",
+        "counts": {
+          "analyzed": 0,
+          "inherited": 0,
+          "unverified": 1,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "1461ccc13a8ce0fa265bbee6bc330f8ae798a35645536b8fc48ebc684e8bc7f5"
+    },
+    {
+      "step": "verified-A-A",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 4.09,
+      "assurance": "baseline_verified",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "acc3ea722cf71c101d1b02d8898a25871b04b6c212bf312dcad7d73e24143342",
+        "counts": {
+          "analyzed": 0,
+          "inherited": 1,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "d09de374738300392218617679d7b8c1d5c49a0e82dd8e6ec4a0cc41cf8e0f86"
+    },
+    {
+      "step": "configured-B",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 4.433,
+      "assurance": "snapshot_verified",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "201fd3343fc061a175e22f8a6be3b32fe61fcbfea3c0e2f3602fc29b366e4775",
+        "counts": {
+          "analyzed": 1,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 1,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "63852c2b21330c132d7d0211a4f1938b1f219c88202d2d4119eb8d498ce99bef"
+    },
+    {
+      "step": "wrong-ref",
+      "return_code": 2,
+      "expected": 2,
+      "passed": true,
+      "elapsed_seconds": 4.044,
+      "assurance": "none",
+      "coverage": {
+        "complete": false,
+        "enumeration_complete": false,
+        "manifest_sha256": null,
+        "counts": {
+          "analyzed": 0,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 0,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "8447d77517c51e00b3be666846ec492930e83c78127bb38ffd42ed8aad9a35b3"
+    },
+    {
+      "step": "strict-without-baseline",
+      "return_code": 2,
+      "expected": 2,
+      "passed": true,
+      "elapsed_seconds": 1.386,
+      "assurance": "none",
+      "coverage": {
+        "complete": false,
+        "enumeration_complete": false,
+        "manifest_sha256": null,
+        "counts": {
+          "target": 0,
+          "analyzed": 0,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "deleted": 0
+        }
+      },
+      "findings": 0,
+      "report_sha256": "7f02152dbff9312967c0875552e16371a84bcd966ba41d7dbc70d5500986f791"
+    },
+    {
+      "step": "public-output",
+      "return_code": 2,
+      "expected": 2,
+      "passed": true,
+      "elapsed_seconds": 0.088
+    },
+    {
+      "step": "git-add-secret",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.012
+    },
+    {
+      "step": "git-commit-secret",
+      "return_code": 0,
+      "expected": 0,
+      "passed": true,
+      "elapsed_seconds": 0.014
+    },
+    {
+      "step": "findings",
+      "return_code": 1,
+      "expected": 1,
+      "passed": true,
+      "elapsed_seconds": 4.4,
+      "assurance": "snapshot_verified",
+      "coverage": {
+        "complete": true,
+        "enumeration_complete": true,
+        "manifest_sha256": "3fda339478c11d5fd7ee075673847d7087300f252e60c3569eab528813153ca5",
+        "counts": {
+          "analyzed": 2,
+          "inherited": 0,
+          "unverified": 0,
+          "excluded": 0,
+          "unsupported": 0,
+          "error": 0,
+          "target": 2,
+          "deleted": 0
+        }
+      },
+      "findings": 1,
+      "report_sha256": "ca07db0f1aa09aae5682d2990053a2e4d919664a7b2b39fa2268d6a0b838fd09"
+    }
+  ],
+  "report_permissions": "0700 directories / 0600 files",
+  "input_unchanged_after_each_scan": true,
+  "package_copy": "hard links of trusted complete export, hashes verified by import",
+  "different_physical_host": false,
+  "contents": [
+    "scripts/docker_scanner.py",
+    "docs/",
+    "package/",
+    "trusted-scanner.json",
+    "check-001/"
+  ]
+}

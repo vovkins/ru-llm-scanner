@@ -1,5 +1,7 @@
 # Dependencies: результаты и отдельный план исправлений
 
+Это исторический отчёт этапа #22. Планы #24/#26 впоследствии явно согласованы; ход исправлений, новый inventory и остаточные риски — [operations-dependencies](../operations-dependencies/README.md). Прежние результаты ниже сохранены для сравнения.
+
 Проверка 2026-10-19 UTC относится к двум images из `runtime-verification.json`.
 [Inventory и безопасные ответы](dependency-advisories.json) содержат названия,
 версии, image IDs, per-record modified, время получения, response SHA-256 и

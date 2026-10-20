@@ -4,6 +4,7 @@
 | --- | --- |
 | `upstream.lock.json` | Reviewed source lock: upstream commit/export-list/hashes, модель/файлы, patch before/after, build profiles |
 | Prepared manifest | Результат `analyzer.py prepare`: точный allowlisted context и его hashes |
+| Offline artifact lock | Полный platform closure с URL/размером/SHA-256; model/wheels/Debian и назначение для компонентов |
 | Analyzer runtime lock | Результат `seal` конкретного image: platform/reference IDs, packages, model/spaCy/sources/settings/signature |
 | Engine directory | Четыре проверенных файла: `source-lock.json`, `runtime-lock.json`, `dictionary_policy.py`, `dictionary.json` |
 | Scanner inventory | Hashes точного Dockerfile, wheels, `.deb`, engine; base/platform/Git/requirements/wheel identity |
@@ -15,11 +16,14 @@
 ```mermaid
 flowchart LR
   S[Source lock и tracked upstream] --> P[Prepared Analyzer context]
-  P --> A[Analyzer image]
+  H[Закреплённый artifact lock и hash-cache] --> F[Полный offline context]
+  P --> F
+  F --> A[Analyzer image]
   A --> R[Новый runtime lock через seal]
-  P --> E[Engine bundle]
+  F --> E[Engine bundle]
   R --> E
   E --> C[Scanner context и wheel]
+  H --> C
   C --> I[Scanner image]
   I --> D[Новый deployment lock]
   R --> D
@@ -57,12 +61,15 @@ snapshot; [правила](../admin/updating-analyzer.md). Штатные locks 
 
 ## Подготовка и корпоративные настройки
 
-Analyzer build разрешает явные `--build-arg`:
+Историческая upstream recipe разрешает явные `--build-arg`:
 `HTTP_PROXY`, `HTTPS_PROXY`, `NO_PROXY`, `PIP_INDEX_URL`, `PIP_TRUSTED_HOST`,
 `PIP_PROXY`, `PYTORCH_INDEX_URL`, `PYTORCH_GPU_INDEX_URL`, `NER_MODEL_PROXY`.
 Не передавайте credentials: upstream build/log может их раскрыть. Явный
 `prepare --certs-dir` включает хеши `*.crt` в manifest; прочие соседние файлы
-не экспортируются. Scanner prepare использует отдельные временные secret mounts.
+не экспортируются. Текущая offline CPU recipe не скачивает эти inputs в build:
+`prepare_offline_analyzer.py --download` и scanner prepare `--download-artifacts`
+явно заполняют cache, `--ca` применяется только host downloader. Без этих флагов
+подготовка не обращается к сети. Старые pip/apt config flags отклоняются.
 [Различие и команды](../admin/build.md#корпоративные-mirrors-proxy-и-ca).
 
 Модель/каталог и подпись — в [механизме распознавания](detection.md),

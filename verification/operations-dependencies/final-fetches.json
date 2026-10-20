@@ -1,0 +1,20 @@
+[
+  {
+    "bytes": 286,
+    "etag": null,
+    "last_modified": null,
+    "retrieved_utc": "2026-10-19T21:47:33.668363+00:00",
+    "sha256": "97e3d01ce7f321b6f3c3db1d9fc82cac7a772693a407dec41f1872a01eb5b0ed",
+    "status": 200,
+    "url": "https://api.osv.dev/v1/querybatch"
+  },
+  {
+    "bytes": 84083145,
+    "etag": null,
+    "last_modified": "Mon, 19 Oct 2026 21:24:49 GMT",
+    "retrieved_utc": "2026-10-19T21:47:34.285323+00:00",
+    "sha256": "780ec10ec381a0134d3dbd21bfba5791ecfc5bd2b9fc49a96d98444443804efa",
+    "status": 200,
+    "url": "https://security-tracker.debian.org/tracker/data/json"
+  }
+]

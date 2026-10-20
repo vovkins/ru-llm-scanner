@@ -4,9 +4,12 @@
 [установку из пакета](installation.md). Сборка/установка dependencies может
 обращаться к одобренным источникам; сканирование готовыми images работает offline.
 Проверены CPU Linux ARM64 и [указанная среда](README.md#среда-и-ответственность).
-На `755152b` полный маршрут выполнен в новом каталоге с отдельным venv и единым
-новым runtime/deployment: [evidence](../../verification/operations-stage-4/README.md).
-Локальные base и BuildKit cache использовались; это не cache-free сборка.
+На source checkpoint `2588571` полный новый offline-маршрут выполнен в отдельном
+каталоге из `git archive`, с новым venv и единым runtime/deployment:
+[evidence #24](../../verification/operations-dependencies/README.md).
+Использовались локальный base, проверенный hash-cache и BuildKit cache;
+это не cache-free сборка. [Исторический маршрут](../../verification/operations-stage-4/README.md)
+относится к прежней recipe; его locks с новой сборкой не смешиваются.
 
 ## 1. Подготовить инструменты и отдельные пути
 
@@ -17,12 +20,16 @@
 
 ```sh
 python3.11 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip==26.2.1
 .venv/bin/python -m pip install -e . -r requirements-dev.txt
 mkdir -p .build
 
 BUILD_ROOT="$PWD/.build/cpu-arm64-build-001"
 mkdir -m 700 "$BUILD_ROOT"
 ANALYZER_CONTEXT="$BUILD_ROOT/analyzer"
+SOURCE_CONTEXT="$BUILD_ROOT/analyzer-source"
+ARTIFACT_CACHE="$PWD/.build/artifact-cache"
+mkdir -p "$ARTIFACT_CACHE"
 RUNTIME_LOCK="$BUILD_ROOT/analyzer.runtime.lock.json"
 ENGINE_DIR="$BUILD_ROOT/engine"
 SCANNER_CONTEXT="$BUILD_ROOT/scanner-context"
@@ -46,16 +53,16 @@ SCANNER_TAG=ru-llm-scanner:cpu-build-001
 
 ```sh
 .venv/bin/python scripts/analyzer.py prepare \
-  --source /trusted/ru-llm-proxy --output "$ANALYZER_CONTEXT" \
+  --source /trusted/ru-llm-proxy --output "$SOURCE_CONTEXT" \
   --profile cpu-linux-arm64
-.venv/bin/python scripts/analyzer.py verify-context --context "$ANALYZER_CONTEXT"
+.venv/bin/python scripts/analyzer.py verify-context --context "$SOURCE_CONTEXT"
 ```
 
 Альтернатива **только вместо** первой команды — явный fetch закреплённого SHA:
 
 ```sh
 .venv/bin/python scripts/analyzer.py prepare --fetch \
-  --output "$ANALYZER_CONTEXT" --profile cpu-linux-arm64
+  --output "$SOURCE_CONTEXT" --profile cpu-linux-arm64
 ```
 
 После альтернативы также выполните `verify-context`. `--fetch` — действие подготовки,
@@ -65,9 +72,24 @@ source lock коммита; рабочие изменения, соседние 
 без fuzz. Manifest фиксирует разрешённые inputs.
 
 Upstream source, model revision/files, constraints и spaCy pins задаёт
-[source lock](../../upstream.lock.json). Веса NER загружаются штатной стадией
-сборки Analyzer по закреплённому model manifest, а не берутся из сканируемого
-клона. Окончательные bytes/версии проверяет seal. [Происхождение](../reference/detection.md).
+[source lock](../../upstream.lock.json). Отдельный
+[artifact lock](../../locks/offline-cpu-linux-arm64.artifacts.json) содержит
+полный closure wheels, Debian-пакетов и прежней модели: URL, размер, SHA-256 и
+назначение для Analyzer/scanner/tests. Подготовьте полный контекст:
+
+```sh
+.venv/bin/python scripts/prepare_offline_analyzer.py \
+  --context "$SOURCE_CONTEXT" --output "$ANALYZER_CONTEXT" \
+  --cache "$ARTIFACT_CACHE" --download
+.venv/bin/python scripts/analyzer.py verify-context --context "$ANALYZER_CONTEXT"
+```
+
+Только `--download` разрешает получение отсутствующих artifacts из сети.
+Для повторной подготовки из полного cache уберите этот флаг: отсутствующий или
+повреждённый файл вызывает отказ. Cache содержит файлы, названные их SHA-256;
+его можно заранее заполнить идентичными проверенными bytes через одобренный
+канал. Модель не берётся из сканируемого клона. Итоговые bytes проверяет seal.
+[Происхождение](../reference/detection.md).
 
 ## 3. Собрать Analyzer и измерить именно этот image
 
@@ -82,8 +104,13 @@ Upstream source, model revision/files, constraints и spaCy pins задаёт
   --output-dir "$BUILD_ROOT/analyzer-parity"
 ```
 
-`build` может скачивать pinned packages/модель и использует upstream Dockerfile
-с ограниченными адаптациями. `seal` без внешней сети проверяет реальные sources,
+Текущий CPU `build` требует полный offline context и использует закреплённый
+`docker/analyzer-offline.Dockerfile` с `--network none --pull=false`. Wheels
+устанавливаются с `--no-index --no-deps` в чистый package tree; `.deb` также
+закреплены. BuildKit может проверять metadata базового digest в registry:
+`--network none` ограничивает RUN, а не resolver FROM. Сохраните base локально
+и проверьте поведение своего builder в изолированной среде.
+`seal` без внешней сети проверяет реальные sources,
 model files, spaCy, packages, настройки, context labels и platform/reference IDs.
 При несоответствии финальный lock не принимается. Parity проверяет raw/patched NER
 и словарь в curated workspace без сети; это отдельная проверка, не замена seal.
@@ -104,7 +131,8 @@ Host parity запускается non-root. [Подробности dev-про�
 .venv/bin/python scripts/build_scanner.py prepare \
   --engine-dir "$ENGINE_DIR" \
   --wheel "$BUILD_ROOT/wheels/ru_llm_scanner-0.1.0.dev0-py3-none-any.whl" \
-  --context "$SCANNER_CONTEXT"
+  --context "$SCANNER_CONTEXT" --artifact-cache "$ARTIFACT_CACHE" \
+  --download-artifacts
 ```
 
 Версия wheel в примере соответствует текущему `pyproject.toml`; после согласованного
@@ -112,9 +140,10 @@ Host parity запускается non-root. [Подробности dev-про�
 source/runtime locks и закреплённые dictionary policy/rules, не модель и не код
 проверяемого репозитория.
 
-`build_scanner.py prepare` — online-фаза: disposable контейнер получает Git `.deb`
-и полный pinned Python wheel closure. Нужен локальный точный Python base; сетевой
-доступ/зеркала настраивает оператор. Context содержит только Dockerfile, wheelhouse,
+`build_scanner.py prepare` проверяет тот же artifact lock и получает Git `.deb`,
+OS fixes и полный scanner wheel closure из cache. Только `--download-artifacts`
+разрешает загрузку отсутствующего artifact; уберите флаг для cache-only работы.
+Context содержит Dockerfile, inventory helper, wheelhouse, artifact lock,
 `.deb`, четыре engine assets и inventory SHA-256. Нет `.git`, `.env`, соседнего
 checkout, пользовательских отчётов или credentials. Не используйте build context `.`.
 
@@ -134,7 +163,8 @@ python3 scripts/docker_scanner.py verify --deployment-lock "$DEPLOYMENT"
 
 Сборка сверяет состав/hash context и текущий Dockerfile, требует локальный base,
 вызывает `--pull=false --network none`, устанавливает wheels с `--no-index --no-deps`
-и выполняет `pip check`, help/version/engine validation. Затем фиксирует IDs обоих
+и выполняет `pip check`, проверку уникальности metadata и imported packaging,
+help/version/engine validation. Затем фиксирует IDs обоих
 images и inventory в **новом** deployment. CLI integration использует тот же runtime
 lock и проверяет установленный wheel; production acceptance использует новый deployment.
 
@@ -157,34 +187,32 @@ Engine извлекается из проверенного scanner image и с�
 путь `SCANNER_LOCK` там указывает на **deployment этого пакета**.
 
 Для повторной offline-сборки сохраните точный context и base; для runtime достаточно
-готовых images. Свежая online-подготовка Debian/Python может дать другой closure
-или метаданные: inventory делает разницу проверяемой, но побайтово одинаковый ID
+готовых images. Новая подготовка не выбирает более свежие пакеты автоматически:
+изменение closure требует reviewed lock/hashes. Источник может удалить старый
+artifact; тогда сохраните/передайте идентичный hash-cache, не меняйте pin ради
+загрузки. Побайтово одинаковый image ID
 при любой пересборке/другом Docker store не обещается. Рабочий старый комплект
 сохраняйте для [отката](updating-analyzer.md).
 
 ## Корпоративные mirrors, proxy и CA
 
-Для **Analyzer** `prepare --certs-dir /trusted/ca` копирует верхнеуровневые `*.crt`
-в manifest; ссылки не принимаются. Сертификаты попадут в prepared context/image
-по upstream recipe — проверьте их назначение и допустимость распространения.
-Соседняя папка certs автоматически не читается. `build --build-arg NAME` берёт
-явно разрешённую настройку из окружения Docker; список — в [справочнике артефактов](../reference/artifacts.md).
-Не передавайте credentials в build args: upstream Docker/pip может вывести их в лог.
-
-Для **scanner prepare** используйте при необходимости:
+Сетевое получение inputs теперь выполняется host Python до сборки. При
+необходимости передайте доверенный CA только инструменту подготовки:
 
 ```sh
-.venv/bin/python scripts/build_scanner.py prepare \
-  --engine-dir "$ENGINE_DIR" \
-  --wheel "$BUILD_ROOT/wheels/ru_llm_scanner-0.1.0.dev0-py3-none-any.whl" \
-  --context "$SCANNER_CONTEXT" \
-  --pip-config /trusted/pip.conf --apt-config /trusted/apt.conf --ca /trusted/ca.pem
+.venv/bin/python scripts/prepare_offline_analyzer.py \
+  --context "$SOURCE_CONTEXT" --output "$ANALYZER_CONTEXT" \
+  --cache "$ARTIFACT_CACHE" --download --ca /trusted/ca.pem
 ```
 
-Это альтернатива команде prepare шага 4, а не повтор в существующий context.
-Файлы монтируются read-only в `/run/secrets` только контейнера подготовки,
-не передаются build args и не копируются в scanner context/image. CA применяется
-через PIP_CERT/APT HTTPS CaInfo. TLS verify не отключайте. Настройка host pip для
+Это альтернатива соответствующей команде шага 2, не повтор в существующий context.
+Для scanner prepare также поддержан `--ca`. HTTPS proxy настраивается штатным
+окружением urllib; credentials не сохраняются в context/lock/image. Для закрытого
+зеркала передайте заранее заполненный hash-cache. Старые `--pip-config` и
+`--apt-config` при новой pinned подготовке отклоняются; содержимое конфигураций
+не копируется и не читается. `prepare --certs-dir` относится к исторической
+upstream recipe, текущему offline CPU runtime CA для внешней сети не нужен.
+TLS verify не отключайте. Настройка host pip для
 wheel/dev dependencies выполняется отдельно без credentials в CLI URL/логах.
 Конкретный корпоративный PKI/mirror этим руководством не объявляется проверенным.
 

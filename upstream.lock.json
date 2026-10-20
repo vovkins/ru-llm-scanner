@@ -168,16 +168,39 @@
           "after": "45989013ea10f19d2953a1fb906eec1df9d06a417013ad1c476bb8fc62c8a3d7"
         }
       }
+    },
+    {
+      "path": "patches/analyzer-dependencies.patch",
+      "sha256": "3a062b7f632676724f4812887030e2888b90fdb97647d8eef7d44b25f1216a2e",
+      "targets": {
+        "presidio/requirements-analyzer.txt": {
+          "before": "cfe2e573443f293c8263456454ca84d3b795cc5220789139a3afe56d9e94c34a",
+          "after": "f96eea666b5020ad120fbc65b2c1417e5fd59962cf0fcb7c3fc4cf42b307b3f3"
+        }
+      }
+    },
+    {
+      "path": "patches/transformers-v5-tokenizer.patch",
+      "sha256": "7ffb9ce9a62faf2df1a1545a5556bb423016dd239cccbb3668925ec7e1b70f5c",
+      "targets": {
+        "presidio/ner/huggingface_recognizer.py": {
+          "before": "45989013ea10f19d2953a1fb906eec1df9d06a417013ad1c476bb8fc62c8a3d7",
+          "after": "316b293ecd29c74821caf2d76c06693e280426d48fc857860bf45f859793715c"
+        }
+      }
     }
   ],
   "build_profiles": {
     "cpu-linux-arm64": {
       "platform": "linux/arm64",
       "profile": "cpu",
-      "base_image": "python@sha256:9534e5a8e315485d4061ed659af0fd78a284c015f9b73661b41d6bab25604534",
+      "base_image": "python@sha256:e88e9763f943ec1834f992a4b51e0f24500486803e8bc534e5767af9ea65f6ce",
       "constraints_path": "locks/requirements-cpu-linux-arm64.txt",
-      "constraints_sha256": "8ba7d4b93b1a38d869c9aa9fffffe0aaf040fefe914008ae312a3a23634e6730",
-      "spacy_tree_sha256": "54d8e411b174d0aa053f235e46d4e5ac52e4a2a8cbcb4fcc2a0da1d13ace6a8e"
+      "constraints_sha256": "1d2256a2b93ca7a909a785a3609e84964710c7c3deee5ae28f1a22618d9c638f",
+      "spacy_tree_sha256": "54d8e411b174d0aa053f235e46d4e5ac52e4a2a8cbcb4fcc2a0da1d13ace6a8e",
+      "offline_artifacts_path": "locks/offline-cpu-linux-arm64.artifacts.json",
+      "offline_artifacts_sha256": "68024c5a384ff061476cbf4f9394e4ba4c71c38faeee639a483cd67a279ff847",
+      "offline_dockerfile_sha256": "06d1c59dde324bb1e8d2bd139a20d3bf1f1e1d2002932bda22a49294fbcc3692"
     }
   },
   "analyzer_environment": {

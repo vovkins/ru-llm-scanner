@@ -11,6 +11,7 @@
 
 ```sh
 python3.11 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip==26.2.1
 .venv/bin/python -m pip install -e . -r requirements-dev.txt
 ```
 
@@ -46,7 +47,7 @@ Black 25.1.0 — dev-tool. Build backend закреплён отдельно. Ho
 | Contracts/documentation | Dev dependencies, без `.build/analyzer` и Docker | Schema/examples/links, config/demo/документированные параметры |
 | Изолированный Git/text | Git, POSIX; Docker только для отдельного Linux-варианта | Реальные synthetic repositories и security/text contracts, без модели |
 | Полный unit | **Prepared `.build/analyzer`**, dev dependencies; локальный HTTP stub | Собственные контракты и регрессии; не качество модели |
-| Upstream subset | Curated context и отдельный test image без NER weights | Закреплённые synthetic upstream fixtures |
+| Upstream subset | Curated context и test image; offline CPU recipe наследует модель, subset не выполняет inference | Закреплённые synthetic upstream fixtures |
 | Raw/patched/scan/CLI | Sealed Analyzer с моделью, подходящий dev/installed scanner image и locks | Реальная модель, parity/coordinates и independent quality |
 | Production acceptance | Готовые verified images/deployment, Docker/Compose | Штатные snapshot/diff/baseline/isolation/lifecycle |
 

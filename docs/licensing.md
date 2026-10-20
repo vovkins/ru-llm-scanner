@@ -1,5 +1,11 @@
 # Лицензирование и происхождение
 
+Для dependency-кандидата #24 сохранён отдельный
+[inventory фактически установленных пакетов](../verification/operations-dependencies/analyzer-licenses.json)
+и [описание происхождения](../verification/operations-dependencies/README.md).
+Исходные license/notice files wheels и Debian packages сохраняются в images.
+Это inventory, а не выбор лицензии scanner или разрешение публикации.
+
 В текущем checkout `ru-llm-scanner` нет файла LICENSE; лицензия scanner пока
 не выбрана владельцем. Историческая read-only проверка GitHub 2026-10-18
 также вернула `license=null`; это не новая проверка внешних настроек.
@@ -13,7 +19,7 @@
 | `ru-llm-proxy` | README закреплённого SHA заявляет MIT; отдельного LICENSE в tracked tree нет | Уточнить достаточность уведомлений до распространения кода/образов |
 | Правила из Gitleaks в прокси | `THIRD_PARTY_NOTICES.md` содержит MIT notice с авторством | Сохранить уведомление при переносе соответствующего компонента |
 | NER-модель | `model_manifest.json` указывает `apache-2.0`; происхождение описано в прокси | Проверить и включить требуемые notices для фактических артефактов сборки |
-| Python/runtime-зависимости | 71 пакет CPU ARM64 и метаданные уведомлений зафиксированы [инвентаризацией](../verification/stage-2/licenses.json) | Проверить комплект перед распространением |
+| Python/runtime-зависимости | Исторические 71 пакет — в [stage-2](../verification/stage-2/licenses.json); в кандидате #24 Analyzer содержит 72, scanner — 28 distributions | Проверить комплект перед распространением |
 | JSON Schema / проверка | Схема написана для scanner; `jsonschema[format]` — runtime/dev dependency | Отдельно учитывать лицензии распространяемых зависимостей |
 
 Закреплённые ссылки: [инвентаризация upstream](reference/detection.md),
@@ -21,9 +27,7 @@
 
 На этапе 1 не копировался runtime-код детекторов или веса. На этапе 2 источники
 и веса используются в локальной сборке. [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md)
-сохранён побайтово из закреплённого upstream и включён в образ. Уведомления
-установленных Python-пакетов сохраняются при копировании `/usr/local`;
-их метаданные/хеши можно получить без сети:
+сохранён побайтово из закреплённого upstream и включён в образ. В новой recipe установленные wheels сохраняют свои license/notice files, Debian packages — `/usr/share/doc`. Историческая recipe копировала `/usr/local`; новая использует чистую установку полного closure. Метаданные/хеши Analyzer можно получить без сети:
 
 ```bash
 .venv/bin/python scripts/capture_licenses.py \

@@ -48,7 +48,7 @@ network none/read-only root/input, cap-drop ALL/no-new-privileges, отдель�
 `offline-verification.json` с hashes/метриками без исходных значений.
 NER parity и качество этого корпуса не заменяют [независимый code-v1](../verification/README.md).
 
-## Upstream subset без весов NER
+## Upstream subset и синтетические NER-регрессии
 
 Для prepared context того же source/profile:
 
@@ -58,9 +58,13 @@ NER parity и качество этого корпуса не заменяют [
 .venv/bin/python scripts/check_upstream_tests.py --context "$ANALYZER_CONTEXT" \
   --image ru-llm-scanner-analyzer:upstream-tests \
   --output .build/upstream-tests-new.json
+.venv/bin/python scripts/check_upstream_tests.py --context "$ANALYZER_CONTEXT" \
+  --image ru-llm-scanner-analyzer:upstream-tests --suite ner \
+  --output .build/ner-regressions-new.json
 ```
 
-Test-image не содержит весов NER. Полный закреплённый набор tests/synthetic corpus
+В текущей offline CPU recipe test-image наследует sealed runtime с моделью,
+но эти synthetic tests не выполняют inference настоящей модели. Полный набор tests/corpus
 монтируется read-only; содержимое corpus не исполняется. Проверяются rules,
 credentials, encoded values, merging, windows и NLP-контракт. Assertion logs
 могут содержать синтетические значения и остаются локальными; отчёт содержит

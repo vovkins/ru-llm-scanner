@@ -1,0 +1,225 @@
+{
+  "cases": [
+    {
+      "analyze_timeout_seconds": 1800.0,
+      "analyzer_cpus": 8.0,
+      "artifacts_sha256": {
+        "report.html": "129e3e554b6daaf6afd799a95166506c42e872562b3b9e03ecdbab2d11b19b5d",
+        "report.json": "9467d7751b9e1905aa36d71d71271120fc3afedec6da63b0f9e5d596c1cc5208"
+      },
+      "case": "public-requests",
+      "categories": {
+        "DB_URL": 28,
+        "EMAIL_ADDRESS": 72,
+        "HOSTNAME": 32,
+        "INTERNAL_DOMAIN": 1,
+        "INTERNAL_IP": 385,
+        "LOGIN": 31,
+        "PASSWORD": 16,
+        "PERSON": 43,
+        "PRIVATE_KEY": 4
+      },
+      "cgroup_sample_maxima": {
+        "analyzer": {
+          "cpu_usage_usec": 4910503372,
+          "memory_peak_bytes": 1116069888,
+          "tmp_visible_bytes": 187
+        },
+        "scanner": {
+          "cpu_usage_usec": 18888036,
+          "memory_peak_bytes": 100380672,
+          "tmp_visible_bytes": 299
+        }
+      },
+      "cleanup": true,
+      "coverage": {
+        "complete": true,
+        "counts": {
+          "analyzed": 119,
+          "deleted": 0,
+          "error": 0,
+          "excluded": 0,
+          "inherited": 0,
+          "target": 132,
+          "unsupported": 13,
+          "unverified": 0
+        },
+        "enumeration_complete": true,
+        "manifest_sha256": "0ddd2ca32fa614e86ae4f5f6bf2bf927fde660fed959a9e62b86ba02727f32a2"
+      },
+      "errors": {},
+      "exit_code": 1,
+      "expected_exit": null,
+      "findings": 612,
+      "fixture": null,
+      "harness_kill": false,
+      "input_unchanged": true,
+      "output_bytes": 72433959,
+      "profile_sha256": "6a7b56674060d1a3746810da6c27a69fb9be630ac060ab793896b7799e82b959",
+      "result": {
+        "assurance": "snapshot_verified",
+        "exit_code": 1,
+        "findings_count": 612,
+        "status": "findings"
+      },
+      "rules": {
+        "credential.kv.login": 12,
+        "credential.kv.password": 9,
+        "hostname_key_value": 32,
+        "none": 559
+      },
+      "run_timeout_seconds": 2400,
+      "sample_failures_during_start_or_cleanup": 0,
+      "sources": {
+        "native_credential": 21,
+        "ner": 69,
+        "structural": 522
+      },
+      "wall_seconds": 733.927
+    }
+  ],
+  "fixture_seed": "deterministic-index-v1; no RNG",
+  "images": {
+    "analyzer": {
+      "image_id": "sha256:40cb971b58e2144749080fd50e6cb5c7bad8b74ce2c4d237e8a9800165d7e8fc",
+      "image_reference_id": "sha256:ee65eede670207d518c911702958f8e4d07c72f45d694f016558e68e03a46927"
+    },
+    "scanner": {
+      "image_id": "sha256:358e0664733bf571d510d23f213339661bcb8b4737c8eab322cc79f3f7ca7095",
+      "image_reference_id": "sha256:358e0664733bf571d510d23f213339661bcb8b4737c8eab322cc79f3f7ca7095"
+    }
+  },
+  "measurement": "1s polling; cgroup lifetime CPU/memory.peak maxima observed before cleanup; final interval may be missed; tmp regular-file sizes omit deleted/open files and are not disk peak",
+  "platform": "linux/arm64",
+  "source": {
+    "url": "https://github.com/psf/requests.git",
+    "tag": "v2.32.5",
+    "commit": "b25c87d7cb8d6a18a37fa12442b5f883f9e41741",
+    "tree": "2663dda7dbb8ce123af703b4573d85d09383ba0f",
+    "files": 132,
+    "blob_bytes": 5190867,
+    "largest_blob_bytes": 2189478,
+    "clone_without_checkout": true,
+    "code_executed": false
+  },
+  "unsupported_files": [
+    {
+      "path": "docs/_static/requests-sidebar.png",
+      "status": "unsupported",
+      "reason": "image",
+      "mode": "100644",
+      "size_bytes": 306086
+    },
+    {
+      "path": "ext/flower-of-life.jpg",
+      "status": "unsupported",
+      "reason": "image",
+      "mode": "100644",
+      "size_bytes": 14896
+    },
+    {
+      "path": "ext/kr-compressed.png",
+      "status": "unsupported",
+      "reason": "image",
+      "mode": "100644",
+      "size_bytes": 5954
+    },
+    {
+      "path": "ext/kr.png",
+      "status": "unsupported",
+      "reason": "image",
+      "mode": "100644",
+      "size_bytes": 9459
+    },
+    {
+      "path": "ext/psf-compressed.png",
+      "status": "unsupported",
+      "reason": "image",
+      "mode": "100644",
+      "size_bytes": 11986
+    },
+    {
+      "path": "ext/psf.png",
+      "status": "unsupported",
+      "reason": "image",
+      "mode": "100644",
+      "size_bytes": 14561
+    },
+    {
+      "path": "ext/requests-logo-compressed.png",
+      "status": "unsupported",
+      "reason": "image",
+      "mode": "100644",
+      "size_bytes": 192073
+    },
+    {
+      "path": "ext/requests-logo.ai",
+      "status": "unsupported",
+      "reason": "pdf",
+      "mode": "100644",
+      "size_bytes": 2189478
+    },
+    {
+      "path": "ext/requests-logo.png",
+      "status": "unsupported",
+      "reason": "image",
+      "mode": "100644",
+      "size_bytes": 192073
+    },
+    {
+      "path": "ext/ss-compressed.png",
+      "status": "unsupported",
+      "reason": "image",
+      "mode": "100644",
+      "size_bytes": 372015
+    },
+    {
+      "path": "ext/ss.png",
+      "status": "unsupported",
+      "reason": "image",
+      "mode": "100644",
+      "size_bytes": 372015
+    },
+    {
+      "path": "tests/certs/mtls/client/ca",
+      "status": "unsupported",
+      "reason": "symlink",
+      "mode": "120000",
+      "size_bytes": null
+    },
+    {
+      "path": "tests/certs/valid/ca",
+      "status": "unsupported",
+      "reason": "symlink",
+      "mode": "120000",
+      "size_bytes": null
+    }
+  ],
+  "problem_files": [
+    {
+      "path": "AUTHORS.rst",
+      "status": "analyzed",
+      "reason": null,
+      "object_oid": "6e017c9a915b56273db2f63107a676336f4764b5",
+      "size_bytes": 8037
+    },
+    {
+      "path": "ext/requests-logo.svg",
+      "status": "analyzed",
+      "reason": null,
+      "object_oid": "80406e7c06fc0d7c961fdd2bc1c6f8d7f69c1a54",
+      "size_bytes": 883794
+    },
+    {
+      "path": "tests/test_requests.py",
+      "status": "analyzed",
+      "reason": null,
+      "object_oid": "75d2deff2e0eb9dbc7add566ba6d050f8e95e29f",
+      "size_bytes": 106660
+    }
+  ],
+  "no_ground_truth": true,
+  "credentials_validated_externally": false,
+  "values_published": false,
+  "interpretation": "Complete enumeration and analysis within text-v1 scope; 13 classified unsupported objects are not analyzed contents. Findings are candidates, not verified leaks; exit 1 is not a clean baseline."
+}
