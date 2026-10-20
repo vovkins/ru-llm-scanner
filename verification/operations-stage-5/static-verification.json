@@ -1,7 +1,7 @@
 {
   "verification_version": 1,
   "status": "passed",
-  "checked_utc": "2026-10-20T13:25:55.457983+00:00",
+  "checked_utc": "2026-10-20T13:30:45.575483+00:00",
   "candidate_head": "e5e311504abcd6b62495159ab8fe239c410e3bd6",
   "commands": [
     {
@@ -20,7 +20,7 @@
   "contracts": {
     "synthetic_reports": 11,
     "invalid_cases_rejected": 22,
-    "local_links": 730
+    "local_links": 731
   },
   "documentation": {
     "verification_version": 1,
@@ -45,11 +45,8 @@
   },
   "git_diff_check": true,
   "sources_sha256": {
-    "AGENTS.md": "4d76a4bd7421b15d473ffd2016e88c7e486e91eff28f37f2839782f16b2ef594",
+    "AGENTS.md": "274669f8d5db7fa17adaa02f7361c12733ce16890fe010a39fb66e538b406561",
     "README.md": "533852b74fa5a14074ea690c00658a8bb3797b4d35fa81ec6f22a63cd7904de6",
-    "scripts/check_contracts.py": "0264ce533afa7640d7ea81258a2c5e24a379635a50ef44c701c3839eb89b3fc0",
-    "scripts/check_documentation.py": "c38775ad359a5fb3a5c22b801defbe8fdc606d8da2c0e6e2c2e1e6d6943666da",
-    "schemas/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
     "docs/README.md": "2c236422acfcc8b001f2247ba50ec115a703443718627ab13d992c988f20eba3",
     "docs/about.md": "b100fb5e02f15e22cf60f88e44b0de09c36e9210219e488bc260de2640cb7562",
     "docs/admin/README.md": "f1568a62a23b52da1cd874c920e0ba202e99e0d0af05f24efd7852a0af520790",
@@ -96,7 +93,13 @@
     "docs/updating-analyzer.md": "a2fab34b2a48e73f2c4e8ed1a945205654bcb503ae001e9b4dab26d4bfae7c70",
     "docs/upstream.md": "736b7872d4c4870a80c32a0d4144be12c502679a1e3fc5879f3d8cc924dbc509",
     "docs/user/README.md": "e9c20d65b4e13fb01fc7ea6844e3989cac1f2eee15cda4b8a707a60fdd9dc47a",
-    "verification/operations-stage-5/README.md": "7da103cbefce9f65d70d3d563515ec244116326d3a9e5f06c9ed6cd28c8d59e6",
+    "schemas/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
+    "scripts/check_contracts.py": "0264ce533afa7640d7ea81258a2c5e24a379635a50ef44c701c3839eb89b3fc0",
+    "scripts/check_documentation.py": "c38775ad359a5fb3a5c22b801defbe8fdc606d8da2c0e6e2c2e1e6d6943666da",
+    "verification/README.md": "39097c3ac2ca0fb6c25f536054d786c4b60fce40536c4daba9ce92b20810e217",
+    "verification/operations-dependencies/README.md": "6c870337b47c5e9667ac85fa2a81fce75d905b39e358462571fde7987f0890f1",
+    "verification/operations-dependencies/native-risk-detail.md": "14d3efc767dfba074212e8ccb82ba14878ce5ed6efb557019803ad4750f5cd9a",
+    "verification/operations-stage-5/README.md": "ee5fb0fbe30349a7a01350459db9b0ff47a08049f4d6ad5aeca259a5c008c611",
     "verification/operations-stage-5/readiness-matrix.md": "a27f66a7f2dd496b9a222e0d82000e572080282dd1abff18481940acb4db92c7",
     "verification/operations-stage-5/review-matrix.md": "a381508e64f490c696c378360f9101f6ff83f9d2183cd9970dbd7fe8daf0114c"
   },
@@ -104,5 +107,8 @@
   "unit_sources_matched": 64,
   "unit_evidence": "../operations-dependencies/unit-tests.json",
   "heavy_runtime_rerun": false,
-  "new_runtime_control": "control-verification.json"
+  "new_runtime_control": "control-verification.json",
+  "acceptance_pr": "https://github.com/vovkins/ru-llm-scanner/pull/30",
+  "staged_diff_check": true,
+  "acceptance_docs_only": true
 }

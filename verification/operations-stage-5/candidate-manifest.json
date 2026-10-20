@@ -249,5 +249,6 @@
     "status": "accepted_by_owner_for_closed_environment",
     "count": 4,
     "reference": "../operations-dependencies/risk-acceptance.md"
-  }
+  },
+  "acceptance_pr": "https://github.com/vovkins/ru-llm-scanner/pull/30"
 }

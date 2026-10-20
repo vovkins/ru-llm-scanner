@@ -31,7 +31,8 @@ runtime/deployment/source hashes, wheel/schema, модель/словарь/spaC
 [#23](https://github.com/vovkins/ru-llm-scanner/pull/23) →
 [#27](https://github.com/vovkins/ru-llm-scanner/pull/27) →
 [#28](https://github.com/vovkins/ru-llm-scanner/pull/28) →
-[#29](https://github.com/vovkins/ru-llm-scanner/pull/29) → draft PR итоговой приёмки.
+[#29](https://github.com/vovkins/ru-llm-scanner/pull/29) →
+[draft PR #30 итоговой приёмки](https://github.com/vovkins/ru-llm-scanner/pull/30).
 
 | Компонент | Platform Image ID, Linux ARM64 |
 | --- | --- |
