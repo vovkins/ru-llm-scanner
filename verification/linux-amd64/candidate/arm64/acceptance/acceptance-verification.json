@@ -1,0 +1,330 @@
+{
+  "foreign_containers_preserved": 0,
+  "history_is_not_audited": true,
+  "images": {
+    "analyzer": {
+      "image_id": "sha256:0cb2ece56abf10245650647f6e90f118b1286b6ba7d80eb33eca4560a513725d",
+      "image_reference_id": "sha256:eaf3d9e385b1ac310e66f36068279a51b535c15ac7c2a8aff75623cb21812090"
+    },
+    "scanner": {
+      "image_id": "sha256:30d21069eea3f7abf57a34c0c6e89004112229fb6bb5aef78eec391b3654d778",
+      "image_reference_id": "sha256:30d21069eea3f7abf57a34c0c6e89004112229fb6bb5aef78eec391b3654d778"
+    }
+  },
+  "input_unchanged": true,
+  "platform": "linux/arm64",
+  "runs": [
+    {
+      "assurance": "snapshot_verified",
+      "case": "snapshot-a",
+      "counts": {
+        "analyzed": 6,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 6,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 7.294,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "snapshot",
+      "report_sha256": "ac4e134274057efdec91b95b435d1cdef6faf0cb32c57e904afe94650ca7f43b"
+    },
+    {
+      "assurance": "baseline_verified",
+      "case": "diff-a-b",
+      "counts": {
+        "analyzed": 3,
+        "deleted": 2,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 1,
+        "target": 5,
+        "unsupported": 1,
+        "unverified": 0
+      },
+      "elapsed_seconds": 7.005,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "diff",
+      "report_sha256": "78e5d23c177d0ce7687e49ba9d8e7553ab378cf23dcdebd9d32a9f965e45c03d"
+    },
+    {
+      "assurance": "baseline_verified",
+      "case": "diff-b-c",
+      "counts": {
+        "analyzed": 1,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 3,
+        "target": 5,
+        "unsupported": 1,
+        "unverified": 0
+      },
+      "elapsed_seconds": 6.984,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "diff",
+      "report_sha256": "627e1b88aa44d91312cd170306f349aef951fa9938179f8acda858ca3e6637aa"
+    },
+    {
+      "assurance": "baseline_verified",
+      "case": "a-equals-b",
+      "counts": {
+        "analyzed": 0,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 4,
+        "target": 5,
+        "unsupported": 1,
+        "unverified": 0
+      },
+      "elapsed_seconds": 6.943,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "diff",
+      "report_sha256": "17895d30044267becb0e31f44389fd8d35e3fd9af0b3e586c00e2fbed317c132"
+    },
+    {
+      "assurance": "none",
+      "case": "profile-mismatch",
+      "counts": {
+        "analyzed": 0,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 0,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 6.968,
+      "exit_code": 2,
+      "findings": 0,
+      "mode": "diff",
+      "report_sha256": "6d17170ab3820a864be71e28778115dd7c0293ccb0d82cc17b43202dcbe03930"
+    },
+    {
+      "assurance": "changed_files_only",
+      "case": "neighbor-context-full-file",
+      "counts": {
+        "analyzed": 1,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 1,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 6.727,
+      "exit_code": 1,
+      "findings": 1,
+      "mode": "diff",
+      "report_sha256": "75c55fb37a9812047cd42e7d109a6a36a498fdc0e1c742facc6f339e590fc7ed"
+    },
+    {
+      "assurance": "snapshot_verified",
+      "case": "multiline-value",
+      "counts": {
+        "analyzed": 1,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 1,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 7.012,
+      "exit_code": 1,
+      "findings": 1,
+      "mode": "snapshot",
+      "report_sha256": "9a8591f970a0d2ac3655c81ec369bed880f45913ae02be888af13000a02f3c7e"
+    },
+    {
+      "assurance": "snapshot_verified",
+      "case": "merge-base-left",
+      "counts": {
+        "analyzed": 2,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 2,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 6.74,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "snapshot",
+      "report_sha256": "3deb82431ce0595aa8b0ad3435e06a2565bcd7af18d75c3120956d72728ce757"
+    },
+    {
+      "assurance": "baseline_verified",
+      "case": "explicit-merge",
+      "counts": {
+        "analyzed": 1,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 2,
+        "target": 3,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 6.685,
+      "exit_code": 1,
+      "findings": 1,
+      "mode": "diff",
+      "report_sha256": "69c7fe30043f25bc7b95d027cf207b4ca0259f167e2f9dc18f5f064a53e60fcb"
+    },
+    {
+      "assurance": "snapshot_verified",
+      "case": "history-clean-a",
+      "counts": {
+        "analyzed": 1,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 1,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 6.678,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "snapshot",
+      "report_sha256": "12b041f576bcdf38951ba6a250e169e39490f3b4ebd3c0e4a995fa9a841e80d6"
+    },
+    {
+      "assurance": "baseline_verified",
+      "case": "history-final-diff",
+      "counts": {
+        "analyzed": 0,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 1,
+        "target": 1,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 6.675,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "diff",
+      "report_sha256": "129fe1fbfe03a6e9e77a6663390bd27533b2a7f1c3551f67d5ccfe910a86d6e6"
+    },
+    {
+      "assurance": "snapshot_verified",
+      "case": "history-intermediate-snapshot",
+      "counts": {
+        "analyzed": 2,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 2,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 6.962,
+      "exit_code": 1,
+      "findings": 1,
+      "mode": "snapshot",
+      "report_sha256": "35c0f57ea4c6f15a210b2e7a5230f73cff3072584b3fdeda6ff6c1cc45c747d1"
+    },
+    {
+      "assurance": "snapshot_verified",
+      "case": "unicode-raw-crlf-encodings",
+      "counts": {
+        "analyzed": 5,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 5,
+        "unsupported": 0,
+        "unverified": 0
+      },
+      "elapsed_seconds": 7.252,
+      "exit_code": 1,
+      "findings": 5,
+      "mode": "snapshot",
+      "report_sha256": "7b5b2f4c9bf3298023e2276cd9e608540792858eaede69060b8b10a0328e140c"
+    },
+    {
+      "assurance": "snapshot_verified",
+      "case": "explicit-scope-unsupported",
+      "counts": {
+        "analyzed": 1,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 1,
+        "inherited": 0,
+        "target": 7,
+        "unsupported": 5,
+        "unverified": 0
+      },
+      "elapsed_seconds": 6.692,
+      "exit_code": 0,
+      "findings": 0,
+      "mode": "snapshot",
+      "report_sha256": "40fc1db46b6dcf27996398d0dab5d022b831f6d467597f04c28f4a31f5106c92"
+    },
+    {
+      "assurance": "snapshot_verified",
+      "case": "hostile-config-hooks-replace-links",
+      "counts": {
+        "analyzed": 2,
+        "deleted": 0,
+        "error": 0,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 3,
+        "unsupported": 1,
+        "unverified": 0
+      },
+      "elapsed_seconds": 6.977,
+      "exit_code": 1,
+      "findings": 1,
+      "mode": "snapshot",
+      "report_sha256": "5c7687c5e5238f85b6ef662c43f5587f1c3fa891c9891e329962ae540d327ff9"
+    },
+    {
+      "assurance": "none",
+      "case": "hostile-missing-object-no-fetch",
+      "counts": {
+        "analyzed": 1,
+        "deleted": 0,
+        "error": 1,
+        "excluded": 0,
+        "inherited": 0,
+        "target": 3,
+        "unsupported": 1,
+        "unverified": 0
+      },
+      "elapsed_seconds": 6.686,
+      "exit_code": 2,
+      "findings": 0,
+      "mode": "snapshot",
+      "report_sha256": "9c1ccc4d35dab14d53130b90b22861ff1e406bcc09e2927719ffc596358bb744"
+    }
+  ],
+  "sources_sha256": {
+    "scripts/check_acceptance.py": "49f3dd9aba6d14a66d10bc521765546dcd15d69c6a9e787e4dd84315b5e32dd7",
+    "scripts/docker_scanner.py": "79767acb5a9ea2fe2c7863bd5e03046e2ad82193306c68d0271627a9022d1e6f",
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+    "tests/git_fixtures.py": "5c7d05e8b5c896af805aee66e2837eb1c9b173469c9f763551b5e6415a671c89"
+  },
+  "status": "passed",
+  "verification_version": 1
+}

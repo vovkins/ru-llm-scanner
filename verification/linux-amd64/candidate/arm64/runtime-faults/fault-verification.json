@@ -1,0 +1,37 @@
+{
+  "cases": [
+    {
+      "analyzer_memory_sample": "1.054GiB / 3GiB",
+      "case": "actual-oom",
+      "exit_code": 2,
+      "memory_sample_is_peak": false,
+      "oom_killed": true
+    },
+    {
+      "analyzer_memory_sample": "1.048GiB / 3GiB",
+      "case": "cancel-after-findings",
+      "completed_findings_preserved": 1,
+      "exit_code": 2,
+      "memory_sample_is_peak": false,
+      "oom_killed": false
+    }
+  ],
+  "images": {
+    "analyzer": {
+      "image_id": "sha256:0cb2ece56abf10245650647f6e90f118b1286b6ba7d80eb33eca4560a513725d",
+      "image_reference_id": "sha256:eaf3d9e385b1ac310e66f36068279a51b535c15ac7c2a8aff75623cb21812090"
+    },
+    "scanner": {
+      "image_id": "sha256:30d21069eea3f7abf57a34c0c6e89004112229fb6bb5aef78eec391b3654d778",
+      "image_reference_id": "sha256:30d21069eea3f7abf57a34c0c6e89004112229fb6bb5aef78eec391b3654d778"
+    }
+  },
+  "input_unchanged": true,
+  "platform": "linux/arm64",
+  "sources_sha256": {
+    "scripts/check_runtime_faults.py": "d58c12c19122e7ca41a7085fe8bb78c9d1977b63b280efbace024e49584ddbb9",
+    "scripts/docker_scanner.py": "79767acb5a9ea2fe2c7863bd5e03046e2ad82193306c68d0271627a9022d1e6f"
+  },
+  "status": "passed",
+  "verification_version": 1
+}

@@ -1,0 +1,6 @@
+{
+  "run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39509568334",
+  "source_commit": "09a2d3f34d9a1de4ee74a5840a878e602f1232a6",
+  "acceptance_complete": false,
+  "complete_groups": "Native build, empty-store import/control and all integration suites both platforms. Jenkins strengthened fixture unresolved; CPU/RAM Requests measurement running."
+}

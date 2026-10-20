@@ -311,7 +311,12 @@ class JenkinsFixture:
 
     def result(self, build, label, expected, *, code=None):
         value = self.wait(
-            lambda: (v if (v := self.json(build + "api/json")).get("result") else None),
+            lambda: (
+                v
+                if (v := self.json(build + "api/json")).get("result")
+                and v.get("building") is False
+                else None
+            ),
             seconds=360,
             message="Jenkins build did not finish: " + label,
         )
@@ -692,6 +697,7 @@ def main():
                 "platform": "linux/amd64",
                 "agent": "native host process; controller executors disabled",
                 "declarative_validation": fixture.declarative_validation,
+                "completed_builds_only": True,
                 "failure": failure,
                 "validation_failure_diagnostics": validation_diagnostics,
                 "cases": fixture.records,

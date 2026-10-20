@@ -1,0 +1,134 @@
+[
+  {
+    "step": "base-pull",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 3.17
+  },
+  {
+    "step": "source-prepare",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 0.665
+  },
+  {
+    "step": "offline-prepare",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 10.5
+  },
+  {
+    "step": "analyzer-build",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 99.517
+  },
+  {
+    "step": "analyzer-seal",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 10.754
+  },
+  {
+    "step": "engine-export",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 0.716
+  },
+  {
+    "step": "wheel-build",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 0.715
+  },
+  {
+    "step": "scanner-prepare",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 1.868
+  },
+  {
+    "step": "scanner-build",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 12.444
+  },
+  {
+    "step": "verify",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 0.164
+  },
+  {
+    "step": "export",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 25.26
+  },
+  {
+    "step": "upstream-test-image",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 2.672
+  },
+  {
+    "step": "upstream-core",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 72.377
+  },
+  {
+    "step": "upstream-ner",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 7.9
+  },
+  {
+    "step": "parity",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 39.48
+  },
+  {
+    "step": "scan-integration",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 23.474
+  },
+  {
+    "step": "cli-integration",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 33.653
+  },
+  {
+    "step": "acceptance",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 110.745
+  },
+  {
+    "step": "docker-integration",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 106.233
+  },
+  {
+    "step": "runtime-faults",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 19.426
+  },
+  {
+    "step": "deployment-extras",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 40.08
+  },
+  {
+    "step": "linux-git",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 1.667
+  }
+]
