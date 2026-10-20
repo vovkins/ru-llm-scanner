@@ -56,6 +56,13 @@ class Candidate:
         self.steps.append(record)
         write_json(self.root / "steps.json", self.steps)
         print(json.dumps(record), flush=True)
+        if result.returncode != expected:
+            # Build inputs and these integration fixtures contain synthetic data.
+            # Real-repository reports are never passed to this diagnostic path.
+            print(
+                (self.root / (name + ".log")).read_text(errors="replace")[-10000:],
+                flush=True,
+            )
         require(result.returncode == expected, "Candidate step failed: " + name)
 
     def python(self, name, script, *args, **kwargs):
