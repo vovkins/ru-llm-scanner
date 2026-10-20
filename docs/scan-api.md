@@ -1,14 +1,13 @@
 # Внутренний API сканирования
 
-Этап 4 соединяет Git/text API, закреплённый Analyzer и словарь. Работает
-Python API для snapshot/diff; CLI, JSON/HTML writer и baseline подключены
-на этапе 5. [Dev quickstart](cli-quickstart.md). Это руководство для разработки,
+Python API соединяет Git/text, закреплённый Analyzer и словарь; CLI, JSON/HTML
+и baseline используют тот же pipeline. [Dev quickstart](cli-quickstart.md). Это руководство для разработки,
 не инструкция production-развёртывания.
 
 ## Подготовка и вызов
 
 Нужны Python 3.11+, Git, установленный пакет и доверенные артефакты
-[Analyzer](analyzer.md): подготовленный `.build/analyzer`, source lock,
+[Analyzer](analyzer.md): подготовленный context, source lock,
 runtime lock измеренного образа и соответствующий запущенный Analyzer.
 Модель при вызове API не скачивается. Адрес ниже должен быть доступен из
 окружения вызывающего процесса и указывать на закреплённый сервис.
@@ -22,8 +21,8 @@ from ru_llm_scanner.engine import ScanEngine
 from ru_llm_scanner.pipeline import scan_repository
 
 engine = ScanEngine.from_context(
-    Path(".build/analyzer"),
-    Path("locks/analyzer-cpu-linux-arm64.runtime.lock.json"),
+    Path("/trusted/build/analyzer"),
+    Path("/trusted/build/analyzer.runtime.lock.json"),
 )
 config = configuration_from_mapping(parameters={
     "analyzer_url": "http://analyzer:5001",
@@ -50,7 +49,7 @@ validation и сверяется с полным деревом A/профиле
 переданного JSON. Явные параметры заменяют отдельные поля, списки целиком.
 `EffectiveConfig()` создаёт defaults. Все варианты используют одни валидаторы;
 scanner не ищет настройки в проверяемом репозитории или окружении.
-[Полный формат и ограничения](configuration.md).
+[Полный формат и ограничения](reference/configuration.md).
 
 `ScanEngine.from_context` проверяет подготовленный контекст. Для отдельной
 упаковки assets доступен `ScanEngine.from_artifacts(source_lock=...,
@@ -83,7 +82,7 @@ commit B, file ID, raw path в base64, стабильный finding ID, offsets 
 координаты. `value == text[start_offset:end_offset]` проверяется до принятия
 файла. Повторы по разным местам/источникам сохраняются; одинаковый ID
 дедуплицируется с максимальным score. Категории и источники расширяемы.
-[Правила ID и сортировки](reports.md).
+[Правила ID и сортировки](reference/reports.md).
 
 Offsets считаются в Unicode code points декодированного исходного текста без
 BOM. Строки/столбцы с 1, конец исключающий; CRLF — один разделитель, CR/LF
@@ -175,16 +174,19 @@ Scanner работает UID 65534/read-only без capabilities в loopback nam
 
 Для отдельной dev-проверки pipeline текущий рецепт содержит `httpx==0.28.1`
 и `jsonschema[format]==4.26.0`. Собирайте новый локальный tag из минимального
-контекста, не из корня checkout:
+контекста, не из корня checkout. Передайте context/runtime одного проверенного
+комплекта из [admin build](admin/build.md), без подстановки старого lock:
 
 ```sh
-mkdir -p .build/scan-dev-context
-cp docker/scan-test.Dockerfile .build/scan-dev-context/Dockerfile
-docker build --platform linux/arm64 -t ru-llm-scanner-scan-tests:operations-fixes .build/scan-dev-context
+ANALYZER_CONTEXT=/trusted/build/analyzer
+RUNTIME_LOCK=/trusted/build/analyzer.runtime.lock.json
+mkdir -p .build/scan-dev-new
+cp docker/scan-test.Dockerfile .build/scan-dev-new/Dockerfile
+docker build --platform linux/arm64 -t ru-llm-scanner-scan-tests:dev-new .build/scan-dev-new
 python scripts/check_scan_integration.py \
-  --context .build/analyzer \
-  --runtime-lock locks/analyzer-cpu-linux-arm64.runtime.lock.json \
-  --scanner-image ru-llm-scanner-scan-tests:operations-fixes \
+  --context "$ANALYZER_CONTEXT" \
+  --runtime-lock "$RUNTIME_LOCK" \
+  --scanner-image ru-llm-scanner-scan-tests:dev-new \
   --output-dir .build/scan-verification-new
 ```
 

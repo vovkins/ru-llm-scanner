@@ -1,165 +1,70 @@
-# Подготовка и проверка Analyzer
+# Analyzer: API и проверки разработчика
 
-На этапе 2 реализован механизм обнаружения. Эти команды собирают и проверяют
-Analyzer. Команды `snapshot/diff`, отчёты и baseline доступны по
-[dev quickstart CLI](cli-quickstart.md) и [штатному Docker quickstart](docker-quickstart.md).
-Репетиция обновления/отката проверена на этапе 7: [инструкция](updating-analyzer.md).
+Полная последовательность подготовки/build/seal/engine/scanner находится в
+[руководстве администратора](admin/build.md). Здесь детали адаптера и отдельных
+проверок; обычный пользователь работает с [готовыми контейнерами](user/README.md).
 
-## Окружение
+## Контекст, runtime и модель
 
-Нужны Python 3.11+, Git и Docker с BuildKit и платформенным inspect (API 1.49+).
-Проверено на macOS/Apple Silicon, Docker 29.6.1, Linux ARM64, CPU; host-инструменты
-проверены на Python 3.12.14, образ использует Python 3.11.16.
-В примерах `python3.11` можно заменить другим доступным Python 3.11+.
+[Source lock](../upstream.lock.json) закрепляет tracked export-list, upstream SHA,
+model manifest, патчи before/after, constraints и spaCy tree. `prepare` экспортирует
+только разрешённые Git bytes, строго применяет patch и создаёт manifest. `verify-context`
+отвергает changed/extra/symlink inputs. Host source не равен содержимому рабочей папки proxy.
 
-```bash
-python3.11 -m venv .venv
-.venv/bin/python -m pip install -e . -r requirements-dev.txt
-```
+`build` использует профиль/constraints; `seal` проверяет фактические model files,
+packages, sources, spaCy/settings и image identity без внешней сети. Измеренный lock
+прошлой CPU ARM64 сборки лежит в [locks](../locks/analyzer-cpu-linux-arm64.runtime.lock.json),
+но fresh image требует собственного seal. [Reference/platform IDs и доверие](reference/artifacts.md).
+Модель/каталог/HTTP-поля — в [справочнике](reference/detection.md).
 
-Для подготовки/сборки могут потребоваться сеть или внутренние зеркала.
-Веса NER (около 709 MB) и библиотеки входят в готовый образ. Выходные данные
-инструментов хранятся в `.build/`, исключённом из Git.
+## Raw/patched parity
 
-## Закрепление
+Предполагаются готовый curated context, sealed image и **его** runtime lock.
+Задайте пути к одному комплекту, output должен отсутствовать:
 
-[upstream.lock.json](../upstream.lock.json) — source lock v1: конкретный SHA
-прокси, 97 SHA-256 файлов (Analyzer, синтетические тесты, словарь, notices),
-модель/ревизия и хеши всех её файлов, патч и хеши до/после, build-профиль.
-[Constraints CPU ARM64](../locks/requirements-cpu-linux-arm64.txt) закрепляют
-71 фактически установленный пакет. Профиль также фиксирует дерево файлов spaCy.
-Список версий не является утверждением о побайтово одинаковом image при любой
-новой сборке: системные пакеты и метаданные сборки тоже влияют на результат.
-Фактический образ проверяется отдельно, получает новый runtime lock и проверки.
-
-Подготовка из локального клона читает объекты конкретного коммита:
-
-```bash
-.venv/bin/python scripts/analyzer.py prepare \
-  --source ../ru-llm-proxy --output .build/analyzer --profile cpu-linux-arm64
-.venv/bin/python scripts/analyzer.py verify-context --context .build/analyzer
-```
-
-Рабочие изменения, `.env` (даже закоммиченный вне export-list), secrets и
-неперечисленные файлы не экспортируются. Патч применяется собственным строгим
-разбором unified diff: без shell, fuzz, смещения или игнорирования хешей.
-Папка назначения должна отсутствовать. Для обновления используйте новую папку,
-а не удаляйте пользовательские каталоги автоматически.
-
-Альтернатива — явное получение того же публичного SHA на этапе подготовки:
-
-```bash
-.venv/bin/python scripts/analyzer.py prepare \
-  --fetch --output .build/analyzer-from-github --profile cpu-linux-arm64
-```
-
-`--source` и `--fetch` взаимоисключающие. Скачивание не выполняется при анализе.
-Оба способа проверены и дали одинаковый подготовленный контекст.
-
-## Сборка и runtime lock
-
-```bash
-.venv/bin/python scripts/analyzer.py build \
-  --context .build/analyzer --tag ru-llm-scanner-analyzer:local-cpu
-.venv/bin/python scripts/analyzer.py seal \
-  --context .build/analyzer --image ru-llm-scanner-analyzer:local-cpu \
-  --output .build/runtime-cpu.lock.json
-```
-
-Сборка использует закреплённый Dockerfile upstream и базовый digest Python,
-добавляет constraints, словарь, notices, offline inventory probe и настройки
-того же профиля прокси. CPU- и GPU-цели исходного Dockerfile сохранены.
-
-`seal` проверяет метки build context, платформу, исходники, все модельные файлы,
-spaCy, версии пакетов и настройки в контейнере с `--network none`. Сохраняются
-реальные provenance/analysis signature и идентификаторы Docker, не заглушки.
-Некорректный результат не записывается как финальный runtime lock.
-
-Измеренный lock проверенного CPU ARM64 образа сохранён в
-[locks](../locks/analyzer-cpu-linux-arm64.runtime.lock.json), результаты — в
-[verification](../verification/stage-2/README.md). Это запись локальной сборки;
-образ не опубликован, повторная сборка требует собственного `seal`.
-
-В Docker 29/containerd ID обычного inspect может быть OCI index, а его
-платформенный manifest не всегда принимается как локальная ссылка запуска.
-Поэтому runtime lock хранит отдельно `image_id` для профиля, `image_id_kind`,
-`image_descriptor` и `image_reference_id` для запуска с указанной платформой.
-Нельзя подменять платформенный digest плавающим tag или общим index.
-Получение платформенного состояния опирается на
-[docker image inspect --platform](https://docs.docker.com/reference/cli/docker/image/inspect/).
-
-Проверка lock без Docker: `load_runtime_lock(path, source_lock)`; она проверяет
-структуру и согласованность, не удостоверяет подлинность произвольного образа.
-Храните lock как доверенный артефакт сборки. Чужой JSON не становится доверенным
-только после прохождения валидации.
-
-## Корпоративная сеть и CA
-
-`prepare --certs-dir /trusted/ca` явно копирует верхнеуровневые `*.crt` и
-включает их хеши в prepared manifest. Символические ссылки не принимаются.
-Соседняя локальная `certs/` автоматически не читается.
-
-`build --build-arg NAME` передаёт значение из окружения Docker; можно также
-явно задать `NAME=value`. Поддержаны `HTTP_PROXY`, `HTTPS_PROXY`, `NO_PROXY`,
-`PIP_INDEX_URL`, `PIP_TRUSTED_HOST`, `PIP_PROXY`, `PYTORCH_INDEX_URL`,
-`PYTORCH_GPU_INDEX_URL`, `NER_MODEL_PROXY`. Поведение соответствует возможностям
-сборки прокси. Не передавайте действующие ключи/пароли в build args: upstream
-Docker/pip могут выводить параметры сборки в лог. Зеркала должны содержать
-точные закреплённые версии; подмена версии ради успешной установки недопустима.
-
-## Проверки с настоящей моделью
-
-```bash
+```sh
+ANALYZER_CONTEXT=/trusted/build/analyzer
+RUNTIME_LOCK=/trusted/build/analyzer.runtime.lock.json
 .venv/bin/python scripts/check_analyzer_integration.py \
-  --context .build/analyzer --runtime-lock .build/runtime-cpu.lock.json \
+  --context "$ANALYZER_CONTEXT" --runtime-lock "$RUNTIME_LOCK" \
   --output-dir .build/analyzer-parity-new
 ```
 
-Контейнер запускается read-only с `--network none`, отдельным tmpfs и папкой
-результатов. В одной и той же среде последовательно запускаются исходный
-сервер из закреплённых байтов и сервер с патчем. Проверяются все 77 случаев
-корпуса NER, интервалы/значения/категории и score с абсолютным допуском `1e-7`,
-исходные quality gates, длинный текст, Unicode и словарные совпадения.
-Проверяются отказ API без патча, неверная подпись, остановленный сервис,
-неполная модель и ошибочная контрольная сумма. Успешный regex-only fallback
-при отказе обязательной NER не допускается. Внешние LLM не вызываются.
+В одной среде поочерёдно запускаются исходный и patched серверы. Проверяются
+77 случаев NER, категории/интервалы/значения/score (absolute tolerance `1e-7`),
+quality gates закреплённого корпуса, длинный текст, Unicode, 4 dictionary cases,
+отказ непатченного API/неверной подписи/остановленного сервиса/модели/checksum.
+Отказ обязательной NER не допускает успешного regex-only fallback.
 
-Docker kernel может создавать неактивные tunnel-интерфейсы и при network=none.
-Проверка подтверждает только loopback в состоянии UP; остальные интерфейсы
-не считаются доступным интернетом по одному присутствию в sysfs.
-
-Каталог результатов должен отсутствовать: harness создаёт его с `0700`.
 Команды `check_analyzer_integration.py` и `check_rehearsal_parity.py` используют
-общий `parity_verification.py`. До запуска проверяются фактические immutable
-reference/platform IDs; отсутствующий образ не скачивается. Контейнер получает
-только allowlisted context, scanner `.py`/`.json` и тест, а не корень checkout;
-работает с `--pull never`, `--network none`, read-only input/root, UID/GID
-оператора, без capabilities и с `no-new-privileges`. У каждого запуска свои
-имя и ownership label; finally удаляет только контейнеры с этим label.
+общий helper: actual immutable image IDs до run, non-root host UID/GID, pull never,
+network none/read-only root/input, cap-drop ALL/no-new-privileges, отдельный tmpfs.
+Монтируются только allowlisted context, scanner `.py`/`.json` и тест; `.git`, `.env`,
+посторонние `.build` и пользовательские reports недоступны. Имя/ownership label
+уникальны, finally удаляет только собственные контейнеры.
 
-Отчёт `offline-verification.json` содержит метрики/идентификаторы случаев,
-без исходных текстов и найденных значений. Это оценка корпуса upstream,
-и не распространяет измеренное качество на любые произвольные исходники.
-Отдельные метрики кода доступны в [code-v1](../verification/stage-7/README.md).
+Проверка sysfs требует только loopback в состоянии UP: неактивные tunnel interfaces
+сами по себе не доказывают внешний маршрут. Сохраняются private log и безопасный
+`offline-verification.json` с hashes/метриками без исходных значений.
+NER parity и качество этого корпуса не заменяют [независимый code-v1](../verification/README.md).
 
-## Быстрые тесты upstream и адаптера
+## Upstream subset без весов NER
 
-```bash
-.venv/bin/python -m unittest discover -s tests -v
-.venv/bin/python scripts/check_contracts.py
-.venv/bin/python scripts/analyzer.py build --context .build/analyzer \
-  --tag ru-llm-scanner-analyzer:local-tests --test-image
-.venv/bin/python scripts/check_upstream_tests.py --context .build/analyzer \
-  --image ru-llm-scanner-analyzer:local-tests \
-  --output .build/verification/upstream-tests.json
+Для prepared context того же source/profile:
+
+```sh
+.venv/bin/python scripts/analyzer.py build --context "$ANALYZER_CONTEXT" \
+  --tag ru-llm-scanner-analyzer:upstream-tests --test-image
+.venv/bin/python scripts/check_upstream_tests.py --context "$ANALYZER_CONTEXT" \
+  --image ru-llm-scanner-analyzer:upstream-tests \
+  --output .build/upstream-tests-new.json
 ```
 
-Upstream test-image не содержит весов NER. В него read-only монтируется полный
-закреплённый набор тестов и синтетический DKB-корпус, без исполнения команд
-из файлов корпуса. Проверяются распознаватели, credentials, слияние,
-кодированные значения, окна текста и NLP-контракт. Полный локальный лог
-может содержать синтетические значения при падении assert; в машинном отчёте
-только итог, версии пакетов, перечень тестов и provenance.
+Test-image не содержит весов NER. Полный закреплённый набор tests/synthetic corpus
+монтируется read-only; содержимое corpus не исполняется. Проверяются rules,
+credentials, encoded values, merging, windows и NLP-контракт. Assertion logs
+могут содержать синтетические значения и остаются локальными; отчёт содержит
+counts/versions/provenance. Unit и prepared assets — [отдельная группа](development.md#группы-проверок-и-assets-test-01).
 
 ## Python API адаптера
 
@@ -168,44 +73,33 @@ from pathlib import Path
 from ru_llm_scanner.analyzer import AnalyzerClient, ExpectedAnalyzer
 
 expected = ExpectedAnalyzer.from_runtime_lock(
-    Path(".build/runtime-cpu.lock.json"), Path("upstream.lock.json")
+    Path('/trusted/build/analyzer.runtime.lock.json'), Path('upstream.lock.json')
 )
 
 async def detect(text):
-    async with AnalyzerClient("http://analyzer:5001", expected) as client:
+    async with AnalyzerClient('http://analyzer:5001', expected) as client:
         return await client.analyze(text)
 ```
 
-Пример показывает API, не запускает сам сервис: имя `analyzer` должно быть
-доступно во внутренней сети [штатного Compose запуска](docker-quickstart.md).
-Адаптер отключает environment proxies и
-redirects, не повторяет анализ, ограничивает параллельность и размер ответа.
-Общий дедлайн охватывает ожидание слота, health, анализ и проверку после него;
-он действует и при медленно поступающих кусках ответа. [HTTPX timeout](https://www.python-httpx.org/advanced/timeouts/)
-сам по себе ограничивает сетевую неактивность, поэтому дополнен asyncio deadline.
-Значение `Detection.value` не входит в repr. Ошибки содержат только bounded code.
+Пример не запускает сервис: `analyzer` должен быть доступен во внутренней сети.
+Адаптер отключает environment proxies/redirects, ограничивает параллельность/ответ,
+не повторяет анализ. Async deadline охватывает slot/health/analyze/проверки после
+ответа, включая медленное поступление chunks. `Detection.value` не входит в repr,
+ошибки содержат только bounded code.
 
-`DictionaryDetector.from_context(path)` использует проверенные policy/rules
-upstream и возвращает отдельные `DICTIONARY_TERM` с исходными смещениями.
-Замены не выполняются; неоднозначность восстановления чужого replacement
-не имеет смысла для поиска. Невалидная конфигурация правил отклоняется.
+`DictionaryDetector.from_context(path)` загружает проверенные policy/rules и
+возвращает отдельные `DICTIONARY_TERM` с исходными смещениями без замены текста.
+Invalid rules отвергаются. Для общей обработки файлов — [Scan API](scan-api.md).
 
 ## Платформы и диагностика
 
-| Возможность | Статус |
-| --- | --- |
-| CPU Linux ARM64 | Сборка, seal, реальная модель и parity проверены |
-| GPU Dockerfile и CUDA-политика upstream | Сохранены; GPU runtime lock не изготовлен |
-| GPU inference | Не проверен: стенд Apple Silicon без CUDA |
-| CPU Linux AMD64 и другие платформы | Нужны собственные constraints/base/spaCy pins и отдельный проверенный профиль |
+CPU Linux ARM64 build/seal/real model подтверждены [evidence](../verification/README.md).
+GPU targets сохранены в upstream; GPU inference/runtime и AMD64 не проверены.
+Нужны отдельные base/constraints/spaCy pins/lock и действительная приёмка;
+ARM64 CPU lock не переносится на CUDA. Скрытого GPU→CPU fallback нет.
 
-Нельзя применять ARM64 base digest и CPU constraints к GPU. Для новой платформы
-создаётся отдельный build profile с реальными артефактами и проверками.
-Неподдержанный ключ профиля отклоняется, скрытого GPU→CPU fallback нет.
-
-`Prepared context changed` — подготовьте заново в новой папке; не редактируйте
-manifest вручную. `Installed runtime packages differ` / spaCy mismatch —
-проверьте зеркало и constraints, не ослабляйте pinning. `analyzer_profile_mismatch`
-— проверьте runtime lock/модель/настройки. `analyzer_contract_error` — проверьте
-наличие патча и формат ответа. Модель должна достигнуть ready/warmed-up;
-отсутствующие/повреждённые файлы дают отказ.
+`Prepared context changed` — новая подготовка в новой папке, не ручная правка
+manifest. Package/spaCy mismatch — сверка mirrors и pins, не ослабление constraints.
+`analyzer_profile_mismatch` — runtime/model/settings; `analyzer_contract_error` —
+API patch/формат. Missing/corrupt model даёт отказ; ready/warmed-up обязательны.
+[Обновление/откат](admin/updating-analyzer.md), [типовые ошибки](reference/errors.md).

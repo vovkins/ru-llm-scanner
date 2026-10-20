@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_kind": "contract_example",
+  "report_id": "1560a79b-c14e-51ee-80fc-cfb327770808",
+  "created_at": "2026-10-18T00:00:00Z",
+  "scanner": {
+    "version": "0.0.0-spec"
+  },
+  "scan": {
+    "mode": "snapshot",
+    "target_ref": "23bb78170f853daa8c4c16c6bec5c203cb06d477",
+    "base_ref": null,
+    "object_format": "sha1",
+    "target_commit": "23bb78170f853daa8c4c16c6bec5c203cb06d477",
+    "base_commit": null,
+    "target_tree": "f350562430a84883b2b6b89e4738465ce9a73abe"
+  },
+  "configuration": {
+    "config_version": "1.0.0",
+    "analysis": {
+      "language": "ru",
+      "score_threshold": 0.35,
+      "entities": null,
+      "dictionary_enabled": true
+    },
+    "scope": {
+      "policy_version": "text-v1",
+      "include": [
+        "**"
+      ],
+      "exclude": [],
+      "encoding_overrides": [],
+      "max_file_bytes": 10485760
+    },
+    "execution": {
+      "analyzer_url": "http://analyzer:5001",
+      "connect_timeout_seconds": 5,
+      "analyze_timeout_seconds": 600,
+      "ready_timeout_seconds": 120,
+      "concurrency": 1
+    },
+    "presentation": {
+      "context_lines": 2
+    }
+  },
+  "engine": {
+    "scanner_semantics": "scanner-v1",
+    "upstream_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
+    "analyzer_image_digest": "sha256:bbb9a30ac377725931b09171c74994e4428edd32294adb6bf49285e786715299",
+    "analyzer_signature": "fdcd9ad20ff35ae5708238c1bbb2f47a7a3ae10840c8e5bc2c1b2e7cee3d6e12",
+    "model_id": "fef2/ner_rus_bert-secret_detection",
+    "model_revision": "52b5b0745aac14f73fcf2ac0f91d9b5001a85ae4",
+    "model_weights_sha256": "6a2c875d02398554ec69384f489a0bf4fe3505fc347c6cdd3385d4fd31ef21a4",
+    "patchset_sha256": "43ed118cf988372c7a77fdae71638818ba76dbac63ff73b37e873e696b1c00f5",
+    "dictionary_sha256": "d88af27fed56e376a51e032c2ca8dd90c5be1f6f616fed3828fe3ee7a1d45053",
+    "profile_sha256": "66b2e6730f5d59c7a76c5eca72372372b86270845f0776434a1f6b8c1fabe9c9"
+  },
+  "baseline": {
+    "status": "not_applicable",
+    "required": false,
+    "report_id": null,
+    "artifact_sha256": null,
+    "mismatch_reasons": []
+  },
+  "coverage": {
+    "complete": true,
+    "enumeration_complete": true,
+    "manifest_sha256": "93844e734b38285c8c2433ca737913b3f24b2fdfd130054f50f86a7c37fed6ee",
+    "counts": {
+      "target": 1,
+      "analyzed": 1,
+      "inherited": 0,
+      "unverified": 0,
+      "excluded": 0,
+      "unsupported": 0,
+      "error": 0,
+      "deleted": 0
+    }
+  },
+  "files": [
+    {
+      "id": "b01a694798646d2a12086ed6715623e491c5ce2465c39e47ac47f73f37725a6d",
+      "path": "contacts.txt",
+      "path_bytes_b64": "Y29udGFjdHMudHh0",
+      "object_oid": "068d799f3e31168ddaeec42cc1770f4ef7d942df",
+      "mode": "100644",
+      "size_bytes": 81,
+      "change": "snapshot",
+      "previous_path": null,
+      "status": "analyzed",
+      "reason": null,
+      "encoding": "utf-8",
+      "evidence_report_id": null
+    }
+  ],
+  "deleted_files": [],
+  "findings": [
+    {
+      "id": "3bd1838e93f53a1938bc122c234ed58c753879a01af16cbdb6c8841de1a100f2",
+      "file_id": "b01a694798646d2a12086ed6715623e491c5ce2465c39e47ac47f73f37725a6d",
+      "category": "EMAIL_ADDRESS",
+      "path": "contacts.txt",
+      "commit": "23bb78170f853daa8c4c16c6bec5c203cb06d477",
+      "start_offset": 11,
+      "end_offset": 32,
+      "start_line": 1,
+      "start_column": 12,
+      "end_line": 1,
+      "end_column": 33,
+      "value": "audit@example.invalid",
+      "context": {
+        "start_line": 1,
+        "end_line": 2,
+        "text": "😀 Контакт: audit@example.invalid\r\nРезерв: audit@example.invalid\r\n"
+      },
+      "source": "structural",
+      "score": 0.85,
+      "rule_id": null
+    },
+    {
+      "id": "e0a908bc09231de6d5a81f012bcb488c01563f9809161c0e773a6331b2e2066f",
+      "file_id": "b01a694798646d2a12086ed6715623e491c5ce2465c39e47ac47f73f37725a6d",
+      "category": "EMAIL_ADDRESS",
+      "path": "contacts.txt",
+      "commit": "23bb78170f853daa8c4c16c6bec5c203cb06d477",
+      "start_offset": 42,
+      "end_offset": 63,
+      "start_line": 2,
+      "start_column": 9,
+      "end_line": 2,
+      "end_column": 30,
+      "value": "audit@example.invalid",
+      "context": {
+        "start_line": 1,
+        "end_line": 2,
+        "text": "😀 Контакт: audit@example.invalid\r\nРезерв: audit@example.invalid\r\n"
+      },
+      "source": "structural",
+      "score": 0.85,
+      "rule_id": null
+    }
+  ],
+  "errors": [],
+  "result": {
+    "status": "findings",
+    "exit_code": 1,
+    "assurance": "snapshot_verified",
+    "findings_count": 2
+  }
+}
