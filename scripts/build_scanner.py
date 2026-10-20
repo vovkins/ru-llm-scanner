@@ -89,6 +89,11 @@ def prepare(args):
         shutil.copyfile(args.engine_dir / name, context / "engine" / name)
     shutil.copyfile(ROOT / "docker/scanner.Dockerfile", context / "Dockerfile")
     shutil.copyfile(ROOT / "docker/probe_runtime.py", context / "probe_runtime.py")
+    notices = context / "distribution-licenses"
+    notices.mkdir()
+    for name in ("LICENSE", "DISTRIBUTION_NOTICES.md", "THIRD_PARTY_NOTICES.md"):
+        shutil.copyfile(ROOT / name, notices / name)
+    shutil.copytree(ROOT / "licenses", notices / "licenses")
     shutil.copyfile(args.wheel, context / "wheels" / args.wheel.name)
     tls = ssl.create_default_context(cafile=args.ca) if args.ca else None
     materialize(

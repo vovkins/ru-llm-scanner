@@ -1,5 +1,8 @@
 # Source context and all inputs are verified before an offline build.
 FROM __BASE__ AS scanner-analyzer
+LABEL org.opencontainers.image.source="https://github.com/vovkins/ru-llm-scanner" \
+      org.opencontainers.image.version="0.1.0" \
+      org.opencontainers.image.description="Offline sensitive-data Analyzer for ru-llm-scanner"
 COPY offline/debs/ /tmp/debs/
 RUN dpkg -i /tmp/debs/*.deb && rm -rf /tmp/debs
 COPY offline/wheels/ /tmp/wheels/
@@ -21,6 +24,7 @@ COPY scanner_build/source-lock.json /opt/scanner/upstream.lock.json
 COPY litellm_guardrails/dictionary_policy.py /opt/scanner/dictionary_policy.py
 COPY litellm_guardrails/dictionary-substitutions.default.json /opt/scanner/dictionary.json
 COPY THIRD_PARTY_NOTICES.md /opt/scanner/THIRD_PARTY_NOTICES.md
+COPY distribution-licenses/ /opt/scanner/licenses/
 COPY offline/artifacts.lock.json /opt/scanner/offline-artifacts.lock.json
 ENV HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HUB_DISABLE_TELEMETRY=1 \
     TOKENIZERS_PARALLELISM=false PYTHONDONTWRITEBYTECODE=1 \

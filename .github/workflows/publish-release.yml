@@ -1,0 +1,35 @@
+name: Publish verified v0.1.0 images
+on:
+  workflow_dispatch:
+    inputs:
+      bundle_sha256:
+        description: SHA-256 of the reviewed frozen draft offline archive
+        type: string
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: publish-v0.1.0
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 45
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4
+        with:
+          version: v29.6.1
+          daemon-config: '{"features":{"containerd-snapshotter":true}}'
+      - name: Verify frozen artifacts, exercise offline runtime, push exact images
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          BUNDLE_SHA256: ${{ inputs.bundle_sha256 }}
+        run: python3 scripts/publish_release.py

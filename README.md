@@ -36,6 +36,13 @@ Docker/Compose и non-root доступ к daemon; venv/исходный proxy �
 Сам по себе checkout scanner без подготовки images к запуску не готов.
 [Полные предусловия и последовательность](docs/user/README.md).
 
+Готовый комплект **v0.1.0 для Linux ARM64** распространяется через
+[GitHub Releases](https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.1.0).
+Два публичных образа размещаются в GitHub Container Registry:
+`ghcr.io/vovkins/ru-llm-scanner:0.1.0` и
+`ghcr.io/vovkins/ru-llm-scanner-analyzer:0.1.0`.
+[Получение релиза, проверка и офлайн-установка](docs/admin/releases.md).
+
 ## Возможности
 
 | Режим | Что проверяется |
@@ -78,8 +85,8 @@ Staged/untracked/незакоммиченные изменения не вход
 
 ## Границы и статус
 
-Версия **`0.1.0.dev0`**, подготовка к эксплуатации продолжается. Опубликованного
-release/registry-комплекта нет. Подтверждённая среда — CPU Linux ARM64 внутри
+Версия **`0.1.0`**, первый выпуск для локального использования с явными
+ограничениями ниже. Подтверждённая среда — CPU Linux ARM64 внутри
 Docker Desktop на Apple Silicon. AMD64/GPU, реальный Linux host/Jenkins controller
 и другой физический offline host не объявлены проверенными.
 [Матрица выполненных проверок](verification/README.md).
@@ -117,6 +124,6 @@ recall **89.19%**. Техническая parity на 46/46 файлах — о�
 [Обновление Analyzer](docs/admin/updating-analyzer.md) ·
 [План подготовки к эксплуатации](https://github.com/vovkins/ru-llm-scanner/issues/16)
 
-Лицензия scanner пока не выбрана. [Статус и происхождение компонентов](docs/licensing.md),
+Лицензия scanner — [MIT](LICENSE). [Происхождение и лицензии компонентов](docs/licensing.md),
 [сторонние уведомления](THIRD_PARTY_NOTICES.md). Не публикуйте действующие секреты
 или полные отчёты в Issues; приватный канал сообщения согласуется с владельцем.
