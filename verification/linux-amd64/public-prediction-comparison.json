@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "findings": 612,
+  "coverage": {
+    "analyzed": 119,
+    "inherited": 0,
+    "unverified": 0,
+    "excluded": 0,
+    "unsupported": 13,
+    "error": 0,
+    "target": 132,
+    "deleted": 0
+  },
+  "maximum_score_absolute_delta": 4.5299530029296875e-06,
+  "score_absolute_tolerance": 1e-05,
+  "reference_configuration_equal": true,
+  "raw_values_published": false,
+  "source_run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39504766172"
+}

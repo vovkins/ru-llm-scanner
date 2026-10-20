@@ -62,6 +62,17 @@ jobs:
             exit 1
           fi
           lscpu -J > .build/evidence/cpu.json
+          python - <<'PY'
+          import json, os, platform, sys
+          from pathlib import Path
+          memory = dict(line.split(':', 1) for line in Path('/proc/meminfo').read_text().splitlines())
+          Path('.build/evidence/environment.json').write_text(json.dumps({
+              'system': platform.platform(), 'machine': platform.machine(),
+              'host_python': sys.version, 'logical_cpus': os.cpu_count(),
+              'host_memory_total_kib': int(memory['MemTotal'].split()[0]),
+              'os_release': platform.freedesktop_os_release(),
+          }, indent=2)+'\n')
+          PY
           docker info --format '{{json .}}' > .build/docker-info-private.json
           docker version > .build/evidence/docker-version.txt
           docker compose version > .build/evidence/compose-version.txt
@@ -70,8 +81,23 @@ jobs:
         id: build
         run: |
           python scripts/check_cpu_candidate.py build --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache --download --offline-firewall
+      - name: Freeze candidate and import into an empty Docker store
+        id: fresh
+        if: always() && steps.build.outcome == 'success'
+        run: |
+          python scripts/assemble_cpu_bundle.py --candidate .build/native --output .build/candidate-bundle
+          python scripts/check_fresh_install.py --bundle .build/candidate-bundle --output-dir .build/native/fresh-install
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.build.outcome == 'success'
+        with:
+          name: native-${{ matrix.arch }}-fresh-install
+          path: |
+            .build/native/fresh-install/fresh-install.json
+            .build/native/fresh-install/installed-control.json
+          retention-days: 3
       - name: Run native integration gates
         id: integration
+        if: always() && steps.build.outcome == 'success'
         run: |
           python scripts/check_cpu_candidate.py integration --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -100,6 +126,9 @@ jobs:
       - name: Measure native libraries and corresponding source closure
         if: always() && steps.build.outcome == 'success'
         run: python scripts/capture_native_inventory.py --deployment-lock .build/native/deployment.json --output-dir .build/native/native-inventory
+      - name: Measure bounded synthetic capacity
+        if: always() && steps.build.outcome == 'success'
+        run: python verification/operations-ner-windowing/probe.py --deployment-lock .build/native/deployment.json --output-dir .build/native/capacity
       - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
         if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
         with:
@@ -114,12 +143,6 @@ jobs:
           name: native-amd64-jenkins
           path: .build/jenkins/jenkins-verification.json
           retention-days: 3
-      - name: Freeze candidate and import into an empty Docker store
-        id: fresh
-        if: always() && steps.build.outcome == 'success'
-        run: |
-          python scripts/assemble_cpu_bundle.py --candidate .build/native --output .build/candidate-bundle
-          python scripts/check_fresh_install.py --bundle .build/candidate-bundle --output-dir .build/native/fresh-install
       - name: Scan pinned public Requests offline
         if: always() && steps.build.outcome == 'success' && steps.integration.outcome == 'success' && steps.fresh.outcome == 'success'
         run: python scripts/check_public_repository.py --deployment-lock .build/native/deployment.json --output-dir .build/native/public-requests --fetch
@@ -136,6 +159,11 @@ jobs:
               if path.is_file():
                   json.loads(path.read_text())
                   shutil.copyfile(path,root/name.replace('/','-'))
+          capacity=Path('.build/native/capacity')
+          summaries=sorted(capacity.glob('probe-summary-*.json'), key=lambda path: int(path.stem.rsplit('-',1)[1]))
+          if summaries:
+              json.loads(summaries[-1].read_text())
+              shutil.copyfile(summaries[-1],root/'capacity-verification.json')
           log=Path('.build/unit-tests.log')
           if log.exists():
               import re

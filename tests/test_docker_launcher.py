@@ -18,6 +18,48 @@ spec.loader.exec_module(launcher)
 
 
 class DockerLauncherTests(unittest.TestCase):
+    def test_foreign_package_refused_before_mutating_image_store(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / "engine").mkdir()
+            for name in launcher.ASSETS:
+                (root / "engine" / name).write_text("synthetic asset")
+            (root / "images.tar").write_bytes(b"synthetic archive")
+            lock = {
+                "deployment_version": 1,
+                "platform": "linux/amd64",
+                "engine_runtime_sha256": "a" * 64,
+                **{
+                    component: {
+                        "image_reference_id": "sha256:" + "b" * 64,
+                        "image_id": "sha256:" + "c" * 64,
+                    }
+                    for component in ("scanner", "analyzer")
+                },
+            }
+            (root / "deployment.json").write_text(json.dumps(lock))
+            paths = [
+                "images.tar",
+                "deployment.json",
+                *("engine/" + n for n in launcher.ASSETS),
+            ]
+            (root / "checksums.json").write_text(
+                json.dumps({name: launcher.digest(root / name) for name in paths})
+            )
+            args = launcher.parser().parse_args(["import", "--directory", str(root)])
+            with (
+                patch.object(
+                    launcher,
+                    "verify_daemon_platform",
+                    side_effect=launcher.Failure("daemon_platform_mismatch"),
+                ),
+                patch.object(launcher, "docker") as docker,
+            ):
+                with self.assertRaises(launcher.Failure) as error:
+                    launcher.transfer(args)
+                self.assertEqual(error.exception.code, "daemon_platform_mismatch")
+                docker.assert_not_called()
+
     def test_metadata_regular_bounded_strict_json_and_final_symlink_policy(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

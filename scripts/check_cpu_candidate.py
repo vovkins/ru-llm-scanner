@@ -272,6 +272,27 @@ class Candidate:
                 "offline_builder_https_blocked": self.args.offline_firewall,
                 "native_daemon_required": True,
                 "images_published": False,
+                "storage": {
+                    "image_reported_bytes": {
+                        name: json.loads(
+                            subprocess.check_output(["docker", "image", "inspect", tag])
+                        )[0]["Size"]
+                        for name, tag in (
+                            ("analyzer", self.analyzer),
+                            ("scanner", self.scanner),
+                        )
+                    },
+                    "transfer_archive_bytes": (self.root / "package/images.tar")
+                    .stat()
+                    .st_size,
+                    "artifact_cache_logical_bytes": sum(
+                        p.stat().st_size for p in cache.iterdir() if p.is_file()
+                    ),
+                    "filesystem_free_bytes_after_build": shutil.disk_usage(
+                        self.root
+                    ).free,
+                    "scope": "Logical image/cache/archive sizes, not peak physical build space; shared layers and temporary build contexts require separate headroom.",
+                },
                 "material_inputs_sha256": self.input_hashes,
             },
         )

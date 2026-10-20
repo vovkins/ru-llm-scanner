@@ -36,6 +36,14 @@ class JenkinsExampleTests(unittest.TestCase):
             self.assertEqual(
                 command[command.index("--deployment-lock") + 1], str(deployment)
             )
+            env["SCANNER_ANALYZER_CPUS"] = "4"
+            command = jenkins.command(env, root / "out")
+            self.assertEqual(command[command.index("--analyzer-cpus") + 1], "4.0")
+            for invalid in ("0", "-1", "NaN", "inf", "65", "$(touch NEVER)"):
+                env["SCANNER_ANALYZER_CPUS"] = invalid
+                with self.assertRaises(ValueError):
+                    jenkins.command(env, root / "out")
+            del env["SCANNER_ANALYZER_CPUS"]
             link = root / "link.json"
             link.symlink_to(deployment)
             for value in (

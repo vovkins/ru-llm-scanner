@@ -71,6 +71,7 @@ def main():
             )
         records.append({"case": label, "exit_code": expected, "passed": True})
         print(json.dumps(records[-1]), flush=True)
+        return result
 
     def cli(label, *extra, expected=2, report=False):
         out = root / label
@@ -179,12 +180,13 @@ def main():
     )
     shutil.copyfile(
         args.deployment_lock,
-        trusted_home / "locks/scanner-cpu-linux-arm64.deployment.json",
+        trusted_home / "locks/approved.deployment.json",
     )
     # Trust is owned by the pipeline/ACLs, not inferred from any arbitrary URL.
     base_env = {
         **os.environ,
         "SCANNER_HOME": str(trusted_home),
+        "SCANNER_DEPLOYMENT_LOCK": str(trusted_home / "locks/approved.deployment.json"),
         "SCANNER_REPOSITORIES": str(repositories),
         "REPOSITORY_NAME": "prepared-repo",
         "SCANNER_CONFIGS": str(root),
@@ -265,6 +267,26 @@ def main():
             str(root / "wrong-id.json"),
         ],
         2,
+    )
+    foreign = json.loads((args.package / "deployment.json").read_text())
+    foreign["platform"] = (
+        "linux/arm64" if foreign["platform"] == "linux/amd64" else "linux/amd64"
+    )
+    write_private(root / "wrong-platform.json", foreign)
+    result = execute(
+        "foreign-daemon-rejected",
+        [
+            sys.executable,
+            str(ROOT / "scripts/docker_scanner.py"),
+            "verify",
+            "--deployment-lock",
+            str(root / "wrong-platform.json"),
+        ],
+        2,
+    )
+    require(
+        json.loads(result.stdout)["error"] == "daemon_platform_mismatch",
+        "foreign_daemon_diagnostic_missing",
     )
     # A changed/new context file must be caught before Docker build.
     verify_context(args.context)

@@ -9,6 +9,7 @@
 | --- | --- |
 | `invalid_arguments`, `config_error` | Обязательные refs/пути, режим, типы/ключи JSON, допустимые параметры |
 | `invalid_lock`, `invalid_deployment`, `image_identity_mismatch` | Обычный bounded metadata file без final symlink, правильный deployment/platform и готовые локальные images |
+| `daemon_platform_mismatch` | Архитектура Docker server не совпадает с deployment. Выберите полный комплект для этого daemon; автоматической эмуляции нет |
 | `invalid_mount`, `unsafe_output`, `report_write_error`, `private_report_missing` | Отдельный output/parent, owner/private permissions, права Docker/UID mapping, место и квоту |
 | `revision_unavailable`, `git_object_missing` | Нужные локальные commit/tree/blob; нет автоматического fetch |
 | Ошибка layout/metadata Git | Self-contained clone, отсутствие alternates/external git-dir/ссылок/неподдерживаемого storage |

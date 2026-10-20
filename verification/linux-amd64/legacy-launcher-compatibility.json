@@ -9,28 +9,40 @@
       "exit_code": 0,
       "assurance": "snapshot_verified",
       "findings": 0,
-      "private_output": true
+      "private_output": true,
+      "elapsed_seconds": 5.138
+    },
+    {
+      "operation": "repeat-snapshot",
+      "exit_code": 0,
+      "assurance": "snapshot_verified",
+      "findings": 0,
+      "private_output": true,
+      "elapsed_seconds": 4.471
     },
     {
       "operation": "strict-diff",
       "exit_code": 1,
       "assurance": "baseline_verified",
       "findings": 1,
-      "private_output": true
+      "private_output": true,
+      "elapsed_seconds": 4.235
     },
     {
       "operation": "invalid-baseline",
       "exit_code": 2,
       "assurance": "none",
       "findings": 0,
-      "private_output": true
+      "private_output": true,
+      "elapsed_seconds": 4.178
     }
   ],
   "input_unchanged": true,
   "reports_published": false,
-  "imported_images": false,
+  "imported_images": true,
+  "timing_scope": "First/repeated scan after image import; fresh containers each time, OS page cache not flushed. Not a hardware cold-boot benchmark.",
   "fixture_kind": "current-launcher-legacy-images-compatibility-fixture",
   "old_bundle_manifest_unchanged": true,
   "old_bundle_manifest_sha256": "2b8bae84b2ca688013b89992b9331353b55c10864ce28c1cf934d47427cf5360",
-  "launcher_sha256": "e558c8f50d6aacc67983ebf425c635750ea1c32353613274aa3dbc24dde254ea"
+  "launcher_sha256": "79767acb5a9ea2fe2c7863bd5e03046e2ad82193306c68d0271627a9022d1e6f"
 }

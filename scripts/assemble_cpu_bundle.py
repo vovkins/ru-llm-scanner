@@ -11,6 +11,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from ru_llm_scanner.artifacts import file_hash, read_json, require, write_json
+from ru_llm_scanner.upstream import verify_context
 
 
 def main():
@@ -24,17 +25,41 @@ def main():
         "Freeze requires a clean committed checkout",
     )
     candidate = args.candidate.resolve()
+    summary = read_json(candidate / "build-summary.json")
+    names = [
+        name
+        for name in subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT)
+        .decode()
+        .split("\0")
+        if name
+    ]
+    current_inputs = {
+        name: file_hash(ROOT / name)
+        for name in names
+        if name.startswith(("src/", "scripts/", "docker/", "locks/", "patches/"))
+        or name in {"pyproject.toml", "upstream.lock.json"}
+    }
+    deployment = read_json(candidate / "deployment.json")
+    runtime = read_json(candidate / "analyzer.runtime.lock.json")
+    require(
+        summary["status"] == "passed"
+        and summary["material_inputs_sha256"] == current_inputs
+        and summary["deployment"] == deployment
+        and summary["runtime"] == runtime
+        and summary["platform"] == deployment["platform"] == runtime["platform"]
+        and file_hash(candidate / "analyzer.runtime.lock.json")
+        == deployment["engine_runtime_sha256"]
+        and file_hash(candidate / "deployment.json")
+        == file_hash(candidate / "package/deployment.json"),
+        "Candidate differs from current reviewed build inputs/deployment",
+    )
+    verify_context(candidate / "source")
     output = args.output.resolve()
     output.mkdir(mode=0o700, parents=True, exist_ok=False)
     revision = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
     ).strip()
-    names = (
-        subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT)
-        .decode()
-        .split("\0")
-    )
-    for name in filter(None, names):
+    for name in names:
         source = ROOT / name
         require(
             source.is_file() and not source.is_symlink(),
@@ -49,7 +74,6 @@ def main():
     metadata.mkdir()
     for name in ("deployment.json", "analyzer.runtime.lock.json", "build-summary.json"):
         shutil.copyfile(candidate / name, metadata / name)
-    deployment = read_json(candidate / "deployment.json")
     files = {
         p.relative_to(output).as_posix(): file_hash(p)
         for p in sorted(output.rglob("*"))

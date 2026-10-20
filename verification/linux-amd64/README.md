@@ -55,14 +55,16 @@ Launcher сверяет архитектуру Docker server и отказыва
 | [Native cross-platform NER](native-prediction-comparison.json) | Решения 77 случаев совпали; max confidence delta 2.265e-6 |
 | [Published v0.1.0 ARM64 → AMD64](published-reference-comparison.json) | Решения совпали; max delta 1.609e-6 |
 | [Настоящий Jenkins AMD64](native-progress/jenkins-native-amd64.json) | 13 сценариев, включая cancel/timeout/agent-loss recovery |
+| [Полный Requests](public-prediction-comparison.json) | 119 analyzed / 13 unsupported / 0 error, 612 находок, exit1 на каждой платформе; решения/reference config совпали |
+| Production / Docker / real faults / extras | 16 / 25 / 2 / 14 на обеих архитектурах |
 | Native source closure | 82 retained sources; фактические версии совпали на обеих архитектурах |
 | Прежний system libstdc++ aligned-new exclusion | Повторно проверен вызов posix_memalign в ELF обеих архитектур; не распространяется на все static wheel paths |
 
 ## Оставшиеся проверки
 
-Полный Requests с точной конфигурацией прежнего reference, все production/fault
-gates и чистый image store, измерение ресурсов, финальная документация и контроль
-комплекта. Исправляются ошибки Linux test harness, которые не были видны через
-Docker Desktop bind mounts. Результаты фиксируются по факту; #33 остаётся открытой.
+Повтор полного набора с исправленной Linux test harness: CLI QA cleanup при
+разных UID, Git fixture helper, отдельный containerd/data root пустого store.
+Дополнительно снимаются ресурсы и завершается документация/контроль комплекта.
+Результаты фиксируются по факту; #33 остаётся открытой.
 Новый [certifi advisory](certifi-advisory.md) и конкретное предложение #34 ожидают
 решения владельца; прежнее принятие четырёх native-рисков этим не меняется.

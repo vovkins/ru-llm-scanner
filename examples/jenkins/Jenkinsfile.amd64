@@ -19,6 +19,7 @@ pipeline {
     environment {
         SCANNER_HOME = '/opt/ru-llm-scanner'
         SCANNER_DEPLOYMENT_LOCK = '/srv/ru-llm-scanner/deployment.json'
+        SCANNER_ANALYZER_CPUS = '2'
         SCANNER_REPOSITORIES = '/srv/ru-llm-scanner/repositories'
         SCANNER_CONFIGS = '/srv/ru-llm-scanner/configs'
         SCANNER_BASELINES = '/srv/ru-llm-scanner/baselines'

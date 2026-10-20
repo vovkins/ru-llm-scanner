@@ -32,6 +32,7 @@ SOURCES = (
     "tests/git_fixtures.py",
     *("tests/" + name + ".py" for name in MODULES),
     "scripts/check_git_layer.py",
+    "scripts/harness_permissions.py",
     "docker/git-test.Dockerfile",
 )
 

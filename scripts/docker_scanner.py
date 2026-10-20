@@ -486,6 +486,7 @@ def transfer(args):
                 raise Failure("transfer_checksum_mismatch")
         lock_path = args.directory / "deployment.json"
         lock = load_lock(lock_path, verify=False)
+        verify_daemon_platform(lock["platform"])
         for name in ASSETS:
             if (
                 checks["engine/" + name]

@@ -31,6 +31,9 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "src"), str(ROOT / "scripts"), str(ROOT / "tests")]
 from ru_llm_scanner.artifacts import file_hash, read_json, require, write_json
+from ru_llm_scanner.configuration import configuration_from_mapping
+from ru_llm_scanner.engine import EngineIdentity
+from ru_llm_scanner.report_validation import validate_report
 from docker_scanner import cleanup, docker, load_lock, owned_resources
 from git_fixtures import RepoFixture, fingerprint
 
@@ -395,9 +398,17 @@ class JenkinsFixture:
                 "Stale Jenkins report archived",
             )
         bad = json.loads(clean)
-        bad["engine"]["profile_sha256"] = "0" * 64
+        # Valid synthetic clean evidence with the real published ARM64 image
+        # identity. Test profile compatibility, rather than a corrupt hash field.
+        bad["engine"]["analyzer_image_digest"] = read_json(
+            ROOT / "verification/linux-amd64/published-arm64-predictions.json"
+        )["image_id"]
+        bad["engine"] = EngineIdentity(
+            **{k: v for k, v in bad["engine"].items() if k != "profile_sha256"}
+        ).as_dict(configuration_from_mapping(bad["configuration"]))
+        validate_report(bad)
         (self.root / "baselines/foreign.json").write_text(json.dumps(bad))
-        self.result(
+        rejected = self.result(
             self.queue(
                 "scanner",
                 SCAN_MODE="diff",
@@ -408,6 +419,10 @@ class JenkinsFixture:
             "foreign-profile-baseline",
             "FAILURE",
             code=2,
+        )
+        require(
+            json.loads(rejected)["baseline"]["status"] == "incompatible",
+            "Foreign architecture identity was not rejected by profile compatibility",
         )
         missing = self.template.replace(
             str(self.args.deployment_lock.resolve()),
