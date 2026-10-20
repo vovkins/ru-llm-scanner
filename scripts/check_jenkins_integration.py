@@ -13,6 +13,7 @@ import hashlib
 import http.cookiejar
 import json
 import os
+import re
 from pathlib import Path
 import secrets
 import shutil
@@ -196,21 +197,22 @@ class JenkinsFixture:
         )
         secret = jnlp.find(".//argument").text
         log = (self.root / "agent.log").open("wb")
+        self.agent_command = [
+            "java",
+            "-jar",
+            str(self.root / "agent.jar"),
+            "-url",
+            self.url,
+            "-secret",
+            secret,
+            "-name",
+            "scanner-cpu-amd64",
+            "-webSocket",
+            "-workDir",
+            str(self.root / "agent"),
+        ]
         self.agent = subprocess.Popen(
-            [
-                "java",
-                "-jar",
-                str(self.root / "agent.jar"),
-                "-url",
-                self.url,
-                "-secret",
-                secret,
-                "-name",
-                "scanner-cpu-amd64",
-                "-webSocket",
-                "-workDir",
-                str(self.root / "agent"),
-            ],
+            self.agent_command,
             stdout=log,
             stderr=subprocess.STDOUT,
             start_new_session=True,
@@ -311,6 +313,11 @@ class JenkinsFixture:
         require(value["result"] == expected, "Jenkins result mismatch: " + label)
         status_data = self.artifact(build, "scan-status.json", optional=True)
         status = json.loads(status_data) if status_data else None
+        if expected == "ABORTED":
+            require(
+                status is None or status["exit_code"] == 2,
+                "Interrupted Jenkins build retained a successful status",
+            )
         if code is not None:
             require(
                 status is not None and status["exit_code"] == code,
@@ -424,6 +431,144 @@ class JenkinsFixture:
             file_hash(baseline) == hashlib.sha256(clean).hexdigest(),
             "Jenkins promoted/replaced baseline",
         )
+        self.test_interruptions()
+        try:
+            raw = urllib.request.urlopen(
+                self.url + second + "artifact/scan-results/report.json", timeout=15
+            ).read()
+        except urllib.error.HTTPError as error:
+            require(error.code in (401, 403), "Unexpected anonymous artifact response")
+        else:
+            require(
+                SECRET.encode() not in raw and b'"findings"' not in raw,
+                "Anonymous Jenkins artifact access allowed",
+            )
+
+    def job_projects(self, job):
+        """Select this job by its unique output mount, not the shared input repo."""
+        expected = str(self.root / "agent/workspace" / job / "scan-results")
+        projects = set()
+        for container in docker(
+            "ps", "-aq", "--filter", "label=com.docker.compose.service=scanner"
+        ).stdout.split():
+            value = docker("inspect", container.decode(), check=False)
+            if value.returncode:
+                continue
+            info = json.loads(value.stdout)[0]
+            if any(
+                m.get("Destination") == "/output" and m.get("Source") == expected
+                for m in info.get("Mounts", [])
+            ):
+                project = info["Config"]["Labels"]["com.docker.compose.project"]
+                require(
+                    project.startswith("rullmscan-"),
+                    "Unexpected job resource ownership",
+                )
+                projects.add(project)
+        return projects
+
+    def test_interruptions(self):
+        repo = RepoFixture(self.root / "repositories/long-repo")
+        commit = repo.commit(
+            {
+                ("doc-%03d.txt" % i)
+                .encode(): (
+                    (
+                        "Record %d. Ordinary application documentation describing modules and configuration.\n"
+                        % i
+                    )
+                    * 1000
+                )
+                .encode()
+                for i in range(32)
+            }
+        )
+        before = fingerprint(repo.root)
+        params = {"REPOSITORY_NAME": "long-repo", "REF_B": commit}
+        self.create_job("scanner-cancel")
+        build = self.queue("scanner-cancel", **params)
+        projects = self.wait(
+            lambda: self.job_projects("scanner-cancel"),
+            message="Cancel test never started scanner",
+        )
+        self.projects.update(projects)
+        self.request(build + "stop", {})
+        self.result(build, "job-cancel", "ABORTED")
+        require(
+            all(not any(owned_resources(p)) for p in projects),
+            "Cancelled job leaked resources",
+        )
+        template = self.template.replace(
+            "timeout(time: 75, unit: 'MINUTES')", "timeout(time: 45, unit: 'SECONDS')"
+        )
+        require(template != self.template, "Timeout fixture replacement failed")
+        self.create_job("scanner-timeout", template)
+        build = self.queue("scanner-timeout", **params)
+        projects = self.wait(
+            lambda: self.job_projects("scanner-timeout"),
+            seconds=60,
+            message="Timeout test never started scanner",
+        )
+        self.projects.update(projects)
+        self.result(build, "job-timeout", "ABORTED")
+        require(
+            all(not any(owned_resources(p)) for p in projects),
+            "Timed-out job leaked resources",
+        )
+        self.create_job("scanner-agent-loss")
+        build = self.queue("scanner-agent-loss", **params)
+        projects = self.wait(
+            lambda: self.job_projects("scanner-agent-loss"),
+            message="Agent loss test never started scanner",
+        )
+        self.projects.update(projects)
+        self.agent.kill()
+        self.agent.wait(timeout=15)
+        self.wait(
+            lambda: self.json("/computer/scanner-cpu-amd64/api/json")["offline"],
+            message="Killed agent stayed online",
+        )
+        self.request(build + "stop", {})
+        workspace = str(self.root / "agent/workspace/scanner-agent-loss").encode()
+        trusted = {
+            str(self.home / "examples/jenkins/run_scan.py").encode(),
+            str(self.home / "scripts/docker_scanner.py").encode(),
+        }
+        # Operator recovery after hard loss: identify only this trusted installation
+        # and this exact WORKSPACE before signalling; never target other jobs.
+        for entry in Path("/proc").iterdir():
+            if not entry.name.isdecimal():
+                continue
+            try:
+                command = (entry / "cmdline").read_bytes().split(b"\0")
+                if not trusted.intersection(command):
+                    continue
+                environment = (entry / "environ").read_bytes().split(b"\0")
+                if b"WORKSPACE=" + workspace in environment:
+                    os.kill(int(entry.name), signal.SIGTERM)
+            except (FileNotFoundError, ProcessLookupError, PermissionError):
+                pass
+        self.wait(
+            lambda: all(not any(owned_resources(p)) for p in projects),
+            seconds=60,
+            message="Agent loss requires additional operator cleanup",
+        )
+        with (self.root / "agent.log").open("ab") as log:
+            self.agent = subprocess.Popen(
+                self.agent_command,
+                stdout=log,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+            )
+        self.wait(
+            lambda: not self.json("/computer/scanner-cpu-amd64/api/json")["offline"],
+            message="Agent recovery failed",
+        )
+        self.result(build, "agent-loss-operator-recovery", "ABORTED")
+        require(
+            fingerprint(repo.root) == before,
+            "Interrupted Jenkins job changed input repo",
+        )
 
     def close(self):
         if self.agent and self.agent.poll() is None:
@@ -456,6 +601,36 @@ def main():
         passed = True
     finally:
         fixture.close()
+        diagnostics = []
+        if not passed:
+            for path in [
+                fixture.root / "controller.log",
+                fixture.root / "agent.log",
+                *fixture.root.glob("*.console.log"),
+            ]:
+                if not path.is_file():
+                    continue
+                for line in path.read_text(errors="replace").splitlines():
+                    if any(
+                        marker in line
+                        for marker in (
+                            "Exception",
+                            "SEVERE",
+                            "ERROR",
+                            "Failed",
+                            "not found",
+                            "No signature",
+                            "requires",
+                        )
+                    ):
+                        line = line.replace(fixture.password, "[redacted]").replace(
+                            SECRET, "[synthetic-value]"
+                        )
+                        diagnostics.append(
+                            re.sub(r"\b[a-fA-F0-9]{24,}\b", "[redacted-token]", line)[
+                                :500
+                            ]
+                        )
         write_json(
             fixture.root / "jenkins-verification.json",
             {
@@ -473,6 +648,7 @@ def main():
                 "cases": fixture.records,
                 "raw_reports_credentials_and_logs_uploaded": False,
                 "user_jenkins_modified": False,
+                "safe_failure_diagnostics": diagnostics[-30:],
             },
         )
 

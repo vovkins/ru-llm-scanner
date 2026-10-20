@@ -1,0 +1,11 @@
+{
+  "status": "partial_attempt",
+  "run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39497211950",
+  "source_revision": "a160e9d",
+  "unit_passed": 167,
+  "unit_skipped": 0,
+  "analyzer_native_build_and_seal_passed": true,
+  "builder_root_https_blocked": true,
+  "scanner_build_passed": false,
+  "followup": "Normalize copied image permissions under umask 077; corrected ARM64 build/verify/export passed locally. Native recheck running; no AMD64 acceptance yet."
+}

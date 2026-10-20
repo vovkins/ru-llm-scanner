@@ -20,7 +20,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: cpu-platforms-${{ github.ref }}
+  group: cpu-platforms-${{ github.ref }}-${{ github.sha }}
   cancel-in-progress: false
 jobs:
   native:
@@ -73,15 +73,29 @@ jobs:
       - name: Run native integration gates
         run: |
           python scripts/check_cpu_candidate.py integration --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.build.outcome == 'success'
+        with:
+          name: native-${{ matrix.arch }}-integration
+          path: |
+            .build/native/steps.json
+            .build/native/upstream-core.json
+            .build/native/upstream-ner.json
+            .build/native/parity/offline-verification.json
+            .build/native/scan-integration/scan-verification.json
+            .build/native/cli-integration/cli-verification.json
+            .build/native/acceptance/acceptance-verification.json
+            .build/native/docker-integration/docker-verification.json
+            .build/native/runtime-faults/fault-verification.json
+            .build/native/deployment-extras/extras-verification.json
+            .build/native/linux-git.json
+          retention-days: 3
       - name: Repeat cache-only preparation and uncached offline builds
         if: always() && steps.build.outcome == 'success'
         run: python scripts/check_cpu_candidate.py repeat --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache --offline-firewall
       - name: Collect native synthetic predictions without raw values
         if: always() && steps.build.outcome == 'success'
         run: python scripts/collect_platform_predictions.py --context .build/native/analyzer --runtime-lock .build/native/analyzer.runtime.lock.json --output-dir .build/native/predictions
-      - name: Scan pinned public Requests offline
-        if: always() && steps.build.outcome == 'success'
-        run: python scripts/check_public_repository.py --deployment-lock .build/native/deployment.json --output-dir .build/native/public-requests --fetch
       - name: Measure native libraries and corresponding source closure
         if: always() && steps.build.outcome == 'success'
         run: python scripts/capture_native_inventory.py --deployment-lock .build/native/deployment.json --output-dir .build/native/native-inventory
@@ -93,11 +107,20 @@ jobs:
       - name: Exercise real isolated Jenkins on native AMD64
         if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
         run: python scripts/check_jenkins_integration.py --deployment-lock .build/native/deployment.json --output-dir .build/jenkins
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
+        with:
+          name: native-amd64-jenkins
+          path: .build/jenkins/jenkins-verification.json
+          retention-days: 3
       - name: Freeze candidate and import into an empty Docker store
         if: always() && steps.build.outcome == 'success'
         run: |
           python scripts/assemble_cpu_bundle.py --candidate .build/native --output .build/candidate-bundle
           python scripts/check_fresh_install.py --bundle .build/candidate-bundle --output-dir .build/native/fresh-install
+      - name: Scan pinned public Requests offline
+        if: always() && steps.build.outcome == 'success'
+        run: python scripts/check_public_repository.py --deployment-lock .build/native/deployment.json --output-dir .build/native/public-requests --fetch
       - name: Collect safe evidence
         if: always()
         run: |
@@ -105,7 +128,7 @@ jobs:
           import json, shutil
           from pathlib import Path
           root=Path('.build/evidence'); root.mkdir(parents=True, exist_ok=True)
-          allowed=('build-summary.json','repeat-summary.json','steps.json','upstream-core.json','upstream-ner.json','linux-git.json','parity/parity-verification.json','scan-integration/scan-verification.json','cli-integration/cli-verification.json','acceptance/acceptance.json','docker-integration/docker-verification.json','runtime-faults/fault-verification.json','deployment-extras/extras-verification.json','predictions/platform-predictions.json','public-requests/public-repository.json','native-inventory/native-inventory.json','fresh-install/fresh-install.json')
+          allowed=('build-summary.json','repeat-summary.json','steps.json','upstream-core.json','upstream-ner.json','linux-git.json','parity/offline-verification.json','scan-integration/scan-verification.json','cli-integration/cli-verification.json','acceptance/acceptance-verification.json','docker-integration/docker-verification.json','runtime-faults/fault-verification.json','deployment-extras/extras-verification.json','predictions/platform-predictions.json','public-requests/public-repository.json','native-inventory/native-inventory.json','fresh-install/fresh-install.json')
           for name in allowed:
               path=Path('.build/native')/name
               if path.is_file():

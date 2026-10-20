@@ -2,6 +2,7 @@
 """Import/control in a fresh Docker store on an explicitly disposable Linux runner."""
 
 import argparse
+import grp
 import json
 import os
 from pathlib import Path
@@ -32,6 +33,7 @@ def main():
         "exec-root": str(root / "exec"),
         "pidfile": str(pidfile),
         "hosts": ["unix://" + str(socket)],
+        "group": grp.getgrgid(os.getgid()).gr_name,
         "bridge": "none",
         "iptables": False,
         "ip6tables": False,
@@ -107,7 +109,9 @@ def main():
         )
     finally:
         if daemon.poll() is None and pidfile.exists():
-            pid = pidfile.read_text().strip()
+            pid = subprocess.check_output(
+                ["sudo", "cat", str(pidfile)], text=True
+            ).strip()
             if not pid.isdecimal():
                 raise RuntimeError("Invalid private daemon pidfile")
             subprocess.run(["sudo", "kill", "-TERM", pid], check=True)

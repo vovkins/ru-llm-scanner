@@ -12,9 +12,12 @@ ARM64-релизом. Нативная AMD64 приёмка и настоящи�
 Python/Debian dependencies, что ARM64 reference. Для каждого профиля закреплены
 свои wheels/DEBs/base digest и отдельный runtime/deployment. GPU не требуется.
 
-Испытательный стенд — нативный Ubuntu 24.04 x86-64, Docker 29.6.1 и Compose.
-Точная модель CPU/flags, измеренные RAM/диск и результат Jenkins будут внесены
-после проверки. Универсальная поддержка всех старых Intel/AMD CPU не заявляется.
+Испытательный стенд — нативный Ubuntu 24.04 x86-64 на AMD EPYC 7763 (4 vCPU,
+AVX2/FMA), Docker 29.6.1 и Compose. Измеренные RAM/диск и результат Jenkins будут
+внесены после проверки. NumPy 2.4 поднял стандартный x86 baseline до
+[x86-64-v2](https://numpy.org/doc/stable/release/2.4.0-notes.html#modulate-dispatched-x86-cpu-features);
+baseline фактического wheel и PyTorch capability дополнительно снимаются в runtime.
+Для старого CPU или VM со скрытыми CPU flags требуется проверка целевого узла.
 На Apple Silicon эмуляция пригодна для вспомогательной отладки; приёмка проходит
 на нативном AMD64. Launcher проверяет архитектуру Docker **server**, включая
 случай удалённого daemon, и возвращает `daemon_platform_mismatch` при несовпадении.

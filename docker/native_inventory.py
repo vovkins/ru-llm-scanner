@@ -65,4 +65,5 @@ if args.component == "analyzer":
         "cpu_capability": torch.backends.cpu.get_cpu_capability(),
         "build_configuration": torch.__config__.show(),
     }
+    result["numpy_cpu_baseline"] = list(numpy._core._multiarray_umath.__cpu_baseline__)
 print(json.dumps(result))

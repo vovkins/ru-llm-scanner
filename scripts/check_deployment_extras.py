@@ -108,6 +108,7 @@ def main():
     finally:
         repo.root.chmod(0o755)
     (root / "public-output").mkdir(mode=0o755)
+    (root / "public-output").chmod(0o755)
     cli("public-output")
     # Test the installed Python CLI independently of Compose output preflight.
     # A missing config yields an error report without starting the Analyzer.

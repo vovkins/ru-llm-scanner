@@ -1,0 +1,56 @@
+[
+  {
+    "step": "base-pull",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 1.717
+  },
+  {
+    "step": "source-prepare",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 0.665
+  },
+  {
+    "step": "offline-prepare",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 19.702
+  },
+  {
+    "step": "analyzer-build",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 118.852
+  },
+  {
+    "step": "analyzer-seal",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 10.941
+  },
+  {
+    "step": "engine-export",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 0.916
+  },
+  {
+    "step": "wheel-build",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 0.765
+  },
+  {
+    "step": "scanner-prepare",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 3.521
+  },
+  {
+    "step": "scanner-build",
+    "return_code": 2,
+    "expected": 0,
+    "seconds": 13.345
+  }
+]
