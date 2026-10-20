@@ -140,6 +140,8 @@ class DockerLauncherTests(unittest.TestCase):
             repo.mkdir()
             public = root / "public"
             public.mkdir(mode=0o755)
+            # Do not depend on the caller's umask (CI deliberately uses 077).
+            public.chmod(0o755)
             link = root / "link"
             link.symlink_to(public, target_is_directory=True)
             for target in (repo / "out", public, link):
