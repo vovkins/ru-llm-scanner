@@ -1,0 +1,40 @@
+{
+  "analyzer_cpus": "2",
+  "cancellation_timeout_seconds": 5.0,
+  "cancelled_svg_not_claimed_analyzed": true,
+  "capacity_rejections": [
+    {
+      "code": "analyzer_overloaded",
+      "reason": "queue_timeout"
+    },
+    {
+      "code": "analyzer_overloaded",
+      "reason": "queue_timeout"
+    }
+  ],
+  "final_health_ready": true,
+  "images": {
+    "image_id": "sha256:33feba355410974fe5593135beecc93e0e1e003557aab4d6d8ce4313e085ec76",
+    "image_reference_id": "sha256:0f05c30512df77a814daf42b0ec28f8b9b9debe95e50fc7d6145eb2043f11fcd"
+  },
+  "input_hashes": {
+    "authors.txt": "67b09ec1002aef944fec0a4c6ab76d5662e0f596f289e1c7b280c24cbb749678",
+    "requests-logo.svg": "b1e7fd86516c1e925191a41ee1efdb2489654548c7756881c311f50b79233af0",
+    "test_requests.py.txt": "4508b22c1aa65417427fe7e51ea1f4e3a3d43d3021acdeb5a5260720a1b367a1"
+  },
+  "inputs": [],
+  "network": "none",
+  "observed_ner_states": [
+    "ready",
+    "ready",
+    "ready"
+  ],
+  "recovered_seconds": 2.348,
+  "script_sha256": "ee1709e49059122766fc614f84904f15d4e8a71eeed5b31fcd305bd3210fec86",
+  "subsequent_small_request_statuses": [
+    503,
+    503,
+    200
+  ],
+  "values_published": false
+}

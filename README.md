@@ -85,10 +85,12 @@ Docker Desktop на Apple Silicon. AMD64/GPU, реальный Linux host/Jenkin
 [Матрица выполненных проверок](verification/README.md).
 Новый [комплексный прогон](verification/operations-stage-4/README.md) включает
 прохождение руководств, браузер, нагрузку и публичный репозиторий.
-Перед итоговой приёмкой остаётся отдельно согласовать
+Перед итоговой приёмкой выполняются согласованные
 [исправления зависимостей](https://github.com/vovkins/ru-llm-scanner/issues/24).
 На реальном Requests также воспроизведён отказ NER на обычном `AUTHORS.rst`:
 выдаётся неполнота/код 2. [Дефект и отдельный план исправления](https://github.com/vovkins/ru-llm-scanner/issues/26).
+Отдельный [NER-кандидат](verification/operations-ner-windowing/README.md)
+уже проходит этот файл; полный Requests и эксплуатационные проверки продолжаются.
 
 Diff сравнивает конечные A/B и **не сканирует промежуточную историю**. Секрет,
 добавленный и удалённый между ними, может остаться в Git. PDF/Office/OCR,

@@ -26,7 +26,7 @@ Black 25.1.0 — dev-tool. Build backend закреплён отдельно. Ho
 | `scripts/docker_scanner.py` | Stdlib host runtime, private Compose, export/import/verify |
 | `scripts/analyzer.py`, `src/ru_llm_scanner/upstream.py` | Явная подготовка/build/seal закреплённого upstream |
 | `scripts/build_scanner.py`, `docker/scanner.Dockerfile` | Малый verified context, offline scanner image и deployment |
-| `upstream.lock.json`, `locks/`, `patches/` | Reviewed source, constraints, измеренные locks и ограниченный API patch |
+| `upstream.lock.json`, `locks/`, `patches/` | Reviewed source, constraints, измеренные locks и точные адаптационные patches |
 | `schemas/report-v1.schema.json` | Публичная schema; packaged копия лежит в `src/ru_llm_scanner/` |
 | `examples/config/`, `examples/reports/`, `examples/demo/` | Синтетические config/JSON/HTML, документационные примеры не baseline |
 | `tests/`, `tests/corpus/`, `tests/integration/` | Unit/stub, frozen quality fixtures и настоящие isolated integration checks |

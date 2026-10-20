@@ -14,7 +14,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class RuntimeLockTests(unittest.TestCase):
     def setUp(self):
-        self.source = ROOT / "upstream.lock.json"
+        # Keep the measured historical runtime paired with its original source;
+        # a new candidate must not rewrite the default deployment's provenance.
+        self.source = ROOT / "locks/analyzer-cpu-linux-arm64.source.lock.json"
         self.valid = read_json(
             ROOT / "locks/analyzer-cpu-linux-arm64.runtime.lock.json"
         )
@@ -60,6 +62,11 @@ class RuntimeLockTests(unittest.TestCase):
             with self.subTest(mutation=mutation):
                 with self.assertRaises(ArtifactError):
                     load_runtime_lock(self.path, self.source)
+
+    def test_candidate_source_cannot_reuse_historical_runtime(self):
+        self.write(self.valid)
+        with self.assertRaisesRegex(ArtifactError, "Runtime/source lock mismatch"):
+            load_runtime_lock(self.path, ROOT / "upstream.lock.json")
 
     def test_adapter_rejects_bad_lock_without_exposing_metadata(self):
         payload = copy.deepcopy(self.valid)
