@@ -92,7 +92,10 @@ Docker Desktop на Apple Silicon. AMD64/GPU, реальный Linux host/Jenkin
 Модель/словарь сохранены, неоднозначность packaging inventory устранена.
 Владелец 2026-10-20 [принял остаточные риски четырёх native advisory](verification/operations-dependencies/risk-acceptance.md)
 для закрытого контура. Штатный deployment не заменён;
-следующий этап — итоговая приёмка #25, её план ожидает отдельного согласования.
+[итоговая приёмка #25](verification/operations-stage-5/README.md) подтверждает
+готовность кандидата к локальному пилоту в указанной среде.
+[Матрица готовности и ограничений](verification/operations-stage-5/readiness-matrix.md).
+Подготовленные PR ещё не слиты в `main`.
 
 Diff сравнивает конечные A/B и **не сканирует промежуточную историю**. Секрет,
 добавленный и удалённый между ними, может остаться в Git. PDF/Office/OCR,

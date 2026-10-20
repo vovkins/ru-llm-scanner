@@ -4,8 +4,10 @@
 Если пакета ещё нет, сначала выполните [fresh build и export](build.md).
 Здесь ничего не скачивается из registry и не собирается.
 Маршрут import→verify→snapshot и последующие пользовательские команды пройдены
-на `755152b` в новой минимальной установке без dev venv/src/proxy/context:
-[результаты и ограничения стенда](../../verification/operations-stage-4/README.md).
+на source checkpoint `2588571` в новой минимальной установке без dev venv/src/proxy/context:
+[ready walkthrough](../../verification/operations-dependencies/ready-walkthrough.json).
+[Итоговый контроль](../../verification/operations-stage-5/README.md) повторно проверил
+этот комплект на кандидате `e5e3115`; другой физический offline host не испытывался.
 
 ## Получить и разместить комплект
 

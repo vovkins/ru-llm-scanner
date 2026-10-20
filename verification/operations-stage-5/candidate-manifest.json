@@ -1,0 +1,254 @@
+{
+  "verification_version": 1,
+  "status": "passed",
+  "checked_utc": "2026-10-20T13:13:15.634221+00:00",
+  "candidate_head": "e5e311504abcd6b62495159ab8fe239c410e3bd6",
+  "source_checkpoint": "2588571392adb28907963222315f828de7956f78",
+  "main": "336feb64b201b0e9b807059f3d60b50fdee41ebb",
+  "platform": "linux/arm64",
+  "images": {
+    "analyzer": {
+      "image_id": "sha256:40cb971b58e2144749080fd50e6cb5c7bad8b74ce2c4d237e8a9800165d7e8fc",
+      "image_reference_id": "sha256:ee65eede670207d518c911702958f8e4d07c72f45d694f016558e68e03a46927"
+    },
+    "scanner": {
+      "image_id": "sha256:358e0664733bf571d510d23f213339661bcb8b4737c8eab322cc79f3f7ca7095",
+      "image_reference_id": "sha256:358e0664733bf571d510d23f213339661bcb8b4737c8eab322cc79f3f7ca7095"
+    }
+  },
+  "pull_performed": false,
+  "images_rebuilt": false,
+  "runtime_changed": false,
+  "stack": [
+    {
+      "number": 19,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/19",
+      "baseRefName": "main",
+      "headRefName": "codex/operations-stage-1-review",
+      "headRefOid": "fc0dcbfa4304cf504ae317f83f015b938f5b52b7"
+    },
+    {
+      "number": 21,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/21",
+      "baseRefName": "codex/operations-stage-1-review",
+      "headRefName": "codex/operations-stage-2-fixes",
+      "headRefOid": "5ff130aae8c173d607e045c0167bc95e196c9671"
+    },
+    {
+      "number": 23,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/23",
+      "baseRefName": "codex/operations-stage-2-fixes",
+      "headRefName": "codex/operations-stage-3-docs",
+      "headRefOid": "755152b8d658506ddb3da819569270ca46f2ae57"
+    },
+    {
+      "number": 27,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/27",
+      "baseRefName": "codex/operations-stage-3-docs",
+      "headRefName": "codex/operations-stage-4-validation",
+      "headRefOid": "6d2cdbf32ef7f11877ee9e85ff7ac35f9c75bbfb"
+    },
+    {
+      "number": 28,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/28",
+      "baseRefName": "codex/operations-stage-4-validation",
+      "headRefName": "codex/operations-ner-windowing",
+      "headRefOid": "5097ea5ff799fe3f7d47afb33c24e48fbf27fe83"
+    },
+    {
+      "number": 29,
+      "url": "https://github.com/vovkins/ru-llm-scanner/pull/29",
+      "baseRefName": "codex/operations-ner-windowing",
+      "headRefName": "codex/operations-dependency-remediation",
+      "headRefOid": "e5e311504abcd6b62495159ab8fe239c410e3bd6"
+    }
+  ],
+  "stack_ancestry_verified": true,
+  "changes_since_build_checkpoint": [
+    "AGENTS.md",
+    "README.md",
+    "docs/admin/README.md",
+    "docs/admin/build.md",
+    "docs/admin/operations.md",
+    "docs/licensing.md",
+    "docs/reference/artifacts.md",
+    "verification/README.md",
+    "verification/operations-dependencies/README.md",
+    "verification/operations-dependencies/acceptance-verification.json",
+    "verification/operations-dependencies/analyzer-licenses.json",
+    "verification/operations-dependencies/cancellation.json",
+    "verification/operations-dependencies/candidate.deployment.json",
+    "verification/operations-dependencies/candidate.runtime.lock.json",
+    "verification/operations-dependencies/capacity-verification.json",
+    "verification/operations-dependencies/cli-verification.json",
+    "verification/operations-dependencies/detection-drift.json",
+    "verification/operations-dependencies/docker-verification.json",
+    "verification/operations-dependencies/documentation.json",
+    "verification/operations-dependencies/extras-verification.json",
+    "verification/operations-dependencies/fault-verification.json",
+    "verification/operations-dependencies/final-checks.json",
+    "verification/operations-dependencies/final-debian-summary.json",
+    "verification/operations-dependencies/final-fetches.json",
+    "verification/operations-dependencies/final-images.json",
+    "verification/operations-dependencies/final-inventory.json",
+    "verification/operations-dependencies/final-osv-summary.json",
+    "verification/operations-dependencies/fresh-walkthrough.json",
+    "verification/operations-dependencies/git-linux.json",
+    "verification/operations-dependencies/native-dispositions.json",
+    "verification/operations-dependencies/native-reachability.json",
+    "verification/operations-dependencies/native-risk-detail.md",
+    "verification/operations-dependencies/ner-regressions.json",
+    "verification/operations-dependencies/offline-verification.json",
+    "verification/operations-dependencies/preservation.json",
+    "verification/operations-dependencies/public-detection-comparison.json",
+    "verification/operations-dependencies/public-requests.json",
+    "verification/operations-dependencies/ready-walkthrough.json",
+    "verification/operations-dependencies/retained-notices.json",
+    "verification/operations-dependencies/risk-acceptance.md",
+    "verification/operations-dependencies/runtime-gates.json",
+    "verification/operations-dependencies/scan-verification.json",
+    "verification/operations-dependencies/unit-tests.json",
+    "verification/operations-dependencies/upgrade-verification.json",
+    "verification/operations-dependencies/upstream-tests.json",
+    "verification/operations-stage-4/dependencies.md"
+  ],
+  "only_docs_and_evidence_changed": true,
+  "previous_source_groups": {
+    "unit-tests": {
+      "evidence_sha256": "a0c6a22326d1732b155c5f7dcce41267e14ea9917bf3df625ae94a73c1ed26f7",
+      "root_source_hashes_matched": 64,
+      "rerun": false
+    },
+    "offline-verification": {
+      "evidence_sha256": "62426284d53117c4662b64d0e3aa419b4307868c08855bd39b1f2f394a4eb16c",
+      "root_source_hashes_matched": 21,
+      "rerun": false
+    },
+    "scan-verification": {
+      "evidence_sha256": "01c8f4891600d51408207f02a951877d63bbf84e87c7a9c5a6c2c2af76bbc785",
+      "root_source_hashes_matched": 24,
+      "rerun": false
+    },
+    "acceptance-verification": {
+      "evidence_sha256": "df20bf85f91a06222480d412e75e48667dea6fdb2ba24fdf324cb725218b17cc",
+      "root_source_hashes_matched": 4,
+      "rerun": false
+    },
+    "docker-verification": {
+      "evidence_sha256": "18a697b1dc22ad9a4e03b41f78cafa8f1b18110669fb0ef8f92baa5a2f2b97fb",
+      "root_source_hashes_matched": 4,
+      "rerun": false
+    },
+    "fault-verification": {
+      "evidence_sha256": "921b93424abec57dc5fb092a365344be6e76046c056313636695c0ab3d93429a",
+      "root_source_hashes_matched": 2,
+      "rerun": false
+    },
+    "extras-verification": {
+      "evidence_sha256": "5aff9ffddeadbd560080e305351593283962a305ac62eaaee1e56c4fd97f01dd",
+      "root_source_hashes_matched": 5,
+      "rerun": false
+    },
+    "upgrade-verification": {
+      "evidence_sha256": "af357bb83b173e1506349130e3f5875938a12d992c42c507003d3ff02881e6b3",
+      "root_source_hashes_matched": 3,
+      "rerun": false
+    },
+    "git-linux": {
+      "evidence_sha256": "ca3d75a89d0b308d2203f69fa1611ac91fa3ab0cc54d515b9d102c4ecde8729b",
+      "root_source_hashes_matched": 11,
+      "rerun": false
+    }
+  },
+  "curated_input_hashes_matched": 211,
+  "scanner_build_inputs_matched": 67,
+  "installed_scanner_modules_and_schema_matched": 21,
+  "installed_scanner_inventory_matched": true,
+  "installed_analyzer_probe_equal_to_runtime_lock": true,
+  "wheel_sha256": "46db54bf03e94104850b56bf5d3a5bc6d741e6dfaa336920fdadff999e46697d",
+  "source_lock_sha256": "b088772c5ec2cb61356e3b6c6181ff0085652ebe51941fe99d9eedffae28bd3d",
+  "prepared_manifest_sha256": "387ae17aeb89920b032747990bf2c2f1d02b0fc461042c7bcccc4b51e22f0144",
+  "runtime_lock_sha256": "f9e91eb24d5e82ce064614a4d0f39c9a1f1c839fc90e7ea6c74a733be13981a6",
+  "deployment_sha256": "b370fc32491aa396da5966f02b5197993b6da9f36627ebbebbc3cb38cc115bfe",
+  "schema_sha256": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
+  "model": {
+    "architecture": "BertForTokenClassification",
+    "base_model": "DeepPavlov/rubert-base-cased",
+    "files": [
+      {
+        "path": "config.json",
+        "sha256": "8d65f0020cf4229110c123670027e9b0fc2f25ecf4cab646eff499e622cb2f16",
+        "size": 1419
+      },
+      {
+        "path": "model.safetensors",
+        "sha256": "6a2c875d02398554ec69384f489a0bf4fe3505fc347c6cdd3385d4fd31ef21a4",
+        "size": 709127044
+      },
+      {
+        "path": "special_tokens_map.json",
+        "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+        "size": 125
+      },
+      {
+        "path": "tokenizer.json",
+        "sha256": "aa68ce2535cea6f63667df615622150c10a72aae14e5ec44285edc4d1c88708a",
+        "size": 3573554
+      },
+      {
+        "path": "tokenizer_config.json",
+        "sha256": "dcac182e3d7a17bbda2fac0f0dd8dc8d792a4eaefbd19510bfd39dfba05c541e",
+        "size": 395
+      },
+      {
+        "path": "vocab.txt",
+        "sha256": "78106a3d3ae8600d1ba573b967b9bb731d2c2282957cbc6e26ab20935c3da02b",
+        "size": 1649718
+      }
+    ],
+    "license": "apache-2.0",
+    "model_id": "fef2/ner_rus_bert-secret_detection",
+    "revision": "52b5b0745aac14f73fcf2ac0f91d9b5001a85ae4",
+    "schema_version": 1
+  },
+  "dictionary": {
+    "policy_path": "9709364660baa4f5ac551b42fbbd411c6d2eaf8093ac1579ca8ea4a30696d099",
+    "rules_path": "126805a93906873c7cd1fd7a3586c106a4c68d9329cfbe5169132d9bfc9a244e"
+  },
+  "spacy_tree_sha256": "54d8e411b174d0aa053f235e46d4e5ac52e4a2a8cbcb4fcc2a0da1d13ace6a8e",
+  "corpus_sha256": {
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+    "tests/corpus/README.md": "022f4edbb787fb5ed149e0049463609bd8a88d10a1545973025608ba7edec665"
+  },
+  "advisory_snapshot": [
+    {
+      "bytes": 286,
+      "etag": null,
+      "last_modified": null,
+      "retrieved_utc": "2026-10-19T21:47:33.668363+00:00",
+      "sha256": "97e3d01ce7f321b6f3c3db1d9fc82cac7a772693a407dec41f1872a01eb5b0ed",
+      "status": 200,
+      "url": "https://api.osv.dev/v1/querybatch"
+    },
+    {
+      "bytes": 84083145,
+      "etag": null,
+      "last_modified": "Mon, 19 Oct 2026 21:24:49 GMT",
+      "retrieved_utc": "2026-10-19T21:47:34.285323+00:00",
+      "sha256": "780ec10ec381a0134d3dbd21bfba5791ecfc5bd2b9fc49a96d98444443804efa",
+      "status": 200,
+      "url": "https://security-tracker.debian.org/tracker/data/json"
+    }
+  ],
+  "protected_resources_captured": {
+    "foreign_containers": 7,
+    "protected_files": 11,
+    "proxy_tracked_clean": true
+  },
+  "residual_native_risks": {
+    "status": "accepted_by_owner_for_closed_environment",
+    "count": 4,
+    "reference": "../operations-dependencies/risk-acceptance.md"
+  },
+  "acceptance_pr": "https://github.com/vovkins/ru-llm-scanner/pull/30"
+}
