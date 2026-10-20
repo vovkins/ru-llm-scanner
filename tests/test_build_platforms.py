@@ -1,4 +1,5 @@
 import io
+import copy
 import json
 from pathlib import Path
 import subprocess
@@ -18,9 +19,45 @@ from ru_llm_scanner.build_platforms import (
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import docker_scanner
+from compare_platform_predictions import compare
 
 
 class PlatformInputTests(unittest.TestCase):
+    def test_confidence_tolerance_never_hides_a_changed_detection(self):
+        before = {
+            "platform": "linux/arm64",
+            "image_id": "arm",
+            "corpus_sha256": "a" * 64,
+            "helper_sha256": "b" * 64,
+            "raw_values_included": False,
+            "native_daemon_checked": True,
+            "rows": {
+                "synthetic": [
+                    {
+                        "entity_type": "PASSWORD",
+                        "start": 1,
+                        "end": 4,
+                        "text_sha256": "c" * 64,
+                        "score": 0.9,
+                    }
+                ]
+            },
+        }
+        after = copy.deepcopy(before)
+        after.update(platform="linux/amd64", image_id="amd")
+        after["rows"]["synthetic"][0]["score"] += 1e-6
+        self.assertEqual(compare(before, after)["status"], "passed")
+        after["rows"]["synthetic"][0]["end"] = 5
+        self.assertEqual(
+            compare(before, after)["detection_changed_cases"], ["synthetic"]
+        )
+        after["rows"]["synthetic"][0]["end"] = 4
+        after["rows"]["synthetic"][0]["score"] = 0.8
+        self.assertEqual(compare(before, after)["status"], "owner_review_required")
+        after["corpus_sha256"] = "d" * 64
+        with self.assertRaises(ArtifactError):
+            compare(before, after)
+
     def test_foreign_platform_or_abi_rejected_before_download(self):
         for platform, filename in (
             ("linux/arm64", "demo-1-cp311-cp311-manylinux_2_28_x86_64.whl"),

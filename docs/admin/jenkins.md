@@ -5,7 +5,10 @@
 Действующий Jenkins, credentials/jobs/RBAC пользователя не изменяются. На данном
 стенде выполнена локальная последовательность adapter → production launcher →
 реальные контейнеры с кодами 0/1/2 и baseline; Jenkins controller/Groovy plugins
-здесь отсутствуют, Declarative validation в реальном Jenkins не заявляется.
+здесь отсутствовали. Нативная AMD64 проверка настоящего Jenkins разрабатывается
+в [#33](https://github.com/vovkins/ru-llm-scanner/issues/33);
+[текущий статус](../../verification/linux-amd64/README.md). До её завершения
+прохождение Declarative validation и полноценного pipeline не заявляется.
 
 ## Подготовка агентом CI
 
@@ -16,19 +19,26 @@ Docker/Compose и готовыми образами из [доверенного
 проверяемого checkout**. Label/пути/retention в примере заменяются администратором.
 Docker-доступ привилегирован; не выдавайте этот агент произвольным PR pipelines.
 
-Adapter выбирает стандартный lock по пути
-`$SCANNER_HOME/locks/scanner-cpu-linux-arm64.deployment.json`; параметра выбора
-другого deployment в примере Jenkins нет. В отдельной доверенной установке CI
-разместите **одобренный deployment своего комплекта** именно по этому пути,
-вместе с соответствующими launcher и `examples/jenkins/run_scan.py`.
-Это размещение выбранного артефакта администратором, не изменение штатных locks
-в исходном Git checkout. Нельзя оставить там исторический lock из Git после fresh build.
+В текущем adapter администратор задаёт **абсолютный путь к одобренному deployment**
+через `SCANNER_DEPLOYMENT_LOCK`, например `/srv/ru-llm-scanner/deployment.json`.
+Переменная относится к доверенной конфигурации агента/pipeline, не к параметрам
+разработчика; URL, относительный путь, symlink и отсутствующий файл отвергаются.
+Выбранный комплект должен соответствовать архитектуре Docker daemon.
+
+[AMD64 Jenkinsfile](../../examples/jenkins/Jenkinsfile.amd64) уже содержит эту
+переменную и label `scanner-cpu-amd64`; его приёмка ещё выполняется.
+Для совместимости без переменной остаётся исторический default
+`$SCANNER_HOME/locks/scanner-cpu-linux-arm64.deployment.json`. Это поведение
+старого ARM64 примера, а не автоматический выбор актуального image после сборки.
+Для новой установки передавайте deployment её пакета явно; штатные locks в Git
+ради этого не изменяются. Старый launcher/adapter из v0.1.0 новую переменную
+не поддерживает: переносите согласованный комплект скриптов целиком.
 
 До настройки job проверьте этот точный комплект non-root учётной записью агента:
 
 ```sh
 python3 /opt/ru-llm-scanner/scripts/docker_scanner.py verify \
-  --deployment-lock /opt/ru-llm-scanner/locks/scanner-cpu-linux-arm64.deployment.json
+  --deployment-lock /srv/ru-llm-scanner/deployment.json
 ```
 
 Установка включает `scripts/docker_scanner.py`, выбранный lock,

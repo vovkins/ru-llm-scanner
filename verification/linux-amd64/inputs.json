@@ -6,6 +6,7 @@
   "actual_hash_size_wheel_metadata_elf_debian_control_checked": true,
   "python_and_debian_versions_unchanged": true,
   "model_dictionary_detection_sources_unchanged": true,
-  "arm64_build_profile_unchanged": true,
-  "images_published": false
+  "images_published": false,
+  "arm64_dependency_pins_unchanged": true,
+  "analyzer_recipe_change": "Normalize copied file/directory permissions for builds under restrictive umask; no detector/dependency changes"
 }

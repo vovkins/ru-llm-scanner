@@ -73,6 +73,18 @@ jobs:
       - name: Run native integration gates
         run: |
           python scripts/check_cpu_candidate.py integration --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache
+      - name: Repeat cache-only preparation and uncached offline builds
+        if: always() && steps.build.outcome == 'success'
+        run: python scripts/check_cpu_candidate.py repeat --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache --offline-firewall
+      - name: Collect native synthetic predictions without raw values
+        if: always() && steps.build.outcome == 'success'
+        run: python scripts/collect_platform_predictions.py --context .build/native/analyzer --runtime-lock .build/native/analyzer.runtime.lock.json --output-dir .build/native/predictions
+      - name: Scan pinned public Requests offline
+        if: always() && steps.build.outcome == 'success'
+        run: python scripts/check_public_repository.py --deployment-lock .build/native/deployment.json --output-dir .build/native/public-requests --fetch
+      - name: Measure native libraries and corresponding source closure
+        if: always() && steps.build.outcome == 'success'
+        run: python scripts/capture_native_inventory.py --deployment-lock .build/native/deployment.json --output-dir .build/native/native-inventory
       - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
         if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
         with:
@@ -81,6 +93,11 @@ jobs:
       - name: Exercise real isolated Jenkins on native AMD64
         if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
         run: python scripts/check_jenkins_integration.py --deployment-lock .build/native/deployment.json --output-dir .build/jenkins
+      - name: Freeze candidate and import into an empty Docker store
+        if: always() && steps.build.outcome == 'success'
+        run: |
+          python scripts/assemble_cpu_bundle.py --candidate .build/native --output .build/candidate-bundle
+          python scripts/check_fresh_install.py --bundle .build/candidate-bundle --output-dir .build/native/fresh-install
       - name: Collect safe evidence
         if: always()
         run: |
@@ -88,7 +105,7 @@ jobs:
           import json, shutil
           from pathlib import Path
           root=Path('.build/evidence'); root.mkdir(parents=True, exist_ok=True)
-          allowed=('build-summary.json','steps.json','upstream-core.json','upstream-ner.json','linux-git.json','parity/parity-verification.json','scan-integration/scan-verification.json','cli-integration/cli-verification.json','acceptance/acceptance.json','docker-integration/docker-verification.json','runtime-faults/fault-verification.json','deployment-extras/extras-verification.json')
+          allowed=('build-summary.json','repeat-summary.json','steps.json','upstream-core.json','upstream-ner.json','linux-git.json','parity/parity-verification.json','scan-integration/scan-verification.json','cli-integration/cli-verification.json','acceptance/acceptance.json','docker-integration/docker-verification.json','runtime-faults/fault-verification.json','deployment-extras/extras-verification.json','predictions/platform-predictions.json','public-requests/public-repository.json','native-inventory/native-inventory.json','fresh-install/fresh-install.json')
           for name in allowed:
               path=Path('.build/native')/name
               if path.is_file():
@@ -110,3 +127,37 @@ jobs:
           path: .build/evidence/
           retention-days: 14
           if-no-files-found: error
+  compare:
+    needs: native
+    if: always()
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: cpu-*-evidence
+          path: .build/evidence
+      - name: Compare independently collected native predictions
+        run: |
+          python3 scripts/compare_platform_predictions.py --arm64 .build/evidence/cpu-arm64-evidence/predictions-platform-predictions.json --amd64 .build/evidence/cpu-amd64-evidence/predictions-platform-predictions.json --output .build/cross-platform.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          a,b=[json.loads(Path('.build/evidence/cpu-'+arch+'-evidence/public-requests-public-repository.json').read_text()) for arch in ('arm64','amd64')]
+          assert a['source']==b['source'] and a['coverage']==b['coverage']
+          assert a['effective_configuration_sha256']==b['effective_configuration_sha256']
+          assert a['finding_fingerprints_without_score']==b['finding_fingerprints_without_score'], 'Requests detection drift requires review'
+          delta=max((abs(a['finding_scores'][key]-b['finding_scores'][key]) for key in a['finding_scores']),default=0)
+          assert delta<=1e-5, 'Requests confidence drift exceeds declared tolerance'
+          Path('.build/public-cross-platform.json').write_text(json.dumps({'status':'passed','source':a['source'],'coverage':a['coverage'],'findings':a['findings'],'maximum_score_absolute_delta':delta,'score_absolute_tolerance':1e-5,'raw_values_published':False})+'\n')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: cross-platform-evidence
+          path: .build/*cross-platform.json
+          retention-days: 14

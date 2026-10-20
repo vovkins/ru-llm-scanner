@@ -34,7 +34,11 @@ class Candidate:
         self.analyzer = self.prefix + "-analyzer:local"
         self.scanner = self.prefix + "-scanner:local"
         self.test_image = self.prefix + "-analyzer-tests:local"
-        self.steps = []
+        self.steps = (
+            read_json(self.root / "steps.json")
+            if (self.root / "steps.json").exists()
+            else []
+        )
 
     def invoke(self, name, command, *, expected=0, timeout=3600, env=None):
         started = time.monotonic()
@@ -109,6 +113,17 @@ class Candidate:
     def build(self):
         self.root.mkdir(mode=0o700, parents=True, exist_ok=False)
         verify_daemon_platform(self.platform)
+        self.input_hashes = {
+            name: file_hash(ROOT / name)
+            for name in subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT)
+            .decode()
+            .split("\0")
+            if name
+            and (
+                name.startswith(("src/", "scripts/", "docker/", "locks/", "patches/"))
+                or name in {"pyproject.toml", "upstream.lock.json"}
+            )
+        }
         source = read_json(ROOT / "upstream.lock.json")
         profile = source["build_profiles"][self.profile]
         self.invoke(
@@ -211,6 +226,7 @@ class Candidate:
             self.python(
                 "scanner-build",
                 "build_scanner.py",
+                "--diagnostics",
                 "build",
                 "--no-cache",
                 "--context",
@@ -252,6 +268,7 @@ class Candidate:
                 "offline_builder_https_blocked": self.args.offline_firewall,
                 "native_daemon_required": True,
                 "images_published": False,
+                "material_inputs_sha256": self.input_hashes,
             },
         )
 
@@ -339,10 +356,86 @@ class Candidate:
             self.root / "linux-git.json",
         )
 
+    def repeat(self):
+        verify_daemon_platform(self.platform)
+        context = self.root / "analyzer-repeat"
+        self.python(
+            "cache-only-prepare",
+            "prepare_offline_analyzer.py",
+            "--context",
+            self.root / "source",
+            "--output",
+            context,
+            "--cache",
+            self.args.artifact_cache.resolve(),
+        )
+        from ru_llm_scanner.upstream import verify_context
+
+        require(
+            verify_context(context)[0] == verify_context(self.context)[0],
+            "Repeated prepared inputs differ",
+        )
+        with self.offline_builder():
+            self.python(
+                "analyzer-repeat-build",
+                "analyzer.py",
+                "build",
+                "--no-cache",
+                "--context",
+                context,
+                "--tag",
+                self.analyzer + "-repeat",
+            )
+        second = self.root / "analyzer-repeat.runtime.lock.json"
+        self.python(
+            "analyzer-repeat-seal",
+            "analyzer.py",
+            "seal",
+            "--context",
+            context,
+            "--image",
+            self.analyzer + "-repeat",
+            "--output",
+            second,
+        )
+        first_runtime, second_runtime = read_json(self.runtime), read_json(second)
+        require(
+            first_runtime["runtime"] == second_runtime["runtime"],
+            "Repeated Analyzer runtime inventory differs",
+        )
+        with self.offline_builder():
+            self.python(
+                "scanner-repeat-build",
+                "build_scanner.py",
+                "--diagnostics",
+                "build",
+                "--no-cache",
+                "--context",
+                self.root / "scanner-context",
+                "--tag",
+                self.scanner + "-repeat",
+                "--deployment-lock",
+                self.root / "repeat.deployment.json",
+            )
+        write_json(
+            self.root / "repeat-summary.json",
+            {
+                "status": "passed",
+                "platform": self.platform,
+                "prepared_inputs_equal": True,
+                "runtime_inventory_equal": True,
+                "cache_only_preparation": True,
+                "build_cache_disabled": True,
+                "builder_https_blocked": self.args.offline_firewall,
+                "image_ids": [first_runtime["image_id"], second_runtime["image_id"]],
+                "bit_identical_images_required": False,
+            },
+        )
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("phase", choices=("build", "integration"))
+    parser.add_argument("phase", choices=("build", "integration", "repeat"))
     parser.add_argument("--arch", choices=("amd64", "arm64"), required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--artifact-cache", type=Path, required=True)

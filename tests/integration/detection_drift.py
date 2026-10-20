@@ -16,6 +16,7 @@ from presidio.evaluation.corpus import load_corpus
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--redact-values", action="store_true")
     args = parser.parse_args()
     log = Path("/tmp/drift-server.log").open("w")
     server = subprocess.Popen(
@@ -92,6 +93,13 @@ def main():
                         x["rule_id"] or "",
                     ),
                 )
+                if args.redact_values:
+                    import hashlib
+
+                    for entity in results[case.case_id]:
+                        entity["text_sha256"] = hashlib.sha256(
+                            entity.pop("text").encode()
+                        ).hexdigest()
             with args.output.open("x") as destination:
                 import os
 

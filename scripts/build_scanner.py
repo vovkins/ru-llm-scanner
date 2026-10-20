@@ -178,12 +178,20 @@ def verify_context(context):
 
 
 def build(args):
+    def execute(*command, **kwargs):
+        result = docker(*command, check=False, **kwargs)
+        if result.returncode:
+            if getattr(args, "diagnostics", False):
+                sys.stderr.buffer.write(result.stdout + result.stderr)
+            raise Failure("scanner_build_command_failed")
+        return result
+
     inventory = verify_context(args.context)
     base_image, platform = inventory["base"], inventory["platform"]
     # Fail before BuildKit if the exact base is absent in the local store.
     # --network none controls RUN, not registry resolution of FROM.
     image_identity(base_image, platform)
-    docker(
+    execute(
         "build",
         *(["--no-cache"] if getattr(args, "no_cache", False) else []),
         "--pull=false",
@@ -219,9 +227,9 @@ def build(args):
         "no-new-privileges",
         reference,
     ]
-    docker(*base, "--help")
-    docker(*base, "--version")
-    docker(
+    execute(*base, "--help")
+    execute(*base, "--version")
+    execute(
         *base[:-1],
         "--entrypoint",
         "python",
@@ -248,6 +256,11 @@ def build(args):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument(
+        "--diagnostics",
+        action="store_true",
+        help="Print trusted build diagnostics to stderr",
+    )
     sub = p.add_subparsers(dest="operation", required=True)
     prep = sub.add_parser("prepare")
     prep.add_argument("--context", type=Path, required=True)
@@ -269,6 +282,10 @@ def main():
         print(json.dumps({"exit_code": 0, "operation": args.operation}))
         return 0
     except (Exception, KeyboardInterrupt):
+        if args.diagnostics:
+            import traceback
+
+            traceback.print_exc()
         print('{"exit_code":2,"error":"scanner_preparation_failed"}')
         return 2
 
