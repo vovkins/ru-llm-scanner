@@ -1,5 +1,5 @@
 # Inputs are prepared and hash-checked by scripts/build_scanner.py.
-FROM python@sha256:e88e9763f943ec1834f992a4b51e0f24500486803e8bc534e5767af9ea65f6ce
+FROM __BASE__
 LABEL org.opencontainers.image.source="https://github.com/vovkins/ru-llm-scanner" \
       org.opencontainers.image.version="0.1.0" \
       org.opencontainers.image.description="Local sensitive-data scanner for Git repositories"

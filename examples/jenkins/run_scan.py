@@ -101,6 +101,13 @@ def command(environ, output):
         "--output",
         str(output),
     ]
+    deployment = environ.get("SCANNER_DEPLOYMENT_LOCK")
+    if deployment is not None:
+        # Trusted agent configuration, not a build parameter or a remote URL.
+        path = Path(deployment)
+        if not path.is_absolute() or path.is_symlink() or not path.is_file():
+            raise ValueError()
+        result += ["--deployment-lock", str(path.resolve(strict=True))]
     target = environ["REF_B"]
     if not target:
         raise ValueError()

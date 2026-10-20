@@ -51,7 +51,7 @@ def verify_files(directory, checkout=None):
     require(
         manifest["manifest_version"] == 1
         and manifest["version"] == VERSION
-        and manifest["platform"] == "linux/arm64"
+        and manifest["platform"] in {"linux/arm64", "linux/amd64"}
         and re.fullmatch(r"[a-f0-9]{40}", manifest["source_revision"]),
         "Unexpected release identity",
     )
@@ -115,7 +115,7 @@ def installed_control(directory, *, import_images=False):
             "--pull",
             "never",
             "--platform",
-            "linux/arm64",
+            manifest["platform"],
             "--network",
             "none",
             "--read-only",
@@ -292,7 +292,7 @@ def installed_control(directory, *, import_images=False):
     return {
         "status": "passed",
         "version": VERSION,
-        "platform": "linux/arm64",
+        "platform": manifest["platform"],
         "verify_exit_code": 0,
         "steps": steps,
         "input_unchanged": True,

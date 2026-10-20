@@ -134,7 +134,18 @@ def load_lock(path, *, verify=True):
             raise ValueError()
     except (ValueError, KeyError, TypeError):
         raise Failure("invalid_deployment") from None
+    if verify:
+        verify_daemon_platform(lock["platform"])
     return lock
+
+
+def verify_daemon_platform(platform):
+    """Runtime support is native; do not silently run a foreign image via QEMU."""
+    value = docker("info", "--format", "{{.OSType}}/{{.Architecture}}")
+    actual = value.stdout.decode().strip()
+    aliases = {"linux/aarch64": "linux/arm64", "linux/x86_64": "linux/amd64"}
+    if aliases.get(actual, actual) != platform:
+        raise Failure("daemon_platform_mismatch")
 
 
 def absolute(path, *, directory=False):

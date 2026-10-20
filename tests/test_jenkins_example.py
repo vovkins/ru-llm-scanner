@@ -18,6 +18,38 @@ spec.loader.exec_module(jenkins)
 
 
 class JenkinsExampleTests(unittest.TestCase):
+    def test_deployment_is_selected_from_trusted_agent_configuration(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder).resolve()
+            (root / "repo").mkdir()
+            deployment = root / "amd64 deployment.json"
+            deployment.write_text("{}")
+            env = {
+                "SCANNER_HOME": str(ROOT),
+                "SCAN_MODE": "snapshot",
+                "SCANNER_REPOSITORIES": str(root),
+                "REPOSITORY_NAME": "repo",
+                "REF_B": "HEAD",
+                "SCANNER_DEPLOYMENT_LOCK": str(deployment),
+            }
+            command = jenkins.command(env, root / "out")
+            self.assertEqual(
+                command[command.index("--deployment-lock") + 1], str(deployment)
+            )
+            link = root / "link.json"
+            link.symlink_to(deployment)
+            for value in (
+                "",
+                "relative.json",
+                "https://example.invalid/lock",
+                str(link),
+                str(root),
+            ):
+                with self.subTest(value=value):
+                    env["SCANNER_DEPLOYMENT_LOCK"] = value
+                    with self.assertRaises(ValueError):
+                        jenkins.command(env, root / "out")
+
     def test_trusted_roots_and_literal_refs_without_shell(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder).resolve()

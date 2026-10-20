@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "artifact_lock_sha256": "6a0dd3c06394a8cf5b2df6ec652fb842d3a376986129ba722b8693d374295ad0",
+  "artifacts": 132,
+  "platform": "linux/amd64",
+  "actual_hash_size_wheel_metadata_elf_debian_control_checked": true,
+  "python_and_debian_versions_unchanged": true,
+  "model_dictionary_detection_sources_unchanged": true,
+  "arm64_build_profile_unchanged": true,
+  "images_published": false
+}

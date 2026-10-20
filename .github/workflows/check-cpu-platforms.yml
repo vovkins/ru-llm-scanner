@@ -1,0 +1,93 @@
+name: Verify unpublished CPU platforms
+on:
+  push:
+    branches: [codex/linux-amd64]
+    paths:
+      - '.github/workflows/check-cpu-platforms.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/check-cpu-platforms.yml'
+      - 'src/**'
+      - 'scripts/**'
+      - 'docker/**'
+      - 'locks/**'
+      - 'patches/**'
+      - 'tests/**'
+      - 'examples/jenkins/**'
+      - 'upstream.lock.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: cpu-platforms-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.11'
+      - uses: docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4
+        with:
+          version: v29.6.1
+          set-host: true
+          daemon-config: '{"features":{"containerd-snapshotter":true}}'
+      - name: Prepare development tools and record host
+        run: |
+          umask 077
+          mkdir -p .build/evidence
+          python -m pip install pip==26.2.1 setuptools==84.1.0 wheel==0.48.0
+          python -m pip install -e . -r requirements-dev.txt
+          python -m unittest discover -s tests > .build/unit-tests.log 2>&1
+          lscpu -J > .build/evidence/cpu.json
+          docker info --format '{{json .}}' > .build/docker-info-private.json
+          docker version > .build/evidence/docker-version.txt
+          docker compose version > .build/evidence/compose-version.txt
+          df -h > .build/evidence/disk-before.txt
+      - name: Build from pinned inputs with builder HTTPS blocked
+        run: |
+          python scripts/check_cpu_candidate.py build --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache --download --offline-firewall
+      - name: Run native integration gates
+        run: |
+          python scripts/check_cpu_candidate.py integration --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache
+      - name: Collect safe evidence
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, shutil
+          from pathlib import Path
+          root=Path('.build/evidence'); root.mkdir(parents=True, exist_ok=True)
+          allowed=('build-summary.json','steps.json','upstream-core.json','upstream-ner.json','linux-git.json','parity/parity-verification.json','scan-integration/scan-verification.json','cli-integration/cli-verification.json','acceptance/acceptance.json','docker-integration/docker-verification.json','runtime-faults/fault-verification.json','deployment-extras/extras-verification.json')
+          for name in allowed:
+              path=Path('.build/native')/name
+              if path.is_file():
+                  json.loads(path.read_text())
+                  shutil.copyfile(path,root/name.replace('/','-'))
+          log=Path('.build/unit-tests.log')
+          if log.exists():
+              import re
+              text=log.read_text()
+              count=re.findall(r'Ran (\d+) tests',text)
+              (root/'unit-summary.json').write_text(json.dumps({'tests':int(count[-1]) if count else None,'passed':bool(re.search(r'^OK$',text,re.M)),'raw_log_uploaded':False})+'\n')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: cpu-${{ matrix.arch }}-evidence
+          path: .build/evidence/
+          retention-days: 14
+          if-no-files-found: error
