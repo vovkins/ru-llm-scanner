@@ -1,8 +1,10 @@
 # Безопасность и сообщения о проблемах
 
 Текущая версия — `0.1.0`. Гарантированный срок реакции на сообщения не установлен.
-Реальные CLI/Compose/Analyzer проверены на CPU Linux ARM64
-в Docker Desktop; Jenkins adapter проверен локально без controller.
+Опубликованный v0.1.0 проверен на CPU Linux ARM64 в Docker Desktop.
+Отдельный неопубликованный [AMD64/ARM64 кандидат](verification/linux-amd64/README.md)
+проходит нативную Linux-приёмку; настоящий Jenkins AMD64, production/fault gates
+и полный Requests уже проверены, итоговый повтор ещё выполняется.
 [Матрица свидетельств](verification/README.md) отделяет static/schema/unit stub,
 real model, independent quality и production behavior. Это внутренние проверки,
 не независимая сертификация или гарантия отсутствия дефектов.
@@ -58,6 +60,10 @@ no-new-privileges включены штатным launcher. Container logs от�
 host operator входят в trust boundary; SIGKILL/daemon loss требует ручного
 [cleanup точного проекта](docs/admin/operations.md). Копии private reports в Jenkins/
 backup требуют отдельно настроенных владельцем RBAC/retention.
+
+Launcher также сверяет архитектуру Docker server с выбранным deployment до
+запуска/импорта; чужая платформа не включается через неявную эмуляцию.
+После смены профиля/идентичности нужен новый полный clean snapshot для baseline.
 
 ## Чувствительные артефакты
 

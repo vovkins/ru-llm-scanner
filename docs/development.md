@@ -59,8 +59,7 @@ Black 25.1.0 — dev-tool. Build backend закреплён отдельно. Ho
 Для full unit сначала подготовьте pinned tracked assets (модель им не нужна):
 
 ```sh
-.venv/bin/python scripts/analyzer.py prepare \
-  --source /trusted/ru-llm-proxy --output .build/analyzer --profile cpu-linux-arm64
+.venv/bin/python scripts/prepare_unit_assets.py --source /trusted/ru-llm-proxy
 .venv/bin/python scripts/analyzer.py verify-context --context .build/analyzer
 ```
 
@@ -68,6 +67,14 @@ Output должен отсутствовать. Если валидный `.buil
 его, не перезаписывайте автоматически. Явный `--fetch` вместо `--source` допустим
 только на стадии подготовки. Context другого пути можно использовать в integration
 через аргумент, но существующие asset-required unit ожидают именно этот путь.
+
+Helper сохраняет исторический source/runtime fixture этих unit и соответствующие
+constraints отдельно от новых build profiles. Он не скачивает модель и не собирает
+images; ARM64 metadata fixture не означает ARM64 inference на AMD64.
+Для новых контейнеров используйте текущий профиль из [admin build](admin/build.md).
+Нативный workflow `check-cpu-platforms.yml` отдельно выполняет настоящую модель,
+полный Requests, empty-store installation, fault/quality проверки обеих архитектур
+и Jenkins AMD64. [Текущий source и протоколы](../verification/linux-amd64/README.md).
 
 ## Быстрые проверки
 
@@ -102,6 +109,7 @@ HTML browser acceptance, clean installation walkthrough и capacity/advisory
 checks выполняются отдельной матрицей, не объявляются результатом этой команды.
 
 Full unit collector требует 0 skipped и сохраняет hashes/versions/counts;
+неопубликованный AMD64 кандидат прошёл [170 host unit](../verification/linux-amd64/host-unit-summary.json).
 сырой log остаётся локальным. Последнее evidence содержит
 [155 tests на слитом main](../verification/operations-main-integration/unit-tests.json), не обещание
 неизменного количества тестов при будущих правках.

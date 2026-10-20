@@ -6,5 +6,8 @@
   "remaining": "Final repeat with repaired CLI cleanup/Git fixture imports and separate containerd store; resource metrics; certifi #34 pending independently",
   "old_run_cancelled_after_jenkins_to_avoid_repeating_known_short_timeout": true,
   "full_public_requests_run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39504766172",
-  "production_faults_and_permissions_run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39506900093"
+  "production_faults_and_permissions_run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39506900093",
+  "final_repeat_run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39509568334",
+  "unpublished_source_commit": "09a2d3f34d9a1de4ee74a5840a878e602f1232a6",
+  "fresh_install_both_platforms_passed": true
 }

@@ -30,7 +30,13 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "src"), str(ROOT / "scripts"), str(ROOT / "tests")]
-from ru_llm_scanner.artifacts import file_hash, read_json, require, write_json
+from ru_llm_scanner.artifacts import (
+    ArtifactError,
+    file_hash,
+    read_json,
+    require,
+    write_json,
+)
 from ru_llm_scanner.configuration import configuration_from_mapping
 from ru_llm_scanner.engine import EngineIdentity
 from ru_llm_scanner.report_validation import validate_report
@@ -54,6 +60,7 @@ class JenkinsFixture:
         )
         self.records = []
         self.projects = set()
+        self.declarative_validation = False
 
     def request(self, path, data=None, *, content_type=None, headers=None):
         auth = base64.b64encode(("scanner-test:" + self.password).encode()).decode()
@@ -230,6 +237,7 @@ class JenkinsFixture:
         )[0].decode()
         (self.root / "declarative-validation.txt").write_text(data)
         require("successfully validated" in data, "Declarative validation failed")
+        self.declarative_validation = True
 
     def create_job(self, name, template=None):
         config = ET.Element("flow-definition", {"plugin": "workflow-job"})
@@ -609,13 +617,39 @@ def main():
     os.umask(0o077)
     fixture = JenkinsFixture(args)
     passed = False
+    phase = "prepare"
+    failure = None
     try:
         fixture.prepare()
+        phase = "start-and-validate"
         fixture.start()
+        phase = "pipeline-tests"
         fixture.test()
         passed = True
+    except Exception as error:
+        # ArtifactError messages are fixed by this trusted harness. Other
+        # exception bodies may contain response data and are never exported.
+        failure = {"phase": phase, "type": type(error).__name__}
+        if isinstance(error, (ArtifactError, RuntimeError)):
+            failure["assertion"] = str(error)
+        if isinstance(error, urllib.error.HTTPError):
+            failure["http_status"] = error.code
+        raise
     finally:
         fixture.close()
+        validation_diagnostics = None
+        validation_file = fixture.root / "declarative-validation.txt"
+        if validation_file.is_file() and not fixture.declarative_validation:
+            value = validation_file.read_text(errors="replace")
+            # This endpoint validates our public trusted fixture, not scanned data.
+            # Never export an unexpected HTML/login page or authentication tokens.
+            if "<html" not in value.lower() and "<script" not in value.lower():
+                value = value.replace(fixture.password, "[redacted]").replace(
+                    SECRET, "[synthetic-value]"
+                )
+                validation_diagnostics = re.sub(
+                    r"\b[a-fA-F0-9]{24,}\b", "[redacted-token]", value
+                )[:2000]
         diagnostics = []
         if not passed:
             for path in [
@@ -657,9 +691,9 @@ def main():
                 ),
                 "platform": "linux/amd64",
                 "agent": "native host process; controller executors disabled",
-                "declarative_validation": (
-                    fixture.root / "declarative-validation.txt"
-                ).exists(),
+                "declarative_validation": fixture.declarative_validation,
+                "failure": failure,
+                "validation_failure_diagnostics": validation_diagnostics,
                 "cases": fixture.records,
                 "raw_reports_credentials_and_logs_uploaded": False,
                 "user_jenkins_modified": False,

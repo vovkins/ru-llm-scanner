@@ -105,6 +105,7 @@ def main():
         and input_unchanged
     )
     config_equal = report["configuration"] == reference["configuration"]
+    coverage_equal = report["coverage"]["counts"] == reference["coverage"]
     decisions_equal = scores.keys() == reference["finding_scores"].keys()
     delta = (
         max(
@@ -114,7 +115,13 @@ def main():
         if decisions_equal
         else None
     )
-    passed = complete and config_equal and decisions_equal and delta <= 1e-5
+    passed = (
+        complete
+        and config_equal
+        and coverage_equal
+        and decisions_equal
+        and delta <= 1e-5
+    )
     errors = {}
     for error in report["errors"]:
         errors[error["code"]] = errors.get(error["code"], 0) + 1
@@ -146,6 +153,7 @@ def main():
                 f["path"] for f in report["files"] if f["status"] == "error"
             ),
             "reference_configuration_equal": config_equal,
+            "reference_coverage_equal": coverage_equal,
             "reference_decisions_equal": decisions_equal,
             "reference_maximum_score_absolute_delta": delta,
             "score_absolute_tolerance": 1e-5,

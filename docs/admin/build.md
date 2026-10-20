@@ -13,7 +13,10 @@
 Это путь администратора с исходниками. Для готового комплекта используйте
 [установку из пакета](installation.md). Сборка/установка dependencies может
 обращаться к одобренным источникам; сканирование готовыми images работает offline.
-Проверены CPU Linux ARM64 и [указанная среда](README.md#среда-и-ответственность).
+Нативные build/seal/повторная offline-сборка обоих профилей подтверждены в
+[протоколах AMD64/ARM64](../../verification/linux-amd64/README.md).
+Итоговый статус установки и эксплуатации указан там же; история ниже относится
+к прежнему ARM64 комплекту.
 На source checkpoint `2588571` полный новый offline-маршрут выполнен в отдельном
 каталоге из `git archive`, с новым venv и единым runtime/deployment:
 [evidence #24](../../verification/operations-dependencies/README.md).
@@ -62,6 +65,15 @@ SCANNER_TAG="ru-llm-scanner:$BUILD_PROFILE-build-001"
 Установка dev dependencies/build backend использует доверенную pip-конфигурацию
 хоста. Отдельно обеспечьте загрузку **закреплённого** Python base из build profile
 через одобренный канал. Не подменяйте digest текущим `python:latest`.
+Если подготовка выполняется с сетью, загрузите base выбранного профиля явно:
+
+```sh
+BASE_IMAGE=$(.venv/bin/python -c 'import json,sys; print(json.load(open("upstream.lock.json"))["build_profiles"][sys.argv[1]]["base_image"])' "$BUILD_PROFILE")
+docker pull --platform "linux/${BUILD_PROFILE#cpu-linux-}" "$BASE_IMAGE"
+```
+
+В закрытой среде вместо pull импортируйте заранее сохранённый и проверенный base
+через доверенный канал. Наличие tar с произвольным tag не заменяет совпадение digest.
 
 ## 2. Подготовить закреплённый upstream
 

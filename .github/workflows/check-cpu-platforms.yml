@@ -95,6 +95,20 @@ jobs:
             .build/native/fresh-install/fresh-install.json
             .build/native/fresh-install/installed-control.json
           retention-days: 3
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exercise real isolated Jenkins on native AMD64
+        if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
+        run: python scripts/check_jenkins_integration.py --deployment-lock .build/native/deployment.json --output-dir .build/jenkins
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
+        with:
+          name: native-amd64-jenkins
+          path: .build/jenkins/jenkins-verification.json
+          retention-days: 3
       - name: Run native integration gates
         id: integration
         if: always() && steps.build.outcome == 'success'
@@ -129,20 +143,6 @@ jobs:
       - name: Measure bounded synthetic capacity
         if: always() && steps.build.outcome == 'success'
         run: python verification/operations-ner-windowing/probe.py --deployment-lock .build/native/deployment.json --output-dir .build/native/capacity
-      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
-        if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
-        with:
-          distribution: temurin
-          java-version: '21'
-      - name: Exercise real isolated Jenkins on native AMD64
-        if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
-        run: python scripts/check_jenkins_integration.py --deployment-lock .build/native/deployment.json --output-dir .build/jenkins
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
-        with:
-          name: native-amd64-jenkins
-          path: .build/jenkins/jenkins-verification.json
-          retention-days: 3
       - name: Scan pinned public Requests offline
         if: always() && steps.build.outcome == 'success' && steps.integration.outcome == 'success' && steps.fresh.outcome == 'success'
         run: python scripts/check_public_repository.py --deployment-lock .build/native/deployment.json --output-dir .build/native/public-requests --fetch
