@@ -1,10 +1,7 @@
 name: Verify unpublished CPU platforms
 on:
-  push:
-    branches: [codex/linux-amd64]
-    paths:
-      - '.github/workflows/check-cpu-platforms.yml'
   pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
     branches: [main]
     paths:
       - '.github/workflows/check-cpu-platforms.yml'
@@ -14,8 +11,19 @@ on:
       - 'locks/**'
       - 'patches/**'
       - 'tests/**'
-      - 'examples/jenkins/**'
+      - 'examples/**'
+      - 'schemas/**'
+      - 'pyproject.toml'
+      - 'requirements-dev.txt'
+      - 'licenses/**'
+      - 'LICENSE'
+      - 'DISTRIBUTION_NOTICES.md'
+      - 'THIRD_PARTY_NOTICES.md'
       - 'upstream.lock.json'
+      - 'docs/**'
+      - 'verification/**'
+      - 'README.md'
+      - 'SECURITY.md'
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,7 +31,37 @@ concurrency:
   group: cpu-platforms-${{ github.ref }}-${{ github.sha }}
   cancel-in-progress: false
 jobs:
+  fast:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.11'
+      - name: Unit, contracts, documentation and format
+        run: |
+          python -m pip install pip==26.2.1 setuptools==84.1.0 wheel==0.48.0
+          python -m pip install -e . -r requirements-dev.txt -c locks/requirements-scanner-linux-amd64.txt
+          python scripts/prepare_unit_assets.py --fetch
+          mkdir -p .build
+          if ! python -m unittest discover -s tests > .build/unit-tests.log 2>&1; then
+            cat .build/unit-tests.log
+            exit 1
+          fi
+          if rg -q 'skipped=' .build/unit-tests.log; then
+            echo 'Critical unit groups were skipped'
+            exit 1
+          fi
+          python scripts/check_contracts.py
+          python scripts/check_documentation.py
+          python -m black --check src tests docker scripts examples/jenkins --extend-exclude 'check_contracts\.py'
+          git diff --check
   native:
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     strategy:
       fail-fast: false
       matrix:
@@ -182,7 +220,7 @@ jobs:
           if-no-files-found: error
   compare:
     needs: native
-    if: always()
+    if: always() && needs.native.result != 'skipped'
     runs-on: ubuntu-24.04
     permissions:
       contents: read

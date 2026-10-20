@@ -91,27 +91,31 @@ Staged/untracked/незакоммиченные изменения не вход
 
 ## Границы и статус
 
-Версия **`0.1.0`**, первый выпуск для локального использования с явными
-ограничениями ниже. Подтверждённая среда — CPU Linux ARM64 внутри
-Docker Desktop на Apple Silicon. Новые нативные Linux AMD64/ARM64 и Jenkins
-проверки относятся к отдельному кандидату #33 и не расширяют состав v0.1.0.
-GPU и другой физический закрытый host не объявлены проверенными.
-[Матрица выполненных проверок](verification/README.md).
-Новый [комплексный прогон](verification/operations-stage-4/README.md) включает
-прохождение руководств, браузер, нагрузку и публичный репозиторий.
-Согласованные исправления [NER/RV-06](verification/operations-ner-windowing/README.md)
-и [зависимостей DEP-01/DEP-02](verification/operations-dependencies/README.md)
-подготовлены отдельными кандидатами. Полный Requests: **119 analyzed / 13 unsupported /
-0 errors**, 612 кандидатов, код 1; значения не проверялись во внешних сервисах.
-Модель/словарь сохранены, неоднозначность packaging inventory устранена.
-Владелец 2026-10-20 [принял остаточные риски четырёх native advisory](verification/operations-dependencies/risk-acceptance.md)
-для закрытого контура. Штатный deployment не заменён;
-[итоговая приёмка #25](verification/operations-stage-5/README.md) подтверждает
-готовность кандидата к локальному пилоту в указанной среде.
-[Матрица готовности и ограничений](verification/operations-stage-5/readiness-matrix.md).
-Изменения объединены в `main`: [результаты интеграции](verification/operations-main-integration/README.md).
-Для пилота выбирайте проверенный комплект явным deployment lock;
-исторический default сохранён.
+Опубликованный **v0.1.0** содержит CPU Linux ARM64. Новая поддержка AMD64
+подготовлена в исходниках; финальный полный прогон [#33](https://github.com/vovkins/ru-llm-scanner/issues/33)
+ещё выполняется. Новые образы и релиз не опубликованы.
+
+| Комплект | Проверенная платформа | Состояние |
+| --- | --- | --- |
+| v0.1.0 | Linux ARM64, Docker Desktop на Apple Silicon | Опубликован, прежние images/locks сохранены |
+| Новый `cpu-linux-amd64` | Native Ubuntu 24.04 x86-64, EPYC 7763/AVX2, Docker 29.6.1 / Compose 2.38.2 | Build, offline import, модель, production/faults и настоящий Jenkins проверены; итоговый повтор выполняется |
+| Новый `cpu-linux-arm64` | Native Ubuntu 24.04 ARM64 | Регрессия тех же runtime/build путей и модели пройдена |
+| GPU, rootless/userns-remap, другие ОС/CPU/корпоративные ACL | В эту приёмку не входят | Нужна отдельная проверка |
+
+[Серверная установка и ресурсы](docs/admin/linux-amd64.md) ·
+[Доверенный Jenkins pipeline](docs/admin/jenkins.md) ·
+[Протоколы AMD64/ARM64](verification/linux-amd64/README.md).
+Полный Requests на обеих архитектурах: **119 analyzed / 13 unsupported / 0 errors**,
+612 кандидатов, код 1. Решения/координаты/источники совпали с принятым ARM64
+reference; абсолютная разница confidence укладывается в `1e-5`. Действительность
+найденных значений во внешних сервисах не проверялась.
+
+Владелец [принял четыре остаточных native-риска](verification/operations-dependencies/risk-acceptance.md)
+для закрытого контура; библиотеки этим не исправлены. Новый
+[certifi advisory и предложение #34](verification/linux-amd64/certifi-advisory.md)
+рассматриваются отдельно. Для каждого комплекта нужен явный deployment;
+исторический default сохранён. Смена runtime/profile требует нового полного
+clean snapshot для baseline. [История предыдущей приёмки](verification/operations-main-integration/README.md).
 
 Diff сравнивает конечные A/B и **не сканирует промежуточную историю**. Секрет,
 добавленный и удалённый между ними, может остаться в Git. PDF/Office/OCR,

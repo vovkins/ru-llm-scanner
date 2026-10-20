@@ -16,7 +16,8 @@ Python/Debian dependencies, что ARM64 reference. Для каждого про
 AVX2/FMA), Docker 29.6.1 и Compose 2.38.2. Полный Requests обработан за 1162 s
 при 4 CPU и analyze timeout 1800 s: 119 analyzed / 13 unsupported / 0 error,
 612 находок, как в ARM64 reference. Это benchmark выбранного дерева, без ground
-truth секретов; не SLA произвольного репозитория. RAM/диск дополняются после измерения.
+truth секретов; не SLA произвольного репозитория. Повтор с cgroup sampling занял
+1053 s; наблюдаемые пики Analyzer/Scanner — 1,0/0,18 GiB.
 NumPy 2.4 поднял стандартный x86 baseline до
 [x86-64-v2](https://numpy.org/doc/stable/release/2.4.0-notes.html#modulate-dispatched-x86-cpu-features);
 baseline фактического wheel и PyTorch capability дополнительно снимаются в runtime.
@@ -83,3 +84,23 @@ confidence до `1e-5` допускается только при совпаде
 В workflow разрешены только безопасные протоколы. Полные реальные отчёты Requests,
 build cache, контейнерные images и credentials не публикуются как CI artifacts.
 Слияние PR, следующий release/tag и GHCR push требуют отдельного указания владельца.
+
+## Ресурсы для пилота
+
+Измерено на 4 vCPU и примерно 16 GiB host RAM. Первый/повторный синтетический
+snapshot после импорта — 6,12/5,81 s; контейнеры каждый раз новые, OS page cache
+не сбрасывался. Это запуск процесса с моделью, не физический cold boot сервера.
+
+Для начального пилота сохраните RAM limits Analyzer `3g` / Scanner `1g`.
+Для полного Requests проверены Analyzer 4 CPU и analyze timeout 1800 s;
+малые проверки проходили с default 2 CPU. Контейнерные пики выбранного корпуса
+не доказывают минимальную RAM хоста. Добавьте запас для ОС/Java/controller;
+двум параллельным jobs нужны суммарные бюджеты двух пар контейнеров.
+
+AMD64 image sizes по Docker — около 1,34 GiB Analyzer и 0,11 GiB Scanner,
+transfer tar — 1,41 GiB, cache подготовки — 1,00 GiB. Это логические размеры,
+не peak физического image store: compressed layers, unpacked snapshots, rollback,
+contexts и временные файлы требуют дополнительного места. Для первого пилота
+планируйте 20 GiB свободного tool-space, отдельно от клона и retention отчётов;
+это стартовый запас, не доказанный минимум. Полные JSON/HTML Requests заняли
+около 69 MiB. [Протоколы и область измерений](../../verification/linux-amd64/README.md).

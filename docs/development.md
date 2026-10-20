@@ -76,6 +76,12 @@ images; ARM64 metadata fixture не означает ARM64 inference на AMD64.
 полный Requests, empty-store installation, fault/quality проверки обеих архитектур
 и Jenkins AMD64. [Текущий source и протоколы](../verification/linux-amd64/README.md).
 
+В draft PR автоматически идут быстрые unit/contracts/docs/format проверки.
+Полный native workflow запускается вручную через `workflow_dispatch` либо
+автоматически для PR, переведённого в ready for review. Коммиты с протоколами
+не требуют повторного model inference при неизменных material inputs;
+соответствие inputs принятому native run проверяется при итоговой приёмке.
+
 ## Быстрые проверки
 
 ```sh
