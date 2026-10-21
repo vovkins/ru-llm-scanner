@@ -66,6 +66,17 @@ jobs:
           bundle=extract_checked(archive,directory/'extracted',os.environ['BUNDLE_SHA256'],name)
           manifest=verify_files(bundle,Path.cwd())
           assert manifest['build_source_revision']==revision and manifest['platform']=='linux/'+arch and manifest['version']==version
+          subprocess.run([sys.executable,'scripts/docker_scanner.py','import','--directory',str(bundle/'package')],check=True)
+          metadata={}
+          for component in ('scanner','analyzer'):
+              image=manifest['images'][component]
+              info=json.loads(subprocess.check_output(['docker','image','inspect','--platform','linux/'+arch,image['image_reference_id']]))[0]
+              labels=info['Config'].get('Labels') or {}
+              assert info['Id']==image['image_id'] and info['Architecture']==arch and info['Os']=='linux'
+              assert labels['org.opencontainers.image.version']==version
+              assert labels['org.opencontainers.image.source']=='https://github.com/vovkins/ru-llm-scanner'
+              metadata[component]={'image_id':info['Id'],'labels':labels,'build_source_revision':revision}
+          (directory/'oci-metadata.json').write_text(json.dumps(metadata,indent=2)+'\n')
           subprocess.run([sys.executable,'scripts/check_fresh_install.py','--bundle',str(bundle),'--output-dir',str(directory/'fresh')],check=True)
           receipt=json.loads((directory/'fresh/fresh-install.json').read_text())
           receipt.update(bundle_sha256=os.environ['BUNDLE_SHA256'],build_source_revision=revision,archive_bytes=archive.stat().st_size,producer_revision=os.environ['GITHUB_SHA'])
@@ -75,6 +86,7 @@ jobs:
         with:
           name: final-frozen-${{ matrix.arch }}
           path: |
+            .build/archive-control/oci-metadata.json
             .build/archive-control/frozen-archive-control.json
             .build/archive-control/fresh/installed-control.json
           retention-days: 14
