@@ -248,6 +248,7 @@ class ReleasePlatformTests(unittest.TestCase):
                 "conclusion": "success",
                 "head_sha": "a" * 40,
                 "path": ".github/workflows/build-release.yml",
+                "event": "workflow_dispatch",
             }
             command.return_value = json.dumps(state).encode()
             path.write_text(json.dumps(receipt))

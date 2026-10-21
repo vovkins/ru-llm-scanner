@@ -25,6 +25,15 @@ on:
       - 'README.md'
       - 'SECURITY.md'
   workflow_dispatch:
+    inputs:
+      release_version:
+        description: Optional frozen CPU release build (no registry push)
+        type: string
+        default: ''
+      source_revision:
+        description: Exact main SHA for a release build
+        type: string
+        default: ''
 permissions:
   contents: read
 concurrency:
@@ -61,7 +70,7 @@ jobs:
           python -m black --check src tests docker scripts examples/jenkins --extend-exclude 'check_contracts\.py'
           git diff --check
   native:
-    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    if: (github.event_name != 'workflow_dispatch' || inputs.release_version == '') && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
     strategy:
       fail-fast: false
       matrix:
@@ -256,3 +265,11 @@ jobs:
             .build/public-cross-platform.json
           include-hidden-files: true
           retention-days: 14
+  release_build:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.release_version != ''
+    permissions:
+      contents: write
+    uses: ./.github/workflows/build-release.yml
+    with:
+      version: ${{ inputs.release_version }}
+      source_revision: ${{ inputs.source_revision }}

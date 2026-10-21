@@ -94,7 +94,9 @@ verify и контрольный scan non-root учётной записью о�
 ## Сопровождающему выпуска
 
 [План #36](https://github.com/vovkins/ru-llm-scanner/issues/36) разрешает выпуск
-после gates обеих платформ. Workflow `build-release.yml` вручную запускается на
+после gates обеих платформ. Workflow `build-release.yml` вызывается из существующего `check-cpu-platforms.yml`
+с `release_version=0.2.0` и `source_revision` (без registry write), либо напрямую
+после регистрации GitHub API. Сборка запускается на
 точном согласованном main SHA: native builds/tests → fresh-store control →
 реальный Jenkins AMD64 → полный Requests → inventories/advisories → frozen draft assets.
 Images на disposable runner сохраняются в этих архивах; обычные CI artifacts

@@ -1,6 +1,14 @@
 # Manual release workflow; registered on the default branch.
 name: Build and test frozen CPU release
 on:
+  workflow_call:
+    inputs:
+      version:
+        type: string
+        required: true
+      source_revision:
+        type: string
+        required: true
   workflow_dispatch:
     inputs:
       version:

@@ -328,7 +328,12 @@ def verify_acceptance(args, directory):
         state.get("status") == "completed"
         and state.get("conclusion") == "success"
         and state.get("head_sha") == args.source_revision
-        and state.get("path") == ".github/workflows/build-release.yml",
+        and state.get("path")
+        in {
+            ".github/workflows/build-release.yml",
+            ".github/workflows/check-cpu-platforms.yml",
+        }
+        and state.get("event") == "workflow_dispatch",
         "Native release workflow has not successfully completed",
     )
 
