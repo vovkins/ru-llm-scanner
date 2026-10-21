@@ -114,11 +114,11 @@ packaged schema и доступные связи полей. Одна Schema н�
 HTML browser acceptance, clean installation walkthrough и capacity/advisory
 checks выполняются отдельной матрицей, не объявляются результатом этой команды.
 
-Full unit collector требует 0 skipped и сохраняет hashes/versions/counts;
-неопубликованный AMD64 кандидат прошёл [170 host unit](../verification/linux-amd64/host-unit-summary.json).
-сырой log остаётся локальным. Последнее evidence содержит
-[155 tests на слитом main](../verification/operations-main-integration/unit-tests.json), не обещание
-неизменного количества тестов при будущих правках.
+Full unit collector требует 0 skipped и сохраняет hashes/versions/counts.
+После слияния PR #35 [повторный unit main](../verification/linux-amd64/main-integration/unit-tests.json)
+прошёл 171 тест без ошибок и пропусков; сырой log остаётся локальным.
+[Предыдущие 155 tests](../verification/operations-main-integration/unit-tests.json)
+относятся к своему checkpoint. Количество тестов может меняться при будущих правках.
 [Итоговая приёмка](../verification/operations-stage-5/README.md) повторно сверила
 все 64 source hashes предыдущего набора; после слияния полный unit выполнен заново.
 

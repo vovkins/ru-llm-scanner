@@ -1,7 +1,8 @@
 # Linux AMD64: подготовка серверного комплекта
 
-Поддержка реализована в [#33](https://github.com/vovkins/ru-llm-scanner/issues/33).
-Это инструкция к неопубликованному кандидату; опубликованный v0.1.0 остаётся
+Поддержка включена в `main` через [PR #35](https://github.com/vovkins/ru-llm-scanner/pull/35);
+[слияние и контроль main](../../verification/linux-amd64/main-integration/README.md)
+проверены отдельно. Это инструкция к неопубликованной поставке; опубликованный v0.1.0 остаётся
 ARM64-релизом. Итоговая нативная AMD64/ARM64 приёмка и настоящий Jenkins прошли:
 [протоколы и статус](../../verification/linux-amd64/README.md).
 

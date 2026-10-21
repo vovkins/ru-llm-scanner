@@ -1,7 +1,10 @@
 # Linux AMD64 — итоговая нативная приёмка
 
 План [#33](https://github.com/vovkins/ru-llm-scanner/issues/33) выполнен;
-[draft PR #35](https://github.com/vovkins/ru-llm-scanner/pull/35) подготовлен к ревью.
+[PR #35](https://github.com/vovkins/ru-llm-scanner/pull/35) слит в `main` 2026-10-21
+по явному согласованию владельца. [Итоговая проверка main](main-integration/README.md)
+подтвердила равенство дерева согласованному head, применимость native evidence,
+полный unit и контроль установленного launcher.
 Полный native [run 39513865393](https://github.com/vovkins/ru-llm-scanner/actions/runs/39513865393)
 успешен для AMD64, ARM64 и compare. Реализация — source4c0d5dc; после неё
 обновлялись документация/CI triggers/безопасные evidence при неизменных runtime inputs.
@@ -34,5 +37,6 @@ Git helper export,отдельный containerd store и ожидание Jenkin
 Подробности — в ревью и истории #33.
 
 Полные реальные отчёты,credentials,images/model archives и cache не публиковались
-как CI artifacts. Новый release/tag/GHCR push и merge не выполнялись.
+как CI artifacts. Новый release/tag/GHCR push не выполнялись; слияние исходников
+не заменяет установленные образы и исторический default deployment.
 Публичный v0.1.0 остаётся ARM64; для будущей публикации требуется отдельное решение.

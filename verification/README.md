@@ -7,7 +7,9 @@
 
 ## Linux AMD64 и нативная ARM64 регрессия
 
-Новый неопубликованный кандидат: [план #33 и протоколы](linux-amd64/README.md).
+Поддержка включена в `main` через PR #35; новая поставка ещё не опубликована.
+[План #33 и нативные протоколы](linux-amd64/README.md),
+[слияние и новые unit/control main](linux-amd64/main-integration/README.md).
 Нативные Ubuntu 24.04 AMD64/ARM64 сборки, parity/quality, полный Requests,
 production/fault проверки и отдельная установка с пустым Docker/containerd store
 подтверждены. Настоящий Jenkins AMD64 прошёл 13 завершённых сценариев. Итоговый

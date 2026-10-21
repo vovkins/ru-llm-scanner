@@ -8,8 +8,8 @@ plugin прошли Declarative validation и 13 сценариев настоя
 0/1/2, snapshot/strict diff, неверные входы, параллельные jobs, отмена, timeout
 и потеря агента с операторским восстановлением. Проверены private artifacts,
 отсутствие найденных значений в console и неизменность baseline.
-[Протокол](../../verification/linux-amd64/native-progress/jenkins-native-amd64.json).
-Итоговая приёмка всего AMD64 комплекта отслеживается отдельно в
+[Финальный протокол](../../verification/linux-amd64/candidate/amd64/jenkins-verification.json).
+Поддержка включена в `main` через PR #35; итоговая приёмка всего AMD64 комплекта — в
 [#33](https://github.com/vovkins/ru-llm-scanner/issues/33).
 
 ## Подготовка агентом CI

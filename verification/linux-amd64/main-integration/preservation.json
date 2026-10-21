@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "release_revision": "e66b9e888948d038ee07446c5948fdca9376abcf",
+  "published_release_list_and_tag_refs_unchanged": true,
+  "protected_inputs_sha256": {
+    "locks/offline-cpu-linux-arm64.artifacts.json": "68024c5a384ff061476cbf4f9394e4ba4c71c38faeee639a483cd67a279ff847",
+    "locks/requirements-cpu-linux-arm64.txt": "1d2256a2b93ca7a909a785a3609e84964710c7c3deee5ae28f1a22618d9c638f",
+    "locks/analyzer-cpu-linux-arm64.source.lock.json": "64a2f586ef1629c8ba5ebf0665d9b6dfd923f6332e77b6095ab45c70e57a6bed",
+    "locks/requirements-scanner-linux-arm64.txt": "91bcb8e68aeb7be9ff824957679f393a4772df849eb631875c7c51ef9f8fa746",
+    "locks/analyzer-cpu-linux-arm64.runtime.lock.json": "a8a08bd416193af9632997afc0ba5256f2528534607eddc74015915ec9cb1a7d",
+    "locks/scanner-cpu-linux-arm64.deployment.json": "877449870cb12066e3203f8de779cb868a5ded6f20a18d3dd4432e8e2ea60bde",
+    "tests/corpus/load_code_corpus.py": "34570026325dc91ae26ec4102680e46f1670564ed16713f4c5da86d73b145a59",
+    "tests/corpus/README.md": "022f4edbb787fb5ed149e0049463609bd8a88d10a1545973025608ba7edec665",
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+    "patches/transformers-v5-tokenizer.patch": "7ffb9ce9a62faf2df1a1545a5556bb423016dd239cccbb3668925ec7e1b70f5c",
+    "patches/ner-window-recovery.patch": "7fbc58bab1d309e93f3cf25a3c720d6c01a438a18e4d4da1dfd4e9a23f5db670",
+    "patches/analyzer-api-v1.patch": "1b81547a59a43fa57bc88cfaeaec7d894465fc2e54491b306736976f6d6a0092",
+    "patches/analyzer-dependencies.patch": "3a062b7f632676724f4812887030e2888b90fdb97647d8eef7d44b25f1216a2e"
+  },
+  "upstream_fields_unchanged": [
+    "lock_version",
+    "kind",
+    "upstream",
+    "sources",
+    "model",
+    "dictionary",
+    "patches",
+    "analyzer_environment"
+  ],
+  "proxy_revision": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
+  "proxy_tracked_worktree_clean": true,
+  "foreign_containers_unchanged": 7,
+  "foreign_container_ids_started_at_images_configuration_unchanged": true,
+  "local_image_references_unchanged": true,
+  "old_bundle_manifest_unchanged": true,
+  "images_or_release_published": false,
+  "default_deployment_replaced": false,
+  "certifi_versions_changed": false
+}

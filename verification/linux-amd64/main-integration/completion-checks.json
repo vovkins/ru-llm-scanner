@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "source_commit_checked": "dd4a11fb91c3c6657fb28564dfe769b6ac4b6abf",
+  "runtime_build_inputs_unchanged": true,
+  "schema": {
+    "examples": 11,
+    "rejected_invalid_cases": 22,
+    "local_links": 861
+  },
+  "documentation": {
+    "browser_acceptance_performed": false,
+    "clean_install_walkthrough_performed": false,
+    "defaults_checked": 19,
+    "demo_artifact_kind": "contract_example",
+    "demo_external_assets": 0,
+    "demo_findings": 2,
+    "documented_commands_checked": 48,
+    "fresh_build_runtime_lock_uses": 3,
+    "role_navigation_anchors_checked": 8,
+    "runtime_rejects_example": true,
+    "shell_blocks_syntax_checked": 40,
+    "status": "passed",
+    "verification_version": 1
+  },
+  "black": {
+    "status": "passed",
+    "output": "All done! ✨ 🍰 ✨\n95 files would be left unchanged."
+  },
+  "git_diff_check": "passed",
+  "new_model_or_image_build_performed": false,
+  "unit_initial_sandbox_attempt": {
+    "status": "environment_blocked",
+    "reason": "sandbox socket.bind restriction on local HTTP fixtures",
+    "full_rerun_with_loopback_access": "passed,171 tests,0 skipped"
+  }
+}

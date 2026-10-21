@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "pull_request": "https://github.com/vovkins/ru-llm-scanner/pull/35",
+  "merged_at": "2026-10-21T06:28:24Z",
+  "main_before": "9c062c8684cb1c7d907cbb08fc1a2f3fd4c33ca5",
+  "approved_head": "56fe5dd713ee3673736639895a4a34841b0d795f",
+  "merge_commit": "dd4a11fb91c3c6657fb28564dfe769b6ac4b6abf",
+  "parents": [
+    "9c062c8684cb1c7d907cbb08fc1a2f3fd4c33ca5",
+    "56fe5dd713ee3673736639895a4a34841b0d795f"
+  ],
+  "merge_tree": "e0630fc7c6ae59f290661a6267f6aa855c6ffcb0",
+  "approved_head_tree": "e0630fc7c6ae59f290661a6267f6aa855c6ffcb0",
+  "trees_equal": true,
+  "material_input_count": 82,
+  "material_inputs_match_both_native_receipts": true,
+  "material_inputs_sha256": "cebc4bae5846261d79253e92f3fd5c5b004e73cf8bf7e8870a43fec4701321ca",
+  "accepted_native_source": "4c0d5dc5e01b2e98708e628eb49f97d5c4678760",
+  "accepted_native_run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39513865393",
+  "approved_head_fast_ci": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39555197729",
+  "automatic_ready_run": {
+    "conclusion": "cancelled",
+    "headSha": "56fe5dd713ee3673736639895a4a34841b0d795f",
+    "status": "completed",
+    "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39555605053"
+  },
+  "automatic_ready_run_cancel_reason": "Duplicate native work: accepted full native run succeeded and all82 recorded runtime/build inputs remain identical. Not claimed successful.",
+  "merge_method": "merge commit; no admin bypass; source branch retained",
+  "post_merge_scope": "documentation and safe evidence only; runtime/dependencies/default deployment unchanged"
+}
