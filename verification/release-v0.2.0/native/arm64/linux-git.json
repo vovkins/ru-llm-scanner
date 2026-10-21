@@ -1,0 +1,34 @@
+{
+  "verification_version": 1,
+  "status": "passed",
+  "python": "3.11.17",
+  "system": "Linux",
+  "machine": "aarch64",
+  "effective_uid": 65534,
+  "git": "git version 2.47.3",
+  "tests_run": 41,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "network_only_loopback": true,
+  "code_unchanged_during_run": true,
+  "sources_sha256": {
+    "src/ru_llm_scanner/__init__.py": "bd960e49296f5fadecf3d0e3f841a43f5f429b8ba481070c7ce2c88a1a043831",
+    "src/ru_llm_scanner/git_repository.py": "020bb53c3989a7e752fd25894c29d1f256d38137d942f40c3e9d373cb343bf27",
+    "src/ru_llm_scanner/git_plan.py": "5b1dbd8b80424b9edb97157bcce3acd470af6c23cbea4befe126a46401c9f855",
+    "src/ru_llm_scanner/text_policy.py": "53ab4ea4a072b76af5ca7df9faaae4ad0820bd25934805133244bc50a46e32d1",
+    "tests/git_fixtures.py": "5c7d05e8b5c896af805aee66e2837eb1c9b173469c9f763551b5e6415a671c89",
+    "tests/test_git_repository.py": "29c9ca9da8a595a0ec28fb5d333a521d9f5fe9d47bdca69a95d9829ef461b470",
+    "tests/test_git_security.py": "699662f501da067f7238ea27852e0e5be700400f8de3ce7abc8635de584494a1",
+    "tests/test_git_plan.py": "d2188ffd2e7086d2485464832a6cb45113caece0e81192d118c98a7b786047bb",
+    "tests/test_text_policy.py": "e804870951116b1fab6704eca324564357d4ee94d80ecf961e0598a0c054d477",
+    "scripts/check_git_layer.py": "d115d42f9acc38c032bf7d6a9c223d2f8ee9fe3a216c5d5059d0c4dbc919ec7e",
+    "scripts/harness_permissions.py": "6e3dc05d838b3c1d01abc65d13de27b6b14a2dd33a04593b87e1955414184cb2",
+    "docker/git-test.Dockerfile": "06292564a0bb33c9760a602ca85495e0a15efe74f42145a8569c83346f8023bf"
+  },
+  "image": {
+    "reference_id": "sha256:5b0af708ce18aae571ad01aea0f181d4697cd161026fdc59c57630a1d8cfe0ee",
+    "platform_image_id": "sha256:5b0af708ce18aae571ad01aea0f181d4697cd161026fdc59c57630a1d8cfe0ee",
+    "platform": "linux/arm64"
+  }
+}

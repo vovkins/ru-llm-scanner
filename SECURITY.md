@@ -2,7 +2,7 @@
 
 Версия текущих исходников — `0.2.0`; состояние публичных выпусков — в GitHub Releases. Гарантированный срок реакции на сообщения не установлен.
 Опубликованный v0.1.0 проверен на CPU Linux ARM64 в Docker Desktop.
-Поддержка AMD64 включена в `main` через PR #35; новая поставка ещё не опубликована.
+Опубликованный [v0.2.0](verification/release-v0.2.0/README.md) проверен на native Linux AMD64/ARM64, включая анонимный pull и полное скачивание offline-архивов.
 [AMD64/ARM64 комплект](verification/linux-amd64/README.md) прошёл нативную Linux-приёмку:
 настоящий Jenkins AMD64, production/fault gates,
 пустой Docker/containerd store и полный Requests проверены.
@@ -66,7 +66,7 @@ Launcher также сверяет архитектуру Docker server с вы�
 запуска/импорта; чужая платформа не включается через неявную эмуляцию.
 После смены профиля/идентичности нужен новый полный clean snapshot для baseline.
 
-Для неопубликованных AMD64/ARM64 кандидатов владелец 2026-10-21
+Для AMD64/ARM64 поставки v0.2.0 владелец 2026-10-21
 [сохранил версии certifi](verification/linux-amd64/certifi-advisory.md) с ограничением
 эксплуатации штатным offline Docker-маршрутом. Произвольный HTTPS endpoint raw CLI
 не входит в принятую конфигурацию и требует отдельной оценки CA policy и зависимостей.

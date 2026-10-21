@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "version": "0.2.0",
+  "platform": "linux/amd64",
+  "build_source_revision": "246ff4304cf5868888949e5bd9b5c4938a60191e",
+  "archive": "ru-llm-scanner-v0.2.0-linux-amd64.tar.gz",
+  "archive_sha256": "ac0fd101c0b6aad534f0ddac82f206dbc11f3d4930c8946665ff8e5b9a74f21a",
+  "archive_bytes": 1515530716,
+  "manifest_sha256": "8cfc9fbbd56fed35716fc74766d40c3b102b6b437837bbcb0bd2337506507535",
+  "wheel_sha256": "a8cacaf49b36452e75eb54b15c04ce6ad1bf1b8bd1368da758698672d524e367",
+  "images": {
+    "scanner": {
+      "image_id": "sha256:101c4b593b5e21db13628f9a317e459c7e4e1cbc733897afdb378c0300469e02",
+      "image_reference_id": "sha256:101c4b593b5e21db13628f9a317e459c7e4e1cbc733897afdb378c0300469e02"
+    },
+    "analyzer": {
+      "image_id": "sha256:bf08aaf337e9fa88f9b060ea0c41de7e6de4e39eb25ae208f447406b63b607c3",
+      "image_reference_id": "sha256:981f59aea6afb1dbedbbf53038ad3b09087ab1d70b7518124fef91d896b3f1e9"
+    }
+  },
+  "evidence_sha256": {
+    "acceptance-acceptance-verification.json": "1bc3fe219ca6cbad70c9aa6f633c0219557ac530e78315254042a9487fff8756",
+    "advisories-debian-summary.json": "b0da80539cb17608ceb195c317a199df9bbd0c3941858b7903fa6ab8d473ca6b",
+    "advisories-fetches.json": "bd41156ef419e6e20c2d296f0f5ae40e6ce03aa84844273827a5956e273a8e19",
+    "advisories-osv-summary.json": "ba0412922b51349b4c76b4c26c412d6f59efe03e88e50e3a61899a9ec6e304f6",
+    "build-summary.json": "64db5abb756dca565a4cf60af2d1f09fb769e1db78ed4598c80bef9bf246fa7a",
+    "capacity-verification.json": "b448e83e1a8d7bcca49b952abfebf701a0d6b9ff36b9427886ae18979efbefec",
+    "cli-integration-cli-verification.json": "77537805c370a022160c24a5f42d3eb972643d81b5d073f4d3cfd9d3b1fa3c0c",
+    "compose-version.txt": "69bed3df0102ffa694591d0458a747b6776632b30fc7d7deeb8d573c3c650f34",
+    "cpu.json": "8f1b85a1b5f0ac8e9fa22fd79b9906dd4093ba63ff4b89417708202b49186f6f",
+    "deployment-extras-extras-verification.json": "a1ab671035c32df60ac32820e96c8cc6dbc79c8ad31425b47e088059caade4da",
+    "disk-before.txt": "0d5587d4dc82b21468b9c6b21d52a983f5ece55e24544a2895f91bee2c46ba65",
+    "docker-integration-docker-verification.json": "44c708a0fc05eaadc3ea1dedb38054fcc09b0a39cd68e88db258af6d428b9584",
+    "docker-version.txt": "257e6747b1ffca8acc4d7e9b005c2d5f1bdb797d693dd4d5ee2a46b451853942",
+    "environment.json": "3a6479546da95392bfdda429fb461de3f0b22d3b72eb2a97cc643cd9c543dad0",
+    "fresh-install-fresh-install.json": "3d0c2249da9ac09f241319cef901da73b4f4eaf49e11ad0d2ea3f2f62b1558d3",
+    "jenkins-verification.json": "b4917dbf5c18bd0521d0329898d604103ecb7ddd4962990f072f019759a6b91c",
+    "linux-git.json": "0a2163698955a7b75bb916f919b16da5ca74e5d16bcc394e1fea80ec60174fcd",
+    "native-inventory-native-inventory.json": "b7a34e168b5f965dc0a101483bbb81be5521114d5aab9763df5db55e619d08e5",
+    "parity-offline-verification.json": "4aac2e0801ac85608b49a0b3723eea6b43fcc06eb3f6788f65c556e3f689fcc2",
+    "predictions-platform-predictions.json": "1df293789d1a7c41fdd8a35ce84ea375b3412fc33d613c479983564076dc07c1",
+    "public-requests-public-repository.json": "8fea9c9f1f812e607cd98a140e481acc038b1debcaf255182b0abfd1a8398927",
+    "repeat-summary.json": "b08b45ad3e7641e9fa3b307128a730fc90b2a46e643a2cdb1d58d41e863dc6e2",
+    "runtime-faults-fault-verification.json": "ed924e250129ea96bd4deec495a0e9a94e4ba0e900902852d8eba170aa41c474",
+    "scan-integration-scan-verification.json": "18a1241cf4206cc8c36d4a75289f4ee4823c4760fd769568c421829f96fad3bb",
+    "steps.json": "c31359bf22bc806804de7f08522572f12cf59d42d8ad946393b959f16980cd89",
+    "unit-summary.json": "d10ce6dfc0c389b44df32ced791142243d9eb02a1149e7733cac0e5cc3ba80a8",
+    "upstream-core.json": "1924799905f6ac0e5786097f429a41c4ded67d3e5d827b24e9e340ce74900b85",
+    "upstream-ner.json": "cc5ea4136138a67ef727580dee8e74d54ab7dbd9f8a61ad364ef1adcc66e20c0"
+  },
+  "raw_reports_included": false,
+  "images_published": false
+}

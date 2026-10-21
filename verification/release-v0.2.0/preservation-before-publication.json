@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "protected_inputs_unchanged": 13,
+  "proxy_revision_unchanged": true,
+  "foreign_containers_config_image_started_at_unchanged": 7,
+  "v0_1_0_release_assets_and_tags_unchanged": true,
+  "v0_1_0_registry_roots_unchanged": true
+}

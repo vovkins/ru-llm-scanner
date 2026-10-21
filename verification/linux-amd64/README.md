@@ -1,5 +1,8 @@
 # Linux AMD64 — итоговая нативная приёмка
 
+> Исторический протокол этапа #33 до релиза. Актуальная опубликованная поставка —
+> [v0.2.0 и её отдельная приёмка](../release-v0.2.0/README.md).
+
 План [#33](https://github.com/vovkins/ru-llm-scanner/issues/33) выполнен;
 [PR #35](https://github.com/vovkins/ru-llm-scanner/pull/35) слит в `main` 2026-10-21
 по явному согласованию владельца. [Итоговая проверка main](main-integration/README.md)

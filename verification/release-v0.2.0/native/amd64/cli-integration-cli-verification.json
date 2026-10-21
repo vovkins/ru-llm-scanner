@@ -1,0 +1,204 @@
+{
+  "verification_version": 1,
+  "status": "passed",
+  "runs": [
+    {
+      "case": "initial",
+      "exit_code": 0,
+      "assurance": "snapshot_verified",
+      "counts": {
+        "analyzed": 3,
+        "inherited": 0,
+        "unverified": 0,
+        "excluded": 0,
+        "unsupported": 0,
+        "error": 0,
+        "target": 3,
+        "deleted": 0
+      },
+      "findings": 0
+    },
+    {
+      "case": "verified-b",
+      "exit_code": 0,
+      "assurance": "baseline_verified",
+      "counts": {
+        "analyzed": 2,
+        "inherited": 1,
+        "unverified": 0,
+        "excluded": 0,
+        "unsupported": 0,
+        "error": 0,
+        "target": 3,
+        "deleted": 1
+      },
+      "findings": 0
+    },
+    {
+      "case": "verified-c",
+      "exit_code": 0,
+      "assurance": "baseline_verified",
+      "counts": {
+        "analyzed": 1,
+        "inherited": 2,
+        "unverified": 0,
+        "excluded": 0,
+        "unsupported": 0,
+        "error": 0,
+        "target": 3,
+        "deleted": 0
+      },
+      "findings": 0
+    },
+    {
+      "case": "a-equals-b-no-baseline",
+      "exit_code": 0,
+      "assurance": "changed_files_only",
+      "counts": {
+        "analyzed": 0,
+        "inherited": 0,
+        "unverified": 3,
+        "excluded": 0,
+        "unsupported": 0,
+        "error": 0,
+        "target": 3,
+        "deleted": 0
+      },
+      "findings": 0
+    },
+    {
+      "case": "wrong-profile",
+      "exit_code": 2,
+      "assurance": "none",
+      "counts": {
+        "analyzed": 0,
+        "inherited": 0,
+        "unverified": 0,
+        "excluded": 0,
+        "unsupported": 0,
+        "error": 0,
+        "target": 0,
+        "deleted": 0
+      },
+      "findings": 0
+    },
+    {
+      "case": "example-baseline",
+      "exit_code": 2,
+      "assurance": "none",
+      "counts": {
+        "analyzed": 0,
+        "inherited": 0,
+        "unverified": 0,
+        "excluded": 0,
+        "unsupported": 0,
+        "error": 0,
+        "target": 0,
+        "deleted": 0
+      },
+      "findings": 0
+    },
+    {
+      "case": "code-corpus",
+      "exit_code": 1,
+      "assurance": "snapshot_verified",
+      "counts": {
+        "analyzed": 46,
+        "inherited": 0,
+        "unverified": 0,
+        "excluded": 0,
+        "unsupported": 0,
+        "error": 0,
+        "target": 46,
+        "deleted": 0
+      },
+      "findings": 46
+    },
+    {
+      "case": "partial",
+      "exit_code": 2,
+      "assurance": "none",
+      "counts": {
+        "analyzed": 1,
+        "inherited": 0,
+        "unverified": 0,
+        "excluded": 0,
+        "unsupported": 0,
+        "error": 1,
+        "target": 2,
+        "deleted": 0
+      },
+      "findings": 1
+    },
+    {
+      "case": "missing-revision",
+      "exit_code": 2,
+      "assurance": "none",
+      "counts": {
+        "analyzed": 0,
+        "inherited": 0,
+        "unverified": 0,
+        "excluded": 0,
+        "unsupported": 0,
+        "error": 0,
+        "target": 0,
+        "deleted": 0
+      },
+      "findings": 0
+    }
+  ],
+  "installed_wheel_matches_source": true,
+  "network_only_loopback": true,
+  "effective_uid": 65534,
+  "jsonschema": "4.26.0",
+  "sources_sha256": {
+    "src/ru_llm_scanner/__init__.py": "bd960e49296f5fadecf3d0e3f841a43f5f429b8ba481070c7ce2c88a1a043831",
+    "src/ru_llm_scanner/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/ru_llm_scanner/analyzer.py": "4f1cf5dce228592b4c43ce6c735ae798b139b6d32c92b9fdfa5e792195f2e746",
+    "src/ru_llm_scanner/artifacts.py": "77271cce804e4fd8c92baa46c4b7ab8f137c50134e516a2e7fbbba56bc836db3",
+    "src/ru_llm_scanner/baseline.py": "23ea9247b900c975be4b9c691f60f61d8762984ffdcc4e30ee83d423086f0020",
+    "src/ru_llm_scanner/build_platforms.py": "4727ea95adccff5258ece51b085ed0bb206499e6f025c5b4139a0f26bbf15914",
+    "src/ru_llm_scanner/cli.py": "3d399aaf656336b37de7d760fcaa87ca05393c76cc80b972db17ca022c79645a",
+    "src/ru_llm_scanner/configuration.py": "0a6e3f90de1bb9a089855734a5a0e06b92728b1cd9d8f13e5bc4b10b1ab7c959",
+    "src/ru_llm_scanner/dictionary.py": "6eecfcfe094ca3d2f4aaa43b3093bd94c69e55734292bba824553dd4807c6238",
+    "src/ru_llm_scanner/engine.py": "8a583e0ef31b4705c75af209a36f063695c7d76704e7f8348efcda8c10b65866",
+    "src/ru_llm_scanner/findings.py": "1f9ffd4f3dce7d48f1e066447552eda238cabf36d82cfe4cd5923c7b0c44a7cf",
+    "src/ru_llm_scanner/git_plan.py": "5b1dbd8b80424b9edb97157bcce3acd470af6c23cbea4befe126a46401c9f855",
+    "src/ru_llm_scanner/git_repository.py": "020bb53c3989a7e752fd25894c29d1f256d38137d942f40c3e9d373cb343bf27",
+    "src/ru_llm_scanner/html_report.py": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
+    "src/ru_llm_scanner/offline_assets.py": "46ca600499ea84c6e751fa8ca621455987e18e4988ae8576f66597d0bb7eb5c0",
+    "src/ru_llm_scanner/output.py": "8c5abca175d5947962330f5374e2e7cddcf391caf2edcc9213e1af509b3dc39d",
+    "src/ru_llm_scanner/pipeline.py": "334658282ca1a85ef230c965f1b4e6272987ff2affae812b435ded7629270eb5",
+    "src/ru_llm_scanner/report-v1.schema.json": "80443bfc328028e8c63b151e4e840765ff53af06550ab6f1e59d3ad194e29e94",
+    "src/ru_llm_scanner/report_validation.py": "c2046099dd2a52b748a6a91f023ea0e653997777e33fc68a58a7585c17d6ec21",
+    "src/ru_llm_scanner/reports.py": "53b31d86e46ddf23e4c21fc479d87f41de943e06e53ea5bdcec5a788893144c3",
+    "src/ru_llm_scanner/text_policy.py": "53ab4ea4a072b76af5ca7df9faaae4ad0820bd25934805133244bc50a46e32d1",
+    "src/ru_llm_scanner/upstream.py": "ee669760f0c02287661d9c06314e5454c372662b6b1ce1fafde68f9e400a4a2d",
+    "tests/integration/cli_offline.py": "8e43b351cceb2e2a252cfad2e021edc78af025287f7ef33a9b0067894d784d6d",
+    "tests/integration/scan_offline.py": "fc05758347149adbefa16677b9636367f80baf1fa67c6a0d56ec5daedf3ce8b4",
+    "tests/git_fixtures.py": "5c7d05e8b5c896af805aee66e2837eb1c9b173469c9f763551b5e6415a671c89",
+    "tests/corpus/load_code_corpus.py": "34570026325dc91ae26ec4102680e46f1670564ed16713f4c5da86d73b145a59",
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80"
+  },
+  "quality_evaluation": {
+    "expected": 37,
+    "predicted": 46,
+    "exact_tp": 33,
+    "exact_fp": 13,
+    "exact_fn": 4,
+    "typed_covered": 33,
+    "exact_precision": 0.717391304347826,
+    "exact_recall": 0.8918918918918919
+  },
+  "full_values_only_in_private_synthetic_qa": true,
+  "images": {
+    "analyzer_platform_id": "sha256:bf08aaf337e9fa88f9b060ea0c41de7e6de4e39eb25ae208f447406b63b607c3",
+    "analyzer_reference_id": "sha256:981f59aea6afb1dbedbbf53038ad3b09087ab1d70b7518124fef91d896b3f1e9",
+    "scanner_platform_id": "sha256:101c4b593b5e21db13628f9a317e459c7e4e1cbc733897afdb378c0300469e02",
+    "scanner_reference_id": "sha256:101c4b593b5e21db13628f9a317e459c7e4e1cbc733897afdb378c0300469e02",
+    "platform": "linux/amd64"
+  },
+  "source_lock_sha256": "e632a01fb91dc60ceeb4f57ea709d0d0ef2bf3d5932996cf9df641a22a44c391",
+  "launcher_sha256": "98057c479cccbcf449075ca40b80e5e64af321a638df83eb3e759184a1fa4845",
+  "test_dockerfile_sha256": "08552ed6115ab9e625bbc34cb03dae532b5ffcaa5375af52c94026d7113ac62b"
+}

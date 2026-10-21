@@ -36,18 +36,18 @@ Docker/Compose и non-root доступ к daemon; venv/исходный proxy �
 Сам по себе checkout scanner без подготовки images к запуску не готов.
 [Полные предусловия и последовательность](docs/user/README.md).
 
-Версия **v0.2.0** предусматривает отдельные offline-комплекты для **Linux AMD64
-и ARM64**. Выбирайте архив по архитектуре Docker server:
+Опубликован [**v0.2.0**](https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.2.0):
+отдельные offline-комплекты для **Linux AMD64 и ARM64**. Выбирайте архив по архитектуре Docker server:
 [GitHub Releases](https://github.com/vovkins/ru-llm-scanner/releases),
 [получение, проверка и offline-установка](docs/admin/releases.md).
 Два публичных GHCR packages — `ghcr.io/vovkins/ru-llm-scanner` и
 `ghcr.io/vovkins/ru-llm-scanner-analyzer`; общий тег `0.2.0` объединяет обе
 архитектуры, платформенные теги — `0.2.0-amd64` и `0.2.0-arm64`.
-Доступность конкретного выпуска проверяйте в GitHub Releases.
+Образы и полные скачанные архивы проверены без авторизации на обеих native платформах.
 
 [Серверная инструкция и ресурсы](docs/admin/linux-amd64.md),
 [протоколы нативной приёмки](verification/linux-amd64/README.md),
-[подготовка и результаты v0.2.0](verification/release-v0.2.0/README.md).
+[результаты выпуска v0.2.0](verification/release-v0.2.0/README.md).
 Прежний **v0.1.0** и GHCR `:0.1.0` сохраняют исходные ARM64 images и hashes;
 [архивная инструкция](docs/admin/releases-v0.1.0.md). Слияние исходников или pull
 не заменяют установленный комплект и его deployment.
@@ -94,17 +94,18 @@ Staged/untracked/незакоммиченные изменения не вход
 
 ## Границы и статус
 
-Опубликованный **v0.1.0** содержит CPU Linux ARM64. Поддержка AMD64 включена
-в `main`: полный нативный прогон [#33](https://github.com/vovkins/ru-llm-scanner/issues/33)
-успешен на обеих архитектурах, [слияние и контроль main](verification/linux-amd64/main-integration/README.md)
-проверены отдельно. Конкретные versioned images получают отдельную
-[приёмку выпуска](verification/release-v0.2.0/README.md).
+Опубликованный **v0.2.0** поддерживает CPU Linux AMD64 и ARM64.
+[Приёмка конкретных образов, GHCR и публичных архивов](verification/release-v0.2.0/README.md)
+завершена на обеих native платформах; настоящий Jenkins проверен на AMD64.
+Предыдущие [#33](https://github.com/vovkins/ru-llm-scanner/issues/33) и
+[контроль main](verification/linux-amd64/main-integration/README.md) сохранены
+как история разработки. v0.1.0 остаётся прежней ARM64-поставкой.
 
 | Комплект | Проверенная платформа | Состояние |
 | --- | --- | --- |
 | v0.1.0 | Linux ARM64, Docker Desktop на Apple Silicon | Опубликован, прежние images/locks сохранены |
-| Новый `cpu-linux-amd64` | Native Ubuntu 24.04 x86-64, EPYC 7763/AVX2, Docker 29.6.1 / Compose 2.38.2 | Build, offline import, модель, production/faults и настоящий Jenkins проверены; полный финальный прогон успешен |
-| Новый `cpu-linux-arm64` | Native Ubuntu 24.04 ARM64 | Регрессия тех же runtime/build путей и модели пройдена |
+| v0.2.0 `cpu-linux-amd64` | Native Ubuntu 24.04 x86-64, EPYC 7763/AVX2, Docker 29.6.1 / Compose 2.38.2 | Build, offline import, модель, production/faults и настоящий Jenkins проверены; полный финальный прогон успешен |
+| v0.2.0 `cpu-linux-arm64` | Native Ubuntu 24.04 ARM64 | Регрессия тех же runtime/build путей и модели пройдена |
 | GPU, rootless/userns-remap, другие ОС/CPU/корпоративные ACL | В эту приёмку не входят | Нужна отдельная проверка |
 
 [Серверная установка и ресурсы](docs/admin/linux-amd64.md) ·

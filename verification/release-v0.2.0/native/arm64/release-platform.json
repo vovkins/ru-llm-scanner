@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "version": "0.2.0",
+  "platform": "linux/arm64",
+  "build_source_revision": "246ff4304cf5868888949e5bd9b5c4938a60191e",
+  "archive": "ru-llm-scanner-v0.2.0-linux-arm64.tar.gz",
+  "archive_sha256": "a8437f065957e8f64b1e922271bb7aa9620c17ed6e42246a82dd85d0248a7f97",
+  "archive_bytes": 1421520971,
+  "manifest_sha256": "a3f1feaed7afc5d23b07b96ea6318940ecc2621037a36c9227c0d3567a2cfd0a",
+  "wheel_sha256": "a8cacaf49b36452e75eb54b15c04ce6ad1bf1b8bd1368da758698672d524e367",
+  "images": {
+    "scanner": {
+      "image_id": "sha256:5b0af708ce18aae571ad01aea0f181d4697cd161026fdc59c57630a1d8cfe0ee",
+      "image_reference_id": "sha256:5b0af708ce18aae571ad01aea0f181d4697cd161026fdc59c57630a1d8cfe0ee"
+    },
+    "analyzer": {
+      "image_id": "sha256:30ec1ca66c4dafba6d59cfc9bdb1569780dde86cea027d97a2e60e3c37b85a4e",
+      "image_reference_id": "sha256:7d482cc570bb85c2d86cd4bab5d31c0abb71055cd70d3909f2ae36e535130d70"
+    }
+  },
+  "evidence_sha256": {
+    "acceptance-acceptance-verification.json": "938382e5503bd8e95a8c52b9b3a4ed6959a1829aa80462fb367c00a75e4b7d1c",
+    "advisories-debian-summary.json": "a97ccf7191d74ada6d5069bec359f73e1303a87bed8b62196592bccfb66b35d8",
+    "advisories-fetches.json": "7b72803abb434d14a90deec9b1b344c09ed9572078b33bd252e6508afa50cb08",
+    "advisories-osv-summary.json": "f306d7066f7cb8d1782c015c4a1d3da25f34ad91c10d95a66af9cf933d2551c6",
+    "build-summary.json": "76f7de94e3b4184ebbd6e5ca7a9b8c310e434776776893098f122f14974f7e23",
+    "capacity-verification.json": "67aaa74dede743839843bbc45f25edf6cbd57d7c26ccb5409042166c00ef3d7e",
+    "cli-integration-cli-verification.json": "ed35c83f48cc55cf10b5ad3bb8fc793fd3a4a4eebc9577b7056eb05ee1a98d47",
+    "compose-version.txt": "69bed3df0102ffa694591d0458a747b6776632b30fc7d7deeb8d573c3c650f34",
+    "cpu.json": "e24b61cf4bc6c46ef02b8711ace011b9b5291e75b1788b517a2c34a499dc447c",
+    "deployment-extras-extras-verification.json": "27fa935747be9ba1e3b4bc086f78814b8f3c3060a9b555254e97945320864ac6",
+    "disk-before.txt": "7a4f8a0d13654aecd8256d6c64b4733da221f0faea12e23988a08c348c744c95",
+    "docker-integration-docker-verification.json": "bc891f002f4947791afac31d09c3315a8d110a11b3348483e54936148eb92591",
+    "docker-version.txt": "83843e815889b55906f51a2160deb53e958080f4ac80da1f879a0a050be2c6fa",
+    "environment.json": "9389ec527014e082e2c9207da7ff334026dde36a9883f9d2dce1e2e19a47f83e",
+    "fresh-install-fresh-install.json": "aec8411de4a77cb0eb0b14d2236043a1e49ae0d57ea41e386922cf81adaf7ec4",
+    "linux-git.json": "86e8a3543af67bf41b3d10f4a7a72c3e643c91d98d7b9350027df148367b0d4b",
+    "native-inventory-native-inventory.json": "745ea89d1f8764aed3c4e7b4b1e9b2ce967a3c0027684edd1af293434277a6d9",
+    "parity-offline-verification.json": "0ab9ea7fff3fcca00e7b303634d143a845c9ff08d4a0af7d43c4946f76388877",
+    "predictions-platform-predictions.json": "19ce7fc350b3e50e38d64ead06bfb80136e8fc81aa87f93d8376b72aff05e2cb",
+    "public-requests-public-repository.json": "127e2e010ca655e8c5e6e4b105d8533019fb133f71a3ccc34057aeaef3c2a893",
+    "repeat-summary.json": "5b419ee0d8e3066ebe04d4c884389516538c790a1fcc932b6f23347c030861a0",
+    "runtime-faults-fault-verification.json": "a7fdf8edf33fd1e6fe2d580b30fe59e4fa2a0e6798067357fa92f5d59d5636d4",
+    "scan-integration-scan-verification.json": "f77b3f8c544268092314d0ed1f4c1fb63f95f3e2957dfd2a20a43fb7b4a313ad",
+    "steps.json": "0f22889cfecc216a218582fd633d28c954a196026a2fd80128c773c3305c3b36",
+    "unit-summary.json": "d10ce6dfc0c389b44df32ced791142243d9eb02a1149e7733cac0e5cc3ba80a8",
+    "upstream-core.json": "729b3f6dfc849f834c783eaf6cdd22c0ea1806233ea5f57b6b3aa82fa51eaa2c",
+    "upstream-ner.json": "c0b80e926bbeff49e90c9a7aeadc2f5bfdd576ba120cdf268040d2697ff523f3"
+  },
+  "raw_reports_included": false,
+  "images_published": false
+}

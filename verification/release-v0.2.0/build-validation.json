@@ -1,0 +1,33 @@
+{
+  "status": "build_validated_pending_final_archive_control",
+  "version": "0.2.0",
+  "build_source_revision": "246ff4304cf5868888949e5bd9b5c4938a60191e",
+  "build_workflow_run": 39623117010,
+  "material_inputs": 85,
+  "bundle_sha256": {
+    "amd64": "ac0fd101c0b6aad534f0ddac82f206dbc11f3d4930c8946665ff8e5b9a74f21a",
+    "arm64": "a8437f065957e8f64b1e922271bb7aa9620c17ed6e42246a82dd85d0248a7f97"
+  },
+  "wheel_sha256": {
+    "amd64": "a8cacaf49b36452e75eb54b15c04ce6ad1bf1b8bd1368da758698672d524e367",
+    "arm64": "a8cacaf49b36452e75eb54b15c04ce6ad1bf1b8bd1368da758698672d524e367"
+  },
+  "wheel_bytes_equal": true,
+  "requests_maximum_score_absolute_delta": 4.5299530029296875e-06,
+  "advisories": {
+    "amd64": {
+      "osv_matches": 4,
+      "debian_potential": 139,
+      "query_time_utc": "2026-10-21T15:51:35.537980+00:00"
+    },
+    "arm64": {
+      "osv_matches": 4,
+      "debian_potential": 139,
+      "query_time_utc": "2026-10-21T15:49:48.830211+00:00"
+    }
+  },
+  "known_risks_fixed": false,
+  "publication_started": false,
+  "analyzer_runtime_dependencies_and_detectors_unchanged": true,
+  "scanner_application_version": "0.2.0"
+}

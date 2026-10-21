@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "version": "0.2.0",
+  "platform": "linux/amd64",
+  "verify_exit_code": 0,
+  "steps": [
+    {
+      "operation": "snapshot",
+      "exit_code": 0,
+      "assurance": "snapshot_verified",
+      "findings": 0,
+      "private_output": true,
+      "elapsed_seconds": 6.004
+    },
+    {
+      "operation": "repeat-snapshot",
+      "exit_code": 0,
+      "assurance": "snapshot_verified",
+      "findings": 0,
+      "private_output": true,
+      "elapsed_seconds": 5.827
+    },
+    {
+      "operation": "strict-diff",
+      "exit_code": 1,
+      "assurance": "baseline_verified",
+      "findings": 1,
+      "private_output": true,
+      "elapsed_seconds": 5.522
+    },
+    {
+      "operation": "invalid-baseline",
+      "exit_code": 2,
+      "assurance": "none",
+      "findings": 0,
+      "private_output": true,
+      "elapsed_seconds": 5.46
+    }
+  ],
+  "input_unchanged": true,
+  "reports_published": false,
+  "imported_images": true,
+  "timing_scope": "First/repeated scan after image import; fresh containers each time, OS page cache not flushed. Not a hardware cold-boot benchmark.",
+  "bundle_sha256": "ac0fd101c0b6aad534f0ddac82f206dbc11f3d4930c8946665ff8e5b9a74f21a",
+  "build_source_revision": "246ff4304cf5868888949e5bd9b5c4938a60191e"
+}

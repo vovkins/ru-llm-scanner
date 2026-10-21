@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "version": "0.2.0",
+  "build_source_revision": "246ff4304cf5868888949e5bd9b5c4938a60191e",
+  "bundle_sha256": {
+    "amd64": "ac0fd101c0b6aad534f0ddac82f206dbc11f3d4930c8946665ff8e5b9a74f21a",
+    "arm64": "a8437f065957e8f64b1e922271bb7aa9620c17ed6e42246a82dd85d0248a7f97"
+  },
+  "images": {
+    "scanner": {
+      "tag": "ghcr.io/vovkins/ru-llm-scanner:0.2.0",
+      "index_digest": "sha256:d958c92f36c0533a5986d9acb2f9aa175a5257c622234591d133446636c28bae",
+      "platform_manifests": {
+        "amd64": "sha256:101c4b593b5e21db13628f9a317e459c7e4e1cbc733897afdb378c0300469e02",
+        "arm64": "sha256:5b0af708ce18aae571ad01aea0f181d4697cd161026fdc59c57630a1d8cfe0ee"
+      }
+    },
+    "analyzer": {
+      "tag": "ghcr.io/vovkins/ru-llm-scanner-analyzer:0.2.0",
+      "index_digest": "sha256:19790cd0843bf2cf952fd1aff2bf5cbe6323c00d830cac0ee4ba04b5bde764d7",
+      "platform_manifests": {
+        "amd64": "sha256:bf08aaf337e9fa88f9b060ea0c41de7e6de4e39eb25ae208f447406b63b607c3",
+        "arm64": "sha256:30ec1ca66c4dafba6d59cfc9bdb1569780dde86cea027d97a2e60e3c37b85a4e"
+      }
+    }
+  },
+  "platform_receipts": {
+    "amd64": {
+      "status": "passed",
+      "version": "0.2.0",
+      "platform": "linux/amd64",
+      "build_source_revision": "246ff4304cf5868888949e5bd9b5c4938a60191e",
+      "bundle_sha256": "ac0fd101c0b6aad534f0ddac82f206dbc11f3d4930c8946665ff8e5b9a74f21a",
+      "images": {
+        "scanner": {
+          "tag": "ghcr.io/vovkins/ru-llm-scanner:0.2.0-amd64",
+          "registry_manifest_digest": "sha256:101c4b593b5e21db13628f9a317e459c7e4e1cbc733897afdb378c0300469e02",
+          "platform_manifest_digest": "sha256:101c4b593b5e21db13628f9a317e459c7e4e1cbc733897afdb378c0300469e02",
+          "config_digest": "sha256:67560af83d5d8bfd6a9a557194223e9f40b1fee82119c99c5c409fcabedfe491",
+          "image_id": "sha256:101c4b593b5e21db13628f9a317e459c7e4e1cbc733897afdb378c0300469e02",
+          "image_reference_id": "sha256:101c4b593b5e21db13628f9a317e459c7e4e1cbc733897afdb378c0300469e02",
+          "anonymous_manifest_verified": true,
+          "authenticated_pull_verified": true
+        },
+        "analyzer": {
+          "tag": "ghcr.io/vovkins/ru-llm-scanner-analyzer:0.2.0-amd64",
+          "registry_manifest_digest": "sha256:981f59aea6afb1dbedbbf53038ad3b09087ab1d70b7518124fef91d896b3f1e9",
+          "platform_manifest_digest": "sha256:bf08aaf337e9fa88f9b060ea0c41de7e6de4e39eb25ae208f447406b63b607c3",
+          "config_digest": "sha256:2c6df0e31bf16e03705f35b34360050de24da6ec3ff5f04f63b6709e41ad5a14",
+          "image_id": "sha256:bf08aaf337e9fa88f9b060ea0c41de7e6de4e39eb25ae208f447406b63b607c3",
+          "image_reference_id": "sha256:981f59aea6afb1dbedbbf53038ad3b09087ab1d70b7518124fef91d896b3f1e9",
+          "anonymous_manifest_verified": true,
+          "authenticated_pull_verified": true
+        }
+      },
+      "control_sha256": "1ba2d9f52124da9e905d7d641ac7c7542663ab55461ad17f0e26418ba42fc04b",
+      "workflow_run": "39634197749"
+    },
+    "arm64": {
+      "status": "passed",
+      "version": "0.2.0",
+      "platform": "linux/arm64",
+      "build_source_revision": "246ff4304cf5868888949e5bd9b5c4938a60191e",
+      "bundle_sha256": "a8437f065957e8f64b1e922271bb7aa9620c17ed6e42246a82dd85d0248a7f97",
+      "images": {
+        "scanner": {
+          "tag": "ghcr.io/vovkins/ru-llm-scanner:0.2.0-arm64",
+          "registry_manifest_digest": "sha256:5b0af708ce18aae571ad01aea0f181d4697cd161026fdc59c57630a1d8cfe0ee",
+          "platform_manifest_digest": "sha256:5b0af708ce18aae571ad01aea0f181d4697cd161026fdc59c57630a1d8cfe0ee",
+          "config_digest": "sha256:a08524ca6ee9a3cca92bd5325c65c0c2498c6683eae8865e087cd75a212b7e98",
+          "image_id": "sha256:5b0af708ce18aae571ad01aea0f181d4697cd161026fdc59c57630a1d8cfe0ee",
+          "image_reference_id": "sha256:5b0af708ce18aae571ad01aea0f181d4697cd161026fdc59c57630a1d8cfe0ee",
+          "anonymous_manifest_verified": true,
+          "authenticated_pull_verified": true
+        },
+        "analyzer": {
+          "tag": "ghcr.io/vovkins/ru-llm-scanner-analyzer:0.2.0-arm64",
+          "registry_manifest_digest": "sha256:7d482cc570bb85c2d86cd4bab5d31c0abb71055cd70d3909f2ae36e535130d70",
+          "platform_manifest_digest": "sha256:30ec1ca66c4dafba6d59cfc9bdb1569780dde86cea027d97a2e60e3c37b85a4e",
+          "config_digest": "sha256:3afffe46e8373efd799a4c49adbbea5d5bf9ec642455441e2b3f5507cf14b8aa",
+          "image_id": "sha256:30ec1ca66c4dafba6d59cfc9bdb1569780dde86cea027d97a2e60e3c37b85a4e",
+          "image_reference_id": "sha256:7d482cc570bb85c2d86cd4bab5d31c0abb71055cd70d3909f2ae36e535130d70",
+          "anonymous_manifest_verified": true,
+          "authenticated_pull_verified": true
+        }
+      },
+      "control_sha256": "840e04e7385abe23d0e5e641b732877d1a9be8640eb3ead240707dfe83f6dee9",
+      "workflow_run": "39634197749"
+    }
+  },
+  "new_images_built": false
+}

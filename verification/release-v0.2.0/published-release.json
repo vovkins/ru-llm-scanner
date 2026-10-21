@@ -1,0 +1,150 @@
+{
+  "status": "published",
+  "id": 419684745,
+  "url": "https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.2.0",
+  "tag": "v0.2.0",
+  "target_commitish": "246ff4304cf5868888949e5bd9b5c4938a60191e",
+  "tag_object": {
+    "sha": "246ff4304cf5868888949e5bd9b5c4938a60191e",
+    "type": "commit",
+    "url": "https://api.github.com/repos/vovkins/ru-llm-scanner/git/commits/246ff4304cf5868888949e5bd9b5c4938a60191e"
+  },
+  "draft": false,
+  "prerelease": false,
+  "published_at": "2026-10-21T16:29:46Z",
+  "assets": [
+    {
+      "name": "DISTRIBUTION_NOTICES.md",
+      "size": 2158,
+      "digest": "sha256:f0b3c29ad37e71806309d8df18eaf7a13b424cbf11db4b19049db1218fb90d41",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/DISTRIBUTION_NOTICES.md"
+    },
+    {
+      "name": "LICENSE",
+      "size": 1064,
+      "digest": "sha256:3bb962f206eef98250782436859a046ecd39ee67e659ac110d1ca9097a45b768",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/LICENSE"
+    },
+    {
+      "name": "registry-amd64.json",
+      "size": 1743,
+      "digest": "sha256:8e203d5c39898f19c4358ac43393f034bd063af2844d37ba378b07281ebb5053",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/registry-amd64.json"
+    },
+    {
+      "name": "registry-arm64.json",
+      "size": 1743,
+      "digest": "sha256:51d16417227d230d2435ccb41878070d7788440f62d9995e42dd8614edc6ead3",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/registry-arm64.json"
+    },
+    {
+      "name": "registry-control-amd64.json",
+      "size": 1268,
+      "digest": "sha256:1ba2d9f52124da9e905d7d641ac7c7542663ab55461ad17f0e26418ba42fc04b",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/registry-control-amd64.json"
+    },
+    {
+      "name": "registry-control-arm64.json",
+      "size": 1269,
+      "digest": "sha256:840e04e7385abe23d0e5e641b732877d1a9be8640eb3ead240707dfe83f6dee9",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/registry-control-arm64.json"
+    },
+    {
+      "name": "registry-images.json",
+      "size": 4935,
+      "digest": "sha256:59efdb6b0d7d232e3d78f75fa62596c2ff096508783b2c6b1f8e77f7f4c883b4",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/registry-images.json"
+    },
+    {
+      "name": "release-acceptance.json",
+      "size": 1923,
+      "digest": "sha256:2f09d62a1d3e843be02f44efc7c08b74aa1cea455bbe12bd3dc8be245b1c990a",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/release-acceptance.json"
+    },
+    {
+      "name": "release-manifest-amd64.json",
+      "size": 95125,
+      "digest": "sha256:8cfc9fbbd56fed35716fc74766d40c3b102b6b437837bbcb0bd2337506507535",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/release-manifest-amd64.json"
+    },
+    {
+      "name": "release-manifest-arm64.json",
+      "size": 95002,
+      "digest": "sha256:a3f1feaed7afc5d23b07b96ea6318940ecc2621037a36c9227c0d3567a2cfd0a",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/release-manifest-arm64.json"
+    },
+    {
+      "name": "release-platform-amd64.json",
+      "size": 3907,
+      "digest": "sha256:13319d56a61c05c2dfaf796b193755abfd58d857ce44551dbee72a03cb732192",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/release-platform-amd64.json"
+    },
+    {
+      "name": "release-platform-arm64.json",
+      "size": 3806,
+      "digest": "sha256:ecd78447482214e75b5b90e7c92bdc455bba5420b6d3bd45dbe051ea281ab856",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/release-platform-arm64.json"
+    },
+    {
+      "name": "release-provenance.json",
+      "size": 20188,
+      "digest": "sha256:158f10b7147836201e332a73d8be524b2db080c418af5c609cf346ed368a9203",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/release-provenance.json"
+    },
+    {
+      "name": "ru-llm-scanner-v0.2.0-linux-amd64.tar.gz",
+      "size": 1515530716,
+      "digest": "sha256:ac0fd101c0b6aad534f0ddac82f206dbc11f3d4930c8946665ff8e5b9a74f21a",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/ru-llm-scanner-v0.2.0-linux-amd64.tar.gz"
+    },
+    {
+      "name": "ru-llm-scanner-v0.2.0-linux-arm64.tar.gz",
+      "size": 1421520971,
+      "digest": "sha256:a8437f065957e8f64b1e922271bb7aa9620c17ed6e42246a82dd85d0248a7f97",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/ru-llm-scanner-v0.2.0-linux-arm64.tar.gz"
+    },
+    {
+      "name": "ru-llm-scanner-v0.2.0-native-sources.tar.gz",
+      "size": 398330836,
+      "digest": "sha256:50b4716387cb500d8cf06dc0cbfdfd99f6ce3e6a9778c6e8b080c035b20a5927",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/ru-llm-scanner-v0.2.0-native-sources.tar.gz"
+    },
+    {
+      "name": "ru_llm_scanner-0.2.0-py3-none-any.whl",
+      "size": 72534,
+      "digest": "sha256:a8cacaf49b36452e75eb54b15c04ce6ad1bf1b8bd1368da758698672d524e367",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/ru_llm_scanner-0.2.0-py3-none-any.whl"
+    },
+    {
+      "name": "SHA256SUMS",
+      "size": 1684,
+      "digest": "sha256:8461ca236e4433635b506bc7751de38249348721e067fc4b9df6b81f084b836e",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/SHA256SUMS"
+    },
+    {
+      "name": "THIRD_PARTY_NOTICES.md",
+      "size": 1762,
+      "digest": "sha256:79b0dc96e17376d526039c2a740d40c2e9da48f0a29a87770062e17d77493264",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/vovkins/ru-llm-scanner/releases/download/v0.2.0/THIRD_PARTY_NOTICES.md"
+    }
+  ]
+}

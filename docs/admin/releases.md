@@ -1,7 +1,9 @@
 # Релиз v0.2.0: Linux AMD64 и ARM64
 
 Это инструкция к комплекту **v0.2.0**. Состояние публикации и точные assets — в
-[GitHub Releases](https://github.com/vovkins/ru-llm-scanner/releases).
+[GitHub Release v0.2.0](https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.2.0).
+Оба архива и GHCR образы проверены после публикации без авторизации на native
+AMD64/ARM64; [протоколы](../../verification/release-v0.2.0/README.md).
 Поддержка обеих CPU-платформ находится в main; GPU в выпуск не входит.
 [Прежний v0.1.0](releases-v0.1.0.md) остаётся отдельным ARM64-комплектом.
 
@@ -47,7 +49,7 @@ python3 -I -S scripts/docker_scanner.py verify --deployment-lock package/deploym
 | Два `ru-llm-scanner-v0.2.0-linux-ARCH.tar.gz` | Launcher, docs/source, `package/images.tar`, engine/deployment/checksums и metadata |
 | `release-manifest-amd64.json`, `release-manifest-arm64.json` | SHA-256 состава соответствующего архива, platform/image/source identities; копия manifest внутри архива |
 | `ru_llm_scanner-0.2.0-py3-none-any.whl` | Python CLI для разработки; отдельно не содержит Analyzer/модель |
-| `ru-llm-scanner-v0.2.0-native-sources.tar.gz` | Соответствующие native sources обеих платформ при подтверждённом совпадении closure |
+| `ru-llm-scanner-v0.2.0-native-sources.tar.gz` | Соответствующие native sources: покрытие обеих фактических платформ подтверждено |
 | `registry-images.json` | Общие index digests, platform manifests и соответствие проверенным images |
 | `SHA256SUMS` | Полные hashes отдельных assets |
 

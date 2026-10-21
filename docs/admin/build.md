@@ -1,9 +1,10 @@
 # Сборка собственного CPU комплекта
 
 Выберите профиль, совпадающий с архитектурой нативного Docker daemon.
-Опубликованный v0.1.0 содержит только ARM64. Для нового неопубликованного
-кандидата AMD64 см. [серверный профиль Linux AMD64](linux-amd64.md);
-статус приёмки обеих архитектур ведётся в [#33](https://github.com/vovkins/ru-llm-scanner/issues/33).
+Готовый [v0.2.0](releases.md) содержит AMD64 и ARM64; собственная сборка для
+его установки не требуется. v0.1.0 содержит только ARM64. Для AMD64 см.
+[серверный профиль](linux-amd64.md); [результаты приёмки версии](../../verification/release-v0.2.0/README.md)
+отделены от исторического [этапа #33](https://github.com/vovkins/ru-llm-scanner/issues/33).
 
 | Docker server | `BUILD_PROFILE` | Artifact lock |
 | --- | --- | --- |

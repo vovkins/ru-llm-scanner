@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "version": "0.2.0",
+  "build_source_revision": "246ff4304cf5868888949e5bd9b5c4938a60191e",
+  "build_run": 39623117010,
+  "final_archive_run": 39632190783,
+  "registry_publish_and_anonymous_run": 39634197749,
+  "public_delivery_run": 39635295581,
+  "public_linux_archive_complete_downloads": 2,
+  "public_assets": 19,
+  "native_platforms": [
+    "linux/amd64",
+    "linux/arm64"
+  ],
+  "registry_tag_index_child_pulls_anonymous": true,
+  "installed_control_exit_codes": [
+    0,
+    0,
+    1,
+    2
+  ],
+  "v0_1_0_and_foreign_projects_preserved": true,
+  "new_dependencies_or_risks_accepted": false,
+  "release_tag_immutable_build_source": true
+}

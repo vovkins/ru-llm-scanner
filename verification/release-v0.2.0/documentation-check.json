@@ -1,0 +1,24 @@
+{
+  "verification_version": 1,
+  "status": "passed",
+  "documented_commands_checked": 48,
+  "role_navigation_anchors_checked": 9,
+  "shell_blocks_syntax_checked": 42,
+  "defaults_checked": 19,
+  "fresh_build_runtime_lock_uses": 3,
+  "demo_findings": 2,
+  "demo_artifact_kind": "contract_example",
+  "runtime_rejects_example": true,
+  "demo_external_assets": 0,
+  "browser_acceptance_performed": false,
+  "clean_install_walkthrough_performed": false,
+  "sources_sha256": {
+    "scripts/check_documentation.py": "c38775ad359a5fb3a5c22b801defbe8fdc606d8da2c0e6e2c2e1e6d6943666da",
+    "src/ru_llm_scanner/html_report.py": "55d8f59d09f967968393852da256d4cfc1c9f4a62945e115504d72b790a47a66",
+    "src/ru_llm_scanner/report_validation.py": "c2046099dd2a52b748a6a91f023ea0e653997777e33fc68a58a7585c17d6ec21",
+    "examples/reports/snapshot-findings.json": "6aeb966f118ddf55dd7702c03ac00bf79dd0f72c1099804ac90d3a2624ddaf79",
+    "examples/config/scanner.json": "608915e492723d1ce8b037053a867f28dec4b5682dce705139974ebe9a6fa1c2",
+    "examples/demo/report.json": "6aeb966f118ddf55dd7702c03ac00bf79dd0f72c1099804ac90d3a2624ddaf79",
+    "examples/demo/report.html": "d0d85a47d1534d418bbfcd6e4d768c4e4395027b7f8395dfddd0519ce4f77879"
+  }
+}

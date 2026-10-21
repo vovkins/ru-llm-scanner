@@ -1,0 +1,38 @@
+[
+  {
+    "bytes": 576,
+    "etag": null,
+    "last_modified": null,
+    "retrieved_utc": "2026-10-21T15:49:48.130852+00:00",
+    "sha256": "213ab7bc711102b40bda32d9e59a057919e14a5dbd3f97b280f17c260161e571",
+    "status": 200,
+    "url": "https://api.osv.dev/v1/querybatch"
+  },
+  {
+    "bytes": 2563,
+    "etag": null,
+    "last_modified": null,
+    "retrieved_utc": "2026-10-21T15:49:48.519890+00:00",
+    "sha256": "1be4487b56a9bed14eb56c9656d7cc4a77661bf3fef7a9abd2823f8a86dc4a8c",
+    "status": 200,
+    "url": "https://api.osv.dev/v1/vulns/GHSA-6q48-6c7w-9gw2"
+  },
+  {
+    "bytes": 2504,
+    "etag": null,
+    "last_modified": null,
+    "retrieved_utc": "2026-10-21T15:49:48.668920+00:00",
+    "sha256": "90c25755ad072a95744c337b91e20bf980afbf273655bd0d4885cbd407214aac",
+    "status": 200,
+    "url": "https://api.osv.dev/v1/vulns/PYSEC-2026-4320"
+  },
+  {
+    "bytes": 84493038,
+    "etag": null,
+    "last_modified": "Wed, 21 Oct 2026 15:05:29 GMT",
+    "retrieved_utc": "2026-10-21T15:49:48.830571+00:00",
+    "sha256": "49e038248a743012c55171c761c3ccb2fb37d2aa287b84e616ef4db5f6b5d5d3",
+    "status": 200,
+    "url": "https://security-tracker.debian.org/tracker/data/json"
+  }
+]

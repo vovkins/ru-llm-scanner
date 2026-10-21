@@ -1,0 +1,64 @@
+{
+  "status": "passed",
+  "version": "0.2.0",
+  "platform": "linux/arm64",
+  "verify_exit_code": 0,
+  "steps": [
+    {
+      "operation": "snapshot",
+      "exit_code": 0,
+      "assurance": "snapshot_verified",
+      "findings": 0,
+      "private_output": true,
+      "elapsed_seconds": 7.184
+    },
+    {
+      "operation": "repeat-snapshot",
+      "exit_code": 0,
+      "assurance": "snapshot_verified",
+      "findings": 0,
+      "private_output": true,
+      "elapsed_seconds": 7.094
+    },
+    {
+      "operation": "strict-diff",
+      "exit_code": 1,
+      "assurance": "baseline_verified",
+      "findings": 1,
+      "private_output": true,
+      "elapsed_seconds": 7.095
+    },
+    {
+      "operation": "invalid-baseline",
+      "exit_code": 2,
+      "assurance": "none",
+      "findings": 0,
+      "private_output": true,
+      "elapsed_seconds": 7.075
+    }
+  ],
+  "input_unchanged": true,
+  "reports_published": false,
+  "imported_images": true,
+  "timing_scope": "First/repeated scan after image import; fresh containers each time, OS page cache not flushed. Not a hardware cold-boot benchmark.",
+  "build_source_revision": "246ff4304cf5868888949e5bd9b5c4938a60191e",
+  "bundle_sha256": "a8437f065957e8f64b1e922271bb7aa9620c17ed6e42246a82dd85d0248a7f97",
+  "anonymous_images": {
+    "scanner": {
+      "anonymous_pull_tag_index_and_child": true,
+      "native_architecture_selected": true,
+      "platform_id": "sha256:5b0af708ce18aae571ad01aea0f181d4697cd161026fdc59c57630a1d8cfe0ee",
+      "index_digest": "sha256:d958c92f36c0533a5986d9acb2f9aa175a5257c622234591d133446636c28bae",
+      "matches_frozen_image": true
+    },
+    "analyzer": {
+      "anonymous_pull_tag_index_and_child": true,
+      "native_architecture_selected": true,
+      "platform_id": "sha256:30ec1ca66c4dafba6d59cfc9bdb1569780dde86cea027d97a2e60e3c37b85a4e",
+      "index_digest": "sha256:19790cd0843bf2cf952fd1aff2bf5cbe6323c00d830cac0ee4ba04b5bde764d7",
+      "matches_frozen_image": true
+    }
+  },
+  "public_assets_downloaded": true,
+  "source": "downloaded frozen archive; anonymous pulled platform IDs matched before import"
+}

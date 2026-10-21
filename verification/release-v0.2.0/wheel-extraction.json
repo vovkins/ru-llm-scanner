@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "source": "bounded prefix of authenticated frozen ARM64 asset; not a full archive download on this host",
+  "archive_sha256": "a8437f065957e8f64b1e922271bb7aa9620c17ed6e42246a82dd85d0248a7f97",
+  "downloaded_prefix_bytes": 4194304,
+  "wheel_sha256": "a8cacaf49b36452e75eb54b15c04ce6ad1bf1b8bd1368da758698672d524e367",
+  "wheel_bytes": 72534,
+  "matches_both_independent_native_wheel_receipts": true,
+  "pure_python_tag": "py3-none-any",
+  "whole_archive_validation": "separate final native archive controls verify full SHA-256 and installed behavior on both architectures"
+}

@@ -5,9 +5,17 @@
 Полные чувствительные report.json/report.html и локальные assertion logs не
 публикуются; открытые evidence содержат hashes/counts/синтетические метрики.
 
+## v0.2.0: опубликованная AMD64/ARM64 поставка
+
+[Приёмка и публикация](release-v0.2.0/README.md): 186 unit на каждой архитектуре,
+upstream/parity/quality/production, 13 Jenkins AMD64 сценариев, полный Requests;
+полные скачанные архивы, анонимный GHCR tag/index/child pull и installed control
+успешны на обеих native платформах.
+
 ## Linux AMD64 и нативная ARM64 регрессия
 
-Поддержка включена в `main` через PR #35; новая поставка ещё не опубликована.
+Исторический этап #33 до version bump: поддержка включена через PR #35.
+Новые versioned images проверены отдельно в [v0.2.0](release-v0.2.0/README.md).
 [План #33 и нативные протоколы](linux-amd64/README.md),
 [слияние и новые unit/control main](linux-amd64/main-integration/README.md).
 Нативные Ubuntu 24.04 AMD64/ARM64 сборки, parity/quality, полный Requests,

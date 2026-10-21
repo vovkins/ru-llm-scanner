@@ -1,0 +1,24 @@
+{
+  "status": "preliminary_disposition",
+  "basis": "local immutable v0.1.0 runtime inventories; new native images must be checked separately",
+  "query_time_utc": "2026-10-21T14:51:01.633666+00:00",
+  "pypi_records": 4,
+  "unique_advisory_groups": 1,
+  "certifi_aliases": [
+    "GHSA-6q48-6c7w-9gw2",
+    "PYSEC-2026-4320"
+  ],
+  "certifi_owner_decision": "#34 preserve pins; supported offline Docker/internal HTTP; arbitrary raw HTTPS outside accepted configuration",
+  "debian_potential_records": 139,
+  "new_source_version_cve_tuples": [],
+  "clarified_records": 17,
+  "clarification_fields": [
+    "description",
+    "scope"
+  ],
+  "clarified_source": "curl",
+  "clarification_assessment": "Added descriptions/scope only. Runtime scan does not fetch/execute repository code or call curl; Scanner→Analyzer uses HTTPX in internal network. Listed curl protocol/handle/cookie/HSTS/MIME APIs are outside this supported offline scan route. Not a claim about arbitrary libcurl/online use.",
+  "known_four_residual_risks_fixed": false,
+  "new_runtime_exclusion_still_requires_actual_native_inventory": true,
+  "raw_user_data_sent": false
+}

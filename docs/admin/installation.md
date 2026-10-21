@@ -1,14 +1,17 @@
 # Установка из готового offline-пакета
 
 Предусловия и проверенная среда — в [руководстве администратора](README.md).
-Если пакета ещё нет, сначала выполните [fresh build и export](build.md).
+Если пакета ещё нет, получите [готовый релиз](releases.md). Для собственной
+сборки доступен отдельный путь [fresh build и export](build.md).
 Здесь ничего не скачивается из registry и не собирается.
 Для AMD64 выберите пакет `cpu-linux-amd64`, для ARM64 — `cpu-linux-arm64`.
 Архитектура Docker **server** должна совпасть с `platform` deployment; чужая
 платформа вызывает `daemon_platform_mismatch`, автоматическая эмуляция не включается.
-После смены профиля нужен новый полный snapshot для baseline. Опубликованный
-v0.1.0 содержит ARM64. Поддержка AMD64 включена в `main` через PR #35, новые образы
-и релиз не опубликованы; порядок сборки и установки — в [серверной инструкции](linux-amd64.md).
+После смены профиля или version/image/source fingerprints нужен новый полный
+snapshot для baseline. [Готовый v0.2.0](releases.md) содержит отдельные AMD64/ARM64
+архивы; v0.1.0 остаётся ARM64. [Релизная приёмка](../../verification/release-v0.2.0/README.md)
+проверила полное скачивание архивов и import→verify→snapshot→diff на обеих native платформах.
+Ниже также сохранены ссылки на исторические walkthrough до выпуска v0.2.0.
 Маршрут import→verify→snapshot и последующие пользовательские команды пройдены
 на source checkpoint `2588571` в новой минимальной установке без dev venv/src/proxy/context:
 [ready walkthrough](../../verification/operations-dependencies/ready-walkthrough.json).
@@ -27,7 +30,9 @@ v0.1.0 содержит ARM64. Поддержка AMD64 включена в `mai
   `engine/dictionary.json`;
 - provenance сборки/проверок, платформу, ожидаемые image IDs и решение о допуске.
 
-**Export не включает launcher и документацию.** Передайте их отдельно из той же
+**Обычный export не включает launcher и документацию.** Готовый релизный `.tar.gz`
+уже объединяет launcher/docs и каталог `package/`; используйте его целиком.
+При собственной сборке передайте launcher/docs отдельно из той же
 согласованной версии scanner. Пользователю не нужны `src/`, `.git`, venv или
 build context. Engine assets уже внутри scanner image; каталог `engine/` пакета
 нужен для проверки переноса, а не для ручного монтирования в каждый scan.

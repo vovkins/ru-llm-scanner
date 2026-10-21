@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "source_lock_change": "only offline_dockerfile_sha256 in both CPU profiles for version label0.2.0",
+  "new_recipe_sha256": "d5b990e26e2aa7004708a78baba5275f9abe379df36470deaf89640ea513352d",
+  "upstream_revision_model_dictionary_patches_constraints_artifacts_unchanged": true,
+  "analyzer_runtime_probe_fields_checked": [
+    "packages",
+    "model",
+    "dictionary",
+    "spacy",
+    "sources",
+    "entity_types",
+    "python"
+  ],
+  "native_source_package_count": 82,
+  "cpython_source_included": true,
+  "native_source_archive_sha256": "50b4716387cb500d8cf06dc0cbfdfd99f6ce3e6a9778c6e8b080c035b20a5927",
+  "native_source_archive_payload_reused_without_changes": true,
+  "scanner_version": "0.2.0",
+  "image_build_source": "246ff4304cf5868888949e5bd9b5c4938a60191e",
+  "material_inputs": 85,
+  "not_a_claim_of_bit_reproducible_rebuild": true
+}

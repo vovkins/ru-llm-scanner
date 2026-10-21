@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "version": "0.2.0",
+  "build_source_revision": "246ff4304cf5868888949e5bd9b5c4938a60191e",
+  "build_workflow_run": 39623117010,
+  "final_archive_workflow_run": 39632190783,
+  "bundle_sha256": {
+    "amd64": "ac0fd101c0b6aad534f0ddac82f206dbc11f3d4930c8946665ff8e5b9a74f21a",
+    "arm64": "a8437f065957e8f64b1e922271bb7aa9620c17ed6e42246a82dd85d0248a7f97"
+  },
+  "advisory_disposition_complete": true,
+  "blockers": [],
+  "material_inputs": 85,
+  "unit_tests_per_platform": 186,
+  "jenkins_completed_cases": 13,
+  "requests": {
+    "analyzed": 119,
+    "unsupported": 13,
+    "errors": 0,
+    "findings": 612,
+    "maximum_score_delta": 4.5299530029296875e-06,
+    "score_tolerance": 1e-05
+  },
+  "final_archive_controls": {
+    "amd64": {
+      "bundle_sha256": "ac0fd101c0b6aad534f0ddac82f206dbc11f3d4930c8946665ff8e5b9a74f21a",
+      "control_sha256": "a87added8c2f4d218a2dbf9437da86c68eb0d755f2f4bb1d64770f12005ea64b",
+      "installed_sha256": "f529cd620752f86ac899e53d2cd015dee044ece683963632db8131c93fb09feb",
+      "oci_sha256": "76c87c986d969407fb4d1cdc45e4f65cb14cacf08b13692673243bcf9cd18ceb"
+    },
+    "arm64": {
+      "bundle_sha256": "a8437f065957e8f64b1e922271bb7aa9620c17ed6e42246a82dd85d0248a7f97",
+      "control_sha256": "90f9f583cd72f35064c990f0c1c82a924acfdc252b37c0f7998ec8b6a0f2190c",
+      "installed_sha256": "2d4d4baf056b0c64e2a91913af6678b533dc1ff29e403b34182441f3adba0f12",
+      "oci_sha256": "54033d27bbbca7e5f3796863df7cf26cf03f4f9d112f9cd0e4efe4f496ca55e6"
+    }
+  },
+  "known_four_native_risks_fixed": false,
+  "certifi_decision": "#34 preserve pins; supported offline Docker/internal HTTP; raw HTTPS outside accepted configuration",
+  "analyzer_runtime_dependencies_and_detectors_unchanged": true,
+  "scanner_version": "0.2.0",
+  "images_published": false,
+  "source_scope": "build-source immutable; producer/workflow commits may contain metadata-only changes"
+}
