@@ -1,0 +1,80 @@
+name: Verify final frozen CPU archives
+on:
+  workflow_call:
+    inputs:
+      version:
+        type: string
+        required: true
+      source_revision:
+        type: string
+        required: true
+      amd64_sha256:
+        type: string
+        required: true
+      arm64_sha256:
+        type: string
+        required: true
+permissions:
+  contents: read
+jobs:
+  archive:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.11'
+      - uses: docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4
+        with:
+          version: v29.6.1
+          set-host: true
+          daemon-config: '{"features":{"containerd-snapshotter":true}}'
+      - name: Check downloaded archive and install into separate empty Docker store
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ inputs.version }}
+          RELEASE_SOURCE: ${{ inputs.source_revision }}
+          RELEASE_ARCH: ${{ matrix.arch }}
+          BUNDLE_SHA256: ${{ matrix.arch == 'amd64' && inputs.amd64_sha256 || inputs.arm64_sha256 }}
+        run: |
+          umask 077
+          mkdir -p .build/archive-control
+          python - <<'PY'
+          import json, os, subprocess, sys
+          from pathlib import Path
+          sys.path.insert(0,'scripts')
+          from release_common import identity, extract_checked, project_version
+          from publish_release import download
+          from check_release_bundle import verify_files
+          version=os.environ['RELEASE_VERSION'];arch=os.environ['RELEASE_ARCH'];revision=os.environ['RELEASE_SOURCE']
+          assert version==project_version(Path.cwd())=='0.2.0'
+          subprocess.run(['git','merge-base','--is-ancestor',revision,'HEAD'],check=True)
+          directory=Path('.build/archive-control');name=identity(version,arch)
+          archive=download(version,name+'.tar.gz',directory)
+          bundle=extract_checked(archive,directory/'extracted',os.environ['BUNDLE_SHA256'],name)
+          manifest=verify_files(bundle,Path.cwd())
+          assert manifest['build_source_revision']==revision and manifest['platform']=='linux/'+arch and manifest['version']==version
+          subprocess.run([sys.executable,'scripts/check_fresh_install.py','--bundle',str(bundle),'--output-dir',str(directory/'fresh')],check=True)
+          receipt=json.loads((directory/'fresh/fresh-install.json').read_text())
+          receipt.update(bundle_sha256=os.environ['BUNDLE_SHA256'],build_source_revision=revision,archive_bytes=archive.stat().st_size,producer_revision=os.environ['GITHUB_SHA'])
+          (directory/'frozen-archive-control.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: final-frozen-${{ matrix.arch }}
+          path: |
+            .build/archive-control/frozen-archive-control.json
+            .build/archive-control/fresh/installed-control.json
+          retention-days: 14

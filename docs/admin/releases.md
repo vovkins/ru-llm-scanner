@@ -85,7 +85,8 @@ clean snapshot для baseline. Совпадение модели не дела�
 verify и контрольный scan non-root учётной записью оператора/агента.
 [Jenkins](jenkins.md) получает явный `SCANNER_DEPLOYMENT_LOCK` нового пакета из
 доверенной конфигурации; входной проект его не выбирает.
-Откат — выбор прежней установки/deployment, без изменения старых образов/locks.
+Откат — выбор прежней установки/deployment **той же архитектуры**, без изменения старых
+образов/locks. ARM64 v0.1.0 не является вариантом отката для AMD64.
 
 Четыре native-риска и [решение о certifi/HTTPS](../../verification/linux-amd64/certifi-advisory.md)
 сохранены; исправление библиотек не заявляется. Принят штатный offline Docker route
@@ -102,6 +103,10 @@ verify и контрольный scan non-root учётной записью о�
 Images на disposable runner сохраняются в этих архивах; обычные CI artifacts
 содержат только безопасные summaries, без images/model/cache/raw reports.
 
+После сохранения финальных `.tar.gz` тот же verification workflow с
+`verify_frozen=true` и обоими настоящими hashes вызывает read-only
+`verify-frozen-release.yml`: архивы скачиваются, извлекаются и проходят import/control
+в отдельных пустых Docker/containerd stores обеих платформ.
 Перед публикацией `release-acceptance.json` связывает успешный build workflow,
 оба archive hashes и завершённый разбор advisory без новых blockers. Publisher
 проверяет эту запись и реальный success соответствующего native workflow.

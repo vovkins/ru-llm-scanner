@@ -34,6 +34,16 @@ on:
         description: Exact main SHA for a release build
         type: string
         default: ''
+      verify_frozen:
+        description: Check final draft archives only; no build or registry write
+        type: boolean
+        default: false
+      amd64_sha256:
+        type: string
+        default: ''
+      arm64_sha256:
+        type: string
+        default: ''
 permissions:
   contents: read
 concurrency:
@@ -266,10 +276,20 @@ jobs:
           include-hidden-files: true
           retention-days: 14
   release_build:
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.release_version != ''
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.release_version != '' && !inputs.verify_frozen
     permissions:
       contents: write
     uses: ./.github/workflows/build-release.yml
     with:
       version: ${{ inputs.release_version }}
       source_revision: ${{ inputs.source_revision }}
+  release_archive_control:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.release_version != '' && inputs.verify_frozen
+    permissions:
+      contents: read
+    uses: ./.github/workflows/verify-frozen-release.yml
+    with:
+      version: ${{ inputs.release_version }}
+      source_revision: ${{ inputs.source_revision }}
+      amd64_sha256: ${{ inputs.amd64_sha256 }}
+      arm64_sha256: ${{ inputs.arm64_sha256 }}
