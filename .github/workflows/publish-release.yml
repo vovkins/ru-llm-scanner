@@ -2,6 +2,11 @@ name: Publish verified CPU release images
 on:
   workflow_dispatch:
     inputs:
+      mode:
+        type: choice
+        default: publish
+        options: [publish, verify-public]
+        required: true
       version:
         type: string
         default: '0.2.0'
@@ -24,7 +29,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   platform:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && inputs.mode == 'publish'
     strategy:
       fail-fast: false
       matrix:
@@ -113,3 +118,13 @@ jobs:
           name: anonymous-registry-${{ matrix.arch }}
           path: .build/registry-control.json
           retention-days: 14
+  verify_public:
+    if: github.ref == 'refs/heads/main' && inputs.mode == 'verify-public'
+    permissions:
+      contents: read
+    uses: ./.github/workflows/verify-release.yml
+    with:
+      version: ${{ inputs.version }}
+      source_revision: ${{ inputs.source_revision }}
+      amd64_sha256: ${{ inputs.amd64_sha256 }}
+      arm64_sha256: ${{ inputs.arm64_sha256 }}

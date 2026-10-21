@@ -114,7 +114,8 @@ registry write есть только в publish jobs, PR runs не получа�
 
 GitHub Release остаётся draft до успешных проверок всего комплекта и анонимных
 GHCR pull/control. Общей транзакции двух packages/tags нет: частичная публикация
-не означает успешный выпуск. После обычной публикации `verify-release.yml`
+не означает успешный выпуск. После обычной публикации `publish-release.yml` с `mode=verify-public` вызывает
+read-only reusable `verify-release.yml`: он
 скачивает assets без credentials, проверяет полные hashes и installed control
 на обеих native платформах. Новый tag/asset не переиспользуется для другой сборки.
 [Протоколы выпуска](../../verification/release-v0.2.0/README.md).
