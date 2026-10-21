@@ -111,9 +111,11 @@ reference; абсолютная разница confidence укладываетс
 найденных значений во внешних сервисах не проверялась.
 
 Владелец [принял четыре остаточных native-риска](verification/operations-dependencies/risk-acceptance.md)
-для закрытого контура; библиотеки этим не исправлены. Новый
-[certifi advisory и предложение #34](verification/linux-amd64/certifi-advisory.md)
-рассматриваются отдельно. Для каждого комплекта нужен явный deployment;
+для закрытого контура; библиотеки этим не исправлены. По
+[certifi #34](verification/linux-amd64/certifi-advisory.md) владелец 2026-10-21
+выбрал сохранение версий для штатного offline Docker-маршрута. Произвольный
+HTTPS endpoint raw CLI не входит в принятую конфигурацию и требует отдельной
+оценки CA policy и зависимостей. Для каждого комплекта нужен явный deployment;
 исторический default сохранён. Смена runtime/profile требует нового полного
 clean snapshot для baseline. [История предыдущей приёмки](verification/operations-main-integration/README.md).
 

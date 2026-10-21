@@ -23,8 +23,9 @@
   [существующий исходный архив](native-source-reference.json). Модель/словарь/patches/
   corpus не изменены. Architecture-specific system-libstdc++ исключение проверено
   заново; прежние четыре риска не объявлены исправленными.
-- [Новый certifi advisory/proposal #34](certifi-advisory.md) ожидает решения отдельно;
-  подготовленный patch не применялся.
+- [Решение по certifi #34](certifi-advisory.md): владелец 2026-10-21 сохранил
+  версии для штатного offline Docker-маршрута с ограничением HTTPS вне него;
+  подготовленный patch не применялся, исправление пакета не заявляется.
 
 Промежуточные initial-native-amd64/native-progress и прежние comparison receipts
 сохраняют собственные commits/runs; не подменяют финальный candidate. В ходе

@@ -1,6 +1,6 @@
 # Linux AMD64: подготовка серверного комплекта
 
-Поддержка реализуется в [#33](https://github.com/vovkins/ru-llm-scanner/issues/33).
+Поддержка реализована в [#33](https://github.com/vovkins/ru-llm-scanner/issues/33).
 Это инструкция к неопубликованному кандидату; опубликованный v0.1.0 остаётся
 ARM64-релизом. Итоговая нативная AMD64/ARM64 приёмка и настоящий Jenkins прошли:
 [протоколы и статус](../../verification/linux-amd64/README.md).
@@ -12,7 +12,9 @@ ARM64-релизом. Итоговая нативная AMD64/ARM64 приёмк
 Python/Debian dependencies, что ARM64 reference. Для каждого профиля закреплены
 свои wheels/DEBs/base digest и отдельный runtime/deployment. GPU не требуется.
 
-Испытательный стенд — нативный Ubuntu 24.04 x86-64 на AMD EPYC 7763 (4 vCPU,
+Параметры сервера и Jenkins-агента пока не выбраны владельцем (2026-10-21).
+Опорный испытательный стенд — нативный Ubuntu 24.04 x86-64 в GitHub Actions
+на AMD EPYC 7763 (4 vCPU,
 AVX2/FMA), Docker 29.6.1 и Compose 2.38.2. Финальный полный Requests обработан за 1330 s
 при 4 CPU и analyze timeout 1800 s: 119 analyzed / 13 unsupported / 0 error,
 612 находок, как в ARM64 reference. Это benchmark выбранного дерева, без ground
@@ -72,6 +74,13 @@ Docker recipes нормализуют права копируемых файло
 а входной Git-клон, configs и baselines располагаются вне очищаемого workspace.
 Доступ к Docker и отчётам предоставляет администратор. Боевой Jenkins текущими
 проверками не изменяется.
+
+По [решению владельца о certifi](../../verification/linux-amd64/certifi-advisory.md)
+версии сохранены; эксплуатация этих кандидатов ограничена штатным offline
+Docker-маршрутом с внутренним HTTP Scanner → Analyzer. Произвольный HTTPS endpoint
+raw Python CLI не входит в принятую конфигурацию: перед его использованием нужна
+отдельная оценка CA policy и зависимостей. Это эксплуатационное ограничение;
+дополнительный программный запрет HTTPS не вводился.
 
 ## Приёмка кандидата
 

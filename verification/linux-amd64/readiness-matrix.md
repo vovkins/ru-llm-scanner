@@ -46,7 +46,9 @@ private0700/0600, полные JSON/HTML значения и безопасна�
 [Инструкция сервера](../../docs/admin/linux-amd64.md),
 [Jenkins](../../docs/admin/jenkins.md), [установка](../../docs/admin/installation.md).
 Rootless/userns-remap, другие ОС/CPU/PKI/ACL и физический закрытый сервер требуют
-отдельного пилота. Параллельные jobs требуют суммы бюджетов и запаса хоста.
+отдельного пилота. Параметры сервера и Jenkins-агента пока не выбраны владельцем;
+опорным остаётся нативный Ubuntu 24.04 x86_64 в GitHub Actions.
+Параллельные jobs требуют суммы бюджетов и запаса хоста.
 
 [Preservation](preservation.json): main/v0.1.0/default locks,proxy/model/dictionary/
 corpus и 7 чужих контейнеров сохранены. [Старый release import/control](legacy-launcher-compatibility.json)
@@ -54,8 +56,11 @@ corpus и 7 чужих контейнеров сохранены. [Старый 
 
 Четыре native-риска приняты владельцем для закрытого контура и не исправлены.
 System-libstdc++ исключение перепроверено на обеих архитектурах; static wheel
-paths целиком не аттестованы. [Certifi #34](certifi-advisory.md) — отдельное
-предложение, ожидающее решения; patch не применён. Версии dependencies сохранены.
+paths целиком не аттестованы. По [certifi #34](certifi-advisory.md) владелец
+2026-10-21 выбрал сохранение версий для штатного offline Docker-маршрута.
+Произвольный HTTPS endpoint raw CLI вне принятой конфигурации требует отдельной
+оценки CA policy и зависимостей; программный запрет HTTPS не добавлялся.
+Patch не применён, исправление certifi не заявляется.
 
 ## Поставка и последующие действия
 

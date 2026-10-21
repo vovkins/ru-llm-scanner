@@ -11,7 +11,9 @@
     "docs/admin/installation.md",
     "docs/admin/linux-amd64.md",
     "docs/admin/updating-analyzer.md",
+    "docs/cli-quickstart.md",
     "docs/development.md",
+    "docs/reference/runtime.md",
     "verification/README.md",
     "verification/linux-amd64/README.md",
     "verification/linux-amd64/candidate/amd64/acceptance/acceptance-verification.json",
@@ -40,8 +42,11 @@
     "verification/linux-amd64/candidate/arm64/upstream-core.json",
     "verification/linux-amd64/candidate/arm64/upstream-ner.json",
     "verification/linux-amd64/candidate/provenance.json",
+    "verification/linux-amd64/certifi-advisory.md",
     "verification/linux-amd64/host-unit-summary.json",
-    "verification/linux-amd64/jenkins-valid-foreign-profile.json"
+    "verification/linux-amd64/jenkins-valid-foreign-profile.json",
+    "verification/linux-amd64/readiness-matrix.md",
+    "verification/linux-amd64/review.md"
   ],
   "image_source_is_recorded_commit_not_a_new_rebuild_of_documentation_head": true,
   "material_input_count": 82,
@@ -56,5 +61,19 @@
   "raw_values_reports_credentials_and_images_exported_to_evidence": false,
   "certifi_proposal_34_applied": false,
   "known_four_native_risks_fixed": false,
-  "disposable_runner_images_not_promised_available_after_job": true
+  "disposable_runner_images_not_promised_available_after_job": true,
+  "certifi_owner_decision": {
+    "date": "2026-10-21",
+    "issue": "https://github.com/vovkins/ru-llm-scanner/issues/34",
+    "decision": "preserve_pinned_versions_with_https_operational_restriction",
+    "analyzer_version": "2026.7.22",
+    "scanner_version": "2026.10.18",
+    "accepted_route": "offline Docker; internal HTTP Scanner to Analyzer; no external TLS",
+    "raw_https_outside_accepted_configuration": true,
+    "new_programmatic_https_block_added": false,
+    "advisory_claimed_fixed": false,
+    "runtime_or_pins_changed_for_decision": false
+  },
+  "target_server_and_jenkins_hardware_selected": false,
+  "reference_amd64_environment": "native Ubuntu 24.04 x86_64 GitHub Actions; target-host pilot remains required"
 }
