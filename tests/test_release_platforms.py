@@ -1,4 +1,5 @@
 import io
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -266,3 +267,16 @@ class ReleasePlatformTests(unittest.TestCase):
             path.write_text(json.dumps(receipt))
             with self.assertRaisesRegex(ValueError, "has blockers"):
                 verify_acceptance(args, Path(temp))
+
+    def test_release_recipe_hash_is_pinned_for_both_real_profiles(self):
+        root = Path(__file__).resolve().parents[1]
+        expected = hashlib.sha256(
+            (root / "docker/analyzer-offline.Dockerfile").read_bytes()
+        ).hexdigest()
+        profiles = json.loads((root / "upstream.lock.json").read_text())[
+            "build_profiles"
+        ]
+        for arch in ("amd64", "arm64"):
+            self.assertEqual(
+                profiles["cpu-linux-" + arch]["offline_dockerfile_sha256"], expected
+            )

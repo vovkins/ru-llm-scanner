@@ -200,7 +200,7 @@
       "spacy_tree_sha256": "54d8e411b174d0aa053f235e46d4e5ac52e4a2a8cbcb4fcc2a0da1d13ace6a8e",
       "offline_artifacts_path": "locks/offline-cpu-linux-arm64.artifacts.json",
       "offline_artifacts_sha256": "68024c5a384ff061476cbf4f9394e4ba4c71c38faeee639a483cd67a279ff847",
-      "offline_dockerfile_sha256": "0bb0db7533423f5ae14cf0ffd1a7dc832d944a7ed418a1d2a0a819399914e3a2"
+      "offline_dockerfile_sha256": "d5b990e26e2aa7004708a78baba5275f9abe379df36470deaf89640ea513352d"
     },
     "cpu-linux-amd64": {
       "base_image": "python@sha256:e529028263dbe6910a2d96f7d2b8f5266385e917fd45d286ef166977c094a51e",
@@ -208,7 +208,7 @@
       "constraints_sha256": "1d2256a2b93ca7a909a785a3609e84964710c7c3deee5ae28f1a22618d9c638f",
       "offline_artifacts_path": "locks/offline-cpu-linux-amd64.artifacts.json",
       "offline_artifacts_sha256": "6a0dd3c06394a8cf5b2df6ec652fb842d3a376986129ba722b8693d374295ad0",
-      "offline_dockerfile_sha256": "0bb0db7533423f5ae14cf0ffd1a7dc832d944a7ed418a1d2a0a819399914e3a2",
+      "offline_dockerfile_sha256": "d5b990e26e2aa7004708a78baba5275f9abe379df36470deaf89640ea513352d",
       "platform": "linux/amd64",
       "profile": "cpu",
       "spacy_tree_sha256": "54d8e411b174d0aa053f235e46d4e5ac52e4a2a8cbcb4fcc2a0da1d13ace6a8e"
