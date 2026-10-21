@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from ru_llm_scanner.artifacts import file_hash, read_json, require, write_json
 from ru_llm_scanner.upstream import verify_context
+from release_common import project_version
 
 
 def main():
@@ -91,7 +92,8 @@ def main():
         output / "release-manifest.json",
         {
             "manifest_version": 1,
-            "version": "0.1.0",
+            "version": project_version(ROOT),
+            "build_source_revision": summary["source_revision"],
             "kind": "unpublished_candidate",
             "source_revision": revision,
             "platform": deployment["platform"],

@@ -18,7 +18,9 @@ import sys
 import tempfile
 import time
 
-VERSION = "0.1.0"
+from release_common import SUPPORTED_VERSIONS
+
+VERSION = "0.2.0"
 
 
 def sha(path):
@@ -51,7 +53,7 @@ def verify_files(directory, checkout=None):
     manifest = json.loads((directory / "release-manifest.json").read_text())
     require(
         manifest["manifest_version"] == 1
-        and manifest["version"] == VERSION
+        and manifest["version"] in SUPPORTED_VERSIONS
         and manifest["platform"] in {"linux/arm64", "linux/amd64"}
         and re.fullmatch(r"[a-f0-9]{40}", manifest["source_revision"]),
         "Unexpected release identity",
@@ -86,6 +88,7 @@ def verify_files(directory, checkout=None):
 def installed_control(directory, *, import_images=False):
     directory = directory.resolve(strict=True)
     manifest = verify_files(directory)
+    version = manifest["version"]
     launcher = [
         sys.executable,
         "-I",
@@ -125,11 +128,11 @@ def installed_control(directory, *, import_images=False):
             scanner,
             "-c",
             "import importlib.metadata as m; from ru_llm_scanner import __version__; "
-            "assert m.version('ru-llm-scanner') == __version__ == '0.1.0'; print(__version__)",
+            f"assert m.version('ru-llm-scanner') == __version__ == {version!r}; print(__version__)",
         ],
         timeout=60,
     )
-    require(output.strip() == VERSION.encode(), "Incorrect installed version")
+    require(output.strip() == version.encode(), "Incorrect installed version")
     steps = []
     with tempfile.TemporaryDirectory(prefix="rullmscan-release-control-") as temp:
         temp = Path(temp)
@@ -299,7 +302,7 @@ def installed_control(directory, *, import_images=False):
         require(before == after, "Input repository changed")
     return {
         "status": "passed",
-        "version": VERSION,
+        "version": version,
         "platform": manifest["platform"],
         "verify_exit_code": 0,
         "steps": steps,

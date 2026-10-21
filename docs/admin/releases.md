@@ -1,87 +1,118 @@
-# Релиз v0.1.0: получение и проверка
+# Релиз v0.2.0: Linux AMD64 и ARM64
 
-Канал выпуска — [GitHub Releases](https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.1.0),
-образы — публичный GitHub Container Registry. Выпуск содержит **только Linux ARM64 CPU**.
-AMD64/GPU образы не публикуются. Используйте offline-комплект: он связывает оба
-образа, engine, locks и launcher, а также включает модель без скачивания при scan.
+Это инструкция к комплекту **v0.2.0**. Состояние публикации и точные assets — в
+[GitHub Releases](https://github.com/vovkins/ru-llm-scanner/releases).
+Поддержка обеих CPU-платформ находится в main; GPU в выпуск не входит.
+[Прежний v0.1.0](releases-v0.1.0.md) остаётся отдельным ARM64-комплектом.
 
-## Получить готовую установку
+## Выбрать платформу и получить установку
 
-На машине с доступом к GitHub загрузите `SHA256SUMS` и
-`ru-llm-scanner-v0.1.0-linux-arm64.tar.gz` из одного релиза. Проверьте SHA-256
-архива по записи в SHA256SUMS **до распаковки**. Сверяйте источник загрузки:
-checksum рядом с файлом не является независимой цифровой подписью.
+Выбирайте архив по архитектуре **Docker server**, включая случай удалённого daemon.
+Не переименовывайте locks и не смешивайте образы разных архитектур/версий.
+Нужны Python3.11+, rootful Docker/Compose и non-root оператор с доступом к daemon.
+[Проверенные стенды, ресурсы и ограничения](linux-amd64.md).
+
+| Docker server | Архив |
+| --- | --- |
+| Linux x86_64 / amd64 | `ru-llm-scanner-v0.2.0-linux-amd64.tar.gz` |
+| Linux aarch64 / arm64 | `ru-llm-scanner-v0.2.0-linux-arm64.tar.gz` |
+
+Загрузите архив и `SHA256SUMS` из **одного** выпуска, проверьте полную SHA-256
+до распаковки. Checksum подтверждает целостность, не личность издателя;
+источник и доставка должны быть доверенными. На Linux:
 
 ```sh
 sha256sum --check --ignore-missing SHA256SUMS
-tar -xzf ru-llm-scanner-v0.1.0-linux-arm64.tar.gz
-cd ru-llm-scanner-v0.1.0-linux-arm64
+# Пример для AMD64; на ARM64 используйте соответствующее имя архива/каталога.
+tar -xzf ru-llm-scanner-v0.2.0-linux-amd64.tar.gz
+cd ru-llm-scanner-v0.2.0-linux-amd64
 python3 -I -S scripts/docker_scanner.py import --directory package
 python3 -I -S scripts/docker_scanner.py verify --deployment-lock package/deployment.json
 ```
 
-На macOS доступна `shasum -a 256` для ручного сопоставления с той же записью.
-`import` сначала сверяет внутренние hashes, затем загружает локальные images
-и проверяет platform IDs. `verify` не строит и не скачивает образы.
-Для переноса в закрытый контур передайте проверенный архив, SHA256SUMS и
-доверенную запись об источнике; на целевой машине повторите проверку/import/verify.
-Для сканирования сеть не требуется.
+На macOS доступна `shasum -a 256` для ручного сравнения той же записи.
+Для закрытого контура перенесите проверенные архив и checksums доверенным каналом,
+повторите проверку/import/verify на целевом узле. При scan нет pull/build/fetch;
+модель и зависимости уже в images. Изолированный import/control проверяется
+на native Linux обеих архитектур, целевой сервер требует собственного пилота.
 
-Нужны Python 3.11+, Docker с API 1.49+ и Compose v2+, non-root оператор и
-достаточная память. Далее выполните [контрольный snapshot](installation.md#контрольный-snapshot)
-и передайте пользователю явный путь `package/deployment.json`.
-Не используйте исторический default lock в `locks/` для этого выпуска.
+Далее выполните [контрольный snapshot](installation.md#контрольный-snapshot).
+Всегда передавайте `package/deployment.json` **этого** комплекта явно.
+Исторические default locks в Git сохраняются для прежней эксплуатации.
 
-## Состав
+## Состав поставки
 
 | Артефакт | Назначение |
 | --- | --- |
-| `ru-llm-scanner-v0.1.0-linux-arm64.tar.gz` | Исходники установки, docs, launcher, package/images.tar, четыре engine assets и deployment/checksums |
-| `ru-llm-scanner-v0.1.0-native-sources.tar.gz` | Соответствующие исходники Debian-пакетов образов и их manifest |
-| `ru_llm_scanner-0.1.0-py3-none-any.whl` | Python CLI для dev/integration; сам по себе не содержит Analyzer/модель |
-| `release-manifest.json` | Build revision, hashes входов и файлов комплекта, image IDs, версия/платформа |
-| `registry-images.json` | Фактические GHCR digests и соответствующие локальные platform IDs |
-| `SHA256SUMS` | Контрольные суммы отдельных release assets |
+| Два `ru-llm-scanner-v0.2.0-linux-ARCH.tar.gz` | Launcher, docs/source, `package/images.tar`, engine/deployment/checksums и metadata |
+| `release-manifest-amd64.json`, `release-manifest-arm64.json` | SHA-256 состава соответствующего архива, platform/image/source identities; копия manifest внутри архива |
+| `ru_llm_scanner-0.2.0-py3-none-any.whl` | Python CLI для разработки; отдельно не содержит Analyzer/модель |
+| `ru-llm-scanner-v0.2.0-native-sources.tar.gz` | Соответствующие native sources обеих платформ при подтверждённом совпадении closure |
+| `registry-images.json` | Общие index digests, platform manifests и соответствие проверенным images |
+| `SHA256SUMS` | Полные hashes отдельных assets |
 
-В основном архиве `metadata/` содержит runtime/deployment, license/native
-inventories и сведения о происхождении; `upstream-source/` — curated patched
-источники Analyzer/словаря. Raw пользовательских отчётов, credentials, host CA,
-локальных proxy configs и build-cache в комплекте нет.
+В `metadata/verification` находятся безопасные протоколы конкретной платформы;
+в `metadata/wheels` — wheel именно этой сборки. `upstream-source/` содержит
+curated patched Analyzer/словарь; notices/licenses включены. Raw отчётов,
+credentials, build-cache и host configs в архиве нет.
 
-## GHCR
+## Образы GHCR
 
-Два образа имеют теги `0.1.0`:
+Два публичных packages: `ghcr.io/vovkins/ru-llm-scanner` и
+`ghcr.io/vovkins/ru-llm-scanner-analyzer`. У каждого:
+
+- `0.2.0` — общий OCI index Linux AMD64/ARM64;
+- `0.2.0-amd64`, `0.2.0-arm64` — проверенные платформенные сборки.
 
 ```sh
-docker pull --platform linux/arm64 ghcr.io/vovkins/ru-llm-scanner:0.1.0
-docker pull --platform linux/arm64 ghcr.io/vovkins/ru-llm-scanner-analyzer:0.1.0
+docker pull ghcr.io/vovkins/ru-llm-scanner:0.2.0
+docker pull ghcr.io/vovkins/ru-llm-scanner-analyzer:0.2.0
 ```
 
-Для воспроизводимого получения используйте `@sha256:…` из `registry-images.json`;
-теги служат удобными именами. Один pull не устанавливает launcher/engine/lock.
-GHCR digest описывает опубликованный manifest/index; platform image ID и
-reference ID могут различаться. Готовый package/deployment.json сохраняет
-проверенные ID, которые восстанавливает offline `import`.
+Общий tag выбирает архитектуру daemon. Для воспроизводимого получения используйте
+index/child `@sha256:…` из registry receipt. Общий index digest, platform manifest
+и config ID — разные сущности; не подставляйте общий index вместо platform ID
+в sealed engine/runtime/deployment. Один pull не устанавливает launcher/locks.
+Штатная offline установка использует проверенный пакет целиком: import восстанавливает
+исходные reference IDs; соответствие platform manifests опубликованным bytes
+проверяется отдельно. Версия0.1.0 и её digests остаются ARM64; `latest` не вводится.
+
+## Обновление, baseline и откат
+
+Version/image/source fingerprints v0.2.0 отличаются от v0.1.0: нужен новый полный
+clean snapshot для baseline. Совпадение модели не делает старый baseline совместимым.
+Сохраните старый каталог установки/пакет; новый разместите рядом, затем выполните
+verify и контрольный scan non-root учётной записью оператора/агента.
+[Jenkins](jenkins.md) получает явный `SCANNER_DEPLOYMENT_LOCK` нового пакета из
+доверенной конфигурации; входной проект его не выбирает.
+Откат — выбор прежней установки/deployment, без изменения старых образов/locks.
+
+Четыре native-риска и [решение о certifi/HTTPS](../../verification/linux-amd64/certifi-advisory.md)
+сохранены; исправление библиотек не заявляется. Принят штатный offline Docker route
+с внутренним HTTP Scanner→Analyzer; произвольный HTTPS raw CLI вне этого решения.
 
 ## Сопровождающему выпуска
 
-Задача [#31](https://github.com/vovkins/ru-llm-scanner/issues/31) фиксирует согласование
-v0.1.0, MIT и публичных образов. Workflow `publish-release.yml` запускается вручную
-на main с SHA-256 конкретного проверенного архива. Он загружает frozen draft asset,
-сверяет hashes и исходники с checkout, импортирует **те же** образы на ARM64 runner,
-выполняет installed verify/snapshot/strict diff/error, затем отправляет их в GHCR
-через временный GITHUB_TOKEN. Повторной удалённой сборки нет.
+[План #36](https://github.com/vovkins/ru-llm-scanner/issues/36) разрешает выпуск
+после gates обеих платформ. Workflow `build-release.yml` вручную запускается на
+точном согласованном main SHA: native builds/tests → fresh-store control →
+реальный Jenkins AMD64 → полный Requests → inventories/advisories → frozen draft assets.
+Images на disposable runner сохраняются в этих архивах; обычные CI artifacts
+содержат только безопасные summaries, без images/model/cache/raw reports.
 
-Публикация требует `contents: write` и `packages: write` только этому job.
-Не помещайте PAT в репозиторий или чат. После push отдельно проверьте публичную
-видимость обоих packages и анонимный pull по digest; публичность репозитория
-сама по себе её не задаёт. Финальные manifests/checksums и release публикуются
-после этих проверок. Stable tags не перезаписываются новыми сборками.
+Перед публикацией `release-acceptance.json` связывает успешный build workflow,
+оба archive hashes и завершённый разбор advisory без новых blockers. Publisher
+проверяет эту запись и реальный success соответствующего native workflow.
+`publish-release.yml` получает явные version/source SHA и hashes двух архивов,
+импортирует и проверяет **те же** images, отправляет platform tags и формирует
+общие indexes по проверенным child digests. Используется временный GITHUB_TOKEN;
+registry write есть только в publish jobs, PR runs не получают write-прав.
+Существующий versioned tag не заменяется другим содержимым; auth/transport error
+не считается отсутствием. Повтор продолжает тот же frozen комплект.
 
-Релиз сохраняет [известное качество и ограничения](../reference/detection.md)
-и [принятое решение по четырём native-рискам](../../verification/operations-dependencies/risk-acceptance.md).
-Для другого окружения проведите собственную приёмку. Возврат выполняется выбором
-прежнего точного deployment; импорт нового комплекта не меняет старые locks.
-
-Новые release image/source fingerprints требуют нового clean snapshot: старый baseline
-не становится совместимым от одного совпадения модели и словаря.
+GitHub Release остаётся draft до успешных проверок всего комплекта и анонимных
+GHCR pull/control. Общей транзакции двух packages/tags нет: частичная публикация
+не означает успешный выпуск. После обычной публикации `verify-release.yml`
+скачивает assets без credentials, проверяет полные hashes и installed control
+на обеих native платформах. Новый tag/asset не переиспользуется для другой сборки.
+[Протоколы выпуска](../../verification/release-v0.2.0/README.md).
