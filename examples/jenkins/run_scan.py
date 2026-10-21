@@ -2,6 +2,7 @@
 """Trusted Jenkins adapter. Never execute this from the scanned checkout."""
 
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -101,6 +102,19 @@ def command(environ, output):
         "--output",
         str(output),
     ]
+    deployment = environ.get("SCANNER_DEPLOYMENT_LOCK")
+    if deployment is not None:
+        # Trusted agent configuration, not a build parameter or a remote URL.
+        path = Path(deployment)
+        if not path.is_absolute() or path.is_symlink() or not path.is_file():
+            raise ValueError()
+        result += ["--deployment-lock", str(path.resolve(strict=True))]
+    cpus = environ.get("SCANNER_ANALYZER_CPUS")
+    if cpus is not None:
+        value = float(cpus)
+        if not math.isfinite(value) or not 0 < value <= 64:
+            raise ValueError()
+        result += ["--analyzer-cpus", str(value)]
     target = environ["REF_B"]
     if not target:
         raise ValueError()

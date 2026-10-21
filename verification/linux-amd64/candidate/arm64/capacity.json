@@ -1,0 +1,483 @@
+{
+  "cases": [
+    {
+      "analyze_timeout_seconds": 600,
+      "analyzer_cpus": 2,
+      "artifacts_sha256": {
+        "report.html": "61b2197b35891a8c4213e6d3b411e775cee3e93bb86de426f7548722374f29b1",
+        "report.json": "bb64248ff61460101c1a89d4d5992c5fb15057919e184c0af7c866ed52e6e9de"
+      },
+      "case": "files-10",
+      "categories": {
+        "PASSWORD": 1
+      },
+      "cgroup_sample_maxima": {
+        "analyzer": {
+          "cpu_usage_usec": 7273406,
+          "memory_peak_bytes": 609210368,
+          "tmp_visible_bytes": 274
+        },
+        "scanner": {
+          "cpu_usage_usec": 501205,
+          "memory_peak_bytes": 34910208,
+          "tmp_visible_bytes": 174
+        }
+      },
+      "cleanup": true,
+      "coverage": {
+        "complete": true,
+        "counts": {
+          "analyzed": 10,
+          "deleted": 0,
+          "error": 0,
+          "excluded": 0,
+          "inherited": 0,
+          "target": 10,
+          "unsupported": 0,
+          "unverified": 0
+        },
+        "enumeration_complete": true,
+        "manifest_sha256": "c8cd88cff3d99d361d06934bbf32f88b2f8231c312a2de47e922b0a309a879a1"
+      },
+      "errors": {},
+      "exit_code": 1,
+      "expected_exit": 1,
+      "findings": 1,
+      "fixture": {
+        "bytes": 230,
+        "files": 10,
+        "known_passwords": 1
+      },
+      "harness_kill": false,
+      "input_unchanged": true,
+      "output_bytes": 27319,
+      "profile_sha256": "f1d97dfaa187b229bc0125f61d31360076d511cc9cc468fa11b1008fe2ac5b5b",
+      "result": {
+        "assurance": "snapshot_verified",
+        "exit_code": 1,
+        "findings_count": 1,
+        "status": "findings"
+      },
+      "rules": {
+        "credential.kv.password": 1
+      },
+      "run_timeout_seconds": 300,
+      "sample_failures_during_start_or_cleanup": 0,
+      "sources": {
+        "native_credential": 1
+      },
+      "wall_seconds": 8.086
+    },
+    {
+      "analyze_timeout_seconds": 600,
+      "analyzer_cpus": 2,
+      "artifacts_sha256": {
+        "report.html": "c66f997fc09d62e22aace5530282d23c712e4e34ac59a0a27e601b2109283962",
+        "report.json": "374d10921076c0be40742be3ec3b7d35b3d4eead6e9c81b53fea92fb60239a47"
+      },
+      "case": "files-100",
+      "categories": {
+        "PASSWORD": 10
+      },
+      "cgroup_sample_maxima": {
+        "analyzer": {
+          "cpu_usage_usec": 17436331,
+          "memory_peak_bytes": 641720320,
+          "tmp_visible_bytes": 309
+        },
+        "scanner": {
+          "cpu_usage_usec": 1096446,
+          "memory_peak_bytes": 35016704,
+          "tmp_visible_bytes": 174
+        }
+      },
+      "cleanup": true,
+      "coverage": {
+        "complete": true,
+        "counts": {
+          "analyzed": 100,
+          "deleted": 0,
+          "error": 0,
+          "excluded": 0,
+          "inherited": 0,
+          "target": 100,
+          "unsupported": 0,
+          "unverified": 0
+        },
+        "enumeration_complete": true,
+        "manifest_sha256": "ee29c582707ba3c070081559e97288a9a274e18310746eadc6614c4584d0e52e"
+      },
+      "errors": {},
+      "exit_code": 1,
+      "expected_exit": 1,
+      "findings": 10,
+      "fixture": {
+        "bytes": 2300,
+        "files": 100,
+        "known_passwords": 10
+      },
+      "harness_kill": false,
+      "input_unchanged": true,
+      "output_bytes": 114825,
+      "profile_sha256": "f1d97dfaa187b229bc0125f61d31360076d511cc9cc468fa11b1008fe2ac5b5b",
+      "result": {
+        "assurance": "snapshot_verified",
+        "exit_code": 1,
+        "findings_count": 10,
+        "status": "findings"
+      },
+      "rules": {
+        "credential.kv.password": 10
+      },
+      "run_timeout_seconds": 300,
+      "sample_failures_during_start_or_cleanup": 0,
+      "sources": {
+        "native_credential": 10
+      },
+      "wall_seconds": 13.975
+    },
+    {
+      "analyze_timeout_seconds": 600,
+      "analyzer_cpus": 2,
+      "artifacts_sha256": {
+        "report.html": "68268d1e19b3725e170dd4ea21e07d814d3372f0e236b45d3053ce6f2bb6752d",
+        "report.json": "482eb7388b5d15d1a9f0484863290d3a550d8d79500900b1c592c38868aff2ad"
+      },
+      "case": "files-100-concurrency-2",
+      "categories": {
+        "PASSWORD": 10
+      },
+      "cgroup_sample_maxima": {
+        "analyzer": {
+          "cpu_usage_usec": 18240500,
+          "memory_peak_bytes": 610566144,
+          "tmp_visible_bytes": 309
+        },
+        "scanner": {
+          "cpu_usage_usec": 1174739,
+          "memory_peak_bytes": 35004416,
+          "tmp_visible_bytes": 174
+        }
+      },
+      "cleanup": true,
+      "coverage": {
+        "complete": true,
+        "counts": {
+          "analyzed": 100,
+          "deleted": 0,
+          "error": 0,
+          "excluded": 0,
+          "inherited": 0,
+          "target": 100,
+          "unsupported": 0,
+          "unverified": 0
+        },
+        "enumeration_complete": true,
+        "manifest_sha256": "ee29c582707ba3c070081559e97288a9a274e18310746eadc6614c4584d0e52e"
+      },
+      "errors": {},
+      "exit_code": 1,
+      "expected_exit": 1,
+      "findings": 10,
+      "fixture": {
+        "bytes": 2300,
+        "files": 100,
+        "known_passwords": 10
+      },
+      "harness_kill": false,
+      "input_unchanged": true,
+      "output_bytes": 114825,
+      "profile_sha256": "f1d97dfaa187b229bc0125f61d31360076d511cc9cc468fa11b1008fe2ac5b5b",
+      "result": {
+        "assurance": "snapshot_verified",
+        "exit_code": 1,
+        "findings_count": 10,
+        "status": "findings"
+      },
+      "rules": {
+        "credential.kv.password": 10
+      },
+      "run_timeout_seconds": 300,
+      "sample_failures_during_start_or_cleanup": 0,
+      "sources": {
+        "native_credential": 10
+      },
+      "wall_seconds": 14.074
+    },
+    {
+      "analyze_timeout_seconds": 600,
+      "analyzer_cpus": 2,
+      "artifacts_sha256": {
+        "report.html": "e5c7e9f45159bbe377bcb40c2070cff723b0cd36ce3eb949f1f9fb96b1092e67",
+        "report.json": "366165596fb5a1bad11522bdce354101fb0adc503a627e5cc835df7819600ce2"
+      },
+      "case": "files-1000",
+      "categories": {
+        "PASSWORD": 100
+      },
+      "cgroup_sample_maxima": {
+        "analyzer": {
+          "cpu_usage_usec": 122344914,
+          "memory_peak_bytes": 612220928,
+          "tmp_visible_bytes": 309
+        },
+        "scanner": {
+          "cpu_usage_usec": 7363619,
+          "memory_peak_bytes": 37285888,
+          "tmp_visible_bytes": 174
+        }
+      },
+      "cleanup": true,
+      "coverage": {
+        "complete": true,
+        "counts": {
+          "analyzed": 1000,
+          "deleted": 0,
+          "error": 0,
+          "excluded": 0,
+          "inherited": 0,
+          "target": 1000,
+          "unsupported": 0,
+          "unverified": 0
+        },
+        "enumeration_complete": true,
+        "manifest_sha256": "e8eb700db8a72b310240335b6a3f965ba37bb7040676bc2f4bdd7154d593ebb8"
+      },
+      "errors": {},
+      "exit_code": 1,
+      "expected_exit": 1,
+      "findings": 100,
+      "fixture": {
+        "bytes": 23000,
+        "files": 1000,
+        "known_passwords": 100
+      },
+      "harness_kill": false,
+      "input_unchanged": true,
+      "output_bytes": 989813,
+      "profile_sha256": "f1d97dfaa187b229bc0125f61d31360076d511cc9cc468fa11b1008fe2ac5b5b",
+      "result": {
+        "assurance": "snapshot_verified",
+        "exit_code": 1,
+        "findings_count": 100,
+        "status": "findings"
+      },
+      "rules": {
+        "credential.kv.password": 100
+      },
+      "run_timeout_seconds": 300,
+      "sample_failures_during_start_or_cleanup": 0,
+      "sources": {
+        "native_credential": 100
+      },
+      "wall_seconds": 72.027
+    },
+    {
+      "analyze_timeout_seconds": 600,
+      "analyzer_cpus": 2,
+      "artifacts_sha256": {
+        "report.html": "fe92bbb5cd19a529bd81b62a60f84bb41bc3c6094da0c80227cf63b2b5ecb56b",
+        "report.json": "a99a2146a228f3d5f0d9b45b1186a78e08da60c63d29c3dc5ea52a71c6ab5c71"
+      },
+      "case": "long-64k",
+      "categories": {},
+      "cgroup_sample_maxima": {
+        "analyzer": {
+          "cpu_usage_usec": 122953477,
+          "memory_peak_bytes": 939606016,
+          "tmp_visible_bytes": 239
+        },
+        "scanner": {
+          "cpu_usage_usec": 2078246,
+          "memory_peak_bytes": 36827136,
+          "tmp_visible_bytes": 174
+        }
+      },
+      "cleanup": true,
+      "coverage": {
+        "complete": true,
+        "counts": {
+          "analyzed": 1,
+          "deleted": 0,
+          "error": 0,
+          "excluded": 0,
+          "inherited": 0,
+          "target": 1,
+          "unsupported": 0,
+          "unverified": 0
+        },
+        "enumeration_complete": true,
+        "manifest_sha256": "7e50e2e467be9094d2a778dc056aa158527e31dfefbe612e730b0100c8b8687c"
+      },
+      "errors": {},
+      "exit_code": 0,
+      "expected_exit": 0,
+      "findings": 0,
+      "fixture": {
+        "bytes": 68817,
+        "files": 1,
+        "known_passwords": 0
+      },
+      "harness_kill": false,
+      "input_unchanged": true,
+      "output_bytes": 18270,
+      "profile_sha256": "f1d97dfaa187b229bc0125f61d31360076d511cc9cc468fa11b1008fe2ac5b5b",
+      "result": {
+        "assurance": "snapshot_verified",
+        "exit_code": 0,
+        "findings_count": 0,
+        "status": "clean"
+      },
+      "rules": {},
+      "run_timeout_seconds": 300,
+      "sample_failures_during_start_or_cleanup": 0,
+      "sources": {},
+      "wall_seconds": 68.013
+    },
+    {
+      "analyze_timeout_seconds": 600,
+      "analyzer_cpus": 2,
+      "artifacts_sha256": {
+        "report.html": "2d2909ad52e85cbad356b1d633b36e10beac0d10a87c56f3eb4467bfbd62c1bf",
+        "report.json": "d253f87ebc0f7f76af8533dac63f482f584f0510bf3df892dad807b895d2f0fd"
+      },
+      "case": "size-limit",
+      "categories": {},
+      "cgroup_sample_maxima": {
+        "analyzer": {
+          "cpu_usage_usec": 6369350,
+          "memory_peak_bytes": 687566848,
+          "tmp_visible_bytes": 0
+        },
+        "scanner": {
+          "cpu_usage_usec": 467059,
+          "memory_peak_bytes": 34369536,
+          "tmp_visible_bytes": 0
+        }
+      },
+      "cleanup": true,
+      "coverage": {
+        "complete": false,
+        "counts": {
+          "analyzed": 0,
+          "deleted": 0,
+          "error": 1,
+          "excluded": 0,
+          "inherited": 0,
+          "target": 1,
+          "unsupported": 0,
+          "unverified": 0
+        },
+        "enumeration_complete": true,
+        "manifest_sha256": "2f716121a7a9827fb36f23ed30bd325921b445d18487a1532a45d670f98daf3a"
+      },
+      "errors": {
+        "file_too_large": 1
+      },
+      "exit_code": 2,
+      "expected_exit": 2,
+      "findings": 0,
+      "fixture": {
+        "bytes": 68817,
+        "files": 1,
+        "known_passwords": 0
+      },
+      "harness_kill": false,
+      "input_unchanged": true,
+      "output_bytes": 18721,
+      "profile_sha256": "023ac9293eeca8ac06f9800989434886d57ba6e6a488cb4027220ccdcccc3b27",
+      "result": {
+        "assurance": "none",
+        "exit_code": 2,
+        "findings_count": 0,
+        "status": "incomplete"
+      },
+      "rules": {},
+      "run_timeout_seconds": 300,
+      "sample_failures_during_start_or_cleanup": 0,
+      "sources": {},
+      "wall_seconds": 9.067
+    },
+    {
+      "analyze_timeout_seconds": 600,
+      "analyzer_cpus": 2,
+      "artifacts_sha256": {
+        "report.html": "a12e7f8b4b8386f7a04368f03d0502d14cb6473d96fd29b7205595393ad0680e",
+        "report.json": "0e3c11960666c7341096dd8dfd3dcd23ab47e2819a4640b3436c17d76d8f30ec"
+      },
+      "case": "many-findings",
+      "categories": {
+        "PASSWORD": 128
+      },
+      "cgroup_sample_maxima": {
+        "analyzer": {
+          "cpu_usage_usec": 19302265,
+          "memory_peak_bytes": 690905088,
+          "tmp_visible_bytes": 274
+        },
+        "scanner": {
+          "cpu_usage_usec": 633349,
+          "memory_peak_bytes": 34533376,
+          "tmp_visible_bytes": 174
+        }
+      },
+      "cleanup": true,
+      "coverage": {
+        "complete": true,
+        "counts": {
+          "analyzed": 1,
+          "deleted": 0,
+          "error": 0,
+          "excluded": 0,
+          "inherited": 0,
+          "target": 1,
+          "unsupported": 0,
+          "unverified": 0
+        },
+        "enumeration_complete": true,
+        "manifest_sha256": "dc59c9743f73b0901ee00e23eaf1eef345da15c76b69889c26fe346a4798efd9"
+      },
+      "errors": {},
+      "exit_code": 1,
+      "expected_exit": 1,
+      "findings": 128,
+      "fixture": {
+        "bytes": 4736,
+        "files": 1,
+        "known_passwords": 128
+      },
+      "harness_kill": false,
+      "input_unchanged": true,
+      "output_bytes": 263303,
+      "profile_sha256": "f1d97dfaa187b229bc0125f61d31360076d511cc9cc468fa11b1008fe2ac5b5b",
+      "result": {
+        "assurance": "snapshot_verified",
+        "exit_code": 1,
+        "findings_count": 128,
+        "status": "findings"
+      },
+      "rules": {
+        "credential.kv.password": 128
+      },
+      "run_timeout_seconds": 300,
+      "sample_failures_during_start_or_cleanup": 0,
+      "sources": {
+        "native_credential": 128
+      },
+      "wall_seconds": 14.121
+    }
+  ],
+  "fixture_seed": "deterministic-index-v1; no RNG",
+  "images": {
+    "analyzer": {
+      "image_id": "sha256:c0d67a29797296b6baafcfd947990b2dcdfbd168c789a016942256274f983eb6",
+      "image_reference_id": "sha256:346ff1b36d01d647276b923234d5f06ce16abc1aa1cdf9dd69f62766ed8cb995"
+    },
+    "scanner": {
+      "image_id": "sha256:8d4da215f23fa12546ed60c323bd48cd1ba26eb84f814bbdf85f4071e632e3fa",
+      "image_reference_id": "sha256:8d4da215f23fa12546ed60c323bd48cd1ba26eb84f814bbdf85f4071e632e3fa"
+    }
+  },
+  "measurement": "1s polling; cgroup lifetime CPU/memory.peak maxima observed before cleanup; final interval may be missed; tmp regular-file sizes omit deleted/open files and are not disk peak",
+  "platform": "linux/arm64"
+}

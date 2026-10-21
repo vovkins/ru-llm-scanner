@@ -54,6 +54,9 @@ def main():
     results = Path("/results")
     qa = results / "qa"
     qa.mkdir()
+    # Synthetic host exports live below a private host-owned temp root. Its
+    # different UID must be able to remove these container-owned directories.
+    qa.chmod(0o777)
     env = {k: v for k, v in os.environ.items() if k != "PYTHONPATH"}
     runs = []
     with tempfile.TemporaryDirectory(prefix="scanner-cli-") as directory:
@@ -245,6 +248,7 @@ def main():
         ]:
             target = qa / label
             target.mkdir()
+            target.chmod(0o777)
             for name in ("report.json", "report.html"):
                 shutil.copyfile(source / name, target / name)
                 # Only synthetic QA exports are made host-readable; CLI outputs are 0600.

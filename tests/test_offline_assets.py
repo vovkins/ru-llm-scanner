@@ -8,6 +8,7 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
+import zipfile
 
 from ru_llm_scanner.artifacts import ArtifactError
 from ru_llm_scanner.offline_assets import (
@@ -27,7 +28,15 @@ class OfflineAssetTests(unittest.TestCase):
         self.root = Path(temporary.name)
         self.cache = self.root / "cache"
         self.cache.mkdir()
-        self.data = b"synthetic wheel bytes"
+        wheel = io.BytesIO()
+        with zipfile.ZipFile(wheel, "w") as archive:
+            archive.writestr(
+                "synthetic-1.dist-info/WHEEL", "Wheel-Version: 1.0\nTag: py3-none-any\n"
+            )
+            archive.writestr(
+                "synthetic-1.dist-info/METADATA", "Name: synthetic\nVersion: 1\n"
+            )
+        self.data = wheel.getvalue()
         self.item = {
             "path": "wheels/synthetic-1-py3-none-any.whl",
             "url": "https://example.invalid/synthetic.whl",
@@ -62,7 +71,7 @@ class OfflineAssetTests(unittest.TestCase):
         with patch("urllib.request.urlopen", return_value=io.BytesIO(self.data)):
             acquire(self.item, self.cache, download=True)
         output = self.root / "output"
-        lock = {"artifacts": [self.item]}
+        lock = {"platform": "linux/arm64", "artifacts": [self.item]}
         materialize(lock, "analyzer", output, self.cache)
         self.assertEqual((output / self.item["path"]).read_bytes(), self.data)
         with self.assertRaises(FileExistsError):

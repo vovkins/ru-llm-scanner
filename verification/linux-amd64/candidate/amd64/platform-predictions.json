@@ -1,0 +1,747 @@
+{
+  "status": "passed",
+  "platform": "linux/amd64",
+  "image_id": "sha256:23f0bb6ebd278bf2697a189717faaa0993241b47e557a906cb2a4c2f8faedb7f",
+  "source_lock_sha256": "d8cdf389f29de502e97992501ae983577fe6e7dfa9bb29996f98b3eee5dd516b",
+  "corpus_sha256": "8bc2f6e3f10a9d123651839de21bae09b35c708622f9bfcada2f908ec0b5582f",
+  "helper_sha256": "37985bc6e40442b238ea4100023918971e2748ae6fea0f1e7680bcc0e99db3c7",
+  "rows": {
+    "auth_token_assignment": [
+      {
+        "end": 40,
+        "entity_type": "AUTH_TOKEN",
+        "rule_id": "credential.kv.auth-token",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 11,
+        "text_sha256": "8661e34f7e29627c9d7653c3c3fb70d2de5e3b8d56064db925692eed528b3627"
+      }
+    ],
+    "auth_token_bearer": [
+      {
+        "end": 52,
+        "entity_type": "AUTH_TOKEN",
+        "rule_id": "credential.context.authorization-bearer",
+        "score": 0.95,
+        "source": "native_credential",
+        "start": 22,
+        "text_sha256": "869a668f87e7d4a86229e1d2d24080695ea43b07725658b0545c591e3b1998e3"
+      }
+    ],
+    "auth_token_explanation_negative": [],
+    "auth_token_multiline": [
+      {
+        "end": 60,
+        "entity_type": "AUTH_TOKEN",
+        "rule_id": "credential.kv.auth-token",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 33,
+        "text_sha256": "3de48268ae40edfc1f16e9afa49aa5bcc1d8ad94a6ddb0e8351613a67f273646"
+      }
+    ],
+    "auth_token_placeholder_negative": [],
+    "auth_token_quoted": [
+      {
+        "end": 37,
+        "entity_type": "AUTH_TOKEN",
+        "rule_id": "credential.kv.auth-token",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 14,
+        "text_sha256": "4c2814ed214cc372633ea2a94b4edec1ae91965e46129333497fa510bd8b1a5a"
+      }
+    ],
+    "auth_token_repeated": [
+      {
+        "end": 38,
+        "entity_type": "AUTH_TOKEN",
+        "rule_id": "credential.context.named-token",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 15,
+        "text_sha256": "c01978d7fc3e4a00d39270f71067ff281a3eaf09211522ed019be4e7100d5f98"
+      },
+      {
+        "end": 72,
+        "entity_type": "AUTH_TOKEN",
+        "rule_id": "credential.context.backup-token",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 50,
+        "text_sha256": "b90a4bdfa954a58089465ce66cf77df6e87a9fa7767e1d73d3ef1f294696b963"
+      }
+    ],
+    "auth_token_ru_context": [
+      {
+        "end": 48,
+        "entity_type": "AUTH_TOKEN",
+        "rule_id": "credential.kv.auth-token",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 19,
+        "text_sha256": "2a3fb56881261f7200823ee1420de8ca1d141bd6809b9065d8ae9f50984508f1"
+      }
+    ],
+    "contract_agreement_en": [
+      {
+        "end": 26,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.85,
+        "source": "contextual_contract",
+        "start": 14,
+        "text_sha256": "6ba92631b14d19219b1ed33fc4450362857b8a5368b0c5c5405958fdc7c4a88b"
+      }
+    ],
+    "contract_agreement_ru": [
+      {
+        "end": 21,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.9958584904670715,
+        "source": "contextual_contract",
+        "start": 11,
+        "text_sha256": "b8231fbec608b182a522125c7f3221263e50f8db7aad823445156a168a559253"
+      }
+    ],
+    "contract_date_negative": [],
+    "contract_document_version_negative": [],
+    "contract_dotted_version_negative": [],
+    "contract_inflected_ru": [
+      {
+        "end": 24,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.9899802803993225,
+        "source": "contextual_contract",
+        "start": 14,
+        "text_sha256": "33d23bd3e0249e1f2e8c1b93807a6fe6f26777eec187b903690d695184bd5147"
+      }
+    ],
+    "contract_multiline_ru": [
+      {
+        "end": 28,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.9952669143676758,
+        "source": "contextual_contract",
+        "start": 16,
+        "text_sha256": "21d4a12a3a04954f19b6e188bafab7160242c3a6a0bf5a9374f1e44450d73dd4"
+      }
+    ],
+    "contract_number_cyrillic_ru": [
+      {
+        "end": 18,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.9980034232139587,
+        "source": "contextual_contract",
+        "start": 9,
+        "text_sha256": "6145e359adbeee8bfc87cda037ed07d83ce5aaf6a9dad41b47277130d58fa869"
+      }
+    ],
+    "contract_number_digits_ru": [
+      {
+        "end": 24,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.9011393785476685,
+        "source": "contextual_contract",
+        "start": 16,
+        "text_sha256": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f"
+      }
+    ],
+    "contract_number_en": [
+      {
+        "end": 28,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.99712735414505,
+        "source": "contextual_contract",
+        "start": 16,
+        "text_sha256": "82325d9afad1f1702c49a69856c283b115714ed00481004f5be7471b71e6f60a"
+      }
+    ],
+    "contract_number_pdf_copy": [
+      {
+        "end": 35,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.9976601600646973,
+        "source": "contextual_contract",
+        "start": 23,
+        "text_sha256": "5ef0ecdc96ca89ca6f768db1fd452b0345b706dc878637ecfac9c635805bc62b"
+      }
+    ],
+    "contract_number_repeated": [
+      {
+        "end": 18,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.990513801574707,
+        "source": "contextual_contract",
+        "start": 9,
+        "text_sha256": "1afbba4f6a6bfea1f58ff9e2bf6676ac1a0562d4fc6a8680a5563b9e6a9a6b77"
+      },
+      {
+        "end": 30,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.9860517978668213,
+        "source": "contextual_contract",
+        "start": 21,
+        "text_sha256": "22a975cb0cbd1dd72c7a9712ddab8ff850a0cada91b59c644d9cca38a25a3c99"
+      }
+    ],
+    "contract_number_symbol_ru": [
+      {
+        "end": 22,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.9966979026794434,
+        "source": "contextual_contract",
+        "start": 10,
+        "text_sha256": "6dd0a2ccf1c7cecf1ccf6f91cf80f387194ff530120132be96213019f1b510c0"
+      }
+    ],
+    "contract_random_code_negative": [],
+    "contract_request_number_negative": [],
+    "contract_template_negative": [],
+    "contract_two_contexts_ru": [
+      {
+        "end": 20,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.9939477443695068,
+        "source": "contextual_contract",
+        "start": 10,
+        "text_sha256": "103e9b1cc3b74d8bddd4c227ffdbfe325757f401fe762f6b8a7e1007b2215a14"
+      },
+      {
+        "end": 41,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.994416356086731,
+        "source": "contextual_contract",
+        "start": 31,
+        "text_sha256": "f3ef9b672037d878e6947ff42d3963f5645d64126c9557731fac0ea92f497a0b"
+      }
+    ],
+    "contract_version_negative": [],
+    "contract_without_number_negative": [],
+    "location_city_en": [
+      {
+        "end": 31,
+        "entity_type": "LOCATION",
+        "rule_id": null,
+        "score": 0.9984575510025024,
+        "source": "ner",
+        "start": 25,
+        "text_sha256": "ecc0e7dc084f141b29479058967d0bc07dee25d9690a98ee4e6fdad5168274d7"
+      }
+    ],
+    "location_city_ru": [
+      {
+        "end": 26,
+        "entity_type": "LOCATION",
+        "rule_id": null,
+        "score": 0.85,
+        "source": "structural",
+        "start": 20,
+        "text_sha256": "24bafe114d6f6128023011697d56677266f6ec481308988cd0507141064ec391"
+      }
+    ],
+    "location_direction_negative": [],
+    "location_label_negative": [],
+    "location_multiword_ru": [
+      {
+        "end": 35,
+        "entity_type": "LOCATION",
+        "rule_id": null,
+        "score": 0.85,
+        "source": "structural",
+        "start": 19,
+        "text_sha256": "a8cbeb7c4048496313045260c6e714fe8d299700d3ea0495de736fd8c0fe5f19"
+      }
+    ],
+    "location_region_ru": [
+      {
+        "end": 40,
+        "entity_type": "LOCATION",
+        "rule_id": null,
+        "score": 0.85,
+        "source": "structural",
+        "start": 22,
+        "text_sha256": "cac812266ec3a13bba4aef4f91d3b81ae45972ca3905e03ae47791623fa172ee"
+      }
+    ],
+    "location_repeated": [
+      {
+        "end": 9,
+        "entity_type": "LOCATION",
+        "rule_id": null,
+        "score": 0.85,
+        "source": "structural",
+        "start": 3,
+        "text_sha256": "e0dd0c05899d53ecd7b4bea39ff451e79f8a69e7f9f76d80de442ad5420400cb"
+      },
+      {
+        "end": 41,
+        "entity_type": "LOCATION",
+        "rule_id": null,
+        "score": 0.85,
+        "source": "structural",
+        "start": 35,
+        "text_sha256": "bb421b85957b37faba1125c1463d989bf5a115681a77c706342bc42f2dfcee56"
+      }
+    ],
+    "login_after_emoji": [
+      {
+        "end": 20,
+        "entity_type": "LOGIN",
+        "rule_id": "credential.kv.login",
+        "score": 0.75,
+        "source": "native_credential",
+        "start": 9,
+        "text_sha256": "417e90c7530ec145fb6ea6014b20d46094b279e0a1fb8c147a1680399623361e"
+      }
+    ],
+    "login_assignment_en": [
+      {
+        "end": 17,
+        "entity_type": "LOGIN",
+        "rule_id": "credential.kv.login",
+        "score": 0.75,
+        "source": "native_credential",
+        "start": 6,
+        "text_sha256": "cfb3169d4dccb1a767e41c87b3adb55905c086c207c1a626ed1ec57cb268a04f"
+      }
+    ],
+    "login_assignment_ru": [
+      {
+        "end": 35,
+        "entity_type": "LOGIN",
+        "rule_id": "credential.kv.login",
+        "score": 0.75,
+        "source": "native_credential",
+        "start": 20,
+        "text_sha256": "ddf70e56b478885eaf3c0c48eb3cb59ce2aeaea773f04671be9132f305702397"
+      }
+    ],
+    "login_cyrillic": [
+      {
+        "end": 27,
+        "entity_type": "LOGIN",
+        "rule_id": null,
+        "score": 0.7513583302497864,
+        "source": "ner",
+        "start": 16,
+        "text_sha256": "4249c2b1c7f2774b35d7f7c6131329d37a27e45be5e4d6961939fa59eccee84e"
+      }
+    ],
+    "login_email_style": [
+      {
+        "end": 43,
+        "entity_type": "LOGIN",
+        "rule_id": "credential.context.login-email",
+        "score": 0.85,
+        "source": "native_credential",
+        "start": 24,
+        "text_sha256": "34e4eb8d23fcac151375484d27365cf160c7a25a2d9df0e4e2528061c0ffb048"
+      }
+    ],
+    "login_explanation_negative": [],
+    "login_placeholder_negative": [],
+    "login_username_en": [
+      {
+        "end": 20,
+        "entity_type": "LOGIN",
+        "rule_id": "credential.kv.login",
+        "score": 0.75,
+        "source": "native_credential",
+        "start": 12,
+        "text_sha256": "99682b662166cd8e4adc60d43c67b7a8227b3cdd74452dbdf71b6ca42a366363"
+      }
+    ],
+    "mixed_identity_and_contract": [
+      {
+        "end": 18,
+        "entity_type": "PERSON",
+        "rule_id": null,
+        "score": 0.9937304258346558,
+        "source": "ner",
+        "start": 7,
+        "text_sha256": "1bd56e5dc56601fd9d4966acc0c6893765b1303a0dc812186d69c49385e4a004"
+      },
+      {
+        "end": 37,
+        "entity_type": "LOGIN",
+        "rule_id": "credential.kv.login",
+        "score": 0.75,
+        "source": "native_credential",
+        "start": 26,
+        "text_sha256": "446d7e8dde731c2ff7ddb55034e44c1cc2f189cc60b3c4fc77462d3f3d007f80"
+      },
+      {
+        "end": 58,
+        "entity_type": "PASSWORD",
+        "rule_id": "credential.kv.password",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 46,
+        "text_sha256": "a5a949958b2fa1efa462531d219242c2a7c8c20feb636de77436fd143cba23a0"
+      },
+      {
+        "end": 78,
+        "entity_type": "CONTRACT_NUMBER",
+        "rule_id": null,
+        "score": 0.9951606392860413,
+        "source": "contextual_contract",
+        "start": 68,
+        "text_sha256": "a6c431cd64750ed4ffdb3cb60316d442cd5a795504783e12b589cbd735e04c5b"
+      }
+    ],
+    "mixed_org_location_secrets": [
+      {
+        "end": 13,
+        "entity_type": "ORGANIZATION",
+        "rule_id": null,
+        "score": 0.9988886713981628,
+        "source": "ner",
+        "start": 4,
+        "text_sha256": "31b15fa695ede4247de3d1d533b0bef538ff5160d407e490d34294b1b3d9d2a6"
+      },
+      {
+        "end": 20,
+        "entity_type": "LOCATION",
+        "rule_id": null,
+        "score": 0.85,
+        "source": "structural",
+        "start": 16,
+        "text_sha256": "b09ec615c708f412ecb074db79676c37b1cf9d6f2b6461595eb920eaac13cabc"
+      },
+      {
+        "end": 61,
+        "entity_type": "AUTH_TOKEN",
+        "rule_id": "credential.kv.auth-token",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 39,
+        "text_sha256": "613fb0ed6726fc84314be779928198e92b53a90809ef9234417c93b158c0849f"
+      },
+      {
+        "end": 97,
+        "entity_type": "SECRET_KEY",
+        "rule_id": "credential.kv.secret-key",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 75,
+        "text_sha256": "bb378a556bd57fb55e2851776304f515903bd0571491fcb658f8300eb7de9e6f"
+      }
+    ],
+    "organization_bank_ru": [
+      {
+        "end": 34,
+        "entity_type": "ORGANIZATION",
+        "rule_id": null,
+        "score": 0.9993946552276611,
+        "source": "ner",
+        "start": 23,
+        "text_sha256": "f3b985acdf4d170c9907f79d2ab4c942c65a9d2066f007a8a30f9d3534ab77a5"
+      }
+    ],
+    "organization_en": [
+      {
+        "end": 49,
+        "entity_type": "ORGANIZATION",
+        "rule_id": null,
+        "score": 0.9991911053657532,
+        "source": "ner",
+        "start": 27,
+        "text_sha256": "841036dc840262d8b3199a38ddf3807265740a196c8d76e638548e01dfe74546"
+      }
+    ],
+    "organization_field_negative": [],
+    "organization_legal_form_ru": [
+      {
+        "end": 22,
+        "entity_type": "ORGANIZATION",
+        "rule_id": null,
+        "score": 0.9990166425704956,
+        "source": "ner",
+        "start": 12,
+        "text_sha256": "e564a0ddb6193d5a471aea34eb53a8ff4a20dfa3953e0f199154c0f0c9441aec"
+      }
+    ],
+    "organization_process_negative": [],
+    "organization_quoted_ru": [
+      {
+        "end": 26,
+        "entity_type": "ORGANIZATION",
+        "rule_id": null,
+        "score": 0.596714437007904,
+        "source": "ner",
+        "start": 9,
+        "text_sha256": "7e7d1e7b57281b3993c0adcca9a4373d7cc98756bfddfa67b62d56991b592093"
+      }
+    ],
+    "organization_repeated": [
+      {
+        "end": 10,
+        "entity_type": "ORGANIZATION",
+        "rule_id": null,
+        "score": 0.9995773434638977,
+        "source": "ner",
+        "start": 0,
+        "text_sha256": "e564a0ddb6193d5a471aea34eb53a8ff4a20dfa3953e0f199154c0f0c9441aec"
+      },
+      {
+        "end": 40,
+        "entity_type": "ORGANIZATION",
+        "rule_id": null,
+        "score": 0.9996034502983093,
+        "source": "ner",
+        "start": 30,
+        "text_sha256": "e564a0ddb6193d5a471aea34eb53a8ff4a20dfa3953e0f199154c0f0c9441aec"
+      }
+    ],
+    "password_assignment_en": [
+      {
+        "end": 23,
+        "entity_type": "PASSWORD",
+        "rule_id": "credential.kv.password",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 9,
+        "text_sha256": "ad61f4c5ecf1133d61dba68d7c3a7d4762ec0e3a03538e5a9d8a1c7bddf710ab"
+      }
+    ],
+    "password_assignment_ru": [
+      {
+        "end": 16,
+        "entity_type": "PASSWORD",
+        "rule_id": "credential.kv.password",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 8,
+        "text_sha256": "195f62edd40a1d9b0c6407104596d6c29e2b408ecc1cc964e803376917ab1fd0"
+      }
+    ],
+    "password_cyrillic": [
+      {
+        "end": 18,
+        "entity_type": "PASSWORD",
+        "rule_id": "credential.kv.password",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 7,
+        "text_sha256": "dd331a8ce7155ce2ed85d92ebc0b4835aadbf67429ec8ccb3e846a43eb3f3ff3"
+      }
+    ],
+    "password_explanation_negative": [],
+    "password_hash_symbol": [
+      {
+        "end": 15,
+        "entity_type": "PASSWORD",
+        "rule_id": "credential.kv.password",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 5,
+        "text_sha256": "dd409ae786ac3883e3d300b2bf6e9e2c9717336f3d1efeaf5680fe770ceb3b83"
+      }
+    ],
+    "password_multiline": [
+      {
+        "end": 37,
+        "entity_type": "PASSWORD",
+        "rule_id": "credential.kv.password",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 22,
+        "text_sha256": "b838a7186dc54c1ed091134c1646b2ece0069fc5d8167a8bd480b258ee1c855a"
+      }
+    ],
+    "password_placeholder_negative": [],
+    "password_short_boundary": [
+      {
+        "end": 14,
+        "entity_type": "PASSWORD",
+        "rule_id": "credential.kv.password",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 8,
+        "text_sha256": "645cd077d4a451af9f99fb1807b336a51944acf6461fc902657a1c4ddeaa1e62"
+      }
+    ],
+    "password_with_spaces": [
+      {
+        "end": 29,
+        "entity_type": "PASSWORD",
+        "rule_id": "credential.kv.password",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 16,
+        "text_sha256": "316cdf8199e0464aed2dd1546e856e991bdb964d6316a65d6185487099f2f7ef"
+      }
+    ],
+    "person_after_emoji": [
+      {
+        "end": 31,
+        "entity_type": "PERSON",
+        "rule_id": null,
+        "score": 0.9961214661598206,
+        "source": "ner",
+        "start": 19,
+        "text_sha256": "09d97b6d3ec21579cdbd32923b7a9ba50f6abc7197b8c1cd1b8125a8750e74df"
+      }
+    ],
+    "person_after_long_prefix": [
+      {
+        "end": 4168,
+        "entity_type": "PERSON",
+        "rule_id": null,
+        "score": 0.990038275718689,
+        "source": "ner",
+        "start": 4155,
+        "text_sha256": "af0d12c688ab396d6a697cedd263c91d63d43459d5702b0a94e2b56f97af9e7c"
+      }
+    ],
+    "person_decomposed_unicode": [
+      {
+        "end": 25,
+        "entity_type": "PERSON",
+        "rule_id": null,
+        "score": 0.9890041947364807,
+        "source": "ner",
+        "start": 13,
+        "text_sha256": "5294d2f5ef79c344b06be17180d65fb3c4a01fab1d7d1b00f2e5a23c22848c87"
+      }
+    ],
+    "person_full_name_en": [
+      {
+        "end": 39,
+        "entity_type": "PERSON",
+        "rule_id": null,
+        "score": 0.9805655479431152,
+        "source": "ner",
+        "start": 21,
+        "text_sha256": "7b1d21251b1f6762e90454036037086593ffe7c8621c55c80052b32248f93ab8"
+      }
+    ],
+    "person_full_name_ru": [
+      {
+        "end": 28,
+        "entity_type": "PERSON",
+        "rule_id": null,
+        "score": 0.997349739074707,
+        "source": "ner",
+        "start": 7,
+        "text_sha256": "a6d6350acd484fbe0a8f06076315117bcfd427e67fb99d302c42dfc08203a522"
+      }
+    ],
+    "person_initials_ru": [
+      {
+        "end": 30,
+        "entity_type": "PERSON",
+        "rule_id": null,
+        "score": 0.9362846612930298,
+        "source": "ner",
+        "start": 18,
+        "text_sha256": "dfec829a5d7424c5f2629028eaf317623ef3dfb871e559b1a6874b3d134c07a7"
+      }
+    ],
+    "person_label_negative": [],
+    "person_repeated_value": [
+      {
+        "end": 11,
+        "entity_type": "PERSON",
+        "rule_id": null,
+        "score": 0.999744713306427,
+        "source": "ner",
+        "start": 0,
+        "text_sha256": "2b8929bad387d796e01207ba77d792ff91dc9fc61aa1f6885645ba3a3f9d460d"
+      },
+      {
+        "end": 32,
+        "entity_type": "PERSON",
+        "rule_id": null,
+        "score": 0.9997504353523254,
+        "source": "ner",
+        "start": 21,
+        "text_sha256": "2b8929bad387d796e01207ba77d792ff91dc9fc61aa1f6885645ba3a3f9d460d"
+      }
+    ],
+    "person_role_negative": [],
+    "secret_key_assignment": [
+      {
+        "end": 43,
+        "entity_type": "SECRET_KEY",
+        "rule_id": "credential.kv.secret-key",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 11,
+        "text_sha256": "7754626102c5dbf621fcecd4653d6454cb9dcc8ca89da15fc78e994aadd1e64e"
+      }
+    ],
+    "secret_key_client_secret": [
+      {
+        "end": 43,
+        "entity_type": "SECRET_KEY",
+        "rule_id": "credential.kv.secret-key",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 15,
+        "text_sha256": "816c3aae6802984f58665d46a9a18ce8c431318eda310261c19436cb6b8a9b10"
+      }
+    ],
+    "secret_key_explanation_negative": [],
+    "secret_key_long_context": [
+      {
+        "end": 3997,
+        "entity_type": "SECRET_KEY",
+        "rule_id": "credential.kv.secret-key",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 3971,
+        "text_sha256": "fedbaf6df2f00071ff8499103591cd2ef93a33e21b12d7eb9fef87d851f1cd29"
+      }
+    ],
+    "secret_key_multiline": [
+      {
+        "end": 48,
+        "entity_type": "SECRET_KEY",
+        "rule_id": "credential.kv.secret-key",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 19,
+        "text_sha256": "c93418101c4be6aa52299e7db878811b72af4d34a22d8be8bac549db14284ac7"
+      }
+    ],
+    "secret_key_placeholder_negative": [],
+    "secret_key_punctuation": [
+      {
+        "end": 37,
+        "entity_type": "SECRET_KEY",
+        "rule_id": "credential.kv.secret-key",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 12,
+        "text_sha256": "ff4e2a6a1a16d1c3032fd92a4181159302212cd7f21321b2e3c58e9df641bdc6"
+      }
+    ],
+    "secret_key_ru_context": [
+      {
+        "end": 51,
+        "entity_type": "SECRET_KEY",
+        "rule_id": "credential.kv.secret-key",
+        "score": 0.9,
+        "source": "native_credential",
+        "start": 24,
+        "text_sha256": "0bc055e63b435adb268da2fe4dbe237bba55a0e5e78becc1deebc625ed7a38fc"
+      }
+    ]
+  },
+  "raw_values_included": false,
+  "native_daemon_checked": true
+}

@@ -1,0 +1,158 @@
+[
+  {
+    "step": "base-pull",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 2.97
+  },
+  {
+    "step": "source-prepare",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 0.615
+  },
+  {
+    "step": "offline-prepare",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 14.247
+  },
+  {
+    "step": "analyzer-build",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 97.436
+  },
+  {
+    "step": "analyzer-seal",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 10.696
+  },
+  {
+    "step": "engine-export",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 0.717
+  },
+  {
+    "step": "wheel-build",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 0.866
+  },
+  {
+    "step": "scanner-prepare",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 3.019
+  },
+  {
+    "step": "scanner-build",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 12.444
+  },
+  {
+    "step": "verify",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 0.164
+  },
+  {
+    "step": "export",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 25.327
+  },
+  {
+    "step": "upstream-test-image",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 2.971
+  },
+  {
+    "step": "upstream-core",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 72.926
+  },
+  {
+    "step": "upstream-ner",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 7.93
+  },
+  {
+    "step": "parity",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 39.141
+  },
+  {
+    "step": "scan-integration",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 23.387
+  },
+  {
+    "step": "cli-integration",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 33.524
+  },
+  {
+    "step": "acceptance",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 114.728
+  },
+  {
+    "step": "docker-integration",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 113.484
+  },
+  {
+    "step": "runtime-faults",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 20.224
+  },
+  {
+    "step": "deployment-extras",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 41.08
+  },
+  {
+    "step": "linux-git",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 1.618
+  },
+  {
+    "step": "cache-only-prepare",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 3.932
+  },
+  {
+    "step": "analyzer-repeat-build",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 109.018
+  },
+  {
+    "step": "analyzer-repeat-seal",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 11.065
+  },
+  {
+    "step": "scanner-repeat-build",
+    "return_code": 0,
+    "expected": 0,
+    "seconds": 12.699
+  }
+]

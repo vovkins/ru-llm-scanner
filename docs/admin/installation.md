@@ -3,6 +3,11 @@
 Предусловия и проверенная среда — в [руководстве администратора](README.md).
 Если пакета ещё нет, сначала выполните [fresh build и export](build.md).
 Здесь ничего не скачивается из registry и не собирается.
+Для AMD64 выберите пакет `cpu-linux-amd64`, для ARM64 — `cpu-linux-arm64`.
+Архитектура Docker **server** должна совпасть с `platform` deployment; чужая
+платформа вызывает `daemon_platform_mismatch`, автоматическая эмуляция не включается.
+После смены профиля нужен новый полный snapshot для baseline. Опубликованный
+v0.1.0 содержит ARM64; статус AMD64 кандидата — в [серверной инструкции](linux-amd64.md).
 Маршрут import→verify→snapshot и последующие пользовательские команды пройдены
 на source checkpoint `2588571` в новой минимальной установке без dev venv/src/proxy/context:
 [ready walkthrough](../../verification/operations-dependencies/ready-walkthrough.json).
@@ -111,6 +116,7 @@ roots и контакты оператора. Дайте пользовател�
 
 Сохраните доверенный пакет, provenance, точный прежний deployment и images
 на случай восстановления. Не удаляйте единственную рабочую копию ради проверки
-import. Перенос save/load подтверждён в одном локальном Docker store;
+import. Новый кандидат прошёл import/control в отдельном пустом Docker/containerd store
+на нативных AMD64 и ARM64 ([протоколы](../../verification/linux-amd64/README.md));
 [имеющиеся свидетельства](../../verification/README.md) не заявляют испытание
 другого физического закрытого хоста.

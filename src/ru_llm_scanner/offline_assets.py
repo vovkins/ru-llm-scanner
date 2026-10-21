@@ -12,6 +12,11 @@ import urllib.request
 from pathlib import Path
 
 from .artifacts import SHA256, file_hash, read_json, require
+from .build_platforms import (
+    CPU_PLATFORMS,
+    validate_artifact_bytes,
+    validate_record_platform,
+)
 from .upstream import safe_path
 
 
@@ -20,7 +25,7 @@ def load_artifacts(path: Path):
     require(
         type(lock.get("artifact_lock_version")) is int
         and lock["artifact_lock_version"] == 1
-        and lock.get("platform") == "linux/arm64"
+        and lock.get("platform") in CPU_PLATFORMS
         and lock.get("artifacts"),
         "Invalid offline artifact lock",
     )
@@ -49,6 +54,7 @@ def load_artifacts(path: Path):
             "Invalid offline artifact URL",
         )
         seen.add(name)
+        validate_record_platform(item, lock["platform"])
     return lock
 
 
@@ -105,6 +111,7 @@ def materialize(
         target.parent.mkdir(parents=True, exist_ok=True)
         require(not target.parent.is_symlink(), "Invalid artifact destination")
         source = acquire(item, cache, download=download, ssl_context=ssl_context)
+        validate_artifact_bytes(source, item, lock["platform"])
         with target.open("xb") as destination, source.open("rb") as incoming:
             shutil.copyfileobj(incoming, destination)
         require(matches(target, item), "Copied artifact checksum mismatch")

@@ -1,9 +1,22 @@
-# Сборка собственного CPU ARM64 комплекта
+# Сборка собственного CPU комплекта
+
+Выберите профиль, совпадающий с архитектурой нативного Docker daemon.
+Опубликованный v0.1.0 содержит только ARM64. Для нового неопубликованного
+кандидата AMD64 см. [серверный профиль Linux AMD64](linux-amd64.md);
+статус приёмки обеих архитектур ведётся в [#33](https://github.com/vovkins/ru-llm-scanner/issues/33).
+
+| Docker server | `BUILD_PROFILE` | Artifact lock |
+| --- | --- | --- |
+| Linux aarch64 / arm64 | `cpu-linux-arm64` | `locks/offline-cpu-linux-arm64.artifacts.json` |
+| Linux x86_64 / amd64 | `cpu-linux-amd64` | `locks/offline-cpu-linux-amd64.artifacts.json` |
 
 Это путь администратора с исходниками. Для готового комплекта используйте
 [установку из пакета](installation.md). Сборка/установка dependencies может
 обращаться к одобренным источникам; сканирование готовыми images работает offline.
-Проверены CPU Linux ARM64 и [указанная среда](README.md#среда-и-ответственность).
+Нативные build/seal/повторная offline-сборка обоих профилей подтверждены в
+[протоколах AMD64/ARM64](../../verification/linux-amd64/README.md).
+Итоговый статус установки и эксплуатации указан там же; история ниже относится
+к прежнему ARM64 комплекту.
 На source checkpoint `2588571` полный новый offline-маршрут выполнен в отдельном
 каталоге из `git archive`, с новым venv и единым runtime/deployment:
 [evidence #24](../../verification/operations-dependencies/README.md).
@@ -24,7 +37,8 @@ python3.11 -m venv .venv
 .venv/bin/python -m pip install -e . -r requirements-dev.txt
 mkdir -p .build
 
-BUILD_ROOT="$PWD/.build/cpu-arm64-build-001"
+BUILD_PROFILE=cpu-linux-arm64
+BUILD_ROOT="$PWD/.build/$BUILD_PROFILE-build-001"
 mkdir -m 700 "$BUILD_ROOT"
 ANALYZER_CONTEXT="$BUILD_ROOT/analyzer"
 SOURCE_CONTEXT="$BUILD_ROOT/analyzer-source"
@@ -34,9 +48,14 @@ RUNTIME_LOCK="$BUILD_ROOT/analyzer.runtime.lock.json"
 ENGINE_DIR="$BUILD_ROOT/engine"
 SCANNER_CONTEXT="$BUILD_ROOT/scanner-context"
 DEPLOYMENT="$BUILD_ROOT/deployment.json"
-ANALYZER_TAG=ru-llm-scanner-analyzer:cpu-build-001
-SCANNER_TAG=ru-llm-scanner:cpu-build-001
+ANALYZER_TAG="ru-llm-scanner-analyzer:$BUILD_PROFILE-build-001"
+SCANNER_TAG="ru-llm-scanner:$BUILD_PROFILE-build-001"
 ```
+
+Для AMD64 замените только первую строку выбора на `BUILD_PROFILE=cpu-linux-amd64`
+до создания каталогов. Не смешивайте contexts, wheels, runtime/engine/deployment
+двух профилей. Нужен BuildKit с Dockerfile frontend 1.14+ для нормализации прав
+`COPY --chmod`; нативные проверки закрепляют Docker 29.6.1.
 
 `python3.11` можно заменить доступным Python 3.11+. Для каждого нового комплекта
 выбирайте новые каталог и tags. Context/engine/lock outputs не перезаписываются;
@@ -46,6 +65,15 @@ SCANNER_TAG=ru-llm-scanner:cpu-build-001
 Установка dev dependencies/build backend использует доверенную pip-конфигурацию
 хоста. Отдельно обеспечьте загрузку **закреплённого** Python base из build profile
 через одобренный канал. Не подменяйте digest текущим `python:latest`.
+Если подготовка выполняется с сетью, загрузите base выбранного профиля явно:
+
+```sh
+BASE_IMAGE=$(.venv/bin/python -c 'import json,sys; print(json.load(open("upstream.lock.json"))["build_profiles"][sys.argv[1]]["base_image"])' "$BUILD_PROFILE")
+docker pull --platform "linux/${BUILD_PROFILE#cpu-linux-}" "$BASE_IMAGE"
+```
+
+В закрытой среде вместо pull импортируйте заранее сохранённый и проверенный base
+через доверенный канал. Наличие tar с произвольным tag не заменяет совпадение digest.
 
 ## 2. Подготовить закреплённый upstream
 
@@ -54,7 +82,7 @@ SCANNER_TAG=ru-llm-scanner:cpu-build-001
 ```sh
 .venv/bin/python scripts/analyzer.py prepare \
   --source /trusted/ru-llm-proxy --output "$SOURCE_CONTEXT" \
-  --profile cpu-linux-arm64
+  --profile "$BUILD_PROFILE"
 .venv/bin/python scripts/analyzer.py verify-context --context "$SOURCE_CONTEXT"
 ```
 
@@ -62,7 +90,7 @@ SCANNER_TAG=ru-llm-scanner:cpu-build-001
 
 ```sh
 .venv/bin/python scripts/analyzer.py prepare --fetch \
-  --output "$SOURCE_CONTEXT" --profile cpu-linux-arm64
+  --output "$SOURCE_CONTEXT" --profile "$BUILD_PROFILE"
 ```
 
 После альтернативы также выполните `verify-context`. `--fetch` — действие подготовки,
@@ -73,7 +101,7 @@ source lock коммита; рабочие изменения, соседние 
 
 Upstream source, model revision/files, constraints и spaCy pins задаёт
 [source lock](../../upstream.lock.json). Отдельный
-[artifact lock](../../locks/offline-cpu-linux-arm64.artifacts.json) содержит
+artifact lock выбранного профиля из таблицы выше содержит
 полный closure wheels, Debian-пакетов и прежней модели: URL, размер, SHA-256 и
 назначение для Analyzer/scanner/tests. Подготовьте полный контекст:
 
@@ -129,6 +157,7 @@ Host parity запускается non-root. [Подробности dev-про�
   --output "$ENGINE_DIR"
 .venv/bin/python -m pip wheel --no-deps . --wheel-dir "$BUILD_ROOT/wheels"
 .venv/bin/python scripts/build_scanner.py prepare \
+  --profile "$BUILD_PROFILE" \
   --engine-dir "$ENGINE_DIR" \
   --wheel "$BUILD_ROOT/wheels/ru_llm_scanner-0.1.0-py3-none-any.whl" \
   --context "$SCANNER_CONTEXT" --artifact-cache "$ARTIFACT_CACHE" \

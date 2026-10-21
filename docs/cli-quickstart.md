@@ -40,6 +40,12 @@ Analyzer должен уже работать по адресу, доступн�
 сеть готового deployment задаётся [launcher](reference/runtime.md); изолированная
 проверка с собственными временными контейнерами приведена ниже.
 
+Для неопубликованных AMD64/ARM64 кандидатов действует
+[решение о сохранении certifi](../verification/linux-amd64/certifi-advisory.md):
+произвольный HTTPS endpoint raw CLI не входит в принятую offline Docker-конфигурацию.
+Перед таким использованием требуется отдельная оценка CA policy и зависимостей.
+Это эксплуатационное ограничение, а не дополнительная проверка URL в CLI.
+
 ```bash
 .venv/bin/ru-llm-scanner snapshot \
   --repo /repo --commit HEAD --output /reports/initial \

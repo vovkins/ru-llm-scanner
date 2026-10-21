@@ -1,0 +1,93 @@
+{
+  "cases": [
+    {
+      "case": "unwritable-output",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "unreadable-input",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "public-output",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "installed-output-0o700",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "installed-output-0o755",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "installed-output-0o777",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "jenkins-clean",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "case": "jenkins-diff",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "case": "jenkins-findings",
+      "exit_code": 1,
+      "passed": true
+    },
+    {
+      "case": "jenkins-error",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "jenkins-untrusted-baseline",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "transfer-checksum-rejected",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "platform-id-rejected",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "case": "context-integrity-rejected",
+      "exit_code": 2,
+      "passed": true
+    }
+  ],
+  "gpu_tested": false,
+  "jenkins_controller_tested": false,
+  "package_checksums": {
+    "deployment.json": "11c8c41093bece57059f1da8128909d5cefc0e1d1427909690af7668fa90479a",
+    "engine/dictionary.json": "126805a93906873c7cd1fd7a3586c106a4c68d9329cfbe5169132d9bfc9a244e",
+    "engine/dictionary_policy.py": "9709364660baa4f5ac551b42fbbd411c6d2eaf8093ac1579ca8ea4a30696d099",
+    "engine/runtime-lock.json": "ef86c24babc829e216d3f00f96c3b1e2edbbd11acbecd0bca453f1ed4a412c18",
+    "engine/source-lock.json": "d8cdf389f29de502e97992501ae983577fe6e7dfa9bb29996f98b3eee5dd516b",
+    "images.tar": "a99a137d2942dc3fa495575f2833c363c5a4ab2f5d4fc0e3b600384eaf5a532c"
+  },
+  "sources_sha256": {
+    "examples/jenkins/Jenkinsfile": "17e83abc26be6624f7917dfc4f1f94eb8b616531857faea6c93394209c09248f",
+    "examples/jenkins/run_scan.py": "5823b797f7de4014bd8f6006c17aa77961b53d56ee8d280fb0324e4846d46159",
+    "scripts/build_scanner.py": "9c82e3dc441db7e5c9333834caa012313a6dd9553c7b48faaecab2a837f80497",
+    "scripts/check_deployment_extras.py": "7a45e350fba8791bfb3703e1cb88db9fc9e8fe69367043c954c928c2b81ff6f5",
+    "scripts/docker_scanner.py": "e57825a345e13b973ec750b7f462294b80a1fafdb93c4d3e4b467dcf716bc558"
+  },
+  "status": "passed",
+  "verification_version": 1
+}

@@ -4,6 +4,12 @@
 переключение на `main/latest`. [Архитектура](../architecture.md) и
 [ADR-0001](../decisions/0001-analyzer-boundary.md) задают границу механизма.
 
+Для CPU AMD64 и ARM64 источники детекторов/модель/словарь остаются общими;
+wheels/DEBs/base и runtime/deployment закрепляются отдельно. Выбирайте профиль
+по [общему CPU-маршруту сборки](build.md), затем проверяйте обе архитектуры нативно
+и сравнивайте решения. Нельзя переносить runtime lock или baseline между
+профилями: после смены fingerprint нужен новый полный clean snapshot.
+
 ## Подготовка обновления
 
 1. Выберите полный commit SHA прокси и изучите изменения правил, каталога,
@@ -17,7 +23,7 @@
    upstream fork. Несовместимый patch завершает подготовку ошибкой.
 4. Обновите полный artifact closure/hashes и inventory/notices. Выполните
    source `prepare`, offline context preparation, `verify-context`, `build` и `seal` по
-   [руководству](../analyzer.md). Старые lock/образы и отчёты сохраните для отката.
+   [руководству CPU-сборки](build.md). Старые lock/образы и отчёты сохраните для отката.
 
 Source lock v1 хранит map `sources: path → SHA-256`. Каждый patch record содержит
 хеш самого патча и `targets: path → {before, after}`. Build profile задаёт

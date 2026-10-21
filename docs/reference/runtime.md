@@ -26,6 +26,13 @@ python3 scripts/docker_scanner.py import --directory PACKAGE_DIR
 у установленного Python CLI: Docker engine находится внутри image, URL всегда
 `http://analyzer:5001`, даже если config задаёт другой адрес.
 
+В неопубликованных AMD64/ARM64 кандидатах версии certifi сохранены по
+[решению владельца](../../verification/linux-amd64/certifi-advisory.md).
+Принятая конфигурация ограничена штатным offline Docker-маршрутом с внутренним
+HTTP. Произвольный HTTPS endpoint установленного Python CLI требует отдельной
+оценки CA policy и зависимостей до использования; программного запрета HTTPS
+этим решением не добавлено.
+
 ## Бюджеты контейнеров
 
 | Аргумент launcher | Default | Ограничение |

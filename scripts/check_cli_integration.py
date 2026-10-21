@@ -6,6 +6,7 @@ import json
 import shutil
 import subprocess
 import sys
+from harness_permissions import readable_sources
 import tempfile
 import uuid
 from pathlib import Path
@@ -86,6 +87,7 @@ def main():
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(path, destination)
         results.mkdir()
+        readable_sources(workspace)
         results.chmod(0o777)
         name = "ru-llm-scanner-stage5-" + uuid.uuid4().hex[:10]
         started = False

@@ -18,6 +18,48 @@ spec.loader.exec_module(launcher)
 
 
 class DockerLauncherTests(unittest.TestCase):
+    def test_foreign_package_refused_before_mutating_image_store(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / "engine").mkdir()
+            for name in launcher.ASSETS:
+                (root / "engine" / name).write_text("synthetic asset")
+            (root / "images.tar").write_bytes(b"synthetic archive")
+            lock = {
+                "deployment_version": 1,
+                "platform": "linux/amd64",
+                "engine_runtime_sha256": "a" * 64,
+                **{
+                    component: {
+                        "image_reference_id": "sha256:" + "b" * 64,
+                        "image_id": "sha256:" + "c" * 64,
+                    }
+                    for component in ("scanner", "analyzer")
+                },
+            }
+            (root / "deployment.json").write_text(json.dumps(lock))
+            paths = [
+                "images.tar",
+                "deployment.json",
+                *("engine/" + n for n in launcher.ASSETS),
+            ]
+            (root / "checksums.json").write_text(
+                json.dumps({name: launcher.digest(root / name) for name in paths})
+            )
+            args = launcher.parser().parse_args(["import", "--directory", str(root)])
+            with (
+                patch.object(
+                    launcher,
+                    "verify_daemon_platform",
+                    side_effect=launcher.Failure("daemon_platform_mismatch"),
+                ),
+                patch.object(launcher, "docker") as docker,
+            ):
+                with self.assertRaises(launcher.Failure) as error:
+                    launcher.transfer(args)
+                self.assertEqual(error.exception.code, "daemon_platform_mismatch")
+                docker.assert_not_called()
+
     def test_metadata_regular_bounded_strict_json_and_final_symlink_policy(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
@@ -140,6 +182,8 @@ class DockerLauncherTests(unittest.TestCase):
             repo.mkdir()
             public = root / "public"
             public.mkdir(mode=0o755)
+            # Do not depend on the caller's umask (CI deliberately uses 077).
+            public.chmod(0o755)
             link = root / "link"
             link.symlink_to(public, target_is_directory=True)
             for target in (repo / "out", public, link):
@@ -167,8 +211,11 @@ class DockerLauncherTests(unittest.TestCase):
             path = Path(folder) / "lock.json"
             path.write_text(json.dumps(lock))
             self.assertEqual(launcher.load_lock(path, verify=False), lock)
-            with patch.object(
-                launcher, "image_identity", return_value="sha256:" + "6" * 64
+            with (
+                patch.object(
+                    launcher, "image_identity", return_value="sha256:" + "6" * 64
+                ),
+                patch.object(launcher, "verify_daemon_platform"),
             ):
                 with self.assertRaises(launcher.Failure):
                     launcher.load_lock(path)
@@ -178,6 +225,45 @@ class DockerLauncherTests(unittest.TestCase):
                 path.write_text(json.dumps(bad))
                 with self.assertRaises(launcher.Failure):
                     launcher.load_lock(path, verify=False)
+
+    def test_foreign_daemon_fails_before_image_lookups_and_invalid_version_before_docker(
+        self,
+    ):
+        lock = {
+            "deployment_version": 1,
+            "platform": "linux/amd64",
+            "scanner": {
+                "image_reference_id": "sha256:" + "1" * 64,
+                "image_id": "sha256:" + "2" * 64,
+            },
+            "analyzer": {
+                "image_reference_id": "sha256:" + "3" * 64,
+                "image_id": "sha256:" + "4" * 64,
+            },
+            "engine_runtime_sha256": "5" * 64,
+        }
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "lock.json"
+            path.write_text(json.dumps(lock))
+            with (
+                patch.object(
+                    launcher,
+                    "verify_daemon_platform",
+                    side_effect=launcher.Failure("daemon_platform_mismatch"),
+                ) as daemon,
+                patch.object(launcher, "image_identity") as identity,
+            ):
+                with self.assertRaises(launcher.Failure) as error:
+                    launcher.load_lock(path)
+                self.assertEqual(error.exception.code, "daemon_platform_mismatch")
+                identity.assert_not_called()
+                daemon.reset_mock()
+                lock["deployment_version"] = True
+                path.write_text(json.dumps(lock))
+                with self.assertRaises(launcher.Failure) as error:
+                    launcher.load_lock(path)
+                self.assertEqual(error.exception.code, "invalid_deployment")
+                daemon.assert_not_called()
 
     def test_error_diagnostics_do_not_echo_bad_arguments(self):
         import contextlib

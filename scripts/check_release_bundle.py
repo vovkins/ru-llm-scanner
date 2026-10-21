@@ -16,6 +16,7 @@ import stat
 import subprocess
 import sys
 import tempfile
+import time
 
 VERSION = "0.1.0"
 
@@ -51,7 +52,7 @@ def verify_files(directory, checkout=None):
     require(
         manifest["manifest_version"] == 1
         and manifest["version"] == VERSION
-        and manifest["platform"] == "linux/arm64"
+        and manifest["platform"] in {"linux/arm64", "linux/amd64"}
         and re.fullmatch(r"[a-f0-9]{40}", manifest["source_revision"]),
         "Unexpected release identity",
     )
@@ -115,7 +116,7 @@ def installed_control(directory, *, import_images=False):
             "--pull",
             "never",
             "--platform",
-            "linux/arm64",
+            manifest["platform"],
             "--network",
             "none",
             "--read-only",
@@ -179,10 +180,12 @@ def installed_control(directory, *, import_images=False):
 
         def scan(label, args, expected, assurance):
             output_dir = temp / label
+            started = time.monotonic()
             summary = invoke(
                 args + lock + ["--repo", str(repo), "--output", str(output_dir)],
                 expected,
             )
+            elapsed = round(time.monotonic() - started, 3)
             require(summary["error"] is None, "Launcher runtime error")
             report = json.loads((output_dir / "report.json").read_text())
             require(report["result"]["exit_code"] == expected, "Incorrect report code")
@@ -219,6 +222,7 @@ def installed_control(directory, *, import_images=False):
                     "assurance": assurance,
                     "findings": len(report["findings"]),
                     "private_output": True,
+                    "elapsed_seconds": elapsed,
                 }
             )
             return output_dir, report
@@ -227,6 +231,10 @@ def installed_control(directory, *, import_images=False):
             "snapshot", ["snapshot", "--commit", a], 0, "snapshot_verified"
         )
         require(not clean["findings"], "Synthetic clean input flagged")
+        _, repeated = scan(
+            "repeat-snapshot", ["snapshot", "--commit", a], 0, "snapshot_verified"
+        )
+        require(not repeated["findings"], "Repeated clean input flagged")
         diff_dir, diff = scan(
             "strict-diff",
             [
@@ -292,12 +300,13 @@ def installed_control(directory, *, import_images=False):
     return {
         "status": "passed",
         "version": VERSION,
-        "platform": "linux/arm64",
+        "platform": manifest["platform"],
         "verify_exit_code": 0,
         "steps": steps,
         "input_unchanged": True,
         "reports_published": False,
         "imported_images": import_images,
+        "timing_scope": "First/repeated scan after image import; fresh containers each time, OS page cache not flushed. Not a hardware cold-boot benchmark.",
     }
 
 

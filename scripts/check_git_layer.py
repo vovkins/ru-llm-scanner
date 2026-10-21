@@ -10,6 +10,7 @@ import re
 import shutil
 import subprocess
 import sys
+from harness_permissions import readable_sources
 import tempfile
 import unittest
 from pathlib import Path
@@ -31,6 +32,7 @@ SOURCES = (
     "tests/git_fixtures.py",
     *("tests/" + name + ".py" for name in MODULES),
     "scripts/check_git_layer.py",
+    "scripts/harness_permissions.py",
     "docker/git-test.Dockerfile",
 )
 
@@ -77,6 +79,7 @@ def docker_tests(image, target_platform, output):
             shutil.copyfile(ROOT / name, destination)
         results = temporary / "results"
         results.mkdir(mode=0o777)
+        readable_sources(workspace)
         results.chmod(0o777)
         run = subprocess.run(
             [

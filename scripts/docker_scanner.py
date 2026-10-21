@@ -115,26 +115,38 @@ def image_identity(reference, platform):
 def load_lock(path, *, verify=True):
     lock = strict_json(path)
     try:
-        if lock["deployment_version"] != 1 or lock["platform"] not in (
-            "linux/arm64",
-            "linux/amd64",
+        if (
+            type(lock["deployment_version"]) is not int
+            or lock["deployment_version"] != 1
+            or lock["platform"] not in ("linux/arm64", "linux/amd64")
         ):
             raise ValueError()
         for name in ("scanner", "analyzer"):
             for key in ("image_reference_id", "image_id"):
                 if not DIGEST.fullmatch(lock[name][key]):
                     raise ValueError()
-            if verify:
-                if not (
-                    image_identity(lock[name]["image_reference_id"], lock["platform"])
-                    == lock[name]["image_id"]
-                ):
-                    raise ValueError()
         if not re.fullmatch(r"[0-9a-f]{64}", lock["engine_runtime_sha256"]):
             raise ValueError()
     except (ValueError, KeyError, TypeError):
         raise Failure("invalid_deployment") from None
+    if verify:
+        verify_daemon_platform(lock["platform"])
+        for name in ("scanner", "analyzer"):
+            if (
+                image_identity(lock[name]["image_reference_id"], lock["platform"])
+                != lock[name]["image_id"]
+            ):
+                raise Failure("invalid_deployment")
     return lock
+
+
+def verify_daemon_platform(platform):
+    """Runtime support is native; do not silently run a foreign image via QEMU."""
+    value = docker("info", "--format", "{{.OSType}}/{{.Architecture}}")
+    actual = value.stdout.decode().strip()
+    aliases = {"linux/aarch64": "linux/arm64", "linux/x86_64": "linux/amd64"}
+    if aliases.get(actual, actual) != platform:
+        raise Failure("daemon_platform_mismatch")
 
 
 def absolute(path, *, directory=False):
@@ -474,6 +486,7 @@ def transfer(args):
                 raise Failure("transfer_checksum_mismatch")
         lock_path = args.directory / "deployment.json"
         lock = load_lock(lock_path, verify=False)
+        verify_daemon_platform(lock["platform"])
         for name in ASSETS:
             if (
                 checks["engine/" + name]

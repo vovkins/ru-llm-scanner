@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "older_candidate_source_revision": "09a2d3f34d9a1de4ee74a5840a878e602f1232a6",
+  "current_checkout": "eb81e385fd96e9df0308e1f0fa48892865116690",
+  "guard": "material inputs differ",
+  "rejected_before_output_creation": true,
+  "docker_images_loaded_or_modified": false,
+  "source_run": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39509568334"
+}

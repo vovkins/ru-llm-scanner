@@ -594,7 +594,14 @@ def validate_runtime_lock(value, source_lock: Path):
         raise ArtifactError("Malformed runtime lock") from None
 
 
-def build(context: Path, tag: str, extra_args: list[str], *, test_image: bool = False):
+def build(
+    context: Path,
+    tag: str,
+    extra_args: list[str],
+    *,
+    test_image: bool = False,
+    no_cache: bool = False,
+):
     manifest, _ = verify_context(context)
     profile = manifest["profile"]
     require(bool(re.fullmatch(r"[a-z0-9][a-z0-9._:/-]+", tag)), "Invalid image tag")
@@ -637,6 +644,7 @@ def build(context: Path, tag: str, extra_args: list[str], *, test_image: bool = 
         offline_args = ["--network", "none", "--pull=false"]
     docker(
         "build",
+        *(["--no-cache"] if no_cache else []),
         *offline_args,
         "--platform",
         profile["platform"],
@@ -815,6 +823,7 @@ def main():
     p.add_argument("--context", type=Path, required=True)
     p.add_argument("--tag", required=True)
     p.add_argument("--build-arg", action="append", default=[])
+    p.add_argument("--no-cache", action="store_true")
     p.add_argument(
         "--test-image",
         action="store_true",
@@ -838,7 +847,13 @@ def main():
         elif args.command == "verify-context":
             verify_context(args.context)
         elif args.command == "build":
-            build(args.context, args.tag, args.build_arg, test_image=args.test_image)
+            build(
+                args.context,
+                args.tag,
+                args.build_arg,
+                test_image=args.test_image,
+                no_cache=args.no_cache,
+            )
         else:
             seal(args.context, args.image, args.output)
     except (ArtifactError, OSError, KeyError, TypeError) as exc:

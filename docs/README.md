@@ -26,6 +26,7 @@ proxy, venv или build context.
 - [Эксплуатация, диагностика и cleanup](admin/operations.md).
 - [Обновление и откат механизма](admin/updating-analyzer.md).
 - [Jenkins: trusted pipeline и приватные artifacts](admin/jenkins.md).
+- [Linux AMD64: профиль сервера и статус нативной приёмки](admin/linux-amd64.md).
 
 ## Справочник
 

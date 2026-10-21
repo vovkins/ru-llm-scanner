@@ -8,6 +8,8 @@ import sys
 import tempfile
 import time
 import unittest
+from unittest.mock import patch
+from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location(
@@ -18,6 +20,81 @@ spec.loader.exec_module(jenkins)
 
 
 class JenkinsExampleTests(unittest.TestCase):
+    def test_harness_waits_for_post_archive_after_early_success(self):
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from check_jenkins_integration import JenkinsFixture
+
+        with tempfile.TemporaryDirectory() as folder:
+            fixture = JenkinsFixture(SimpleNamespace(output_dir=Path(folder)))
+            states = iter(
+                [
+                    {"result": "SUCCESS", "building": True, "duration": 0},
+                    {"result": "SUCCESS", "building": False, "duration": 137},
+                ]
+            )
+            observed = []
+
+            def build_state(_):
+                value = next(states)
+                observed.append(value)
+                return value
+
+            def artifact(_, name, **kwargs):
+                self.assertFalse(observed[-1]["building"])
+                return (
+                    b'{"exit_code":0}' if name == "scan-status.json" else b"synthetic"
+                )
+
+            with (
+                patch.object(fixture, "json", side_effect=build_state),
+                patch.object(fixture, "request", return_value=(b"safe console", {})),
+                patch.object(fixture, "artifact", side_effect=artifact),
+                patch("check_jenkins_integration.time.sleep"),
+            ):
+                fixture.result("/synthetic/", "synthetic-race", "SUCCESS", code=0)
+            self.assertEqual(len(observed), 2)
+            self.assertEqual(fixture.records[0]["duration_ms"], 137)
+
+    def test_deployment_is_selected_from_trusted_agent_configuration(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder).resolve()
+            (root / "repo").mkdir()
+            deployment = root / "amd64 deployment.json"
+            deployment.write_text("{}")
+            env = {
+                "SCANNER_HOME": str(ROOT),
+                "SCAN_MODE": "snapshot",
+                "SCANNER_REPOSITORIES": str(root),
+                "REPOSITORY_NAME": "repo",
+                "REF_B": "HEAD",
+                "SCANNER_DEPLOYMENT_LOCK": str(deployment),
+            }
+            command = jenkins.command(env, root / "out")
+            self.assertEqual(
+                command[command.index("--deployment-lock") + 1], str(deployment)
+            )
+            env["SCANNER_ANALYZER_CPUS"] = "4"
+            command = jenkins.command(env, root / "out")
+            self.assertEqual(command[command.index("--analyzer-cpus") + 1], "4.0")
+            for invalid in ("0", "-1", "NaN", "inf", "65", "$(touch NEVER)"):
+                env["SCANNER_ANALYZER_CPUS"] = invalid
+                with self.assertRaises(ValueError):
+                    jenkins.command(env, root / "out")
+            del env["SCANNER_ANALYZER_CPUS"]
+            link = root / "link.json"
+            link.symlink_to(deployment)
+            for value in (
+                "",
+                "relative.json",
+                "https://example.invalid/lock",
+                str(link),
+                str(root),
+            ):
+                with self.subTest(value=value):
+                    env["SCANNER_DEPLOYMENT_LOCK"] = value
+                    with self.assertRaises(ValueError):
+                        jenkins.command(env, root / "out")
+
     def test_trusted_roots_and_literal_refs_without_shell(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder).resolve()

@@ -24,8 +24,6 @@ from docker_scanner import (
     write_private,
 )
 
-BASE = "python@sha256:e88e9763f943ec1834f992a4b51e0f24500486803e8bc534e5767af9ea65f6ce"
-PLATFORM = "linux/arm64"
 GIT = "1:2.47.3-0+deb13u1"
 ASSETS = (
     "source-lock.json",
@@ -65,9 +63,23 @@ def prepare(args):
     )
     if args.pip_config or args.apt_config:
         raise Failure("locked_artifacts_use_cache_or_explicit_download")
-    profile = read_json(ROOT / "upstream.lock.json")["build_profiles"][
-        "cpu-linux-arm64"
-    ]
+    runtime = read_json(args.engine_dir / "runtime-lock.json")
+    source = read_json(args.engine_dir / "source-lock.json")
+    profile_key = args.profile or runtime["profile_key"]
+    require(
+        profile_key in {"cpu-linux-arm64", "cpu-linux-amd64"}
+        and profile_key == runtime["profile_key"],
+        "Scanner profile differs from Analyzer engine",
+    )
+    profile = read_json(ROOT / "upstream.lock.json")["build_profiles"][profile_key]
+    require(
+        profile == source["build_profiles"][profile_key],
+        "Engine build profile mismatch",
+    )
+    base, platform = profile["base_image"], profile["platform"]
+    requirements = ROOT / (
+        "locks/requirements-scanner-" + platform.replace("/", "-") + ".txt"
+    )
     artifact_path = ROOT / profile["offline_artifacts_path"]
     require(
         digest(artifact_path) == profile["offline_artifacts_sha256"],
@@ -75,19 +87,17 @@ def prepare(args):
     )
     artifacts = load_artifacts(artifact_path)
     require(
-        artifacts["base"] == BASE and artifacts["platform"] == PLATFORM,
+        artifacts["base"] == base and artifacts["platform"] == platform,
         "Artifact base/platform mismatch",
     )
-    validate_closure(
-        artifacts, "scanner", ROOT / "locks/requirements-scanner-linux-arm64.txt"
-    )
+    validate_closure(artifacts, "scanner", requirements)
     context = args.context.resolve()
     context.mkdir(mode=0o700, parents=False, exist_ok=False)
     for folder in ("wheels", "debs", "engine"):
         (context / folder).mkdir()
     for name in ASSETS:
         shutil.copyfile(args.engine_dir / name, context / "engine" / name)
-    shutil.copyfile(ROOT / "docker/scanner.Dockerfile", context / "Dockerfile")
+    (context / "Dockerfile").write_text(scanner_recipe(base))
     shutil.copyfile(ROOT / "docker/probe_runtime.py", context / "probe_runtime.py")
     notices = context / "distribution-licenses"
     notices.mkdir()
@@ -107,13 +117,12 @@ def prepare(args):
     shutil.copyfile(artifact_path, context / "artifacts.lock.json")
     inventory = {
         "inventory_version": 1,
-        "base": BASE,
-        "platform": PLATFORM,
+        "base": base,
+        "platform": platform,
+        "profile_key": profile_key,
         "git": GIT,
         "wheel_sha256": digest(args.wheel),
-        "requirements_sha256": digest(
-            ROOT / "locks/requirements-scanner-linux-arm64.txt"
-        ),
+        "requirements_sha256": digest(requirements),
         "offline_artifacts_sha256": digest(artifact_path),
         "files": {
             str(p.relative_to(context)): digest(p)
@@ -123,6 +132,13 @@ def prepare(args):
     }
     write_private(context / "inventory.json", inventory)
     return inventory
+
+
+def scanner_recipe(base):
+    recipe = (ROOT / "docker/scanner.Dockerfile").read_text()
+    if recipe.count("__BASE__") != 1:
+        raise Failure("context_integrity_error")
+    return recipe.replace("__BASE__", base)
 
 
 def verify_context(context):
@@ -135,13 +151,26 @@ def verify_context(context):
     }
     if actual != expected or any(p.is_symlink() for p in context.rglob("*")):
         raise Failure("context_integrity_error")
+    source = strict_json(context / "engine/source-lock.json")
+    runtime = strict_json(context / "engine/runtime-lock.json")
+    key = inventory["profile_key"]
+    profiles = strict_json(ROOT / "upstream.lock.json")["build_profiles"]
+    if key not in {"cpu-linux-arm64", "cpu-linux-amd64"} or key not in profiles:
+        raise Failure("context_integrity_error")
+    profile = profiles[key]
     if (
-        inventory["base"] != BASE
-        or inventory["platform"] != PLATFORM
+        source["build_profiles"].get(key) != profile
+        or runtime["profile_key"] != key
+        or runtime["platform"] != profile["platform"]
+        or inventory["base"] != profile["base_image"]
+        or inventory["platform"] != profile["platform"]
         or inventory["git"] != GIT
+        or inventory["offline_artifacts_sha256"] != profile["offline_artifacts_sha256"]
+        or digest(context / "artifacts.lock.json")
+        != profile["offline_artifacts_sha256"]
     ):
         raise Failure("context_integrity_error")
-    if digest(context / "Dockerfile") != digest(ROOT / "docker/scanner.Dockerfile"):
+    if (context / "Dockerfile").read_text() != scanner_recipe(profile["base_image"]):
         raise Failure("context_integrity_error")
     if digest(context / "probe_runtime.py") != digest(ROOT / "docker/probe_runtime.py"):
         raise Failure("context_integrity_error")
@@ -149,17 +178,27 @@ def verify_context(context):
 
 
 def build(args):
+    def execute(*command, **kwargs):
+        result = docker(*command, check=False, **kwargs)
+        if result.returncode:
+            if getattr(args, "diagnostics", False):
+                sys.stderr.buffer.write(result.stdout + result.stderr)
+            raise Failure("scanner_build_command_failed")
+        return result
+
     inventory = verify_context(args.context)
+    base_image, platform = inventory["base"], inventory["platform"]
     # Fail before BuildKit if the exact base is absent in the local store.
     # --network none controls RUN, not registry resolution of FROM.
-    image_identity(BASE, PLATFORM)
-    docker(
+    image_identity(base_image, platform)
+    execute(
         "build",
+        *(["--no-cache"] if getattr(args, "no_cache", False) else []),
         "--pull=false",
         "--network",
         "none",
         "--platform",
-        PLATFORM,
+        platform,
         "--provenance=false",
         "-t",
         args.tag,
@@ -167,9 +206,9 @@ def build(args):
         timeout=1800,
     )
     reference = json.loads(docker("image", "inspect", args.tag).stdout)[0]["Id"]
-    identity = image_identity(reference, PLATFORM)
+    identity = image_identity(reference, platform)
     runtime = strict_json(args.context / "engine/runtime-lock.json")
-    if image_identity(runtime["image_reference_id"], PLATFORM) != runtime["image_id"]:
+    if image_identity(runtime["image_reference_id"], platform) != runtime["image_id"]:
         raise Failure("analyzer_identity_mismatch")
     # Console/schema/engine validation execute from the installed image offline.
     base = [
@@ -178,7 +217,7 @@ def build(args):
         "--pull",
         "never",
         "--platform",
-        PLATFORM,
+        platform,
         "--network",
         "none",
         "--read-only",
@@ -188,9 +227,9 @@ def build(args):
         "no-new-privileges",
         reference,
     ]
-    docker(*base, "--help")
-    docker(*base, "--version")
-    docker(
+    execute(*base, "--help")
+    execute(*base, "--version")
+    execute(
         *base[:-1],
         "--entrypoint",
         "python",
@@ -205,7 +244,7 @@ def build(args):
     )
     lock = {
         "deployment_version": 1,
-        "platform": PLATFORM,
+        "platform": platform,
         "scanner": {"image_reference_id": reference, "image_id": identity},
         "analyzer": {k: runtime[k] for k in ("image_reference_id", "image_id")},
         "engine_runtime_sha256": digest(args.context / "engine/runtime-lock.json"),
@@ -217,18 +256,25 @@ def build(args):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument(
+        "--diagnostics",
+        action="store_true",
+        help="Print trusted build diagnostics to stderr",
+    )
     sub = p.add_subparsers(dest="operation", required=True)
     prep = sub.add_parser("prepare")
     prep.add_argument("--context", type=Path, required=True)
     prep.add_argument("--engine-dir", type=Path, required=True)
     prep.add_argument("--wheel", type=Path, required=True)
     prep.add_argument("--artifact-cache", type=Path, required=True)
+    prep.add_argument("--profile", choices=("cpu-linux-arm64", "cpu-linux-amd64"))
     prep.add_argument("--download-artifacts", action="store_true")
     for name in ("pip-config", "apt-config", "ca"):
         prep.add_argument("--" + name, type=Path)
     b = sub.add_parser("build")
     b.add_argument("--context", type=Path, required=True)
     b.add_argument("--tag", required=True)
+    b.add_argument("--no-cache", action="store_true")
     b.add_argument("--deployment-lock", type=Path, required=True)
     args = p.parse_args()
     try:
@@ -236,6 +282,10 @@ def main():
         print(json.dumps({"exit_code": 0, "operation": args.operation}))
         return 0
     except (Exception, KeyboardInterrupt):
+        if args.diagnostics:
+            import traceback
+
+            traceback.print_exc()
         print('{"exit_code":2,"error":"scanner_preparation_failed"}')
         return 2
 
