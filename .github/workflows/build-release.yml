@@ -1,0 +1,244 @@
+name: Build and test frozen CPU release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        default: '0.2.0'
+        required: true
+      source_revision:
+        description: Exact reviewed main commit to build
+        type: string
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: build-release-${{ inputs.version }}
+  cancel-in-progress: false
+jobs:
+  native:
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.11'
+      - uses: docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4
+        with:
+          version: v29.6.1
+          set-host: true
+          daemon-config: '{"features":{"containerd-snapshotter":true}}'
+      - name: Validate reviewed release identity
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+          RELEASE_SOURCE: ${{ inputs.source_revision }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PYCODE'
+          import os, subprocess, sys
+          from pathlib import Path
+          sys.path.insert(0,'scripts')
+          from release_common import project_version
+          from publish_release import release_state
+          assert os.environ['RELEASE_VERSION']==project_version(Path.cwd())=='0.2.0'
+          revision=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          assert revision==os.environ['RELEASE_SOURCE']==os.environ['GITHUB_SHA']
+          state=release_state(os.environ['RELEASE_VERSION'])
+          assert state['draft'] and state['target_commitish']==revision
+          epoch=subprocess.check_output(['git','log','-1','--format=%ct'],text=True).strip()
+          with open(os.environ['GITHUB_ENV'],'a') as stream: stream.write('SOURCE_DATE_EPOCH='+epoch+'\n')
+          PYCODE
+      - name: Prepare development tools and record host
+        run: |
+          umask 077
+          mkdir -p .build/evidence
+          python -m pip install pip==26.2.1 setuptools==84.1.0 wheel==0.48.0
+          python -m pip install -e . -r requirements-dev.txt -c locks/requirements-scanner-linux-${{ matrix.arch }}.txt
+          python scripts/prepare_unit_assets.py --fetch
+          if ! python -m unittest discover -s tests > .build/unit-tests.log 2>&1; then
+            cat .build/unit-tests.log
+            exit 1
+          fi
+          if rg -q 'skipped=' .build/unit-tests.log; then
+            echo 'Critical unit groups were skipped'
+            exit 1
+          fi
+          lscpu -J > .build/evidence/cpu.json
+          python - <<'PY'
+          import json, os, platform, sys
+          from pathlib import Path
+          memory = dict(line.split(':', 1) for line in Path('/proc/meminfo').read_text().splitlines())
+          Path('.build/evidence/environment.json').write_text(json.dumps({
+              'system': platform.platform(), 'machine': platform.machine(),
+              'host_python': sys.version, 'logical_cpus': os.cpu_count(),
+              'host_memory_total_kib': int(memory['MemTotal'].split()[0]),
+              'os_release': platform.freedesktop_os_release(),
+          }, indent=2)+'\n')
+          PY
+          docker info --format '{{json .}}' > .build/docker-info-private.json
+          docker version > .build/evidence/docker-version.txt
+          docker compose version > .build/evidence/compose-version.txt
+          df -h > .build/evidence/disk-before.txt
+      - name: Build from pinned inputs with builder HTTPS blocked
+        id: build
+        run: |
+          python scripts/check_cpu_candidate.py build --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache --download --offline-firewall
+      - name: Freeze candidate and import into an empty Docker store
+        id: fresh
+        if: always() && steps.build.outcome == 'success'
+        run: |
+          python scripts/assemble_cpu_bundle.py --candidate .build/native --output .build/candidate-bundle
+          python scripts/check_fresh_install.py --bundle .build/candidate-bundle --output-dir .build/native/fresh-install
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.build.outcome == 'success'
+        with:
+          name: native-${{ matrix.arch }}-fresh-install
+          path: |
+            .build/native/fresh-install/fresh-install.json
+            .build/native/fresh-install/installed-control.json
+          retention-days: 3
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exercise real isolated Jenkins on native AMD64
+        if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
+        run: python scripts/check_jenkins_integration.py --deployment-lock .build/native/deployment.json --output-dir .build/jenkins
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
+        with:
+          name: native-amd64-jenkins
+          path: .build/jenkins/jenkins-verification.json
+          retention-days: 3
+      - name: Run native integration gates
+        id: integration
+        if: always() && steps.build.outcome == 'success'
+        run: |
+          python scripts/check_cpu_candidate.py integration --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.build.outcome == 'success'
+        with:
+          name: native-${{ matrix.arch }}-integration
+          path: |
+            .build/native/steps.json
+            .build/native/upstream-core.json
+            .build/native/upstream-ner.json
+            .build/native/parity/offline-verification.json
+            .build/native/scan-integration/scan-verification.json
+            .build/native/cli-integration/cli-verification.json
+            .build/native/acceptance/acceptance-verification.json
+            .build/native/docker-integration/docker-verification.json
+            .build/native/runtime-faults/fault-verification.json
+            .build/native/deployment-extras/extras-verification.json
+            .build/native/linux-git.json
+          retention-days: 3
+      - name: Repeat cache-only preparation and uncached offline builds
+        if: always() && steps.build.outcome == 'success'
+        run: python scripts/check_cpu_candidate.py repeat --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache --offline-firewall
+      - name: Collect native synthetic predictions without raw values
+        if: always() && steps.build.outcome == 'success'
+        run: python scripts/collect_platform_predictions.py --context .build/native/analyzer --runtime-lock .build/native/analyzer.runtime.lock.json --output-dir .build/native/predictions
+      - name: Measure native libraries and corresponding source closure
+        if: always() && steps.build.outcome == 'success'
+        run: python scripts/capture_native_inventory.py --deployment-lock .build/native/deployment.json --output-dir .build/native/native-inventory
+      - name: Measure bounded synthetic capacity
+        if: always() && steps.build.outcome == 'success'
+        run: python verification/operations-ner-windowing/probe.py --deployment-lock .build/native/deployment.json --output-dir .build/native/capacity
+      - name: Scan pinned public Requests offline
+        if: always() && steps.build.outcome == 'success' && steps.integration.outcome == 'success' && steps.fresh.outcome == 'success'
+        run: python scripts/check_public_repository.py --deployment-lock .build/native/deployment.json --output-dir .build/native/public-requests --fetch
+      - name: Collect current advisory data for disposition
+        if: success()
+        run: python scripts/check_dependency_advisories.py --deployment-lock .build/native/deployment.json --output-dir .build/native/advisories
+      - name: Collect safe evidence
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, shutil
+          from pathlib import Path
+          root=Path('.build/evidence'); root.mkdir(parents=True, exist_ok=True)
+          allowed=('build-summary.json','repeat-summary.json','steps.json','upstream-core.json','upstream-ner.json','linux-git.json','parity/offline-verification.json','scan-integration/scan-verification.json','cli-integration/cli-verification.json','acceptance/acceptance-verification.json','docker-integration/docker-verification.json','runtime-faults/fault-verification.json','deployment-extras/extras-verification.json','predictions/platform-predictions.json','public-requests/public-repository.json','native-inventory/native-inventory.json','fresh-install/fresh-install.json','advisories/osv-summary.json','advisories/debian-summary.json','advisories/fetches.json')
+          for name in allowed:
+              path=Path('.build/native')/name
+              if path.is_file():
+                  json.loads(path.read_text())
+                  shutil.copyfile(path,root/name.replace('/','-'))
+          capacity=Path('.build/native/capacity')
+          summaries=sorted(capacity.glob('probe-summary-*.json'), key=lambda path: int(path.stem.rsplit('-',1)[1]))
+          if summaries:
+              json.loads(summaries[-1].read_text())
+              shutil.copyfile(summaries[-1],root/'capacity-verification.json')
+          log=Path('.build/unit-tests.log')
+          if log.exists():
+              import re
+              text=log.read_text()
+              count=re.findall(r'Ran (\d+) tests',text)
+              (root/'unit-summary.json').write_text(json.dumps({'tests':int(count[-1]) if count else None,'passed':bool(re.search(r'^OK$',text,re.M)),'raw_log_uploaded':False})+'\n')
+          jenkins=Path('.build/jenkins/jenkins-verification.json')
+          if jenkins.exists(): shutil.copyfile(jenkins,root/'jenkins-verification.json')
+          PY
+      - name: Persist tested frozen archive in draft release
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/prepare_release_assets.py --bundle .build/candidate-bundle --candidate .build/native --evidence .build/evidence --output .build/release-assets
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: cpu-${{ matrix.arch }}-evidence
+          path: .build/evidence/
+          retention-days: 14
+          if-no-files-found: error
+  compare:
+    needs: native
+    if: always() && needs.native.result != 'skipped'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: cpu-*-evidence
+          path: .build/evidence
+      - name: Compare independently collected native predictions
+        run: |
+          python3 scripts/compare_platform_predictions.py --arm64 .build/evidence/cpu-arm64-evidence/predictions-platform-predictions.json --amd64 .build/evidence/cpu-amd64-evidence/predictions-platform-predictions.json --output .build/cross-platform.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          a,b=[json.loads(Path('.build/evidence/cpu-'+arch+'-evidence/public-requests-public-repository.json').read_text()) for arch in ('arm64','amd64')]
+          assert a['status']==b['status']=='passed' and a['exit_code']==b['exit_code']==1
+          assert a['source']==b['source'] and a['coverage']==b['coverage']
+          assert a['effective_configuration_sha256']==b['effective_configuration_sha256']
+          assert a['finding_fingerprints_without_score']==b['finding_fingerprints_without_score'], 'Requests detection drift requires review'
+          delta=max((abs(a['finding_scores'][key]-b['finding_scores'][key]) for key in a['finding_scores']),default=0)
+          assert delta<=1e-5, 'Requests confidence drift exceeds declared tolerance'
+          Path('.build/public-cross-platform.json').write_text(json.dumps({'status':'passed','source':a['source'],'coverage':a['coverage'],'findings':a['findings'],'maximum_score_absolute_delta':delta,'score_absolute_tolerance':1e-5,'raw_values_published':False})+'\n')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: cross-platform-evidence
+          path: |
+            .build/cross-platform.json
+            .build/public-cross-platform.json
+          include-hidden-files: true
+          retention-days: 14

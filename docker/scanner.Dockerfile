@@ -1,7 +1,7 @@
 # Inputs are prepared and hash-checked by scripts/build_scanner.py.
 FROM __BASE__
 LABEL org.opencontainers.image.source="https://github.com/vovkins/ru-llm-scanner" \
-      org.opencontainers.image.version="0.1.0" \
+      org.opencontainers.image.version="0.2.0" \
       org.opencontainers.image.description="Local sensitive-data scanner for Git repositories"
 COPY --chmod=u=rwX,go=rX debs/ /tmp/debs/
 RUN dpkg -i /tmp/debs/*.deb && rm -rf /tmp/debs

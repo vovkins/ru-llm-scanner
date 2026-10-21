@@ -36,19 +36,21 @@ Docker/Compose и non-root доступ к daemon; venv/исходный proxy �
 Сам по себе checkout scanner без подготовки images к запуску не готов.
 [Полные предусловия и последовательность](docs/user/README.md).
 
-Готовый комплект **v0.1.0 для Linux ARM64** распространяется через
-[GitHub Releases](https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.1.0).
-Два публичных образа размещаются в GitHub Container Registry:
-`ghcr.io/vovkins/ru-llm-scanner:0.1.0` и
-`ghcr.io/vovkins/ru-llm-scanner-analyzer:0.1.0`.
-[Получение релиза, проверка и офлайн-установка](docs/admin/releases.md).
+Версия **v0.2.0** предусматривает отдельные offline-комплекты для **Linux AMD64
+и ARM64**. Выбирайте архив по архитектуре Docker server:
+[GitHub Releases](https://github.com/vovkins/ru-llm-scanner/releases),
+[получение, проверка и offline-установка](docs/admin/releases.md).
+Два публичных GHCR packages — `ghcr.io/vovkins/ru-llm-scanner` и
+`ghcr.io/vovkins/ru-llm-scanner-analyzer`; общий тег `0.2.0` объединяет обе
+архитектуры, платформенные теги — `0.2.0-amd64` и `0.2.0-arm64`.
+Доступность конкретного выпуска проверяйте в GitHub Releases.
 
-Поддержка **Linux AMD64** включена в `main` через
-[PR #35](https://github.com/vovkins/ru-llm-scanner/pull/35): отдельный закреплённый
-профиль сборки и пример настоящего Jenkins pipeline. Новая поставка пока не опубликована:
-[серверная инструкция](docs/admin/linux-amd64.md),
-[прогресс нативной приёмки](verification/linux-amd64/README.md).
-Теги GHCR `:0.1.0` остаются ARM64; AMD64-образов под этими тегами нет.
+[Серверная инструкция и ресурсы](docs/admin/linux-amd64.md),
+[протоколы нативной приёмки](verification/linux-amd64/README.md),
+[подготовка и результаты v0.2.0](verification/release-v0.2.0/README.md).
+Прежний **v0.1.0** и GHCR `:0.1.0` сохраняют исходные ARM64 images и hashes;
+[архивная инструкция](docs/admin/releases-v0.1.0.md). Слияние исходников или pull
+не заменяют установленный комплект и его deployment.
 
 ## Возможности
 
@@ -95,7 +97,8 @@ Staged/untracked/незакоммиченные изменения не вход
 Опубликованный **v0.1.0** содержит CPU Linux ARM64. Поддержка AMD64 включена
 в `main`: полный нативный прогон [#33](https://github.com/vovkins/ru-llm-scanner/issues/33)
 успешен на обеих архитектурах, [слияние и контроль main](verification/linux-amd64/main-integration/README.md)
-проверены отдельно. Новые образы и релиз не опубликованы.
+проверены отдельно. Конкретные versioned images получают отдельную
+[приёмку выпуска](verification/release-v0.2.0/README.md).
 
 | Комплект | Проверенная платформа | Состояние |
 | --- | --- | --- |

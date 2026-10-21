@@ -1,0 +1,58 @@
+name: Verify public CPU release assets
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        default: '0.2.0'
+        required: true
+      source_revision:
+        type: string
+        required: true
+      amd64_sha256:
+        description: SHA-256 of the tested frozen AMD64 archive
+        type: string
+        required: true
+      arm64_sha256:
+        description: SHA-256 of the tested frozen ARM64 archive
+        type: string
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: verify-public-release-${{ inputs.version }}
+  cancel-in-progress: false
+jobs:
+  anonymous:
+    if: github.ref == 'refs/heads/main'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4
+        with:
+          version: v29.6.1
+          set-host: true
+          daemon-config: '{"features":{"containerd-snapshotter":true}}'
+      - name: Anonymous native pull and installed control
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+          RELEASE_SOURCE: ${{ inputs.source_revision }}
+          RELEASE_ARCH: ${{ matrix.arch }}
+          BUNDLE_SHA256: ${{ matrix.arch == 'amd64' && inputs.amd64_sha256 || inputs.arm64_sha256 }}
+        run: python3 scripts/check_published_release.py --version "$RELEASE_VERSION" --source-revision "$RELEASE_SOURCE" --arch "$RELEASE_ARCH" --bundle-sha256 "$BUNDLE_SHA256" --public-assets --output .build/public-control.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: public-release-${{ matrix.arch }}
+          path: .build/public-control.json
+          retention-days: 14

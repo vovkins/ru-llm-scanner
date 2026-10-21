@@ -1,20 +1,39 @@
-name: Publish verified v0.1.0 images
+name: Publish verified CPU release images
 on:
   workflow_dispatch:
     inputs:
-      bundle_sha256:
-        description: SHA-256 of the reviewed frozen draft offline archive
+      version:
+        type: string
+        default: '0.2.0'
+        required: true
+      source_revision:
+        type: string
+        required: true
+      amd64_sha256:
+        description: SHA-256 of the tested frozen AMD64 archive
+        type: string
+        required: true
+      arm64_sha256:
+        description: SHA-256 of the tested frozen ARM64 archive
         type: string
         required: true
 permissions:
   contents: read
 concurrency:
-  group: publish-v0.1.0
+  group: publish-release-${{ inputs.version }}
   cancel-in-progress: false
 jobs:
-  publish:
+  platform:
     if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-24.04-arm
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
     timeout-minutes: 45
     permissions:
       contents: write
@@ -22,16 +41,75 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          fetch-depth: 0
           persist-credentials: false
       - uses: docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4
         with:
           version: v29.6.1
-          # Keep this daemon when the publisher creates an ephemeral DOCKER_CONFIG.
           set-host: true
           daemon-config: '{"features":{"containerd-snapshotter":true}}'
-      - name: Verify frozen artifacts, exercise offline runtime, push exact images
+      - name: Import, check and push exact platform images
         env:
           GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-          BUNDLE_SHA256: ${{ inputs.bundle_sha256 }}
-        run: python3 scripts/publish_release.py
+          RELEASE_VERSION: ${{ inputs.version }}
+          RELEASE_SOURCE: ${{ inputs.source_revision }}
+          RELEASE_ARCH: ${{ matrix.arch }}
+          BUNDLE_SHA256: ${{ matrix.arch == 'amd64' && inputs.amd64_sha256 || inputs.arm64_sha256 }}
+        run: python3 scripts/publish_release.py platform --version "$RELEASE_VERSION" --source-revision "$RELEASE_SOURCE" --arch "$RELEASE_ARCH" --bundle-sha256 "$BUNDLE_SHA256"
+  index:
+    needs: platform
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069
+        with:
+          version: v0.38.1
+      - name: Publish OCI indexes from tested child digests
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ inputs.version }}
+          RELEASE_SOURCE: ${{ inputs.source_revision }}
+          AMD64_SHA256: ${{ inputs.amd64_sha256 }}
+          ARM64_SHA256: ${{ inputs.arm64_sha256 }}
+        run: python3 scripts/publish_release.py index --version "$RELEASE_VERSION" --source-revision "$RELEASE_SOURCE" --amd64-sha256 "$AMD64_SHA256" --arm64-sha256 "$ARM64_SHA256"
+  anonymous:
+    needs: index
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4
+        with:
+          version: v29.6.1
+          set-host: true
+          daemon-config: '{"features":{"containerd-snapshotter":true}}'
+      - name: Anonymous native pull and installed control
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ inputs.version }}
+          RELEASE_SOURCE: ${{ inputs.source_revision }}
+          RELEASE_ARCH: ${{ matrix.arch }}
+          BUNDLE_SHA256: ${{ matrix.arch == 'amd64' && inputs.amd64_sha256 || inputs.arm64_sha256 }}
+        run: python3 scripts/check_published_release.py --version "$RELEASE_VERSION" --source-revision "$RELEASE_SOURCE" --arch "$RELEASE_ARCH" --bundle-sha256 "$BUNDLE_SHA256" --output .build/registry-control.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: anonymous-registry-${{ matrix.arch }}
+          path: .build/registry-control.json
+          retention-days: 14
