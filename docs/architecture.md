@@ -5,7 +5,7 @@ Git reader, сравнение деревьев и подготовка текс
 Внутренний [scan pipeline](scan-api.md) реализован на этапе 4.
 CLI, JSON/HTML writer, runtime validation и baseline подключены на этапе 5.
 [Штатный Docker/Compose](user/README.md) и [пример Jenkins](admin/jenkins.md)
-подключены на этапе 6; реальные Jenkins/GPU не проверялись.
+подключены на этапе 6; настоящий Jenkins AMD64 проверен в [v0.2.0](../verification/release-v0.2.0/README.md), GPU в поставку не входит.
 
 ## Компоненты и данные
 

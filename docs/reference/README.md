@@ -23,3 +23,6 @@
 
 Внутренние API и build details — в [руководстве разработчика](../development.md),
 ограничения стендов и фактические прогоны — в [verification](../../verification/README.md).
+
+[Проектируемый простой интерфейс](simple-workflow.md) — спецификация #39,
+не инструкция к действующему runtime.

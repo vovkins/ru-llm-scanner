@@ -52,6 +52,10 @@ Docker/Compose и non-root доступ к daemon; venv/исходный proxy �
 [архивная инструкция](docs/admin/releases-v0.1.0.md). Слияние исходников или pull
 не заменяют установленный комплект и его deployment.
 
+Подготовлена [спецификация простого make/CLI интерфейса](docs/reference/simple-workflow.md)
+в рамках [#38](https://github.com/vovkins/ru-llm-scanner/issues/38). Новые команды
+пока не реализованы; приведённый выше путь относится к текущему runtime.
+
 ## Возможности
 
 | Режим | Что проверяется |

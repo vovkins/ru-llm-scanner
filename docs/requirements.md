@@ -9,7 +9,7 @@
 [этапа 4](../verification/stage-4/README.md) и
 [этапа 5](../verification/stage-5/README.md) и
 [этапа 6](../verification/stage-6/README.md). Scan API, CLI/отчёты/baseline,
-штатная упаковка и Jenkins example реализованы; настоящий Jenkins/GPU не проверены.
+штатная упаковка и Jenkins example реализованы; настоящий Jenkins AMD64 проверен в [v0.2.0](../verification/release-v0.2.0/README.md), GPU в поставку не входит.
 Итоговая сквозная приёмка и согласованное историческое обновление/откат —
 [этап 7](../verification/stage-7/README.md). Статусы ниже относятся к указанной
 проверенной среде, не к отсутствующему release или другой инфраструктуре.
