@@ -27,8 +27,8 @@
     "docker/git-test.Dockerfile": "06292564a0bb33c9760a602ca85495e0a15efe74f42145a8569c83346f8023bf"
   },
   "image": {
-    "reference_id": "sha256:30d21069eea3f7abf57a34c0c6e89004112229fb6bb5aef78eec391b3654d778",
-    "platform_image_id": "sha256:30d21069eea3f7abf57a34c0c6e89004112229fb6bb5aef78eec391b3654d778",
+    "reference_id": "sha256:8d4da215f23fa12546ed60c323bd48cd1ba26eb84f814bbdf85f4071e632e3fa",
+    "platform_image_id": "sha256:8d4da215f23fa12546ed60c323bd48cd1ba26eb84f814bbdf85f4071e632e3fa",
     "platform": "linux/arm64"
   }
 }

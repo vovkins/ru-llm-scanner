@@ -192,10 +192,10 @@
   },
   "full_values_only_in_private_synthetic_qa": true,
   "images": {
-    "analyzer_platform_id": "sha256:0cb2ece56abf10245650647f6e90f118b1286b6ba7d80eb33eca4560a513725d",
-    "analyzer_reference_id": "sha256:eaf3d9e385b1ac310e66f36068279a51b535c15ac7c2a8aff75623cb21812090",
-    "scanner_platform_id": "sha256:30d21069eea3f7abf57a34c0c6e89004112229fb6bb5aef78eec391b3654d778",
-    "scanner_reference_id": "sha256:30d21069eea3f7abf57a34c0c6e89004112229fb6bb5aef78eec391b3654d778",
+    "analyzer_platform_id": "sha256:c0d67a29797296b6baafcfd947990b2dcdfbd168c789a016942256274f983eb6",
+    "analyzer_reference_id": "sha256:346ff1b36d01d647276b923234d5f06ce16abc1aa1cdf9dd69f62766ed8cb995",
+    "scanner_platform_id": "sha256:8d4da215f23fa12546ed60c323bd48cd1ba26eb84f814bbdf85f4071e632e3fa",
+    "scanner_reference_id": "sha256:8d4da215f23fa12546ed60c323bd48cd1ba26eb84f814bbdf85f4071e632e3fa",
     "platform": "linux/arm64"
   },
   "source_lock_sha256": "d8cdf389f29de502e97992501ae983577fe6e7dfa9bb29996f98b3eee5dd516b",

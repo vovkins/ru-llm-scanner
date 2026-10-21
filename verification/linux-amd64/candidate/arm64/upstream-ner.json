@@ -3,7 +3,7 @@
   "status": "passed",
   "source_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
   "source_lock_sha256": "d8cdf389f29de502e97992501ae983577fe6e7dfa9bb29996f98b3eee5dd516b",
-  "test_image_id": "sha256:d8f15db4fcff3e897a1c99482bbbb1586b4399f757b7f66e173660aeb3b72a21",
+  "test_image_id": "sha256:862f0acbe189ccb95fc364b06a960947e26d317da3c97864a01eb8aaa8194dba",
   "platform": "linux/arm64",
   "test_files": [
     "test_ner.py"

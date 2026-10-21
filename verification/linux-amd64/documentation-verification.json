@@ -1,9 +1,9 @@
 {
   "verification_version": 1,
   "status": "passed",
-  "documented_commands_checked": 49,
-  "role_navigation_anchors_checked": 9,
-  "shell_blocks_syntax_checked": 39,
+  "documented_commands_checked": 48,
+  "role_navigation_anchors_checked": 8,
+  "shell_blocks_syntax_checked": 40,
   "defaults_checked": 19,
   "fresh_build_runtime_lock_uses": 3,
   "demo_findings": 2,

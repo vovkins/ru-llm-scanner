@@ -1110,11 +1110,11 @@
     "partial_findings_retained": true,
     "wrong_profile_rejected": true
   },
-  "scan_elapsed_seconds": 13.439,
-  "total_elapsed_seconds": 21.346,
+  "scan_elapsed_seconds": 13.429,
+  "total_elapsed_seconds": 21.344,
   "profile": {
     "upstream_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
-    "analyzer_image_digest": "sha256:0cb2ece56abf10245650647f6e90f118b1286b6ba7d80eb33eca4560a513725d",
+    "analyzer_image_digest": "sha256:c0d67a29797296b6baafcfd947990b2dcdfbd168c789a016942256274f983eb6",
     "analyzer_signature": "a0a1e3eea0c98231613797097e101d23a06e170ff5a9f0a10ceef44d3f3ed9b0",
     "model_id": "fef2/ner_rus_bert-secret_detection",
     "model_revision": "52b5b0745aac14f73fcf2ac0f91d9b5001a85ae4",
@@ -1122,7 +1122,7 @@
     "patchset_sha256": "e38ab292ac0e5bd3ce44aa947d337ff903fe8419ba72535a98f5a49d95511bcc",
     "dictionary_sha256": "dc2ae9065b21ba772be25067444fb1049a73342038b594400fc2a4acf2680392",
     "scanner_semantics": "scanner-v1",
-    "profile_sha256": "edd2084383e0a18a28f6e16f4c2b01023875f5753d3c4ac72e63db808450e105"
+    "profile_sha256": "f1d97dfaa187b229bc0125f61d31360076d511cc9cc468fa11b1008fe2ac5b5b"
   },
   "sources_sha256": {
     "src/ru_llm_scanner/__init__.py": "26ff9f0aafce2c727d9005397b5d1bba450858f505b6c41b652bed8e2906da23",
@@ -1161,10 +1161,10 @@
   },
   "gpu_inference": "not_tested_no_cuda",
   "images": {
-    "analyzer_platform_id": "sha256:0cb2ece56abf10245650647f6e90f118b1286b6ba7d80eb33eca4560a513725d",
-    "analyzer_reference_id": "sha256:eaf3d9e385b1ac310e66f36068279a51b535c15ac7c2a8aff75623cb21812090",
-    "scanner_platform_id": "sha256:30d21069eea3f7abf57a34c0c6e89004112229fb6bb5aef78eec391b3654d778",
-    "scanner_reference_id": "sha256:30d21069eea3f7abf57a34c0c6e89004112229fb6bb5aef78eec391b3654d778",
+    "analyzer_platform_id": "sha256:c0d67a29797296b6baafcfd947990b2dcdfbd168c789a016942256274f983eb6",
+    "analyzer_reference_id": "sha256:346ff1b36d01d647276b923234d5f06ce16abc1aa1cdf9dd69f62766ed8cb995",
+    "scanner_platform_id": "sha256:8d4da215f23fa12546ed60c323bd48cd1ba26eb84f814bbdf85f4071e632e3fa",
+    "scanner_reference_id": "sha256:8d4da215f23fa12546ed60c323bd48cd1ba26eb84f814bbdf85f4071e632e3fa",
     "platform": "linux/arm64"
   },
   "source_lock_sha256": "d8cdf389f29de502e97992501ae983577fe6e7dfa9bb29996f98b3eee5dd516b",

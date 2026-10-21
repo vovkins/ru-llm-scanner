@@ -28,7 +28,7 @@
     "src/ru_llm_scanner/upstream.py": "ee669760f0c02287661d9c06314e5454c372662b6b1ce1fafde68f9e400a4a2d",
     "tests/integration/offline.py": "185106d35cb106412d4025d065b1a2a9502e5418f58d0ebba02f06e984b88671"
   },
-  "runtime_image_id": "sha256:0cb2ece56abf10245650647f6e90f118b1286b6ba7d80eb33eca4560a513725d",
+  "runtime_image_id": "sha256:c0d67a29797296b6baafcfd947990b2dcdfbd168c789a016942256274f983eb6",
   "corpus_sha256": "8bc2f6e3f10a9d123651839de21bae09b35c708622f9bfcada2f908ec0b5582f",
   "cases": 77,
   "parity_cases": 77,
@@ -1896,7 +1896,7 @@
     "src/ru_llm_scanner/baseline.py": "23ea9247b900c975be4b9c691f60f61d8762984ffdcc4e30ee83d423086f0020",
     "src/ru_llm_scanner/engine.py": "8a583e0ef31b4705c75af209a36f063695c7d76704e7f8348efcda8c10b65866",
     "tests/integration/offline.py": "185106d35cb106412d4025d065b1a2a9502e5418f58d0ebba02f06e984b88671",
-    "runtime.json": "1be01c8686998fe0ed59648c806586ca9d28040b51d5084a3d324a7d2d941545",
+    "runtime.json": "f9d6b8c04ba9d7abdedbe0d2f1a93264df573432b7e007bcaf1e80fe88b1dfde",
     "context/README.md": "61a56e9c3aaa911c2df1033b284766e4638ce66e9c4eab09316b84cfe749afb8",
     "context/THIRD_PARTY_NOTICES.md": "79b0dc96e17376d526039c2a740d40c2e9da48f0a29a87770062e17d77493264",
     "context/certs/README.md": "d20e192e80ae69c0f57d7df4172454bc50d3aeac52a7b6b4ada5bb0a3fdb55c5",
@@ -2090,6 +2090,6 @@
     "context/tests/fixtures/dkb/manifest.json": "8693cd751b6980b3b23010727ecfd467aad6f473c2913120ae47b3824a7adf18",
     "context/scanner_build/manifest.json": "8dad8847d0bb4e04c57d4a6d7b61ff810fa5a64a3983e3910e476213dca22423"
   },
-  "image_reference_id": "sha256:eaf3d9e385b1ac310e66f36068279a51b535c15ac7c2a8aff75623cb21812090",
-  "image_platform_id": "sha256:0cb2ece56abf10245650647f6e90f118b1286b6ba7d80eb33eca4560a513725d"
+  "image_reference_id": "sha256:346ff1b36d01d647276b923234d5f06ce16abc1aa1cdf9dd69f62766ed8cb995",
+  "image_platform_id": "sha256:c0d67a29797296b6baafcfd947990b2dcdfbd168c789a016942256274f983eb6"
 }

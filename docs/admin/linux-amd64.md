@@ -2,7 +2,7 @@
 
 Поддержка реализуется в [#33](https://github.com/vovkins/ru-llm-scanner/issues/33).
 Это инструкция к неопубликованному кандидату; опубликованный v0.1.0 остаётся
-ARM64-релизом. Настоящий Jenkins прошёл 13 сценариев; итоговая AMD64 приёмка ещё выполняется:
+ARM64-релизом. Итоговая нативная AMD64/ARM64 приёмка и настоящий Jenkins прошли:
 [протоколы и статус](../../verification/linux-amd64/README.md).
 
 ## Выбор платформы
@@ -13,11 +13,11 @@ Python/Debian dependencies, что ARM64 reference. Для каждого про
 свои wheels/DEBs/base digest и отдельный runtime/deployment. GPU не требуется.
 
 Испытательный стенд — нативный Ubuntu 24.04 x86-64 на AMD EPYC 7763 (4 vCPU,
-AVX2/FMA), Docker 29.6.1 и Compose 2.38.2. Полный Requests обработан за 1162 s
+AVX2/FMA), Docker 29.6.1 и Compose 2.38.2. Финальный полный Requests обработан за 1330 s
 при 4 CPU и analyze timeout 1800 s: 119 analyzed / 13 unsupported / 0 error,
 612 находок, как в ARM64 reference. Это benchmark выбранного дерева, без ground
-truth секретов; не SLA произвольного репозитория. Повтор с cgroup sampling занял
-1053 s; наблюдаемые пики Analyzer/Scanner — 1,0/0,18 GiB.
+truth секретов; не SLA произвольного репозитория. Наблюдаемые пики по cgroup sampling:
+Analyzer/Scanner — 0,98/0,11 GiB.
 NumPy 2.4 поднял стандартный x86 baseline до
 [x86-64-v2](https://numpy.org/doc/stable/release/2.4.0-notes.html#modulate-dispatched-x86-cpu-features);
 baseline фактического wheel и PyTorch capability дополнительно снимаются в runtime.
@@ -88,7 +88,7 @@ build cache, контейнерные images и credentials не публику�
 ## Ресурсы для пилота
 
 Измерено на 4 vCPU и примерно 16 GiB host RAM. Первый/повторный синтетический
-snapshot после импорта — 6,12/5,81 s; контейнеры каждый раз новые, OS page cache
+snapshot после импорта — 8.01/7.99 s; контейнеры каждый раз новые, OS page cache
 не сбрасывался. Это запуск процесса с моделью, не физический cold boot сервера.
 
 Для начального пилота сохраните RAM limits Analyzer `3g` / Scanner `1g`.

@@ -1,70 +1,37 @@
-# Linux AMD64 — реализация и нативная приёмка
+# Linux AMD64 — итоговая нативная приёмка
 
-План [#33](https://github.com/vovkins/ru-llm-scanner/issues/33) явно согласован
-2026-10-20. Исходная точка `9c062c8684cb1c7d907cbb08fc1a2f3fd4c33ca5`;
-ветка `codex/linux-amd64`. Работа продолжается; готовность AMD64 пока не заявляется.
-Слияние и публикация не разрешены.
+План [#33](https://github.com/vovkins/ru-llm-scanner/issues/33) выполнен;
+[draft PR #35](https://github.com/vovkins/ru-llm-scanner/pull/35) подготовлен к ревью.
+Полный native [run 39513865393](https://github.com/vovkins/ru-llm-scanner/actions/runs/39513865393)
+успешен для AMD64, ARM64 и compare. Реализация — source4c0d5dc; после неё
+обновлялись документация/CI triggers/безопасные evidence при неизменных runtime inputs.
 
-## Проверено при подготовке
+- [Матрица приёмки, ресурсы и ограничения](readiness-matrix.md).
+- [Финальные протоколы и provenance](candidate/provenance.json):171 unit на каждой
+  архитектуре,478/96 upstream,77+4 parity,46 scan/9 CLI,TP33/FP13/FN4,
+  production16/Docker25/faults2/extras15/LinuxGit41,offline empty-store0/1/2.
+- [Настоящий Jenkins13](candidate/amd64/jenkins-verification.json): completed builds,
+  valid foreign image baseline,cancel/timeout/agent-loss recovery,private artifacts.
+- [Сравнение NER](candidate/cross-platform.json) и
+  [полного Requests](candidate/public-cross-platform.json):119/13/0,612 candidates,
+  exit1; решение совпало с исходным ARM64 reference, tolerance1e-5.
+- [Ревью](review.md), [stale-input negative](stale-input-rejection.json),
+  [сохранность](preservation.json), [compatibility v0.1.0](legacy-launcher-compatibility.json).
+- [Проверенные AMD64 inputs](inputs.json):132 artifacts, все SHA/размеры,
+  wheel metadata/ELF и Debian control; версии сохранены.
+- [82 corresponding native sources](native-sources.json) и
+  [существующий исходный архив](native-source-reference.json). Модель/словарь/patches/
+  corpus не изменены. Architecture-specific system-libstdc++ исключение проверено
+  заново; прежние четыре риска не объявлены исправленными.
+- [Новый certifi advisory/proposal #34](certifi-advisory.md) ожидает решения отдельно;
+  подготовленный patch не применялся.
 
-- Сохранены исходные hashes старых locks, корпуса/patches и идентичность семи
-  работающих чужих контейнеров в приватном `.build/linux-amd64/baseline.json`.
-- Локальный Docker 29.6.1 работает на Linux aarch64; нативный AMD64 gate выполняется
-  отдельно, на GitHub runner `ubuntu-24.04`. Эмуляция не считается приёмкой.
-- Официальные PyPI/PyTorch CPU и Debian indexes содержат все закреплённые версии:
-  AMD64 artifact lock включает 132 записи, Python package closure и версии 33
-  Debian-пакетов совпадают с ARM64. Все фактические bytes проверены по
-  размеру/SHA-256, wheel tags/metadata/ELF и Debian control; ошибок нет.
-- Принятая Python база `python@sha256:e88e9763f943ec1834f992a4b51e0f24500486803e8bc534e5767af9ea65f6ce`
-  является OCI index, а не только ARM64 manifest. Её AMD64 child
-  `sha256:e529028263dbe6910a2d96f7d2b8f5266385e917fd45d286ef166977c094a51e`
-  выбран явно; Python/OS family не обновлялись из mutable tag.
-- Модель, исходники детекторов/словарь и patches/corpus не изменены. Изменение
-  source lock/profile/image fingerprint означает новый baseline после установки.
-- Начальные host unit-проверки: 167 tests, 0 failures/errors/skipped. Первый запуск
-  внутри sandbox не смог открыть синтетический localhost HTTP server; полный
-  повтор с разрешённым bind прошёл. Это ещё не нативная AMD64 интеграция.
+Промежуточные initial-native-amd64/native-progress и прежние comparison receipts
+сохраняют собственные commits/runs; не подменяют финальный candidate. В ходе
+нативной приёмки исправлены umask/COPY permissions,Linux test mounts/cleanup,
+Git helper export,отдельный containerd store и ожидание Jenkins post/archive.
+Подробности — в ревью и истории #33.
 
-## Карта изменений
-
-`build_platforms.py` проверяет CPython ABI/platform tags, реальный ELF machine,
-Debian control metadata; `offline_assets.py` применяет проверки до установки.
-`build_scanner.py` выбирает профиль согласованного Analyzer engine, формирует
-Dockerfile из pinned base и не принимает смешанные artifacts/runtime/platform.
-Launcher сверяет архитектуру Docker server и отказывает при попытке незаметного
-запуска чужой платформы. Jenkins adapter принимает доверенный абсолютный путь
-`SCANNER_DEPLOYMENT_LOCK`; прежний режим без переменной сохранён.
-
-`check-cpu-platforms.yml` предназначен для нативных проверок обеих архитектур.
-Он не имеет permissions публикации packages/releases и сохраняет только
-разрешённые сводки. Образы, полные отчёты, context/cache и логи не загружаются
-в публичные CI artifacts. Исторический `publish-release.yml` не запускается.
-
-## Нативные результаты
-
-[Промежуточные протоколы](native-progress/provenance.json) сохраняют происхождение
-каждого прогона; они не обозначают завершение всей приёмки.
-
-| Проверка | Результат |
-| --- | --- |
-| Native AMD64 и ARM64 build/seal/verify/export | Пройдены, без build cache и с блокировкой root HTTP/HTTPS builder |
-| Повторная cache-only подготовка и uncached build | Пройдены на обеих архитектурах, material inputs/runtime inventories совпали |
-| Upstream core / NER | 478 / 96 на каждой архитектуре |
-| NER / dictionary parity | 77 / 4 |
-| Independent code-v1 | TP33 / FP13 / FN4; модель/порог/ожидания сохранены |
-| [Native cross-platform NER](native-prediction-comparison.json) | Решения 77 случаев совпали; max confidence delta 2.265e-6 |
-| [Published v0.1.0 ARM64 → AMD64](published-reference-comparison.json) | Решения совпали; max delta 1.609e-6 |
-| [Настоящий Jenkins AMD64](native-progress/jenkins-native-amd64.json) | 13 сценариев, включая cancel/timeout/agent-loss recovery |
-| [Полный Requests](public-prediction-comparison.json) | 119 analyzed / 13 unsupported / 0 error, 612 находок, exit1 на каждой платформе; решения/reference config совпали |
-| Production / Docker / real faults / extras | 16 / 25 / 2 / 14 на обеих архитектурах |
-| Native source closure | 82 retained sources; фактические версии совпали на обеих архитектурах |
-| Прежний system libstdc++ aligned-new exclusion | Повторно проверен вызов posix_memalign в ELF обеих архитектур; не распространяется на все static wheel paths |
-
-## Оставшиеся проверки
-
-Повтор полного набора с исправленной Linux test harness: CLI QA cleanup при
-разных UID, Git fixture helper, отдельный containerd/data root пустого store.
-Дополнительно снимаются ресурсы и завершается документация/контроль комплекта.
-Результаты фиксируются по факту; #33 остаётся открытой.
-Новый [certifi advisory](certifi-advisory.md) и конкретное предложение #34 ожидают
-решения владельца; прежнее принятие четырёх native-рисков этим не меняется.
+Полные реальные отчёты,credentials,images/model archives и cache не публиковались
+как CI artifacts. Новый release/tag/GHCR push и merge не выполнялись.
+Публичный v0.1.0 остаётся ARM64; для будущей публикации требуется отдельное решение.

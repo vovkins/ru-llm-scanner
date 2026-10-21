@@ -92,13 +92,13 @@ Staged/untracked/незакоммиченные изменения не вход
 ## Границы и статус
 
 Опубликованный **v0.1.0** содержит CPU Linux ARM64. Новая поддержка AMD64
-подготовлена в исходниках; финальный полный прогон [#33](https://github.com/vovkins/ru-llm-scanner/issues/33)
-ещё выполняется. Новые образы и релиз не опубликованы.
+проверена в исходниках: полный нативный прогон [#33](https://github.com/vovkins/ru-llm-scanner/issues/33)
+успешен на обеих архитектурах. Новые образы и релиз не опубликованы.
 
 | Комплект | Проверенная платформа | Состояние |
 | --- | --- | --- |
 | v0.1.0 | Linux ARM64, Docker Desktop на Apple Silicon | Опубликован, прежние images/locks сохранены |
-| Новый `cpu-linux-amd64` | Native Ubuntu 24.04 x86-64, EPYC 7763/AVX2, Docker 29.6.1 / Compose 2.38.2 | Build, offline import, модель, production/faults и настоящий Jenkins проверены; итоговый повтор выполняется |
+| Новый `cpu-linux-amd64` | Native Ubuntu 24.04 x86-64, EPYC 7763/AVX2, Docker 29.6.1 / Compose 2.38.2 | Build, offline import, модель, production/faults и настоящий Jenkins проверены; полный финальный прогон успешен |
 | Новый `cpu-linux-arm64` | Native Ubuntu 24.04 ARM64 | Регрессия тех же runtime/build путей и модели пройдена |
 | GPU, rootless/userns-remap, другие ОС/CPU/корпоративные ACL | В эту приёмку не входят | Нужна отдельная проверка |
 

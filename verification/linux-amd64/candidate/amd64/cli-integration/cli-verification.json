@@ -192,10 +192,10 @@
   },
   "full_values_only_in_private_synthetic_qa": true,
   "images": {
-    "analyzer_platform_id": "sha256:61a64e5cf4b941f57c3cb91112a2ca4f1b1d0205aacd980d0fdf5436eeb20ca4",
-    "analyzer_reference_id": "sha256:bad242433a557ff76a708f8bbc8dab6762f0ba30f68e2051589bfea7346edca6",
-    "scanner_platform_id": "sha256:59674dc58b4bc9435df15d73dd04e107fea69bdd76a100cd6163345d5b2c8657",
-    "scanner_reference_id": "sha256:59674dc58b4bc9435df15d73dd04e107fea69bdd76a100cd6163345d5b2c8657",
+    "analyzer_platform_id": "sha256:23f0bb6ebd278bf2697a189717faaa0993241b47e557a906cb2a4c2f8faedb7f",
+    "analyzer_reference_id": "sha256:c1d4da38b9bf5947878d5c4099507c57dc7d0b8b387f874c6c53b3d7beda0c2d",
+    "scanner_platform_id": "sha256:54500da9423aa4ddd77fbdf9acd0c234f8fdd91f713af1369c839fc48582a0d9",
+    "scanner_reference_id": "sha256:54500da9423aa4ddd77fbdf9acd0c234f8fdd91f713af1369c839fc48582a0d9",
     "platform": "linux/amd64"
   },
   "source_lock_sha256": "d8cdf389f29de502e97992501ae983577fe6e7dfa9bb29996f98b3eee5dd516b",

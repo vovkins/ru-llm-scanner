@@ -3,8 +3,8 @@
 Текущая версия — `0.1.0`. Гарантированный срок реакции на сообщения не установлен.
 Опубликованный v0.1.0 проверен на CPU Linux ARM64 в Docker Desktop.
 Отдельный неопубликованный [AMD64/ARM64 кандидат](verification/linux-amd64/README.md)
-проходит нативную Linux-приёмку; настоящий Jenkins AMD64, production/fault gates
-и полный Requests уже проверены, итоговый повтор ещё выполняется.
+прошёл нативную Linux-приёмку: настоящий Jenkins AMD64, production/fault gates,
+пустой Docker/containerd store и полный Requests проверены.
 [Матрица свидетельств](verification/README.md) отделяет static/schema/unit stub,
 real model, independent quality и production behavior. Это внутренние проверки,
 не независимая сертификация или гарантия отсутствия дефектов.

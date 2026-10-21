@@ -18,7 +18,7 @@
         "assurance": "snapshot_verified",
         "findings": 0,
         "private_output": true,
-        "elapsed_seconds": 6.122
+        "elapsed_seconds": 8.01
       },
       {
         "operation": "repeat-snapshot",
@@ -26,7 +26,7 @@
         "assurance": "snapshot_verified",
         "findings": 0,
         "private_output": true,
-        "elapsed_seconds": 5.806
+        "elapsed_seconds": 7.987
       },
       {
         "operation": "strict-diff",
@@ -34,7 +34,7 @@
         "assurance": "baseline_verified",
         "findings": 1,
         "private_output": true,
-        "elapsed_seconds": 5.806
+        "elapsed_seconds": 7.97
       },
       {
         "operation": "invalid-baseline",
@@ -42,7 +42,7 @@
         "assurance": "none",
         "findings": 0,
         "private_output": true,
-        "elapsed_seconds": 5.804
+        "elapsed_seconds": 7.952
       }
     ],
     "input_unchanged": true,
