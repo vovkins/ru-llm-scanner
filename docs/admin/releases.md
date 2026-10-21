@@ -104,9 +104,12 @@ Images на disposable runner сохраняются в этих архивах;
 содержат только безопасные summaries, без images/model/cache/raw reports.
 
 После сохранения финальных `.tar.gz` тот же verification workflow с
-`verify_frozen=true` и обоими настоящими hashes вызывает read-only
+`verify_frozen=true` и обоими настоящими hashes вызывает проверочный
 `verify-frozen-release.yml`: архивы скачиваются, извлекаются и проходят import/control
 в отдельных пустых Docker/containerd stores обеих платформ.
+Для чтения ещё скрытых draft assets этим jobs требуется `contents: write`
+по ACL GitHub; операции остаются download/verify, `packages: write` им не выдаётся.
+Проверка уже публичных assets использует read-only token и anonymous download.
 Перед публикацией `release-acceptance.json` связывает успешный build workflow,
 оба archive hashes и завершённый разбор advisory без новых blockers. Publisher
 проверяет эту запись и реальный success соответствующего native workflow.

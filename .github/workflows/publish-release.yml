@@ -86,6 +86,9 @@ jobs:
         run: python3 scripts/publish_release.py index --version "$RELEASE_VERSION" --source-revision "$RELEASE_SOURCE" --amd64-sha256 "$AMD64_SHA256" --arm64-sha256 "$ARM64_SHA256"
   anonymous:
     needs: index
+    permissions:
+      # Draft asset downloads require repository push access; no registry write.
+      contents: write
     strategy:
       fail-fast: false
       matrix:

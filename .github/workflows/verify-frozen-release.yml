@@ -15,7 +15,9 @@ on:
         type: string
         required: true
 permissions:
-  contents: read
+  # GitHub restricts untagged draft assets to push-capable repository tokens.
+  # Operations below only download/verify; no packages permission is granted.
+  contents: write
 jobs:
   archive:
     strategy:
@@ -62,6 +64,7 @@ jobs:
           assert version==project_version(Path.cwd())=='0.2.0'
           subprocess.run(['git','merge-base','--is-ancestor',revision,'HEAD'],check=True)
           directory=Path('.build/archive-control');name=identity(version,arch)
+          subprocess.run(['gh','release','view','v'+version,'--repo','vovkins/ru-llm-scanner','--json','isDraft,apiUrl'],check=True)
           archive=download(version,name+'.tar.gz',directory)
           bundle=extract_checked(archive,directory/'extracted',os.environ['BUNDLE_SHA256'],name)
           manifest=verify_files(bundle,Path.cwd())

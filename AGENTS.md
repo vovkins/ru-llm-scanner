@@ -2,6 +2,8 @@
 
 ## Согласования и прогресс
 
+- Финальный archive-control run39630474675 остановился до скачивания: contents:read token не видит untagged draft assets. Только проверочным draft-download jobs выдан contents:write по ACL GitHub; registry packages write им НЕ выдаётся. Публичный verify-public остаётся read-only/anonymous. Full native build39623117010/source246ff43 SUCCESS, frozen hashes прежние ac0fd101…/a8437f06…; runtime85 inputs не менять и не пересобирать модели. Следующий archive-control повторяет только проверку сохранённых архивов.
+
 - Release build39622038571/sourcef04 завершился до сборки на draft identity: REST /releases/tags/v0.2.0 возвращает404 для ещё untagged draft. release_state исправлен: gh release view apiUrl → проверенный numeric release ID API; regression добавлен. Никаких frozen assets/images ещё не создано. Следующий actual build/source и draft target должны совпадать; v0.2.0 tag ref по-прежнему отсутствует. При повторной попытке API identity не считать ошибки успешной приёмкой.
 
 - Реальный полный release build запущен: run39622038571 на sourcef04adb3a630dfb7c0243e51638ab348ef2bbe7e9, через check-cpu-platforms release_build (reusable build-release). Draft v0.2.0 targetf04adb3 без tag ref; metadata-only дальнейшие CI/docs commits не должны менять runtime inputs или этот target. Старый PR native39620523676 failed на recipe hash и не выдаётся за success. Изменения source lock с исходногоee336f0 — ТОЛЬКО offline_dockerfile_sha256 обоих профилей под label0.2.0; dependency/artifact/model pins прежние. Новый manual public checker вызывается через publish-release mode=verify-public с read-only reusable job; mode=publish разрешён только после фактических gates и настоящих archive hashes.

@@ -286,7 +286,7 @@ jobs:
   release_archive_control:
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.release_version != '' && inputs.verify_frozen
     permissions:
-      contents: read
+      contents: write
     uses: ./.github/workflows/verify-frozen-release.yml
     with:
       version: ${{ inputs.release_version }}
