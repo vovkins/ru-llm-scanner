@@ -21,7 +21,13 @@ from release_common import (
     extract_checked,
 )
 from check_release_bundle import sha
-from publish_release import load_bundle, login, upload_immutable, verify_acceptance
+from publish_release import (
+    load_bundle,
+    login,
+    upload_immutable,
+    verify_acceptance,
+    release_state,
+)
 from types import SimpleNamespace
 
 
@@ -281,3 +287,23 @@ class ReleasePlatformTests(unittest.TestCase):
             self.assertEqual(
                 profiles["cpu-linux-" + arch]["offline_dockerfile_sha256"], expected
             )
+
+    @patch("publish_release.run")
+    def test_draft_lookup_resolves_numeric_id_instead_of_missing_tag_ref(self, command):
+        url = "https://api.github.com/repos/vovkins/ru-llm-scanner/releases/123"
+        command.side_effect = [
+            json.dumps({"apiUrl": url}).encode(),
+            json.dumps({"id": 123, "draft": True}).encode(),
+        ]
+        self.assertTrue(release_state("0.2.0")["draft"])
+        self.assertEqual(command.call_args.args[0], ["gh", "api", url])
+        self.assertNotIn("/tags/", str(command.call_args_list))
+
+    @patch("publish_release.run")
+    def test_draft_api_url_must_belong_to_our_repository(self, command):
+        command.return_value = json.dumps(
+            {"apiUrl": "https://example.invalid/private"}
+        ).encode()
+        with self.assertRaisesRegex(ValueError, "Unexpected release API URL"):
+            release_state("0.2.0")
+        self.assertEqual(command.call_count, 1)

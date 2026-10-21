@@ -37,9 +37,33 @@ def run(args, *, data=None):
 
 
 def release_state(version):
-    return json.loads(
-        run(["gh", "api", f"repos/{REPOSITORY}/releases/tags/v{version}"])
+    # GitHub's by-tag endpoint excludes an untagged draft. gh release view
+    # resolves drafts; fetch its validated numeric API URL for complete asset hashes.
+    view = json.loads(
+        run(
+            [
+                "gh",
+                "release",
+                "view",
+                "v" + version,
+                "--repo",
+                REPOSITORY,
+                "--json",
+                "apiUrl",
+            ]
+        )
     )
+    url = view["apiUrl"]
+    require(
+        re.fullmatch(
+            r"https://api\.github\.com/repos/"
+            + re.escape(REPOSITORY)
+            + r"/releases/[0-9]+",
+            url,
+        ),
+        "Unexpected release API URL",
+    )
+    return json.loads(run(["gh", "api", url]))
 
 
 def asset(state, name):
