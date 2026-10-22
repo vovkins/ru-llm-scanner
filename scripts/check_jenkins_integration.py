@@ -395,6 +395,8 @@ class JenkinsFixture:
                 for r in observed
                 if r["workspace"] == workspace and r["project"]
             }
+            if code in (0, 1):
+                require(bool(projects), "Jenkins Docker observer missed successful scan")
             self.projects.update(projects)
             require(
                 all(not any(owned_resources(p)) for p in projects),
