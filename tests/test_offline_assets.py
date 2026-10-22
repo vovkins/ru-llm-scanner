@@ -125,6 +125,30 @@ class PackagingInventoryTests(unittest.TestCase):
         cls.probe = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(cls.probe)
 
+    def test_catalog_uses_public_health_without_private_import_alias(self):
+        catalog = {
+            "scanner_contract_version": 1,
+            "supported_entities": ["PASSWORD"],
+            "detection_sources": ["native_credential", "future_source"],
+        }
+
+        async def health():
+            return SimpleNamespace(body=json.dumps(catalog).encode())
+
+        server = SimpleNamespace(health=health)
+        self.assertEqual(self.probe.api_catalog(server), catalog)
+        for key, value in (
+            ("scanner_contract_version", 2),
+            ("detection_sources", []),
+            ("detection_sources", ["ner", "ner"]),
+            ("supported_entities", [None]),
+        ):
+            before = catalog[key]
+            catalog[key] = value
+            with self.assertRaises(RuntimeError):
+                self.probe.api_catalog(server)
+            catalog[key] = before
+
     def test_duplicate_metadata_is_rejected_even_if_versions_match(self):
         one = SimpleNamespace(metadata={"Name": "some_package"}, version="1")
         two = SimpleNamespace(metadata={"Name": "Some-Package"}, version="1")

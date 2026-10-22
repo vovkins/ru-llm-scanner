@@ -102,6 +102,10 @@ class Acceptance:
                             diagnostics.append(
                                 {"stage": log.stem, "exception": line[-800:]}
                             )
+                        elif log.stem == "analyzer" and "Error:" in line:
+                            diagnostics.append(
+                                {"stage": log.stem, "exception": line[-800:]}
+                            )
                 self.receipt["build_failure_diagnostics"] = diagnostics[-10:]
                 for deployment in (cwd / ".build/workflow/builds").glob(
                     "*/deployment.json"
@@ -287,12 +291,22 @@ class Acceptance:
             home = self.homes[name]
             for path in candidate.rglob("*"):
                 if path.is_file():
+                    if (
+                        path.relative_to(candidate).as_posix()
+                        == "docker/probe_runtime.py"
+                    ):
+                        continue
                     dest = home / path.relative_to(candidate)
                     dest.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copyfile(path, dest)
             lock = read_json(home / "upstream.lock.json")
             lock["analyzer_environment"]["PRESIDIO_ANALYZER_BASE64_POLICY"] = name
             write_json(home / "upstream.lock.json", lock)
+        self.receipt["metadata_probe_adaptation"] = {
+            "historical_sha256": file_hash(candidate / "docker/probe_runtime.py"),
+            "accepted_sha256": file_hash(ROOT / "docker/probe_runtime.py"),
+            "reason": "Read public health catalogs instead of private server import aliases; no detector changes",
+        }
         self.save()
 
     def build(self):
@@ -315,6 +329,9 @@ class Acceptance:
             self.save()
             installed = Path(info["directory"])
             self.run(name + "-make-test", ["make", "test"], cwd=home)
+            suites = list((home / ".build/workflow/tests").glob("*/summary.json"))
+            require(len(suites) == 1, "Expected one fresh complete test suite")
+            info["make_test_summary"] = read_json(suites[0])
             if name != "old":
                 image = "rullmscan-engine-tests-" + name + ":" + uuid.uuid4().hex
                 self.py(
@@ -344,6 +361,26 @@ class Acceptance:
                 self.receipt.setdefault("upstream_base64", {})[name] = read_json(
                     self.root / (name + "-upstream-base64.json")
                 )
+                if name == "content":
+                    for suite in ("core", "ner"):
+                        self.py(
+                            name + "-upstream-" + suite,
+                            "check_upstream_tests.py",
+                            "--context",
+                            installed / "analyzer",
+                            "--image",
+                            image,
+                            "--suite",
+                            suite,
+                            "--output",
+                            self.root / (name + "-upstream-" + suite + ".json"),
+                            home=home,
+                        )
+                        self.receipt.setdefault("upstream_content_regressions", {})[
+                            suite
+                        ] = read_json(
+                            self.root / (name + "-upstream-" + suite + ".json")
+                        )
             output = self.root / (name + "-model")
             output.mkdir(mode=0o700)
             image_id = info["lock"]["analyzer"]["image_reference_id"]
@@ -430,7 +467,8 @@ class Acceptance:
                 ],
             )
             baseline = out / "report.json"
-            baselines[name] = baseline
+            # Reuse the first saved clean evidence on return to this engine.
+            baselines.setdefault(name, baseline)
             if i:
                 other = "old" if name == "logistic" else "logistic"
                 self.run(
@@ -464,7 +502,7 @@ class Acceptance:
                     "--to",
                     b,
                     "--baseline",
-                    baseline,
+                    baselines[name],
                     "--require-baseline",
                     "--output",
                     self.root / ("strict-" + str(i)),
@@ -490,6 +528,7 @@ class Acceptance:
             "strict_compatible": True,
             "foreign_baselines_rejected": True,
             "input_unchanged": True,
+            "original_saved_baselines_reused_on_return": True,
         }
         self.save()
 
@@ -498,6 +537,16 @@ class Acceptance:
         home = self.homes[name]
         info = self.receipt["installations"][name]
         installed = Path(info["directory"])
+        self.py(
+            "logistic-documentation-walkthrough",
+            "check_documentation_walkthrough.py",
+            "--output-dir",
+            self.root / "walkthrough",
+            home=home,
+        )
+        self.receipt["documentation_walkthrough"] = read_json(
+            self.root / "walkthrough/workflow-verification.json"
+        )
         self.py(
             "logistic-scan-integration",
             "check_scan_integration.py",
