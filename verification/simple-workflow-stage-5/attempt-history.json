@@ -1,0 +1,35 @@
+{
+  "attempts": [
+    {
+      "run": 39810713533,
+      "source": "38e83386b943be5ddc60dd662c8215323ff3e4c5",
+      "status": "failed",
+      "cases_before_failure": 7,
+      "candidate_compare_and_repeat_prepare_passed": true,
+      "failed_gate": "exact_input_repository_inventory_unchanged",
+      "image_build_started": false,
+      "initial_changed_path_detail_recorded": false,
+      "followup": "Explicit fetch --no-auto-maintenance; changed-path diagnostics added; exact inventory comparison retained. Background Git maintenance is the suspected preparation-side cause, not a proved changed-file attribution."
+    },
+    {
+      "run": 39811643700,
+      "source": "7726d7395b57268e69902a416d511d34923c6b65",
+      "status": "passed_both_cpu_before_final_adapter_cleanup",
+      "input_inventory_unchanged": true,
+      "current_engine_first_repeat_units": 244,
+      "skipped": 0,
+      "acceptance_scope": "Source candidate and unchanged-engine build/test/repair/cancel passed; a final candidate-only public source catalog adaptation was then made and requires its own receipt."
+    },
+    {
+      "run": 39813337053,
+      "source": "1ad574538a807bdc790774d240099bd2d3f20b97",
+      "status": "passed_both_cpu_final",
+      "input_inventory_unchanged": true,
+      "private_source_enum_import_removed": true,
+      "all_material_inputs_match_current_tree": true,
+      "candidate_content_equal_local_amd64_arm64": true
+    }
+  ],
+  "local_source_only_probe": "passed",
+  "raw_logs_uploaded": false
+}

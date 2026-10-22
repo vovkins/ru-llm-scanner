@@ -1,0 +1,25 @@
+{
+  "status": "observed",
+  "native": [
+    {
+      "platform": "linux/amd64",
+      "complete_acceptance_seconds": 333.448,
+      "current_engine_regression_seconds": 329.751,
+      "first_suite_seconds": 68.423,
+      "repeat_suite_seconds": 65.06,
+      "unit_per_successful_suite": 244,
+      "skipped": 0
+    },
+    {
+      "platform": "linux/arm64",
+      "complete_acceptance_seconds": 360.112,
+      "current_engine_regression_seconds": 356.721,
+      "first_suite_seconds": 77.36,
+      "repeat_suite_seconds": 76.633,
+      "unit_per_successful_suite": 244,
+      "skipped": 0
+    }
+  ],
+  "peak_rss_measured": false,
+  "performance_sla_claimed": false
+}

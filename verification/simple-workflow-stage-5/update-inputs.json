@@ -1,0 +1,7 @@
+{
+  "examples/upstream/README.md": "7f165494f25ac1d69faac30333d9b504ced1eabe6129c5e7e48599653258b49c",
+  "examples/upstream/base64-review.json": "cf7b5ca16c82ad1c21e3c20a8c06a9dc54e0266fb41639fb22ec25bc261ee846",
+  "examples/upstream/patches/analyzer-api-base64-v1.patch": "a7bba7d6ef0974b7fec9cf654e84254a92fa7f31b1fd56d08dd195712b086dd3",
+  "schemas/upstream-update-v1.schema.json": "632b792f783dfa75e13a4d2779ad0addb75ac214aae53f6ccbb432b9a5a03c68",
+  "tests/test_upstream_update.py": "e84d1c4fbf0c0565c7347b34b0fc03bb0c6836aca936709e4d06a2bc97b8793c"
+}

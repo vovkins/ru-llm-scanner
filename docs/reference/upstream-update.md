@@ -171,3 +171,5 @@ Jenkins и обновление/откат по отдельному плану 
 происхождения нового кода и notices перед распространением: source comparison
 не является самостоятельным подтверждением условий стороннего кода.
 [Обновление и откат](../admin/updating-analyzer.md), [план #47](https://github.com/vovkins/ru-llm-scanner/issues/47).
+
+[Фактическая source-only приёмка и границы этапа5](../../verification/simple-workflow-stage-5/README.md). Реальная функциональная приёмка и предлагаемый logistic default — [отдельный план #49](https://github.com/vovkins/ru-llm-scanner/issues/49), ещё не выполняется.
