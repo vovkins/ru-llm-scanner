@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import signal
 import subprocess
@@ -103,6 +104,7 @@ import json,os,sys
 from pathlib import Path
 args=sys.argv[1:];operation=args[0] if args else ''
 record={'operation':operation}
+if operation=='kill':record['signal']=args[args.index('--signal')+1] if '--signal' in args else None
 if operation in {'build','pull','push','load','tag'} or operation=='compose' and any(x in {'build','pull','push'} for x in args):
  record['forbidden']=True
  with open(os.environ['SCANNER_DOCKER_OPERATIONS'],'a') as s:s.write(json.dumps(record)+'\\n')
@@ -343,6 +345,7 @@ os.execv(os.environ['SCANNER_REAL_DOCKER'],[os.environ['SCANNER_REAL_DOCKER'],*a
             "Concurrent scan failed",
         )
         receipt["concurrent_scan_and_build_reuse"] = True
+        prior_operations = len(docker_log.read_text().splitlines())
         timed_out = run(
             "runtime-timeout",
             [
@@ -359,10 +362,32 @@ os.execv(os.environ['SCANNER_REAL_DOCKER'],[os.environ['SCANNER_REAL_DOCKER'],*a
             ],
             2,
         )
-        require(
-            b"[run_timeout]" in timed_out.stderr, "Timeout failed for another reason"
+        timeout_operations = [
+            json.loads(line)
+            for line in docker_log.read_text().splitlines()[prior_operations:]
+        ]
+        stopped = any(
+            x.get("operation") == "kill" and x.get("signal") == "SIGINT"
+            for x in timeout_operations
         )
-        receipt["runtime_timeout_code_verified"] = True
+        diagnostic_codes = re.findall(
+            r"\[([a-z_]+)\]", timed_out.stderr.decode("utf-8", errors="replace")
+        )
+        receipt["runtime_timeout"] = {
+            "exit_code": timed_out.returncode,
+            "stop_signal_observed": stopped,
+            "diagnostic_codes": diagnostic_codes,
+        }
+        save()
+        # An early timeout can interrupt Python before report/handlers exist; preserve
+        # the launcher's secondary scanner/report error. Verify actual stop + failure.
+        require(
+            stopped
+            and len(diagnostic_codes) == 1
+            and diagnostic_codes[0]
+            in {"run_timeout", "scanner_failed", "private_report_missing"},
+            "Timeout did not stop the scanner or produced an unrelated failure",
+        )
         # Cancel a real public scan after its own Compose resources exist.
         cancelled = subprocess.Popen(
             [
