@@ -223,6 +223,11 @@ os.execv(os.environ['SCANNER_REAL_DOCKER'],[os.environ['SCANNER_REAL_DOCKER'],*a
             "Make/CLI snapshot mismatch",
         )
         _, target = scan("cli-HEAD", [entry, "scan", "--repo", str(repo)], 1, 1)
+        require(
+            any(finding["value"] == canary for finding in target["findings"]),
+            "Expected complete synthetic value was not reported",
+        )
+        receipt["complete_synthetic_value_in_private_report"] = True
         _, make_target = scan("make-HEAD", ["make", "scan", "REPO=" + str(repo)], 2, 1)
         require(
             fingerprint(target) == fingerprint(make_target), "Make/CLI HEAD mismatch"
@@ -338,7 +343,7 @@ os.execv(os.environ['SCANNER_REAL_DOCKER'],[os.environ['SCANNER_REAL_DOCKER'],*a
             "Concurrent scan failed",
         )
         receipt["concurrent_scan_and_build_reuse"] = True
-        run(
+        timed_out = run(
             "runtime-timeout",
             [
                 entry,
@@ -354,6 +359,10 @@ os.execv(os.environ['SCANNER_REAL_DOCKER'],[os.environ['SCANNER_REAL_DOCKER'],*a
             ],
             2,
         )
+        require(
+            b"[run_timeout]" in timed_out.stderr, "Timeout failed for another reason"
+        )
+        receipt["runtime_timeout_code_verified"] = True
         # Cancel a real public scan after its own Compose resources exist.
         cancelled = subprocess.Popen(
             [
@@ -442,6 +451,23 @@ os.execv(os.environ['SCANNER_REAL_DOCKER'],[os.environ['SCANNER_REAL_DOCKER'],*a
             },
             "Input clone changed",
         )
+        projects = subprocess.check_output(
+            [
+                real_docker,
+                "ps",
+                "-a",
+                "--filter",
+                "label=com.docker.compose.project",
+                "--format",
+                '{{.Label "com.docker.compose.project"}}',
+            ],
+            text=True,
+        ).splitlines()
+        require(
+            not any(p.startswith("rullmscan-") for p in projects),
+            "Own containers leaked",
+        )
+        receipt["no_own_containers_after_controls"] = True
         operations = [json.loads(line) for line in docker_log.read_text().splitlines()]
         require(
             not any(x.get("forbidden") for x in operations),
