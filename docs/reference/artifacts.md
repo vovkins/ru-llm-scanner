@@ -1,5 +1,7 @@
 # Locks, образы и доверенные артефакты
 
+В обычном [make build](../admin/build.md) эти материалы создаются и выбираются автоматически. Таблицы ниже нужны сопровождающему; они не являются списком ручных шагов пользователя. Для опубликованных архивов — [расширенный маршрут](../admin/advanced.md).
+
 | Артефакт | Источник и назначение |
 | --- | --- |
 | `upstream.lock.json` | Reviewed source lock: upstream commit/export-list/hashes, модель/файлы, patch before/after, build profiles |
@@ -70,7 +72,7 @@ snapshot; [правила](../admin/updating-analyzer.md). Штатные locks 
 `prepare_offline_analyzer.py --download` и scanner prepare `--download-artifacts`
 явно заполняют cache, `--ca` применяется только host downloader. Без этих флагов
 подготовка не обращается к сети. Старые pip/apt config flags отклоняются.
-[Различие и команды](../admin/build.md#корпоративные-mirrors-proxy-и-ca).
+[Различие и команды](../admin/advanced-build.md#корпоративные-mirrors-proxy-и-ca).
 
 Модель/каталог и подпись — в [механизме распознавания](detection.md),
 JSON/output metadata policy — в [runtime](runtime.md),

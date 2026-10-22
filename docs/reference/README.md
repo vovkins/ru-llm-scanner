@@ -6,6 +6,8 @@
 
 | Тема | Документ |
 | --- | --- |
+| Make/CLI build, scan, diff, test: параметры и defaults | [Простой интерфейс](simple-workflow.md) |
+| Повседневный suite: предпосылки, группы и диагностика | [Make test](everyday-tests.md) |
 | Snapshot/diff, Git-состояния, text-v1 и coverage | [Режимы и охват](scan-modes.md) |
 | Анализ/scope/execution/presentation, CLI и defaults | [Конфигурация](configuration.md) |
 | Host launcher, container budgets, private output и lifecycle | [Docker runtime](runtime.md) |

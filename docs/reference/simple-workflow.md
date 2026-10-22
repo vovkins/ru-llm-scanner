@@ -1,11 +1,9 @@
 # Простой интерфейс сборки и сканирования
 
-**Спецификация этапа [#39](https://github.com/vovkins/ru-llm-scanner/issues/39),
+**Контракт текущих исходников. Спецификация этапа [#39](https://github.com/vovkins/ru-llm-scanner/issues/39),
 общий план [#38](https://github.com/vovkins/ru-llm-scanner/issues/38).
 Build/scan/diff реализованы на этапе [#40](https://github.com/vovkins/ru-llm-scanner/issues/40);
-suite `make test` реализован на этапе [#43](https://github.com/vovkins/ru-llm-scanner/issues/43).** Это контракт для этапов 2–4,
-не инструкция запуска опубликованного v0.2.0. Прежний explicit путь:
-[сборка](../admin/build.md), [сканирование](../user/README.md).
+suite `make test` реализован на этапе [#43](https://github.com/vovkins/ru-llm-scanner/issues/43).** Это не инструкция запуска опубликованного v0.2.0. Пошаговый путь: [администратор](../admin/README.md), [пользователь](../user/README.md). Прежний explicit путь — [отдельно](../admin/advanced.md).
 [ADR-0007](../decisions/0007-simple-workflow.md) объясняет границу интерфейса;
 [карта существующих шагов и матрица приёмки](../../verification/simple-workflow-stage-1/README.md)
 отделяет проект от фактически выполненных проверок.
@@ -16,10 +14,11 @@ suite `make test` реализован на этапе [#43](https://github.com/
 scanner; входной Git-клон передаётся параметром и никогда не становится местом
 поиска исполняемых файлов, Makefile или конфигурации установки.
 
-Основной сценарий из checkout с реализацией этапа 2:
+Основной сценарий из доверенного checkout scanner:
 
 ```sh
 make build
+make test
 make scan REPO='/srv/git/example project'
 ```
 
@@ -167,7 +166,7 @@ scan. Старые образы/каталоги и чужие Docker-ресур
 
 Перед каждым scan сверяются платформа/daemon, запись успешной сборки, отпечаток
 влияющих исходников и pins, deployment/engine и фактические локальные Image IDs.
-Документационные изменения сами по себе пересборки не требуют. При изменённых
+Большинство документационных файлов не входят в material inputs; README включён в provenance пакета, поэтому его изменение требует build. При изменённых
 влияющих inputs, чужом daemon, удалённом image или несовместимом состоянии —
 понятный отказ с предложением `make build`. Поиск «последнего каталога» по mtime,
 fallback к ARM64 lock из Git, silent pull/build и исправление хешей запрещены.
@@ -248,30 +247,14 @@ run timeout/stop grace и окружение, затем повторите пр
 рекомендуемая команда выводятся без чувствительных значений. Необязательный
 CONFIG не становится обязательным из-за диагностики.
 
-## Jenkins: проектируемый пример
+## Jenkins
 
-Пример предназначен для будущего интерфейса и ещё не является испытанным pipeline.
+Прямой CLI работает; новый настоящий Jenkins pilot ещё не выполнен. Канонический пример и границы — [руководство Jenkins](../admin/jenkins.md).
 На агенте уже есть доверенная установка в `/opt/ru-llm-scanner`, подготовленная
 тем же non-root оператором на этом daemon через build. Входной клон и report root
 вне очищаемого workspace; конфигурация pipeline берётся из доверенного места.
 
-```groovy
-node('scanner-native') {
-    int status = sh(
-        returnStatus: true,
-        script: '/opt/ru-llm-scanner/scanner scan --repo /srv/git/project --commit HEAD'
-    )
-    if (status == 1) {
-        error('Scanner: обнаружены чувствительные данные; отчёт остаётся приватным')
-    } else if (status != 0) {
-        error('Scanner: проверка завершилась ошибкой или неполнотой')
-    }
-}
-```
-
-Реальное имя агента/пути выбирает администратор. JSON/HTML не публикуются через
-archiveArtifacts автоматически. Strict diff требует явных FROM/TO, BASELINE и
-REQUIRE_BASELINE; не заменять им полный первоначальный snapshot.
+Настройку доверенных путей, status handling, приватных artifacts и baseline см. в каноническом примере по ссылке выше. Полный первоначальный snapshot не заменяется обычным diff.
 
 ## Проверка готовности реализации
 
@@ -279,6 +262,4 @@ REQUIRE_BASELINE; не заменять им полный первоначаль
 проверить native AMD64/ARM64, точные коды прямого CLI и сохранность изоляции/старой
 установки. Точные сценарии и распределение между этапами 2–4 приведены в
 [матрице приёмки](../../verification/simple-workflow-stage-1/README.md#матрица-будущей-приёмки).
-Этап39 проверял только спецификацию. Проверки реализации этапа40 фиксируются
-отдельно; их результаты не означают приёмку будущего suite, нового Jenkins
-pipeline или переноса обновлений proxy.
+Этап39 проверял спецификацию; фактические build/scan проверки этапа40 и suite этапа43 сохранены отдельно в verification. Новый Jenkins pilot и перенос обновлений proxy относятся к последующим этапам #38.
