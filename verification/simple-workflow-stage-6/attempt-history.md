@@ -9,7 +9,7 @@
 |39829824719 /b9d9ac7|Обе CPU: повтор smoke дал docker_command_failed. Ошибка локализована в Compose, до нового алгоритма.|
 |39830777807 /10d95d4|Обе CPU: old build/test244/real-model parity прошли; code-v1 TP33/FP13/FN4. New content build остановился в runtime inventory на приватном server alias `_KNOWN_SOURCES`.|
 |39832756956 /9bbf6c6|AMD64: три build/test и реальные raw/patched model runs прошли; strict frozen verdict остановил дальнейшие gates на NER/Base64 fragmentation. Code-v1 logistic33/14/4, Base642511/3/1 (2500 повторений одного stress). ARM64: old build/test244/model и content build прошли; content make test отказал, подробная suite-диагностика добавлена в следующую попытку. Причина пока не установлена. Обе ветки run FAILED. |
-|39835960260 /d59a69d|ARM64: три build/make test/model,489 Base64 tests,77-case real parity и полный old→logistic→old→logistic откат прошли. Walkthrough ошибочно вызван в уже собранной установке и сразу отклонён clean guard; fresh-run не выполнен. AMD64 ещё выполняется. Добавлены: добавлены независимое продолжение после измерения exact-расхождения и детальная диагностика failed make test. Final source ещё содержит прежний strict критерий; даже полный runtime pass не будет выдаваться за зелёный итог этого run. |
+|39835960260 /d59a69d|ARM64: три build/make test/model,489 Base64 tests,77-case real parity и полный old→logistic→old→logistic откат прошли. Walkthrough ошибочно вызван в уже собранной установке и сразу отклонён clean guard; fresh-run не выполнен. AMD64 завершился тем же clean-checkout отказом после трёх комплектов,77-case parity и полного отката; обе CPU FAILED. Добавлены: добавлены независимое продолжение после измерения exact-расхождения и детальная диагностика failed make test. Final source ещё содержит прежний strict критерий; даже полный runtime pass не будет выдаваться за зелёный итог этого run. |
 
 В отдельном кратковременном контейнере `/bin/true` воспроизведён точный отказ:
 Compose YAML parser отвергает JSON surrogate-escape non-BMP символа в bind-path.
@@ -37,3 +37,8 @@ Walkthrough harness исправляется отдельным чистым che
 Из уже проверенного logistic копируются только material inputs, их hash-map
 сверяется полностью, фиксируется временный локальный candidate commit без remote
 публикации. `.build`, venv/cache не копируются. Исходный clean guard не ослабляется.
+
+Независимая сверка run39835960260 показала rule_id-only drift в двух JSON случаях;
+[расследование и конкретный прототип](metadata-review.md). Остальные поля2805
+находок совпадают, max score delta3.3974647521972656e-06. Strict rule_id gate
+не объявляется пройденным; historical-only уточнение отдельно ожидает владельца.
