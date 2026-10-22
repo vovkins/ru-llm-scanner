@@ -84,7 +84,9 @@ def strict_json(path):
 def write_private(path, value):
     with path.open("x", encoding="utf-8") as stream:
         os.chmod(path, 0o600)
-        json.dump(value, stream, ensure_ascii=True, sort_keys=True, indent=2)
+        # Compose reads JSON through YAML. YAML rejects JSON's surrogate-pair
+        # escapes for non-BMP characters (e.g. emoji in an installation path).
+        json.dump(value, stream, ensure_ascii=False, sort_keys=True, indent=2)
         stream.write("\n")
 
 

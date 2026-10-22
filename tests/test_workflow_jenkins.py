@@ -18,6 +18,26 @@ spec.loader.exec_module(adapter)
 
 
 class WorkflowJenkinsTests(unittest.TestCase):
+    def test_compose_json_uses_utf8_for_non_bmp_bind_paths(self):
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import docker_scanner
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "compose.json"
+            value = {
+                "services": {
+                    "scanner": {
+                        "volumes": [{"source": "/trusted scanner 🧪/repository"}]
+                    }
+                }
+            }
+            docker_scanner.write_private(path, value)
+            raw = path.read_bytes()
+            self.assertIn("🧪".encode(), raw)
+            self.assertNotIn(b"\\ud83e", raw)
+            self.assertEqual(json.loads(raw), value)
+            self.assertEqual(path.stat().st_mode & 0o777, 0o600)
+
     def test_direct_argv_preserves_ref_and_rejects_traversal_or_explicit_lock(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp).resolve()

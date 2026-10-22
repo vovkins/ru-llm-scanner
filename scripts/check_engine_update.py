@@ -221,7 +221,11 @@ class Acceptance:
             ("content", self.receipt["scanner_source"]),
             ("logistic", self.receipt["scanner_source"]),
         ):
-            home = self.root / ("trusted " + name + " 🧪")
+            # The historical launcher predates the non-BMP Compose fix. Keep
+            # that installation unchanged; new installations exercise it.
+            home = self.root / (
+                "trusted-old" if name == "old" else "trusted " + name + " 🧪"
+            )
             self.run(
                 name + "-clone",
                 [
@@ -401,7 +405,7 @@ class Acceptance:
             self.save()
 
     def rollback(self):
-        repo = RepoFixture(self.root / "repository with space 🧪")
+        repo = RepoFixture(self.root / "repository with space Кириллица")
         a = repo.commit({b"main.py": b"x = 1\n"})
         b = repo.commit({b"main.py": b"x = 2\n"}, parents=(a,))
         c = repo.commit(
@@ -567,6 +571,33 @@ class Acceptance:
     def finish(self):
         models = self.receipt["models"]
         self.receipt["model_comparison"] = compare_models(models)
+        runtimes = {
+            name: item["runtime_receipt"]["runtime"]
+            for name, item in self.receipt["installations"].items()
+        }
+        for name, runtime in runtimes.items():
+            for field in (
+                "model",
+                "dictionary",
+                "packages",
+                "spacy",
+                "entity_types",
+                "detection_sources",
+            ):
+                require(
+                    runtime[field] == runtimes["old"][field],
+                    "Unexpected runtime foundation change: " + field,
+                )
+            require(
+                models[name]["health"]["analysis_signature"]
+                == runtime["analysis_signature"],
+                "Health signature differs from sealed runtime",
+            )
+        require(
+            len({r["analysis_signature"] for r in runtimes.values()}) == 3,
+            "Policy/source signature did not change",
+        )
+        self.receipt["runtime_foundation_unchanged"] = True
         for entry in self.foreign:
             now = json.loads(
                 subprocess.check_output(["docker", "inspect", entry["Id"]])
@@ -646,6 +677,8 @@ def main():
     try:
         test.prepare()
         test.build()
+        test.receipt["model_comparison"] = compare_models(test.receipt["models"])
+        test.save()
         test.rollback()
         test.extras()
         test.finish()
