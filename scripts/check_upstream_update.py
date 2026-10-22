@@ -23,7 +23,13 @@ AFTER = "9e47e6594ba3d9616ba90720994ced008335416c"
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, required=True)
-    directory = parser.parse_args().output_dir.resolve()
+    parser.add_argument(
+        "--source-only",
+        action="store_true",
+        help="Stop before unchanged-engine regression; separate status",
+    )
+    args = parser.parse_args()
+    directory = args.output_dir.resolve()
     os.umask(0o077)
     directory.mkdir(parents=True, mode=0o700)
     receipt = {
@@ -85,6 +91,7 @@ def main():
                     "-c",
                     "core.hooksPath=/dev/null",
                     "fetch",
+                    "--no-auto-maintenance",
                     "--no-tags",
                     "--depth=1",
                     "https://github.com/vovkins/ru-llm-proxy.git",
@@ -186,15 +193,18 @@ os.execv(__GIT__,[__GIT__,*a])
         state.require(
             (ROOT / "upstream.lock.json").read_bytes() == current_lock, "test_failed"
         )
-        state.require(
-            before
-            == {
-                str(p.relative_to(source)): hashlib.sha256(p.read_bytes()).hexdigest()
-                for p in source.rglob("*")
-                if p.is_file()
-            },
-            "test_failed",
+        after_files = {
+            str(p.relative_to(source)): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in source.rglob("*")
+            if p.is_file()
+        }
+        receipt["source_input_changed_paths"] = sorted(
+            p
+            for p in set(before) | set(after_files)
+            if before.get(p) != after_files.get(p)
         )
+        save()
+        state.require(before == after_files, "test_failed")
         ops = [
             json.loads(line)
             for line in (directory / "source-operations.jsonl").read_text().splitlines()
@@ -231,6 +241,9 @@ os.execv(__GIT__,[__GIT__,*a])
             "model_dependencies_unchanged": True,
         }
         save()
+        if args.source_only:
+            receipt["status"] = "source_only_passed"
+            return
         run(
             "current-engine-regression",
             [
