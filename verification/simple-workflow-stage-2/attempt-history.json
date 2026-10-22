@@ -1,0 +1,34 @@
+{
+  "verification_version": 1,
+  "runs": [
+    {
+      "run_id": 39741316366,
+      "source_revision": "54050aaa833323079c8a20682ba4a5bbc69ab3df",
+      "amd64": "success",
+      "arm64": "success",
+      "scope": "Initial native build/public CLI parity/reuse/injected rollback"
+    },
+    {
+      "run_id": 39742344566,
+      "source_revision": "34250d0eea8039915263aebcf045ed2636248598",
+      "amd64": "success",
+      "arm64": "success",
+      "scope": "Generated metadata excluded; actual SIGTERM/timeout exit2"
+    },
+    {
+      "run_id": 39743057999,
+      "source_revision": "a66310b7ce734aa49a3b2545ddce3fc1ffc6afcd",
+      "amd64": "failure",
+      "arm64": "success",
+      "scope": "Overstrict timeout diagnostic gate; AMD64 returned expected2 but not sole run_timeout. Not accepted as a passing run."
+    },
+    {
+      "run_id": 39744041536,
+      "source_revision": "baee3230cefca525ee434e9af5e83402bf8f064c",
+      "amd64": "success",
+      "arm64": "success",
+      "scope": "Final observed SIGINT/exit2/known diagnostics/cleanup + full synthetic values; final receipts native-amd64.json/native-arm64.json"
+    }
+  ],
+  "raw_logs_or_reports_included": false
+}

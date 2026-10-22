@@ -107,18 +107,19 @@ class EntryTests(unittest.TestCase):
             (tool / "scripts/workflow.py").write_text(
                 'import json,os;print(json.dumps([os.environ.get("_SCANNER_REPO"),os.environ.get("_SCANNER_EXPLICIT")]))'
             )
-            result = self.invoke(
-                "make",
-                "-f",
-                str(tool / "Makefile"),
-                "scan",
-                "REPO=/a path/Юникод",
-                cwd=Path(name),
-            )
-            self.assertEqual(result.returncode, 0, result.stderr)
-            values = json.loads(result.stdout)
-            self.assertEqual(values[0], "/a path/Юникод")
-            self.assertIn("REPO", values[1])
+            for value in ("/a path/Юникод", "/quotes'\"; &|<>! [literal]"):
+                result = self.invoke(
+                    "make",
+                    "-f",
+                    str(tool / "Makefile"),
+                    "scan",
+                    "REPO=" + value,
+                    cwd=Path(name),
+                )
+                self.assertEqual(result.returncode, 0, result.stderr)
+                values = json.loads(result.stdout)
+                self.assertEqual(values[0], value)
+                self.assertIn("REPO", values[1])
 
     def test_invalid_values_fail_before_daemon(self):
         cases = [
