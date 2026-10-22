@@ -5,6 +5,11 @@ import argparse
 import json
 from pathlib import Path
 
+HISTORICAL_RULE_IDS = {
+    "unpadded-declared": ("BASE64_DATA", 20, 27, "structural"),
+    "typed-secret-json": ("SECRET_KEY", 22, 54, "structural"),
+}
+
 
 def compare(a, b):
     if a["status"] != "passed" or b["status"] != "passed":
@@ -13,8 +18,13 @@ def compare(a, b):
         raise ValueError("Native platform pair required")
     if a["scanner_source"] != b["scanner_source"]:
         raise ValueError("Different scanner sources")
+    if not a.get("testing_inputs_sha256") or a["testing_inputs_sha256"] != b.get(
+        "testing_inputs_sha256"
+    ):
+        raise ValueError("Different or missing frozen testing inputs")
     delta = 0
     count = 0
+    historical_metadata = []
     for variant in ("old", "content", "logistic"):
         left, right = (v["models"][variant] for v in (a, b))
         if (
@@ -45,7 +55,32 @@ def compare(a, b):
                 if {k: v for k, v in x.items() if k != "score"} != {
                     k: v for k, v in y.items() if k != "score"
                 }:
-                    raise ValueError("Finding spans/value/source differ: " + name)
+                    approved_old_metadata = (
+                        variant == "old"
+                        and name in HISTORICAL_RULE_IDS
+                        and tuple(
+                            x[k] for k in ("entity_type", "start", "end", "source")
+                        )
+                        == HISTORICAL_RULE_IDS[name]
+                        and {x["rule_id"], y["rule_id"]} == {None, "base64.declared"}
+                        and {
+                            k: v for k, v in x.items() if k not in {"score", "rule_id"}
+                        }
+                        == {k: v for k, v in y.items() if k not in {"score", "rule_id"}}
+                    )
+                    if not approved_old_metadata:
+                        raise ValueError(
+                            "Finding spans/value/source/rule differ: " + name
+                        )
+                    historical_metadata.append(
+                        {
+                            "variant": variant,
+                            "case": name,
+                            "left_rule_id": x["rule_id"],
+                            "right_rule_id": y["rule_id"],
+                            "owner_approved_criterion": "2026-10-22",
+                        }
+                    )
                 delta = max(delta, abs(x["score"] - y["score"]))
                 count += 1
     x, y = (v["public"] for v in (a, b))
@@ -77,6 +112,7 @@ def compare(a, b):
         "requests_coverage": x["coverage"],
         "requests_findings": x["findings"],
         "metrics": a["models"]["logistic"]["metrics"],
+        "historical_rule_id_differences": historical_metadata,
         "raw_values_exported": False,
     }
 

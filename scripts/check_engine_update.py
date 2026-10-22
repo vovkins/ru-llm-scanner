@@ -50,6 +50,9 @@ class Acceptance:
                 "tests/corpus/load_code_corpus.py",
                 "verification/simple-workflow-stage-6/expectations.md",
                 "verification/simple-workflow-stage-6/criterion-amendment.md",
+                "verification/simple-workflow-stage-6/metadata-review.md",
+                "examples/upstream/base64-metadata-review.json",
+                "examples/upstream/patches/analyzer-api-base64-v2.patch",
             )
         }
 
@@ -288,7 +291,7 @@ class Acceptance:
             "--to",
             NEW,
             "--review",
-            ROOT / "examples/upstream/base64-review.json",
+            ROOT / "examples/upstream/base64-metadata-review.json",
             "--output",
             self.root / "candidate",
         )

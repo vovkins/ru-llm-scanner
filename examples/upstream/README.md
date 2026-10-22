@@ -37,3 +37,16 @@ API adapter использует exported entity catalog и четыре пуб�
 Закреплённый upstream docs/base64-logistic.md указывает SHA256 исходного архива/модуля и сообщает, что код/коэффициенты сгенерированы Claude по запросу автора PR, без стороннего кода. Сам архив не опубликован, training inputs брались с плавающего HEAD: побайтовое воспроизведение обучения не подтверждено. Переносятся именно закреплённые коэффициенты; новые метрики scanner нужно измерить отдельно. Перед распространением сверяются происхождение и notices; неизменный THIRD_PARTY_NOTICES сам по себе не является такой проверкой.
 Рабочий клон proxy, его конфиги/секреты и существующие deployments не изменяются.
 [Инструкция инструмента](../../docs/reference/upstream-update.md).
+
+## Этап6: стабильность scanner metadata
+
+[Отдельный review v2](base64-metadata-review.json) использует ту же пару A/B и
+полный source inventory. [API v2](patches/analyzer-api-base64-v2.patch) сохраняет
+решения/координаты/значения/source/score, но для уже найденных structural declarations
+выбирает существующий точный upstream Base64 rule. Причина — дедупликация Presidio,
+не учитывающая metadata; старый API мог случайно оставить rule_id=null.
+[Измерение и согласование](../../verification/simple-workflow-stage-6/metadata-review.md).
+
+V1 review/patch и evidence этапа5 сохраняются. V2 candidate source_prepared не
+считается новым native/runtime pass: настоящая приёмка этапа6 ещё выполняется.
+Модель, dependencies, dictionary, коэффициенты и frozen annotations не меняются.

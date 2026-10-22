@@ -25,17 +25,28 @@ Base64 declaration rule из document-pass/public analyze_declared. Metadata map
 или source. Logistic coefficients и frozen corpus прежние. На новом API строго
 проверяются стабильные rule_id, raw/patched common fields и все точные метрики.
 
-Уточнение historical-only gate отдельно предъявлено владельцу. Пока оно не
-получено, strict old rule_id сравнение остаётся блокирующим. Нельзя скрывать
+Владелец явно согласовал2026-10-22: «Согласовать: исторический drift описать,
+новый исправить». Historical-only исключение ограничено этими двумя case IDs и
+парой rule_id null/base64.declared при полном совпадении остальных identity fields;
+score сохраняет прежний tolerance1e-5. Content/logistic rule_id проверяются строго. Нельзя скрывать
 расхождения удалением rule_id из receipts или изменением старых образов/аннотаций.
 
 ## Частный проверенный прототип
 
-[Предлагаемый patch](proposed-analyzer-api-base64-v2.patch) ещё не включён в
-review/locks/текущие образы. [Безопасная сводка](metadata-prototype.json): настоящий
+[Patch-прототип](proposed-analyzer-api-base64-v2.patch) перенесён в отдельный
+review v2; root source lock и текущие образы ещё не переключены. [Безопасная сводка](metadata-prototype.json): настоящий
 локальный ARM64/model run на неизменном старом package/model image с новым source
 overlay, network=none,2CPU/3GiB.65 raw/patched common-field parity cases прошли,
 NER ready; exact33/14/4 и2511/3/1 сохранены. Оба проблемных новых declaration
 rule_id стали base64.declared-json; NER и logistic-cascade fragment не меняются.
 Это прототип, не freshly-built native image acceptance; повторная стабильность
 и новые нативные комплекты пока не подтверждены. Текущие pins/images не менялись.
+
+Новый [review](../../examples/upstream/base64-metadata-review.json) и API v2
+сохраняют исходный stage5 review/API v1 без изменений. Native приёмка v2 pending;
+root pin пока старый. [Отдельное NER/Base64 уточнение](criterion-amendment.md) прежнее.
+
+Local source preparation v2:106sources/0blockers; source lock23903ac45dd82fb1b2839bd841d8faa5818e38d6bfabc4ad19607bdd69321f2c
+отличается от stage5 d663 только patches.259unit/0skip/0missing пройдены;
+отдельные regressions проверяют canonical metadata, запрет NER/native relabel,
+неизменность входных результатов и узкий historical-only scope.

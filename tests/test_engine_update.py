@@ -36,6 +36,7 @@ def receipt(platform):
         "status": "passed",
         "platform": platform,
         "scanner_source": "b" * 40,
+        "testing_inputs_sha256": {"synthetic": "e" * 64},
         "models": {k: copy.deepcopy(model) for k in ("old", "content", "logistic")},
         "public": {
             "source": "pinned",
@@ -80,6 +81,45 @@ def overlap_models():
 
 
 class EngineUpdateTests(unittest.TestCase):
+    def test_historical_rule_id_exception_does_not_apply_to_new_engine(self):
+        a, b = receipt("linux/amd64"), receipt("linux/arm64")
+        case = {
+            "path": "base64/unpadded-declared.txt",
+            "corpus": "base64-update-v1",
+            "missing": [],
+            "extra": [],
+            "rows": [
+                {
+                    "entity_type": "BASE64_DATA",
+                    "start": 20,
+                    "end": 27,
+                    "score": 0.95,
+                    "source": "structural",
+                    "rule_id": "base64.declared",
+                    "text_sha256": "f" * 64,
+                }
+            ],
+        }
+        for result in (a, b):
+            for model in result["models"].values():
+                model["cases"]["unpadded-declared"] = copy.deepcopy(case)
+        b["models"]["old"]["cases"]["unpadded-declared"]["rows"][0]["rule_id"] = None
+        result = compare(a, b)
+        self.assertEqual(len(result["historical_rule_id_differences"]), 1)
+        b["models"]["logistic"]["cases"]["unpadded-declared"]["rows"][0][
+            "rule_id"
+        ] = None
+        with self.assertRaises(ValueError):
+            compare(a, b)
+
+    def test_historical_exception_rejects_other_case_or_source_changes(self):
+        a, b = receipt("linux/amd64"), receipt("linux/arm64")
+        b["models"]["old"]["cases"]["synthetic"]["rows"][0][
+            "rule_id"
+        ] = "base64.declared"
+        with self.assertRaises(ValueError):
+            compare(a, b)
+
     def test_approved_overlap_preserves_exact_metrics(self):
         models = overlap_models()
         before = copy.deepcopy(models)
@@ -125,6 +165,7 @@ class EngineUpdateTests(unittest.TestCase):
             {"status": "failed"},
             {"scanner_source": "e" * 40},
             {"platform": "linux/amd64"},
+            {"testing_inputs_sha256": {}},
         ):
             with self.assertRaises(ValueError):
                 compare(a, {**b, **change})
