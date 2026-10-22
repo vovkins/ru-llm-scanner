@@ -4,6 +4,7 @@
 import argparse
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -64,6 +65,34 @@ class Acceptance:
                 "seconds": round(time.monotonic() - started, 3),
             }
         )
+        if process.returncode != expected:
+            self.receipt["failed_step"] = label
+            # Only curated synthetic probes, never public-repository output.
+            if label.endswith("-model") or "upstream-base64" in label:
+                self.receipt["synthetic_failure_diagnostics"] = (
+                    self.root / (label + ".log")
+                ).read_text(errors="replace")[-2500:]
+            if label.endswith("-make-build"):
+                outer = (self.root / (label + ".log")).read_text(errors="replace")
+                self.receipt["build_failure_stage"] = [
+                    s
+                    for s in outer.splitlines()
+                    if "отказ на стадии" in s or "Scanner:" in s
+                ]
+                diagnostics = []
+                for log in (cwd / ".build/workflow").glob("builds/*/*.log"):
+                    lines = log.read_text(errors="replace").splitlines()
+                    # These builds precede user input; export only the exception
+                    # type/fixed failure message, not a raw acquisition/build log.
+                    for line in lines:
+                        if re.search(
+                            r"(?:ArtifactError|Failure|RuntimeError|UnicodeEncodeError|ModuleNotFoundError|CalledProcessError):",
+                            line,
+                        ):
+                            diagnostics.append(
+                                {"stage": log.stem, "exception": line[-800:]}
+                            )
+                self.receipt["build_failure_diagnostics"] = diagnostics[-10:]
         self.save()
         require(process.returncode == expected, "Step failed: " + label)
 
@@ -245,6 +274,9 @@ class Acceptance:
                     "--output",
                     self.root / (name + "-upstream-base64.json"),
                     home=home,
+                )
+                self.receipt.setdefault("upstream_base64", {})[name] = read_json(
+                    self.root / (name + "-upstream-base64.json")
                 )
             output = self.root / (name + "-model")
             output.mkdir(mode=0o700)
@@ -463,6 +495,11 @@ class Acceptance:
             path = self.root / relative
             if path.exists():
                 self.receipt[label] = read_json(path)
+        summaries = list((self.root / "capacity").glob("probe-summary-*.json"))
+        if summaries:
+            self.receipt["capacity"] = read_json(
+                max(summaries, key=lambda p: int(p.stem.rsplit("-", 1)[1]))
+            )
         self.save()
 
     def finish(self):
