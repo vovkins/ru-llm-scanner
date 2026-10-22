@@ -136,6 +136,7 @@ def materials():
             p
             for p in entries
             if not any(n in {"__pycache__", ".DS_Store"} for n in p.parts)
+            and not any(n.endswith(".egg-info") for n in p.parts)
             and p.suffix not in {".pyc", ".pyo"}
             and not p.is_dir()
         ]
@@ -162,7 +163,7 @@ def build_path(value):
     require(not root.is_symlink(), "invalid_workflow_state")
     path = root / value
     require(path.is_dir() and not path.is_symlink(), "invalid_workflow_state")
-    return path
+    return owned_directory(path)
 
 
 def selected(server, inputs):

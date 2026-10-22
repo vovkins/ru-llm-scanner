@@ -110,7 +110,10 @@ class Builder:
                 )
             if directory is None:
                 directory = root / ("env-" + uuid.uuid4().hex)
-                venv.EnvBuilder(with_pip=True).create(directory)
+                try:
+                    venv.EnvBuilder(with_pip=True).create(directory)
+                except (OSError, subprocess.SubprocessError):
+                    raise legacy.Failure("venv_unavailable") from None
                 self.python = directory / "bin/python"
                 self.step(
                     "bootstrap",
@@ -172,7 +175,9 @@ class Builder:
             shutil.copytree(
                 state.ROOT / name,
                 target / name,
-                ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store"),
+                ignore=shutil.ignore_patterns(
+                    "__pycache__", "*.pyc", "*.egg-info", ".DS_Store"
+                ),
             )
         return target
 

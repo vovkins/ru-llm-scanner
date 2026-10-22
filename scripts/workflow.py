@@ -63,6 +63,7 @@ MESSAGES = {
     "scan_cancelled": "Операция отменена; доступные отчёты сохранены приватно.",
     "invalid_mount": "Неверный путь REPO/CONFIG/BASELINE. Проверьте существование и ссылки.",
     "git_required": "Установите Git и повторите make build.",
+    "venv_unavailable": "Python не смог создать venv с pip. Установите поддержку venv/ensurepip и повторите make build.",
     "docker_api_too_old": "Нужен Docker server с API 1.49+. Обновите Docker и повторите команду.",
     "compose_version_unsupported": "Установите Docker Compose v2+ и повторите команду.",
     "rootless_daemon_unsupported": "Для этого пути нужен rootful Docker server.",

@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import signal
 import subprocess
 import sys
 import time
@@ -61,6 +62,7 @@ def main():
     started = time.monotonic()
 
     def run(label, command, expected=0):
+        print("Native workflow: " + label, flush=True)
         result = subprocess.run(
             command, cwd=ROOT, env=env, capture_output=True, timeout=7200
         )
@@ -125,7 +127,7 @@ os.execv(os.environ['SCANNER_REAL_DOCKER'],[os.environ['SCANNER_REAL_DOCKER'],*a
         require(
             before == state.current_path(server).read_bytes(), "Reuse changed selection"
         )
-        repo = directory / "input repo"
+        repo = directory / "input repo Юникод"
         repo.mkdir()
         git_env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
         git_env.update(GIT_CONFIG_NOSYSTEM="1", GIT_CONFIG_GLOBAL=os.devnull)
@@ -163,6 +165,11 @@ os.execv(os.environ['SCANNER_REAL_DOCKER'],[os.environ['SCANNER_REAL_DOCKER'],*a
         canary = "R7vN!2mQ9zL8"
         (repo / "change.py").write_text('settings = {"password": "' + canary + '"}\n')
         b = commit()
+        (repo / "change.py").write_text(
+            'raise RuntimeError("uncommitted-must-not-execute")\n'
+        )
+        (repo / "Makefile").write_text("all:\n\ttouch forbidden-input-marker\n")
+        (repo / ".env").write_text("REPO=/must-not-select\nCOMMIT=not-a-commit\n")
         initial = {
             str(p.relative_to(repo)): legacy.digest(p)
             for p in repo.rglob("*")
@@ -331,6 +338,76 @@ os.execv(os.environ['SCANNER_REAL_DOCKER'],[os.environ['SCANNER_REAL_DOCKER'],*a
             "Concurrent scan failed",
         )
         receipt["concurrent_scan_and_build_reuse"] = True
+        run(
+            "runtime-timeout",
+            [
+                entry,
+                "scan",
+                "--repo",
+                str(repo),
+                "--commit",
+                a,
+                "--run-timeout-seconds",
+                "0.01",
+                "--stop-grace-seconds",
+                "1",
+            ],
+            2,
+        )
+        # Cancel a real public scan after its own Compose resources exist.
+        cancelled = subprocess.Popen(
+            [
+                entry,
+                "scan",
+                "--repo",
+                str(repo),
+                "--commit",
+                a,
+                "--output",
+                str(directory / "cancelled-output"),
+            ],
+            cwd=ROOT,
+            env=env,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        try:
+            project = None
+            deadline = time.monotonic() + 90
+            while time.monotonic() < deadline and cancelled.poll() is None:
+                projects = subprocess.check_output(
+                    [
+                        real_docker,
+                        "ps",
+                        "-a",
+                        "--filter",
+                        "label=com.docker.compose.project",
+                        "--format",
+                        '{{.Label "com.docker.compose.project"}}',
+                    ],
+                    text=True,
+                ).splitlines()
+                own = set(p for p in projects if p.startswith("rullmscan-"))
+                if own:
+                    require(len(own) == 1, "Unexpected concurrent own project")
+                    project = own.pop()
+                    break
+                time.sleep(0.1)
+            require(project is not None, "No resources observed before cancellation")
+            cancelled.send_signal(signal.SIGTERM)
+            stdout, stderr = cancelled.communicate(timeout=90)
+            (directory / "runtime-cancelled.log").write_bytes(stdout + stderr)
+            require(cancelled.returncode == 2, "Cancelled scan returned success")
+            require(b"scan_cancelled" in stderr, "Cancellation diagnostic missing")
+            require(
+                not any(legacy.owned_resources(project)),
+                "Cancellation leaked own resources",
+            )
+            receipt["runtime_sigterm_and_own_cleanup"] = True
+        finally:
+            if cancelled.poll() is None:
+                cancelled.send_signal(signal.SIGTERM)
+                cancelled.communicate(timeout=90)
         # Inject a failure before build work to check rollback without rebuilding images.
         bad = dict(inputs, synthetic_failure="changed")
         with (

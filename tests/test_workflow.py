@@ -12,6 +12,7 @@ import sys
 import tempfile
 import time
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -297,6 +298,130 @@ class StateTests(unittest.TestCase):
         ):
             with self.assertRaisesRegex(legacy.Failure, "workflow_build_required"):
                 state.selected(self.server, self.inputs)
+
+    def test_foreign_daemon_never_selects_another_daemons_install(self):
+        candidate = self.candidate()
+        state.publish(self.server, candidate, self.inputs)
+        other = dict(self.server, key="f" * 64)
+        with self.assertRaisesRegex(legacy.Failure, "workflow_build_required"):
+            state.selected(other, self.inputs)
+
+
+class DaemonTests(unittest.TestCase):
+    def test_server_architecture_aliases_and_unsupported_platforms(self):
+        for architecture, expected in (
+            ("aarch64", "arm64"),
+            ("x86_64", "amd64"),
+            ("arm64", "arm64"),
+            ("amd64", "amd64"),
+            ("riscv64", None),
+        ):
+
+            def docker(*args):
+                value = {
+                    "ID": "synthetic-daemon",
+                    "OSType": "linux",
+                    "Architecture": architecture,
+                }
+                if args[0] == "version":
+                    value = {"ApiVersion": "1.49"}
+                return SimpleNamespace(
+                    stdout=(
+                        b"2.38.2\n"
+                        if args[0] == "compose"
+                        else json.dumps(value).encode()
+                    )
+                )
+
+            with (
+                patch.object(state, "docker", side_effect=docker),
+                patch.object(state.os, "getuid", return_value=1000),
+            ):
+                if expected is None:
+                    with self.assertRaisesRegex(
+                        legacy.Failure, "unsupported_daemon_platform"
+                    ):
+                        state.daemon()
+                else:
+                    self.assertEqual(state.daemon()["platform"], "linux/" + expected)
+
+
+class MaterialTests(unittest.TestCase):
+    def test_generated_package_metadata_is_not_a_material_or_wheel_input(self):
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            for item in (
+                "scanner",
+                "Makefile",
+                "README.md",
+                "pyproject.toml",
+                "requirements-dev.txt",
+                "upstream.lock.json",
+                "LICENSE",
+                "DISTRIBUTION_NOTICES.md",
+                "THIRD_PARTY_NOTICES.md",
+            ):
+                (root / item).write_text("fixture")
+            for folder in ("src", "scripts", "docker", "locks", "patches", "licenses"):
+                (root / folder).mkdir()
+            package = root / "src/fixture"
+            package.mkdir()
+            (package / "__init__.py").write_text("x=1")
+            with patch.object(state, "ROOT", root):
+                before = state.materials()
+                metadata = root / "src/fixture.egg-info"
+                metadata.mkdir()
+                (metadata / "PKG-INFO").write_text("generated")
+                self.assertEqual(before, state.materials())
+                build = root / "candidate"
+                build.mkdir()
+                wheel_source = workflow_build.Builder({}, build).wheel_source()
+                self.assertFalse((wheel_source / "src/fixture.egg-info").exists())
+                self.assertTrue((wheel_source / "src/fixture/__init__.py").is_file())
+
+
+class ScanBoundaryTests(unittest.TestCase):
+    def test_infrastructure_error_dominates_clean_report_and_console_hides_values(self):
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            repo = root / "input"
+            repo.mkdir()
+            for error in (
+                "run_timeout",
+                "scan_cancelled",
+                "analyzer_failed",
+                "cleanup_failed",
+                "scanner_failed",
+            ):
+                output = root / error
+                output.mkdir(mode=0o700)
+                (output / "report.json").write_text(
+                    json.dumps(
+                        {
+                            "coverage": {"counts": {"analyzed": 1, "error": 0}},
+                            "result": {"exit_code": 0, "findings_count": 0},
+                            "findings": [{"value": "private-canary-do-not-print"}],
+                        }
+                    )
+                )
+                console = io.StringIO()
+                with (
+                    patch.object(state, "daemon", return_value={}),
+                    patch.object(state, "materials", return_value={}),
+                    patch.object(state, "selected", return_value=(root, {})),
+                    patch.object(workflow, "report_directory", return_value=output),
+                    patch.object(
+                        legacy,
+                        "run_scan",
+                        return_value={"exit_code": 2, "error": error},
+                    ),
+                    contextlib.redirect_stdout(console),
+                    contextlib.redirect_stderr(console),
+                ):
+                    status = workflow.main(["scan", "--repo", str(repo)])
+                self.assertEqual(status, 2)
+                self.assertIn(error, console.getvalue())
+                self.assertNotIn("private-canary-do-not-print", console.getvalue())
 
 
 class CancellationTests(unittest.TestCase):
