@@ -44,6 +44,14 @@ Black 25.1.0 — dev-tool. Build backend закреплён отдельно. Ho
 | `verification/` | Версионированные безопасные evidence и границы результатов |
 | `.build/` | Локальные private assets/results; не публикуются |
 
+Этап6 использует `scripts/check_engine_update.py`: отдельные old/content/logistic
+установки, real-model raw/patched parity, прежний code-v1 и заранее размеченный
+base64-update-v1, затем CLI rollback, runtime faults/capacity/Requests и настоящий
+Jenkins AMD64. [Ожидания и статус](../verification/simple-workflow-stage-6/README.md)
+отделяют принятый выбор logistic от проверки переноса. Межплатформенное сравнение
+выполняет `scripts/compare_engine_update.py`; tolerance1e-5 относится только к
+score при одинаковых решениях/spans/значениях/source. Сырые отчёты не артефакты CI.
+
 Архитектура: [обзор](architecture.md), [ADR](decisions/README.md),
 [требования](requirements.md). API: [Git](git-reader.md), [scan](scan-api.md),
 [Analyzer](analyzer.md), [dev CLI](cli-quickstart.md).

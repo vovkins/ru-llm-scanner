@@ -20,6 +20,7 @@ REQUIRED_MODULES = {
     "test_workflow",
     "test_workflow_test",
     "test_workflow_jenkins",
+    "test_engine_update",
 }
 
 

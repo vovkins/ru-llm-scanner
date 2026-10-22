@@ -41,6 +41,16 @@ class Acceptance:
             "registry_or_release_write": False,
         }
         self.started = time.monotonic()
+        self.receipt["testing_inputs_sha256"] = {
+            name: file_hash(ROOT / name)
+            for name in (
+                "tests/integration/engine_update_model.py",
+                "tests/corpus/code-v1.json",
+                "tests/corpus/base64-update-v1.json",
+                "tests/corpus/load_code_corpus.py",
+                "verification/simple-workflow-stage-6/expectations.md",
+            )
+        }
 
     def save(self):
         write_json(self.root / "engine-update.json", self.receipt)
@@ -93,6 +103,48 @@ class Acceptance:
                                 {"stage": log.stem, "exception": line[-800:]}
                             )
                 self.receipt["build_failure_diagnostics"] = diagnostics[-10:]
+                for deployment in (cwd / ".build/workflow/builds").glob(
+                    "*/deployment.json"
+                ):
+                    built = deployment.parent
+                    if not (built / "smoke-repo").is_dir():
+                        continue
+                    diagnostic_output = built / ("diagnostic-" + uuid.uuid4().hex)
+                    result = subprocess.run(
+                        [
+                            sys.executable,
+                            cwd / "scripts/docker_scanner.py",
+                            "snapshot",
+                            "--repo",
+                            built / "smoke-repo",
+                            "--commit",
+                            "HEAD",
+                            "--deployment-lock",
+                            deployment,
+                            "--output",
+                            diagnostic_output,
+                        ],
+                        cwd=cwd,
+                        env=self.env,
+                        capture_output=True,
+                        timeout=180,
+                    )
+                    try:
+                        summary = json.loads(result.stdout)
+                        self.receipt["smoke_failure_summary"] = {
+                            k: summary.get(k) for k in ("exit_code", "error")
+                        }
+                        report_path = diagnostic_output / "report.json"
+                        if report_path.is_file():
+                            report = read_json(report_path)
+                            self.receipt["smoke_report_error_codes"] = [
+                                e["code"] for e in report["errors"]
+                            ]
+                    except ValueError:
+                        self.receipt["smoke_failure_summary"] = {
+                            "exit_code": result.returncode,
+                            "error": "diagnostic_protocol_error",
+                        }
         self.save()
         require(process.returncode == expected, "Step failed: " + label)
 
@@ -240,6 +292,16 @@ class Acceptance:
         self.save()
 
     def build(self):
+        curated = self.root / "model-inputs"
+        for name in ("src", "tests/corpus"):
+            shutil.copytree(
+                ROOT / name,
+                curated / name,
+                ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
+            )
+        helper = curated / "tests/integration/engine_update_model.py"
+        helper.parent.mkdir(parents=True)
+        shutil.copyfile(ROOT / "tests/integration/engine_update_model.py", helper)
         for name, home in self.homes.items():
             self.run(name + "-make-build", ["make", "build"], cwd=home)
             info = self.inventory(home)
@@ -310,7 +372,7 @@ class Acceptance:
                         "-e",
                         "XDG_CACHE_HOME=/tmp/cache",
                         "--mount",
-                        f"type=bind,src={ROOT},dst=/scanner,readonly",
+                        f"type=bind,src={curated},dst=/scanner,readonly",
                         "--mount",
                         f"type=bind,src={installed / 'analyzer'},dst=/context,readonly",
                         "--mount",
