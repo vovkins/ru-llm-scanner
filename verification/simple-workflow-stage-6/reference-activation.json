@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "current_reference": "verification/simple-workflow-stage-6/requests-reference.json",
+  "current_reference_sha256": "3a22f1fab15ef06ba9331cd6372fcd002e9e64ac85d945d282f2e11669725ad3",
+  "current_reference_findings": 632,
+  "native_measurements": {
+    "amd64": {
+      "configuration_coverage_engine_contract_and_decisions_equal": true,
+      "maximum_score_delta": 0.0
+    },
+    "arm64": {
+      "configuration_coverage_engine_contract_and_decisions_equal": true,
+      "maximum_score_delta": 3.3974647521972656e-06
+    }
+  },
+  "historical_reference_sha256": "e305a883927f6c3b47cb35eceae896310856280b077958c902941b12265e341b",
+  "historical_reference_unchanged": true,
+  "frozen_testing_inputs_unchanged": {
+    "tests/integration/engine_update_model.py": "cbbff96d55035f8dd9c0f0a5969f540b74bf7452559bab6ee72f954136caf844",
+    "tests/corpus/code-v1.json": "44e7f17513c1d44f4eacf69e513a404b1b312d27e364b9fe70bb1acee0d12d80",
+    "tests/corpus/base64-update-v1.json": "54f365fc85b53f888562c5560289fb1127cb8d36d5aab80798b1367e4e6306b7",
+    "tests/corpus/load_code_corpus.py": "34570026325dc91ae26ec4102680e46f1670564ed16713f4c5da86d73b145a59",
+    "verification/simple-workflow-stage-6/expectations.md": "b2706c960b3f7f239a6e16e4e28f2df32516e6cbbebebe0138a976a21558e633",
+    "verification/simple-workflow-stage-6/criterion-amendment.md": "77f2115ccdb32de01aca7a97e3e13689909fbee72486107d1f54f09b3bd11c7d",
+    "verification/simple-workflow-stage-6/metadata-review.md": "179be17d496cdd6990dc2514afdedbc1d47a55a07daab662bd72eb858aaa5eb8",
+    "examples/upstream/base64-metadata-review.json": "aa52ea1067c50198a22eec599f7ee03a59abc956a9ef69ee77f2a75262bd11f7",
+    "examples/upstream/patches/analyzer-api-base64-v2.patch": "79d2083b5529412b5c47e88e4ee675a6a4a8c3c8ad5d011fe648bb69214b4b07"
+  },
+  "raw_values_exported": false
+}

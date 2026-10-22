@@ -1,6 +1,6 @@
 # Результаты проверок
 
-[Упрощение, этап 6: logistic/rollback/Jenkins](simple-workflow-stage-6/README.md) — полный native run39848479099 SUCCESS на AMD64/ARM64, 261 unit/0skip, 13 настоящих Jenkins AMD64 сценариев. Exact9e47e65/logistic/API v2 закреплены в ветке; финальная привязка документации проверяется отдельно.
+[Упрощение, этап 6: logistic/rollback/Jenkins](simple-workflow-stage-6/README.md) — полный native run39848479099 SUCCESS на AMD64/ARM64, 261 unit/0skip, 13 настоящих Jenkins AMD64 сценариев. Exact9e47e65/logistic/API v2 закреплены в ветке; финальный clean walkthrough39856787113 прошёл на обеих CPU, все109 material inputs совпали.
 
 [Упрощение, этап5: controlled proxy update](simple-workflow-stage-5/README.md) — whole-tree25 changes/106 source candidate, exact review/patches, native AMD64/ARM64 source preparation +244unit/0skip/current-engine regression. Source-only подготовка отделена от последующей runtime приёмки этапа 6.
 

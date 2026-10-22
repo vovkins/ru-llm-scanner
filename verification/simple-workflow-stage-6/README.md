@@ -100,8 +100,24 @@ rootless Docker, GPU и настоящий ARM64 Jenkins не проверяли
 [AMD64](material-inputs-amd64.json) / [ARM64](material-inputs-arm64.json).
 После успешных gates source lock/API v2 перенесены побайтово из проверенного
 кандидата; обновлены документация и reference helper. Заключительный чистый
-native build/test/walkthrough этой финальной ветки ещё выполняется; завершение
-задач и финальный material proof будут зафиксированы по его результату.
+[run39856787113](https://github.com/vovkins/ru-llm-scanner/actions/runs/39856787113)
+на source **e6c8e65f01ff5646d25f7f917febd85ef5bf127c** прошёл на обеих CPU:
+19 случаев,9 буквальных блоков,261unit/0skip/0missing,22 own projects cleaned,
+acquisition0. [AMD64](final-walkthrough-amd64.json) /
+[ARM64](final-walkthrough-arm64.json), [fast CI](fast-run.json).
+Все109 material inputs совпадают с текущим source;9 frozen testing inputs и
+буквальные команды совпали с модельной приёмкой. [Material proof](material-adoption.json)
+объясняет две разницы относительно model-tested candidate: README как package
+metadata и default reference path проверочного helper. Детекторы/adapter/model
+bytes идентичны. [Reference binding](reference-activation.json) проверяет632
+fingerprints/config/coverage/engine contract на обеих CPU и сохраняет старый reference.
+
+[Preservation](preservation.json):43 из44 исходных protected inputs неизменны;
+единственная согласованная замена — основной source lock с точным candidate SHA.
+7 чужих контейнеров (Config/Running/StartedAt),58 первоначальных локальных image IDs,
+proxy HEAD,main и published releases/assets сохранены. Raw environment не выводился.
+Все24 пункта #49 и20 пунктов #38 выполнены; статус реализации завершён в draft-ветке,
+без merge или новой публикации.
 
 [Ревью](review.md), [история неуспешных попыток](attempt-history.md).
 Frozen expectations/amendments сохраняют формулировки своих checkpoint;

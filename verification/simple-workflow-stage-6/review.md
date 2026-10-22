@@ -14,7 +14,7 @@
 | Jenkins | Прямой adapter переиспользует input validation прежнего adapter, использует process0/1/2 и отдельный status. Trusted installation/input/config/baseline расположены вне очищаемого workspace, параметры не интерполируются в shell. Console не является протоколом. |
 | Test harness | Отрицательный Jenkins случай теперь действительно использует unbuilt installation. Docker observer связывает projects с WORKSPACE, запрещает acquisition и проверяет cleanup, не записывая raw argv. Его portable shebang проверен настоящим interpreter path с пробелом/emoji. |
 | Повторная сборка | Candidate source-only probe и runtime probe различаются явно описанной проверкой metadata. Build receipts сохраняют реальные inputs/IDs. Clean walkthrough использует новый checkout/HOME, не копирует build state/venv и сверяет все material hashes. |
-| Сохранность | Git reader, pipeline, report schema/renderer, model, dictionary, packages, прежние locks/patches/licenses/notices защищены проверкой хешей. Новая policy/source/patch меняют профиль явно, прежний baseline автоматически не принимается. |
+| Сохранность | Git reader, pipeline, report schema/renderer, model, dictionary, packages, прежние locks/patches/licenses/notices защищены проверкой хешей:43 прежних файла неизменны, основной source lock отдельно совпал с принятым candidate SHA-256. Новая policy/source/patch меняют профиль явно, прежний baseline автоматически не принимается. |
 
 Нерешённых замечаний к перечисленным изменениям исходников не выявлено.
 Это не обещание автоматической совместимости будущего proxy: для него снова
