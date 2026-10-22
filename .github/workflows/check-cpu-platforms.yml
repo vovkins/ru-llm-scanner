@@ -201,6 +201,7 @@ jobs:
             .build/native/steps.json
             .build/native/upstream-core.json
             .build/native/upstream-ner.json
+            .build/native/upstream-base64.json
             .build/native/parity/offline-verification.json
             .build/native/scan-integration/scan-verification.json
             .build/native/cli-integration/cli-verification.json
@@ -232,7 +233,7 @@ jobs:
           import json, shutil
           from pathlib import Path
           root=Path('.build/evidence'); root.mkdir(parents=True, exist_ok=True)
-          allowed=('build-summary.json','repeat-summary.json','steps.json','upstream-core.json','upstream-ner.json','linux-git.json','parity/offline-verification.json','scan-integration/scan-verification.json','cli-integration/cli-verification.json','acceptance/acceptance-verification.json','docker-integration/docker-verification.json','runtime-faults/fault-verification.json','deployment-extras/extras-verification.json','predictions/platform-predictions.json','public-requests/public-repository.json','native-inventory/native-inventory.json','fresh-install/fresh-install.json')
+          allowed=('build-summary.json','repeat-summary.json','steps.json','upstream-core.json','upstream-ner.json','upstream-base64.json','linux-git.json','parity/offline-verification.json','scan-integration/scan-verification.json','cli-integration/cli-verification.json','acceptance/acceptance-verification.json','docker-integration/docker-verification.json','runtime-faults/fault-verification.json','deployment-extras/extras-verification.json','predictions/platform-predictions.json','public-requests/public-repository.json','native-inventory/native-inventory.json','fresh-install/fresh-install.json')
           for name in allowed:
               path=Path('.build/native')/name
               if path.is_file():

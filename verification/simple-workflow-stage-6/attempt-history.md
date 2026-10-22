@@ -27,3 +27,8 @@ pipeline, схема и renderer не меняются. Старый checkout/о
 Source-only candidate содержит historical probe из своего baseline; runtime
 сборка сохраняет reviewed новый scanner metadata probe из ветки. Изменение
 фиксируется отдельными before/after SHA,106 upstream sources/coefficients прежние.
+
+|39832756956 /9bbf6c6|AMD64: три build/test и реальные raw/patched model runs прошли; strict frozen verdict остановил дальнейшие gates на NER/Base64 fragmentation. Code-v1 logistic33/14/4, Base642511/3/1 (2500 повторений одного stress). ARM64: old build/test244/model и content build прошли; content make test отказал, подробная suite-диагностика добавлена в следующую попытку. Причина пока не установлена. Обе ветки run FAILED. |
+|39835960260 /d59a69d|Выполняется: добавлены независимое продолжение после измерения exact-расхождения и детальная диагностика failed make test. Final source ещё содержит прежний strict критерий; даже полный runtime pass не будет выдаваться за зелёный итог этого run. |
+
+Узкое [уточнение plain-container](criterion-amendment.md) отдельно согласовано владельцем после измерения. Разметка и exact categorical метрики сохраняются. Никакие другие пропуски/добавки этим не разрешены.

@@ -556,6 +556,7 @@ class Acceptance:
         self.receipt["upstream_parity"] = read_json(
             self.root / "upstream-parity/offline-verification.json"
         )
+        self.save()
         self.py(
             "logistic-documentation-walkthrough",
             "check_documentation_walkthrough.py",
@@ -566,6 +567,7 @@ class Acceptance:
         self.receipt["documentation_walkthrough"] = read_json(
             self.root / "walkthrough/workflow-verification.json"
         )
+        self.save()
         self.py(
             "logistic-scan-integration",
             "check_scan_integration.py",
@@ -579,6 +581,10 @@ class Acceptance:
             self.root / "scan-integration",
             home=home,
         )
+        self.receipt["scan_integration"] = read_json(
+            self.root / "scan-integration/scan-verification.json"
+        )
+        self.save()
         self.py(
             "logistic-runtime-faults",
             "check_runtime_faults.py",
@@ -588,6 +594,8 @@ class Acceptance:
             self.root / "faults",
             home=home,
         )
+        self.receipt["faults"] = read_json(self.root / "faults/fault-verification.json")
+        self.save()
         self.py(
             "logistic-capacity",
             "../verification/operations-ner-windowing/probe.py",
@@ -597,6 +605,12 @@ class Acceptance:
             self.root / "capacity",
             home=home,
         )
+        summaries = list((self.root / "capacity").glob("probe-summary-*.json"))
+        if summaries:
+            self.receipt["capacity"] = read_json(
+                max(summaries, key=lambda p: int(p.stem.rsplit("-", 1)[1]))
+            )
+        self.save()
         self.py(
             "logistic-public",
             "check_public_repository.py",
@@ -608,6 +622,8 @@ class Acceptance:
             "--measure-update",
             home=home,
         )
+        self.receipt["public"] = read_json(self.root / "public/public-repository.json")
+        self.save()
         if info["lock"]["platform"] == "linux/amd64":
             self.py(
                 "logistic-jenkins",
@@ -620,19 +636,8 @@ class Acceptance:
                 self.root / "jenkins",
                 home=home,
             )
-        for label, relative in (
-            ("scan_integration", "scan-integration/scan-verification.json"),
-            ("faults", "faults/fault-verification.json"),
-            ("public", "public/public-repository.json"),
-            ("jenkins", "jenkins/jenkins-verification.json"),
-        ):
-            path = self.root / relative
-            if path.exists():
-                self.receipt[label] = read_json(path)
-        summaries = list((self.root / "capacity").glob("probe-summary-*.json"))
-        if summaries:
-            self.receipt["capacity"] = read_json(
-                max(summaries, key=lambda p: int(p.stem.rsplit("-", 1)[1]))
+            self.receipt["jenkins"] = read_json(
+                self.root / "jenkins/jenkins-verification.json"
             )
         self.save()
 
@@ -718,8 +723,86 @@ def compare_models(models, *, require_exact=True):
         differences[left + "_to_" + right] = changed
     new = models["logistic"]["metrics"]["base64-update-v1"]
     exact = new["fp"] == 0 and new["fn"] == 0
+    overlap = None
     if require_exact:
-        require(exact, "Frozen Base64 cases differ; inspect safe model receipt")
+        if not exact:
+            # Explicit owner amendment 2026-10-22, limited to this frozen case:
+            # preserve exact categorical metrics, require complete union coverage
+            # and the SAME pre-existing NER fragments. No annotation retuning.
+            failing = {
+                name: c
+                for name, c in models["logistic"]["cases"].items()
+                if c["corpus"] == "base64-update-v1" and (c["missing"] or c["extra"])
+            }
+            require(
+                set(failing) == {"plain-container"},
+                "Unexpected frozen Base64 discrepancy",
+            )
+            fixture = next(
+                c
+                for c in read_json(ROOT / "tests/corpus/base64-update-v1.json")["cases"]
+                if c["id"] == "plain-container"
+            )
+            case = failing["plain-container"]
+            require(
+                case["missing"] == fixture["expected"], "Unexpected missing Base64 span"
+            )
+            category, start, end = fixture["expected"][0]
+            rows = case["rows"]
+            native = {key(r) for r in rows if r["entity_type"] != category}
+            previous = {
+                key(r)
+                for r in models["content"]["cases"]["plain-container"]["rows"]
+                if r["entity_type"] != category
+            }
+            original = {
+                key(r)
+                for r in models["old"]["cases"]["plain-container"]["rows"]
+                if r["entity_type"] != category
+            }
+            require(
+                native == previous == original and bool(native), "NER overlap changed"
+            )
+            require(
+                new["fp"] == 3
+                and new["fn"] == 1
+                and sorted(
+                    (r["entity_type"], r["start"], r["end"], r["source"], r["rule_id"])
+                    for r in rows
+                )
+                == [
+                    (
+                        "BASE64_DATA",
+                        start + 1,
+                        end - 1,
+                        "structural",
+                        "base64.logistic-cascade",
+                    ),
+                    ("SECRET_KEY", start, start + 1, "ner", None),
+                    ("SECRET_KEY", end - 1, end, "ner", None),
+                ],
+                "Unexpected approved overlap representation",
+            )
+            cursor = start
+            for row in sorted(rows, key=lambda r: (r["start"], r["end"])):
+                require(
+                    start <= row["start"] < row["end"] <= end
+                    and row["start"] <= cursor,
+                    "Base64 union gap/outside span",
+                )
+                cursor = max(cursor, row["end"])
+            require(
+                cursor == end and any(r["entity_type"] == category for r in rows),
+                "Base64 union incomplete",
+            )
+            overlap = {
+                "case": "plain-container",
+                "expected_span": [start, end],
+                "full_union_coverage": True,
+                "preexisting_ner_fragments_preserved": True,
+                "exact_metrics_unchanged": dict(new),
+                "owner_approved_criterion": "2026-10-22",
+            }
     require(
         all(
             m["raw_patched_parity_cases"] > 0 and m["real_ner_ready"]
@@ -728,10 +811,11 @@ def compare_models(models, *, require_exact=True):
         "Missing real-model parity",
     )
     return {
-        "status": "passed" if exact else "measured_pending_frozen_criterion",
+        "status": "passed" if exact or overlap else "measured_pending_frozen_criterion",
         "differences": differences,
         "protected_non_base64_retained": True,
         "frozen_logistic_cases_exact": exact,
+        "approved_ner_overlap": overlap,
     }
 
 
