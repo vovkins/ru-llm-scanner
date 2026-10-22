@@ -2,8 +2,7 @@
 
 Статус: build/scan/diff реализованы на согласованном этапе
 [#40](https://github.com/vovkins/ru-llm-scanner/issues/40) по спецификации
-[#39](https://github.com/vovkins/ru-llm-scanner/issues/39). Suite test остаётся
-этапом3 и пока явно возвращает ошибку. В опубликованном v0.2.0 новых команд нет.
+[#39](https://github.com/vovkins/ru-llm-scanner/issues/39). Suite test реализован по [#43](https://github.com/vovkins/ru-llm-scanner/issues/43). В опубликованном v0.2.0 новых команд нет.
 Общий план — [#38](https://github.com/vovkins/ru-llm-scanner/issues/38).
 
 ## Контекст

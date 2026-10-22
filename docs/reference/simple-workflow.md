@@ -3,7 +3,7 @@
 **Спецификация этапа [#39](https://github.com/vovkins/ru-llm-scanner/issues/39),
 общий план [#38](https://github.com/vovkins/ru-llm-scanner/issues/38).
 Build/scan/diff реализованы на этапе [#40](https://github.com/vovkins/ru-llm-scanner/issues/40);
-suite `make test` ещё не готов и явно возвращает 2.** Это контракт для этапов 2–4,
+suite `make test` реализован на этапе [#43](https://github.com/vovkins/ru-llm-scanner/issues/43).** Это контракт для этапов 2–4,
 не инструкция запуска опубликованного v0.2.0. Прежний explicit путь:
 [сборка](../admin/build.md), [сканирование](../user/README.md).
 [ADR-0007](../decisions/0007-simple-workflow.md) объясняет границу интерфейса;
@@ -60,7 +60,7 @@ Makefile делегирует операции одному stdlib host CLI `./s
 | `make build` | `./scanner build` | Подготовленный и проверенный локальный комплект Analyzer/Scanner |
 | `make scan REPO=...` | `./scanner scan --repo ...` | Полный snapshot выбранного коммита, default HEAD |
 | `make diff REPO=... FROM=... TO=...` | `./scanner diff --repo ... --from ... --to ...` | Анализ перехода конечных состояний A/B |
-| `make test` | `./scanner test` | Повседневные проверки проекта; точный suite реализуется на этапе 3 |
+| `make test` | `./scanner test` | [Повседневный suite](everyday-tests.md), без обязательных skips и скрытых загрузок |
 | `make help` или `make` | `./scanner --help` | Краткая справка без Docker, модели, сборок и сети |
 
 Прямой CLI также имеет локальный `--version`. Неизвестные аргументы, лишние

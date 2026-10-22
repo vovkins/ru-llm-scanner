@@ -6,8 +6,8 @@
 
 [Простой make/CLI интерфейс](reference/simple-workflow.md) и
 [карта переиспользования/матрица](../verification/simple-workflow-stage-1/README.md)
-относятся к #39–40. Build/scan/diff реализованы; повседневный suite `make test`
-остаётся этапом 3 и пока явно возвращает ошибку. Текущие dev-команды приведены ниже.
+относятся к #39–40. Build/scan/diff и [повседневный make test](reference/everyday-tests.md)
+реализованы по #40/#43. Текущие dev-команды приведены ниже.
 
 ## Окружение
 

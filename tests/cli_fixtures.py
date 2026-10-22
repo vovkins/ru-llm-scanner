@@ -6,6 +6,7 @@ import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from unit_assets import unit_assets
 from scan_fixtures import health, response
 from ru_llm_scanner.artifacts import read_json
 from ru_llm_scanner.engine import ScanEngine
@@ -14,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def make_bundle(destination):
-    context = ROOT / ".build/analyzer"
+    context = unit_assets()
     runtime = ROOT / "locks/analyzer-cpu-linux-arm64.runtime.lock.json"
     engine = ScanEngine.from_context(context, runtime)
     source = context / "scanner_build/source-lock.json"

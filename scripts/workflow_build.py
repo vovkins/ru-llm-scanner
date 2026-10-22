@@ -1,10 +1,8 @@
 """Explicit network preparation and local native builds; no registry writes."""
 
-import hashlib
 import json
 import os
 from pathlib import Path
-import re
 import shutil
 import signal
 import subprocess
@@ -17,13 +15,9 @@ from email.parser import BytesParser
 import docker_scanner as legacy
 import workflow_state as state
 
-TOOLS = {
-    "pip": "26.2.1",
-    "setuptools": "84.1.0",
-    "wheel": "0.48.0",
-    "httpx": "0.28.1",
-    "jsonschema": "4.26.0",
-}
+import workflow_environment as environment
+
+TOOLS = environment.TOOLS
 TOOL_CODE = "import runpy,sys;from pathlib import Path;r=Path(sys.argv.pop(1));s=sys.argv.pop(1);sys.path[:0]=[str(r/'scripts'),str(r/'src')];sys.argv[0]=str(r/'scripts'/s);runpy.run_path(sys.argv[0],run_name='__main__')"
 
 
@@ -79,37 +73,20 @@ class Builder:
         constraints = (
             state.ROOT / f'locks/requirements-scanner-linux-{self.server["arch"]}.txt'
         )
-        key = hashlib.sha256(
-            json.dumps(
-                {
-                    "python": sys.version,
-                    "executable": os.path.realpath(sys.executable),
-                    "tools": TOOLS,
-                    "constraints": legacy.digest(constraints),
-                    "dev": legacy.digest(state.ROOT / "requirements-dev.txt"),
-                },
-                sort_keys=True,
-            ).encode()
-        ).hexdigest()
-        pointer = root / ("environment-" + key + ".json")
+        key = environment.identity(self.server)
         with state.build_lock({"key": "environment-" + key}):
             directory = None
-            if pointer.exists() or pointer.is_symlink():
-                marker = state.read_private(pointer)
-                name = marker.get("directory", "")
-                state.require(
-                    marker.get("key") == key
-                    and isinstance(name, str)
-                    and re.fullmatch(r"env-[0-9a-f]{32}", name),
-                    "invalid_workflow_state",
-                )
-                directory = state.owned_directory(root / name)
-                state.require(
-                    state.read_private(directory / "ready.json") == marker,
-                    "invalid_workflow_state",
-                )
+            try:
+                directory = environment.selected(self.server)
+            except legacy.Failure as error:
+                if error.code not in {"invalid_test_support", "invalid_workflow_state"}:
+                    raise
+            if directory is not None:
+                self.python = directory / "bin/python"
+                return
             if directory is None:
                 directory = root / ("env-" + uuid.uuid4().hex)
+                directory.mkdir(mode=0o700)
                 try:
                     venv.EnvBuilder(with_pip=True).create(directory)
                 except (OSError, subprocess.SubprocessError):
@@ -155,10 +132,7 @@ class Builder:
                     json.dumps(TOOLS),
                 ],
             )
-            if not pointer.exists():
-                marker = {"key": key, "directory": directory.name}
-                state.atomic_json(directory / "ready.json", marker)
-                state.atomic_json(pointer, marker)
+            environment.publish(self.server, directory)
 
     def wheel_source(self):
         target = self.directory / "wheel-source"
@@ -397,6 +371,12 @@ def build():
                 raise
             directory = None
         if directory is not None:
+            from workflow_support import ensure
+
+            preparations = state.owned_directory(root / "preparations")
+            job = preparations / uuid.uuid4().hex
+            job.mkdir(mode=0o700)
+            ensure(Builder(server, job), directory)
             print(
                 "Сборка: исправный комплект проверен и переиспользован; загрузка не требуется."
             )
@@ -405,7 +385,11 @@ def build():
         directory = builds / (server["arch"] + "-" + uuid.uuid4().hex)
         directory.mkdir(mode=0o700)
         state.atomic_json(directory / "provenance.json", state.provenance())
-        Builder(server, directory).assemble()
+        builder = Builder(server, directory)
+        builder.assemble()
+        from workflow_support import ensure
+
+        ensure(builder, directory)
         state.publish(server, directory, inputs)
         print(
             "Сборка: проверенный локальный комплект готов. Запустите make scan REPO=..."

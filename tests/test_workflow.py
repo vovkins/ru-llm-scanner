@@ -70,11 +70,16 @@ class EntryTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0)
             self.assertFalse(marker.exists())
 
-    def test_test_suite_is_honestly_pending(self):
+    def test_test_suite_does_not_pass_without_a_working_daemon(self):
         for command in ([str(ROOT / "scanner"), "test"], ["make", "test"]):
-            result = self.invoke(*command)
+            result = self.invoke(
+                *command, environment={"DOCKER_HOST": "unix:///no-such-daemon"}
+            )
             self.assertEqual(result.returncode, 2)
-            self.assertIn(b"test_suite_pending", result.stderr)
+            self.assertTrue(
+                b"docker_unavailable" in result.stderr
+                or b"docker_command_failed" in result.stderr
+            )
 
     def test_make_never_evaluates_data_or_unknown_assignments(self):
         with tempfile.TemporaryDirectory() as name:

@@ -37,7 +37,7 @@ HELP = """ru-llm-scanner: локальный анализ Git-репозитор
   make build                         подготовить и проверить оба образа
   make scan REPO='/srv/git/project'   просканировать HEAD
   make diff REPO=... FROM=... TO=...  проверить переход A/B
-  make test                          suite этапа 3 пока не реализован
+  make test                          unit, контракты, docs, format и короткий runtime suite
   make help                          эта справка
 
 COMMIT=HEAD, OUTPUT и CONFIG необязательны. JSON/HTML создаются приватно вне клона.
@@ -57,6 +57,8 @@ MESSAGES = {
     "invalid_arguments": "Неверные параметры. Используйте ./scanner --help.",
     "unsafe_output": "Нужен новый/пустой приватный OUTPUT вне клона с доступным parent.",
     "config_error": "Неверный CONFIG или параметры анализа. Проверьте явный файл.",
+    "invalid_test_support": "Тестовые материалы или Python-окружение отсутствуют/повреждены. Выполните make build.",
+    "test_failed": "Проверки не прошли. См. приватную диагностику группы.",
     "test_suite_pending": "Повседневный make test ещё не реализован (этап 3). Успех не заявляется.",
     "build_failed": "Сборка не прошла. Предыдущий проверенный комплект сохранён.",
     "build_inputs_changed": "Исходники изменились во время сборки. Повторите make build.",
@@ -280,7 +282,9 @@ def _main(argv=None):
         parsed = parser().parse_args(args)
         validate(parsed)
         if parsed.operation == "test":
-            raise legacy.Failure("test_suite_pending")
+            from workflow_test import test
+
+            return test()
         if parsed.operation == "build":
             from workflow_build import build
 
