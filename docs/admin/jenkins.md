@@ -99,11 +99,16 @@ production credentials/RBAC/daemon и не настраивает Docker host.
 
 ## Что проверено
 
-Команды нового CLI проверяются native AMD64/ARM64 walkthrough; этот Groovy пример
-не означает новый настоящий Jenkins pilot. Новый adapter проходит приёмку в [этапе6](../../verification/simple-workflow-stage-6/README.md) и не
-меняет production jobs/credentials/RBAC. Историческая настоящая приёмка Jenkins
-v0.2.0 (13 сценариев) относится к [explicit adapter](jenkins-explicit.md) и своим
-images/locks. Его [Jenkinsfile](../../examples/jenkins/Jenkinsfile),
-[AMD64-вариант](../../examples/jenkins/Jenkinsfile.amd64) и
-[adapter](../../examples/jenkins/run_scan.py) сохранены совместимыми; они требуют
-explicit deployment и не являются новым Make/CLI интерфейсом.
+Настоящий отдельный Jenkins AMD64 pilot прошёл declarative validation и13
+завершённых сценариев:0/1/2, strict baseline, invalid ref/config/baseline,
+foreign profile, unbuilt trusted installation без старого report, две параллельные
+jobs, timeout/cancel и hard agent loss с ограниченным operator cleanup.
+Private artifacts содержат полные synthetic values, console — безопасную сводку;
+baseline не продвигается автоматически. Docker project IDs наблюдались отдельно
+по argv/WORKSPACE, acquisition запрещён, собственные ресурсы проверены после jobs.
+[Точные source/controller/plugins/resources и результаты](../../verification/simple-workflow-stage-6/README.md).
+
+Это native Ubuntu24.04 AMD64/reference pilot, не проверка production Jenkins,
+корпоративных ACL/PKI, rootless Docker, GPU или отдельного ARM64 Jenkins. Native
+ARM64 CLI/build/test/scan проверены отдельно. Исторический v0.2.0 pilot относится
+к [прежнему explicit adapter](jenkins-explicit.md); он сохраняется совместимым.

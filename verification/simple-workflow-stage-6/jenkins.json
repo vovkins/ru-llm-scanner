@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "controller": "jenkins/jenkins@sha256:5e70c4e8c97025f7784858bb5c4380912fc17e5fa0f0afa1d4833700a08666eb",
+  "jenkins_lts": "2.580.1",
+  "plugins_lock_sha256": "361c4b5450cbf6a32fdba1d5846c4008ea2aa5196242ccb0558f8e8207d80510",
+  "platform": "linux/amd64",
+  "agent": "native host process; controller executors disabled",
+  "declarative_validation": true,
+  "completed_builds_only": true,
+  "failure": null,
+  "validation_failure_diagnostics": null,
+  "cases": [
+    {
+      "case": "clean-snapshot",
+      "result": "SUCCESS",
+      "adapter_exit_code": 0,
+      "reports_archived": true,
+      "console_contains_finding_value": false,
+      "duration_ms": 18236
+    },
+    {
+      "case": "strict-clean-diff",
+      "result": "SUCCESS",
+      "adapter_exit_code": 0,
+      "reports_archived": true,
+      "console_contains_finding_value": false,
+      "duration_ms": 11428
+    },
+    {
+      "case": "findings",
+      "result": "UNSTABLE",
+      "adapter_exit_code": 1,
+      "reports_archived": true,
+      "console_contains_finding_value": false,
+      "duration_ms": 11126
+    },
+    {
+      "case": "invalid-ref",
+      "result": "FAILURE",
+      "adapter_exit_code": 2,
+      "reports_archived": true,
+      "console_contains_finding_value": false,
+      "duration_ms": 11480
+    },
+    {
+      "case": "missing-config",
+      "result": "FAILURE",
+      "adapter_exit_code": 2,
+      "reports_archived": false,
+      "console_contains_finding_value": false,
+      "duration_ms": 1393
+    },
+    {
+      "case": "missing-baseline",
+      "result": "FAILURE",
+      "adapter_exit_code": 2,
+      "reports_archived": false,
+      "console_contains_finding_value": false,
+      "duration_ms": 1503
+    },
+    {
+      "case": "foreign-profile-baseline",
+      "result": "FAILURE",
+      "adapter_exit_code": 2,
+      "reports_archived": true,
+      "console_contains_finding_value": false,
+      "duration_ms": 10989
+    },
+    {
+      "case": "unbuilt-workflow-installation",
+      "result": "FAILURE",
+      "adapter_exit_code": 2,
+      "reports_archived": false,
+      "console_contains_finding_value": false,
+      "duration_ms": 1234
+    },
+    {
+      "case": "parallel-clean",
+      "result": "SUCCESS",
+      "adapter_exit_code": 0,
+      "reports_archived": true,
+      "console_contains_finding_value": false,
+      "duration_ms": 11020
+    },
+    {
+      "case": "parallel-findings",
+      "result": "UNSTABLE",
+      "adapter_exit_code": 1,
+      "reports_archived": true,
+      "console_contains_finding_value": false,
+      "duration_ms": 10628
+    },
+    {
+      "case": "job-cancel",
+      "result": "ABORTED",
+      "adapter_exit_code": null,
+      "reports_archived": true,
+      "console_contains_finding_value": false,
+      "duration_ms": 5117
+    },
+    {
+      "case": "job-timeout",
+      "result": "ABORTED",
+      "adapter_exit_code": null,
+      "reports_archived": true,
+      "console_contains_finding_value": false,
+      "duration_ms": 47423
+    },
+    {
+      "case": "agent-loss-operator-recovery",
+      "result": "ABORTED",
+      "adapter_exit_code": null,
+      "reports_archived": false,
+      "console_contains_finding_value": false,
+      "duration_ms": 3119
+    }
+  ],
+  "raw_reports_credentials_and_logs_uploaded": false,
+  "user_jenkins_modified": false,
+  "safe_failure_diagnostics": [],
+  "observed_docker_projects": 10,
+  "docker_acquisition_attempts": 0
+}

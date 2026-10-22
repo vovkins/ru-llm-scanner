@@ -72,7 +72,7 @@ network, read-only input/rootfs, non-root и отключённые Docker logs.
 
 [Обновление proxy](updating-analyzer.md) переносит применимые детекторы/словарь через
 адаптер. Смена модели/правил/профиля требует нового clean snapshot для baseline.
-[Сравнение и подготовка source-only кандидата](../reference/upstream-update.md) реализованы на этапе5 #38. Принятие нового Base64 engine и настоящий Jenkins pilot остаются отдельной приёмкой этапа6.
+[Сравнение и подготовка source-only кандидата](../reference/upstream-update.md) реализованы на этапе5 #38. Перенос exact9e47e65/logistic, настоящий откат и отдельный Jenkins AMD64 pilot проверены на [этапе6](../../verification/simple-workflow-stage-6/README.md); произвольное будущее upstream не принимается автоматически.
 [Лицензия и notices](../licensing.md) передаются с комплектом.
 
 Буквальное прохождение основных инструкций на чистых native AMD64/ARM64: [этап4](../../verification/simple-workflow-stage-4/README.md). Виды приёмки HTML/static/browser и ограничения указаны отдельно.

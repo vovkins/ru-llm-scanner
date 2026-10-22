@@ -15,6 +15,13 @@
 
 ## 1. Сравнить ревизии
 
+Ниже фиксированная историческая пара da4f50a→9e47e65. Для неё
+`PREVIOUS_SCANNER` — сохранённая доверенная установка7045dd4 с прежним source lock,
+patches/constraints/probe; текущий lock уже9e47e65 и не подходит как A=da4f50a.
+Для следующего обновления укажите текущую установку как PREVIOUS_SCANNER, её pin
+как A, новый точный SHA как B и подготовьте собственный review. Старый готовый
+review не подходит произвольному main. Не редактируйте hashes ради совместимости.
+
 Путь PROXY замените своим. Сборочные системные предпосылки готовятся отдельно;
 `.build` — собственный рабочий parent, конечный output должен быть новым:
 
@@ -22,10 +29,12 @@
 umask 077
 mkdir -p .build
 PROXY="$HOME/git/ru-llm-proxy"
+PREVIOUS_SCANNER="$HOME/tools/ru-llm-scanner-old"
 A=da4f50a87ddf8a6c160c5f1893f5bf526f713d1c
 B=9e47e6594ba3d9616ba90720994ced008335416c
 python3 -I -S scripts/update_upstream.py compare \
-  --source "$PROXY" --from "$A" --to "$B" \
+  --source "$PROXY" --source-lock "$PREVIOUS_SCANNER/upstream.lock.json" \
+  --from "$A" --to "$B" \
   --output .build/upstream-comparison
 ```
 
@@ -84,12 +93,13 @@ Fuzz и автоматического rebase нет. Если upstream сдви
 hashes/targets и reason. Путь относителен к каталогу review и должен лежать в
 `patches/`; старый patch в Git не перезаписывается.
 
-Для согласованной пары A/B есть [проверенный review](../../examples/upstream/base64-review.json)
+Для согласованной пары A/B есть [проверенный review](../../examples/upstream/base64-metadata-review.json)
 и [описание всех решений](../../examples/upstream/README.md). Он переносит девять
-новых файлов, сохраняет словарь и включает **candidate-only**
+новых файлов, сохраняет словарь и включает
 `PRESIDIO_ANALYZER_BASE64_POLICY=logistic`. Upstream по умолчанию использует
-`content`; сравнение обоих режимов и принятие logistic остаются отдельной
-функциональной приёмкой этапа6. Текущий engine scanner не переключается.
+`content`; сравнение обоих режимов, metadata API v2 и принятие logistic выполнены на
+[этапе6](../../verification/simple-workflow-stage-6/README.md). Сам compare/prepare
+по-прежнему не переключает действующую установку.
 
 ## 3. Подготовить отдельный кандидат
 
@@ -97,12 +107,14 @@ hashes/targets и reason. Путь относителен к каталогу re
 
 ```sh
 python3 -I -S scripts/update_upstream.py compare \
-  --source "$PROXY" --from "$A" --to "$B" \
-  --review examples/upstream/base64-review.json \
+  --source "$PROXY" --source-lock "$PREVIOUS_SCANNER/upstream.lock.json" \
+  --from "$A" --to "$B" \
+  --review examples/upstream/base64-metadata-review.json \
   --output .build/upstream-reviewed
 python3 -I -S scripts/update_upstream.py prepare \
-  --source "$PROXY" --from "$A" --to "$B" \
-  --review examples/upstream/base64-review.json \
+  --source "$PROXY" --source-lock "$PREVIOUS_SCANNER/upstream.lock.json" \
+  --from "$A" --to "$B" \
+  --review examples/upstream/base64-metadata-review.json \
   --output .build/upstream-candidate
 ```
 
@@ -157,7 +169,7 @@ python3 -I -S scripts/analyzer.py verify-context \
 устаревшее или неполное решение; не исправляйте hashes ради формального pass.
 Ошибки layout/output/types требуют исправить вход, без автоматического chmod/fetch.
 
-## Что ещё не принято
+## Границы автоматизации
 
 `source_prepared` всегда имеет `accepted_into_installation=false` и
 `runtime_acceptance_performed=false`. Tool не создаёт runtime/deployment locks,
@@ -167,9 +179,10 @@ NER artifacts и зависимости этим не обновляются.
 
 Приёмка нового engine требует native AMD64/ARM64 build, upstream regressions,
 паритет/независимое качество/длинный текст, baseline incompatibility, настоящий
-Jenkins и обновление/откат по отдельному плану этапа6. Нужна также проверка
+Jenkins и обновление/откат. Для exact9e47e65 это выполнено на этапе6; следующая
+ревизия требует собственной приёмки. Нужна также проверка
 происхождения нового кода и notices перед распространением: source comparison
 не является самостоятельным подтверждением условий стороннего кода.
 [Обновление и откат](../admin/updating-analyzer.md), [план #47](https://github.com/vovkins/ru-llm-scanner/issues/47).
 
-[Фактическая source-only приёмка и границы этапа5](../../verification/simple-workflow-stage-5/README.md). Реальная функциональная приёмка и предлагаемый logistic default — [отдельный план #49](https://github.com/vovkins/ru-llm-scanner/issues/49), ещё не выполняется.
+[Source-only приёмка этапа5](../../verification/simple-workflow-stage-5/README.md) сохранена как история. Реальный перенос exact9e47e65/logistic, API v2 и откат подтверждены на [этапе6](../../verification/simple-workflow-stage-6/README.md). Обычный build использует уже рассмотренный source lock; следующая произвольная ревизия proxy требует нового review и применимых проверок.

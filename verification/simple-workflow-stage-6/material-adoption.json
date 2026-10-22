@@ -1,0 +1,28 @@
+{
+  "source_full_native": "9f384a8423f7da8bf55bb8b7565222c02339768d",
+  "current_source_lock_sha256": "23903ac45dd82fb1b2839bd841d8faa5818e38d6bfabc4ad19607bdd69321f2c",
+  "candidate_source_patch_bytes_identical": true,
+  "differences_from_model_tested_materials": {
+    "amd64": {
+      "README.md": {
+        "tested": "81dd81a9cc73b03dad0bd4a47495869b21b6644040a33586419688f1732d95b4",
+        "current": "7dd9d2751fad5843f50fbdc37b10d8034c36071ca2e2159c0a9a2be2f8546e07"
+      },
+      "scripts/check_public_repository.py": {
+        "tested": "1c345d9d988c9735d7ee254c9cd7a14ed744d406f4e8d9e62a1439083a139628",
+        "current": "4aa1fcc482f5ce23722d56de336a6e2ac3c016733de63c790de4692c37e0bd4f"
+      }
+    },
+    "arm64": {
+      "README.md": {
+        "tested": "81dd81a9cc73b03dad0bd4a47495869b21b6644040a33586419688f1732d95b4",
+        "current": "7dd9d2751fad5843f50fbdc37b10d8034c36071ca2e2159c0a9a2be2f8546e07"
+      },
+      "scripts/check_public_repository.py": {
+        "tested": "1c345d9d988c9735d7ee254c9cd7a14ed744d406f4e8d9e62a1439083a139628",
+        "current": "4aa1fcc482f5ce23722d56de336a6e2ac3c016733de63c790de4692c37e0bd4f"
+      }
+    }
+  },
+  "final_native_documentation_walkthrough": "pending"
+}

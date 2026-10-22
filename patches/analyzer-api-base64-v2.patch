@@ -1,0 +1,103 @@
+--- a/presidio/analyzer_server.py
++++ b/presidio/analyzer_server.py
+@@ -23,10 +23,13 @@
+ from presidio_analyzer.predefined_recognizers import SpacyRecognizer
+ 
+ from capacity import CapacityRejected, build_limiter_from_env
+-from entity_types import NER_ENTITY_TYPES
++from entity_types import NER_ENTITY_TYPES, SUPPORTED_ENTITY_TYPES
+ from recognizers import ALL_RECOGNIZERS
+ from recognizers.base64_data import Base64DataRecognizer
+-from result_merging import MergeDecision, merge_results
++from result_merging import (
++    MergeDecision, merge_results, detection_source, SOURCE_NER,
++    SOURCE_NATIVE_CREDENTIAL, SOURCE_STRUCTURAL, SOURCE_CONTEXTUAL_CONTRACT,
++)
+ from text_chunking import TextChunk, plan_text_chunks
+ from ner import (
+     MODEL_ID,
+@@ -491,6 +494,7 @@
+ class AnalyzeResponse(BaseModel):
+     text: str
+     entities: list[dict]
++    analysis_signature: str = ANALYSIS_SIGNATURE
+ 
+ 
+ def _validate_analyzer_correlation(
+@@ -542,6 +546,11 @@
+         "ner_precision": runtime["precision"],
+         "ner_inference_batch_size": runtime["inference_batch_size"],
+         "analysis_signature": ANALYSIS_SIGNATURE,
++        "scanner_contract_version": 1,
++        "supported_entities": sorted(SUPPORTED_ENTITY_TYPES),
++        "detection_sources": sorted({
++            SOURCE_NER, SOURCE_NATIVE_CREDENTIAL, SOURCE_STRUCTURAL, SOURCE_CONTEXTUAL_CONTRACT,
++        }),
+         "capacity": capacity_limiter.snapshot(),
+     }
+     if runtime["device_name"] is not None:
+@@ -793,6 +802,7 @@
+         chunks = plan_text_chunks(request.text)
+         _record_text_chunk_metrics(chunks)
+         results: list[RecognizerResult] = []
++        scanner_document_results = []
+         presidio_duration = 0.0
+         declared_starts: list[int] = []
+         declared_ends: list[int] = []
+@@ -804,6 +814,7 @@
+             try:
+                 _raise_if_cancelled(cancellation_event)
+                 results = _analyze_document_base64(request)
++                scanner_document_results = list(results)
+                 _raise_if_cancelled(cancellation_event)
+             except Exception:
+                 _record_analyzer_phase(
+@@ -923,6 +934,7 @@
+         _record_merge_metrics(merge_outcome.decisions)
+         results = merge_outcome.results
+ 
++        scanner_rule_ids = _scanner_declared_rule_ids(request, scanner_document_results)
+         entities = [
+             {
+                 "entity_type": r.entity_type,
+@@ -930,6 +942,8 @@
+                 "end": r.end,
+                 "score": r.score,
+                 "text": request.text[r.start : r.end],
++                "source": detection_source(r),
++                "rule_id": _scanner_rule_id(r, scanner_rule_ids),
+             }
+             for r in results
+         ]
+@@ -974,6 +988,31 @@
+         raise AnalyzerWorkCancelled("Analyzer request was cancelled")
+ 
+ 
++def _scanner_declared_rule_ids(request, document_results):
++    """Canonical metadata for already detected declarations; never merger input."""
++    candidates = []
++    registry = getattr(analyzer, "registry", None)
++    for recognizer in getattr(registry, "recognizers", ()):
++        if isinstance(recognizer, Base64DataRecognizer) and recognizer.supported_language == request.language:
++            candidates.extend(recognizer.analyze_declared(request.text, recognizer.supported_entities))
++    # The document pass owns decoded JSON declaration coordinates and precedence.
++    candidates.extend(document_results)
++    rules = {}
++    for result in candidates:
++        metadata = result.recognition_metadata or {}
++        rule = metadata.get("deterministic_rule_id")
++        if metadata.get("encoded_container") is True and rule:
++            rules[(result.entity_type, result.start, result.end)] = rule
++    return rules
++
++
++def _scanner_rule_id(result, declarations):
++    original = (result.recognition_metadata or {}).get("deterministic_rule_id")
++    if detection_source(result) != SOURCE_STRUCTURAL:
++        return original
++    return declarations.get((result.entity_type, result.start, result.end), original)
++
++
+ def _analyze_document_base64(request: AnalyzeRequest) -> list[RecognizerResult]:
+     """Resolve complete Base64 spans through the configured language registry."""
+     results = []

@@ -34,7 +34,7 @@ def main():
     parser.add_argument(
         "--reference",
         type=Path,
-        default=ROOT / "verification/linux-amd64/requests-reference.json",
+        default=ROOT / "verification/simple-workflow-stage-6/requests-reference.json",
     )
     parser.add_argument("--fetch", action="store_true", required=True)
     parser.add_argument(

@@ -1,14 +1,15 @@
 # Механизм распознавания ru-llm-proxy
 
-Инвентаризация выполнена по локальному чистому tracked-состоянию
-`da4f50a87ddf8a6c160c5f1893f5bf526f713d1c` от 18 октября 2026 года.
-Незакоммиченные `config/`, `secrets/` и `tmp/` не использовались.
-Эта же ревизия закреплена в [source lock](../../upstream.lock.json); на её основе
-собран и проверен CPU Analyzer для `linux/arm64`.
+Текущие неопубликованные исходники закрепляют `9e47e6594ba3d9616ba90720994ced008335416c`
+в [source lock](../../upstream.lock.json), с политикой `logistic`. Модель, packages
+и словарь прежние; каталог30 типов сохранён. Реальный перенос, качество и откат
+на native AMD64/ARM64 — [этап6](../../verification/simple-workflow-stage-6/README.md).
+Опубликованные v0.1.0/v0.2.0 и их da4f50a evidence остаются историческими поставками.
+Рабочие configs/secrets соседнего proxy не читались и не менялись.
 
 ## Каталог
 
-Источником является [entity_types.py закреплённой ревизии](https://github.com/vovkins/ru-llm-proxy/blob/da4f50a87ddf8a6c160c5f1893f5bf526f713d1c/presidio/entity_types.py).
+Источником является [entity_types.py закреплённой ревизии](https://github.com/vovkins/ru-llm-proxy/blob/9e47e6594ba3d9616ba90720994ced008335416c/presidio/entity_types.py).
 Объединение детерминированного и NER-наборов содержит 30 типов:
 
 | Группа | Типы |
@@ -28,7 +29,7 @@ NER покрывает `PERSON`, `LOCATION`, `ORGANIZATION`, `LOGIN`, `PASSWORD`
 Модель: `fef2/ner_rus_bert-secret_detection`, ревизия
 `52b5b0745aac14f73fcf2ac0f91d9b5001a85ae4`, SHA-256 весов
 `6a2c875d02398554ec69384f489a0bf4fe3505fc347c6cdd3385d4fd31ef21a4`.
-Источник: [model_manifest.json](https://github.com/vovkins/ru-llm-proxy/blob/da4f50a87ddf8a6c160c5f1893f5bf526f713d1c/presidio/model_manifest.json).
+Источник: [model_manifest.json](https://github.com/vovkins/ru-llm-proxy/blob/9e47e6594ba3d9616ba90720994ced008335416c/presidio/model_manifest.json).
 spaCy `ru_core_news_sm` и детерминированные правила также влияют на результат.
 
 ## HTTP-контракт
@@ -47,7 +48,7 @@ spaCy `ru_core_news_sm` и детерминированные правила т�
 во время запуска завершает проверку с ошибкой. Нет перехода к успешному
 «только regex» при отказе обязательной NER-модели.
 
-Проверенная реализация: [analyzer_server.py](https://github.com/vovkins/ru-llm-proxy/blob/da4f50a87ddf8a6c160c5f1893f5bf526f713d1c/presidio/analyzer_server.py).
+Проверенная реализация: [analyzer_server.py](https://github.com/vovkins/ru-llm-proxy/blob/9e47e6594ba3d9616ba90720994ced008335416c/presidio/analyzer_server.py).
 
 ## Источники и расширение API
 
@@ -58,20 +59,24 @@ spaCy `ru_core_news_sm` и детерминированные правила т�
 слияния, а не как источник валидной находки.
 
 В исходном API эти метаданные не входят в HTTP-ответ.
-[Отдельный патч](../../patches/analyzer-api-v1.patch) добавляет `source`, `rule_id`
+[Отдельный патч](../../patches/analyzer-api-base64-v2.patch) добавляет `source`, `rule_id`
 и подпись `analysis_signature` в результат, а в health —
 `scanner_contract_version=1`, `supported_entities` и `detection_sources`.
-Если реального rule ID нет, возвращается `null`, без придуманного значения.
+Для уже найденного structural declaration точный category/span получает существующий
+upstream Base64 rule; document JSON declaration имеет приоритет. Это устраняет
+потерю metadata при дедупликации, не меняет category/span/value/source/score или merge.
+NER/native результаты не переименовываются. Если реального rule ID нет, возвращается
+`null`, без придуманного значения. [Причина и проверки](../../verification/simple-workflow-stage-6/metadata-review.md).
 Новые категории/источники поддерживаются строками в JSON. Отсутствие
 обязательного расширения — `analyzer_contract_error`, не молчаливый `unknown`.
 
-Источник: [result_merging.py](https://github.com/vovkins/ru-llm-proxy/blob/da4f50a87ddf8a6c160c5f1893f5bf526f713d1c/presidio/result_merging.py).
+Источник: [result_merging.py](https://github.com/vovkins/ru-llm-proxy/blob/9e47e6594ba3d9616ba90720994ced008335416c/presidio/result_merging.py).
 
-Кандидат исправления RV-06 дополнительно содержит закреплённый
+Сохранён закреплённый
 [NER patch](../../patches/ner-window-recovery.patch): при неудаче центрированного
 восстановления границы пробуются два других полных контекста. Неподтверждённая
 граница остаётся ошибкой. Модель и пороги не меняются; подпись профиля меняется.
-[Проверки и текущие ограничения кандидата](../../verification/operations-ner-windowing/README.md).
+[Исторические проверки и ограничения](../../verification/operations-ner-windowing/README.md).
 
 ## Настройки, подпись и словарь
 
@@ -84,6 +89,7 @@ spaCy `ru_core_news_sm` и детерминированные правила т�
 | `PRESIDIO_ANALYZER_DETECT_BARE_INN_BY_CHECKSUM` | `true` |
 | `PRESIDIO_ANALYZER_DETECT_PUBLIC_IPS` | `true` |
 | `PRESIDIO_ANALYZER_INTERNAL_DOMAIN_SUFFIXES` | `internal,local,lan,corp,corp.local,cluster.local,svc.cluster.local` |
+| `PRESIDIO_ANALYZER_BASE64_POLICY` | `logistic` (upstream default — `content`) |
 | CPU profile / precision / batch size | `cpu` / `fp32` / `4` |
 | GPU profile / precision / batch size | `gpu` / `fp16` / `8` |
 
@@ -94,10 +100,10 @@ spaCy `ru_core_news_sm` и детерминированные правила т�
 профиль и проверяет его, не полагается на неявное окружение.
 
 Прокси отдельно выполняет точные словарные подстановки до Analyzer.
-[Словарь](https://github.com/vovkins/ru-llm-proxy/blob/da4f50a87ddf8a6c160c5f1893f5bf526f713d1c/litellm_guardrails/dictionary-substitutions.default.json)
+[Словарь](https://github.com/vovkins/ru-llm-proxy/blob/9e47e6594ba3d9616ba90720994ced008335416c/litellm_guardrails/dictionary-substitutions.default.json)
 содержит термины десяти банков. Scanner должен искать оригинальные `source`
 с теми же настройками регистра/целой фразы из
-[dictionary_policy.py](https://github.com/vovkins/ru-llm-proxy/blob/da4f50a87ddf8a6c160c5f1893f5bf526f713d1c/litellm_guardrails/dictionary_policy.py),
+[dictionary_policy.py](https://github.com/vovkins/ru-llm-proxy/blob/9e47e6594ba3d9616ba90720994ced008335416c/litellm_guardrails/dictionary_policy.py),
 без замены исходного текста. Результат: `DICTIONARY_TERM`, `source=dictionary`,
 реальный rule ID и `score=1.0` как точное выполнение правила, не вероятность.
 Совпадение словаря может сосуществовать с NER-находкой в том же месте.
@@ -108,12 +114,25 @@ spaCy `ru_core_news_sm` и детерминированные правила т�
 У прокси synthetic allowlist по умолчанию выключен; новый скрытый allowlist
 в scanner не добавляется. Существующие upstream-фильтры placeholder сохраняются.
 
-## Качество
+## Качество и ограничения
 
-Переносим правила и профиль как единое закреплённое поведение. На этапе 2
-сравнены 77 одинаковых текстов с исходным Analyzer и отдельно словарные
-совпадения; пройдены 478 upstream-тестов. [Результаты и ограничения проверки](../../verification/stage-2/README.md).
-На этапах 4–7 проверен независимый положительный/отрицательный корпус кода,
-конфигураций и документации: [TP/FP/FN и ограничения](../../verification/stage-7/README.md).
-Метрики прокси на запросах не являются метриками scanner.
-Универсального выявления любых неизвестных/закодированных секретов нет.
+Новая политика распознаёт форму Base64-контейнера, даже если decoded content
+обычный. Это расширяет находки и может увеличивать FP. Коэффициенты/пороги
+перенесены без переобучения; upstream training numbers не являются независимой
+оценкой scanner. Score не является вероятностью истинного секрета.
+
+На неизменном code-v1 exact TP/FP/FN **33/14/4** против прежних33/13/4;
+precision0.702128, recall0.891892. Одна добавка — BASE64_DATA в frozen negative-base64;
+прежний NER PASSWORD сохранён. Старые известные FN не скрыты.
+На18 малых новых случаях **11/3/1**; дополнительно2500 повторений одного dense
+stress дали2500 exact TP. Общую2511/3/1 нельзя выдавать за2500 независимых примеров.
+В одном frozen случае NER сохраняет края, Base64 покрывает середину; полное
+объединение подтверждено отдельно, exact FP/FN не исправлялись.
+[Метрики и все расхождения](../../verification/simple-workflow-stage-6/quality.md).
+
+Raw/patched common-field parity и upstream tests проверяют перенос конкретного
+механизма. Они не гарантируют полноту неизвестных/закодированных секретов.
+Публичный Requests не имеет ground truth; его coverage, воспроизводимость,
+ресурсы и20 добавок к прежним612 описаны в протоколе этапа6, без публикации значений.
+Исходный архив обучения коэффициентов не опубликован, inputs floating HEAD:
+обучение побайтово не воспроизводилось. Эти ограничения сохраняются.

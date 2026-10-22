@@ -1,9 +1,11 @@
 # Качество и сохранение прежних находок
 
-Модельная часть API v2 проверена на native AMD64/ARM64 в run39841638737
-(source f12c798). ARM64 завершил полный набор, AMD64 остановился на Jenkins.
-Это не объявляется полной приёмкой этапа: исправленный pilot ещё проверяется.
-[Сверка model/public](model-public-cross-api-v2.json) имеет явную ограниченную область.
+Полная native приёмка API v2 завершилась на AMD64/ARM64 в
+[run39848479099](https://github.com/vovkins/ru-llm-scanner/actions/runs/39848479099)
+(source9f384a8), включая Jenkins AMD64. [Полная сверка](cross-platform.json)
+использует исходные успешные receipts. Предыдущая
+[model/public сверка](model-public-cross-api-v2.json) сохраняет ограниченную
+область и не подменяет финальный run.
 
 Все модели были готовы к настоящему NER inference. На каждом из трёх комплектов
 прошли 65 raw/patched проверок общих полей ответа. Дополнительные metadata
@@ -43,15 +45,15 @@ SECRET_KEY [9,10), [84,85) и добавляет BASE64_DATA [10,84). Объед
 
 В model/public сверке проверены 2805 synthetic находок трёх комплектов. Новые
 content/logistic rule_id совпали строго; максимальная разница score —
-2.1457672119140625e-06. Исторические два rule_id-only расхождения сохранены в
-receipt согласно [отдельному согласованию](metadata-review.md). Остальные поля
+3.3974647521972656e-06. В финальной попытке historical drift не повторился. Два прежних
+rule_id-only расхождения сохранены в scoped receipt согласно [отдельному согласованию](metadata-review.md). Остальные поля
 совпадают, допуск score остаётся 1e-5 и не разрешает изменения решений или координат.
 
 ## Публичный Requests
 
 Pinned tree `2663dda7dbb8ce123af703b4573d85d09383ba0f`: 119 analyzed,
 13 unsupported, 0 errors. Обе CPU дали 632 находки с одинаковыми fingerprints;
-max score delta — 4.5299530029296875e-06. Все 612 прежних semantic identities
+max score delta — 3.3974647521972656e-06. Все 612 прежних semantic identities
 сохранены, старые rule_id не менялись. Добавлены 20 BASE64_DATA / base64.logistic-cascade
 в 10 paths; API v1/v2 fingerprint sets совпадают.
 

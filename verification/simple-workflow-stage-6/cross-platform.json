@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "scanner_source": "9f384a8423f7da8bf55bb8b7565222c02339768d",
+  "platforms": [
+    "linux/amd64",
+    "linux/arm64"
+  ],
+  "compared_synthetic_findings": 2805,
+  "maximum_synthetic_score_delta": 3.3974647521972656e-06,
+  "maximum_public_score_delta": 3.3974647521972656e-06,
+  "score_absolute_tolerance": 1e-05,
+  "requests_coverage": {
+    "analyzed": 119,
+    "inherited": 0,
+    "unverified": 0,
+    "excluded": 0,
+    "unsupported": 13,
+    "error": 0,
+    "target": 132,
+    "deleted": 0
+  },
+  "requests_findings": 632,
+  "metrics": {
+    "code-v1": {
+      "tp": 33,
+      "fp": 14,
+      "fn": 4,
+      "precision": 0.7021276595744681,
+      "recall": 0.8918918918918919
+    },
+    "base64-update-v1": {
+      "tp": 2511,
+      "fp": 3,
+      "fn": 1,
+      "precision": 0.9988066825775657,
+      "recall": 0.9996019108280255
+    }
+  },
+  "historical_rule_id_differences": [],
+  "raw_values_exported": false
+}

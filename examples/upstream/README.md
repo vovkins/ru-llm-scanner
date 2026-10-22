@@ -3,7 +3,7 @@
 [base64-review.json](base64-review.json) относится только к полным SHA
 `da4f50a87ddf8a6c160c5f1893f5bf526f713d1c` →
 `9e47e6594ba3d9616ba90720994ced008335416c` публичного ru-llm-proxy.
-Это решение сопровождающего для **source-only кандидата**, не принятый runtime.
+Это исторический review v1 этапа5 для source-only кандидата. Текущий exact9e47e65 runtime использует [review v2](base64-metadata-review.json), проверенный на [этапе6](../../verification/simple-workflow-stage-6/README.md).
 Не используйте его с другой ревизией или как автоматическую политику future main.
 
 | Изменения | Решение и причина |
@@ -24,8 +24,7 @@
 Динамические связи и фактическая совместимость API остаются runtime gates.
 
 Candidate явно выбирает `PRESIDIO_ANALYZER_BASE64_POLICY=logistic`; upstream default —
-`content`. Текущий scanner lock/env не меняется. До принятия нужно сравнить оба
-режима и зафиксировать ожидаемые различия качества/координат/нагрузки.
+`content`. В текущих неопубликованных исходниках scanner выбран logistic; сравнение обоих режимов, качество, координаты и нагрузка подтверждены на этапе6. Сам инструмент prepare не меняет действующую установку.
 
 [Replacement API patch](patches/analyzer-api-base64-v1.patch) делает те же пять
 metadata изменений, что прежний analyzer-api-v1.patch: category/source catalog,
@@ -47,6 +46,6 @@ API adapter использует exported entity catalog и четыре пуб�
 не учитывающая metadata; старый API мог случайно оставить rule_id=null.
 [Измерение и согласование](../../verification/simple-workflow-stage-6/metadata-review.md).
 
-V1 review/patch и evidence этапа5 сохраняются. V2 candidate source_prepared не
-считается новым native/runtime pass: настоящая приёмка этапа6 ещё выполняется.
+V1 review/patch и evidence этапа5 сохраняются. V2 прошёл отдельную настоящую
+приёмку этапа6. Сам по себе source_prepared по-прежнему не является runtime pass.
 Модель, dependencies, dictionary, коэффициенты и frozen annotations не меняются.
