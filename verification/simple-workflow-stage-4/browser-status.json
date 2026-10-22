@@ -1,0 +1,8 @@
+{
+  "status": "not_performed",
+  "automatic_attempt": "blocked",
+  "reason": "Browser URL policy rejects file protocol; permitted protocols are http and https. No workaround attempted.",
+  "requested_document": "examples/demo/report.html",
+  "browser_acceptance_performed": false,
+  "generated_html_static_check_is_separate": true
+}

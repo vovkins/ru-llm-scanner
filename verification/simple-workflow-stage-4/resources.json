@@ -1,0 +1,28 @@
+{
+  "status": "observed",
+  "native": [
+    {
+      "platform": "linux/amd64",
+      "docker_cpus": 4,
+      "docker_memory_bytes": 16760344576,
+      "peak_rss_measured": false,
+      "walkthrough_seconds": 389.997,
+      "suite_seconds": 83.443,
+      "unit_tests": 225,
+      "skipped": 0
+    },
+    {
+      "platform": "linux/arm64",
+      "docker_cpus": 4,
+      "docker_memory_bytes": 16715964416,
+      "peak_rss_measured": false,
+      "walkthrough_seconds": 337.329,
+      "suite_seconds": 75.462,
+      "unit_tests": 225,
+      "skipped": 0
+    }
+  ],
+  "target_server_pilot_performed": false,
+  "jenkins_pilot_performed": false,
+  "container_limits_not_reservations": true
+}

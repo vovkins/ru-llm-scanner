@@ -75,3 +75,5 @@ network, read-only input/rootfs, non-root и отключённые Docker logs.
 Автоматизация подготовки кандидата и реальное Base64-обновление относятся к
 последующим этапам #38, здесь они не объявлены готовыми.
 [Лицензия и notices](../licensing.md) передаются с комплектом.
+
+Буквальное прохождение основных инструкций на чистых native AMD64/ARM64: [этап4](../../verification/simple-workflow-stage-4/README.md). Виды приёмки HTML/static/browser и ограничения указаны отдельно.
