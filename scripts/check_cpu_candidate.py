@@ -312,7 +312,10 @@ class Candidate:
             self.test_image,
             "--test-image",
         )
-        for suite in ("core", "ner"):
+        suites = ("core", "ner")
+        if (self.context / "presidio/tests/test_base64_logistic.py").is_file():
+            suites += ("base64",)
+        for suite in suites:
             self.python(
                 "upstream-" + suite,
                 "check_upstream_tests.py",

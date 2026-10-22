@@ -31,6 +31,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--deployment-lock", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument(
+        "--reference",
+        type=Path,
+        default=ROOT / "verification/linux-amd64/requests-reference.json",
+    )
     parser.add_argument("--fetch", action="store_true", required=True)
     parser.add_argument(
         "--measure-update",
@@ -41,7 +46,7 @@ def main():
     os.umask(0o077)
     root = args.output_dir.resolve()
     root.mkdir(mode=0o700, parents=True, exist_ok=False)
-    reference = read_json(ROOT / "verification/linux-amd64/requests-reference.json")
+    reference = read_json(args.reference)
     repo = root / "requests"
     repo.mkdir()
     env = {**os.environ, "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.devnull}
@@ -96,6 +101,14 @@ def main():
     input_unchanged = fingerprint(repo) == before
     report_path = root / "measurement/public-requests/report.json"
     report = validate_report(read_json(report_path))
+    if "engine_contract" in reference:
+        require(
+            all(
+                report["engine"].get(k) == v
+                for k, v in reference["engine_contract"].items()
+            ),
+            "Public reference belongs to another engine",
+        )
     normalized = []
     scores = {}
     for finding in report["findings"]:
@@ -178,6 +191,20 @@ def main():
             "effective_configuration_sha256": hashlib.sha256(
                 canonical(report["configuration"])
             ).hexdigest(),
+            "configuration": report["configuration"],
+            "engine_contract": {
+                k: report["engine"][k]
+                for k in (
+                    "scanner_semantics",
+                    "upstream_commit",
+                    "analyzer_signature",
+                    "model_id",
+                    "model_revision",
+                    "model_weights_sha256",
+                    "patchset_sha256",
+                    "dictionary_sha256",
+                )
+            },
             "report_sha256": file_hash(report_path),
             "elapsed_seconds": elapsed,
             "input_unchanged": input_unchanged,
