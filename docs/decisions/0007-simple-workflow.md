@@ -1,7 +1,9 @@
 # ADR-0007: простой интерфейс поверх существующего механизма
 
-Статус: спроектировано на согласованном этапе [#39](https://github.com/vovkins/ru-llm-scanner/issues/39).
-Реализация требует отдельного согласования этапа2; в v0.2.0 новых команд нет.
+Статус: build/scan/diff реализованы на согласованном этапе
+[#40](https://github.com/vovkins/ru-llm-scanner/issues/40) по спецификации
+[#39](https://github.com/vovkins/ru-llm-scanner/issues/39). Suite test остаётся
+этапом3 и пока явно возвращает ошибку. В опубликованном v0.2.0 новых команд нет.
 Общий план — [#38](https://github.com/vovkins/ru-llm-scanner/issues/38).
 
 ## Контекст

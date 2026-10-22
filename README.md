@@ -12,6 +12,26 @@ HTML и JSON с категориями, координатами, полными
 
 ## Начать работу
 
+В ветке упрощения [#40](https://github.com/vovkins/ru-llm-scanner/issues/40)
+реализован новый путь из доверенного checkout scanner:
+
+```sh
+make build
+make scan REPO='/srv/git/example project'
+make diff REPO='/srv/git/example project' FROM=abc1234 TO=def5678
+```
+
+Нужны `python3` версии 3.11+ с venv/pip, Git, GNU Make и rootful Docker
+(server Linux AMD64/ARM64, API 1.49+, Compose v2, BuildKit). Сборка может
+получать материалы из интернета. Она сама готовит Python-окружение, модель и оба
+локальных образа. Scan выбирает проверенный комплект без загрузок и выводит
+пути приватных JSON/HTML. Ручной `deployment.json` для этого пути не требуется.
+Параметры, каталоги и ошибки: [простой интерфейс](docs/reference/simple-workflow.md).
+`make test` пока возвращает ошибку с сообщением о неготовности: suite — этап 3.
+Для Jenkins используйте `./scanner scan|diff`, чтобы сохранить точные коды 0/1/2.
+
+Новые команды ещё не включены в опубликованный v0.2.0. Его прежние инструкции:
+
 | Ваша задача | Маршрут |
 | --- | --- |
 | Просканировать локальный клон в готовом окружении | [Руководство пользователя](docs/user/README.md) |
@@ -52,9 +72,9 @@ Docker/Compose и non-root доступ к daemon; venv/исходный proxy �
 [архивная инструкция](docs/admin/releases-v0.1.0.md). Слияние исходников или pull
 не заменяют установленный комплект и его deployment.
 
-Подготовлена [спецификация простого make/CLI интерфейса](docs/reference/simple-workflow.md)
-в рамках [#38](https://github.com/vovkins/ru-llm-scanner/issues/38). Новые команды
-пока не реализованы; приведённый выше путь относится к текущему runtime.
+Упрощение ведётся по [плану #38](https://github.com/vovkins/ru-llm-scanner/issues/38).
+Новый интерфейс сохраняет прежний механизм распознавания и explicit launcher;
+полная переработка руководств и suite `make test` остаются следующими этапами.
 
 ## Возможности
 
