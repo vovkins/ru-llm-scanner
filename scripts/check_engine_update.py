@@ -696,25 +696,30 @@ class Acceptance:
             self.root / "public",
             "--fetch",
             "--measure-update",
+            "--reference",
+            home / "verification/linux-amd64/requests-reference.json",
             home=home,
         )
         self.receipt["public"] = read_json(self.root / "public/public-repository.json")
         self.save()
         if info["lock"]["platform"] == "linux/amd64":
-            self.py(
-                "logistic-jenkins",
-                "check_jenkins_integration.py",
-                "--deployment-lock",
-                info["deployment"],
-                "--workflow-home",
-                home,
-                "--output-dir",
-                self.root / "jenkins",
-                home=home,
-            )
-            self.receipt["jenkins"] = read_json(
-                self.root / "jenkins/jenkins-verification.json"
-            )
+            try:
+                self.py(
+                    "logistic-jenkins",
+                    "check_jenkins_integration.py",
+                    "--deployment-lock",
+                    info["deployment"],
+                    "--workflow-home",
+                    home,
+                    "--output-dir",
+                    self.root / "jenkins",
+                    home=home,
+                )
+            finally:
+                path = self.root / "jenkins/jenkins-verification.json"
+                if path.exists():
+                    self.receipt["jenkins"] = read_json(path)
+                    self.save()
         self.save()
 
     def finish(self):

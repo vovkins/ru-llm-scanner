@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import sys
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -18,6 +19,59 @@ spec.loader.exec_module(adapter)
 
 
 class WorkflowJenkinsTests(unittest.TestCase):
+    def test_unbuilt_installation_fixture_changes_the_actual_home(self):
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from check_jenkins_integration import unbuilt_workflow_template
+        from ru_llm_scanner.artifacts import ArtifactError
+
+        template = "SCANNER_HOME = '/trusted scanner'"
+        changed = unbuilt_workflow_template(
+            template, Path("/trusted scanner"), Path("/unbuilt scanner")
+        )
+        self.assertEqual(changed, "SCANNER_HOME = '/unbuilt scanner'")
+        with self.assertRaises(ArtifactError):
+            unbuilt_workflow_template(template, Path("/missing"), Path("/unbuilt"))
+
+    def test_docker_observer_tracks_cleanup_without_recording_arguments(self):
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from check_jenkins_integration import docker_observer
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp).resolve()
+            real = root / "fake-docker"
+            real.write_text("#!" + sys.executable + "\nimport sys;sys.exit(0)\n")
+            real.chmod(0o700)
+            with patch(
+                "check_jenkins_integration.shutil.which", return_value=str(real)
+            ):
+                env, log = docker_observer(root)
+            env["WORKSPACE"] = str(root / "workspace")
+            command = root / "docker-observer/docker"
+            project = "rullmscan-" + "a" * 32
+            result = subprocess.run(
+                [
+                    command,
+                    "compose",
+                    "--project-name",
+                    project,
+                    "up",
+                    "PRIVATE_ARGUMENT_MUST_NOT_BE_LOGGED",
+                ],
+                env=env,
+                capture_output=True,
+            )
+            self.assertEqual(result.returncode, 0)
+            observed = json.loads(log.read_text())
+            self.assertEqual(observed["project"], project)
+            self.assertEqual(observed["workspace"], env["WORKSPACE"])
+            self.assertNotIn("PRIVATE_ARGUMENT", log.read_text())
+            self.assertEqual(log.stat().st_mode & 0o777, 0o600)
+            result = subprocess.run(
+                [command, "push", "example"], env=env, capture_output=True
+            )
+            self.assertEqual(result.returncode, 91)
+            self.assertTrue(json.loads(log.read_text().splitlines()[-1])["forbidden"])
+
     def test_compose_json_uses_utf8_for_non_bmp_bind_paths(self):
         sys.path.insert(0, str(ROOT / "scripts"))
         import docker_scanner

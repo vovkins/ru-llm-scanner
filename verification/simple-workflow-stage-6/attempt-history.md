@@ -42,3 +42,11 @@ Walkthrough harness исправляется отдельным чистым che
 [расследование и конкретный прототип](metadata-review.md). Остальные поля2805
 находок совпадают, max score delta3.3974647521972656e-06. Strict rule_id gate
 не объявляется пройденным; historical-only уточнение отдельно ожидает владельца.
+
+|39838784294 /52de7f2|ARM64 SUCCESS: три kits, model/upstream, реальный откат, чистый19-case walkthrough, scan/faults/seven capacity и Requests632/119analyzed/13unsupported/0error. AMD64 те же gates прошёл, отказ на logistic-jenkins; подробный child Jenkins receipt этой версии не экспортировался. Найден отдельный concrete harness defect: замена deployment path в новом шаблоне была no-op. Новый отрицательный сценарий проверяет unbuilt trusted installation/exit2 без reports. Docker argv observer дополнительно проверяет project cleanup и отсутствие acquisition без console parsing.|
+|39841638737 /f12c798|Native API v2 выполняется. Та же модель/коэффициенты/corpus, новые declaration metadata; финальный Jenkins helper этой source ещё до исправления отрицательного сценария.|
+
+Requests API v1 обеих CPU:632 findings, все612 исторических semantic identities
+сохранены,20 добавок BASE64_DATA/base64.logistic-cascade в10 публичных paths;
+изменений старых rule_id на Requests нет. Это не ground-truth secret precision.
+Runtime v2 и полный новый Jenkins всё ещё требуют своих фактических результатов.
