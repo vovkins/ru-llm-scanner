@@ -23,8 +23,9 @@ closure прежние; training inputs floating HEAD не позволяют в
 
 Новый [Jenkins adapter](../../examples/jenkins/run_workflow_scan.py) использует
 прямой CLI и OS exit0/1/2, private output и отдельный status. Человеческая console
-не является протоколом. Старый explicit adapter сохраняется. Настоящий Jenkins
-pilot и model/native результаты пока не объявлены успешными.
+не является протоколом. Старый explicit adapter сохраняется. Модельные измерения
+AMD64/ARM64 и настоящий откат выполнены в предыдущей попытке; полный native v2
+и настоящий Jenkins pilot пока не объявлены успешными.
 
 Полные отчёты, environment, container logs и модель не публикуются. Native
 workflow имеет contents:read и не вызывает release/registry jobs. Browser проверка
@@ -33,3 +34,19 @@ workflow имеет contents:read и не вызывает release/registry jobs
 Локально после уточнения:254unit/0skip/0missing, contracts11valid/22negative,
 static docs и format прошли; fast CI39837583437/source e0c2f77 SUCCESS. Это
 не заменяет текущий native39835960260 и ещё не завершённые rollback/Requests/Jenkins gates.
+
+## Текущий проверяемый кандидат
+
+Отдельный [metadata review v2](../../examples/upstream/base64-metadata-review.json)
+сохраняет stage5 review/API v1 как историю. Candidate source lock
+23903ac45dd82fb1b2839bd841d8faa5818e38d6bfabc4ad19607bdd69321f2c отличается от
+прежнего d663 только patches;106sources/0blockers. Native39841638737/source f12c798
+выполняется. Локально259unit/0skip/0missing и fast39841443630 SUCCESS.
+[Исследование rule_id](metadata-review.md) включает явное согласование узкого
+historical-only исключения; новые metadata проверяются строго.
+
+[Исторические safe Requests details](requests-historical-details.json) извлечены
+из сохранённого исходного отчёта:612finding hashes/scores, configuration и coverage
+точно совпали с frozen historical reference, без новых model runs и публикации
+значений. Они нужны для объяснения новых semantic/metadata differences. Это
+историческое измерение; текущая проверка Requests ещё не завершена.
