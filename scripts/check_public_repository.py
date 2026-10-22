@@ -32,6 +32,11 @@ def main():
     parser.add_argument("--deployment-lock", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--fetch", action="store_true", required=True)
+    parser.add_argument(
+        "--measure-update",
+        action="store_true",
+        help="Measure an approved engine update; keep historical equality distinct",
+    )
     args = parser.parse_args()
     os.umask(0o077)
     root = args.output_dir.resolve()
@@ -115,13 +120,41 @@ def main():
         if decisions_equal
         else None
     )
-    passed = (
+    historical_equal = (
         complete
         and config_equal
         and coverage_equal
         and decisions_equal
         and delta <= 1e-5
     )
+    passed = (
+        historical_equal
+        or args.measure_update
+        and complete
+        and config_equal
+        and coverage_equal
+    )
+    by_id = {f["id"]: f for f in report["files"]}
+    safe_findings = [
+        {
+            "path": by_id[f["file_id"]]["path"],
+            **{
+                k: v
+                for k, v in f.items()
+                if k
+                in {
+                    "category",
+                    "source",
+                    "rule_id",
+                    "start_offset",
+                    "end_offset",
+                    "score",
+                }
+            },
+            "value_sha256": hashlib.sha256(f["value"].encode()).hexdigest(),
+        }
+        for f in report["findings"]
+    ]
     errors = {}
     for error in report["errors"]:
         errors[error["code"]] = errors.get(error["code"], 0) + 1
@@ -155,6 +188,15 @@ def main():
             "reference_configuration_equal": config_equal,
             "reference_coverage_equal": coverage_equal,
             "reference_decisions_equal": decisions_equal,
+            "historical_reference_equal": historical_equal,
+            "approved_update_measurement": args.measure_update,
+            "reference_added_fingerprints": sorted(
+                scores.keys() - reference["finding_scores"].keys()
+            ),
+            "reference_removed_fingerprints": sorted(
+                reference["finding_scores"].keys() - scores.keys()
+            ),
+            "safe_findings": safe_findings if args.measure_update else [],
             "reference_maximum_score_absolute_delta": delta,
             "score_absolute_tolerance": 1e-5,
             "analyzer_cpus": 4,

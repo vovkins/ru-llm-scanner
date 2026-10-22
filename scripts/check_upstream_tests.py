@@ -22,6 +22,14 @@ TESTS = (
     "test_ner_text_processing.py",
     "test_nlp_context_contract.py",
 )
+BASE64_TESTS = (
+    "test_base64_logistic.py",
+    "test_base64_logistic_api.py",
+    "test_base64_logistic_cases.py",
+    "test_base64_logistic_full_path.py",
+    "test_base64_logistic_review.py",
+    "test_base64_policies_evaluation.py",
+)
 
 
 def main():
@@ -29,7 +37,7 @@ def main():
     p.add_argument("--context", type=Path, required=True)
     p.add_argument("--image", required=True)
     p.add_argument("--output", type=Path, required=True)
-    p.add_argument("--suite", choices=("core", "ner"), default="core")
+    p.add_argument("--suite", choices=("core", "ner", "base64"), default="core")
     args = p.parse_args()
     context = args.context.resolve()
     manifest, lock = verify_context(context)
@@ -72,7 +80,11 @@ def main():
         "/workspace",
         reference,
     ]
-    tests = TESTS if args.suite == "core" else ("test_ner.py",)
+    tests = {"core": TESTS, "ner": ("test_ner.py",), "base64": BASE64_TESTS}[args.suite]
+    require(
+        all((context / "presidio/tests" / n).is_file() for n in tests),
+        "Missing test file",
+    )
     regression = ROOT / "tests/integration/ner_window_cases.py"
     if args.suite == "ner":
         base[-1:-1] = [
@@ -109,9 +121,11 @@ def main():
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.with_suffix(".log").write_text(result.stdout)
     passed = re.findall(r"(\d+) passed", result.stdout)
+    skipped = re.findall(r"(\d+) skipped", result.stdout)
+    success = result.returncode == 0 and bool(passed) and not skipped
     report = {
         "verification_version": 1,
-        "status": "passed" if result.returncode == 0 else "failed",
+        "status": "passed" if success else "failed",
         "source_commit": lock["upstream"]["commit"],
         "source_lock_sha256": manifest["source_lock_sha256"],
         "test_image_id": info["Id"],
@@ -120,6 +134,7 @@ def main():
         "packages": packages,
         "passed": int(passed[-1]) if passed else 0,
         "return_code": result.returncode,
+        "skipped": sum(map(int, skipped)),
     }
     if args.suite == "ner":
         report["scanner_regression_sha256"] = file_hash(regression)
@@ -133,7 +148,7 @@ def main():
             }
         )
     )
-    raise SystemExit(result.returncode)
+    raise SystemExit(0 if success else 1)
 
 
 if __name__ == "__main__":

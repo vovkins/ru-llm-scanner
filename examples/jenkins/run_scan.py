@@ -139,7 +139,7 @@ def command(environ, output):
     return result
 
 
-def main():
+def main(*, command_builder=command, status_validator=validated_status):
     os.umask(0o077)
     workspace = None
     output = None
@@ -171,7 +171,7 @@ def main():
         for sig in (signal.SIGINT, signal.SIGTERM):
             previous_handlers[sig] = signal.signal(sig, forward)
         process = subprocess.Popen(
-            command(os.environ, output),
+            command_builder(os.environ, output),
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
@@ -184,7 +184,7 @@ def main():
                     # The trusted launcher gets cleanup grace, then is reaped.
                     stdout, stderr = process.communicate(timeout=45)
                     break
-        checked = validated_status(stdout, process.returncode, stderr)
+        checked = status_validator(stdout, process.returncode, stderr)
         if interrupted or (
             checked["exit_code"] in (0, 1) and not reports_available(output)
         ):

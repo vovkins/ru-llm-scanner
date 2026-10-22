@@ -127,11 +127,12 @@ class JenkinsFixture:
             self.lock["controller_image"],
             timeout=900,
         )
-        self.home = self.root / "trusted-scanner"
-        for name in ("scripts/docker_scanner.py", "examples/jenkins/run_scan.py"):
-            path = self.home / name
-            path.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(ROOT / name, path)
+        self.home = self.args.workflow_home or self.root / "trusted-scanner"
+        if not self.args.workflow_home:
+            for name in ("scripts/docker_scanner.py", "examples/jenkins/run_scan.py"):
+                path = self.home / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ROOT / name, path)
         for name in ("repositories", "configs", "baselines", "agent"):
             (self.root / name).mkdir(mode=0o700)
         self.repo = RepoFixture(self.root / "repositories/prepared-repo")
@@ -144,7 +145,15 @@ class JenkinsFixture:
             parents=(self.b,),
         )
         self.before = fingerprint(self.repo.root)
-        template = (ROOT / "examples/jenkins/Jenkinsfile.amd64").read_text()
+        template = (
+            ROOT
+            / "examples/jenkins"
+            / (
+                "Jenkinsfile.workflow"
+                if self.args.workflow_home
+                else "Jenkinsfile.amd64"
+            )
+        ).read_text()
         substitutions = {
             "/opt/ru-llm-scanner": str(self.home),
             "/srv/ru-llm-scanner/deployment.json": str(
@@ -561,6 +570,8 @@ class JenkinsFixture:
         trusted = {
             str(self.home / "examples/jenkins/run_scan.py").encode(),
             str(self.home / "scripts/docker_scanner.py").encode(),
+            str(self.home / "examples/jenkins/run_workflow_scan.py").encode(),
+            str(self.home / "scripts/workflow.py").encode(),
         }
         # Operator recovery after hard loss: identify only this trusted installation
         # and this exact WORKSPACE before signalling; never target other jobs.
@@ -616,6 +627,7 @@ class JenkinsFixture:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--deployment-lock", type=Path, required=True)
+    parser.add_argument("--workflow-home", type=lambda s: Path(s).resolve(strict=True))
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     require(not args.output_dir.exists(), "Jenkins output already exists")
