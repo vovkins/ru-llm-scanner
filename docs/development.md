@@ -175,3 +175,7 @@ NER, а изменение распознавания не подтвержда�
 [CONTRIBUTING](../CONTRIBUTING.md), [SECURITY](../SECURITY.md),
 [лицензирование](licensing.md). Текущий цикл/согласования — [#38](https://github.com/vovkins/ru-llm-scanner/issues/38);
 каждый следующий этап получает отдельный подробный план и явное согласование.
+
+## Source-only обновление proxy
+
+Сопровождающий использует [compare/prepare](reference/upstream-update.md), [schema](../schemas/upstream-update-v1.schema.json) и reviewed applicability. Unit `test_upstream_update` проверяет полноту новых modules/resources/tests/settings, exact patches, повторяемость, Git trust boundary и отказ при stale review. Native CI mode upstream_update отдельно получает точные SHA и готовит кандидат без исполнения его кода, затем выполняет build/test со старым engine; новая модель этим не принимается.

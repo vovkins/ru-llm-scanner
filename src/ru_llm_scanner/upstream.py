@@ -186,7 +186,7 @@ def _load_source_lock(path: Path):
     )
     require(
         all(
-            re.fullmatch(r"PRESIDIO_ANALYZER_[A-Z_]+", k)
+            re.fullmatch(r"PRESIDIO_ANALYZER_[A-Z0-9_]+", k)
             and isinstance(v, str)
             and "\n" not in v
             for k, v in lock["analyzer_environment"].items()
@@ -360,76 +360,106 @@ def prepare(
             strict_json(payloads["presidio/model_manifest.json"]) == lock["model"],
             "Model source manifest mismatch",
         )
-        destination.mkdir(parents=True)
-        for name, raw in payloads.items():
-            out = destination / name
-            out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_bytes(raw)
-        helpers = destination / "scanner_build"
-        helpers.mkdir()
-        (helpers / "original_analyzer_server.py").write_bytes(
-            payloads["presidio/analyzer_server.py"]
+        return prepare_payloads(
+            payloads, destination, lock_path, profile_key, certs=certs
         )
-        for patch in lock["patches"]:
-            patch_path = project / patch["path"]
-            require(file_hash(patch_path) == patch["sha256"], "Patch checksum mismatch")
-            apply_exact_patch(destination, patch_path.read_bytes(), patch["targets"])
-        (helpers / "constraints.txt").write_bytes(
-            (project / profile["constraints_path"]).read_bytes()
-        )
-        (helpers / "probe_runtime.py").write_bytes(
-            (project / "docker/probe_runtime.py").read_bytes()
-        )
-        write_json(helpers / "source-lock.json", lock)
-        if certs is not None:
-            require(
-                certs.is_dir() and not certs.is_symlink(),
-                "Invalid certificates directory",
-            )
-            for p in sorted(certs.glob("*.crt")):
-                require(
-                    p.is_file() and not p.is_symlink(), "Certificate must be regular"
-                )
-                (destination / "certs" / p.name).write_bytes(p.read_bytes())
-        dockerfile = (destination / "presidio/Dockerfile").read_text()
+
+
+def prepare_payloads(payloads, destination, lock_path, profile_key, *, certs=None):
+    """Prepare an exact verified export without depending on a caller's Git commands.
+
+    This is the shared source-only seam; it never imports or executes payloads.
+    Git acquisition and trust validation belong to the caller. All bytes are
+    independently checked against the source lock before any context is created.
+    """
+    lock = load_source_lock(lock_path)
+    require(profile_key in lock["build_profiles"], "Build profile not pinned")
+    profile = lock["build_profiles"][profile_key]
+    project = lock_path.resolve().parent
+    require(not destination.exists(), "Preparation destination already exists")
+    require(
+        set(payloads) == set(lock["sources"])
+        and all(
+            isinstance(raw, bytes) and sha256(raw) == lock["sources"][name]
+            for name, raw in payloads.items()
+        ),
+        "Source payload checksum mismatch",
+    )
+    require(
+        strict_json(payloads["presidio/model_manifest.json"]) == lock["model"],
+        "Model source manifest mismatch",
+    )
+    require(
+        file_hash(project / profile["constraints_path"])
+        == profile["constraints_sha256"],
+        "Constraints checksum mismatch",
+    )
+    destination.mkdir(parents=True)
+    for name, raw in payloads.items():
+        out = destination / name
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_bytes(raw)
+    helpers = destination / "scanner_build"
+    helpers.mkdir()
+    (helpers / "original_analyzer_server.py").write_bytes(
+        payloads["presidio/analyzer_server.py"]
+    )
+    for patch in lock["patches"]:
+        patch_path = project / patch["path"]
+        require(file_hash(patch_path) == patch["sha256"], "Patch checksum mismatch")
+        apply_exact_patch(destination, patch_path.read_bytes(), patch["targets"])
+    (helpers / "constraints.txt").write_bytes(
+        (project / profile["constraints_path"]).read_bytes()
+    )
+    (helpers / "probe_runtime.py").write_bytes(
+        (project / "docker/probe_runtime.py").read_bytes()
+    )
+    write_json(helpers / "source-lock.json", lock)
+    if certs is not None:
         require(
-            dockerfile.count("FROM python:3.11-slim AS python-base") == 1,
-            "Unexpected upstream Docker base",
+            certs.is_dir() and not certs.is_symlink(),
+            "Invalid certificates directory",
         )
-        dockerfile = dockerfile.replace(
-            "FROM python:3.11-slim AS python-base",
-            "FROM " + profile["base_image"] + " AS python-base",
-        )
-        marker = "FROM python-base AS analyzer-common-build\n"
-        require(dockerfile.count(marker) == 1, "Unexpected dependency build stage")
-        dockerfile = dockerfile.replace(
-            marker,
-            marker
-            + "COPY scanner_build/constraints.txt /opt/scanner/constraints.txt\nENV PIP_CONSTRAINT=/opt/scanner/constraints.txt\n",
-        )
-        # The original GPU stages remain intact; a GPU build requires its own pinned profile.
-        for name, base in (
-            ("scanner-analyzer", "analyzer"),
-            ("scanner-analyzer-gpu", "analyzer-gpu"),
-        ):
-            dockerfile += "\nFROM " + base + " AS " + name + "\n"
-            dockerfile += "COPY scanner_build/probe_runtime.py /opt/scanner/probe_runtime.py\nCOPY scanner_build/source-lock.json /opt/scanner/upstream.lock.json\n"
-            dockerfile += "COPY litellm_guardrails/dictionary_policy.py /opt/scanner/dictionary_policy.py\nCOPY litellm_guardrails/dictionary-substitutions.default.json /opt/scanner/dictionary.json\nCOPY THIRD_PARTY_NOTICES.md /opt/scanner/THIRD_PARTY_NOTICES.md\n"
-            for key, value in sorted(lock["analyzer_environment"].items()):
-                dockerfile += (
-                    "ENV " + key + "=" + __import__("json").dumps(value) + "\n"
-                )
-            dockerfile += "RUN python /opt/scanner/probe_runtime.py > /opt/scanner/build-provenance.json\n"
-        (helpers / "Dockerfile").write_text(dockerfile)
-        files = inventory(destination)
-        manifest = {
-            "manifest_version": 1,
-            "source_lock_sha256": file_hash(lock_path),
-            "profile_key": profile_key,
-            "profile": profile,
-            "files": files,
-        }
-        write_json(helpers / "manifest.json", manifest)
+        for p in sorted(certs.glob("*.crt")):
+            require(p.is_file() and not p.is_symlink(), "Certificate must be regular")
+            (destination / "certs" / p.name).write_bytes(p.read_bytes())
+    dockerfile = (destination / "presidio/Dockerfile").read_text()
+    require(
+        dockerfile.count("FROM python:3.11-slim AS python-base") == 1,
+        "Unexpected upstream Docker base",
+    )
+    dockerfile = dockerfile.replace(
+        "FROM python:3.11-slim AS python-base",
+        "FROM " + profile["base_image"] + " AS python-base",
+    )
+    marker = "FROM python-base AS analyzer-common-build\n"
+    require(dockerfile.count(marker) == 1, "Unexpected dependency build stage")
+    dockerfile = dockerfile.replace(
+        marker,
+        marker
+        + "COPY scanner_build/constraints.txt /opt/scanner/constraints.txt\nENV PIP_CONSTRAINT=/opt/scanner/constraints.txt\n",
+    )
+    # The original GPU stages remain intact; a GPU build requires its own pinned profile.
+    for name, base in (
+        ("scanner-analyzer", "analyzer"),
+        ("scanner-analyzer-gpu", "analyzer-gpu"),
+    ):
+        dockerfile += "\nFROM " + base + " AS " + name + "\n"
+        dockerfile += "COPY scanner_build/probe_runtime.py /opt/scanner/probe_runtime.py\nCOPY scanner_build/source-lock.json /opt/scanner/upstream.lock.json\n"
+        dockerfile += "COPY litellm_guardrails/dictionary_policy.py /opt/scanner/dictionary_policy.py\nCOPY litellm_guardrails/dictionary-substitutions.default.json /opt/scanner/dictionary.json\nCOPY THIRD_PARTY_NOTICES.md /opt/scanner/THIRD_PARTY_NOTICES.md\n"
+        for key, value in sorted(lock["analyzer_environment"].items()):
+            dockerfile += "ENV " + key + "=" + __import__("json").dumps(value) + "\n"
+        dockerfile += "RUN python /opt/scanner/probe_runtime.py > /opt/scanner/build-provenance.json\n"
+    (helpers / "Dockerfile").write_text(dockerfile)
+    files = inventory(destination)
+    manifest = {
+        "manifest_version": 1,
+        "source_lock_sha256": file_hash(lock_path),
+        "profile_key": profile_key,
+        "profile": profile,
+        "files": files,
+    }
+    write_json(helpers / "manifest.json", manifest)
     return manifest
 
 

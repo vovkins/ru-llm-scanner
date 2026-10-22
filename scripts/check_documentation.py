@@ -20,6 +20,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from ru_llm_scanner import html_report
 from ru_llm_scanner.artifacts import file_hash, read_json, require, write_json
 from ru_llm_scanner.cli import parser as cli_parser
+from ru_llm_scanner.upstream_update import parser as update_parser
 from ru_llm_scanner.configuration import EffectiveConfig, load_configuration
 from ru_llm_scanner.report_validation import ReportError, validate_report
 
@@ -192,16 +193,20 @@ def check_commands():
                         args.extend([MAKE_FLAGS[name], value])
                 workflow_parser().parse_args(args)
                 checked += 1
-            script = (
-                tokens[1]
-                if len(tokens) > 1 and tokens[1].startswith("scripts/")
-                else None
-            )
-            if len(tokens) > 1 and tokens[1].endswith("/scripts/docker_scanner.py"):
-                script = "scripts/docker_scanner.py"
-            if script == "scripts/docker_scanner.py":
+            script, arguments = None, []
+            for index, token in enumerate(tokens[1:], 1):
+                if token.startswith("scripts/"):
+                    script, arguments = token, tokens[index + 1 :]
+                    break
+                if token.endswith("/scripts/docker_scanner.py"):
+                    script, arguments = "scripts/docker_scanner.py", tokens[index + 1 :]
+                    break
+            if script == "scripts/update_upstream.py":
+                update_parser().parse_args(arguments)
+                checked += 1
+            elif script == "scripts/docker_scanner.py":
                 if "--help" not in tokens:
-                    launcher_parser().parse_args(tokens[2:])
+                    launcher_parser().parse_args(arguments)
                 checked += 1
             elif Path(tokens[0]).name == "ru-llm-scanner":
                 if not {"--help", "--version"} & set(tokens):
@@ -214,7 +219,7 @@ def check_commands():
                 checked += 1
             elif script and Path(script).name in helper_scripts:
                 operation = (
-                    tokens[2:3]
+                    arguments[:1]
                     if Path(script).name in {"analyzer.py", "build_scanner.py"}
                     else []
                 )
@@ -226,7 +231,7 @@ def check_commands():
                     )
                 allowed = set(re.findall(r"--[a-z][a-z-]+", helps[key]))
                 require(
-                    {t.split("=", 1)[0] for t in tokens[2:] if t.startswith("--")}
+                    {t.split("=", 1)[0] for t in arguments if t.startswith("--")}
                     <= allowed,
                     "Undocumented/invalid example options in "
                     + str(path.relative_to(ROOT)),
