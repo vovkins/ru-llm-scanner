@@ -162,14 +162,14 @@
     {
       "replaces": "patches/analyzer-api-v1.patch",
       "path": "patches/analyzer-api-base64-v1.patch",
-      "sha256": "9838bcd7333af49ee3fe0a502b16eea6b3e18e458381cef62ab9c09edc059835",
+      "sha256": "a7bba7d6ef0974b7fec9cf654e84254a92fa7f31b1fd56d08dd195712b086dd3",
       "targets": {
         "presidio/analyzer_server.py": {
           "before": "cee606db3b1525f2495ab96132d48980ccf502a8feb1c75e52de1dff8c9b9ecc",
-          "after": "e7125d5be14926d92da086cbf724d23d2ae7fb1cfb1178124c9ccf74a6151c0d"
+          "after": "bdd2957c919926e372649cf961126162f685fb75034f95c6194cf777cab7ff04"
         }
       },
-      "reason": "same_five_scanner_metadata_changes_exact_new_offsets"
+      "reason": "same_metadata_with_public_source_constants"
     }
   ],
   "resource_exclusions": {},

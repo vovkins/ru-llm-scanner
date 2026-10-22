@@ -2,6 +2,7 @@
 """Native source-candidate acceptance plus regression of the unchanged engine."""
 
 import argparse
+import ast
 import hashlib
 import json
 import os
@@ -219,6 +220,47 @@ os.execv(__GIT__,[__GIT__,*a])
             and len(comparison["candidate_sources"]) == 106,
             "test_failed",
         )
+        prepared = directory / "candidate-0/contexts/cpu-linux-amd64/presidio"
+        merging = ast.parse((prepared / "result_merging.py").read_bytes())
+        constants = {
+            node.targets[0].id: node.value.value
+            for node in merging.body
+            if isinstance(node, ast.Assign)
+            and len(node.targets) == 1
+            and isinstance(node.targets[0], ast.Name)
+            and isinstance(node.value, ast.Constant)
+            and isinstance(node.value.value, str)
+        }
+        known = next(
+            node.value.args[0]
+            for node in merging.body
+            if isinstance(node, ast.Assign)
+            and any(
+                isinstance(t, ast.Name) and t.id == "_KNOWN_SOURCES"
+                for t in node.targets
+            )
+        )
+        server_ast = ast.parse((prepared / "analyzer_server.py").read_bytes())
+        advertised = [
+            value.args[0]
+            for node in ast.walk(server_ast)
+            if isinstance(node, ast.Dict)
+            for key, value in zip(node.keys, node.values)
+            if isinstance(key, ast.Constant) and key.value == "detection_sources"
+        ]
+        state.require(
+            len(advertised) == 1
+            and {n.id for n in advertised[0].elts} == {n.id for n in known.elts},
+            "test_failed",
+        )
+        state.require(
+            not any(
+                isinstance(n, ast.Name) and n.id == "_KNOWN_SOURCES"
+                for n in ast.walk(server_ast)
+            ),
+            "test_failed",
+        )
+        public_catalog = sorted(constants[n.id] for n in advertised[0].elts)
         receipt["source_candidate"] = {
             "from_commit": BEFORE,
             "to_commit": AFTER,
@@ -238,6 +280,8 @@ os.execv(__GIT__,[__GIT__,*a])
             "input_unchanged": True,
             "acquisition_commands_during_compare_prepare": 0,
             "patch_override_count": 1,
+            "public_source_catalog": public_catalog,
+            "private_source_enum_import_removed": True,
             "model_dependencies_unchanged": True,
         }
         save()

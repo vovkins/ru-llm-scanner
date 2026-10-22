@@ -1,6 +1,6 @@
 --- a/presidio/analyzer_server.py
 +++ b/presidio/analyzer_server.py
-@@ -23,10 +23,10 @@
+@@ -23,10 +23,13 @@
  from presidio_analyzer.predefined_recognizers import SpacyRecognizer
  
  from capacity import CapacityRejected, build_limiter_from_env
@@ -9,11 +9,14 @@
  from recognizers import ALL_RECOGNIZERS
  from recognizers.base64_data import Base64DataRecognizer
 -from result_merging import MergeDecision, merge_results
-+from result_merging import MergeDecision, merge_results, detection_source, _KNOWN_SOURCES
++from result_merging import (
++    MergeDecision, merge_results, detection_source, SOURCE_NER,
++    SOURCE_NATIVE_CREDENTIAL, SOURCE_STRUCTURAL, SOURCE_CONTEXTUAL_CONTRACT,
++)
  from text_chunking import TextChunk, plan_text_chunks
  from ner import (
      MODEL_ID,
-@@ -491,6 +491,7 @@
+@@ -491,6 +494,7 @@
  class AnalyzeResponse(BaseModel):
      text: str
      entities: list[dict]
@@ -21,17 +24,19 @@
  
  
  def _validate_analyzer_correlation(
-@@ -542,6 +543,9 @@
+@@ -542,6 +546,11 @@
          "ner_precision": runtime["precision"],
          "ner_inference_batch_size": runtime["inference_batch_size"],
          "analysis_signature": ANALYSIS_SIGNATURE,
 +        "scanner_contract_version": 1,
 +        "supported_entities": sorted(SUPPORTED_ENTITY_TYPES),
-+        "detection_sources": sorted(_KNOWN_SOURCES),
++        "detection_sources": sorted({
++            SOURCE_NER, SOURCE_NATIVE_CREDENTIAL, SOURCE_STRUCTURAL, SOURCE_CONTEXTUAL_CONTRACT,
++        }),
          "capacity": capacity_limiter.snapshot(),
      }
      if runtime["device_name"] is not None:
-@@ -930,6 +934,8 @@
+@@ -930,6 +939,8 @@
                  "end": r.end,
                  "score": r.score,
                  "text": request.text[r.start : r.end],
