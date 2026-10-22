@@ -1,0 +1,35 @@
+{
+  "runs": [
+    {
+      "run_id": 39762846405,
+      "source_revision": "ead712df02558e59bc1e22d063a3fe0a90e66310",
+      "amd64": "failure",
+      "arm64": "failure",
+      "builds_passed": true,
+      "unit_tests": 225,
+      "skipped": 0,
+      "unit_errors": 1,
+      "reason": "Recursive GNU Make diagnostic lines were parsed as transport JSON; not accepted."
+    },
+    {
+      "run_id": 39763355152,
+      "type": "fast",
+      "conclusion": "failure",
+      "reason": "Unavailable-Docker unit fixture depended on actual host Docker configuration; not accepted."
+    },
+    {
+      "run_id": 39764343216,
+      "source_revision": "fa10c5e6fd261b9a431f7281d5b253ddffd0d4cb",
+      "amd64": "success",
+      "arm64": "success",
+      "scope": "Final native build/make test/repeat/missing/corrupt/repair/SIGTERM controls"
+    },
+    {
+      "run_id": 39764351277,
+      "type": "fast",
+      "conclusion": "success",
+      "source_revision": "fa10c5e6fd261b9a431f7281d5b253ddffd0d4cb"
+    }
+  ],
+  "raw_logs_or_reports_uploaded": false
+}

@@ -1,0 +1,15 @@
+{
+  "tests": 225,
+  "skipped": 0,
+  "failures": 0,
+  "errors": 0,
+  "missing_required_modules": [],
+  "failure_cases": [],
+  "status": "passed",
+  "source_revision": "fa10c5e6fd261b9a431f7281d5b253ddffd0d4cb",
+  "host_python": "3.12.14",
+  "real_new_build_venv": true,
+  "isolated_pinned_historical_fixture": true,
+  "makelevel": "1",
+  "real_model_inference_claimed": false
+}

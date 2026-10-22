@@ -58,3 +58,8 @@ SIGINT/SIGTERM останавливает собственные дочерни�
 Полный Requests, upstream/independent quality, release archives/GHCR и настоящий
 Jenkins/migration остаются отдельной полной матрицей CI. Повседневный suite не
 подменяет эти gates. Новые команды ещё не входят в опубликованный v0.2.0.
+
+На опорных native Ubuntu24.04 стендах (4CPU, Docker около15.6GiB RAM) этот suite
+выполнился за78.050s на AMD64 и79.419s на ARM64; повтор —75.975s и77.609s.
+Это время synthetic suite, не оценки скорости сканирования произвольного клона.
+[Измерения и границы](../../verification/simple-workflow-stage-3/resources.json).
