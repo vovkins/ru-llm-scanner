@@ -10,6 +10,8 @@
 повторное согласование алгоритма. Старый7045dd4/da4f50a и новый9e47e65 проверяются
 в отдельных готовых установках content/logistic с неизменными dependencies,
 словарём, моделью и коэффициентами. Текущий root pin пока прежний.
+[Exact качество и stress отдельно](quality.md); [согласованное уточнение](criterion-amendment.md)
+сохраняет исходную разметку и TP/FP/FN.
 
 Повторная source preparation дала106 sources/0 blockers. Upstream PR104 merged
 2026-10-21T19:20:10Z, base da4f50a, exact merge9e47e65. SHA256 source archive
@@ -27,3 +29,7 @@ pilot и model/native результаты пока не объявлены ус
 Полные отчёты, environment, container logs и модель не публикуются. Native
 workflow имеет contents:read и не вызывает release/registry jobs. Browser проверка
 не заявляется: renderer не меняется, ранее file:// был заблокирован policy tool.
+
+Локально после уточнения:254unit/0skip/0missing, contracts11valid/22negative,
+static docs и format прошли; fast CI39837583437/source e0c2f77 SUCCESS. Это
+не заменяет текущий native39835960260 и ещё не завершённые rollback/Requests/Jenkins gates.

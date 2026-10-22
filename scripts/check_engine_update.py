@@ -49,20 +49,21 @@ class Acceptance:
                 "tests/corpus/base64-update-v1.json",
                 "tests/corpus/load_code_corpus.py",
                 "verification/simple-workflow-stage-6/expectations.md",
+                "verification/simple-workflow-stage-6/criterion-amendment.md",
             )
         }
 
     def save(self):
         write_json(self.root / "engine-update.json", self.receipt)
 
-    def run(self, label, command, *, cwd=ROOT, expected=0, timeout=7200):
+    def run(self, label, command, *, cwd=ROOT, expected=0, timeout=7200, env=None):
         print("Engine update: " + label, flush=True)
         started = time.monotonic()
         with (self.root / (label + ".log")).open("xb") as stream:
             process = subprocess.run(
                 list(map(str, command)),
                 cwd=cwd,
-                env=self.env,
+                env=self.env if env is None else env,
                 stdout=stream,
                 stderr=subprocess.STDOUT,
                 timeout=timeout,
@@ -83,7 +84,10 @@ class Acceptance:
                     for p in (cwd / ".build/workflow/tests").glob("*/summary.json")
                 ]
             # Only curated synthetic probes, never public-repository output.
-            if label.endswith("-model") or "upstream-base64" in label:
+            if (
+                label.endswith(("-model", "-documentation-walkthrough"))
+                or "upstream-base64" in label
+            ):
                 self.receipt["synthetic_failure_diagnostics"] = (
                     self.root / (label + ".log")
                 ).read_text(errors="replace")[-2500:]
@@ -537,6 +541,85 @@ class Acceptance:
         }
         self.save()
 
+    def walkthrough(self, home):
+        # The literal first-run probe deliberately rejects an already-built or
+        # dirty checkout. Give it a separate clean snapshot of the exact tested
+        # candidate, without copying .build, venv, caches or user configuration.
+        fresh = self.root / "clean installation Кириллица 🧪"
+        self.run(
+            "walkthrough-clone",
+            ["git", "clone", "--no-hardlinks", "--template=", ROOT, fresh],
+        )
+        inputs = self.receipt["installations"]["logistic"]["material_inputs"]
+        for relative, digest in inputs.items():
+            source = home / relative
+            require(file_hash(source) == digest, "Candidate changed before walkthrough")
+            target = fresh / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, target)
+        self.run(
+            "walkthrough-stage-candidate",
+            ["git", "add", "--", *inputs],
+            cwd=fresh,
+        )
+        self.run(
+            "walkthrough-snapshot-candidate",
+            [
+                "git",
+                "-c",
+                "core.hooksPath=/dev/null",
+                "-c",
+                "user.name=Scanner acceptance",
+                "-c",
+                "user.email=fixture@example.invalid",
+                "-c",
+                "commit.gpgsign=false",
+                "commit",
+                "--allow-empty",
+                "-qm",
+                "Temporary reviewed candidate for clean first-run acceptance",
+            ],
+            cwd=fresh,
+        )
+        code = "import json,sys;sys.path[:0]=['scripts','src'];import workflow_state as s;print(json.dumps(s.materials()))"
+        require(
+            json.loads(
+                subprocess.check_output(
+                    [sys.executable, "-c", code], cwd=fresh, env=self.env
+                )
+            )
+            == inputs,
+            "Walkthrough candidate material mismatch",
+        )
+        private_home = self.root / "fresh HOME Кириллица 🧪"
+        private_home.mkdir(mode=0o700)
+        env = {
+            **self.env,
+            "HOME": str(private_home),
+            "DOCKER_CONFIG": self.env.get(
+                "DOCKER_CONFIG", str(Path(self.env["HOME"]) / ".docker")
+            ),
+        }
+        try:
+            self.py(
+                "logistic-documentation-walkthrough",
+                "check_documentation_walkthrough.py",
+                "--output-dir",
+                self.root / "walkthrough",
+                home=fresh,
+                env=env,
+            )
+        finally:
+            path = self.root / "walkthrough/workflow-verification.json"
+            if path.exists():
+                self.receipt["documentation_walkthrough"] = {
+                    **read_json(path),
+                    "candidate_materials_match_tested_logistic": True,
+                    "temporary_local_snapshot_only": True,
+                    "parent_scanner_source": self.receipt["scanner_source"],
+                }
+                self.save()
+
     def extras(self):
         name = "logistic"
         home = self.homes[name]
@@ -557,17 +640,7 @@ class Acceptance:
             self.root / "upstream-parity/offline-verification.json"
         )
         self.save()
-        self.py(
-            "logistic-documentation-walkthrough",
-            "check_documentation_walkthrough.py",
-            "--output-dir",
-            self.root / "walkthrough",
-            home=home,
-        )
-        self.receipt["documentation_walkthrough"] = read_json(
-            self.root / "walkthrough/workflow-verification.json"
-        )
-        self.save()
+        self.walkthrough(home)
         self.py(
             "logistic-scan-integration",
             "check_scan_integration.py",
