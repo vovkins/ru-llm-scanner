@@ -39,7 +39,7 @@ class WorkflowJenkinsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp).resolve()
             real = root / "fake-docker"
-            real.write_text("#!" + sys.executable + "\nimport sys;sys.exit(0)\n")
+            real.write_text("#!/usr/bin/env python3\nimport sys;sys.exit(0)\n")
             real.chmod(0o700)
             with patch(
                 "check_jenkins_integration.shutil.which", return_value=str(real)

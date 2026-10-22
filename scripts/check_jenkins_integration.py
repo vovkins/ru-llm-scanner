@@ -73,7 +73,7 @@ finally:os.close(fd)
 if forbidden:sys.exit(91)
 os.execv(os.environ['SCANNER_JENKINS_REAL_DOCKER'],[os.environ['SCANNER_JENKINS_REAL_DOCKER'],*a])
 """
-    (guard / "docker").write_text("#!" + sys.executable + "\n" + script)
+    (guard / "docker").write_text("#!/usr/bin/env python3\n" + script)
     (guard / "docker").chmod(0o700)
     return {
         **os.environ,

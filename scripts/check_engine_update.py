@@ -702,6 +702,11 @@ class Acceptance:
         )
         self.receipt["public"] = read_json(self.root / "public/public-repository.json")
         self.save()
+
+    def jenkins(self):
+        # Run this affected gate before the long, independent Requests scan.
+        home = self.homes["logistic"]
+        info = self.receipt["installations"]["logistic"]
         if info["lock"]["platform"] == "linux/amd64":
             try:
                 self.py(
@@ -915,6 +920,7 @@ def main():
             test.receipt["models"], require_exact=False
         )
         test.save()
+        test.jenkins()
         test.rollback()
         test.extras()
         test.finish()

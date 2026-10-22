@@ -50,3 +50,9 @@ Requests API v1 обеих CPU:632 findings, все612 исторических 
 сохранены,20 добавок BASE64_DATA/base64.logistic-cascade в10 публичных paths;
 изменений старых rule_id на Requests нет. Это не ground-truth secret precision.
 Runtime v2 и полный новый Jenkins всё ещё требуют своих фактических результатов.
+
+|39846686884 /03cb872|Обе CPU отказали в content make test/unit до новых model runs: единственная ошибка test_docker_observer_tracks_cleanup_without_recording_arguments,261tests/0skip/1error. Причина локально воспроизведена через настоящий Python из пути с пробелом/emoji: абсолютный interpreter path в shebang разбивается ядром. Test observer и fake Docker переведены на /usr/bin/env python3; все261unit из того же space/emoji пути прошли. Модель/корпуса/коэффициенты не менялись.|
+
+После обнаруженных test harness дефектов Jenkins gate выполняется сразу после
+трёх готовых комплектов, до долгого независимого Requests. Состав gates не
+сокращён. Его safe receipt сохраняется и при отказе; raw логи не публикуются.
