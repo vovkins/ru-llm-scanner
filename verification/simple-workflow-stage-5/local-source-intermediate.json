@@ -1,0 +1,27 @@
+{
+  "status": "source_only_passed",
+  "input_changed_paths": [],
+  "actual_public_revisions": [
+    "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
+    "9e47e6594ba3d9616ba90720994ced008335416c"
+  ],
+  "source_count": 106,
+  "content_sha256": "0b32305eccb70ae7695802e22a9c8cff5c581f30c9e75291769b2c9057362623",
+  "repeat_content_equal": true,
+  "matches_native_amd64": true,
+  "profiles": {
+    "cpu-linux-amd64": {
+      "platform": "linux/amd64",
+      "context_manifest_sha256": "d99f3ff0e0c3c6d9caa006d6c7c8e2a39a607d0daa447e50a17ec9ae3107e5da",
+      "source_lock_sha256": "1ac703ef738c0d6469f3c6ed5b032ba25561d08f1a572a49cde6a4b641759eea"
+    },
+    "cpu-linux-arm64": {
+      "platform": "linux/arm64",
+      "context_manifest_sha256": "34d515d1c5428ac84833c442d16e84e9184086f876949f2802bfdeb41e8548dd",
+      "source_lock_sha256": "1ac703ef738c0d6469f3c6ed5b032ba25561d08f1a572a49cde6a4b641759eea"
+    }
+  },
+  "runtime_acceptance_performed": false,
+  "schema_instances_validated": 3,
+  "raw_reports_or_contexts_uploaded": false
+}

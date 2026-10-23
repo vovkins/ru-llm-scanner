@@ -16,6 +16,7 @@ REQUIRED_MODULES = {
     "test_pipeline",
     "test_reports",
     "test_upstream",
+    "test_upstream_update",
     "test_workflow",
     "test_workflow_test",
 }

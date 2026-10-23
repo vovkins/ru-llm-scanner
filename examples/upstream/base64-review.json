@@ -1,0 +1,177 @@
+{
+  "review_version": 1,
+  "from_commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c",
+  "to_commit": "9e47e6594ba3d9616ba90720994ced008335416c",
+  "changes": {
+    ".env.example": {
+      "before_sha256": "55d586e7a3a2bafbe777685548ded385ed906d0864d015907933d1d30680772a",
+      "after_sha256": "7b4592022d555228dfb32f5f41ff406ef531dfea6feaf918a1fedfcf4abb63a4",
+      "disposition": "adapter",
+      "reason": "explicit_candidate_environment_replaces_proxy_compose"
+    },
+    ".github/workflows/ner-model-integration.yml": {
+      "before_sha256": "b2ed43da66a958e6b27c1ae5b956ce2ecbe3161267e434e4caa54d323c9d5f2d",
+      "after_sha256": "2655918cca752d13ca7f4ed512a3f23b17bc24cfe8ac42c0e433e8fbb7f6934a",
+      "disposition": "proxy_only",
+      "reason": "proxy_build_and_model_ci_wiring_not_scanner_runtime"
+    },
+    "Makefile": {
+      "before_sha256": "a5e059ec8a457fac03e902b1032492e334b1889bad91eaa77cd5557fd9abe2ab",
+      "after_sha256": "301bb0cac6021108270d1f17d80a13227f5ec36dc4050c415d982e1262756843",
+      "disposition": "proxy_only",
+      "reason": "proxy_build_and_model_ci_wiring_not_scanner_runtime"
+    },
+    "docker-compose.yml": {
+      "before_sha256": "a2ac395a101c3becefe8449aa4fb537399ce6928962d08976cddd075ef3feb22",
+      "after_sha256": "272dc32d2edb72bff8512da960c9b41988539b7604cbe4247fa0b2db468416fb",
+      "disposition": "adapter",
+      "reason": "explicit_candidate_environment_replaces_proxy_compose"
+    },
+    "docs/README.md": {
+      "before_sha256": "ed6abc1488889cdeecf11d79b691b1d921c409e61c62b13888ea721f25519f85",
+      "after_sha256": "179d99f4eb4ba9762ea290e7d9280647ac8f77987f9fea99044ad5d547ad7466",
+      "disposition": "proxy_only",
+      "reason": "proxy_usage_documentation_reviewed_separately"
+    },
+    "docs/base64-logistic.md": {
+      "before_sha256": null,
+      "after_sha256": "df4a6a916158f11183913c67cc9892777f8ef4f85921003794f9deb6815433ff",
+      "disposition": "proxy_only",
+      "reason": "proxy_usage_documentation_reviewed_separately"
+    },
+    "docs/configuration.md": {
+      "before_sha256": "13f41b6f2ddbcdd0248ad590a3628afb8226a908691fd865c15e9e21e3331a66",
+      "after_sha256": "ff55cf9b0c3c9d497056c80601c3e24f7646c5a39fc3dc4bad77a4216305a2d6",
+      "disposition": "proxy_only",
+      "reason": "proxy_usage_documentation_reviewed_separately"
+    },
+    "presidio/analyzer_server.py": {
+      "before_sha256": "3517fdda1288483ec366fdd636e3e92bcd0412c3d511af805bf2130adb0b67c5",
+      "after_sha256": "cee606db3b1525f2495ab96132d48980ccf502a8feb1c75e52de1dff8c9b9ecc",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "presidio/evaluation/base64_policies.py": {
+      "before_sha256": null,
+      "after_sha256": "aec1b9a07799362d5d6b007e539f2087545e61e0a7fe390a043d6812b71a9187",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "presidio/evaluation/reports/base64-policies.json": {
+      "before_sha256": null,
+      "after_sha256": "830dc6a56ea47d9a2f0a2f8691344a3331aee57dcd56bdc4e0883ea510be17e4",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "presidio/recognizers/base64_data.py": {
+      "before_sha256": "73c2aa1ad7b4a7ab40e2aded8d3d2ee68d30f503a6ee4cc1424541a7a07f6937",
+      "after_sha256": "ad2c3e6ec58049a0c9dc7be0ae237e918095d1119847250205293752e42ec3a3",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "presidio/recognizers/base64_logistic.py": {
+      "before_sha256": null,
+      "after_sha256": "abe317ab30bf52731683e217449f783bad1c8411c260cbffd41a0a0f369ca1cd",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "presidio/recognizers/json_strings.py": {
+      "before_sha256": "b413ecf3b232d6968144ef4f47480f8a1af48f7afd6e11d3a59acdaeed7df358",
+      "after_sha256": "1307ad00608513f79c970cef790d2a275aac3e8204d4c443b93b2d8c70b7db90",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "presidio/result_merging.py": {
+      "before_sha256": "05fba49c4b4c4a1fc4aa1878a8834b8f9164df499feb35c93ffe2fefb4646409",
+      "after_sha256": "bde51a47ed80f711763731f571aad412110443fc689a256110577a338afecb6e",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "presidio/tests/test_base64_logistic.py": {
+      "before_sha256": null,
+      "after_sha256": "956199501da8b3138c9373cc7035db7c39bb89b3ba02de986b3839971efbd759",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "presidio/tests/test_base64_logistic_api.py": {
+      "before_sha256": null,
+      "after_sha256": "d02236bc593c72c3fdfd7928edbbb8526d94eafc6816643c4486691b7cb5b07f",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "presidio/tests/test_base64_logistic_cases.py": {
+      "before_sha256": null,
+      "after_sha256": "aa7902713405b31d45b42b2eeb964654e3502c1e26081284bbdb01dfe26b15ba",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "presidio/tests/test_base64_logistic_full_path.py": {
+      "before_sha256": null,
+      "after_sha256": "3f1503b92219d555eb0b230d0ee3dd2290e46ff55cbc4a18124e3c1371d42fe7",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "presidio/tests/test_base64_logistic_review.py": {
+      "before_sha256": null,
+      "after_sha256": "33cb55b0153646dc497d0e2096f7727dc5d0366f183175bdcca436290a1eb5e6",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "presidio/tests/test_base64_policies_evaluation.py": {
+      "before_sha256": null,
+      "after_sha256": "62943f032cc09fcd0259afdf46f19f9fd642aa1b71145c912772e59bf4743126",
+      "disposition": "export",
+      "reason": "carry_base64_detection_and_regressions"
+    },
+    "tests/e2e/check_responses_history.py": {
+      "before_sha256": "0466d33bfc1c33a9b851e4d34600a88e6ada9e67ab8839a219240917fd841cd2",
+      "after_sha256": "57249aa1b8df96635e677e2ab134f25660dbcacce5e4ddb9a3d06d8509921722",
+      "disposition": "proxy_only",
+      "reason": "proxy_gateway_and_history_integration_stage6_reference"
+    },
+    "tests/e2e/dkb_corpus_checks.py": {
+      "before_sha256": "88330b407ccddf5631789d4b63fcf71fc280ac92b9f0434a660bf317d76e75ed",
+      "after_sha256": "d7827351ec1f4599ff9fed7e484447f601a3ab3a52def53a4c226c4f105f4d6c",
+      "disposition": "proxy_only",
+      "reason": "proxy_gateway_and_history_integration_stage6_reference"
+    },
+    "tests/e2e/docker-compose.ner-proxy.yml": {
+      "before_sha256": "e014d4270bc63b2185c97b21bbb0bed68e019eb26a0a2c92e9434dd1c73d0068",
+      "after_sha256": "e7ddddcff7486e77610dfdb34552314658fb17a8aefb52463fb21052dd94b9ae",
+      "disposition": "proxy_only",
+      "reason": "proxy_gateway_and_history_integration_stage6_reference"
+    },
+    "tests/e2e/test_ner_proxy_flow.sh": {
+      "before_sha256": "ead35987ad517bb834ad4a231621d2da27b32fd9741c53ba7a904509afbee9ff",
+      "after_sha256": "97bd2e7a8d547c2ca97369fb1ee596061358dae2ee31bdbefa7ea99ec4d1cde4",
+      "disposition": "proxy_only",
+      "reason": "proxy_gateway_and_history_integration_stage6_reference"
+    },
+    "tests/test_ner_integration_config.py": {
+      "before_sha256": "7e521a599d4230bed0e435d51df4182e8d281f27cb7ee19636d80eb6b586985e",
+      "after_sha256": "b19c1cd23efe8bed249151a99273b02c1b526a9707d3798c8349b6e73bf8a645",
+      "disposition": "proxy_only",
+      "reason": "proxy_gateway_and_history_integration_stage6_reference"
+    }
+  },
+  "extra_sources": {},
+  "environment": {
+    "PRESIDIO_ANALYZER_BASE64_POLICY": "logistic"
+  },
+  "patches": [
+    {
+      "replaces": "patches/analyzer-api-v1.patch",
+      "path": "patches/analyzer-api-base64-v1.patch",
+      "sha256": "a7bba7d6ef0974b7fec9cf654e84254a92fa7f31b1fd56d08dd195712b086dd3",
+      "targets": {
+        "presidio/analyzer_server.py": {
+          "before": "cee606db3b1525f2495ab96132d48980ccf502a8feb1c75e52de1dff8c9b9ecc",
+          "after": "bdd2957c919926e372649cf961126162f685fb75034f95c6194cf777cab7ff04"
+        }
+      },
+      "reason": "same_metadata_with_public_source_constants"
+    }
+  ],
+  "resource_exclusions": {},
+  "static_analysis_acknowledged": true
+}

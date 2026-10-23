@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "valid_report_examples": 11,
+  "rejected_invalid_reports": 22,
+  "local_links_checked": 1086,
+  "black_files_checked": 114,
+  "git_diff_check": "passed",
+  "update_schema_actual_instances_checked": 3,
+  "material_inputs_match_final_native": 106,
+  "extra_update_inputs_match_final_native": 5,
+  "browser_acceptance_performed": false,
+  "candidate_runtime_acceptance_performed": false
+}

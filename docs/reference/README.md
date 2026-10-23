@@ -15,6 +15,7 @@
 | Допуск, совместимость и цепочка A→B | [Baseline](baseline.md) |
 | Категории, источники, модель/словарь и известное качество | [Распознавание](detection.md) |
 | Source/runtime/deployment, images и provenance | [Артефакты](artifacts.md) |
+| Сравнение proxy и отдельный source-only candidate | [Управляемое обновление](upstream-update.md) |
 | Типовые ошибки и действия | [Ошибки](errors.md) |
 
 [JSON Schema](../../schemas/report-v1.schema.json) и

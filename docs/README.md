@@ -24,6 +24,7 @@
 [Среда и ресурсы](admin/README.md) → [единая сборка и повторный запуск](admin/build.md)
 → [диагностика и хранение](admin/operations.md).
 [CPU и исторические измерения](admin/linux-amd64.md),
+[сравнение/подготовка proxy candidate](reference/upstream-update.md),
 [обновление Analyzer](admin/updating-analyzer.md), [Jenkins](admin/jenkins.md).
 Ручная сборка/export/import, explicit launcher и релизные комплекты —
 [отдельный раздел](admin/advanced.md).

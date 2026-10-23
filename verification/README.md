@@ -1,5 +1,7 @@
 # Результаты проверок
 
+[Упрощение, этап5: controlled proxy update](simple-workflow-stage-5/README.md) — whole-tree25 changes/106 source candidate, exact review/patches, native AMD64/ARM64 source preparation +244unit/0skip/current-engine regression. Новый engine пока не принят.
+
 [Упрощение, этап4: docs и clean native first run](simple-workflow-stage-4/README.md) —19cases/9docblocks/225unit без skips на AMD64/ARM64. Browser попытка заблокирована URL policy; browser pass не заявлен.
 
 Эти материалы фиксируют конкретные ревизии, images, fixtures, команды и среду.

@@ -1,0 +1,637 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Source-only upstream review, comparison or candidate v1",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/review"
+    },
+    {
+      "$ref": "#/$defs/comparison"
+    },
+    {
+      "$ref": "#/$defs/candidate"
+    }
+  ],
+  "$defs": {
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "review_version": {
+          "const": 1,
+          "type": "integer"
+        },
+        "from_commit": {
+          "type": "string",
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+        },
+        "to_commit": {
+          "type": "string",
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+        },
+        "changes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "before_sha256": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "after_sha256": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "disposition": {
+                "enum": [
+                  "export",
+                  "adapter",
+                  "proxy_only",
+                  "decision"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{2,95}$"
+              }
+            },
+            "required": [
+              "before_sha256",
+              "after_sha256",
+              "disposition",
+              "reason"
+            ]
+          }
+        },
+        "extra_sources": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{2,95}$"
+          }
+        },
+        "environment": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^PRESIDIO_ANALYZER_[A-Z0-9_]+$"
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "patches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "targets": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "before": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "after": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    }
+                  },
+                  "required": [
+                    "before",
+                    "after"
+                  ]
+                }
+              },
+              "replaces": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{2,95}$"
+              }
+            },
+            "required": [
+              "path",
+              "sha256",
+              "targets",
+              "replaces",
+              "reason"
+            ]
+          }
+        },
+        "resource_exclusions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{2,95}$"
+          }
+        },
+        "static_analysis_acknowledged": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "review_version",
+        "from_commit",
+        "to_commit",
+        "changes",
+        "extra_sources",
+        "environment",
+        "patches",
+        "resource_exclusions",
+        "static_analysis_acknowledged"
+      ]
+    },
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "update_version": {
+          "const": 1,
+          "type": "integer"
+        },
+        "from_commit": {
+          "type": "string",
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+        },
+        "to_commit": {
+          "type": "string",
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+        },
+        "accepted_into_installation": {
+          "const": false
+        },
+        "runtime_acceptance_performed": {
+          "const": false
+        },
+        "kind": {
+          "const": "comparison"
+        },
+        "status": {
+          "enum": [
+            "blocked",
+            "reviewed"
+          ]
+        },
+        "from_tree": {
+          "type": "string",
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+        },
+        "to_tree": {
+          "type": "string",
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+        },
+        "baseline_lock_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "review_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "previous_path": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "change": {
+                "enum": [
+                  "A",
+                  "D",
+                  "M",
+                  "R"
+                ]
+              },
+              "group": {
+                "enum": [
+                  "dictionary",
+                  "model_dependencies_build_notices",
+                  "tests_evaluation",
+                  "detectors",
+                  "analyzer_ner",
+                  "settings_build",
+                  "proxy_other"
+                ]
+              },
+              "before": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "oid": {
+                        "type": "string",
+                        "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+                      },
+                      "mode": {
+                        "enum": [
+                          "100644",
+                          "100755"
+                        ]
+                      },
+                      "sha256": {
+                        "type": "string",
+                        "pattern": "^[a-f0-9]{64}$"
+                      }
+                    },
+                    "required": [
+                      "oid",
+                      "mode",
+                      "sha256"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "after": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "oid": {
+                        "type": "string",
+                        "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+                      },
+                      "mode": {
+                        "enum": [
+                          "100644",
+                          "100755"
+                        ]
+                      },
+                      "sha256": {
+                        "type": "string",
+                        "pattern": "^[a-f0-9]{64}$"
+                      }
+                    },
+                    "required": [
+                      "oid",
+                      "mode",
+                      "sha256"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "disposition": {
+                "enum": [
+                  "export",
+                  "adapter",
+                  "proxy_only",
+                  "decision"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{2,95}$"
+              }
+            },
+            "required": [
+              "path",
+              "previous_path",
+              "change",
+              "group",
+              "before",
+              "after",
+              "disposition",
+              "reason"
+            ]
+          }
+        },
+        "static_analysis": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "local_imports": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "source": {
+                    "type": "string"
+                  },
+                  "module": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source",
+                  "module",
+                  "target"
+                ]
+              }
+            },
+            "resources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "source": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source",
+                  "target"
+                ]
+              }
+            },
+            "missing": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "source": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source",
+                  "target"
+                ]
+              }
+            },
+            "dynamic_import_paths": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "parse_error_paths": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "limitations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "local_imports",
+            "resources",
+            "missing",
+            "dynamic_import_paths",
+            "parse_error_paths",
+            "limitations"
+          ]
+        },
+        "new_settings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "candidate_sources": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "candidate_environment": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "patches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "targets": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "before": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "after": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    }
+                  },
+                  "required": [
+                    "before",
+                    "after"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "path",
+              "sha256",
+              "targets"
+            ]
+          }
+        },
+        "blockers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "code": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{2,95}$"
+              },
+              "path": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "code",
+              "path"
+            ]
+          }
+        }
+      },
+      "required": [
+        "update_version",
+        "from_commit",
+        "to_commit",
+        "accepted_into_installation",
+        "runtime_acceptance_performed",
+        "kind",
+        "status",
+        "from_tree",
+        "to_tree",
+        "baseline_lock_sha256",
+        "review_sha256",
+        "changes",
+        "static_analysis",
+        "new_settings",
+        "candidate_sources",
+        "candidate_environment",
+        "patches",
+        "blockers"
+      ]
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "update_version": {
+          "const": 1,
+          "type": "integer"
+        },
+        "from_commit": {
+          "type": "string",
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+        },
+        "to_commit": {
+          "type": "string",
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+        },
+        "accepted_into_installation": {
+          "const": false
+        },
+        "runtime_acceptance_performed": {
+          "const": false
+        },
+        "kind": {
+          "const": "candidate"
+        },
+        "status": {
+          "const": "source_prepared"
+        },
+        "profiles": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "platform": {
+                "enum": [
+                  "linux/amd64",
+                  "linux/arm64"
+                ]
+              },
+              "context_manifest_sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "source_lock_sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "required": [
+              "platform",
+              "context_manifest_sha256",
+              "source_lock_sha256"
+            ]
+          }
+        },
+        "files_sha256": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "content_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "update_version",
+        "from_commit",
+        "to_commit",
+        "accepted_into_installation",
+        "runtime_acceptance_performed",
+        "kind",
+        "status",
+        "profiles",
+        "files_sha256",
+        "content_sha256"
+      ]
+    }
+  }
+}
