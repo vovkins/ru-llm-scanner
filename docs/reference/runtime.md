@@ -1,5 +1,7 @@
 # Docker launcher: команды, ресурсы и изоляция
 
+Обычный вход — [Make/CLI](simple-workflow.md), который автоматически выбирает комплект. Ниже сохранён explicit launcher для сопровождения/v0.2.0 и общие container budgets/lifecycle; его исторический default lock не является default нового CLI.
+
 Штатный пользовательский маршрут — [руководство пользователя](../user/README.md).
 Ниже справочник host launcher `python3 scripts/docker_scanner.py`; он требует
 только stdlib Python 3.11+ и локальный Docker/Compose. Установленный Python CLI

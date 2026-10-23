@@ -1,7 +1,7 @@
 # Python CLI для разработки
 
 Доступны `snapshot`, `diff`, JSON/HTML v1 и baseline chain. Штатные
-[Docker/Compose](user/README.md), [перенос](admin/build.md) и
+[Docker/Compose](user/README.md), [перенос](admin/advanced.md) и
 [Jenkins example](admin/jenkins.md) описаны отдельно. Ниже — проверенный dev
 интерфейс; при анализе зависимости/веса не скачиваются. Для пользователя готовых
 images основной маршрут — [руководство пользователя](user/README.md).

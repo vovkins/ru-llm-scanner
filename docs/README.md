@@ -1,65 +1,56 @@
 # Документация ru-llm-scanner
 
-Начните с маршрута своей роли. Текущая версия `0.2.0`; администратор получает
-[готовый релиз](admin/releases.md) либо собирает images и передаёт локальную установку.
-[Выполненные проверки и границы стендов](../verification/README.md).
+Основной маршрут текущих исходников: **make build → make test → make scan → HTML/JSON**.
+Новые команды ещё не входят в опубликованный v0.2.0. Для него и ручных процедур
+сохранён [расширенный маршрут](admin/advanced.md); старые evidence относятся
+к своим source/images, а не к будущему выпуску.
 
-| Роль | Основной маршрут |
+| Задача | Начать здесь |
 | --- | --- |
-| Пользователь | [Готовность → snapshot → HTML/JSON → diff/baseline](user/README.md) |
-| Администратор | [Среда → импорт или build → verify → handoff → сопровождение](admin/README.md) |
-| Разработчик | [Окружение, устройство репозитория и группы проверок](development.md) |
+| Получить первый отчёт, проверить commit или A/B | [Пользователь](user/README.md) |
+| Подготовить хост, собрать и сопровождать установку | [Администратор](admin/README.md) |
+| Подключить доверенный CLI в CI | [Jenkins](admin/jenkins.md) |
+| Найти точные флаги/defaults/форматы | [Справочник](reference/README.md) |
+| Изменить код и выбрать нужные проверки | [Разработчик](development.md) |
 
 ## Пользователю
 
-[Руководство](user/README.md) последовательно объясняет подготовленный Git-вход,
-выбор коммита, private output, коды 0/1/2, чтение отчёта, совместимый baseline,
-настройки и действия при ошибках. Для запуска готовых images не нужны исходный
-proxy, venv или build context.
+[Пошаговая инструкция](user/README.md): HEAD и конкретный commit, автоматические
+приватные каталоги, optional OUTPUT/CONFIG, коды 0/1/2, HTML/JSON, diff и strict baseline.
+Для scan используются подготовленные локальные images; ручные venv/модель/locks не нужны.
 
 ## Администратору
 
-- [Среда, компоненты и чеклист передачи](admin/README.md).
-- [Получение релиза из GitHub/GHCR и офлайн-перенос](admin/releases.md).
-- [Готовый offline-пакет: import/verify/контрольный snapshot](admin/installation.md).
-- [Fresh build: один runtime lock через все стадии](admin/build.md).
-- [Эксплуатация, диагностика и cleanup](admin/operations.md).
-- [Обновление и откат механизма](admin/updating-analyzer.md).
-- [Jenkins: trusted pipeline и приватные artifacts](admin/jenkins.md).
-- [Linux AMD64: профиль сервера и статус нативной приёмки](admin/linux-amd64.md).
+[Среда и ресурсы](admin/README.md) → [единая сборка и повторный запуск](admin/build.md)
+→ [диагностика и хранение](admin/operations.md).
+[CPU и исторические измерения](admin/linux-amd64.md),
+[обновление Analyzer](admin/updating-analyzer.md), [Jenkins](admin/jenkins.md).
+Ручная сборка/export/import, explicit launcher и релизные комплекты —
+[отдельный раздел](admin/advanced.md).
 
 ## Справочник
 
-[Карта справочника](reference/README.md): [режимы/охват](reference/scan-modes.md),
-[CLI и конфигурация](reference/configuration.md), [Docker runtime/budgets](reference/runtime.md),
-[JSON/HTML](reference/reports.md), [baseline](reference/baseline.md),
-[каталог и качество](reference/detection.md), [артефакты/locks](reference/artifacts.md),
-[ошибки](reference/errors.md).
+[Команды/параметры](reference/simple-workflow.md), [повседневные проверки](reference/everyday-tests.md),
+[режимы/охват](reference/scan-modes.md), [конфигурация](reference/configuration.md),
+[runtime](reference/runtime.md), [отчёты](reference/reports.md),
+[baseline](reference/baseline.md), [каталог распознавания](reference/detection.md),
+[артефакты](reference/artifacts.md), [ошибки](reference/errors.md).
 
 [JSON Schema](../schemas/report-v1.schema.json) ·
-[конфигурация по умолчанию](../examples/config/scanner.json) ·
+[defaults config](../examples/config/scanner.json) ·
 [синтетический HTML](../examples/demo/report.html) ·
-[контрактные JSON-примеры](../examples/reports/README.md).
+[контрактные JSON](../examples/reports/README.md). Примеры не пригодны как baseline.
 
-## Разработчику и сопровождающему
+## Разработчику
 
-[Простой интерфейс build/scan/diff/test](reference/simple-workflow.md) — спецификация
-этапа #39, команды ещё не реализованы. Текущий рабочий запуск описан выше.
+[Разработка](development.md), [архитектура](architecture.md), [ADR](decisions/README.md),
+[требования](requirements.md), [Git reader](git-reader.md), [Scan API](scan-api.md),
+[Analyzer](analyzer.md), [внутренний Python CLI](cli-quickstart.md).
+[Корпус](../tests/corpus/README.md), [ревью](review/README.md),
+[verification](../verification/README.md), [CONTRIBUTING](../CONTRIBUTING.md),
+[SECURITY](../SECURITY.md), [лицензирование](licensing.md), [AGENTS](../AGENTS.md).
 
-- [Архитектура](architecture.md), [ADR](decisions/README.md), [требования](requirements.md).
-- [Git reader](git-reader.md), [Scan API](scan-api.md), [Analyzer API и dev-проверки](analyzer.md).
-- [Dev Python CLI](cli-quickstart.md) — установка и engine assets для разработки;
-  пользовательский Docker маршрут описан отдельно.
-- [Тестовые группы и prepared assets](development.md), [независимый корпус](../tests/corpus/README.md).
-- [Результаты проверок](../verification/README.md), [ревью](review/README.md),
-  [исправления](../verification/operations-stage-2/README.md).
-- [Участие](../CONTRIBUTING.md), [безопасность](../SECURITY.md),
-  [лицензирование](licensing.md), [постоянные инструкции](../AGENTS.md).
-- [Подготовленный текст About](about.md) — внешние metadata не применены.
-
-История первоначальных семи этапов доступна через verification и
-[исходный план](https://github.com/vovkins/ru-llm-scanner/issues/1).
-Цикл подготовки к эксплуатации [#16](https://github.com/vovkins/ru-llm-scanner/issues/16)
-завершён. Текущий цикл упрощения — [#38](https://github.com/vovkins/ru-llm-scanner/issues/38),
-спецификация интерфейса — [#39](https://github.com/vovkins/ru-llm-scanner/issues/39).
-Каждый следующий этап требует отдельного явного согласования.
+Текущий цикл — [#38](https://github.com/vovkins/ru-llm-scanner/issues/38).
+Каждый этап получает отдельный согласованный план; документация не разрешает
+слияния, обновление proxy или публикацию. Первоначальные проверки сохранены в
+verification; [About](about.md) — подготовленный текст metadata.

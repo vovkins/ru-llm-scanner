@@ -1,5 +1,7 @@
 # Результаты проверок
 
+[Упрощение, этап4: docs и clean native first run](simple-workflow-stage-4/README.md) —19cases/9docblocks/225unit без skips на AMD64/ARM64. Browser попытка заблокирована URL policy; browser pass не заявлен.
+
 Эти материалы фиксируют конкретные ревизии, images, fixtures, команды и среду.
 Исторический passed не является результатом проверки любого последующего кода.
 Полные чувствительные report.json/report.html и локальные assertion logs не

@@ -2,7 +2,7 @@
 
 Предусловия и проверенная среда — в [руководстве администратора](README.md).
 Если пакета ещё нет, получите [готовый релиз](releases.md). Для собственной
-сборки доступен отдельный путь [fresh build и export](build.md).
+сборки доступен отдельный путь [fresh build и export](advanced-build.md).
 Здесь ничего не скачивается из registry и не собирается.
 Для AMD64 выберите пакет `cpu-linux-amd64`, для ARM64 — `cpu-linux-arm64`.
 Архитектура Docker **server** должна совпасть с `platform` deployment; чужая

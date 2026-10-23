@@ -1,5 +1,7 @@
 # CLI и конфигурация
 
+Основные команды — `./scanner scan|diff` и make: [параметры/defaults](simple-workflow.md). Для них commit по умолчанию HEAD, output автоматический; engine и Analyzer URL задаются контейнерной установкой. Ниже канонические **параметры анализа** и отдельно внутренний установленный Python CLI с обязательными refs/output.
+
 Это справочник установленного Python CLI и эффективной конфигурации.
 [Dev quickstart](../cli-quickstart.md) описывает assets для разработки.
 [Штатный Docker launcher](runtime.md) использует

@@ -8,7 +8,7 @@
 Основной запуск описан в [руководстве пользователя](../user/README.md),
 состав/бюджеты — в [runtime](../reference/runtime.md).
 Консоль launcher намеренно содержит только фиксированные коды и уникальный
-`project`. Значения, refs, пути, контекст и HTTP bodies не печатаются. JSON/HTML
+`project`. Значения, refs, контекст и HTTP bodies не печатаются; новый CLI показывает безопасно экранированные пути отчётов/диагностики. JSON/HTML
 полные и чувствительные. Docker logs отключены; не включайте debug/HTTP logging
 на продуктивном анализе для диагностики секретов. Локальные assertion logs
 dev-проверок тоже нельзя автоматически публиковать.
@@ -16,8 +16,7 @@ dev-проверок тоже нельзя автоматически публи
 1. Сохраните process code и технический project ID. Не печатайте входы/полный JSON
    и не включайте content logging ради диагностики.
 2. Если console содержит infrastructure error, найдите его в
-   [каноническом справочнике ошибок](../reference/errors.md): сначала проверьте
-   выбранный deployment, Docker context/daemon, пути/UID и состояние собственного run.
+   [каноническом справочнике ошибок](../reference/errors.md): сначала проверьте Docker context/daemon, пути/UID и состояние собственного run. В новом CLI комплект выбирается автоматически; при отсутствующей/устаревшей установке выполните make build.
 3. Если код 2 без infrastructure error, прочитайте `errors`/coverage приватного
    JSON: ref/object/config/baseline, декодирование/лимиты или readiness/analysis.
    При отсутствии отчёта выясняйте ранний preflight/output/FS отказ.
@@ -29,6 +28,36 @@ dev-проверок тоже нельзя автоматически публи
 или при недоступном output может не создать отчётов. Не подменяйте это пустым
 clean report. Output writer атомарен для отдельного файла; consumer требует
 exit 0 плюс доверенное происхождение/совместимость baseline.
+
+## Частые проблемы нового интерфейса
+
+| Ситуация | Действие |
+| --- | --- |
+| `workflow_build_required`, `invalid_workflow_state` | Из доверенного checkout выполнить `make build`, затем `make test` |
+| `invalid_test_support` | Явный `make build` восстановит собственные environment/assets; test сам ничего не скачивает |
+| Python/venv/Git/Compose/API | Установить системные предпосылки из [admin](README.md), проверить `python3` в PATH |
+| Docker недоступен / неверный context | Проверить выбранный endpoint/права; scanner их не переключает |
+| `unsafe_output`, `invalid_mount` | Новый/пустой приватный OUTPUT вне клона с существующим parent, обычные пути без symlink |
+| `baseline_invalid`, `baseline_incompatible` | Проверить завершённый clean A/tree/profile и происхождение; после нового engine сделать snapshot |
+| Build hash/seal/smoke failed | Проверить стадию в private diagnostic, источники/диск; не редактировать хеши, повторить build после исправления |
+
+При раннем timeout возможны вторичные `scanner_failed`/`private_report_missing`:
+это также код 2, отчёт может отсутствовать. Проверьте бюджеты и повторите в новый
+output. Существование JSON не отменяет неуспешный код процесса.
+
+## Хранение и очистка собственных файлов
+
+Отчёты по умолчанию лежат в HOME/XDG root, указанном [пользователю](../user/README.md).
+Определите срок хранения и правила backups. Удаляйте только конкретный завершённый
+run-каталог после проверки владельца и того, что он не нужен как baseline/доказательство.
+Не очищайте общий root по маске и не меняйте права чужих каталогов.
+
+`.build/workflow` и `.build/artifact-cache` содержат private build/test материалы;
+raw logs/contexts/weights/venv не публикуются. Старые builds/images сохраняются для
+возврата. Перед ручным удалением конкретного собственного неиспользуемого build
+проверьте отсутствие активных scans/tests/builds и сохраните нужную установку.
+Удаление текущих inputs/images может потребовать `make build`; rootful Docker image
+store может быть общим с другими проектами. Global prune не является обслуживанием scanner.
 
 ## Потерянный запуск
 

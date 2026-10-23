@@ -7,6 +7,11 @@
 
 | Код/группа | Что проверить |
 | --- | --- |
+| `workflow_build_required`, `invalid_workflow_state` | Выполнить `make build` из доверенного checkout для выбранного daemon/platform; не редактировать generated manifests |
+| `invalid_test_support` | Явным `make build` восстановить собственные test assets/environment, затем повторить `make test` |
+| `unsafe_workflow_state`, `unsafe_workflow_directory` | Проверить owner/private permissions своих служебных путей; автоматического chmod/chown нет |
+| `nonroot_operator_required`, `rootless_daemon_unsupported`, `unsupported_daemon_platform` | Non-root оператор, rootful native Linux AMD64/ARM64 Docker server |
+| `docker_api_too_old`, `compose_version_unsupported`, `venv_unavailable` | Системные предпосылки из [admin](../admin/README.md), Python3.11+ как python3 |
 | `invalid_arguments`, `config_error` | Обязательные refs/пути, режим, типы/ключи JSON, допустимые параметры |
 | `invalid_lock`, `invalid_deployment`, `image_identity_mismatch` | Обычный bounded metadata file без final symlink, правильный deployment/platform и готовые локальные images |
 | `daemon_platform_mismatch` | Архитектура Docker server не совпадает с deployment. Выберите полный комплект для этого daemon; автоматической эмуляции нет |

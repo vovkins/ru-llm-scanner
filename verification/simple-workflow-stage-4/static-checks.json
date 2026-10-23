@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "valid_contract_examples": 11,
+  "rejected_invalid_cases": 22,
+  "local_links_checked": 1051,
+  "black_files_checked": 110,
+  "git_diff_check": "passed",
+  "material_inputs_match_native": 103,
+  "actual_clean_walkthrough_receipts": [
+    "native-amd64.json",
+    "native-arm64.json"
+  ],
+  "browser_acceptance_performed": false
+}

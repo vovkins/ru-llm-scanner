@@ -63,3 +63,5 @@ Jenkins/migration остаются отдельной полной матриц�
 выполнился за78.050s на AMD64 и79.419s на ARM64; повтор —75.975s и77.609s.
 Это время synthetic suite, не оценки скорости сканирования произвольного клона.
 [Измерения и границы](../../verification/simple-workflow-stage-3/resources.json).
+
+Буквальное прохождение основных инструкций на чистых native AMD64/ARM64: [этап4](../../verification/simple-workflow-stage-4/README.md). Виды приёмки HTML/static/browser и ограничения указаны отдельно.

@@ -1,132 +1,75 @@
-# Интеграция с Jenkins
+# Jenkins: прямой доверенный CLI
 
-[Jenkinsfile](../../examples/jenkins/Jenkinsfile) и
-[Python adapter](../../examples/jenkins/run_scan.py) — пример доверенного pipeline.
-Действующий Jenkins, credentials/jobs/RBAC пользователя не изменяются.
-На изолированном нативном AMD64 стенде Jenkins LTS 2.580.1 с 51 закреплённым
-plugin прошли Declarative validation и 13 сценариев настоящего pipeline:
-0/1/2, snapshot/strict diff, неверные входы, параллельные jobs, отмена, timeout
-и потеря агента с операторским восстановлением. Проверены private artifacts,
-отсутствие найденных значений в console и неизменность baseline.
-[Финальный протокол](../../verification/linux-amd64/candidate/amd64/jenkins-verification.json).
-Поддержка включена в `main` через PR #35; итоговая приёмка всего AMD64 комплекта — в
-[#33](https://github.com/vovkins/ru-llm-scanner/issues/33).
+Сначала подтвердите обычный build/test/scan под non-root учётной записью агента.
+Доверенная установка scanner находится вне проверяемого/очищаемого workspace,
+на том же rootful Docker daemon; config/baseline контролирует владелец CI.
+[Предпосылки](README.md) и [build](build.md) одинаковы с обычным сервером.
 
-## Подготовка агентом CI
+Новый CLI сохраняет точные **0/1/2**. GNU Make для программного запуска не подходит:
+он возвращает собственный код ошибки рецепта. Пример ниже фиксирует доверенные
+пути и не подставляет build parameters в shell:
 
-Владелец предоставляет dedicated non-root CPU AMD64 или ARM64 agent с Python 3.11+,
-Docker/Compose и готовыми образами из [доверенного offline-пакета](build.md).
-Установите scanner/scripts/пример в `/opt/ru-llm-scanner`, доступный агенту для
-чтения. Pipeline/script берутся из доверенной версии scanner, **никогда из
-проверяемого checkout**. Label/пути/retention в примере заменяются администратором.
-Docker-доступ привилегирован; не выдавайте этот агент произвольным PR pipelines.
-
-В проверенном маршруте Python/Java агента и Docker daemon работают на одном
-Linux host и видят установку, `/srv` и `WORKSPACE` по **тем же абсолютным путям**.
-Controller может быть отдельно; Docker socket ему не требуется. При агенте в
-контейнере администратор должен обеспечить одинаковые host/agent bind paths и
-корректные UID/GID. Удалённый Docker context не переносит локальные каталоги:
-если путь на daemon host обозначает другое содержимое, такой запуск недопустим.
-Настройка этой общей файловой области проверяется до создания job.
-
-В текущем adapter администратор задаёт **абсолютный путь к одобренному deployment**
-через `SCANNER_DEPLOYMENT_LOCK`, например `/srv/ru-llm-scanner/deployment.json`.
-Переменная относится к доверенной конфигурации агента/pipeline, не к параметрам
-разработчика; URL, относительный путь, symlink и отсутствующий файл отвергаются.
-Выбранный комплект должен соответствовать архитектуре Docker daemon.
-
-[AMD64 Jenkinsfile](../../examples/jenkins/Jenkinsfile.amd64) уже содержит эту
-переменную и label `scanner-cpu-amd64`.
-Для совместимости без переменной остаётся исторический default
-`$SCANNER_HOME/locks/scanner-cpu-linux-arm64.deployment.json`. Это поведение
-старого ARM64 примера, а не автоматический выбор актуального image после сборки.
-Для новой установки передавайте deployment её пакета явно; штатные locks в Git
-ради этого не изменяются. Старый launcher/adapter из v0.1.0 новую переменную
-не поддерживает: переносите согласованный комплект скриптов целиком.
-
-Доверенная переменная `SCANNER_ANALYZER_CPUS` задаёт лимит Analyzer (положительное
-конечное число до 64); без неё сохранён default 2 CPU. Это настройка администратора,
-не build parameter. Для полного Requests на AMD64 проверены 4 CPU и
-`execution.analyze_timeout_seconds=1800` в одобренном `CONFIG_NAME`;
-пример Jenkinsfile оставляет 2 CPU для небольших проверок. Планируйте сумму
-лимитов параллельных jobs, запас для Scanner/Java/ОС и timeout всего задания.
-
-До настройки job проверьте этот точный комплект non-root учётной записью агента:
-
-```sh
-python3 /opt/ru-llm-scanner/scripts/docker_scanner.py verify \
-  --deployment-lock /srv/ru-llm-scanner/deployment.json
+```groovy
+node('scanner-native') {
+    int status = sh(returnStatus: true, script: '''
+        set +x
+        /opt/ru-llm-scanner/scanner scan \
+            --repo '/srv/git/example project' --commit HEAD
+    ''')
+    if (status == 1) {
+        unstable('Scanner: найдены чувствительные данные; отчёт приватный')
+    } else if (status != 0) {
+        error('Scanner: ошибка или неполнота проверки')
+    }
+}
 ```
 
-Установка включает `scripts/docker_scanner.py`, выбранный lock,
-`examples/jenkins/run_scan.py` и trusted Jenkinsfile. Документация/происхождение
-передаются вместе с ними. Значения `SCANNER_HOME` и roots в примере меняет
-владелец CI; scanner сам не редактирует jobs/credentials/RBAC.
+Пути/label заменяет администратор. Для diff используйте явно заданные refs и
+одобренный baseline; например, команда из доверенного script:
 
-До scan другой доверенный SCM-процесс готовит self-contained Git-клон под
-`/srv/ru-llm-scanner/repositories/REPOSITORY_NAME`. A/B и все reachable objects
-должны быть доступны: shallow clone допустим только при наличии нужных объектов.
-Scanner не выполняет fetch/unshallow/checkout. Не используйте shared alternates,
-linked worktrees, `.git` с внешней metadata и clone, изменяемый параллельно.
-Рабочие/staged/untracked файлы не входят в состояние выбранного коммита.
+```sh
+/opt/ru-llm-scanner/scanner diff \
+  --repo '/srv/git/example project' --from COMMIT_A --to COMMIT_B \
+  --baseline '/srv/scanner baselines/approved-A.json' --require-baseline \
+  --config '/srv/scanner config/approved.json'
+```
 
-Пример `skipDefaultCheckout(true)` не подготавливает SCM автоматически. Вход,
-trusted configs и baseline располагаются **вне workspace этого job**: `deleteDir()`
-очищает workspace перед новым запуском, чтобы не архивировать прежний clean
-report при ранней ошибке. Подготовка SCM при необходимости идёт отдельным
-доверенным этапом до вызова примера, с собственными credentials вне scanner.
+Это пример с placeholders, не готовая SCM job. Не исполняйте pipeline/Makefile
+из входного проекта и не добавляйте произвольные параметры разработчика в shell.
+Для программного формирования аргументов используйте массив argv; разрешённые
+refs/config/baseline определяет доверенная CI-логика. Baseline нельзя брать из
+непроверенного workspace или продвигать после кода 1/2.
 
-## Параметры и результат
+## Файлы и ресурсы агента
 
-| Параметр | Значение |
-| --- | --- |
-| `SCAN_MODE` | `snapshot` или `diff` |
-| `REPOSITORY_NAME` | Имя подготовленного клона внутри доверенного root |
-| `REF_A`, `REF_B` | Явные refs/commit A и B; A нужен только для diff |
-| `CONFIG_NAME` | Имя одобренного файла в `/srv/ru-llm-scanner/configs`, либо пусто |
-| `BASELINE_NAME` | Имя доверенного JSON в `/srv/ru-llm-scanner/baselines`, либо пусто |
-| `REQUIRE_BASELINE` | Для diff по умолчанию true |
+SCM-процесс заранее получает все нужные объекты и прекращает изменение клона
+на время scan. Docker host и агент видят одни и те же абсолютные bind-пути.
+Controller может быть отдельно; установка daemon/context/credentials не выполняется
+scanner. Dedicated Docker agent не предоставляется произвольным PR pipelines.
 
-Имена — один basename без traversal/URL/symlink. Refs передаются как отдельные
-argv без shell/Groovy interpolation. Не задавайте в параметрах найденные значения.
-Конфигурационный/базовый каталоги защищаются владельцем CI от записи разработчиками
-и недоверенными jobs. Само имя `approved.json` не доказывает происхождение.
+По умолчанию отчёт создаётся в HOME/XDG каталоге учётной записи агента, вне клона;
+его абсолютный путь печатается после запуска. Для машинного получения артефактов
+задайте `--output` с уникальным новым приватным каталогом и существующим parent
+**вне** очищаемого workspace. Если такой путь уже занят, запуск отклоняется.
+Не архивируйте «последний найденный» старый report после раннего отказа.
 
-0 оставляет build успешным; 1 помечает его UNSTABLE с находками; 2/иной код
-останавливает stage как FAILURE. `post always` архивирует доступные report.json,
-report.html и безопасный scan-status.json с `allowEmptyArchive`. При раннем
-отказе отчётов может не быть; status/exit остаётся отказом. Сигналы adapter
-пересылает launcher для cleanup. SIGKILL/потеря агента требуют
-[операторского восстановления](operations.md). Jenkins timeout должен быть
-больше `run-timeout` + startup/stop/cleanup grace; пример выделяет 75 минут.
+JSON/HTML содержат полные значения. В этом примере автоматической публикации
+artifacts/HTML нет. Если она нужна, владелец CI отдельно ограничивает job/workspace/
+artifact/backups ACL и retention, сохраняет process status и точный output текущего
+запуска. Локальные `0700`/`0600` сами по себе не задают RBAC Jenkins.
 
-Adapter принимает только JSON-объект с `exit_code` (целое 0/1/2, не bool),
-`error` (null или ограниченный код) и необязательным `project` доверенного launcher.
-Code должен совпасть с кодом дочернего процесса. Пустой/битый ответ, duplicate keys,
-лишние поля, stderr, сигнал или исключение означают `2`; сырые ответы не
-попадают в status/console. Для `0`/`1` обязательны оба непустых обычных файла
-`report.json`/`report.html`, принадлежащие UID агента и без group/other permissions,
-в таком же приватном каталоге. Это проверка артефактов доверенного launcher,
-а не независимое доказательство полноты анализа.
+Подбирайте limits/concurrency по целевому агенту. Внешний Jenkins timeout должен
+оставлять время на run timeout, stop grace и cleanup. Потеря агента/SIGKILL может
+требовать [операторского восстановления](operations.md#потерянный-запуск).
+Продвижение baseline — отдельный доверенный процесс после завершённого exit 0.
 
-Workspace должен существовать; `scan-status.json` должен отсутствовать,
-`scan-results` — отсутствовать либо быть пустым приватным каталогом агента.
-Adapter не перезаписывает старый status/отчёты. При невозможности записи status
-итоговый код процесса остаётся `2`; старый файл не является статусом нового
-запуска. Отсутствующий/недоступный WORKSPACE также даёт безопасную сводку и `2`.
+## Что проверено
 
-## Baseline и чувствительные артефакты
-
-Продвижение baseline не автоматизировано этим примером. Только доверенный процесс
-CI/оператор переносит JSON **из завершённого запуска с exit 0**, с сохранённой
-идентичностью job/сборки/профиля и подходящими ACL. Никогда не продвигайте код 1/2,
-наличие файла без статуса запуска или артефакт по пользовательскому URL. Runtime
-дополнительно сверяет schema/semantic invariants, A/tree/profile; это не подпись
-происхождения. Новая модель/правила/область требуют нового полного snapshot.
-
-Полные находки и контекст остаются в JSON/HTML. Перед включением архивации
-владелец ограничивает доступ к job/workspace/artifacts/backups, задаёт срок хранения,
-аудит доступа и защищённую доставку. `buildDiscarder` в примере задаёт только
-пример retention, **не RBAC и не гарантию удаления всех копий/backup**. HTML
-просматривайте через разрешённую приватную выдачу; не добавляйте автоматический
-публичный HTML publisher. Не печатайте JSON/HTML и параметры с данными в console.
+Команды нового CLI проверяются native AMD64/ARM64 walkthrough; этот Groovy пример
+не означает новый настоящий Jenkins pilot. Он запланирован в этапе6 #38 и не
+меняет production jobs/credentials/RBAC. Историческая настоящая приёмка Jenkins
+v0.2.0 (13 сценариев) относится к [explicit adapter](jenkins-explicit.md) и своим
+images/locks. Его [Jenkinsfile](../../examples/jenkins/Jenkinsfile),
+[AMD64-вариант](../../examples/jenkins/Jenkinsfile.amd64) и
+[adapter](../../examples/jenkins/run_scan.py) сохранены совместимыми; они требуют
+explicit deployment и не являются новым Make/CLI интерфейсом.

@@ -175,7 +175,7 @@ Scanner работает UID 65534/read-only без capabilities в loopback nam
 Для отдельной dev-проверки pipeline текущий рецепт содержит `httpx==0.28.1`
 и `jsonschema[format]==4.26.0`. Собирайте новый локальный tag из минимального
 контекста, не из корня checkout. Передайте context/runtime одного проверенного
-комплекта из [admin build](admin/build.md), без подстановки старого lock:
+комплекта из [admin build](admin/advanced-build.md), без подстановки старого lock:
 
 ```sh
 ANALYZER_CONTEXT=/trusted/build/analyzer

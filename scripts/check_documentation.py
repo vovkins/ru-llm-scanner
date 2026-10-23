@@ -13,6 +13,7 @@ import sys
 from unittest.mock import patch
 
 from docker_scanner import parser as launcher_parser
+from workflow import MAKE_FLAGS, parser as workflow_parser
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -134,6 +135,11 @@ def check_defaults():
             (float(raw) if type(value) is float else raw) == value,
             "Documented runtime default differs: " + flag,
         )
+    public = workflow_parser().parse_args(["scan", "--repo", "/repo"])
+    require(public.commit == "HEAD" and public.output is None, "Public defaults drift")
+    text = (ROOT / "docs/reference/simple-workflow.md").read_text()
+    for name, flag in MAKE_FLAGS.items():
+        require(name in text and flag in text, "Missing public parameter: " + name)
     return len(mapping) + len(runtime)
 
 
@@ -170,6 +176,22 @@ def check_commands():
     checked, helps = 0, {}
     for path in paths:
         for tokens in shell_commands(path):
+            if Path(tokens[0]).name == "scanner":
+                workflow_parser().parse_args(tokens[1:])
+                checked += 1
+            elif tokens[0] == "make" and len(tokens) > 1:
+                args = [tokens[1]] if tokens[1] != "help" else ["--help"]
+                for token in tokens[2:]:
+                    name, sep, value = token.partition("=")
+                    require(sep and name in MAKE_FLAGS, "Invalid Make example")
+                    if name == "REQUIRE_BASELINE":
+                        require(value in {"0", "1"}, "Invalid strict Make flag")
+                        if value == "1":
+                            args.append(MAKE_FLAGS[name])
+                    else:
+                        args.extend([MAKE_FLAGS[name], value])
+                workflow_parser().parse_args(args)
+                checked += 1
             script = (
                 tokens[1]
                 if len(tokens) > 1 and tokens[1].startswith("scripts/")
@@ -210,7 +232,7 @@ def check_commands():
                     + str(path.relative_to(ROOT)),
                 )
                 checked += 1
-    build = list(shell_commands(ROOT / "docs/admin/build.md"))
+    build = list(shell_commands(ROOT / "docs/admin/advanced-build.md"))
     runtime_uses = [t for t in build if "--runtime-lock" in t]
     require(
         len(runtime_uses) == 3
@@ -319,6 +341,7 @@ def main():
         "shell_blocks_syntax_checked": shell_blocks,
         "defaults_checked": defaults,
         "fresh_build_runtime_lock_uses": 3,
+        "public_make_cli_examples_checked": True,
         "demo_findings": findings,
         "demo_artifact_kind": "contract_example",
         "runtime_rejects_example": True,

@@ -1,5 +1,7 @@
 # Разработка и проверки
 
+Повседневный путь после системной подготовки — `make build` и `make test`: окружение и unit materials готовятся автоматически. Ниже — отдельные dev-команды и полная матрица для сопровождающего; собственный venv не является условием обычного scan/test.
+
 Пользователь готового Docker-комплекта следует [своему руководству](user/README.md).
 Подготовка images — [маршрут администратора](admin/build.md). Здесь описаны
 изменения scanner, внутренние API и dev-проверки, а не prerequisites обычного scan.
@@ -29,6 +31,7 @@ Black 25.1.0 — dev-tool. Build backend закреплён отдельно. Ho
 | Путь | Назначение |
 | --- | --- |
 | `src/ru_llm_scanner/` | Git/text, Analyzer/dictionary client, pipeline, config/profile, baseline, output/renderer |
+| `scanner`, `Makefile`, `scripts/workflow*.py` | Публичные четыре операции, собственный build/test environment, auto kit/output |
 | `scripts/docker_scanner.py` | Stdlib host runtime, private Compose, export/import/verify |
 | `scripts/analyzer.py`, `src/ru_llm_scanner/upstream.py` | Явная подготовка/build/seal закреплённого upstream |
 | `scripts/build_scanner.py`, `docker/scanner.Dockerfile` | Малый verified context, offline scanner image и deployment |
@@ -56,10 +59,9 @@ Black 25.1.0 — dev-tool. Build backend закреплён отдельно. Ho
 | Raw/patched/scan/CLI | Sealed Analyzer с моделью, подходящий dev/installed scanner image и locks | Реальная модель, parity/coordinates и independent quality |
 | Production acceptance | Готовые verified images/deployment, Docker/Compose | Штатные snapshot/diff/baseline/isolation/lifecycle |
 
-Часть dictionary и CLI unit жёстко использует `.build/analyzer`.
+Standalone dictionary и CLI unit по умолчанию используют `.build/analyzer`; `make test` передаёт проверенную отдельную копию fixture.
 Если его нет, unittest помечает группы skipped. **Passed со skipped не является
-полным прогоном.** Это известное предусловие TEST-01, не исправленное перестановкой
-документации. Не удаляйте обязательные проверки и не подменяйте assets фиктивными.
+полным прогоном.** Это предусловие standalone запуска TEST-01; make build готовит materials автоматически. Не удаляйте обязательные проверки и не подменяйте assets фиктивными.
 
 Для full unit сначала подготовьте pinned tracked assets (модель им не нужна):
 
@@ -71,12 +73,12 @@ Black 25.1.0 — dev-tool. Build backend закреплён отдельно. Ho
 Output должен отсутствовать. Если валидный `.build/analyzer` уже есть, проверьте
 его, не перезаписывайте автоматически. Явный `--fetch` вместо `--source` допустим
 только на стадии подготовки. Context другого пути можно использовать в integration
-через аргумент, но существующие asset-required unit ожидают именно этот путь.
+через аргумент, для standalone unit также поддержан внутренний `RU_LLM_SCANNER_UNIT_ASSETS`; вручную он для make test не нужен.
 
 Helper сохраняет исторический source/runtime fixture этих unit и соответствующие
 constraints отдельно от новых build profiles. Он не скачивает модель и не собирает
 images; ARM64 metadata fixture не означает ARM64 inference на AMD64.
-Для новых контейнеров используйте текущий профиль из [admin build](admin/build.md).
+Для новых контейнеров используйте текущий профиль из [расширенной сборки](admin/advanced-build.md).
 Нативный workflow `check-cpu-platforms.yml` отдельно выполняет настоящую модель,
 полный Requests, empty-store installation, fault/quality проверки обеих архитектур
 и Jenkins AMD64. [Текущий source и протоколы](../verification/linux-amd64/README.md).
@@ -129,7 +131,7 @@ Full unit collector требует 0 skipped и сохраняет hashes/versio
 
 ## Реальная модель и контейнеры
 
-[Admin build](admin/build.md) проводит один новый runtime lock через seal/parity/
+[Расширенная сборка](admin/advanced-build.md) проводит один новый runtime lock через seal/parity/
 engine/CLI и получает отдельный deployment. [Analyzer dev](analyzer.md) описывает
 upstream subset и API. [Scan API](scan-api.md) содержит малый dev recipe с
 httpx/jsonschema и import/schema smoke до модели.
@@ -171,5 +173,5 @@ NER, а изменение распознавания не подтвержда�
 Все данные только синтетические, реальные reports/credentials/proxy configs/weights
 в Git не включаются. Историческое evidence не переписывается как новый passed.
 [CONTRIBUTING](../CONTRIBUTING.md), [SECURITY](../SECURITY.md),
-[лицензирование](licensing.md). Текущий цикл/согласования — [#16](https://github.com/vovkins/ru-llm-scanner/issues/16);
+[лицензирование](licensing.md). Текущий цикл/согласования — [#38](https://github.com/vovkins/ru-llm-scanner/issues/38);
 каждый следующий этап получает отдельный подробный план и явное согласование.

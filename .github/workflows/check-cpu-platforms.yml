@@ -28,6 +28,10 @@ on:
       - 'SECURITY.md'
   workflow_dispatch:
     inputs:
+      documentation_walkthrough:
+        description: Clean native documentation build/test/scan walkthrough (no publication)
+        type: boolean
+        default: false
       everyday_tests:
         description: Native make build/test acceptance only (no publication)
         type: boolean
@@ -90,7 +94,7 @@ jobs:
           python -m black --check src tests docker scripts examples/jenkins --extend-exclude 'check_contracts\.py'
           git diff --check
   native:
-    if: (github.event_name != 'workflow_dispatch' || !inputs.everyday_tests && !inputs.simple_workflow && inputs.release_version == '') && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
+    if: (github.event_name != 'workflow_dispatch' || !inputs.documentation_walkthrough && !inputs.everyday_tests && !inputs.simple_workflow && inputs.release_version == '') && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
     strategy:
       fail-fast: false
       matrix:
@@ -286,7 +290,7 @@ jobs:
           include-hidden-files: true
           retention-days: 14
   release_build:
-    if: github.event_name == 'workflow_dispatch' && !inputs.everyday_tests && !inputs.simple_workflow && github.ref == 'refs/heads/main' && inputs.release_version != '' && !inputs.verify_frozen
+    if: github.event_name == 'workflow_dispatch' && !inputs.documentation_walkthrough && !inputs.everyday_tests && !inputs.simple_workflow && github.ref == 'refs/heads/main' && inputs.release_version != '' && !inputs.verify_frozen
     permissions:
       contents: write
     uses: ./.github/workflows/build-release.yml
@@ -294,7 +298,7 @@ jobs:
       version: ${{ inputs.release_version }}
       source_revision: ${{ inputs.source_revision }}
   release_archive_control:
-    if: github.event_name == 'workflow_dispatch' && !inputs.everyday_tests && !inputs.simple_workflow && github.ref == 'refs/heads/main' && inputs.release_version != '' && inputs.verify_frozen
+    if: github.event_name == 'workflow_dispatch' && !inputs.documentation_walkthrough && !inputs.everyday_tests && !inputs.simple_workflow && github.ref == 'refs/heads/main' && inputs.release_version != '' && inputs.verify_frozen
     permissions:
       contents: write
     uses: ./.github/workflows/verify-frozen-release.yml
@@ -305,7 +309,7 @@ jobs:
       arm64_sha256: ${{ inputs.arm64_sha256 }}
 
   workflow_native:
-    if: github.event_name == 'workflow_dispatch' && (inputs.simple_workflow || inputs.everyday_tests)
+    if: github.event_name == 'workflow_dispatch' && (inputs.documentation_walkthrough || inputs.simple_workflow || inputs.everyday_tests)
     strategy:
       fail-fast: false
       matrix:
@@ -334,7 +338,9 @@ jobs:
       - name: Build and exercise the public workflow
         run: |
           umask 077
-          if [ "${{ inputs.everyday_tests }}" = "true" ]; then
+          if [ "${{ inputs.documentation_walkthrough }}" = "true" ]; then
+            python scripts/check_documentation_walkthrough.py --output-dir .build/simple-workflow-native
+          elif [ "${{ inputs.everyday_tests }}" = "true" ]; then
             python scripts/check_workflow_test.py --output-dir .build/simple-workflow-native
           else
             python scripts/check_simple_workflow.py --output-dir .build/simple-workflow-native

@@ -1,0 +1,58 @@
+{
+  "databaseId": 39777325091,
+  "headSha": "63c2461789119773b01114f8fb51a12889b2fd89",
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39777325091",
+  "jobs": [
+    {
+      "name": "workflow_native (amd64, ubuntu-24.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-22T12:18:59Z",
+      "completedAt": "2026-10-22T12:25:55Z"
+    },
+    {
+      "name": "workflow_native (arm64, ubuntu-24.04-arm)",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-22T12:19:01Z",
+      "completedAt": "2026-10-22T12:25:02Z"
+    },
+    {
+      "name": "release_build",
+      "status": "completed",
+      "conclusion": "skipped",
+      "startedAt": "2026-10-22T12:18:57Z",
+      "completedAt": "2026-10-22T12:18:57Z"
+    },
+    {
+      "name": "release_archive_control",
+      "status": "completed",
+      "conclusion": "skipped",
+      "startedAt": "2026-10-22T12:18:57Z",
+      "completedAt": "2026-10-22T12:18:57Z"
+    },
+    {
+      "name": "native",
+      "status": "completed",
+      "conclusion": "skipped",
+      "startedAt": "2026-10-22T12:18:57Z",
+      "completedAt": "2026-10-22T12:18:57Z"
+    },
+    {
+      "name": "fast",
+      "status": "completed",
+      "conclusion": "skipped",
+      "startedAt": "2026-10-22T12:18:57Z",
+      "completedAt": "2026-10-22T12:18:57Z"
+    },
+    {
+      "name": "compare",
+      "status": "completed",
+      "conclusion": "skipped",
+      "startedAt": "2026-10-22T12:18:57Z",
+      "completedAt": "2026-10-22T12:18:57Z"
+    }
+  ]
+}
