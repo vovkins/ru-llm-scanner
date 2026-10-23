@@ -1,0 +1,347 @@
+{
+  "corpus_version": "base64-update-v1",
+  "annotation_scope": "explicit Base64/native filters; not an all-category NER benchmark",
+  "cases": [
+    {
+      "id": "short-declared",
+      "path": "base64/short-declared.txt",
+      "text": "Base64: YQ==",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [
+        [
+          "BASE64_DATA",
+          8,
+          12
+        ]
+      ],
+      "reason": "encoded payload; logistic detects the container regardless of decoded sensitivity"
+    },
+    {
+      "id": "unpadded-declared",
+      "path": "base64/unpadded-declared.txt",
+      "text": "{\"document_base64\":\"aGVsbG8\"}",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [
+        [
+          "BASE64_DATA",
+          20,
+          27
+        ]
+      ],
+      "reason": "encoded payload; logistic detects the container regardless of decoded sensitivity"
+    },
+    {
+      "id": "typed-password",
+      "path": "base64/typed-password.txt",
+      "text": "password_base64=\"U2Nhbm5lclN5bnRoZXRpY1ZhbHVlLTI2IQ==\"",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [
+        [
+          "PASSWORD",
+          17,
+          53
+        ]
+      ],
+      "reason": "declared native type must win over an untyped cascade"
+    },
+    {
+      "id": "typed-secret-json",
+      "path": "base64/typed-secret-json.txt",
+      "text": "{\"secret_key_base64\":\"U2Nhbm5lclN5bnRoZXRpY0tleS0yNiE=\"}",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [
+        [
+          "SECRET_KEY",
+          22,
+          54
+        ]
+      ],
+      "reason": "declared native secret class retains original JSON coordinates"
+    },
+    {
+      "id": "escaped-key",
+      "path": "base64/escaped-key.txt",
+      "text": "{\"password_\\u0062ase64\":\"U2Nhbm5lclN5bnRoZXRpY0VzY2FwZWQtMjYh\"}",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [
+        [
+          "PASSWORD",
+          25,
+          61
+        ]
+      ],
+      "reason": "JSON key is decoded, reported value offsets remain in source bytes/codepoints"
+    },
+    {
+      "id": "unicode-prefix",
+      "path": "base64/unicode-prefix.txt",
+      "text": "Заметка 🧪. Base64: 0L7QsdGL0YfQvdGL0Lkg0YLQtdC60YHRgiDQtNC70Y8g0L/RgNC+0LLQtdGA0LrQuA== Конец.",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [
+        [
+          "BASE64_DATA",
+          19,
+          87
+        ]
+      ],
+      "reason": "encoded payload; logistic detects the container regardless of decoded sensitivity"
+    },
+    {
+      "id": "sensitive-content",
+      "path": "base64/sensitive-content.txt",
+      "text": "Код YUBiLmNv из письма.",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [
+        [
+          "BASE64_DATA",
+          4,
+          12
+        ]
+      ],
+      "reason": "previous content protection must survive"
+    },
+    {
+      "id": "plain-container",
+      "path": "base64/plain-container.txt",
+      "text": "Передано 0L7QsdGL0YfQvdC+0LUg0YHQvtC+0LHRidC10L3QuNC1INCx0LXQtyDRgdC10LrRgNC10YLQvtCy.",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [
+        [
+          "BASE64_DATA",
+          9,
+          85
+        ]
+      ],
+      "reason": "encoded payload; logistic detects the container regardless of decoded sensitivity"
+    },
+    {
+      "id": "binary-standard",
+      "path": "base64/binary-standard.txt",
+      "text": "\"CzBVep/E6Q4zWH2ix+wRNluApcrvFDleg6jN8hc8YYar0PUaP2SJrtP4HUJnjLHW+yBFao+02f4jSG2St9wBJktwlbrfBClOc5i94gcsUXabwOUKL1R5nsPoDTJXfKHG6xA1Wn+kye4TOF2Cp8zxFjtgharP9Bk+\"",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [
+        [
+          "BASE64_DATA",
+          1,
+          161
+        ]
+      ],
+      "reason": "encoded payload; logistic detects the container regardless of decoded sensitivity"
+    },
+    {
+      "id": "url-safe",
+      "path": "base64/url-safe.txt",
+      "text": "Base64: -__v-__v-__v-__v-__v-__v-__v-__v-__v-__v-__v-__v",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [
+        [
+          "BASE64_DATA",
+          8,
+          56
+        ]
+      ],
+      "reason": "encoded payload; logistic detects the container regardless of decoded sensitivity"
+    },
+    {
+      "id": "native-jwt",
+      "path": "base64/native-jwt.txt",
+      "text": "X-Session: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmaXh0dXJlLTQ3IiwiYXVkIjoiZXhhbXBsZS5pbnZhbGlkIn0.bm90LWEtdmFsaWQtc2lnbmF0dXJl",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [
+        [
+          "JWT",
+          11,
+          136
+        ]
+      ],
+      "reason": "native JWT boundaries/category must survive cascade"
+    },
+    {
+      "id": "native-private-key",
+      "path": "base64/native-private-key.txt",
+      "text": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASC\n-----END PRIVATE KEY-----",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [
+        [
+          "PRIVATE_KEY",
+          0,
+          86
+        ]
+      ],
+      "reason": "native PEM takes precedence"
+    },
+    {
+      "id": "hex",
+      "path": "base64/hex.txt",
+      "text": "0779d1e0b300a8ae30936a2dd1498c7ee861125ccc4e45cf61383c5da7d71935",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [],
+      "reason": "non-encoded source text, no Base64/native credential expected"
+    },
+    {
+      "id": "uuid",
+      "path": "base64/uuid.txt",
+      "text": "550e8400-e29b-41d4-a716-446655440000",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [],
+      "reason": "non-encoded source text, no Base64/native credential expected"
+    },
+    {
+      "id": "path",
+      "path": "base64/path.txt",
+      "text": "src/main/java/org/springframework/samples/petclinic",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [],
+      "reason": "non-encoded source text, no Base64/native credential expected"
+    },
+    {
+      "id": "identifier",
+      "path": "base64/identifier.txt",
+      "text": "getUserProfileById",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [],
+      "reason": "non-encoded source text, no Base64/native credential expected"
+    },
+    {
+      "id": "ordinary-terms",
+      "path": "base64/ordinary-terms.txt",
+      "text": "config defaults padding headers username CPU BERT baseline",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [],
+      "reason": "non-encoded source text, no Base64/native credential expected"
+    },
+    {
+      "id": "separator",
+      "path": "base64/separator.txt",
+      "text": "/////////////////////////////////////////////////////////////////",
+      "entities": [
+        "BASE64_DATA",
+        "PASSWORD",
+        "SECRET_KEY",
+        "JWT",
+        "PRIVATE_KEY"
+      ],
+      "expected": [],
+      "reason": "non-encoded source text, no Base64/native credential expected"
+    },
+    {
+      "id": "dense-multi-chunk",
+      "path": "base64/dense.txt",
+      "text": "\"cGFzc3dvcmQ9IlNjYW5uZXJTeW50aGV0aWNEZW5zZS0yNiEi\"\n",
+      "entities": [
+        "BASE64_DATA"
+      ],
+      "expected": [
+        [
+          "BASE64_DATA",
+          1,
+          49
+        ]
+      ],
+      "reason": "one original-source span per independent value across outer 128k chunks",
+      "repeat_count": 2500
+    }
+  ]
+}

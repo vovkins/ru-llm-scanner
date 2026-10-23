@@ -3,7 +3,7 @@
 [base64-review.json](base64-review.json) относится только к полным SHA
 `da4f50a87ddf8a6c160c5f1893f5bf526f713d1c` →
 `9e47e6594ba3d9616ba90720994ced008335416c` публичного ru-llm-proxy.
-Это решение сопровождающего для **source-only кандидата**, не принятый runtime.
+Это исторический review v1 этапа5 для source-only кандидата. Текущий exact9e47e65 runtime использует [review v2](base64-metadata-review.json), проверенный на [этапе6](../../verification/simple-workflow-stage-6/README.md).
 Не используйте его с другой ревизией или как автоматическую политику future main.
 
 | Изменения | Решение и причина |
@@ -24,8 +24,7 @@
 Динамические связи и фактическая совместимость API остаются runtime gates.
 
 Candidate явно выбирает `PRESIDIO_ANALYZER_BASE64_POLICY=logistic`; upstream default —
-`content`. Текущий scanner lock/env не меняется. До принятия нужно сравнить оба
-режима и зафиксировать ожидаемые различия качества/координат/нагрузки.
+`content`. В текущих неопубликованных исходниках scanner выбран logistic; сравнение обоих режимов, качество, координаты и нагрузка подтверждены на этапе6. Сам инструмент prepare не меняет действующую установку.
 
 [Replacement API patch](patches/analyzer-api-base64-v1.patch) делает те же пять
 metadata изменений, что прежний analyzer-api-v1.patch: category/source catalog,
@@ -37,3 +36,16 @@ API adapter использует exported entity catalog и четыре пуб�
 Закреплённый upstream docs/base64-logistic.md указывает SHA256 исходного архива/модуля и сообщает, что код/коэффициенты сгенерированы Claude по запросу автора PR, без стороннего кода. Сам архив не опубликован, training inputs брались с плавающего HEAD: побайтовое воспроизведение обучения не подтверждено. Переносятся именно закреплённые коэффициенты; новые метрики scanner нужно измерить отдельно. Перед распространением сверяются происхождение и notices; неизменный THIRD_PARTY_NOTICES сам по себе не является такой проверкой.
 Рабочий клон proxy, его конфиги/секреты и существующие deployments не изменяются.
 [Инструкция инструмента](../../docs/reference/upstream-update.md).
+
+## Этап6: стабильность scanner metadata
+
+[Отдельный review v2](base64-metadata-review.json) использует ту же пару A/B и
+полный source inventory. [API v2](patches/analyzer-api-base64-v2.patch) сохраняет
+решения/координаты/значения/source/score, но для уже найденных structural declarations
+выбирает существующий точный upstream Base64 rule. Причина — дедупликация Presidio,
+не учитывающая metadata; старый API мог случайно оставить rule_id=null.
+[Измерение и согласование](../../verification/simple-workflow-stage-6/metadata-review.md).
+
+V1 review/patch и evidence этапа5 сохраняются. V2 прошёл отдельную настоящую
+приёмку этапа6. Сам по себе source_prepared по-прежнему не является runtime pass.
+Модель, dependencies, dictionary, коэффициенты и frozen annotations не меняются.

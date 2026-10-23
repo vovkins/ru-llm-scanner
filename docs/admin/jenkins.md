@@ -63,13 +63,52 @@ artifact/backups ACL и retention, сохраняет process status и точн
 требовать [операторского восстановления](operations.md#потерянный-запуск).
 Продвижение baseline — отдельный доверенный процесс после завершённого exit 0.
 
+## Готовый доверенный adapter
+
+Для job с restricted artifacts подготовлен
+[Jenkinsfile.workflow](../../examples/jenkins/Jenkinsfile.workflow) и
+[run_workflow_scan.py](../../examples/jenkins/run_workflow_scan.py). Администратор
+задаёт `SCANNER_HOME`, корни repositories/configs/baselines и agent label в
+доверенной pipeline-конфигурации; пользователь выбирает только разрешённые имена
+и refs. `SCANNER_HOME` указывает на заранее собранную и проверенную установку,
+расположенную вне очищаемого workspace. Ручной deployment JSON ему не нужен.
+
+Adapter формирует argv, запускает `scanner scan|diff`, получает process0/1/2 и
+пишет безопасный `scan-status.json`. Человеческие stdout/stderr не разбираются и
+не копируются в Jenkins console. Для0/1 обязательны оба private report-файла.
+Ранний отказ/сигнал даёт2; успешный status не наследуется от предыдущего запуска.
+
+В этом варианте только временные reports/status находятся в отдельном workspace
+job (`scan-results`,0700/0600), который очищается перед build; установка, input,
+config и baseline остаются вне workspace. Одновременные builds одной job
+запрещены, разные jobs получают разные workspace/output. Archives содержат полные
+значения: до включения примера настройте доверенные job/artifact ACL и retention.
+`archiveArtifacts` копирует текущие файлы, но не продвигает baseline автоматически.
+
+Одна пара контейнеров по умолчанию ограничена3GiB/2CPU Analyzer и1GiB/1CPU
+scanner. Для двух параллельных пар учитывайте8GiB контейнерных лимитов плюс host,
+Jenkins JVM, Docker и запас;4CPU суммарно распределяются планировщиком. Ограничения
+контейнеров не являются требованиями SLA. Большие файлы могут требовать явных
+бюджетов из [эксплуатационного руководства](operations.md).
+
+Отмена/timeout пересылают TERM trusted CLI и дают ему время на cleanup. После
+жёсткой потери агента оператор сначала идентифицирует точную установку и
+workspace, затем завершает только её процессы и Compose project; глобальный
+`docker prune`/остановка соседних jobs не применяется. Сам pipeline не меняет
+production credentials/RBAC/daemon и не настраивает Docker host.
+
 ## Что проверено
 
-Команды нового CLI проверяются native AMD64/ARM64 walkthrough; этот Groovy пример
-не означает новый настоящий Jenkins pilot. Он запланирован в этапе6 #38 и не
-меняет production jobs/credentials/RBAC. Историческая настоящая приёмка Jenkins
-v0.2.0 (13 сценариев) относится к [explicit adapter](jenkins-explicit.md) и своим
-images/locks. Его [Jenkinsfile](../../examples/jenkins/Jenkinsfile),
-[AMD64-вариант](../../examples/jenkins/Jenkinsfile.amd64) и
-[adapter](../../examples/jenkins/run_scan.py) сохранены совместимыми; они требуют
-explicit deployment и не являются новым Make/CLI интерфейсом.
+Настоящий отдельный Jenkins AMD64 pilot прошёл declarative validation и13
+завершённых сценариев:0/1/2, strict baseline, invalid ref/config/baseline,
+foreign profile, unbuilt trusted installation без старого report, две параллельные
+jobs, timeout/cancel и hard agent loss с ограниченным operator cleanup.
+Private artifacts содержат полные synthetic values, console — безопасную сводку;
+baseline не продвигается автоматически. Docker project IDs наблюдались отдельно
+по argv/WORKSPACE, acquisition запрещён, собственные ресурсы проверены после jobs.
+[Точные source/controller/plugins/resources и результаты](../../verification/simple-workflow-stage-6/README.md).
+
+Это native Ubuntu24.04 AMD64/reference pilot, не проверка production Jenkins,
+корпоративных ACL/PKI, rootless Docker, GPU или отдельного ARM64 Jenkins. Native
+ARM64 CLI/build/test/scan проверены отдельно. Исторический v0.2.0 pilot относится
+к [прежнему explicit adapter](jenkins-explicit.md); он сохраняется совместимым.

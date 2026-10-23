@@ -19,6 +19,9 @@ REQUIRED_MODULES = {
     "test_upstream_update",
     "test_workflow",
     "test_workflow_test",
+    "test_workflow_jenkins",
+    "test_engine_update",
+    "test_api_metadata",
 }
 
 

@@ -1,0 +1,39 @@
+{
+  "status": "prototype_measured_not_native_image_acceptance",
+  "platform": "linux/arm64",
+  "execution": "old pinned model/package image with exact new source overlay and proposed API metadata function; no new sealed image",
+  "raw_patched_parity_cases": 65,
+  "real_ner_ready": true,
+  "metrics": {
+    "code-v1": {
+      "tp": 33,
+      "fp": 14,
+      "fn": 4,
+      "precision": 0.7021276595744681,
+      "recall": 0.8918918918918919
+    },
+    "base64-update-v1": {
+      "tp": 2511,
+      "fp": 3,
+      "fn": 1,
+      "precision": 0.9988066825775657,
+      "recall": 0.9996019108280255
+    }
+  },
+  "network": "none",
+  "memory_limit_bytes": 3221225472,
+  "cpus": 2,
+  "prototype_source_sha256": "0563c63e7cbbadbf9c41f516130a4dad41c96497e05c75eadd74e499e6470f11",
+  "proposed_patch_sha256": "79d2083b5529412b5c47e88e4ee675a6a4a8c3c8ad5d011fe648bb69214b4b07",
+  "model_receipt_sha256": "642d50afc8938cbd271c21d46d9ec3690695b81e0e33bef19769e5f94035575d",
+  "stable_declared_rule_ids": {
+    "unpadded-declared": [
+      "base64.declared-json"
+    ],
+    "typed-secret-json": [
+      "base64.declared-json"
+    ]
+  },
+  "raw_values_exported": false,
+  "current_source_pin_changed": false
+}

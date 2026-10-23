@@ -1,5 +1,6 @@
 """Offline build/runtime inventory. Never reads prompts or environment secrets."""
 
+import asyncio
 import hashlib
 import importlib
 import importlib.metadata
@@ -48,6 +49,24 @@ def packaging_imports(packages):
             raise RuntimeError("Imported packaging module differs from metadata")
         result[name] = {"version": version, "path": module.__file__}
     return result
+
+
+def api_catalog(server):
+    """Read the public scanner contract, independent of server import aliases."""
+    response = asyncio.run(server.health())
+    value = json.loads(response.body)
+    if value.get("scanner_contract_version") != 1:
+        raise RuntimeError("Missing scanner metadata contract")
+    for key in ("supported_entities", "detection_sources"):
+        items = value.get(key)
+        if (
+            not isinstance(items, list)
+            or not items
+            or any(not isinstance(v, str) or not v for v in items)
+            or len(set(items)) != len(items)
+        ):
+            raise RuntimeError("Invalid public scanner catalog")
+    return value
 
 
 def main():
@@ -107,6 +126,8 @@ def main():
         dictionary[key] = expected
     import analyzer_server
 
+    catalog = api_catalog(analyzer_server)
+
     env_names = tuple(lock["analyzer_environment"]) + (
         "PRESIDIO_ANALYZER_DEVICE_PROFILE",
         "PRESIDIO_ANALYZER_GPU_PRECISION",
@@ -129,8 +150,8 @@ def main():
                 },
                 "dictionary": dictionary,
                 "analysis_signature": analyzer_server.ANALYSIS_SIGNATURE,
-                "entity_types": sorted(analyzer_server.SUPPORTED_ENTITY_TYPES),
-                "detection_sources": sorted(analyzer_server._KNOWN_SOURCES),
+                "entity_types": sorted(catalog["supported_entities"]),
+                "detection_sources": sorted(catalog["detection_sources"]),
                 "environment": {name: os.environ.get(name) for name in env_names},
             },
             sort_keys=True,

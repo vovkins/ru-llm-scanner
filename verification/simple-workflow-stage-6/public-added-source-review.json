@@ -1,0 +1,408 @@
+{
+  "scope": "API v1 and v2 have identical Requests fingerprint sets; model_public scope only",
+  "pinned_source_tree": "2663dda7dbb8ce123af703b4573d85d09383ba0f",
+  "raw_values_exported": false,
+  "rows": [
+    {
+      "path": "tests/certs/valid/server/server.pem",
+      "category": "BASE64_DATA",
+      "start_offset": 1468,
+      "end_offset": 2769,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "e480a31c230d099158184d208dc95e024ed8977b6796c498bce0bdcc25726650",
+      "source_slice_sha256_matches": true,
+      "characters": 1301,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        1468,
+        2769
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "pem_container"
+    },
+    {
+      "path": "tests/certs/expired/server/server.csr",
+      "category": "BASE64_DATA",
+      "start_offset": 0,
+      "end_offset": 1119,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "e4b5da832009e46cba07f5753f856ceeeb404fbfe4568c118fc11c4c5d7efea3",
+      "source_slice_sha256_matches": true,
+      "characters": 1119,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        0,
+        1158
+      ],
+      "native_preservation_fragment": true,
+      "container_shape": "pem_container"
+    },
+    {
+      "path": "tests/certs/expired/ca/ca.crt",
+      "category": "BASE64_DATA",
+      "start_offset": 0,
+      "end_offset": 1321,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "4385ea7a639301db0bf685fdb98709070b2946ce84f8efa11119d789343bb31c",
+      "source_slice_sha256_matches": true,
+      "characters": 1321,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        0,
+        1321
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "pem_container"
+    },
+    {
+      "path": "tests/test_requests.py",
+      "category": "BASE64_DATA",
+      "start_offset": 20535,
+      "end_offset": 20543,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "c0650edc3a2d97139b80bd5e3063f82ef74ff83f1d95e4501074615d8f09dccc",
+      "source_slice_sha256_matches": true,
+      "characters": 8,
+      "canonical_base64": true,
+      "payload_shape": "utf8_payload",
+      "full_upstream_cascade_span": [
+        20535,
+        20559
+      ],
+      "native_preservation_fragment": true,
+      "container_shape": "base64_form_token"
+    },
+    {
+      "path": "tests/certs/expired/server/server.csr",
+      "category": "BASE64_DATA",
+      "start_offset": 1123,
+      "end_offset": 1158,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "b461d95e2dde23a7de6becac3d5fd4328ac0c1996654f7528288abb79fa140c0",
+      "source_slice_sha256_matches": true,
+      "characters": 35,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        0,
+        1158
+      ],
+      "native_preservation_fragment": true,
+      "container_shape": "pem_container"
+    },
+    {
+      "path": "tests/certs/mtls/client/client.pem",
+      "category": "BASE64_DATA",
+      "start_offset": 0,
+      "end_offset": 1325,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "7a9ee3b9127368a5f28ffde4d5e07daba60afc7bc52e64b3e3f3dba97ce20bf7",
+      "source_slice_sha256_matches": true,
+      "characters": 1325,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        0,
+        1325
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "pem_container"
+    },
+    {
+      "path": "tests/certs/valid/server/server.csr",
+      "category": "BASE64_DATA",
+      "start_offset": 0,
+      "end_offset": 1174,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "bf4dc6838281ca3abb1b4af9bc85232429d36cbed32adc1f44e398e4433e73b5",
+      "source_slice_sha256_matches": true,
+      "characters": 1174,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        0,
+        1174
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "pem_container"
+    },
+    {
+      "path": "tests/certs/expired/server/server.pem",
+      "category": "BASE64_DATA",
+      "start_offset": 1326,
+      "end_offset": 2627,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "e480a31c230d099158184d208dc95e024ed8977b6796c498bce0bdcc25726650",
+      "source_slice_sha256_matches": true,
+      "characters": 1301,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        1326,
+        2627
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "pem_container"
+    },
+    {
+      "path": "tests/test_requests.py",
+      "category": "BASE64_DATA",
+      "start_offset": 66408,
+      "end_offset": 66482,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "bc2c700c6d2280e220e5ed7839f599c5f6375e139e5917ad314530e329920e11",
+      "source_slice_sha256_matches": true,
+      "characters": 74,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        66408,
+        66482
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "data_uri_container"
+    },
+    {
+      "path": "tests/test_requests.py",
+      "category": "BASE64_DATA",
+      "start_offset": 73703,
+      "end_offset": 73714,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "eff812d4e2cd1b9eac86725dbbbdc6863fa33397bd09105f80080654b323de36",
+      "source_slice_sha256_matches": true,
+      "characters": 11,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        73703,
+        73715
+      ],
+      "native_preservation_fragment": true,
+      "container_shape": "base64_form_token"
+    },
+    {
+      "path": "tests/certs/mtls/client/client.pem",
+      "category": "BASE64_DATA",
+      "start_offset": 1326,
+      "end_offset": 2627,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "e480a31c230d099158184d208dc95e024ed8977b6796c498bce0bdcc25726650",
+      "source_slice_sha256_matches": true,
+      "characters": 1301,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        1326,
+        2627
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "pem_container"
+    },
+    {
+      "path": "tests/certs/valid/server/server.pem",
+      "category": "BASE64_DATA",
+      "start_offset": 0,
+      "end_offset": 1467,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "29a9d31c0d6c28da7decf58eab51e877530674fdaf7b3ef4bcbf2df2570e47d6",
+      "source_slice_sha256_matches": true,
+      "characters": 1467,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        0,
+        1467
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "pem_container"
+    },
+    {
+      "path": "README.md",
+      "category": "BASE64_DATA",
+      "start_offset": 817,
+      "end_offset": 839,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "b25eaf7793d5d01b895bdaaa15ae50e90555cf2e1e33f2349287993f72243db2",
+      "source_slice_sha256_matches": true,
+      "characters": 22,
+      "canonical_base64": true,
+      "payload_shape": "utf8_payload",
+      "full_upstream_cascade_span": [
+        817,
+        839
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "base64_form_token"
+    },
+    {
+      "path": "tests/test_requests.py",
+      "category": "BASE64_DATA",
+      "start_offset": 76813,
+      "end_offset": 76821,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "e9a7e33431867a08e7f3473fce62acf4eff0dfa059f730009155f172fea08e7f",
+      "source_slice_sha256_matches": true,
+      "characters": 8,
+      "canonical_base64": true,
+      "payload_shape": "utf8_payload",
+      "full_upstream_cascade_span": [
+        76813,
+        76821
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "base64_form_token"
+    },
+    {
+      "path": "tests/certs/mtls/client/client.csr",
+      "category": "BASE64_DATA",
+      "start_offset": 0,
+      "end_offset": 1499,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "a5eae33e83732c8df9598d2d281ef3aff55ef529046593b00d9ef16358db98f7",
+      "source_slice_sha256_matches": true,
+      "characters": 1499,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        0,
+        1499
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "pem_container"
+    },
+    {
+      "path": "tests/certs/expired/server/server.pem",
+      "category": "BASE64_DATA",
+      "start_offset": 0,
+      "end_offset": 1325,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "2c3183d429a9e659534db3aa3949d12491cacebe88d33cf0a772d2e65ddddf47",
+      "source_slice_sha256_matches": true,
+      "characters": 1325,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        0,
+        1325
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "pem_container"
+    },
+    {
+      "path": "tests/test_requests.py",
+      "category": "BASE64_DATA",
+      "start_offset": 76598,
+      "end_offset": 76610,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "0e9d220616f08345a714ee57d8516310770588484b5239844635f952965e34a6",
+      "source_slice_sha256_matches": true,
+      "characters": 12,
+      "canonical_base64": true,
+      "payload_shape": "utf8_payload",
+      "full_upstream_cascade_span": [
+        76598,
+        76610
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "base64_form_token"
+    },
+    {
+      "path": "docs/user/advanced.rst",
+      "category": "BASE64_DATA",
+      "start_offset": 15288,
+      "end_offset": 15316,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "ee1f78d5c4338edffcae18263f40e56e9155be94bce58473d9c55e9533f17545",
+      "source_slice_sha256_matches": true,
+      "characters": 28,
+      "canonical_base64": false,
+      "payload_shape": "not_canonical_base64_fragment",
+      "full_upstream_cascade_span": [
+        15288,
+        15316
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "data_uri_container"
+    },
+    {
+      "path": "tests/test_requests.py",
+      "category": "BASE64_DATA",
+      "start_offset": 97705,
+      "end_offset": 97725,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "951a6ea3a615c215334f8f9b92a09278620b3c28e2c4023ab2b777aac4f4de48",
+      "source_slice_sha256_matches": true,
+      "characters": 20,
+      "canonical_base64": true,
+      "payload_shape": "utf8_payload",
+      "full_upstream_cascade_span": [
+        97705,
+        97725
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "base64_form_token"
+    },
+    {
+      "path": "tests/test_requests.py",
+      "category": "BASE64_DATA",
+      "start_offset": 97660,
+      "end_offset": 97680,
+      "source": "structural",
+      "score": 0.95,
+      "rule_id": "base64.logistic-cascade",
+      "value_sha256": "951a6ea3a615c215334f8f9b92a09278620b3c28e2c4023ab2b777aac4f4de48",
+      "source_slice_sha256_matches": true,
+      "characters": 20,
+      "canonical_base64": true,
+      "payload_shape": "utf8_payload",
+      "full_upstream_cascade_span": [
+        97660,
+        97680
+      ],
+      "native_preservation_fragment": false,
+      "container_shape": "base64_form_token"
+    }
+  ],
+  "ground_truth_secret_labels_available": false
+}

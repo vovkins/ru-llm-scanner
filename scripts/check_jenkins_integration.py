@@ -46,6 +46,43 @@ from git_fixtures import RepoFixture, fingerprint
 SECRET = "SYNTHETIC_JENKINS_SECRET_42!"
 
 
+def unbuilt_workflow_template(template, home, unbuilt):
+    needle = "SCANNER_HOME = '" + str(home) + "'"
+    require(template.count(needle) == 1, "Workflow fixture home missing or ambiguous")
+    return template.replace(needle, "SCANNER_HOME = '" + str(unbuilt) + "'")
+
+
+def docker_observer(root):
+    """Observe trusted Docker argv, independently of the human CLI console."""
+    real = shutil.which("docker")
+    require(real is not None, "Docker unavailable")
+    guard = root / "docker-observer"
+    guard.mkdir(mode=0o700)
+    log = root / "docker-observations.jsonl"
+    script = """import json,os,re,sys
+a=sys.argv[1:]; op=a[0] if a else ''
+forbidden=op in {'build','pull','push','load','tag'} or op=='compose' and any(x in {'build','pull','push'} for x in a)
+record={'operation':op,'forbidden':forbidden,'workspace':os.environ.get('WORKSPACE'),'project':None}
+if op=='compose' and '--project-name' in a:
+ project=a[a.index('--project-name')+1]
+ if not re.fullmatch(r'rullmscan-[0-9a-f]{32}',project):sys.exit(92)
+ record['project']=project
+fd=os.open(os.environ['SCANNER_JENKINS_DOCKER_LOG'],os.O_WRONLY|os.O_CREAT|os.O_APPEND,0o600)
+try:os.write(fd,(json.dumps(record)+'\\n').encode())
+finally:os.close(fd)
+if forbidden:sys.exit(91)
+os.execv(os.environ['SCANNER_JENKINS_REAL_DOCKER'],[os.environ['SCANNER_JENKINS_REAL_DOCKER'],*a])
+"""
+    (guard / "docker").write_text("#!/usr/bin/env python3\n" + script)
+    (guard / "docker").chmod(0o700)
+    return {
+        **os.environ,
+        "PATH": str(guard) + os.pathsep + os.environ["PATH"],
+        "SCANNER_JENKINS_REAL_DOCKER": real,
+        "SCANNER_JENKINS_DOCKER_LOG": str(log),
+    }, log
+
+
 class JenkinsFixture:
     def __init__(self, args):
         self.args = args
@@ -61,6 +98,13 @@ class JenkinsFixture:
         self.records = []
         self.projects = set()
         self.declarative_validation = False
+        self.agent_env = None
+        self.docker_log = None
+
+    def observations(self):
+        if self.docker_log is None or not self.docker_log.exists():
+            return []
+        return [json.loads(line) for line in self.docker_log.read_text().splitlines()]
 
     def request(self, path, data=None, *, content_type=None, headers=None):
         auth = base64.b64encode(("scanner-test:" + self.password).encode()).decode()
@@ -127,11 +171,12 @@ class JenkinsFixture:
             self.lock["controller_image"],
             timeout=900,
         )
-        self.home = self.root / "trusted-scanner"
-        for name in ("scripts/docker_scanner.py", "examples/jenkins/run_scan.py"):
-            path = self.home / name
-            path.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(ROOT / name, path)
+        self.home = self.args.workflow_home or self.root / "trusted-scanner"
+        if not self.args.workflow_home:
+            for name in ("scripts/docker_scanner.py", "examples/jenkins/run_scan.py"):
+                path = self.home / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ROOT / name, path)
         for name in ("repositories", "configs", "baselines", "agent"):
             (self.root / name).mkdir(mode=0o700)
         self.repo = RepoFixture(self.root / "repositories/prepared-repo")
@@ -144,7 +189,15 @@ class JenkinsFixture:
             parents=(self.b,),
         )
         self.before = fingerprint(self.repo.root)
-        template = (ROOT / "examples/jenkins/Jenkinsfile.amd64").read_text()
+        template = (
+            ROOT
+            / "examples/jenkins"
+            / (
+                "Jenkinsfile.workflow"
+                if self.args.workflow_home
+                else "Jenkinsfile.amd64"
+            )
+        ).read_text()
         substitutions = {
             "/opt/ru-llm-scanner": str(self.home),
             "/srv/ru-llm-scanner/deployment.json": str(
@@ -158,6 +211,8 @@ class JenkinsFixture:
             require("'" not in new and "\n" not in new, "Unsupported fixture path")
             template = template.replace("'" + old + "'", "'" + new + "'")
         self.template = template
+        if self.args.workflow_home:
+            self.agent_env, self.docker_log = docker_observer(self.root)
 
     def start(self):
         with socket.socket() as listener:
@@ -223,6 +278,7 @@ class JenkinsFixture:
         ]
         self.agent = subprocess.Popen(
             self.agent_command,
+            env=self.agent_env,
             stdout=log,
             stderr=subprocess.STDOUT,
             start_new_session=True,
@@ -327,6 +383,27 @@ class JenkinsFixture:
         )
         (self.root / (label + ".console.log")).write_bytes(console)
         require(value["result"] == expected, "Jenkins result mismatch: " + label)
+        if self.docker_log is not None:
+            workspace = str(self.root / "agent/workspace" / build.split("/")[2])
+            observed = self.observations()
+            require(
+                not any(r["forbidden"] for r in observed),
+                "Jenkins scan attempted acquisition",
+            )
+            projects = {
+                r["project"]
+                for r in observed
+                if r["workspace"] == workspace and r["project"]
+            }
+            if code in (0, 1):
+                require(
+                    bool(projects), "Jenkins Docker observer missed successful scan"
+                )
+            self.projects.update(projects)
+            require(
+                all(not any(owned_resources(p)) for p in projects),
+                "Jenkins workflow resources leaked",
+            )
         status_data = self.artifact(build, "scan-status.json", optional=True)
         status = json.loads(status_data) if status_data else None
         if expected == "ABORTED":
@@ -437,14 +514,31 @@ class JenkinsFixture:
             json.loads(rejected)["baseline"]["status"] == "incompatible",
             "Foreign architecture identity was not rejected by profile compatibility",
         )
-        missing = self.template.replace(
-            str(self.args.deployment_lock.resolve()),
-            str(self.root / "missing-deployment.json"),
+        if self.args.workflow_home:
+            unbuilt = self.root / "unbuilt-trusted-scanner"
+            shutil.copytree(
+                self.home,
+                unbuilt,
+                ignore=shutil.ignore_patterns(
+                    ".git", ".build", ".venv", "__pycache__", "*.pyc"
+                ),
+            )
+            missing = unbuilt_workflow_template(self.template, self.home, unbuilt)
+            missing_case = "unbuilt-workflow-installation"
+        else:
+            missing = self.template.replace(
+                str(self.args.deployment_lock.resolve()),
+                str(self.root / "missing-deployment.json"),
+            )
+            missing_case = "wrong-deployment"
+        require(
+            missing != self.template, "Negative Jenkins fixture did not change pipeline"
         )
         self.create_job("wrong-deployment", missing)
-        self.result(
-            self.queue("wrong-deployment"), "wrong-deployment", "FAILURE", code=2
+        unavailable = self.result(
+            self.queue("wrong-deployment"), missing_case, "FAILURE", code=2
         )
+        require(unavailable is None, "Unavailable installation archived a report")
         self.create_job("parallel")
         first, second = self.queue("scanner"), self.queue(
             "parallel", REF_B=self.secret_commit
@@ -561,6 +655,8 @@ class JenkinsFixture:
         trusted = {
             str(self.home / "examples/jenkins/run_scan.py").encode(),
             str(self.home / "scripts/docker_scanner.py").encode(),
+            str(self.home / "examples/jenkins/run_workflow_scan.py").encode(),
+            str(self.home / "scripts/workflow.py").encode(),
         }
         # Operator recovery after hard loss: identify only this trusted installation
         # and this exact WORKSPACE before signalling; never target other jobs.
@@ -584,6 +680,7 @@ class JenkinsFixture:
         with (self.root / "agent.log").open("ab") as log:
             self.agent = subprocess.Popen(
                 self.agent_command,
+                env=self.agent_env,
                 stdout=log,
                 stderr=subprocess.STDOUT,
                 start_new_session=True,
@@ -606,6 +703,7 @@ class JenkinsFixture:
             except subprocess.TimeoutExpired:
                 os.killpg(self.agent.pid, signal.SIGKILL)
                 self.agent.wait(timeout=10)
+        self.projects.update(r["project"] for r in self.observations() if r["project"])
         for project in self.projects:
             cleanup(project)
         result = docker("logs", self.name, check=False)
@@ -616,6 +714,7 @@ class JenkinsFixture:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--deployment-lock", type=Path, required=True)
+    parser.add_argument("--workflow-home", type=lambda s: Path(s).resolve(strict=True))
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     require(not args.output_dir.exists(), "Jenkins output already exists")
@@ -704,6 +803,10 @@ def main():
                 "raw_reports_credentials_and_logs_uploaded": False,
                 "user_jenkins_modified": False,
                 "safe_failure_diagnostics": diagnostics[-30:],
+                "observed_docker_projects": len(fixture.projects),
+                "docker_acquisition_attempts": sum(
+                    r["forbidden"] for r in fixture.observations()
+                ),
             },
         )
 

@@ -28,6 +28,10 @@ on:
       - 'SECURITY.md'
   workflow_dispatch:
     inputs:
+      engine_update:
+        description: Native old/content/logistic transfer, rollback and Jenkins (no publication)
+        type: boolean
+        default: false
       upstream_update:
         description: Native source-only proxy candidate and unchanged-engine regression
         type: boolean
@@ -98,7 +102,7 @@ jobs:
           python -m black --check src tests docker scripts examples/jenkins --extend-exclude 'check_contracts\.py'
           git diff --check
   native:
-    if: (github.event_name != 'workflow_dispatch' || !inputs.upstream_update && !inputs.documentation_walkthrough && !inputs.everyday_tests && !inputs.simple_workflow && inputs.release_version == '') && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
+    if: (github.event_name != 'workflow_dispatch' || !inputs.engine_update && !inputs.upstream_update && !inputs.documentation_walkthrough && !inputs.everyday_tests && !inputs.simple_workflow && inputs.release_version == '') && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
     strategy:
       fail-fast: false
       matrix:
@@ -197,6 +201,7 @@ jobs:
             .build/native/steps.json
             .build/native/upstream-core.json
             .build/native/upstream-ner.json
+            .build/native/upstream-base64.json
             .build/native/parity/offline-verification.json
             .build/native/scan-integration/scan-verification.json
             .build/native/cli-integration/cli-verification.json
@@ -228,7 +233,7 @@ jobs:
           import json, shutil
           from pathlib import Path
           root=Path('.build/evidence'); root.mkdir(parents=True, exist_ok=True)
-          allowed=('build-summary.json','repeat-summary.json','steps.json','upstream-core.json','upstream-ner.json','linux-git.json','parity/offline-verification.json','scan-integration/scan-verification.json','cli-integration/cli-verification.json','acceptance/acceptance-verification.json','docker-integration/docker-verification.json','runtime-faults/fault-verification.json','deployment-extras/extras-verification.json','predictions/platform-predictions.json','public-requests/public-repository.json','native-inventory/native-inventory.json','fresh-install/fresh-install.json')
+          allowed=('build-summary.json','repeat-summary.json','steps.json','upstream-core.json','upstream-ner.json','upstream-base64.json','linux-git.json','parity/offline-verification.json','scan-integration/scan-verification.json','cli-integration/cli-verification.json','acceptance/acceptance-verification.json','docker-integration/docker-verification.json','runtime-faults/fault-verification.json','deployment-extras/extras-verification.json','predictions/platform-predictions.json','public-requests/public-repository.json','native-inventory/native-inventory.json','fresh-install/fresh-install.json')
           for name in allowed:
               path=Path('.build/native')/name
               if path.is_file():
@@ -294,7 +299,7 @@ jobs:
           include-hidden-files: true
           retention-days: 14
   release_build:
-    if: github.event_name == 'workflow_dispatch' && !inputs.upstream_update && !inputs.documentation_walkthrough && !inputs.everyday_tests && !inputs.simple_workflow && github.ref == 'refs/heads/main' && inputs.release_version != '' && !inputs.verify_frozen
+    if: github.event_name == 'workflow_dispatch' && !inputs.engine_update && !inputs.upstream_update && !inputs.documentation_walkthrough && !inputs.everyday_tests && !inputs.simple_workflow && github.ref == 'refs/heads/main' && inputs.release_version != '' && !inputs.verify_frozen
     permissions:
       contents: write
     uses: ./.github/workflows/build-release.yml
@@ -302,7 +307,7 @@ jobs:
       version: ${{ inputs.release_version }}
       source_revision: ${{ inputs.source_revision }}
   release_archive_control:
-    if: github.event_name == 'workflow_dispatch' && !inputs.upstream_update && !inputs.documentation_walkthrough && !inputs.everyday_tests && !inputs.simple_workflow && github.ref == 'refs/heads/main' && inputs.release_version != '' && inputs.verify_frozen
+    if: github.event_name == 'workflow_dispatch' && !inputs.engine_update && !inputs.upstream_update && !inputs.documentation_walkthrough && !inputs.everyday_tests && !inputs.simple_workflow && github.ref == 'refs/heads/main' && inputs.release_version != '' && inputs.verify_frozen
     permissions:
       contents: write
     uses: ./.github/workflows/verify-frozen-release.yml
@@ -313,7 +318,7 @@ jobs:
       arm64_sha256: ${{ inputs.arm64_sha256 }}
 
   workflow_native:
-    if: github.event_name == 'workflow_dispatch' && (inputs.upstream_update || inputs.documentation_walkthrough || inputs.simple_workflow || inputs.everyday_tests)
+    if: github.event_name == 'workflow_dispatch' && !inputs.engine_update && (inputs.upstream_update || inputs.documentation_walkthrough || inputs.simple_workflow || inputs.everyday_tests)
     strategy:
       fail-fast: false
       matrix:
@@ -356,5 +361,54 @@ jobs:
         with:
           name: simple-workflow-${{ matrix.arch }}
           path: .build/simple-workflow-native/workflow-verification.json
+          include-hidden-files: true
+          retention-days: 14
+
+  engine_update_native:
+    if: github.event_name == 'workflow_dispatch' && inputs.engine_update
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 180
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.11'
+      - uses: docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4
+        with:
+          version: v29.6.1
+          set-host: true
+          daemon-config: '{"features":{"containerd-snapshotter":true}}'
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        if: matrix.arch == 'amd64'
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Prepare pinned host verification tools
+        run: |
+          python -m pip install pip==26.2.1 setuptools==84.1.0 wheel==0.48.0
+          python -m pip install -e . -r requirements-dev.txt -c locks/requirements-scanner-linux-${{ matrix.arch }}.txt
+      - name: Exercise isolated trusted installations
+        run: python scripts/check_engine_update.py --output-dir .build/engine-update
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: engine-update-${{ matrix.arch }}
+          path: |
+            .build/engine-update/engine-update.json
+            .build/engine-update/*-upstream-base64.json
+            .build/engine-update/capacity/probe-summary-*.json
           include-hidden-files: true
           retention-days: 14

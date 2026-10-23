@@ -3,7 +3,7 @@
   "kind": "source",
   "upstream": {
     "url": "https://github.com/vovkins/ru-llm-proxy.git",
-    "commit": "da4f50a87ddf8a6c160c5f1893f5bf526f713d1c"
+    "commit": "9e47e6594ba3d9616ba90720994ced008335416c"
   },
   "sources": {
     "README.md": "61a56e9c3aaa911c2df1033b284766e4638ce66e9c4eab09316b84cfe749afb8",
@@ -12,12 +12,13 @@
     "litellm_guardrails/dictionary-substitutions.default.json": "126805a93906873c7cd1fd7a3586c106a4c68d9329cfbe5169132d9bfc9a244e",
     "litellm_guardrails/dictionary_policy.py": "9709364660baa4f5ac551b42fbbd411c6d2eaf8093ac1579ca8ea4a30696d099",
     "presidio/Dockerfile": "820b8b9380c080250ebdf71d1f1e463d1ba5c5d8b64196e4cf8b6317b71ea851",
-    "presidio/analyzer_server.py": "3517fdda1288483ec366fdd636e3e92bcd0412c3d511af805bf2130adb0b67c5",
+    "presidio/analyzer_server.py": "cee606db3b1525f2495ab96132d48980ccf502a8feb1c75e52de1dff8c9b9ecc",
     "presidio/capacity.py": "aceeadddfce4cfefcb7bf4e6417548dbea25fcc9e8c550cd95cdb384cfda5479",
     "presidio/download_hf_model.py": "fc8d97ff42fae63f83a947c8bbc1de46683eec5e52c4cf373f867b3014489b40",
     "presidio/entity_types.py": "68da0fed596f8682b60bcf4b33617e0eb0f4b757bcce703a0224b531edc46f4f",
     "presidio/evaluation/README.md": "45e6ef6c9aa473f1565c44eaf3a093752ed881435d684d23c32c1f6d7d49624d",
     "presidio/evaluation/__init__.py": "f73edf08610c98e7971e8411264042b2dcf23664ab60c9d978b95bd92b43db4f",
+    "presidio/evaluation/base64_policies.py": "aec1b9a07799362d5d6b007e539f2087545e61e0a7fe390a043d6812b71a9187",
     "presidio/evaluation/corpus.py": "180ff6b7486cc07f4514d3825695592b886fe70b36f96ccad06cad070fdc7800",
     "presidio/evaluation/data/deterministic_rules_review.jsonl": "0f7173f3778faa89f2c69c6269eb38e3c7028ae8144f9ddca1cd6bf8db6dbda2",
     "presidio/evaluation/data/instruction_regressions.jsonl": "5096b3fbe0f368976447d1e9a4c1eccddd2f38ce9f50123a8bc85eedf1132f06",
@@ -30,6 +31,7 @@
     "presidio/evaluation/deterministic_rule_source_manifest.json": "c86ce785f4c7d004bfaa377f8f8da829f0e0620dd2b27a99dc66d56a1a13c1f0",
     "presidio/evaluation/metrics.py": "d7bb78b1532abf8fb2bf8d404ccc34fb84bcc864025369ff4daea356866952ed",
     "presidio/evaluation/name_recheck_experiment.py": "e13cee91435b47ba6970f66cf81099d86c551c63b6490cd17e9b38e3306438a2",
+    "presidio/evaluation/reports/base64-policies.json": "830dc6a56ea47d9a2f0a2f8691344a3331aee57dcd56bdc4e0883ea510be17e4",
     "presidio/evaluation/reports/deeppavlov-baseline.json": "6754a55e7ca7b1b5b33575285c941b51f65c596a98572fb21d1fd0590b6dd4a1",
     "presidio/evaluation/reports/deterministic-rule-inventory.json": "9cce17fcbec59d061fab94c1460c0341295a086f5b4662c6e319d3a293f8212f",
     "presidio/evaluation/reports/deterministic-rule-review.json": "506c64726bbda1b71e3346c2bc7479f9f13e3fabe9f3d7282259aff329f63e90",
@@ -44,10 +46,11 @@
     "presidio/ner/text_processing.py": "b0a826c41012ffb5dabfaf314216070ccddfecb691203e0a07de485aa6b096e4",
     "presidio/real_model_smoke.py": "8ed1563b7058876bc47ea8efe53938443526a8316b8c5c1a939173b496b3e959",
     "presidio/recognizers/__init__.py": "3043f2220709038c6a62ee9c4f4706b5ffe6a49ac46499ef3b343d5311e6ccb7",
-    "presidio/recognizers/base64_data.py": "73c2aa1ad7b4a7ab40e2aded8d3d2ee68d30f503a6ee4cc1424541a7a07f6937",
+    "presidio/recognizers/base64_data.py": "ad2c3e6ec58049a0c9dc7be0ae237e918095d1119847250205293752e42ec3a3",
+    "presidio/recognizers/base64_logistic.py": "abe317ab30bf52731683e217449f783bad1c8411c260cbffd41a0a0f369ca1cd",
     "presidio/recognizers/credential_rules.py": "0d17a7c7f3e0a98167cfead36e8fa31e068ec31d8236ee5fda9207ea97feff93",
     "presidio/recognizers/infra_secrets.py": "727d41e1cfb00a1710985f3643d4864773d060d19dbf121d4b1be19e999bdada",
-    "presidio/recognizers/json_strings.py": "b413ecf3b232d6968144ef4f47480f8a1af48f7afd6e11d3a59acdaeed7df358",
+    "presidio/recognizers/json_strings.py": "1307ad00608513f79c970cef790d2a275aac3e8204d4c443b93b2d8c70b7db90",
     "presidio/recognizers/ru_address.py": "efea5ecba9608f2b2a76c9a04644314911ea35fb5e9487c6b4e3bdb3b02b551a",
     "presidio/recognizers/ru_bank_card.py": "f82be91f5e5e64d6a4c602cdcc662c2db33d2b0ef658e21141545bbd62518165",
     "presidio/recognizers/ru_bank_requisites.py": "167859f84f592a261e71cd735fc765cbe7e9575778a837f9c5d619e4e9269965",
@@ -61,10 +64,16 @@
     "presidio/requirements-analyzer-gpu.txt": "9f38f25ab81168f2c5a7173fb68bf14874764f11e648226d295f31c05fbe2f9b",
     "presidio/requirements-analyzer-test.txt": "a1c4d57a0907cbc50a8970ffd6cccd48e8add0d09a840a12073fa65d62d68755",
     "presidio/requirements-analyzer.txt": "cfe2e573443f293c8263456454ca84d3b795cc5220789139a3afe56d9e94c34a",
-    "presidio/result_merging.py": "05fba49c4b4c4a1fc4aa1878a8834b8f9164df499feb35c93ffe2fefb4646409",
+    "presidio/result_merging.py": "bde51a47ed80f711763731f571aad412110443fc689a256110577a338afecb6e",
     "presidio/tests/test_analyzer_api_thresholds.py": "b4e48d583033df624e4d1edd028d9e8736bf9140e54f3e64daf2df34854aa64c",
     "presidio/tests/test_analyzer_entity_filters.py": "aae10cb705a4017e3edb643371640dc15b818b7eb4dcc4b9d6d138083df0328f",
     "presidio/tests/test_analyzer_server_capacity.py": "fb2f9e4d10f286ad1005afcc29adc5848b294bce0b7c70f532ff86e40c9d3c31",
+    "presidio/tests/test_base64_logistic.py": "956199501da8b3138c9373cc7035db7c39bb89b3ba02de986b3839971efbd759",
+    "presidio/tests/test_base64_logistic_api.py": "d02236bc593c72c3fdfd7928edbbb8526d94eafc6816643c4486691b7cb5b07f",
+    "presidio/tests/test_base64_logistic_cases.py": "aa7902713405b31d45b42b2eeb964654e3502c1e26081284bbdb01dfe26b15ba",
+    "presidio/tests/test_base64_logistic_full_path.py": "3f1503b92219d555eb0b230d0ee3dd2290e46ff55cbc4a18124e3c1371d42fe7",
+    "presidio/tests/test_base64_logistic_review.py": "33cb55b0153646dc497d0e2096f7727dc5d0366f183175bdcca436290a1eb5e6",
+    "presidio/tests/test_base64_policies_evaluation.py": "62943f032cc09fcd0259afdf46f19f9fd642aa1b71145c912772e59bf4743126",
     "presidio/tests/test_capacity.py": "98451530d274a3da4eadb3bfe6e83e4a03cbf1aff0619db42f40943da88180d8",
     "presidio/tests/test_credential_rules.py": "8bfa61a96924b159dc047ce31fe9beacbee10dfd972b9c0702dffcfd3999f8ff",
     "presidio/tests/test_download_model.py": "88446c14f2191cbb237d71f2b5e14dc38108b2d4cce25184578369c4455534b9",
@@ -150,12 +159,12 @@
   },
   "patches": [
     {
-      "path": "patches/analyzer-api-v1.patch",
-      "sha256": "1b81547a59a43fa57bc88cfaeaec7d894465fc2e54491b306736976f6d6a0092",
+      "path": "patches/analyzer-api-base64-v2.patch",
+      "sha256": "79d2083b5529412b5c47e88e4ee675a6a4a8c3c8ad5d011fe648bb69214b4b07",
       "targets": {
         "presidio/analyzer_server.py": {
-          "before": "3517fdda1288483ec366fdd636e3e92bcd0412c3d511af805bf2130adb0b67c5",
-          "after": "b6d1adefcd6a4fe13a8b43757b4680b80243433c311967caa6a6f40b80b264a9"
+          "before": "cee606db3b1525f2495ab96132d48980ccf502a8feb1c75e52de1dff8c9b9ecc",
+          "after": "0563c63e7cbbadbf9c41f516130a4dad41c96497e05c75eadd74e499e6470f11"
         }
       }
     },
@@ -215,6 +224,7 @@
     }
   },
   "analyzer_environment": {
+    "PRESIDIO_ANALYZER_BASE64_POLICY": "logistic",
     "PRESIDIO_ANALYZER_DETECT_BARE_INN_BY_CHECKSUM": "true",
     "PRESIDIO_ANALYZER_DETECT_PUBLIC_IPS": "true",
     "PRESIDIO_ANALYZER_INTERNAL_DOMAIN_SUFFIXES": "internal,local,lan,corp,corp.local,cluster.local,svc.cluster.local",

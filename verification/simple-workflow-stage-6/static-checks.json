@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "source_runtime_materials": "e6c8e65f01ff5646d25f7f917febd85ef5bf127c",
+  "local_unit_tests": 261,
+  "unit_skips": 0,
+  "unit_failures": 0,
+  "unit_errors": 0,
+  "missing_required_modules": [],
+  "contracts": {
+    "valid_examples": 11,
+    "rejected_invalid_cases": 22,
+    "local_links": 1144
+  },
+  "documentation": {
+    "commands": 74,
+    "shell_blocks": 58,
+    "defaults": 19
+  },
+  "black": {
+    "python_files": 121,
+    "status": "passed",
+    "confirmation": "fast run39856795230 and unchanged Python sources"
+  },
+  "git_diff_check": "passed",
+  "browser_acceptance_performed": false,
+  "native_model_or_jenkins_implied_by_static_checks": false
+}
