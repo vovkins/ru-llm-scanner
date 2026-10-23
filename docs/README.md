@@ -1,6 +1,6 @@
 # Документация ru-llm-scanner
 
-Начните с маршрута своей роли. Текущая версия `0.1.0`; администратор получает
+Начните с маршрута своей роли. Текущая версия `0.2.0`; администратор получает
 [готовый релиз](admin/releases.md) либо собирает images и передаёт локальную установку.
 [Выполненные проверки и границы стендов](../verification/README.md).
 
@@ -43,6 +43,9 @@ proxy, venv или build context.
 
 ## Разработчику и сопровождающему
 
+[Простой интерфейс build/scan/diff/test](reference/simple-workflow.md) — спецификация
+этапа #39, команды ещё не реализованы. Текущий рабочий запуск описан выше.
+
 - [Архитектура](architecture.md), [ADR](decisions/README.md), [требования](requirements.md).
 - [Git reader](git-reader.md), [Scan API](scan-api.md), [Analyzer API и dev-проверки](analyzer.md).
 - [Dev Python CLI](cli-quickstart.md) — установка и engine assets для разработки;
@@ -56,6 +59,7 @@ proxy, venv или build context.
 
 История первоначальных семи этапов доступна через verification и
 [исходный план](https://github.com/vovkins/ru-llm-scanner/issues/1).
-Текущий цикл — [#16](https://github.com/vovkins/ru-llm-scanner/issues/16),
-документация — [#20](https://github.com/vovkins/ru-llm-scanner/issues/20).
+Цикл подготовки к эксплуатации [#16](https://github.com/vovkins/ru-llm-scanner/issues/16)
+завершён. Текущий цикл упрощения — [#38](https://github.com/vovkins/ru-llm-scanner/issues/38),
+спецификация интерфейса — [#39](https://github.com/vovkins/ru-llm-scanner/issues/39).
 Каждый следующий этап требует отдельного явного согласования.

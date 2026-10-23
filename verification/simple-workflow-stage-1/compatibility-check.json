@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "scope": "existing launcher argument parser and documented defaults; no new CLI execution",
+  "existing_flags_checked": [
+    "--repo",
+    "--commit",
+    "--from",
+    "--to",
+    "--output",
+    "--config",
+    "--baseline",
+    "--require-baseline",
+    "--analyzer-cpus",
+    "--scanner-cpus",
+    "--analyzer-memory",
+    "--scanner-memory",
+    "--run-timeout-seconds",
+    "--stop-grace-seconds"
+  ],
+  "existing_runtime_defaults_checked": {
+    "analyzer_cpus": 2.0,
+    "scanner_cpus": 1.0,
+    "analyzer_memory": "3g",
+    "scanner_memory": "1g",
+    "run_timeout_seconds": 3600.0,
+    "stop_grace_seconds": 30.0
+  },
+  "scan_translation": "snapshot; wrapper must supply explicit HEAD and generated output/deployment",
+  "planned_acceptance_cases": 23,
+  "planned_commands_implemented": false,
+  "docker_or_model_started": false
+}

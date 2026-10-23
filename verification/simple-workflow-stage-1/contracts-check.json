@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "exit_code": 0,
+  "scope": "schema, synthetic reports, invalid examples and local links; no Git scan or detector/runtime validation",
+  "output": "Valid schema; 11 synthetic reports; 22 rejected invalid cases; 950 local links.\nNo Git scanning, detector-quality or runtime validation is implied.",
+  "synthetic_reports": 11,
+  "rejected_invalid_examples": 22,
+  "local_links": 950
+}

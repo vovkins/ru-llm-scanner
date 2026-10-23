@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "make_version": "GNU Make 3.81",
+  "synthetic_probe_only": true,
+  "new_project_makefile_executed": false,
+  "cases": [
+    {
+      "recipe_exit_code": 1,
+      "make_exit_code": 2
+    },
+    {
+      "recipe_exit_code": 2,
+      "make_exit_code": 2
+    }
+  ]
+}

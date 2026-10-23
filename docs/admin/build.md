@@ -1,5 +1,8 @@
 # Сборка собственного CPU комплекта
 
+[Проектируемый make-интерфейс](../reference/simple-workflow.md) ещё не реализован.
+Ниже сохранён текущий рабочий ручной маршрут; его автоматизация — следующий этап.
+
 Выберите профиль, совпадающий с архитектурой нативного Docker daemon.
 Готовый [v0.2.0](releases.md) содержит AMD64 и ARM64; собственная сборка для
 его установки не требуется. v0.1.0 содержит только ARM64. Для AMD64 см.
@@ -160,7 +163,7 @@ Host parity запускается non-root. [Подробности dev-про�
 .venv/bin/python scripts/build_scanner.py prepare \
   --profile "$BUILD_PROFILE" \
   --engine-dir "$ENGINE_DIR" \
-  --wheel "$BUILD_ROOT/wheels/ru_llm_scanner-0.1.0-py3-none-any.whl" \
+  --wheel "$BUILD_ROOT/wheels/ru_llm_scanner-0.2.0-py3-none-any.whl" \
   --context "$SCANNER_CONTEXT" --artifact-cache "$ARTIFACT_CACHE" \
   --download-artifacts
 ```

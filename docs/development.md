@@ -4,6 +4,10 @@
 Подготовка images — [маршрут администратора](admin/build.md). Здесь описаны
 изменения scanner, внутренние API и dev-проверки, а не prerequisites обычного scan.
 
+[Спецификация будущего make/CLI интерфейса](reference/simple-workflow.md) и
+[карта переиспользования/матрица](../verification/simple-workflow-stage-1/README.md)
+относятся к #39. Команды пока не реализованы; текущие dev-команды приведены ниже.
+
 ## Окружение
 
 Нужны POSIX, Python 3.11+, Git и venv. Установка может обращаться к одобренному
