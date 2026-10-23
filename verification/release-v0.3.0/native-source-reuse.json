@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "source_archive": "ru-llm-scanner-v0.2.0-native-sources.tar.gz",
+  "release_archive": "ru-llm-scanner-v0.3.0-native-sources.tar.gz",
+  "archive_sha256": "50b4716387cb500d8cf06dc0cbfdfd99f6ce3e6a9778c6e8b080c035b20a5927",
+  "bytes": 398330836,
+  "manifest_matches_retained_source_inventory": true,
+  "checked_debian_source_files": 267,
+  "native_package_versions_must_match_new_images_before_publication": true,
+  "archive_content_version_neutral": true,
+  "cpython_archive_verified": {
+    "version": "3.11.17",
+    "url": "https://www.python.org/ftp/python/3.11.17/Python-3.11.17.tar.xz",
+    "file": "Python-3.11.17.tar.xz",
+    "sha256": "bfb74ad39efae27cda510f134ab408e00f9992c56851cfc0b1cdb5646da11599",
+    "size": 20352864,
+    "hash_source": "PYTHON_SHA256 in pinned Docker Official Image"
+  },
+  "new_native_inventories_match_both_architectures": true,
+  "native_build_workflow_run": 39927948569
+}

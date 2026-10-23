@@ -1,0 +1,22 @@
+{
+  "scanner": {
+    "image_id": "sha256:3f13aa3d3004c69b3394f4cb7ffbc28297236fb315122102560e30140acbeb22",
+    "labels": {
+      "org.opencontainers.image.description": "Local sensitive-data scanner for Git repositories",
+      "org.opencontainers.image.source": "https://github.com/vovkins/ru-llm-scanner",
+      "org.opencontainers.image.version": "0.3.0"
+    },
+    "build_source_revision": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39"
+  },
+  "analyzer": {
+    "image_id": "sha256:e7f7c677fd39c7040e25eb22f1391a3264ff1029fbb0294d92d0ec80c90245ec",
+    "labels": {
+      "org.opencontainers.image.description": "Offline sensitive-data Analyzer for ru-llm-scanner",
+      "org.opencontainers.image.source": "https://github.com/vovkins/ru-llm-scanner",
+      "org.opencontainers.image.version": "0.3.0",
+      "org.ru-llm-scanner.context-sha256": "3510fcaafadccb5e332329b852a68370da02d8f996d5cf30dc577d388fd20b9f",
+      "org.ru-llm-scanner.source-lock-sha256": "e5b79edb957b6a53ca935c7c7af6d5e90ffa34120f5142835af5c5f83668c7ed"
+    },
+    "build_source_revision": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39"
+  }
+}

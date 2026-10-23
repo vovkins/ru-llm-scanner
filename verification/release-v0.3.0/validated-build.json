@@ -1,0 +1,54 @@
+{
+  "status": "build_validated_pending_final_archive_control",
+  "version": "0.3.0",
+  "build_source_revision": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39",
+  "build_workflow_run": 39927948569,
+  "material_inputs": 110,
+  "unit_tests_per_platform": 267,
+  "bundle_sha256": {
+    "amd64": "e2d3699f710583aa855abb6f7806f80db325b080b00535112581c7d5552336a4",
+    "arm64": "1854a7c764b545644d44963ef7e1e7d012cc782a77ace6a84f40845a4a2be240"
+  },
+  "wheel_sha256": {
+    "amd64": "391344e3fe5acb3b5bfc2d61058cfaa08b8139246b8544ad3999e51a7936487e",
+    "arm64": "391344e3fe5acb3b5bfc2d61058cfaa08b8139246b8544ad3999e51a7936487e"
+  },
+  "model_cross": {
+    "status": "passed",
+    "findings": 2561,
+    "maximum_score_delta": 2.1457672119140625e-06,
+    "rule_ids_exact": true,
+    "raw_values_exported": false
+  },
+  "requests_maximum_score_delta": 4.5299530029296875e-06,
+  "advisories": {
+    "amd64": {
+      "query_time_utc": "2026-10-23T09:41:23.633455+00:00",
+      "osv_matches": 4,
+      "debian_potential": 140,
+      "new_advisory_tuples": [
+        [
+          "brotli",
+          "1.1.0-2",
+          "CVE-2026-111497"
+        ]
+      ],
+      "new_advisory_disposition": "vulnerable decoder not in supported execution path; exact frozen images measured on both architectures; not a fix or general container exemption"
+    },
+    "arm64": {
+      "query_time_utc": "2026-10-23T09:41:03.853337+00:00",
+      "osv_matches": 4,
+      "debian_potential": 140,
+      "new_advisory_tuples": [
+        [
+          "brotli",
+          "1.1.0-2",
+          "CVE-2026-111497"
+        ]
+      ],
+      "new_advisory_disposition": "vulnerable decoder not in supported execution path; exact frozen images measured on both architectures; not a fix or general container exemption"
+    }
+  },
+  "native_sources_match": true,
+  "published_images_built": false
+}

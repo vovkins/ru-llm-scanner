@@ -1,0 +1,33 @@
+{
+  "component": "scanner",
+  "python_optional_modules": {
+    "brotli": false,
+    "brotlicffi": false,
+    "_brotli": false
+  },
+  "httpx_supported_decoders": [
+    "deflate",
+    "gzip",
+    "identity"
+  ],
+  "httpx_default_accept_encoding": "gzip, deflate",
+  "unsupported_br_response_left_opaque": true,
+  "git_binary_sha256": "a0e562e4bd3c4c79379e91d8c07a10104b2cefe8fac966dc6bd4874a57a807f3",
+  "git_binary_links_brotli": false,
+  "git_binary_links_libcurl": false,
+  "remote_http_helper_links_brotli": true,
+  "remote_http_helper_links_libcurl": true,
+  "brotli_loaded_in_python_process": false,
+  "node_installed": false,
+  "installed_lib_brotli": "1.1.0-2+b7",
+  "scope": "Default local Git-object reader and internal HTTPX route only; library remains vulnerable for other callers",
+  "status": "passed",
+  "platform": "linux/arm64",
+  "build_source_revision": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39",
+  "image": {
+    "image_id": "sha256:3f13aa3d3004c69b3394f4cb7ffbc28297236fb315122102560e30140acbeb22",
+    "image_reference_id": "sha256:3f13aa3d3004c69b3394f4cb7ffbc28297236fb315122102560e30140acbeb22"
+  },
+  "cve": "CVE-2026-111497",
+  "probe_sha256": "cb820e3e73f92711f38f2613e6055b213d709013e170bdc7fb5ba8e0e340f5ae"
+}

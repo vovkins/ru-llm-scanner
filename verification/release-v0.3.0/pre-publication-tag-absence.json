@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "method": "Anonymous bounded GET; only explicit registry404 considered absent",
+  "tags": {
+    "ghcr.io/vovkins/ru-llm-scanner:0.3.0": "explicit_registry_not_found",
+    "ghcr.io/vovkins/ru-llm-scanner:0.3.0-amd64": "explicit_registry_not_found",
+    "ghcr.io/vovkins/ru-llm-scanner:0.3.0-arm64": "explicit_registry_not_found",
+    "ghcr.io/vovkins/ru-llm-scanner-analyzer:0.3.0": "explicit_registry_not_found",
+    "ghcr.io/vovkins/ru-llm-scanner-analyzer:0.3.0-amd64": "explicit_registry_not_found",
+    "ghcr.io/vovkins/ru-llm-scanner-analyzer:0.3.0-arm64": "explicit_registry_not_found"
+  },
+  "registry_write": false
+}

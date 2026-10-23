@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "initial_images": 0,
+  "initial_containers": 0,
+  "separate_data_root": true,
+  "separate_containerd_process_and_data_root": true,
+  "primary_image_store_unchanged": true,
+  "daemon_version": "Docker version 29.6.1, build 8ec5ab3",
+  "installed_control": {
+    "status": "passed",
+    "version": "0.3.0",
+    "platform": "linux/arm64",
+    "verify_exit_code": 0,
+    "steps": [
+      {
+        "operation": "snapshot",
+        "exit_code": 0,
+        "assurance": "snapshot_verified",
+        "findings": 0,
+        "private_output": true,
+        "elapsed_seconds": 6.72
+      },
+      {
+        "operation": "repeat-snapshot",
+        "exit_code": 0,
+        "assurance": "snapshot_verified",
+        "findings": 0,
+        "private_output": true,
+        "elapsed_seconds": 6.584
+      },
+      {
+        "operation": "strict-diff",
+        "exit_code": 1,
+        "assurance": "baseline_verified",
+        "findings": 1,
+        "private_output": true,
+        "elapsed_seconds": 6.612
+      },
+      {
+        "operation": "invalid-baseline",
+        "exit_code": 2,
+        "assurance": "none",
+        "findings": 0,
+        "private_output": true,
+        "elapsed_seconds": 6.589
+      }
+    ],
+    "input_unchanged": true,
+    "reports_published": false,
+    "imported_images": true,
+    "timing_scope": "First/repeated scan after image import; fresh containers each time, OS page cache not flushed. Not a hardware cold-boot benchmark."
+  },
+  "images_published": false,
+  "bundle_sha256": "1854a7c764b545644d44963ef7e1e7d012cc782a77ace6a84f40845a4a2be240",
+  "build_source_revision": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39",
+  "archive_bytes": 1422654397,
+  "producer_revision": "855a1c5f3a522d1c0187cbcae591b41a45bc2d50"
+}
