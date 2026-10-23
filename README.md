@@ -34,10 +34,9 @@ make scan REPO="$HOME/git/пример project"
 Ручные `deployment.json`, хеши, выбор wheel и запуск сервисов не нужны.
 Каталог отчёта создаётся автоматически с приватными правами вне клона.
 
-**Статус:** этот простой интерфейс включён в `main`,
-но ещё **не включён в опубликованный v0.2.0**. Используйте доверенный
-checkout `main`. Для неизменного v0.2.0 сохранён
-[отдельный маршрут установки и запуска](docs/admin/advanced.md).
+**Версия интерфейса — v0.3.0.** Для воспроизводимого запуска выбирайте
+доверенный Git checkout конкретного релизного тега; [версии и получение](docs/admin/releases.md).
+Для прежнего v0.2.0 сохранён [отдельный маршрут](docs/admin/advanced.md).
 
 ## Четыре команды
 
@@ -105,8 +104,8 @@ Snapshot проверяет все поддерживаемые текстовы
 
 Scanner распространяется под [MIT](LICENSE); модель, upstream и зависимости
 сохраняют собственные условия и [notices](THIRD_PARTY_NOTICES.md).
-Готовится v0.3.0 с этим Make/CLI и обновлённым Analyzer: [план и gates](verification/release-v0.3.0/README.md).
-Последний опубликованный [v0.2.0](https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.2.0)
+Протокол v0.3.0 с этим Make/CLI и обновлённым Analyzer: [состояние и gates](verification/release-v0.3.0/README.md).
+Прежний [v0.2.0](https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.2.0)
 имеет публичные GHCR images и архивы AMD64/ARM64; v0.1.0 остаётся ARM64-поставкой.
 [Получение опубликованных комплектов](docs/admin/releases.md).
 Принятые владельцем [native-риски](verification/operations-dependencies/risk-acceptance.md)

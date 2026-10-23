@@ -4,7 +4,7 @@
 
 Поддержка включена в `main` через [PR #35](https://github.com/vovkins/ru-llm-scanner/pull/35);
 [слияние и контроль main](../../verification/linux-amd64/main-integration/README.md)
-проверены отдельно. [v0.2.0 опубликован](releases.md) для AMD64/ARM64;
+проверены отдельно. [v0.2.0 опубликован](releases-v0.2.0.md) для AMD64/ARM64;
 [приёмка релизных образов, GHCR и архивов](../../verification/release-v0.2.0/README.md)
 прошла на обеих native платформах. v0.1.0 остаётся ARM64-релизом.
 Ниже приведены также исходные измерения этапа [#33](../../verification/linux-amd64/README.md);

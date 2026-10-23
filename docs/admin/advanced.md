@@ -7,7 +7,7 @@
 
 | Задача | Инструкция |
 | --- | --- |
-| Получить v0.2.0: публичные GHCR и архивы AMD64/ARM64 | [Релизы](releases.md) |
+| Получить v0.2.0: публичные GHCR и архивы AMD64/ARM64 | [Релиз v0.2.0](releases-v0.2.0.md) |
 | Установить готовый offline-пакет | [Import → verify → контрольный snapshot](installation.md) |
 | Просканировать с явным deployment | [Explicit launcher](explicit-launcher.md) |
 | Вручную подготовить новый кандидат, locks и export | [Расширенная CPU-сборка](advanced-build.md) |
