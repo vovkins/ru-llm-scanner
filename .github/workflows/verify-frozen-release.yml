@@ -80,6 +80,14 @@ jobs:
               assert labels['org.opencontainers.image.source']=='https://github.com/vovkins/ru-llm-scanner'
               metadata[component]={'image_id':info['Id'],'labels':labels,'build_source_revision':revision}
           (directory/'oci-metadata.json').write_text(json.dumps(metadata,indent=2)+'\n')
+          # Measure reachability on the exact frozen image; do not patch/rebuild it.
+          probe=Path('.github/release-probes/brotli.py').read_text()
+          scanner=manifest['images']['scanner']['image_reference_id']
+          measured=json.loads(subprocess.check_output(['docker','run','--rm','--pull','never','--network','none','--read-only','--user',str(os.getuid())+':'+str(os.getgid()),'--cap-drop','ALL','--security-opt','no-new-privileges','--tmpfs','/tmp:rw,size=32m,mode=1777','--entrypoint','python',scanner,'-c',probe],text=True))
+          measured.update(platform='linux/'+arch,build_source_revision=revision,image=manifest['images']['scanner'],cve='CVE-2026-111497',probe_sha256=__import__('hashlib').sha256(probe.encode()).hexdigest())
+          (directory/'brotli-reachability.json').write_text(json.dumps(measured,indent=2)+'\n')
+          assert measured['status']=='passed', 'Brotli reachability requires review'
+
           subprocess.run([sys.executable,'scripts/check_fresh_install.py','--bundle',str(bundle),'--output-dir',str(directory/'fresh')],check=True)
           receipt=json.loads((directory/'fresh/fresh-install.json').read_text())
           receipt.update(bundle_sha256=os.environ['BUNDLE_SHA256'],build_source_revision=revision,archive_bytes=archive.stat().st_size,producer_revision=os.environ['GITHUB_SHA'])
@@ -89,6 +97,7 @@ jobs:
         with:
           name: final-frozen-${{ matrix.arch }}
           path: |
+            .build/archive-control/brotli-reachability.json
             .build/archive-control/oci-metadata.json
             .build/archive-control/frozen-archive-control.json
             .build/archive-control/fresh/installed-control.json
