@@ -12,7 +12,8 @@ from urllib.request import Request, urlopen
 
 REPOSITORY = "vovkins/ru-llm-scanner"
 PLATFORMS = {"amd64": "linux/amd64", "arm64": "linux/arm64"}
-SUPPORTED_VERSIONS = {"0.1.0", "0.2.0"}
+SUPPORTED_VERSIONS = {"0.1.0", "0.2.0", "0.3.0"}
+RELEASE_VERSION = "0.3.0"
 DIGEST = re.compile(r"sha256:[a-f0-9]{64}")
 INDEX_TYPE = "application/vnd.oci.image.index.v1+json"
 ACCEPT = ", ".join(
@@ -83,7 +84,7 @@ def registry_manifest(repository, reference):
     )
     require(
         DIGEST.fullmatch(reference)
-        or re.fullmatch(r"0\.[12]\.0(?:-amd64|-arm64)?", reference),
+        or re.fullmatch(r"0\.[123]\.0(?:-amd64|-arm64)?", reference),
         "Invalid registry reference",
     )
     query = urlencode(

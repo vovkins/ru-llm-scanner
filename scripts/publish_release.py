@@ -378,7 +378,7 @@ def main():
         "Publish only from this repository main",
     )
     require(
-        args.version == project_version(Path.cwd()) == "0.2.0",
+        args.version == project_version(Path.cwd()) == "0.3.0",
         "Publisher version differs from reviewed project",
     )
     require(

@@ -20,7 +20,7 @@ import time
 
 from release_common import SUPPORTED_VERSIONS
 
-VERSION = "0.2.0"
+VERSION = "0.3.0"
 
 
 def sha(path):
@@ -69,6 +69,11 @@ def verify_files(directory, checkout=None):
         safe_name(name)
         require(re.fullmatch(r"[a-f0-9]{64}", digest), "Invalid file digest")
     require(actual == expected, "Release file inventory mismatch")
+    if manifest["version"] == "0.3.0":
+        require(
+            (directory / "scanner").stat().st_mode & stat.S_IXUSR,
+            "Release scanner launcher is not executable",
+        )
     inputs = manifest["runtime_inputs_sha256"]
     require(inputs and "scripts/docker_scanner.py" in inputs, "Missing runtime inputs")
     for name, digest in inputs.items():

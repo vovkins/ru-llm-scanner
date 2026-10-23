@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ru-llm-scanner"
-version = "0.2.0"
+version = "0.3.0"
 description = "Local sensitive-data detection for Git repository scanning"
 readme = "README.md"
 license = "MIT"

@@ -13,7 +13,7 @@ on:
     inputs:
       version:
         type: string
-        default: '0.2.0'
+        default: '0.3.0'
         required: true
       source_revision:
         description: Exact reviewed main commit to build
@@ -63,7 +63,7 @@ jobs:
           sys.path.insert(0,'scripts')
           from release_common import project_version
           from publish_release import release_state
-          assert os.environ['RELEASE_VERSION']==project_version(Path.cwd())=='0.2.0'
+          assert os.environ['RELEASE_VERSION']==project_version(Path.cwd())=='0.3.0'
           revision=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
           assert revision==os.environ['RELEASE_SOURCE']==os.environ['GITHUB_SHA']
           state=release_state(os.environ['RELEASE_VERSION'])
@@ -78,7 +78,7 @@ jobs:
           python -m pip install pip==26.2.1 setuptools==84.1.0 wheel==0.48.0
           python -m pip install -e . -r requirements-dev.txt -c locks/requirements-scanner-linux-${{ matrix.arch }}.txt
           python scripts/prepare_unit_assets.py --fetch
-          if ! python -m unittest discover -s tests > .build/unit-tests.log 2>&1; then
+          if ! python scripts/run_workflow_units.py .build/unit-summary.json > .build/unit-tests.log 2>&1; then
             cat .build/unit-tests.log
             exit 1
           fi
@@ -102,10 +102,10 @@ jobs:
           docker version > .build/evidence/docker-version.txt
           docker compose version > .build/evidence/compose-version.txt
           df -h > .build/evidence/disk-before.txt
-      - name: Build from pinned inputs with builder HTTPS blocked
+      - name: Build and test the public Make workflow from pinned inputs
         id: build
         run: |
-          python scripts/check_cpu_candidate.py build --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache --download --offline-firewall
+          python scripts/check_cpu_candidate.py build --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/artifact-cache --workflow-build
       - name: Freeze candidate and import into an empty Docker store
         id: fresh
         if: always() && steps.build.outcome == 'success'
@@ -127,7 +127,9 @@ jobs:
           java-version: '21'
       - name: Exercise real isolated Jenkins on native AMD64
         if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
-        run: python scripts/check_jenkins_integration.py --deployment-lock .build/native/deployment.json --output-dir .build/jenkins
+        run: |
+          python scripts/check_jenkins_integration.py --deployment-lock .build/native/deployment.json --workflow-home "$PWD" --output-dir .build/jenkins
+          python scripts/check_jenkins_integration.py --deployment-lock .build/native/deployment.json --output-dir .build/jenkins-legacy
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always() && matrix.arch == 'amd64' && steps.build.outcome == 'success'
         with:
@@ -138,7 +140,7 @@ jobs:
         id: integration
         if: always() && steps.build.outcome == 'success'
         run: |
-          python scripts/check_cpu_candidate.py integration --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache
+          python scripts/check_cpu_candidate.py integration --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/artifact-cache
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always() && steps.build.outcome == 'success'
         with:
@@ -158,7 +160,12 @@ jobs:
           retention-days: 3
       - name: Repeat cache-only preparation and uncached offline builds
         if: always() && steps.build.outcome == 'success'
-        run: python scripts/check_cpu_candidate.py repeat --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/input-cache --offline-firewall
+        run: python scripts/check_cpu_candidate.py repeat --arch '${{ matrix.arch }}' --output-dir .build/native --artifact-cache .build/artifact-cache --offline-firewall
+      - name: Frozen quality, rule metadata and published-release rollback
+        if: always() && steps.build.outcome == 'success'
+        run: |
+          python scripts/check_release_candidate.py model --candidate .build/native --output .build/native/model
+          python scripts/check_release_candidate.py rollback --candidate .build/native --output .build/native/rollback
       - name: Collect native synthetic predictions without raw values
         if: always() && steps.build.outcome == 'success'
         run: python scripts/collect_platform_predictions.py --context .build/native/analyzer --runtime-lock .build/native/analyzer.runtime.lock.json --output-dir .build/native/predictions
@@ -181,7 +188,7 @@ jobs:
           import json, shutil
           from pathlib import Path
           root=Path('.build/evidence'); root.mkdir(parents=True, exist_ok=True)
-          allowed=('build-summary.json','repeat-summary.json','steps.json','upstream-core.json','upstream-ner.json','linux-git.json','parity/offline-verification.json','scan-integration/scan-verification.json','cli-integration/cli-verification.json','acceptance/acceptance-verification.json','docker-integration/docker-verification.json','runtime-faults/fault-verification.json','deployment-extras/extras-verification.json','predictions/platform-predictions.json','public-requests/public-repository.json','native-inventory/native-inventory.json','fresh-install/fresh-install.json','advisories/osv-summary.json','advisories/debian-summary.json','advisories/fetches.json')
+          allowed=('walkthrough/workflow-verification.json','model/model-verification.json','rollback/rollback-verification.json','upstream-base64.json','build-summary.json','repeat-summary.json','steps.json','upstream-core.json','upstream-ner.json','linux-git.json','parity/offline-verification.json','scan-integration/scan-verification.json','cli-integration/cli-verification.json','acceptance/acceptance-verification.json','docker-integration/docker-verification.json','runtime-faults/fault-verification.json','deployment-extras/extras-verification.json','predictions/platform-predictions.json','public-requests/public-repository.json','native-inventory/native-inventory.json','fresh-install/fresh-install.json','advisories/osv-summary.json','advisories/debian-summary.json','advisories/fetches.json')
           for name in allowed:
               path=Path('.build/native')/name
               if path.is_file():
@@ -192,14 +199,16 @@ jobs:
           if summaries:
               json.loads(summaries[-1].read_text())
               shutil.copyfile(summaries[-1],root/'capacity-verification.json')
-          log=Path('.build/unit-tests.log')
-          if log.exists():
-              import re
-              text=log.read_text()
-              count=re.findall(r'Ran (\d+) tests',text)
-              (root/'unit-summary.json').write_text(json.dumps({'tests':int(count[-1]) if count else None,'passed':bool(re.search(r'^OK$',text,re.M)),'raw_log_uploaded':False})+'\n')
+          unit=Path('.build/unit-summary.json')
+          if unit.exists():
+              value=json.loads(unit.read_text())
+              value['passed']=value['status']=='passed'
+              value['raw_log_uploaded']=False
+              (root/'unit-summary.json').write_text(json.dumps(value)+'\n')
           jenkins=Path('.build/jenkins/jenkins-verification.json')
           if jenkins.exists(): shutil.copyfile(jenkins,root/'jenkins-verification.json')
+          legacy=Path('.build/jenkins-legacy/jenkins-verification.json')
+          if legacy.exists(): shutil.copyfile(legacy,root/'jenkins-legacy-verification.json')
           PY
       - name: Persist tested frozen archive in draft release
         if: success()
@@ -231,8 +240,12 @@ jobs:
         run: |
           python3 scripts/compare_platform_predictions.py --arm64 .build/evidence/cpu-arm64-evidence/predictions-platform-predictions.json --amd64 .build/evidence/cpu-amd64-evidence/predictions-platform-predictions.json --output .build/cross-platform.json
           python3 - <<'PY'
-          import json
+          import json,sys
           from pathlib import Path
+          sys.path.insert(0,'scripts')
+          from check_release_candidate import compare_model
+          model=[json.loads(Path('.build/evidence/cpu-'+arch+'-evidence/model-model-verification.json').read_text())['model'] for arch in ('arm64','amd64')]
+          Path('.build/model-cross-platform.json').write_text(json.dumps(compare_model(*model))+'\n')
           a,b=[json.loads(Path('.build/evidence/cpu-'+arch+'-evidence/public-requests-public-repository.json').read_text()) for arch in ('arm64','amd64')]
           assert a['status']==b['status']=='passed' and a['exit_code']==b['exit_code']==1
           assert a['source']==b['source'] and a['coverage']==b['coverage']
@@ -249,5 +262,6 @@ jobs:
           path: |
             .build/cross-platform.json
             .build/public-cross-platform.json
+            .build/model-cross-platform.json
           include-hidden-files: true
           retention-days: 14

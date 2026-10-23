@@ -29,7 +29,7 @@ def main():
     )
     root = Path.cwd()
     version = project_version(root)
-    require(version == "0.2.0", "Unexpected release version")
+    require(version == "0.3.0", "Unexpected release version")
     manifest = verify_files(args.bundle, root)
     require(manifest["version"] == version, "Frozen bundle version mismatch")
     arch = manifest["platform"].split("/")[1]
@@ -61,6 +61,10 @@ def main():
         "linux-git.json",
         "native-inventory-native-inventory.json",
         "public-requests-public-repository.json",
+        "walkthrough-workflow-verification.json",
+        "model-model-verification.json",
+        "rollback-rollback-verification.json",
+        "upstream-base64.json",
     )
     for name in required:
         value = evidence.get(name)
@@ -68,13 +72,20 @@ def main():
             value
             and (
                 value.get("status") == "passed"
-                or name in ("upstream-core.json", "upstream-ner.json", "linux-git.json")
+                or name
+                in (
+                    "upstream-core.json",
+                    "upstream-ner.json",
+                    "upstream-base64.json",
+                    "linux-git.json",
+                )
             ),
             "Missing or failed release gate: " + name,
         )
     require(
         evidence["unit-summary.json"]["passed"]
-        and evidence["unit-summary.json"]["tests"] >= 171,
+        and evidence["unit-summary.json"]["tests"] >= 261
+        and evidence["unit-summary.json"].get("skipped") == 0,
         "Incomplete unit suite",
     )
     require(
@@ -88,6 +99,15 @@ def main():
             and jenkins.get("completed_builds_only")
             and len(jenkins["cases"]) == 13,
             "Jenkins release gate incomplete",
+        )
+        require(
+            jenkins.get("workflow_adapter") is True,
+            "Release requires the direct workflow Jenkins adapter",
+        )
+        legacy = evidence.get("jenkins-legacy-verification.json", {})
+        require(
+            legacy.get("status") == "passed" and len(legacy.get("cases", [])) == 13,
+            "Legacy Jenkins compatibility incomplete",
         )
     metadata = args.bundle / "metadata/verification"
     metadata.mkdir()

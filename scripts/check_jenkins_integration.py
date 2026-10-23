@@ -794,6 +794,7 @@ def main():
                     ROOT / "tests/jenkins/plugins.lock.json"
                 ),
                 "platform": "linux/amd64",
+                "workflow_adapter": bool(fixture.args.workflow_home),
                 "agent": "native host process; controller executors disabled",
                 "declarative_validation": fixture.declarative_validation,
                 "completed_builds_only": True,

@@ -112,3 +112,7 @@ baseline не продвигается автоматически. Docker projec
 корпоративных ACL/PKI, rootless Docker, GPU или отдельного ARM64 Jenkins. Native
 ARM64 CLI/build/test/scan проверены отдельно. Исторический v0.2.0 pilot относится
 к [прежнему explicit adapter](jenkins-explicit.md); он сохраняется совместимым.
+
+Релиз v0.3.0 проверяет именно `Jenkinsfile.workflow` на Make-built images; прежний
+explicit adapter остаётся отдельным совместимым примером. Итоговые run IDs и
+границы пилота фиксируются в [протоколе выпуска](../../verification/release-v0.3.0/README.md).
