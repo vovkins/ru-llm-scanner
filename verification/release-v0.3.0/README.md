@@ -1,5 +1,8 @@
 # Релиз v0.3.0: приёмка завершена, публикация выполняется
 
+**Опубликован [v0.3.0](https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.3.0)**,19assets, source/tag5be9ad8. GHCR publisher39936095023 SUCCESS оба CPU/index/anonymous controls; public archive39937473313 и Git-tag walkthrough39937477276 выполняются.
+
+
 **Текущий статус:** [publisher39936095023](https://github.com/vovkins/ru-llm-scanner/actions/runs/39936095023) выполняется после успешных native/frozen/advisory gates; GitHub Release остаётся draft доanonymous control.
 [Release acceptance](release-acceptance.json), [Brotli scope](advisory-review.md).
 

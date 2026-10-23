@@ -28,4 +28,4 @@
 ограничения стендов и фактические прогоны — в [verification](../../verification/README.md).
 
 [Простой make/CLI интерфейс](simple-workflow.md) реализован для build/scan/diff
-по #40, [suite make test](everyday-tests.md) — по #43. В опубликованном v0.2.0 этих команд нет.
+по #40, [suite make test](everyday-tests.md) — по #43. Эти команды поставляются в v0.3.0; в v0.2.0 их нет.

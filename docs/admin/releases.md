@@ -1,7 +1,9 @@
 # Релиз v0.3.0: простой запуск и обновлённый Analyzer
 
-Выпуск готовится по согласованному [плану #51](https://github.com/vovkins/ru-llm-scanner/issues/51).
-До завершения публичных проверок это кандидат, а не опубликованная поставка.
+[v0.3.0 опубликован](https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.3.0)
+2026-10-23 на exact source `5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39`,19assets.
+Native приёмка, full frozen archive controls и anonymous GHCR pulls прошли
+AMD64/ARM64; дополнительные public full-download/Git-tag проверки выполняются.
 [Протокол и состояние](../../verification/release-v0.3.0/README.md).
 Прежние инструкции: [v0.2.0 AMD64/ARM64](releases-v0.2.0.md),
 [v0.1.0 ARM64](releases-v0.1.0.md).
@@ -18,7 +20,7 @@ make test
 make scan REPO='/srv/git/example project'
 ```
 
-Используйте этот тег после публикации. Нужны Git, Python3.11+ с venv/make и
+Тег v0.3.0 закреплён и не перемещается. Нужны Git, Python3.11+ с venv/make и
 rootful Docker Engine API1.49+/Compose2; оператор non-root, архитектура Docker
 server — Linux AMD64 или ARM64. `make build` сам готовит окружение, модель,
 образы и проверяет готовность. Он **собирает из исходников**, а не устанавливает
@@ -34,7 +36,7 @@ Make использует собственный код ошибки рецеп�
 
 ## GHCR и полные архивы
 
-Планируются два публичных package:
+Доступны два публичных package:
 
 | Package | Общий OCI index | Платформенные tags |
 | --- | --- | --- |
@@ -42,7 +44,7 @@ Make использует собственный код ошибки рецеп�
 | `ghcr.io/vovkins/ru-llm-scanner-analyzer` | `0.3.0` | `0.3.0-amd64`, `0.3.0-arm64` |
 
 Каждый index содержит ровно Linux AMD64 и ARM64. `latest` не вводится.
-После публикации получить образы отдельно можно так:
+Получить образы отдельно можно так:
 
 ```sh
 docker pull ghcr.io/vovkins/ru-llm-scanner:0.3.0
@@ -86,13 +88,14 @@ Baseline v0.2.0 несовместим с новым engine/profile. Сохра�
 прежнюю готовую установку и её baseline той же архитектуры; старые locks не правьте.
 Процедура [обновления Analyzer](updating-analyzer.md) сохраняется.
 
-Измеренные до релиза ограничения: code-v1 33TP/14FP/4FN; малые Base64-примеры
+Измеренные в релизной приёмке ограничения: code-v1 33TP/14FP/4FN; малые Base64-примеры
 11/3/1. Повторение2500 элементов — нагрузочный сценарий, не независимая выборка.
 Logistic может отмечать Base64 с обычным содержимым. [Оценка качества](../reference/detection.md)
 и [решение по NER-пересечению](../../verification/simple-workflow-stage-6/criterion-amendment.md)
 сохраняются; финальные релизные измерения фиксируются отдельно.
 Принятые [native-риски](../../verification/operations-dependencies/risk-acceptance.md)
 и [certifi/HTTPS](../../verification/linux-amd64/certifi-advisory.md) не исправлены.
+Новый Brotli advisory [измеренно вне штатного пути исполнения](../../verification/release-v0.3.0/advisory-review.md); библиотека остаётся уязвимой для других callers.
 
 ## Сопровождающему выпуска
 
