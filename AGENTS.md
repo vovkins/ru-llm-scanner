@@ -2,6 +2,8 @@
 
 ## Согласования и прогресс
 
+- Релизный PR #52 слит в main после native smoke39924875081/source4b1ddd2 SUCCESS AMD64/ARM64:267unit/0skip/0missing,19cases, Make images exported unchanged и empty Docker/containerd import/control. Merge61a2138 tree равен принятому head; ветка сохранена, force/admin bypass нет. Дублирующий ready run39926061208 отменён и не считается passed.532 frozen/historical inputs,7 чужих контейнеров,58 images,proxy и старые releases/assets/tags/digests сохранены. Далее full release build/gates на одном точном main SHA по #51; registry/tag/release пока не опубликованы.
+
 - Владелец 2026-10-23 явно согласовал полный план релиза v0.3.0 #51, включая слияние релизного PR и публикацию GitHub Release/GHCR после успешных native AMD64/ARM64 gates. Ветка codex/release-v0.3.0 от70bdabb. Сохранять exact Analyzer9e47/logistic/APIv2, модель/словарь/коэффициенты/зависимости, frozen критерии и старые releases/tags/assets/чужие ресурсы. Допустимы version labels и непосредственно связанные recipe hashes, адаптация release orchestration к существующим Make/CLI/direct Jenkins и собственные проверки выпуска. Образы публиковать только из принятого frozen комплекта, без пересборки; latest не создавать. Обновлять #51 по факту. Новое явное поручение отменяет прежний запрет публикации только в границах v0.3.0.
 
 

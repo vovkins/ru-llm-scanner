@@ -2,7 +2,10 @@
 
 План [#51](https://github.com/vovkins/ru-llm-scanner/issues/51) согласован владельцем
 2026-10-23, включая слияние проверенного релизного PR и публикацию после gates.
-Сейчас выполняется подготовка; сборки/публичная приёмка ещё не завершены.
+Релизный PR #52 слит после успешных native smoke39924875081 обеих CPU;
+267unit/0skip/0missing и19case Make walkthrough с empty-store import/control.
+[Подготовка](preparation.json) и [сохранность](preservation.json) проверены.
+Полная релизная сборка/приёмка и публичные проверки ещё не завершены.
 
 Исходная точка: main `70bdabb93efffb295e3e7596428c4aa859d2ea9d`.
 Ветка `codex/release-v0.3.0`. Версия0.3.0, exact Analyzer9e47/logistic/APIv2;
