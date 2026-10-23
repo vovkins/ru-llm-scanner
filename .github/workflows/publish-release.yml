@@ -115,11 +115,44 @@ jobs:
           RELEASE_SOURCE: ${{ inputs.source_revision }}
           RELEASE_ARCH: ${{ matrix.arch }}
           BUNDLE_SHA256: ${{ matrix.arch == 'amd64' && inputs.amd64_sha256 || inputs.arm64_sha256 }}
-        run: python3 scripts/check_published_release.py --version "$RELEASE_VERSION" --source-revision "$RELEASE_SOURCE" --arch "$RELEASE_ARCH" --bundle-sha256 "$BUNDLE_SHA256" --output .build/registry-control.json
+        run: |
+          python3 scripts/check_published_release.py --version "$RELEASE_VERSION" --source-revision "$RELEASE_SOURCE" --arch "$RELEASE_ARCH" --bundle-sha256 "$BUNDLE_SHA256" --output .build/registry-control.json
+          python3 - <<'PYCODE'
+          import json, os, subprocess, sys, tempfile
+          from pathlib import Path
+          sys.path.insert(0,'scripts')
+          from release_common import registry_manifest, platform_manifest
+          version=os.environ['RELEASE_VERSION'];arch=os.environ['RELEASE_ARCH'];source=os.environ['RELEASE_SOURCE']
+          control=json.loads(Path('.build/registry-control.json').read_text())
+          assert control['version']==version and control['build_source_revision']==source and control['platform']=='linux/'+arch
+          records={}
+          with tempfile.TemporaryDirectory(prefix='scanner-anonymous-tags-') as config:
+              env={**os.environ,'DOCKER_CONFIG':config}
+              assert not Path(config,'config.json').exists()
+              for component,suffix in (('scanner',''),('analyzer','-analyzer')):
+                  repository='vovkins/ru-llm-scanner'+suffix
+                  index=registry_manifest(repository,version)
+                  tag=registry_manifest(repository,version+'-'+arch)
+                  assert index and tag
+                  expected=platform_manifest(repository,index,'linux/'+arch)
+                  child=platform_manifest(repository,tag,'linux/'+arch)
+                  assert child['digest']==expected['digest']
+                  reference='ghcr.io/'+repository+':'+version+'-'+arch
+                  subprocess.run(['docker','pull',reference],env=env,check=True)
+                  info=json.loads(subprocess.check_output(['docker','image','inspect','--platform','linux/'+arch,reference],env=env))[0]
+                  assert info['Architecture']==arch and info['Os']=='linux'
+                  assert info['Id']==control['anonymous_images'][component]['platform_id']
+                  labels=info['Config']['Labels'];assert labels['org.opencontainers.image.version']==version
+                  assert labels['org.opencontainers.image.source']=='https://github.com/vovkins/ru-llm-scanner'
+                  records[component]={'tag':reference,'tag_manifest_digest':tag['digest'],'platform_manifest_digest':child['digest'],'image_id':info['Id'],'matches_frozen_and_index_control':True}
+          Path('.build/platform-tags-control.json').write_text(json.dumps({'status':'passed','version':version,'build_source_revision':source,'platform':'linux/'+arch,'anonymous_docker_config':True,'images':records},indent=2)+'\n')
+          PYCODE
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: anonymous-registry-${{ matrix.arch }}
-          path: .build/registry-control.json
+          path: |
+            .build/registry-control.json
+            .build/platform-tags-control.json
           retention-days: 14
   verify_public:
     if: github.ref == 'refs/heads/main' && inputs.mode == 'verify-public'
