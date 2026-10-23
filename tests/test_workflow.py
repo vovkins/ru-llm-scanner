@@ -51,7 +51,7 @@ class EntryTests(unittest.TestCase):
             )
             self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(
-            self.invoke(str(ROOT / "scanner"), "--version").stdout.strip(), b"0.2.0"
+            self.invoke(str(ROOT / "scanner"), "--version").stdout.strip(), b"0.3.0"
         )
 
     def test_entry_does_not_import_input_sitecustomize(self):

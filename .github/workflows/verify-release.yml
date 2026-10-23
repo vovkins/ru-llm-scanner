@@ -19,7 +19,7 @@ on:
     inputs:
       version:
         type: string
-        default: '0.2.0'
+        default: '0.3.0'
         required: true
       source_revision:
         type: string

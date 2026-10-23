@@ -117,6 +117,8 @@ class Candidate:
     def build(self):
         self.root.mkdir(mode=0o700, parents=True, exist_ok=False)
         verify_daemon_platform(self.platform)
+        if self.args.workflow_build:
+            return self.workflow_build()
         self.input_hashes = {
             name: file_hash(ROOT / name)
             for name in subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT)
@@ -297,8 +299,69 @@ class Candidate:
             },
         )
 
+    def workflow_build(self):
+        """Freeze the actual public Make build; never rebuild substitute images."""
+        import workflow_state as state
+
+        self.python(
+            "documentation-walkthrough",
+            "check_documentation_walkthrough.py",
+            "--output-dir",
+            self.root / "walkthrough",
+        )
+        server = state.daemon()
+        inputs = state.materials()
+        installed, deployment = state.selected(server, inputs)
+        require(server["platform"] == self.platform, "Wrong workflow platform")
+        for name in ("source", "analyzer", "engine", "scanner-context", "wheels"):
+            shutil.copytree(installed / name, self.root / name, copy_function=os.link)
+        for name in ("deployment.json", "analyzer.runtime.lock.json"):
+            shutil.copyfile(installed / name, self.root / name)
+        self.analyzer = deployment["analyzer"]["image_reference_id"]
+        self.scanner = deployment["scanner"]["image_reference_id"]
+        self.python(
+            "export",
+            "docker_scanner.py",
+            "export",
+            "--deployment-lock",
+            self.deployment,
+            "--directory",
+            self.root / "package",
+        )
+        wheels = list((self.root / "wheels").glob("*.whl"))
+        require(len(wheels) == 1, "Unexpected workflow wheel set")
+        write_json(
+            self.root / "build-summary.json",
+            {
+                "status": "passed",
+                "platform": self.platform,
+                "source_revision": state.provenance()["git_revision"],
+                "profile": read_json(ROOT / "upstream.lock.json")["build_profiles"][
+                    self.profile
+                ],
+                "source_lock_sha256": file_hash(ROOT / "upstream.lock.json"),
+                "runtime": read_json(self.runtime),
+                "deployment": deployment,
+                "wheel_sha256": file_hash(wheels[0]),
+                "material_inputs_sha256": inputs,
+                "build_workflow": "make",
+                "workflow_installation": str(installed),
+                "native_daemon_required": True,
+                "images_published": False,
+                "offline_builder_https_blocked": False,
+                "scope": "Public make build/test/walkthrough images exported unchanged; repeat separately checks firewall/cache-only builds.",
+            },
+        )
+
+    def installed_images(self):
+        if self.deployment.exists():
+            lock = read_json(self.deployment)
+            self.analyzer = lock["analyzer"]["image_reference_id"]
+            self.scanner = lock["scanner"]["image_reference_id"]
+
     def integration(self):
         verify_daemon_platform(self.platform)
+        self.installed_images()
         # These suites use separate outputs/owned resources. Exercise every suite
         # before failing the gate, so a harness error does not hide other defects.
         self.collect_failures = True
@@ -392,6 +455,7 @@ class Candidate:
 
     def repeat(self):
         verify_daemon_platform(self.platform)
+        # Repeat tags must not be derived from an immutable sha256 reference.
         context = self.root / "analyzer-repeat"
         self.python(
             "cache-only-prepare",
@@ -476,6 +540,7 @@ def main():
     parser.add_argument("--source", type=Path)
     parser.add_argument("--download", action="store_true")
     parser.add_argument("--offline-firewall", action="store_true")
+    parser.add_argument("--workflow-build", action="store_true")
     args = parser.parse_args()
     os.umask(0o077)
     candidate = Candidate(args)

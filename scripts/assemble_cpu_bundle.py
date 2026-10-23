@@ -40,6 +40,10 @@ def main():
         if name.startswith(("src/", "scripts/", "docker/", "locks/", "patches/"))
         or name in {"pyproject.toml", "upstream.lock.json"}
     }
+    if summary.get("build_workflow") == "make":
+        from workflow_state import materials
+
+        current_inputs = materials()
     deployment = read_json(candidate / "deployment.json")
     runtime = read_json(candidate / "analyzer.runtime.lock.json")
     require(
@@ -68,7 +72,7 @@ def main():
         )
         destination = output / name
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(source, destination)
+        shutil.copy2(source, destination)
     shutil.copytree(candidate / "package", output / "package", copy_function=os.link)
     shutil.copytree(candidate / "source", output / "upstream-source")
     metadata = output / "metadata"

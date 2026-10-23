@@ -105,6 +105,7 @@ Snapshot проверяет все поддерживаемые текстовы
 
 Scanner распространяется под [MIT](LICENSE); модель, upstream и зависимости
 сохраняют собственные условия и [notices](THIRD_PARTY_NOTICES.md).
+Готовится v0.3.0 с этим Make/CLI и обновлённым Analyzer: [план и gates](verification/release-v0.3.0/README.md).
 Последний опубликованный [v0.2.0](https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.2.0)
 имеет публичные GHCR images и архивы AMD64/ARM64; v0.1.0 остаётся ARM64-поставкой.
 [Получение опубликованных комплектов](docs/admin/releases.md).

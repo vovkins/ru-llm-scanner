@@ -61,7 +61,7 @@ jobs:
           from publish_release import download
           from check_release_bundle import verify_files
           version=os.environ['RELEASE_VERSION'];arch=os.environ['RELEASE_ARCH'];revision=os.environ['RELEASE_SOURCE']
-          assert version==project_version(Path.cwd())=='0.2.0'
+          assert version==project_version(Path.cwd())=='0.3.0'
           subprocess.run(['git','merge-base','--is-ancestor',revision,'HEAD'],check=True)
           directory=Path('.build/archive-control');name=identity(version,arch)
           subprocess.run(['gh','release','view','v'+version,'--repo','vovkins/ru-llm-scanner','--json','isDraft,apiUrl'],check=True)

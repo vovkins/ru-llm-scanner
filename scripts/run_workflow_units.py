@@ -22,6 +22,9 @@ REQUIRED_MODULES = {
     "test_workflow_jenkins",
     "test_engine_update",
     "test_api_metadata",
+    "test_release_workflow",
+    "test_release_platforms",
+    "test_release_integrity",
 }
 
 
