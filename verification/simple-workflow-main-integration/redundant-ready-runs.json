@@ -9,7 +9,9 @@
     "status": "in_progress",
     "reason": "Redundant ready_for_review run after accepted standalone native gates and exact merge tree proof; final main clean native control follows",
     "required_branch_checks": false,
-    "cancel_requested": true
+    "cancel_requested": true,
+    "final_status": "completed",
+    "final_conclusion": "cancelled"
   },
   {
     "conclusion": "",
@@ -21,7 +23,9 @@
     "status": "in_progress",
     "reason": "Redundant ready_for_review run after accepted standalone native gates and exact merge tree proof; final main clean native control follows",
     "required_branch_checks": false,
-    "cancel_requested": true
+    "cancel_requested": true,
+    "final_status": "completed",
+    "final_conclusion": "cancelled"
   },
   {
     "conclusion": "",
@@ -33,7 +37,9 @@
     "status": "in_progress",
     "reason": "Redundant ready_for_review run after accepted standalone native gates and exact merge tree proof; final main clean native control follows",
     "required_branch_checks": false,
-    "cancel_requested": true
+    "cancel_requested": true,
+    "final_status": "completed",
+    "final_conclusion": "cancelled"
   },
   {
     "conclusion": "",
@@ -45,7 +51,9 @@
     "status": "in_progress",
     "reason": "Redundant ready_for_review run after accepted standalone native gates and exact merge tree proof; final main clean native control follows",
     "required_branch_checks": false,
-    "cancel_requested": true
+    "cancel_requested": true,
+    "final_status": "completed",
+    "final_conclusion": "cancelled"
   },
   {
     "conclusion": "",
@@ -57,7 +65,9 @@
     "status": "in_progress",
     "reason": "Redundant ready_for_review run after accepted standalone native gates and exact merge tree proof; final main clean native control follows",
     "required_branch_checks": false,
-    "cancel_requested": true
+    "cancel_requested": true,
+    "final_status": "completed",
+    "final_conclusion": "cancelled"
   },
   {
     "conclusion": "",
@@ -69,6 +79,8 @@
     "status": "in_progress",
     "reason": "Redundant ready_for_review run after accepted standalone native gates and exact merge tree proof; final main clean native control follows",
     "required_branch_checks": false,
-    "cancel_requested": true
+    "cancel_requested": true,
+    "final_status": "completed",
+    "final_conclusion": "cancelled"
   }
 ]

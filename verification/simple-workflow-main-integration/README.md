@@ -21,7 +21,7 @@ Checkpoint после слияний — **`640856f5bcfab70202e59af8ccb42011da09
 head. Каждое дерево совпало с принятым PR; итоговое полностью совпало с
 `9353a80bf7956c394159e4dba29c35f81c798a3e`. Все6 heads являются предками checkpoint.
 [Полные SHA и порядок](merges.json), [проверка дерева](merge-checkpoint.json).
-Никаких конфликтов, force push или admin bypass; исходные ветки сохранены.
+Никаких конфликтов, force push или admin bypass; [исходные ветки сохранены](source-branches.json).
 Branch protection отсутствовала, API rules вернул пустой список.
 
 Все [109 принятых material inputs](accepted-materials.json) совпали сразу после
@@ -33,10 +33,37 @@ model/dictionary/dependencies, коэффициенты и frozen corpus не м
 
 Статусы README и документации обновлены: новый Make/CLI и9e47e65/logistic
 находятся в main, опубликованный v0.2.0 остаётся прежним выпуском.
-README входит в package provenance, поэтому выполняется новый clean native
-build/test/walkthrough main на AMD64/ARM64. Итог пока не заявляется успешным;
-safe receipts будут добавлены после завершения. Local unit/contracts/docs/format
-также проверяются отдельно. Старые JSON receipts не переписываются.
+README входит в package provenance, поэтому после обновления статуса выполнен
+новый clean native build/test/walkthrough main:
+[run39906014678](https://github.com/vovkins/ru-llm-scanner/actions/runs/39906014678),
+точный source **51c0f6c7893090e717fd29732ad6336f11b15822**, SUCCESS обеих CPU.
+[Run](native-run.json), [AMD64](native-amd64.json), [ARM64](native-arm64.json).
+
+| Проверка нового main | AMD64 | ARM64 |
+| --- | --- | --- |
+| Чистый checkout без .build/venv → build → test → scan/diff | Passed | Passed |
+| Unit suite | 261 /0skip /0errors /0missing | 261 /0skip /0errors /0missing |
+| Буквальные docs blocks / случаи | 9 /19 | 9 /19 |
+| Собственные projects очищены | 22 | 22 |
+| Acquisition после initial build | 0 | 0 |
+| Все109 material inputs совпали с текущим main | Passed | Passed |
+| Input/private reports/strict baseline/HTML static | Passed | Passed |
+
+[Local unit](local-unit.json) независимо прошёл261 тест без skips/errors/missing;
+[docs](documentation-check.json), [contracts/format](static-checks.json) прошли.
+[Применимость](evidence-applicability.json) фиксирует108 неизменных inputs
+относительно принятого PR50 и единственное изменение README/package metadata,
+которое вошло в новые build/test. Все9 frozen testing inputs и9 буквальных
+командных блоков прежние. После source51c0f6c менялись только безопасные
+integration receipts/README и статус AGENTS, ни один из109 build inputs.
+
+[Сохранность](preservation.json):749 из755 прежних tracked files неизменны,
+все6 изменений — статусы README/docs/AGENTS.7 чужих контейнеров
+(Config/Running/StartedAt),58 исходных local image IDs,proxy HEAD и published
+release/assets сохранены. Шесть GHCR v0.2.0 index/platform tag manifests совпали
+с опубликованными SHA; проверка только анонимным чтением без скачивания слоёв.
+Исторические JSON/Markdown evidence этапов1–6 не переписывались; их состояния
+«draft/не слито» относятся к соответствующим checkpoint до интеграции.
 
 Шесть автоматических ready_for_review прогонов отменены как дублирующие
 проверки уже принятых heads, [IDs и причина](redundant-ready-runs.json).

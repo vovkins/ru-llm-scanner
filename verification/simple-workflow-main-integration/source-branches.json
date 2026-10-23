@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "branches": [
+    {
+      "pr": 41,
+      "branch": "codex/simple-workflow-spec",
+      "head": "2ec86e11df8bd17b1666b842d3067ba22339ffe2",
+      "remote_branch_preserved": true
+    },
+    {
+      "pr": 42,
+      "branch": "codex/simple-workflow-implementation",
+      "head": "8dfa134f1df6fd78984abd5a58639c984149cedf",
+      "remote_branch_preserved": true
+    },
+    {
+      "pr": 44,
+      "branch": "codex/everyday-tests",
+      "head": "4ef088b7475a51a8f5d74aee3b9b1ef50b253972",
+      "remote_branch_preserved": true
+    },
+    {
+      "pr": 46,
+      "branch": "codex/documentation-first-run",
+      "head": "d39c8e64fdf9edc9f60e4305844f066a655c91f1",
+      "remote_branch_preserved": true
+    },
+    {
+      "pr": 48,
+      "branch": "codex/controlled-upstream-update",
+      "head": "7045dd4fc7b232f7987795d7fc5638c60badde42",
+      "remote_branch_preserved": true
+    },
+    {
+      "pr": 50,
+      "branch": "codex/logistic-engine-acceptance",
+      "head": "9353a80bf7956c394159e4dba29c35f81c798a3e",
+      "remote_branch_preserved": true
+    }
+  ]
+}

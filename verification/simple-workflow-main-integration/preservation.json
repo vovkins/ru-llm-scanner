@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "tracked_baseline_files": 755,
+  "changed_existing_files": [
+    "AGENTS.md",
+    "README.md",
+    "docs/README.md",
+    "docs/development.md",
+    "docs/reference/detection.md",
+    "verification/README.md"
+  ],
+  "allowed_existing_changes_are_only_status_documentation": true,
+  "unchanged_existing_files": 749,
+  "foreign_containers": 7,
+  "foreign_config_running_started_at_preserved": true,
+  "local_container_set_unchanged": true,
+  "initial_unique_images_all_retained": 58,
+  "proxy_head_unchanged": "9e47e6594ba3d9616ba90720994ced008335416c",
+  "release_asset_counts": {
+    "v0.2.0": 19,
+    "v0.1.0": 7
+  },
+  "published_release_identities_assets_unchanged": true,
+  "published_v020_registry_manifests_unchanged": {
+    "ghcr.io/vovkins/ru-llm-scanner:0.2.0": "sha256:d958c92f36c0533a5986d9acb2f9aa175a5257c622234591d133446636c28bae",
+    "ghcr.io/vovkins/ru-llm-scanner-analyzer:0.2.0": "sha256:19790cd0843bf2cf952fd1aff2bf5cbe6323c00d830cac0ee4ba04b5bde764d7",
+    "ghcr.io/vovkins/ru-llm-scanner:0.2.0-amd64": "sha256:101c4b593b5e21db13628f9a317e459c7e4e1cbc733897afdb378c0300469e02",
+    "ghcr.io/vovkins/ru-llm-scanner-analyzer:0.2.0-amd64": "sha256:981f59aea6afb1dbedbbf53038ad3b09087ab1d70b7518124fef91d896b3f1e9",
+    "ghcr.io/vovkins/ru-llm-scanner:0.2.0-arm64": "sha256:5b0af708ce18aae571ad01aea0f181d4697cd161026fdc59c57630a1d8cfe0ee",
+    "ghcr.io/vovkins/ru-llm-scanner-analyzer:0.2.0-arm64": "sha256:7d482cc570bb85c2d86cd4bab5d31c0abb71055cd70d3909f2ae36e535130d70"
+  },
+  "registry_operations": "anonymous GET token/manifest only; no layers/pull/build/push/tag",
+  "raw_config_env_or_tokens_exported": false
+}

@@ -1,6 +1,6 @@
 # Результаты проверок
 
-[Интеграция цикла #38 в main](simple-workflow-main-integration/README.md): PR #41/#42/#44/#46/#48/#50 последовательно слиты; каждое дерево совпало с принятым PR. Документация обновлена, итоговый clean native build/test/walkthrough main проверяется отдельно от прежней модельной приёмки. Релиз и образы не публикуются.
+[Интеграция цикла #38 в main](simple-workflow-main-integration/README.md): PR #41/#42/#44/#46/#48/#50 последовательно слиты; каждое дерево совпало с принятым PR. Документация обновлена; новый main native39906014678 SUCCESS AMD64/ARM64:261unit/0skip,19cases/9literal blocks/22 own projects/acquisition0. Все109 inputs совпали с текущими исходниками. Релиз и образы не публиковались.
 
 [Упрощение, этап 6: logistic/rollback/Jenkins](simple-workflow-stage-6/README.md) — полный native run39848479099 SUCCESS на AMD64/ARM64, 261 unit/0skip, 13 настоящих Jenkins AMD64 сценариев. Exact9e47e65/logistic/API v2 включены в main; финальный clean walkthrough39856787113 прошёл на обеих CPU, все109 material inputs совпали.
 

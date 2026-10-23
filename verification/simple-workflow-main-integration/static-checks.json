@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "unit": {
+    "tests": 261,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0,
+    "missing_required_modules": [],
+    "failure_cases": [],
+    "status": "passed"
+  },
+  "contracts": {
+    "synthetic_valid": 11,
+    "invalid_rejected": 22,
+    "local_links": 1162
+  },
+  "documentation": {
+    "commands": 74,
+    "shell_blocks": 58,
+    "defaults": 19
+  },
+  "black_python_files": 121,
+  "git_diff_check": "passed",
+  "native_or_model_result_implied": false,
+  "main_build_source": "51c0f6c7893090e717fd29732ad6336f11b15822",
+  "final_native_checks_recorded_separately": true
+}
