@@ -1,3 +1,4 @@
+from unit_assets import unit_assets
 import copy
 import dataclasses
 import hashlib
@@ -139,7 +140,7 @@ class ConfigurationTests(unittest.TestCase):
 
     def test_real_bundle_matches_sealed_profile_and_bad_artifacts_are_bounded(self):
         root = Path(__file__).resolve().parents[1]
-        context = root / ".build/analyzer"
+        context = unit_assets()
         if not context.exists():
             self.skipTest("Prepare pinned Analyzer assets first")
         engine = ScanEngine.from_context(

@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "source_revision": "fa10c5e6fd261b9a431f7281d5b253ddffd0d4cb",
+  "run_id": 39764343216,
+  "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39764343216",
+  "jobs": [
+    {
+      "name": "workflow_native (arm64, ubuntu-24.04-arm)",
+      "conclusion": "success"
+    },
+    {
+      "name": "workflow_native (amd64, ubuntu-24.04)",
+      "conclusion": "success"
+    },
+    {
+      "name": "release_archive_control",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "native",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "release_build",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "compare",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "fast",
+      "conclusion": "skipped"
+    }
+  ],
+  "contents_permission": "read",
+  "registry_or_release_write": false,
+  "platform_results": [
+    {
+      "platform": "linux/amd64",
+      "first_suite_seconds": 78.05,
+      "repeat_suite_seconds": 75.975,
+      "acceptance_wall_seconds": 388.916,
+      "unit_tests_per_run": 225,
+      "skips": 0
+    },
+    {
+      "platform": "linux/arm64",
+      "first_suite_seconds": 79.419,
+      "repeat_suite_seconds": 77.609,
+      "acceptance_wall_seconds": 347.993,
+      "unit_tests_per_run": 225,
+      "skips": 0
+    }
+  ]
+}

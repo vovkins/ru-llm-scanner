@@ -1,0 +1,39 @@
+{
+  "status": "observed",
+  "capacity_from_docker_setup_logs": {
+    "arm64": {
+      "cpus": 4,
+      "memory": "15.57GiB"
+    },
+    "amd64": {
+      "cpus": 4,
+      "memory": "15.61GiB"
+    }
+  },
+  "observed_suite_times": [
+    {
+      "platform": "linux/amd64",
+      "first_suite_seconds": 78.05,
+      "repeat_suite_seconds": 75.975,
+      "acceptance_wall_seconds": 388.916,
+      "unit_tests_per_run": 225,
+      "skips": 0
+    },
+    {
+      "platform": "linux/arm64",
+      "first_suite_seconds": 79.419,
+      "repeat_suite_seconds": 77.609,
+      "acceptance_wall_seconds": 347.993,
+      "unit_tests_per_run": 225,
+      "skips": 0
+    }
+  ],
+  "container_memory_limits": {
+    "analyzer": "3g",
+    "scanner": "1g",
+    "parallel_scans": 2,
+    "sum_parallel_limits": "8g"
+  },
+  "container_peak_rss_measured": false,
+  "target_server_pilot_performed": false
+}

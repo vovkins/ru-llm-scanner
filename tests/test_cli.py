@@ -1,3 +1,4 @@
+from unit_assets import unit_assets
 import json
 import os
 import signal
@@ -15,7 +16,7 @@ from ru_llm_scanner.report_validation import validate_report
 class CLITests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        if not (ROOT / ".build/analyzer").exists():
+        if not (unit_assets()).exists():
             raise unittest.SkipTest("Prepare pinned Analyzer assets first")
         cls.bundle_temp = tempfile.TemporaryDirectory()
         cls.bundle = Path(cls.bundle_temp.name).resolve() / "engine"

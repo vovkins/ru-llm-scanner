@@ -70,11 +70,23 @@ class EntryTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0)
             self.assertFalse(marker.exists())
 
-    def test_test_suite_is_honestly_pending(self):
-        for command in ([str(ROOT / "scanner"), "test"], ["make", "test"]):
-            result = self.invoke(*command)
-            self.assertEqual(result.returncode, 2)
-            self.assertIn(b"test_suite_pending", result.stderr)
+    def test_test_suite_does_not_pass_without_a_working_daemon(self):
+        with tempfile.TemporaryDirectory() as name:
+            docker = Path(name) / "docker"
+            docker.write_text("#!/bin/sh\nexit 1\n")
+            docker.chmod(0o700)
+            # Do not depend on the host's Docker context/API version or running projects.
+            env = {
+                "PATH": name
+                + os.pathsep
+                + str(Path(sys.executable).parent)
+                + os.pathsep
+                + os.environ["PATH"]
+            }
+            for command in ([str(ROOT / "scanner"), "test"], ["make", "test"]):
+                result = self.invoke(*command, environment=env)
+                self.assertEqual(result.returncode, 2)
+                self.assertIn(b"docker_command_failed", result.stderr)
 
     def test_make_never_evaluates_data_or_unknown_assignments(self):
         with tempfile.TemporaryDirectory() as name:
@@ -117,7 +129,12 @@ class EntryTests(unittest.TestCase):
                     cwd=Path(name),
                 )
                 self.assertEqual(result.returncode, 0, result.stderr)
-                values = json.loads(result.stdout)
+                # GNU Make may add Entering/Leaving directory lines for recursive MAKELEVEL.
+                payloads = [
+                    line for line in result.stdout.splitlines() if line.startswith(b"[")
+                ]
+                self.assertEqual(len(payloads), 1, result.stdout)
+                values = json.loads(payloads[0])
                 self.assertEqual(values[0], value)
                 self.assertIn("REPO", values[1])
 

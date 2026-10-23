@@ -1,3 +1,4 @@
+from unit_assets import unit_assets
 import json
 import tempfile
 import unittest
@@ -15,7 +16,7 @@ class DictionaryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Offline tests consume prepared pinned assets; preparation is tested separately.
-        cls.assets = ROOT / ".build/analyzer"
+        cls.assets = unit_assets()
         if not cls.assets.exists():
             raise unittest.SkipTest(
                 "Prepare upstream assets before dictionary parity tests"

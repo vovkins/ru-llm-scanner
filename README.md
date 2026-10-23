@@ -17,6 +17,7 @@ HTML и JSON с категориями, координатами, полными
 
 ```sh
 make build
+make test
 make scan REPO='/srv/git/example project'
 make diff REPO='/srv/git/example project' FROM=abc1234 TO=def5678
 ```
@@ -27,7 +28,8 @@ make diff REPO='/srv/git/example project' FROM=abc1234 TO=def5678
 локальных образа. Scan выбирает проверенный комплект без загрузок и выводит
 пути приватных JSON/HTML. Ручной `deployment.json` для этого пути не требуется.
 Параметры, каталоги и ошибки: [простой интерфейс](docs/reference/simple-workflow.md).
-`make test` пока возвращает ошибку с сообщением о неготовности: suite — этап 3.
+`make test` запускает обязательные unit, contracts/docs/format и короткий runtime suite.
+[Состав, коды и диагностика](docs/reference/everyday-tests.md).
 Для Jenkins используйте `./scanner scan|diff`, чтобы сохранить точные коды 0/1/2.
 
 Новые команды ещё не включены в опубликованный v0.2.0. Его прежние инструкции:
@@ -74,7 +76,7 @@ Docker/Compose и non-root доступ к daemon; venv/исходный proxy �
 
 Упрощение ведётся по [плану #38](https://github.com/vovkins/ru-llm-scanner/issues/38).
 Новый интерфейс сохраняет прежний механизм распознавания и explicit launcher;
-полная переработка руководств и suite `make test` остаются следующими этапами.
+повседневный suite реализован по #43; полная переработка руководств остаётся этапом4.
 
 ## Возможности
 
