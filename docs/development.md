@@ -89,7 +89,8 @@ images; ARM64 metadata fixture не означает ARM64 inference на AMD64.
 Для новых контейнеров используйте текущий профиль из [расширенной сборки](admin/advanced-build.md).
 Нативный workflow `check-cpu-platforms.yml` отдельно выполняет настоящую модель,
 полный Requests, empty-store installation, fault/quality проверки обеих архитектур
-и Jenkins AMD64. [Текущий source и протоколы](../verification/linux-amd64/README.md).
+и Jenkins AMD64. [Текущий main и интеграционная проверка](../verification/simple-workflow-main-integration/README.md);
+[полная приёмка logistic/отката/Jenkins](../verification/simple-workflow-stage-6/README.md).
 
 В draft PR автоматически идут быстрые unit/contracts/docs/format проверки.
 Полный native workflow запускается вручную через `workflow_dispatch` либо

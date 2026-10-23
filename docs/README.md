@@ -1,6 +1,6 @@
 # Документация ru-llm-scanner
 
-Основной маршрут текущих исходников: **make build → make test → make scan → HTML/JSON**.
+Основной маршрут `main`: **make build → make test → make scan → HTML/JSON**.
 Новые команды ещё не входят в опубликованный v0.2.0. Для него и ручных процедур
 сохранён [расширенный маршрут](admin/advanced.md); старые evidence относятся
 к своим source/images, а не к будущему выпуску.

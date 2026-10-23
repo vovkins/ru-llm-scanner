@@ -1,0 +1,104 @@
+[
+  {
+    "number": 41,
+    "url": "https://github.com/vovkins/ru-llm-scanner/pull/41",
+    "head": "2ec86e11df8bd17b1666b842d3067ba22339ffe2",
+    "previous_main": "37e5e0e7dfd545941a6de008585e226b9271e5a0",
+    "merge_commit": "30efd5c0228173b2edeb55e3b443e9dcd25c1c10",
+    "merged_at": "2026-10-23T05:24:44Z",
+    "parents": [
+      "37e5e0e7dfd545941a6de008585e226b9271e5a0",
+      "2ec86e11df8bd17b1666b842d3067ba22339ffe2"
+    ],
+    "tree": "03bddf3f1c38a84f78fd73e66d57a5115ce27823",
+    "tree_matches_accepted_head": true,
+    "method": "merge",
+    "admin_bypass": false,
+    "source_branch_deleted": false
+  },
+  {
+    "number": 42,
+    "url": "https://github.com/vovkins/ru-llm-scanner/pull/42",
+    "head": "8dfa134f1df6fd78984abd5a58639c984149cedf",
+    "previous_main": "30efd5c0228173b2edeb55e3b443e9dcd25c1c10",
+    "merge_commit": "b7b970cf64e854267b6df0b9cd2970ec616c73c7",
+    "merged_at": "2026-10-23T05:24:53Z",
+    "parents": [
+      "30efd5c0228173b2edeb55e3b443e9dcd25c1c10",
+      "8dfa134f1df6fd78984abd5a58639c984149cedf"
+    ],
+    "tree": "ac808f06c84376d9c57a1d2328644c76798a19ea",
+    "tree_matches_accepted_head": true,
+    "method": "merge",
+    "admin_bypass": false,
+    "source_branch_deleted": false
+  },
+  {
+    "number": 44,
+    "url": "https://github.com/vovkins/ru-llm-scanner/pull/44",
+    "head": "4ef088b7475a51a8f5d74aee3b9b1ef50b253972",
+    "previous_main": "b7b970cf64e854267b6df0b9cd2970ec616c73c7",
+    "merge_commit": "515595412debb9c68c8ca20ff8006111adc8f6b4",
+    "merged_at": "2026-10-23T05:25:01Z",
+    "parents": [
+      "b7b970cf64e854267b6df0b9cd2970ec616c73c7",
+      "4ef088b7475a51a8f5d74aee3b9b1ef50b253972"
+    ],
+    "tree": "0b2fbd0be755599857c9c2c66cd7f01972ab8ab0",
+    "tree_matches_accepted_head": true,
+    "method": "merge",
+    "admin_bypass": false,
+    "source_branch_deleted": false
+  },
+  {
+    "number": 46,
+    "url": "https://github.com/vovkins/ru-llm-scanner/pull/46",
+    "head": "d39c8e64fdf9edc9f60e4305844f066a655c91f1",
+    "previous_main": "515595412debb9c68c8ca20ff8006111adc8f6b4",
+    "merge_commit": "2121007da17776a911c602410b65789cc44bd5a1",
+    "merged_at": "2026-10-23T05:25:08Z",
+    "parents": [
+      "515595412debb9c68c8ca20ff8006111adc8f6b4",
+      "d39c8e64fdf9edc9f60e4305844f066a655c91f1"
+    ],
+    "tree": "da50499eb49d30ad3bdd0bc35d8ef30757f57a38",
+    "tree_matches_accepted_head": true,
+    "method": "merge",
+    "admin_bypass": false,
+    "source_branch_deleted": false
+  },
+  {
+    "number": 48,
+    "url": "https://github.com/vovkins/ru-llm-scanner/pull/48",
+    "head": "7045dd4fc7b232f7987795d7fc5638c60badde42",
+    "previous_main": "2121007da17776a911c602410b65789cc44bd5a1",
+    "merge_commit": "f5ba37e44c580e0743fe80f909656b68a6179971",
+    "merged_at": "2026-10-23T05:25:17Z",
+    "parents": [
+      "2121007da17776a911c602410b65789cc44bd5a1",
+      "7045dd4fc7b232f7987795d7fc5638c60badde42"
+    ],
+    "tree": "84e1b3a0023cea043716c471210ea677c71d2946",
+    "tree_matches_accepted_head": true,
+    "method": "merge",
+    "admin_bypass": false,
+    "source_branch_deleted": false
+  },
+  {
+    "number": 50,
+    "url": "https://github.com/vovkins/ru-llm-scanner/pull/50",
+    "head": "9353a80bf7956c394159e4dba29c35f81c798a3e",
+    "previous_main": "f5ba37e44c580e0743fe80f909656b68a6179971",
+    "merge_commit": "640856f5bcfab70202e59af8ccb42011da09bd4c",
+    "merged_at": "2026-10-23T05:25:25Z",
+    "parents": [
+      "f5ba37e44c580e0743fe80f909656b68a6179971",
+      "9353a80bf7956c394159e4dba29c35f81c798a3e"
+    ],
+    "tree": "f93468080783851ece569eed13a98b93bf4b5ddc",
+    "tree_matches_accepted_head": true,
+    "method": "merge",
+    "admin_bypass": false,
+    "source_branch_deleted": false
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "main_before": "37e5e0e7dfd545941a6de008585e226b9271e5a0",
+  "main_after": "640856f5bcfab70202e59af8ccb42011da09bd4c",
+  "final_accepted_head": "9353a80bf7956c394159e4dba29c35f81c798a3e",
+  "tree_matches_accepted_head": true,
+  "all_six_heads_are_ancestors": true,
+  "merge_order": [
+    41,
+    42,
+    44,
+    46,
+    48,
+    50
+  ]
+}
