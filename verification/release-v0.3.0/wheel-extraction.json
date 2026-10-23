@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "scope": "Bounded prefix only on this host; whole archive SHA and installed behavior checked separately on both native CPUs",
+  "prefix_bytes": 8388608,
+  "wheel_bytes": 79784,
+  "sha256": "391344e3fe5acb3b5bfc2d61058cfaa08b8139246b8544ad3999e51a7936487e",
+  "matches_both_native_wheels": true
+}

@@ -16,7 +16,7 @@ Brotli-потока; upstream-исправление находится в де�
 который поддерживает Brotli только с optional decoder:
 [HTTPX](https://www.python-httpx.org/quickstart/#binary-response-content).
 
-Для окончательного disposition нужна проверка **фактического frozen Scanner** на
+Для окончательного disposition выполнена проверка **фактического frozen Scanner** на
 обеих CPU: optional modules/HTTPX encodings, ELF linkage самого Git и отдельного
 HTTP-helper, process mappings после импорта CLI. Она добавлена в frozen-archive
 workflow; helper `.github/release-probes/brotli.py` не меняет images или зависимости.

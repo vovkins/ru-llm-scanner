@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "version": "0.3.0",
+  "build_source_revision": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39",
+  "platform": "linux/amd64",
+  "anonymous_docker_config": true,
+  "images": {
+    "scanner": {
+      "tag": "ghcr.io/vovkins/ru-llm-scanner:0.3.0-amd64",
+      "tag_manifest_digest": "sha256:4425981d9f17b985d40d9bb317ed9a648c7a5419ae5ed47f1d6c5c5656105216",
+      "platform_manifest_digest": "sha256:4425981d9f17b985d40d9bb317ed9a648c7a5419ae5ed47f1d6c5c5656105216",
+      "image_id": "sha256:4425981d9f17b985d40d9bb317ed9a648c7a5419ae5ed47f1d6c5c5656105216",
+      "matches_frozen_and_index_control": true
+    },
+    "analyzer": {
+      "tag": "ghcr.io/vovkins/ru-llm-scanner-analyzer:0.3.0-amd64",
+      "tag_manifest_digest": "sha256:e3020e3604819db4f4b19171c44be04871c391d9ebc99e66658828f46ed705f3",
+      "platform_manifest_digest": "sha256:9886538ee244ca75fb8f0f81759cb0aa3dcf98ee6e5c193efabda6e43c116038",
+      "image_id": "sha256:9886538ee244ca75fb8f0f81759cb0aa3dcf98ee6e5c193efabda6e43c116038",
+      "matches_frozen_and_index_control": true
+    }
+  }
+}

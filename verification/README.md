@@ -1,6 +1,6 @@
 # Результаты проверок
 
-[Подготовка v0.3.0](release-v0.3.0/README.md): новый Make/CLI, logistic и две CPU; результаты добавляются по факту.
+[Опубликованный v0.3.0](release-v0.3.0/README.md): Make/CLI, logistic и две CPU; native/frozen/GHCR/public/Git-tag gates SUCCESS.
 
 
 [Интеграция цикла #38 в main](simple-workflow-main-integration/README.md): PR #41/#42/#44/#46/#48/#50 последовательно слиты; каждое дерево совпало с принятым PR. Документация обновлена; новый main native39906014678 SUCCESS AMD64/ARM64:261unit/0skip,19cases/9literal blocks/22 own projects/acquisition0. Все109 inputs совпали с текущими исходниками. Релиз и образы не публиковались.

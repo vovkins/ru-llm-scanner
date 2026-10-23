@@ -1,0 +1,149 @@
+{
+  "status": "passed",
+  "version": "0.3.0",
+  "source": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39",
+  "public_native_run": 39937473313,
+  "public_tag_run": 39937477276,
+  "platforms": {
+    "amd64": {
+      "status": "passed",
+      "anonymous_full_platform_archive": true,
+      "anonymous_index_platform_tags_digests": true,
+      "installed_codes": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "git_tag_source": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39",
+      "make_walkthrough_cases": 19,
+      "literal_blocks": 9,
+      "unit_tests": 267,
+      "unit_skipped": 0,
+      "runtime_acquisition": 0,
+      "own_projects_cleaned": 22,
+      "tag_walkthrough_seconds": 397.353,
+      "browser_acceptance_performed": false
+    },
+    "arm64": {
+      "status": "passed",
+      "anonymous_full_platform_archive": true,
+      "anonymous_index_platform_tags_digests": true,
+      "installed_codes": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "git_tag_source": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39",
+      "make_walkthrough_cases": 19,
+      "literal_blocks": 9,
+      "unit_tests": 267,
+      "unit_skipped": 0,
+      "runtime_acquisition": 0,
+      "own_projects_cleaned": 22,
+      "tag_walkthrough_seconds": 340.538,
+      "browser_acceptance_performed": false
+    }
+  },
+  "non_platform_assets": {
+    "status": "passed_for_non_platform_assets",
+    "version": "0.3.0",
+    "build_source_revision": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39",
+    "public_assets": 19,
+    "anonymous_complete_file_downloads_here": {
+      "DISTRIBUTION_NOTICES.md": {
+        "sha256": "e1a64427b77d9ceedb7a1b42b532d1f29ec16bfa745f635d4e9597ef19b6124a",
+        "bytes": 2282,
+        "anonymous_full_file_download": true
+      },
+      "LICENSE": {
+        "sha256": "3bb962f206eef98250782436859a046ecd39ee67e659ac110d1ca9097a45b768",
+        "bytes": 1064,
+        "anonymous_full_file_download": true
+      },
+      "registry-amd64.json": {
+        "sha256": "6ea96a1e2036ed47f769f2c2d89e903baf592cece2fe2998fa08d53ae7e9afc1",
+        "bytes": 1743,
+        "anonymous_full_file_download": true
+      },
+      "registry-arm64.json": {
+        "sha256": "402075ec43df41d7c8a0c46cec2ee56f83a53594a1c31a4c6c492f500f40a481",
+        "bytes": 1743,
+        "anonymous_full_file_download": true
+      },
+      "registry-control-amd64.json": {
+        "sha256": "3e4740e924683b4a2c112707c9659719f074b33088d771aff2682c2456761087",
+        "bytes": 1269,
+        "anonymous_full_file_download": true
+      },
+      "registry-control-arm64.json": {
+        "sha256": "1ca289877f948fb38baf99191832adb3e338e6672722fa8e0e263204ab1ebf12",
+        "bytes": 1269,
+        "anonymous_full_file_download": true
+      },
+      "registry-images.json": {
+        "sha256": "5e85d19842c0efa730aa3a81616974a555ba6a0498ed1cc5579a9220908867e3",
+        "bytes": 4935,
+        "anonymous_full_file_download": true
+      },
+      "release-acceptance.json": {
+        "sha256": "951e5e038dea19a154a34babd26bc3d207e7a3e0b917d34ba00cb6e9c6b16719",
+        "bytes": 5952,
+        "anonymous_full_file_download": true
+      },
+      "release-manifest-amd64.json": {
+        "sha256": "3c6c11b65ccfb4294de173dcc2f529e3296a0e87d8dc02571385a49c6c3d09aa",
+        "bytes": 133753,
+        "anonymous_full_file_download": true
+      },
+      "release-manifest-arm64.json": {
+        "sha256": "17055163db33bb8c9a84b6061559544f78fe9ff62a4bf1ebe1e22c748fb6b612",
+        "bytes": 133500,
+        "anonymous_full_file_download": true
+      },
+      "release-platform-amd64.json": {
+        "sha256": "8bf3ec6c78cf82734e051908f12d834647eaa5ee20475e500c4a50ebbd4d7c28",
+        "bytes": 4441,
+        "anonymous_full_file_download": true
+      },
+      "release-platform-arm64.json": {
+        "sha256": "89d962f59320c2c39262a2c009566288d223fff306c321ab819fda10200fbb5a",
+        "bytes": 4232,
+        "anonymous_full_file_download": true
+      },
+      "release-provenance.json": {
+        "sha256": "8fa65a8d102e40922aa9caf2335955e348b959e640899979ded09d9a87ac63db",
+        "bytes": 26448,
+        "anonymous_full_file_download": true
+      },
+      "ru-llm-scanner-v0.3.0-native-sources.tar.gz": {
+        "sha256": "50b4716387cb500d8cf06dc0cbfdfd99f6ce3e6a9778c6e8b080c035b20a5927",
+        "bytes": 398330836,
+        "anonymous_full_file_download": true
+      },
+      "ru_llm_scanner-0.3.0-py3-none-any.whl": {
+        "sha256": "391344e3fe5acb3b5bfc2d61058cfaa08b8139246b8544ad3999e51a7936487e",
+        "bytes": 79784,
+        "anonymous_full_file_download": true
+      },
+      "SHA256SUMS": {
+        "sha256": "9c8f323aa6bb3d50ce15ae7a93da5ab64f5bd75d574d24d2bcec8d437e5c1807",
+        "bytes": 1684,
+        "anonymous_full_file_download": true
+      },
+      "THIRD_PARTY_NOTICES.md": {
+        "sha256": "79b0dc96e17376d526039c2a740d40c2e9da48f0a29a87770062e17d77493264",
+        "bytes": 1762,
+        "anonymous_full_file_download": true
+      }
+    },
+    "platform_archives": {
+      "scope": "Separate native AMD64/ARM64 public workflow must download full archives, check SHA and installed behavior; not claimed by this local asset audit"
+    },
+    "checksum_inventory_entries": 18,
+    "credentials_used_for_download": false,
+    "raw_values_exported": false
+  },
+  "source_build_and_pulled_images_are_separate_controls": true
+}

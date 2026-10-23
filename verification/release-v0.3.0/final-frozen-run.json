@@ -1,0 +1,250 @@
+{
+  "conclusion": "success",
+  "headSha": "855a1c5f3a522d1c0187cbcae591b41a45bc2d50",
+  "jobs": [
+    {
+      "completedAt": "2026-10-23T09:54:45Z",
+      "conclusion": "success",
+      "databaseId": 120352288784,
+      "name": "release_archive_control / archive (arm64, ubuntu-24.04-arm)",
+      "startedAt": "2026-10-23T09:52:28Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-23T09:52:30Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-23T09:52:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:52:31Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-10-23T09:52:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:52:31Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 3,
+          "startedAt": "2026-10-23T09:52:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:52:41Z",
+          "conclusion": "success",
+          "name": "Run docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4",
+          "number": 4,
+          "startedAt": "2026-10-23T09:52:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:54:37Z",
+          "conclusion": "success",
+          "name": "Check downloaded archive and install into separate empty Docker store",
+          "number": 5,
+          "startedAt": "2026-10-23T09:52:41Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:54:38Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 6,
+          "startedAt": "2026-10-23T09:54:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:54:43Z",
+          "conclusion": "success",
+          "name": "Post Run docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4",
+          "number": 10,
+          "startedAt": "2026-10-23T09:54:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:54:44Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 11,
+          "startedAt": "2026-10-23T09:54:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:54:44Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 12,
+          "startedAt": "2026-10-23T09:54:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:54:44Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-10-23T09:54:44Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39935005472/job/120352288784"
+    },
+    {
+      "completedAt": "2026-10-23T09:54:56Z",
+      "conclusion": "success",
+      "databaseId": 120352289234,
+      "name": "release_archive_control / archive (amd64, ubuntu-24.04)",
+      "startedAt": "2026-10-23T09:52:26Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-23T09:52:28Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-23T09:52:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:52:29Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-10-23T09:52:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:52:29Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 3,
+          "startedAt": "2026-10-23T09:52:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:52:41Z",
+          "conclusion": "success",
+          "name": "Run docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4",
+          "number": 4,
+          "startedAt": "2026-10-23T09:52:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:54:48Z",
+          "conclusion": "success",
+          "name": "Check downloaded archive and install into separate empty Docker store",
+          "number": 5,
+          "startedAt": "2026-10-23T09:52:41Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:54:49Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 6,
+          "startedAt": "2026-10-23T09:54:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:54:54Z",
+          "conclusion": "success",
+          "name": "Post Run docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4",
+          "number": 10,
+          "startedAt": "2026-10-23T09:54:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:54:54Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 11,
+          "startedAt": "2026-10-23T09:54:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:54:54Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 12,
+          "startedAt": "2026-10-23T09:54:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:54:54Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-10-23T09:54:54Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39935005472/job/120352289234"
+    },
+    {
+      "completedAt": "2026-10-23T09:52:24Z",
+      "conclusion": "skipped",
+      "databaseId": 120352289780,
+      "name": "release_build",
+      "startedAt": "2026-10-23T09:52:24Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39935005472/job/120352289780"
+    },
+    {
+      "completedAt": "2026-10-23T09:52:24Z",
+      "conclusion": "skipped",
+      "databaseId": 120352290183,
+      "name": "engine_update_native",
+      "startedAt": "2026-10-23T09:52:24Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39935005472/job/120352290183"
+    },
+    {
+      "completedAt": "2026-10-23T09:52:24Z",
+      "conclusion": "skipped",
+      "databaseId": 120352290236,
+      "name": "native",
+      "startedAt": "2026-10-23T09:52:24Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39935005472/job/120352290236"
+    },
+    {
+      "completedAt": "2026-10-23T09:52:24Z",
+      "conclusion": "skipped",
+      "databaseId": 120352290873,
+      "name": "compare",
+      "startedAt": "2026-10-23T09:52:24Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39935005472/job/120352290873"
+    },
+    {
+      "completedAt": "2026-10-23T09:52:24Z",
+      "conclusion": "skipped",
+      "databaseId": 120352332389,
+      "name": "workflow_native",
+      "startedAt": "2026-10-23T09:52:31Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39935005472/job/120352332389"
+    },
+    {
+      "completedAt": "2026-10-23T09:52:24Z",
+      "conclusion": "skipped",
+      "databaseId": 120352347048,
+      "name": "fast",
+      "startedAt": "2026-10-23T09:52:33Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39935005472/job/120352347048"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39935005472"
+}

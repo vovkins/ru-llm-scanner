@@ -1,0 +1,613 @@
+{
+  "conclusion": "success",
+  "headSha": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39",
+  "jobs": [
+    {
+      "completedAt": "2026-10-23T09:42:40Z",
+      "conclusion": "success",
+      "databaseId": 120328864856,
+      "name": "release_build / native (arm64, ubuntu-24.04-arm)",
+      "startedAt": "2026-10-23T08:54:11Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-23T08:54:14Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-23T08:54:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T08:54:15Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-10-23T08:54:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T08:54:16Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 3,
+          "startedAt": "2026-10-23T08:54:15Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T08:54:26Z",
+          "conclusion": "success",
+          "name": "Run docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4",
+          "number": 4,
+          "startedAt": "2026-10-23T08:54:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T08:54:30Z",
+          "conclusion": "success",
+          "name": "Validate reviewed release identity",
+          "number": 5,
+          "startedAt": "2026-10-23T08:54:26Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T08:55:01Z",
+          "conclusion": "success",
+          "name": "Prepare development tools and record host",
+          "number": 6,
+          "startedAt": "2026-10-23T08:54:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:01:04Z",
+          "conclusion": "success",
+          "name": "Build and test the public Make workflow from pinned inputs",
+          "number": 7,
+          "startedAt": "2026-10-23T08:55:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:02:01Z",
+          "conclusion": "success",
+          "name": "Freeze candidate and import into an empty Docker store",
+          "number": 8,
+          "startedAt": "2026-10-23T09:01:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:02:02Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 9,
+          "startedAt": "2026-10-23T09:02:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:02:02Z",
+          "conclusion": "skipped",
+          "name": "Run actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961",
+          "number": 10,
+          "startedAt": "2026-10-23T09:02:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:02:02Z",
+          "conclusion": "skipped",
+          "name": "Exercise real isolated Jenkins on native AMD64",
+          "number": 11,
+          "startedAt": "2026-10-23T09:02:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:02:02Z",
+          "conclusion": "skipped",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 12,
+          "startedAt": "2026-10-23T09:02:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:09:55Z",
+          "conclusion": "success",
+          "name": "Run native integration gates",
+          "number": 13,
+          "startedAt": "2026-10-23T09:02:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:09:56Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 14,
+          "startedAt": "2026-10-23T09:09:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:12:08Z",
+          "conclusion": "success",
+          "name": "Repeat cache-only preparation and uncached offline builds",
+          "number": 15,
+          "startedAt": "2026-10-23T09:09:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:15:22Z",
+          "conclusion": "success",
+          "name": "Frozen quality, rule metadata and published-release rollback",
+          "number": 16,
+          "startedAt": "2026-10-23T09:12:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:15:38Z",
+          "conclusion": "success",
+          "name": "Collect native synthetic predictions without raw values",
+          "number": 17,
+          "startedAt": "2026-10-23T09:15:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:15:41Z",
+          "conclusion": "success",
+          "name": "Measure native libraries and corresponding source closure",
+          "number": 18,
+          "startedAt": "2026-10-23T09:15:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:18:50Z",
+          "conclusion": "success",
+          "name": "Measure bounded synthetic capacity",
+          "number": 19,
+          "startedAt": "2026-10-23T09:15:41Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:41:02Z",
+          "conclusion": "success",
+          "name": "Scan pinned public Requests offline",
+          "number": 20,
+          "startedAt": "2026-10-23T09:18:50Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:41:10Z",
+          "conclusion": "success",
+          "name": "Collect current advisory data for disposition",
+          "number": 21,
+          "startedAt": "2026-10-23T09:41:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:41:10Z",
+          "conclusion": "success",
+          "name": "Collect safe evidence",
+          "number": 22,
+          "startedAt": "2026-10-23T09:41:10Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:30Z",
+          "conclusion": "success",
+          "name": "Persist tested frozen archive in draft release",
+          "number": 23,
+          "startedAt": "2026-10-23T09:41:10Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:31Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 24,
+          "startedAt": "2026-10-23T09:42:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:37Z",
+          "conclusion": "success",
+          "name": "Post Run docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4",
+          "number": 46,
+          "startedAt": "2026-10-23T09:42:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:37Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 47,
+          "startedAt": "2026-10-23T09:42:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:37Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 48,
+          "startedAt": "2026-10-23T09:42:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:37Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 49,
+          "startedAt": "2026-10-23T09:42:37Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39927948569/job/120328864856"
+    },
+    {
+      "completedAt": "2026-10-23T09:42:59Z",
+      "conclusion": "success",
+      "databaseId": 120328865047,
+      "name": "release_build / native (amd64, ubuntu-24.04)",
+      "startedAt": "2026-10-23T08:54:09Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-23T08:54:12Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-23T08:54:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T08:54:14Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-10-23T08:54:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T08:54:14Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 3,
+          "startedAt": "2026-10-23T08:54:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T08:54:25Z",
+          "conclusion": "success",
+          "name": "Run docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4",
+          "number": 4,
+          "startedAt": "2026-10-23T08:54:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T08:54:29Z",
+          "conclusion": "success",
+          "name": "Validate reviewed release identity",
+          "number": 5,
+          "startedAt": "2026-10-23T08:54:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T08:54:52Z",
+          "conclusion": "success",
+          "name": "Prepare development tools and record host",
+          "number": 6,
+          "startedAt": "2026-10-23T08:54:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:00:06Z",
+          "conclusion": "success",
+          "name": "Build and test the public Make workflow from pinned inputs",
+          "number": 7,
+          "startedAt": "2026-10-23T08:54:52Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:01:06Z",
+          "conclusion": "success",
+          "name": "Freeze candidate and import into an empty Docker store",
+          "number": 8,
+          "startedAt": "2026-10-23T09:00:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:01:07Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 9,
+          "startedAt": "2026-10-23T09:01:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:01:07Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961",
+          "number": 10,
+          "startedAt": "2026-10-23T09:01:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:09:10Z",
+          "conclusion": "success",
+          "name": "Exercise real isolated Jenkins on native AMD64",
+          "number": 11,
+          "startedAt": "2026-10-23T09:01:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:09:11Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 12,
+          "startedAt": "2026-10-23T09:09:10Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:16:07Z",
+          "conclusion": "success",
+          "name": "Run native integration gates",
+          "number": 13,
+          "startedAt": "2026-10-23T09:09:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:16:08Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 14,
+          "startedAt": "2026-10-23T09:16:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:18:28Z",
+          "conclusion": "success",
+          "name": "Repeat cache-only preparation and uncached offline builds",
+          "number": 15,
+          "startedAt": "2026-10-23T09:16:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:21:35Z",
+          "conclusion": "success",
+          "name": "Frozen quality, rule metadata and published-release rollback",
+          "number": 16,
+          "startedAt": "2026-10-23T09:18:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:21:46Z",
+          "conclusion": "success",
+          "name": "Collect native synthetic predictions without raw values",
+          "number": 17,
+          "startedAt": "2026-10-23T09:21:35Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:21:49Z",
+          "conclusion": "success",
+          "name": "Measure native libraries and corresponding source closure",
+          "number": 18,
+          "startedAt": "2026-10-23T09:21:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:24:00Z",
+          "conclusion": "success",
+          "name": "Measure bounded synthetic capacity",
+          "number": 19,
+          "startedAt": "2026-10-23T09:21:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:41:22Z",
+          "conclusion": "success",
+          "name": "Scan pinned public Requests offline",
+          "number": 20,
+          "startedAt": "2026-10-23T09:24:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:41:29Z",
+          "conclusion": "success",
+          "name": "Collect current advisory data for disposition",
+          "number": 21,
+          "startedAt": "2026-10-23T09:41:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:41:29Z",
+          "conclusion": "success",
+          "name": "Collect safe evidence",
+          "number": 22,
+          "startedAt": "2026-10-23T09:41:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:50Z",
+          "conclusion": "success",
+          "name": "Persist tested frozen archive in draft release",
+          "number": 23,
+          "startedAt": "2026-10-23T09:41:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:51Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 24,
+          "startedAt": "2026-10-23T09:42:50Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:52Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961",
+          "number": 45,
+          "startedAt": "2026-10-23T09:42:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:57Z",
+          "conclusion": "success",
+          "name": "Post Run docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4",
+          "number": 46,
+          "startedAt": "2026-10-23T09:42:52Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:57Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 47,
+          "startedAt": "2026-10-23T09:42:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:57Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 48,
+          "startedAt": "2026-10-23T09:42:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:42:57Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 49,
+          "startedAt": "2026-10-23T09:42:57Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39927948569/job/120328865047"
+    },
+    {
+      "completedAt": "2026-10-23T08:54:07Z",
+      "conclusion": "skipped",
+      "databaseId": 120328865679,
+      "name": "release_archive_control",
+      "startedAt": "2026-10-23T08:54:07Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39927948569/job/120328865679"
+    },
+    {
+      "completedAt": "2026-10-23T08:54:07Z",
+      "conclusion": "skipped",
+      "databaseId": 120328866064,
+      "name": "fast",
+      "startedAt": "2026-10-23T08:54:07Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39927948569/job/120328866064"
+    },
+    {
+      "completedAt": "2026-10-23T08:54:07Z",
+      "conclusion": "skipped",
+      "databaseId": 120328866217,
+      "name": "native",
+      "startedAt": "2026-10-23T08:54:07Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39927948569/job/120328866217"
+    },
+    {
+      "completedAt": "2026-10-23T08:54:07Z",
+      "conclusion": "skipped",
+      "databaseId": 120328866250,
+      "name": "engine_update_native",
+      "startedAt": "2026-10-23T08:54:07Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39927948569/job/120328866250"
+    },
+    {
+      "completedAt": "2026-10-23T08:54:07Z",
+      "conclusion": "skipped",
+      "databaseId": 120328866313,
+      "name": "workflow_native",
+      "startedAt": "2026-10-23T08:54:07Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39927948569/job/120328866313"
+    },
+    {
+      "completedAt": "2026-10-23T08:54:07Z",
+      "conclusion": "skipped",
+      "databaseId": 120328867175,
+      "name": "compare",
+      "startedAt": "2026-10-23T08:54:07Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39927948569/job/120328867175"
+    },
+    {
+      "completedAt": "2026-10-23T09:43:11Z",
+      "conclusion": "success",
+      "databaseId": 120348515633,
+      "name": "release_build / compare",
+      "startedAt": "2026-10-23T09:43:02Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-23T09:43:04Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-23T09:43:03Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:43:05Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-10-23T09:43:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:43:06Z",
+          "conclusion": "success",
+          "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+          "number": 3,
+          "startedAt": "2026-10-23T09:43:05Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:43:06Z",
+          "conclusion": "success",
+          "name": "Compare independently collected native predictions",
+          "number": 4,
+          "startedAt": "2026-10-23T09:43:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:43:08Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 5,
+          "startedAt": "2026-10-23T09:43:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:43:08Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 10,
+          "startedAt": "2026-10-23T09:43:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T09:43:08Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 11,
+          "startedAt": "2026-10-23T09:43:08Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39927948569/job/120348515633"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39927948569"
+}

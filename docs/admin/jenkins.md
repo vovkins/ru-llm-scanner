@@ -114,5 +114,5 @@ ARM64 CLI/build/test/scan проверены отдельно. Историче�
 к [прежнему explicit adapter](jenkins-explicit.md); он сохраняется совместимым.
 
 Релиз v0.3.0 проверяет именно `Jenkinsfile.workflow` на Make-built images; прежний
-explicit adapter остаётся отдельным совместимым примером. Итоговые run IDs и
-границы пилота фиксируются в [протоколе выпуска](../../verification/release-v0.3.0/README.md).
+explicit adapter остаётся отдельным совместимым примером. Native v0.3.0:13direct и13legacy completed cases, acquisition0. Run IDs и
+границы пилота зафиксированы в [протоколе выпуска](../../verification/release-v0.3.0/README.md).

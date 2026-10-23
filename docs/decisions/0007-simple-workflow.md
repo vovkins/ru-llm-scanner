@@ -42,4 +42,4 @@ fallback к legacy ARM64 lock, state входного репозитория и�
 карта переиспользования — [протокол этапа](../../verification/simple-workflow-stage-1/README.md).
 Публичные интерфейсы proxy и перенос новой Base64-политики относятся к этапам5–6.
 
-Пошаговая документация текущего интерфейса: [admin](../admin/README.md), [user](../user/README.md). Ручной explicit путь и v0.2.0 вынесены в [расширенный раздел](../admin/advanced.md). Автоматизация proxy update и новый Jenkins pilot остаются этапами5–6 #38.
+Пошаговая документация текущего интерфейса: [admin](../admin/README.md), [user](../user/README.md). Ручной explicit путь и v0.2.0 вынесены в [расширенный раздел](../admin/advanced.md). Автоматизация proxy update и новый Jenkins pilot завершены на этапах5–6 #38 и поставляются в v0.3.0.

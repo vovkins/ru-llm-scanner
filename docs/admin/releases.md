@@ -3,7 +3,7 @@
 [v0.3.0 опубликован](https://github.com/vovkins/ru-llm-scanner/releases/tag/v0.3.0)
 2026-10-23 на exact source `5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39`,19assets.
 Native приёмка, full frozen archive controls и anonymous GHCR pulls прошли
-AMD64/ARM64; дополнительные public full-download/Git-tag проверки выполняются.
+AMD64/ARM64; public full-download и чистый Git-tag Make walkthrough тоже завершены успешно.
 [Протокол и состояние](../../verification/release-v0.3.0/README.md).
 Прежние инструкции: [v0.2.0 AMD64/ARM64](releases-v0.2.0.md),
 [v0.1.0 ARM64](releases-v0.1.0.md).
@@ -95,7 +95,7 @@ Logistic может отмечать Base64 с обычным содержимы
 сохраняются; финальные релизные измерения фиксируются отдельно.
 Принятые [native-риски](../../verification/operations-dependencies/risk-acceptance.md)
 и [certifi/HTTPS](../../verification/linux-amd64/certifi-advisory.md) не исправлены.
-Новый Brotli advisory [измеренно вне штатного пути исполнения](../../verification/release-v0.3.0/advisory-review.md); библиотека остаётся уязвимой для других callers.
+Новый Brotli advisory [измеренно вне штатного пути исполнения](../../verification/release-v0.3.0/advisory-review.md); библиотека остаётся уязвимой для других потребителей.
 
 ## Сопровождающему выпуска
 

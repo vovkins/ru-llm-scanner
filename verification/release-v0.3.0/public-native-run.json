@@ -1,0 +1,188 @@
+{
+  "conclusion": "success",
+  "headSha": "aa643269a3793a36b3a704dfb6c822286a737646",
+  "jobs": [
+    {
+      "completedAt": "2026-10-23T10:14:32Z",
+      "conclusion": "success",
+      "databaseId": 120360451103,
+      "name": "verify_public / anonymous (arm64, ubuntu-24.04-arm)",
+      "startedAt": "2026-10-23T10:12:49Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-23T10:12:51Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-23T10:12:50Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:12:52Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-10-23T10:12:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:13:03Z",
+          "conclusion": "success",
+          "name": "Run docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4",
+          "number": 3,
+          "startedAt": "2026-10-23T10:12:52Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:14:24Z",
+          "conclusion": "success",
+          "name": "Anonymous native pull and installed control",
+          "number": 4,
+          "startedAt": "2026-10-23T10:13:03Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:14:25Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 5,
+          "startedAt": "2026-10-23T10:14:24Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:14:30Z",
+          "conclusion": "success",
+          "name": "Post Run docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4",
+          "number": 9,
+          "startedAt": "2026-10-23T10:14:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:14:30Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 10,
+          "startedAt": "2026-10-23T10:14:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:14:30Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 11,
+          "startedAt": "2026-10-23T10:14:30Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39937473313/job/120360451103"
+    },
+    {
+      "completedAt": "2026-10-23T10:14:32Z",
+      "conclusion": "success",
+      "databaseId": 120360451317,
+      "name": "verify_public / anonymous (amd64, ubuntu-24.04)",
+      "startedAt": "2026-10-23T10:12:47Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-23T10:12:48Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-23T10:12:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:12:49Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-10-23T10:12:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:13:00Z",
+          "conclusion": "success",
+          "name": "Run docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4",
+          "number": 3,
+          "startedAt": "2026-10-23T10:12:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:14:24Z",
+          "conclusion": "success",
+          "name": "Anonymous native pull and installed control",
+          "number": 4,
+          "startedAt": "2026-10-23T10:13:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:14:25Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 5,
+          "startedAt": "2026-10-23T10:14:24Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:14:30Z",
+          "conclusion": "success",
+          "name": "Post Run docker/setup-docker-action@e43656e248c0bd0647d3f5c195d116aacf6fcaf4",
+          "number": 9,
+          "startedAt": "2026-10-23T10:14:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:14:31Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 10,
+          "startedAt": "2026-10-23T10:14:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-23T10:14:31Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 11,
+          "startedAt": "2026-10-23T10:14:31Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39937473313/job/120360451317"
+    },
+    {
+      "completedAt": "2026-10-23T10:12:45Z",
+      "conclusion": "skipped",
+      "databaseId": 120360452520,
+      "name": "index",
+      "startedAt": "2026-10-23T10:12:45Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39937473313/job/120360452520"
+    },
+    {
+      "completedAt": "2026-10-23T10:12:45Z",
+      "conclusion": "skipped",
+      "databaseId": 120360453824,
+      "name": "anonymous",
+      "startedAt": "2026-10-23T10:12:45Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39937473313/job/120360453824"
+    },
+    {
+      "completedAt": "2026-10-23T10:12:45Z",
+      "conclusion": "skipped",
+      "databaseId": 120360490803,
+      "name": "platform",
+      "startedAt": "2026-10-23T10:12:51Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39937473313/job/120360490803"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/vovkins/ru-llm-scanner/actions/runs/39937473313"
+}
