@@ -1,4 +1,10 @@
-# Подготовка v0.3.0
+# Релиз v0.3.0: приёмка завершена, публикация выполняется
+
+**Текущий статус:** [publisher39936095023](https://github.com/vovkins/ru-llm-scanner/actions/runs/39936095023) выполняется после успешных native/frozen/advisory gates; GitHub Release остаётся draft доanonymous control.
+[Release acceptance](release-acceptance.json), [Brotli scope](advisory-review.md).
+
+## История подготовки (ранние pending статусы относятся к своему checkpoint)
+
 
 План [#51](https://github.com/vovkins/ru-llm-scanner/issues/51) согласован владельцем
 2026-10-23, включая слияние проверенного релизного PR и публикацию после gates.

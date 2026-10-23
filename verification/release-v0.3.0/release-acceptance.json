@@ -1,0 +1,150 @@
+{
+  "status": "passed",
+  "version": "0.3.0",
+  "build_source_revision": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39",
+  "build_workflow_run": 39927948569,
+  "final_archive_workflow_run": 39935005472,
+  "bundle_sha256": {
+    "amd64": "e2d3699f710583aa855abb6f7806f80db325b080b00535112581c7d5552336a4",
+    "arm64": "1854a7c764b545644d44963ef7e1e7d012cc782a77ace6a84f40845a4a2be240"
+  },
+  "advisory_disposition_complete": true,
+  "advisories": {
+    "amd64": {
+      "query_time_utc": "2026-10-23T09:41:23.633455+00:00",
+      "osv_matches": 4,
+      "debian_potential": 140,
+      "new_advisory_tuples": [
+        [
+          "brotli",
+          "1.1.0-2",
+          "CVE-2026-111497"
+        ]
+      ],
+      "new_advisory_disposition": "vulnerable decoder not in supported execution path; exact frozen images measured on both architectures; not a fix or general container exemption"
+    },
+    "arm64": {
+      "query_time_utc": "2026-10-23T09:41:03.853337+00:00",
+      "osv_matches": 4,
+      "debian_potential": 140,
+      "new_advisory_tuples": [
+        [
+          "brotli",
+          "1.1.0-2",
+          "CVE-2026-111497"
+        ]
+      ],
+      "new_advisory_disposition": "vulnerable decoder not in supported execution path; exact frozen images measured on both architectures; not a fix or general container exemption"
+    }
+  },
+  "brotli_reachability": {
+    "amd64": {
+      "component": "scanner",
+      "python_optional_modules": {
+        "brotli": false,
+        "brotlicffi": false,
+        "_brotli": false
+      },
+      "httpx_supported_decoders": [
+        "deflate",
+        "gzip",
+        "identity"
+      ],
+      "httpx_default_accept_encoding": "gzip, deflate",
+      "unsupported_br_response_left_opaque": true,
+      "git_binary_sha256": "356db14e102d68a1a37d8a1ac577dfd678d45d46e92f468bef8b7154e7bfdc60",
+      "git_binary_links_brotli": false,
+      "git_binary_links_libcurl": false,
+      "remote_http_helper_links_brotli": true,
+      "remote_http_helper_links_libcurl": true,
+      "brotli_loaded_in_python_process": false,
+      "node_installed": false,
+      "installed_lib_brotli": "1.1.0-2+b7",
+      "scope": "Default local Git-object reader and internal HTTPX route only; library remains vulnerable for other callers",
+      "status": "passed",
+      "platform": "linux/amd64",
+      "build_source_revision": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39",
+      "image": {
+        "image_id": "sha256:4425981d9f17b985d40d9bb317ed9a648c7a5419ae5ed47f1d6c5c5656105216",
+        "image_reference_id": "sha256:4425981d9f17b985d40d9bb317ed9a648c7a5419ae5ed47f1d6c5c5656105216"
+      },
+      "cve": "CVE-2026-111497",
+      "probe_sha256": "cb820e3e73f92711f38f2613e6055b213d709013e170bdc7fb5ba8e0e340f5ae"
+    },
+    "arm64": {
+      "component": "scanner",
+      "python_optional_modules": {
+        "brotli": false,
+        "brotlicffi": false,
+        "_brotli": false
+      },
+      "httpx_supported_decoders": [
+        "deflate",
+        "gzip",
+        "identity"
+      ],
+      "httpx_default_accept_encoding": "gzip, deflate",
+      "unsupported_br_response_left_opaque": true,
+      "git_binary_sha256": "a0e562e4bd3c4c79379e91d8c07a10104b2cefe8fac966dc6bd4874a57a807f3",
+      "git_binary_links_brotli": false,
+      "git_binary_links_libcurl": false,
+      "remote_http_helper_links_brotli": true,
+      "remote_http_helper_links_libcurl": true,
+      "brotli_loaded_in_python_process": false,
+      "node_installed": false,
+      "installed_lib_brotli": "1.1.0-2+b7",
+      "scope": "Default local Git-object reader and internal HTTPX route only; library remains vulnerable for other callers",
+      "status": "passed",
+      "platform": "linux/arm64",
+      "build_source_revision": "5be9ad8be41e5ccad36d4dcea2b1fe96d7d06c39",
+      "image": {
+        "image_id": "sha256:3f13aa3d3004c69b3394f4cb7ffbc28297236fb315122102560e30140acbeb22",
+        "image_reference_id": "sha256:3f13aa3d3004c69b3394f4cb7ffbc28297236fb315122102560e30140acbeb22"
+      },
+      "cve": "CVE-2026-111497",
+      "probe_sha256": "cb820e3e73f92711f38f2613e6055b213d709013e170bdc7fb5ba8e0e340f5ae"
+    }
+  },
+  "blockers": [],
+  "material_inputs": 110,
+  "unit_tests_per_platform": 267,
+  "model_cross": {
+    "status": "passed",
+    "findings": 2561,
+    "maximum_score_delta": 2.1457672119140625e-06,
+    "rule_ids_exact": true,
+    "raw_values_exported": false
+  },
+  "requests": {
+    "analyzed": 119,
+    "unsupported": 13,
+    "errors": 0,
+    "findings": 632,
+    "maximum_score_delta": 4.5299530029296875e-06,
+    "score_tolerance": 1e-05
+  },
+  "jenkins_direct_completed_cases": 13,
+  "jenkins_legacy_completed_cases": 13,
+  "final_archive_controls": {
+    "amd64": {
+      "bundle_sha256": "e2d3699f710583aa855abb6f7806f80db325b080b00535112581c7d5552336a4",
+      "control_sha256": "16a0bae9224e118233bf075525a6ebb976d6cc01a0e81c3834baed53a8e9ce5e",
+      "installed_sha256": "7d83a34e70bc462ed4af3dcc2374bad12460ee425a581d4b9bc98dbc47e44198",
+      "oci_sha256": "15a381317790a9bf81dcb5903152a9390380e801e38e5a3ba2bb41e3b6bd361e"
+    },
+    "arm64": {
+      "bundle_sha256": "1854a7c764b545644d44963ef7e1e7d012cc782a77ace6a84f40845a4a2be240",
+      "control_sha256": "8469996c2c3c587a37f75be053eccbb5999b1036c4d5a368bcb6864b819fc043",
+      "installed_sha256": "6e5996a54d94d060a67be57844ed4228a3946dd97a2b58683de135083f364a1a",
+      "oci_sha256": "a9eef2a072d68c5e86808230018fb3939ac760f7d99ffa33ee76b3f1fcf5a15e"
+    }
+  },
+  "known_native_risks_fixed": false,
+  "certifi_decision": "#34 preserve pins; supported offline Docker/internal HTTP; arbitrary raw HTTPS outside accepted configuration",
+  "exact_analyzer": "9e47e6594ba3d9616ba90720994ced008335416c",
+  "base64_policy": "logistic",
+  "metadata_api": 2,
+  "model_dependencies_dictionary_corpora_preserved": true,
+  "images_published": false,
+  "source_scope": "Immutable accepted source; subsequent metadata commits do not move tag or replace images"
+}
