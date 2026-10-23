@@ -4,9 +4,10 @@
 Подготовка images — [маршрут администратора](admin/build.md). Здесь описаны
 изменения scanner, внутренние API и dev-проверки, а не prerequisites обычного scan.
 
-[Спецификация будущего make/CLI интерфейса](reference/simple-workflow.md) и
+[Простой make/CLI интерфейс](reference/simple-workflow.md) и
 [карта переиспользования/матрица](../verification/simple-workflow-stage-1/README.md)
-относятся к #39. Команды пока не реализованы; текущие dev-команды приведены ниже.
+относятся к #39–40. Build/scan/diff реализованы; повседневный suite `make test`
+остаётся этапом 3 и пока явно возвращает ошибку. Текущие dev-команды приведены ниже.
 
 ## Окружение
 

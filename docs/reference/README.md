@@ -24,5 +24,5 @@
 Внутренние API и build details — в [руководстве разработчика](../development.md),
 ограничения стендов и фактические прогоны — в [verification](../../verification/README.md).
 
-[Проектируемый простой интерфейс](simple-workflow.md) — спецификация #39,
-не инструкция к действующему runtime.
+[Простой make/CLI интерфейс](simple-workflow.md) реализован для build/scan/diff
+по #40. Suite `make test` ещё не готов; в опубликованном v0.2.0 этих команд нет.

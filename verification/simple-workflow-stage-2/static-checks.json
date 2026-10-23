@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "contracts": {
+    "valid_synthetic_reports": 11,
+    "invalid_cases_rejected": 22,
+    "local_links": 969
+  },
+  "black_checked_files": 102,
+  "git_diff_check": true,
+  "gnu_make_local_version": "3.81",
+  "actual_make_transport_subprocess_tests": true,
+  "focused_tests": 29,
+  "new_runtime_model_claimed_by_static_tests": false
+}

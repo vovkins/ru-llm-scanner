@@ -1,0 +1,8 @@
+#!/bin/sh
+# Isolated stdlib host entry; never import Python/site code from the input clone.
+if [ -L "$0" ]; then
+    printf '%s\n' 'Scanner: используйте исходную точку входа, а не ссылку.' >&2
+    exit 2
+fi
+SCANNER_ENTRY_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P) || exit 2
+exec python3 -I -S "$SCANNER_ENTRY_ROOT/scripts/workflow.py" "$@"
