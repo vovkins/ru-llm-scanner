@@ -7,7 +7,7 @@
 | Компонент | Происхождение и уведомления |
 | --- | --- |
 | Scanner | Copyright (c) 2026 vovkins, MIT |
-| Analyzer/словарь | ru-llm-proxy `da4f50a`; upstream README заявляет MIT; точные hashes и изменения — upstream.lock.json/patches |
+| Analyzer/словарь | ru-llm-proxy `9e47e65` (logistic/APIv2); upstream README заявляет MIT; точные hashes и изменения — upstream.lock.json/patches |
 | Правила Gitleaks | MIT, исходный copyright и текст сохранены побайтово в THIRD_PARTY_NOTICES.md |
 | NER-модель | `fef2/ner_rus_bert-secret_detection`, revision `52b5b0745aac14f73fcf2ac0f91d9b5001a85ae4`, manifest объявляет Apache-2.0; шесть файлов неизменны |
 | Python/native runtime | Собственные лицензии установленных зависимостей; notice files сохраняются в images |

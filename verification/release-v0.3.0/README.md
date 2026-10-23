@@ -6,6 +6,8 @@
 267unit/0skip/0missing и19case Make walkthrough с empty-store import/control.
 [Подготовка](preparation.json) и [сохранность](preservation.json) проверены.
 Полная релизная сборка/приёмка и публичные проверки ещё не завершены.
+[История попыток](attempt-history.md): первый full run отменён до assets из-за
+исправления атрибуции notices; это не успешная приёмка.
 
 Исходная точка: main `70bdabb93efffb295e3e7596428c4aa859d2ea9d`.
 Ветка `codex/release-v0.3.0`. Версия0.3.0, exact Analyzer9e47/logistic/APIv2;

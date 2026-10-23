@@ -7,11 +7,13 @@ see LICENSE. This does not change the licenses of bundled dependencies or models
 
 Analyzer and dictionary sources originate from
 https://github.com/vovkins/ru-llm-proxy at
-da4f50a87ddf8a6c160c5f1893f5bf526f713d1c. Its README declares MIT.
+9e47e6594ba3d9616ba90720994ced008335416c. Its README declares MIT.
 The owner selected MIT for ru-llm-scanner on 2026-10-20.
 Exact source hashes and scanner adaptation patches are recorded in
 upstream.lock.json; patches include capacity/offline integration and bounded NER
-window recovery. These are scanner modifications, not an upstream release.
+window recovery and metadata API v2 with deterministic Base64 rule identifiers.
+The accepted upstream Base64 policy is logistic. These adaptations are scanner
+modifications, not an upstream release.
 
 Gitleaks-derived rules retain the original MIT notice in THIRD_PARTY_NOTICES.md,
 copied byte for byte from that upstream revision.
